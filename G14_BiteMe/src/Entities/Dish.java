@@ -9,7 +9,6 @@ public double price;
 
 
 public Dish(String details, String meal, String type, double price) {
-	super();
 	this.setDetails(details);
 	this.setMeal(meal);
 	this.setType(type);
