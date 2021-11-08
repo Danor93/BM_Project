@@ -57,7 +57,7 @@ public class TableConnections {
 			typeOfOrder = s.next();
 			orderAddress = s.next();
 			if(orderAddress.length() <= 45 && typeOfOrder.length() <= 20) {
-				stmt = con1.prepareStatement("UPDATE tbl_flights SET flight_status = ? WHERE typeOfOrder = ?");
+				stmt = con1.prepareStatement("UPDATE order SET typeOfOrder = ? WHERE orderAddress = ?");
 		 		stmt.setString(1,typeOfOrder);
 		 		stmt.setString(2,orderAddress);
 				stmt.executeUpdate();
