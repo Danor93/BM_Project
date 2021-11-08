@@ -43,14 +43,14 @@ public class Order {
 
 	public void setFinalPrice(double finalPrice) {
 		this.finalPrice = finalPrice;
-	};
+	}
 
 	public Dish[] getOrderedDishes() {
 		return OrderedDishes;
-	};
+	}
 
 	public void setOrderedDishes(Dish[] orderedDishes) {
 		OrderedDishes = orderedDishes;
-	};
+	}
 
 }
