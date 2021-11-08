@@ -63,6 +63,6 @@ public class TableConnections {
 				stmt.executeUpdate();
 			}
 		} catch (SQLException e) {	e.printStackTrace();}
-		 		
+		s.close();
 	}
 }
