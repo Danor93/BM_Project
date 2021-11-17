@@ -50,6 +50,16 @@
             <Button fx:id="connectBtn" layoutX="484.0" layoutY="130.0" mnemonicParsing="false" onAction="#ConnectServer" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #0AAF00; -fx-background-radius: 30;" text="Connect" />
             <Button fx:id="disconnectBtn" layoutX="484.0" layoutY="187.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #FC8080; -fx-background-radius: 30;" text="Disconnect" />
             <Button fx:id="btnClose" layoutX="574.0" layoutY="414.0" mnemonicParsing="false" style="-fx-background-color: #F4FB8B; -fx-background-radius: 30;" text="Close" />
+            <Label layoutX="379.0" layoutY="262.0" prefHeight="53.0" prefWidth="163.0" text="Server Status: ">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="Statuslbl" layoutX="543.0" layoutY="273.0" prefHeight="31.0" prefWidth="77.0" text="OFF" textFill="RED">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
    </children>
 </AnchorPane>

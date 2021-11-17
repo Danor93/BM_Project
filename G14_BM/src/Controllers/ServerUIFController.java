@@ -11,79 +11,89 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class ServerUIFController {
-	public static ServerUIFController serveruifconroller; 
+	public static ServerUIFController serveruifconroller;
 	final public static int DEFAULT_PORT = 5555;
+	@FXML // ResourceBundle that was given to the FXMLLoader
+	private ResourceBundle resources;
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML // URL location of the FXML file that was given to the FXMLLoader
+	private URL location;
 
-    @FXML
-    private URL location;
+	@FXML // fx:id="DBNameLabel"
+	private Label DBNameLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private Label DBNameLabel;
+	@FXML // fx:id="DBPasswordLabel"
+	private Label DBPasswordLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private Label DBPasswordLabel;
+	@FXML // fx:id="DBUserLabel"
+	private Label DBUserLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private Label DBUserLabel;
+	@FXML // fx:id="Statuslbl"
+	private Label Statuslbl; // Value injected by FXMLLoader
 
-    @FXML
-    private Button btnClose;
+	public Label getLabelStatusServer() {
+		return Statuslbl;
+	}
 
-    @FXML
-    private Button connectBtn;
+	@FXML // fx:id="btnClose"
+	private Button btnClose; // Value injected by FXMLLoader
 
-    @FXML
-    private Button disconnectBtn;
+	@FXML // fx:id="connectBtn"
+	private Button connectBtn; // Value injected by FXMLLoader
 
-    @FXML
-    private Label ipLabel;
+	@FXML // fx:id="disconnectBtn"
+	private Button disconnectBtn; // Value injected by FXMLLoader
 
-    @FXML
-    private Label portLabel;
+	@FXML // fx:id="ipLabel"
+	private Label ipLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField txDBPassword;
+	@FXML // fx:id="portLabel"
+	private Label portLabel; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField txtDBName;
+	@FXML // fx:id="txDBPassword"
+	private TextField txDBPassword; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField txtDBUser;
+	@FXML // fx:id="txtDBName"
+	private TextField txtDBName; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField txtIP;
+	@FXML // fx:id="txtDBUser"
+	private TextField txtDBUser; // Value injected by FXMLLoader
 
-    @FXML
-    private TextField txtPort;
+	@FXML // fx:id="txtIP"
+	private TextField txtIP; // Value injected by FXMLLoader
 
-    @FXML
-    void ConnectServer(ActionEvent event) {
-    	System.out.println("Hello!");
-    }
-    
-    
+	@FXML // fx:id="txtPort"
+	private TextField txtPort; // Value injected by FXMLLoader
 
+	@FXML
+	void ConnectServer(ActionEvent event) {
 
-    @FXML
-    void initialize() {
-        assert DBNameLabel != null : "fx:id=\"DBNameLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert DBPasswordLabel != null : "fx:id=\"DBPasswordLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert DBUserLabel != null : "fx:id=\"DBUserLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert btnClose != null : "fx:id=\"btnClose\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert connectBtn != null : "fx:id=\"connectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert disconnectBtn != null : "fx:id=\"disconnectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert ipLabel != null : "fx:id=\"ipLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert portLabel != null : "fx:id=\"portLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert txDBPassword != null : "fx:id=\"txDBPassword\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert txtDBName != null : "fx:id=\"txtDBName\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert txtDBUser != null : "fx:id=\"txtDBUser\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert txtIP != null : "fx:id=\"txtIP\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-        assert txtPort != null : "fx:id=\"txtPort\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		// ServerConnection.startServer(null, this);
+		Statuslbl.setText("ON");
+		Statuslbl.setStyle("-fx-text-fill: green");
+		// addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 
-    }
+	}
+
+	@FXML // This method is called by the FXMLLoader when initialization is complete
+	void initialize() {
+		assert DBNameLabel != null : "fx:id=\"DBNameLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert DBPasswordLabel != null
+				: "fx:id=\"DBPasswordLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert DBUserLabel != null : "fx:id=\"DBUserLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert Statuslbl != null : "fx:id=\"Statuslbl\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert btnClose != null : "fx:id=\"btnClose\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert connectBtn != null : "fx:id=\"connectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert disconnectBtn != null
+				: "fx:id=\"disconnectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert ipLabel != null : "fx:id=\"ipLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert portLabel != null : "fx:id=\"portLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert txDBPassword != null : "fx:id=\"txDBPassword\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert txtDBName != null : "fx:id=\"txtDBName\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert txtDBUser != null : "fx:id=\"txtDBUser\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert txtIP != null : "fx:id=\"txtIP\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		assert txtPort != null : "fx:id=\"txtPort\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+
+	}
 
 }
-
