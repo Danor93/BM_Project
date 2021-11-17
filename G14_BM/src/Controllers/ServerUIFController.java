@@ -1,8 +1,12 @@
 package Controllers;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.ResourceBundle;
-
+import Server.ServerConnection;
+import Server.EchoServer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -68,12 +72,29 @@ public class ServerUIFController {
 	@FXML
 	void ConnectServer(ActionEvent event) {
 
-		// ServerConnection.startServer(null, this);
+		ServerConnection.startServer(null, this);
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
-		// addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 
 	}
+	
+	
+	  @FXML
+	    void StopServer(ActionEvent event) {
+			ServerConnection.stopServer(this);
+			Statuslbl.setText("OFF");
+			Statuslbl.setStyle("-fx-text-fill: red");
+			addToTextArea("Server has stopped listening for connections on port: "+DEFAULT_PORT);
+		//	clientTableConnection.getItems().clear();
+			//clientTableConnection.refresh();
+		//	Query.logoutAllUsers();
+	    }
+		/**This method add message to the log area*/
+		public void addToTextArea(String msg) {
+			String timeStamp = new SimpleDateFormat("[dd.MM.yyyy]  [HH:mm:ss]  ").format(Calendar.getInstance().getTime());
+		}
+	
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {

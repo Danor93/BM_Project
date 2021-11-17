@@ -5,7 +5,7 @@ package Server;
 
 import java.io.*;
 import ocsf.server.*;
-
+import Controllers.ServerUIFController;
 /**
  * This class overrides some of the methods in the abstract 
  * superclass in order to give more functionality to the server.
@@ -24,6 +24,7 @@ public class EchoServer extends AbstractServer
    * The default port to listen on.
    */
   final public static int DEFAULT_PORT = 5555;
+  public static ServerUIFController serverUIFController;
   
   //Constructors ****************************************************
   

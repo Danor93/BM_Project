@@ -48,7 +48,7 @@
             <TextField fx:id="txtIP" layoutX="198.0" layoutY="133.0" style="-fx-background-color: #FFFFFF;" />
             <ButtonBar layoutX="338.0" layoutY="78.0" prefHeight="40.0" prefWidth="200.0" />
             <Button fx:id="connectBtn" layoutX="484.0" layoutY="130.0" mnemonicParsing="false" onAction="#ConnectServer" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #0AAF00; -fx-background-radius: 30;" text="Connect" />
-            <Button fx:id="disconnectBtn" layoutX="484.0" layoutY="187.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #FC8080; -fx-background-radius: 30;" text="Disconnect" />
+            <Button fx:id="disconnectBtn" layoutX="484.0" layoutY="187.0" mnemonicParsing="false" onAction="#StopServer" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #FC8080; -fx-background-radius: 30;" text="Disconnect" />
             <Button fx:id="btnClose" layoutX="574.0" layoutY="414.0" mnemonicParsing="false" style="-fx-background-color: #F4FB8B; -fx-background-radius: 30;" text="Close" />
             <Label layoutX="379.0" layoutY="262.0" prefHeight="53.0" prefWidth="163.0" text="Server Status: ">
                <font>
