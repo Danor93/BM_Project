@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 
 public class serverUI extends Application {
+	
+	//did you see this?
 
 	@Override
 	public void start(Stage primaryStage) throws IOException
@@ -21,7 +23,7 @@ public class serverUI extends Application {
 		controller =load.getController();
 		Scene home=new Scene(root);
 		primaryStage.setScene(home);
-		primaryStage.show();//hello
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
