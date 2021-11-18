@@ -57,7 +57,7 @@ public class TableConnections {
 			typeOfOrder = s.next();
 			orderAddress = s.next();
 			if(orderAddress.length() <= 45 && typeOfOrder.length() <= 20) {
-				stmt = con1.prepareStatement("UPDATE order SET typeOfOrder = ? WHERE orderAddress = ?");
+				stmt = con1.prepareStatement("UPDATE order SET typeOfOrder = ? AND orderAddress = ?");
 		 		stmt.setString(1,typeOfOrder);
 		 		stmt.setString(2,orderAddress);
 				stmt.executeUpdate();
