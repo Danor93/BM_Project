@@ -21,7 +21,7 @@ public class serverUI extends Application {
 		controller =load.getController();
 		Scene home=new Scene(root);
 		primaryStage.setScene(home);
-		primaryStage.show();
+		primaryStage.show();//hello
 	}
 
 	public static void main(String[] args) {
