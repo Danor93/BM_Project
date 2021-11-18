@@ -38,11 +38,11 @@ public class ShowUpdateController {
     @FXML
     void updateOrders(ActionEvent event) throws IOException 
     {
-		FXMLLoader loader = new FXMLLoader();
 		
-		//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		
+		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Pane root = loader.load(getClass().getResource("/gui/UpdateForm.fxml").openStream());
+		Parent root = FXMLLoader.load(getClass().getResource("UpdateForm.fxml"));
 		//UpdateFormController updateFormController = loader.getController();		
 		//studentFormController.loadStudent(ChatClient.s1);
 	
