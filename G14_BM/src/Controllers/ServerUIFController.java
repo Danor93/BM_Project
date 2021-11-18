@@ -5,14 +5,20 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import Server.ServerConnection;
+import extra.ClientConnection;
 import Server.EchoServer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
@@ -20,54 +26,41 @@ public class ServerUIFController {
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
 
-	@FXML // URL location of the FXML file that was given to the FXMLLoader
+	@FXML
 	private URL location;
 
-	@FXML // fx:id="DBNameLabel"
-	private Label DBNameLabel; // Value injected by FXMLLoader
+	@FXML
+	private TableView<?> ClientTable;
 
-	@FXML // fx:id="DBPasswordLabel"
-	private Label DBPasswordLabel; // Value injected by FXMLLoader
+	@FXML
+	private TableColumn<ClientConnection, String> HostCol;
 
-	@FXML // fx:id="DBUserLabel"
-	private Label DBUserLabel; // Value injected by FXMLLoader
+	@FXML
+	private TableColumn<ClientConnection, String> IpCol;
 
-	@FXML // fx:id="Statuslbl"
-	private Label Statuslbl; // Value injected by FXMLLoader
+	@FXML
+	private TextArea ServerLogTxt;
 
-	public Label getLabelStatusServer() {
-		return Statuslbl;
-	}
+	@FXML
+	private TableColumn<ClientConnection, String> StatusCol;
 
-	@FXML // fx:id="btnClose"
-	private Button btnClose; // Value injected by FXMLLoader
+	@FXML
+	private Label Statuslbl;
 
-	@FXML // fx:id="connectBtn"
-	private Button connectBtn; // Value injected by FXMLLoader
+	@FXML
+	private Button btnClose;
 
-	@FXML // fx:id="disconnectBtn"
-	private Button disconnectBtn; // Value injected by FXMLLoader
+	@FXML
+	private Button connectBtn;
 
-	@FXML // fx:id="ipLabel"
-	private Label ipLabel; // Value injected by FXMLLoader
+	@FXML
+	private Button disconnectBtn;
 
-	@FXML // fx:id="portLabel"
-	private Label portLabel; // Value injected by FXMLLoader
+	@FXML
+	private Label ipLabel;
 
-	@FXML // fx:id="txDBPassword"
-	private TextField txDBPassword; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtDBName"
-	private TextField txtDBName; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtDBUser"
-	private TextField txtDBUser; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtIP"
-	private TextField txtIP; // Value injected by FXMLLoader
-
-	@FXML // fx:id="txtPort"
-	private TextField txtPort; // Value injected by FXMLLoader
+	@FXML
+	private Button ClearLogBtn;
 
 	@FXML
 	void ConnectServer(ActionEvent event) {
@@ -78,42 +71,45 @@ public class ServerUIFController {
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 
 	}
+
+	@FXML
+	void StopServer(ActionEvent event) {
+		ServerConnection.stopServer(this);
+		Statuslbl.setText("OFF");
+		Statuslbl.setStyle("-fx-text-fill: red");
+		addToTextArea("Server has stopped listening for connections on port: " + DEFAULT_PORT);
+		// clientTableConnection.getItems().clear();
+		// clientTableConnection.refresh();
+		// Query.logoutAllUsers();
+	}
 	
+	/**This method add message to the log area*/
+	public void addToTextArea(String msg) {
+		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy]  [HH:mm:ss]  ").format(Calendar.getInstance().getTime());
+		Platform.runLater(() -> ServerLogTxt.appendText(timeStamp + msg + "\n"));
+	}
+	
+	public void Close(ActionEvent event) {
+		this.StopServer(event);
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+	    stage.close();
+	}
 	
 	  @FXML
-	    void StopServer(ActionEvent event) {
-			ServerConnection.stopServer(this);
-			Statuslbl.setText("OFF");
-			Statuslbl.setStyle("-fx-text-fill: red");
-			addToTextArea("Server has stopped listening for connections on port: "+DEFAULT_PORT);
-		//	clientTableConnection.getItems().clear();
-			//clientTableConnection.refresh();
-		//	Query.logoutAllUsers();
+	    void clearLog(ActionEvent event) {
+		  ServerLogTxt.clear();
 	    }
-		/**This method add message to the log area*/
-		public void addToTextArea(String msg) {
-			String timeStamp = new SimpleDateFormat("[dd.MM.yyyy]  [HH:mm:ss]  ").format(Calendar.getInstance().getTime());
+	  
+	  public Label getLabelStatusServer() {
+			return Statuslbl;
 		}
-	
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
-		assert DBNameLabel != null : "fx:id=\"DBNameLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert DBPasswordLabel != null
-				: "fx:id=\"DBPasswordLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert DBUserLabel != null : "fx:id=\"DBUserLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert Statuslbl != null : "fx:id=\"Statuslbl\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert btnClose != null : "fx:id=\"btnClose\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert connectBtn != null : "fx:id=\"connectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert disconnectBtn != null
-				: "fx:id=\"disconnectBtn\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert ipLabel != null : "fx:id=\"ipLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert portLabel != null : "fx:id=\"portLabel\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert txDBPassword != null : "fx:id=\"txDBPassword\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert txtDBName != null : "fx:id=\"txtDBName\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert txtDBUser != null : "fx:id=\"txtDBUser\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert txtIP != null : "fx:id=\"txtIP\" was not injected: check your FXML file 'ServerUIF.fxml'.";
-		assert txtPort != null : "fx:id=\"txtPort\" was not injected: check your FXML file 'ServerUIF.fxml'.";
+		serveruifconroller = this;
+		IpCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("ipAddress"));
+		HostCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("hostName"));
+		StatusCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("status"));
 
 	}
 

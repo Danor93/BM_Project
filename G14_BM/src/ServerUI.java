@@ -9,9 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class serverUI extends Application {
-	
-	//did you see this?
+public class ServerUI extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException
