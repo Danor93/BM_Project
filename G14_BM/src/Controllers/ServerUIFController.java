@@ -2,12 +2,15 @@ package Controllers;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import Server.ServerConnection;
 import extra.ClientConnection;
 import Server.EchoServer;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import SQL.*;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
@@ -30,7 +34,7 @@ public class ServerUIFController {
 	private URL location;
 
 	@FXML
-	private TableView<?> ClientTable;
+	private TableView<ClientConnection> ClientTable;
 
 	@FXML
 	private TableColumn<ClientConnection, String> HostCol;
@@ -69,7 +73,7 @@ public class ServerUIFController {
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
-
+		DBConnect.connect();
 	}
 
 	@FXML
@@ -102,6 +106,15 @@ public class ServerUIFController {
 	  
 	  public Label getLabelStatusServer() {
 			return Statuslbl;
+		}
+	  
+		/**This method will update the table*/
+		public void Update(ArrayList<ClientConnection> client) {
+
+			addToTextArea("New connection: " + client);
+			ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
+			ClientTable.setItems(data);
+			ClientTable.refresh();
 		}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
