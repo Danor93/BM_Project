@@ -3,6 +3,7 @@ package SQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import Controllers.*;
 
 import Server.EchoServer;
 
@@ -22,7 +23,7 @@ public class DBConnect {
 		try {
 			con = DriverManager.getConnection("jdbc:mysql://localhost/ordertable?serverTimezone=IST", "root",
 					"Ds0502660865");
-			//EchoServer.serverController.addToTextArea("SQL connection succeed.");
+			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 		} catch (SQLException ex) {/* handle any errors */
 			EchoServer.serverUIFController.addToTextArea("SQLException:" + ex.getMessage()+".");
 			EchoServer.serverUIFController.addToTextArea("SQLState: " + ex.getSQLState()+".");

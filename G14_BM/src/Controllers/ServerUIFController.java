@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.sql.*;
 import Server.ServerConnection;
 import extra.ClientConnection;
 import Server.EchoServer;
@@ -73,7 +74,7 @@ public class ServerUIFController {
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
-		DBConnect.connect();
+		Connection connection = DBConnect.connect();
 	}
 
 	@FXML
@@ -82,8 +83,8 @@ public class ServerUIFController {
 		Statuslbl.setText("OFF");
 		Statuslbl.setStyle("-fx-text-fill: red");
 		addToTextArea("Server has stopped listening for connections on port: " + DEFAULT_PORT);
-		// clientTableConnection.getItems().clear();
-		// clientTableConnection.refresh();
+		ClientTable.getItems().clear();
+		ClientTable.refresh();
 		// Query.logoutAllUsers();
 	}
 	
