@@ -69,12 +69,11 @@ public class ServerUIFController {
 
 	@FXML
 	void ConnectServer(ActionEvent event) {
-
+		Connection connection = DBConnect.connect();
 		ServerConnection.startServer(null, this);
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
-		Connection connection = DBConnect.connect();
 	}
 
 	@FXML
