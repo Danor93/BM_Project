@@ -69,11 +69,12 @@ public class ServerUIFController {
 
 	@FXML
 	void ConnectServer(ActionEvent event) {
-		Connection connection = DBConnect.connect();
+		//Connection connection = DBConnect.connect();
 		ServerConnection.startServer(null, this);
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+		Connection connection = DBConnect.connect();
 	}
 
 	@FXML
@@ -84,7 +85,6 @@ public class ServerUIFController {
 		addToTextArea("Server has stopped listening for connections on port: " + DEFAULT_PORT);
 		ClientTable.getItems().clear();
 		ClientTable.refresh();
-		// Query.logoutAllUsers();
 	}
 	
 	/**This method add message to the log area*/
