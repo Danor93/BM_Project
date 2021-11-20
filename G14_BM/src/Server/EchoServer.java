@@ -5,8 +5,9 @@ package Server;
 // license found at www.lloseng.com 
 
 import java.io.*;
+
+import gui.ServerUIFController;
 import ocsf.server.*;
-import Controllers.ServerUIFController;
 
 /**
  * This class overrides some of the methods in the abstract superclass in order

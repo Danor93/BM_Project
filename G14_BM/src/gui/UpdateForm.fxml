@@ -4,15 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="334.0" prefWidth="393.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="gui.">
+<AnchorPane prefHeight="334.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateFormController">
    <children>
-      <Label fx:id="lblAddress" layoutX="52.0" layoutY="98.0" text="Order address" />
-      <Label fx:id="lblType" layoutX="51.0" layoutY="167.0" text="Order Type" />
-      <TextField fx:id="txtAddress" layoutX="134.0" layoutY="97.0" />
-      <TextField fx:id="txtType" layoutX="133.0" layoutY="163.0" />
-      <Button fx:id="fUpdateBtn" layoutX="292.0" layoutY="253.0" mnemonicParsing="false" onAction="#sendDataUpdate" text="Update" />
-      <Button fx:id="backBtn" layoutX="34.0" layoutY="253.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Label fx:id="lblAddress" layoutX="44.0" layoutY="98.0" prefHeight="18.0" prefWidth="86.0" text="Order address:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblType" layoutX="52.0" layoutY="166.0" prefHeight="18.0" prefWidth="70.0" text="Order Type:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="txtAddress" layoutX="140.0" layoutY="94.0" />
+      <TextField fx:id="txtType" layoutX="140.0" layoutY="162.0" />
+      <Button fx:id="UpdateBtn" layoutX="261.0" layoutY="253.0" mnemonicParsing="false" onAction="#sendDataUpdate" prefHeight="50.0" prefWidth="86.0" style="-fx-background-radius: 30;" text="Update">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="backBtn" layoutX="24.0" layoutY="254.0" mnemonicParsing="false" onAction="#back" prefHeight="49.0" prefWidth="86.0" style="-fx-background-radius: 30;" text="Back">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Label layoutX="139.0" layoutY="34.0" prefHeight="27.0" prefWidth="114.0" text="Update Page" textFill="#0a11d4">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

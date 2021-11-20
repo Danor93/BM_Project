@@ -4,7 +4,7 @@ package Server;
 
 import java.io.IOException;
 
-import Controllers.ServerUIFController;
+import gui.ServerUIFController;
 
 /***
  * ServerConnection this class handle connection to server

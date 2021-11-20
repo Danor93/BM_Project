@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -29,6 +30,9 @@ public class ShowUpdateController {
 
     @FXML
     private Button updateBtn;
+    
+    @FXML
+    private Button CloseBtn;
 
     @FXML
     void showOrders(ActionEvent event) {
@@ -39,26 +43,22 @@ public class ShowUpdateController {
     void updateOrders(ActionEvent event) throws IOException 
     {
 		FXMLLoader loader = new FXMLLoader();
-		
-		//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("/gui/UpdateForm.fxml").openStream());
 		//UpdateFormController updateFormController = loader.getController();		
 		//studentFormController.loadStudent(ChatClient.s1);
-	
 		Scene scene = new Scene(root);			
-		//scene.getStylesheets().add(getClass().getResource("/gui/StudentForm.css").toExternalForm());
 		primaryStage.setTitle("Update window");
-
-		primaryStage.setScene(scene);		
+		primaryStage.setScene(scene);
+		primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 		primaryStage.show();
-		
-		
-				
-			
-		
-
     }
+    
+	public void Close(ActionEvent event) {
+		Stage stage = (Stage) CloseBtn.getScene().getWindow();
+	    stage.close();
+	}
 
     @FXML
     void initialize() {
@@ -73,6 +73,7 @@ public class ShowUpdateController {
 		Parent root=FXMLLoader.load(getClass().getResource("/gui/Showupdate.fxml"));
 		Scene home=new Scene(root);
 		primaryStage.setScene(home);
+		primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 		primaryStage.show();
 		
 	}
