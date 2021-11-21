@@ -72,21 +72,19 @@ public class ServerUIFController {
 	@FXML
 	private Button ClearLogBtn;
 
-	public void start(Stage primaryStage) throws IOException
-	{
-		FXMLLoader load= new FXMLLoader();
+	public void start(Stage primaryStage) throws IOException {
+		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
-		Parent root=FXMLLoader.load(getClass().getResource("ServerUIF.fxml"));
-		Scene home=new Scene(root);
+		Parent root = FXMLLoader.load(getClass().getResource("ServerUIF.fxml"));
+		Scene home = new Scene(root);
 		primaryStage.setScene(home);
 		primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
 		primaryStage.show();
 	}
 
-	
 	@FXML
 	void ConnectServer(ActionEvent event) {
-		//Connection connection = DBConnect.connect();
+		// Connection connection = DBConnect.connect();
 		ServerConnection.startServer(null, this);
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
@@ -103,36 +101,36 @@ public class ServerUIFController {
 		ClientTable.getItems().clear();
 		ClientTable.refresh();
 	}
-	
-	/**This method add message to the log area*/
+
+	/** This method add message to the log area */
 	public void addToTextArea(String msg) {
 		String timeStamp = new SimpleDateFormat("[dd.MM.yyyy]  [HH:mm:ss]  ").format(Calendar.getInstance().getTime());
 		Platform.runLater(() -> ServerLogTxt.appendText(timeStamp + msg + "\n"));
 	}
-	
+
 	public void Close(ActionEvent event) {
 		this.StopServer(event);
 		Stage stage = (Stage) btnClose.getScene().getWindow();
-	    stage.close();
+		stage.close();
 	}
-	
-	  @FXML
-	    void clearLog(ActionEvent event) {
-		  ServerLogTxt.clear();
-	    }
-	  
-	  public Label getLabelStatusServer() {
-			return Statuslbl;
-		}
-	  
-		/**This method will update the table*/
-		public void Update(ArrayList<ClientConnection> client) {
 
-			addToTextArea("New connection: " + client);
-			ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
-			ClientTable.setItems(data);
-			ClientTable.refresh();
-		}
+	@FXML
+	void clearLog(ActionEvent event) {
+		ServerLogTxt.clear();
+	}
+
+	public Label getLabelStatusServer() {
+		return Statuslbl;
+	}
+
+	/** This method will update the table */
+	public void Update(ArrayList<ClientConnection> client) {
+
+		addToTextArea("New connection: " + client);
+		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
+		ClientTable.setItems(data);
+		ClientTable.refresh();
+	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {

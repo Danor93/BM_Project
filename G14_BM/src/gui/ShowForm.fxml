@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="528.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ShowFormController">
+   <children>
+      <TableView fx:id="table" layoutX="25.0" layoutY="6.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="colRestaurant" prefWidth="102.40002822875977" text="Restaurant" />
+            <TableColumn fx:id="colOrdNum" prefWidth="126.4000244140625" text="OrderNumber" />
+            <TableColumn fx:id="colOrdTime" prefWidth="121.5999755859375" text="OrderTime" />
+            <TableColumn fx:id="colPhone" prefWidth="157.5999755859375" text="PhoneNumber" />
+            <TableColumn fx:id="colType" prefWidth="139.199951171875" text="TypeOfOrder" />
+            <TableColumn fx:id="colAddress" prefWidth="144.0" text="OrderAddress" />
+        </columns>
+      </TableView>
+      <Button fx:id="backBtn" layoutX="23.0" layoutY="492.0" mnemonicParsing="false" onAction="#backToMain" style="-fx-background-radius: 30;" text="Back">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="showOrderBtn" layoutX="320.0" layoutY="491.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="151.0" text="Show Updated Orders">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

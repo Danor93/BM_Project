@@ -3,12 +3,12 @@ package SQL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import gui.*;
 
 import Server.EchoServer;
 
 public class DBConnect {
 
+	public static Connection conn;
 	@SuppressWarnings("deprecation")
 	public static Connection connect() {
 		Connection con = null;
@@ -21,7 +21,7 @@ public class DBConnect {
 		}
 
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/ordertable?serverTimezone=IST", "root",
+			con = DriverManager.getConnection("jdbc:mysql://localhost/order?serverTimezone=IST", "root",
 					"Ds0502660865");
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 		} catch (SQLException ex) {/* handle any errors */

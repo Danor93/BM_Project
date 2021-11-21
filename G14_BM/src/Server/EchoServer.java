@@ -5,19 +5,19 @@ package Server;
 // license found at www.lloseng.com 
 
 import java.io.*;
+import java.util.ArrayList;
 
+import Entities.Message;
+import Entities.MessageType;
+import Entities.Order;
+import SQL.ShowOrders;
+import SQL.UpdateDB;
 import gui.ServerUIFController;
 import ocsf.server.*;
 
 /**
  * This class overrides some of the methods in the abstract superclass in order
  * to give more functionality to the server.
- *
- * @author Dr Timothy C. Lethbridge
- * @author Dr Robert Lagani&egrave;re
- * @author Fran&ccedil;ois B&eacute;langer
- * @author Paul Holden
- * @version July 2000
  */
 public class EchoServer extends AbstractServer {
 	// Class variables *************************************************
@@ -28,29 +28,36 @@ public class EchoServer extends AbstractServer {
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
 
-	// Constructors ****************************************************
-
-	/**
-	 * Constructs an instance of the echo server.
-	 *
-	 * @param port The port number to connect on.
-	 */
+	
 	public EchoServer(int port) {
 		super(port);
 	}
 
-	// Instance methods ************************************************
-
-	/**
-	 * This method handles any messages received from the client.
-	 *
-	 * @param msg    The message received from the client.
-	 * @param client The connection from which the message originated.
-	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		System.out.println("Message received: " + msg + " from " + client);
-		
-		this.sendToAllClients(msg);
+		Message message = (Message) msg;
+		Message messageFromServer = null;
+
+		switch (message.getMessageType()) {
+		case Show_Orders: {//get all orders from DB
+			ArrayList<Order> order = ShowOrders.getOrders();
+			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
+		}
+			break;
+
+		case Update_Orders: {
+			UpdateDB.UpdateOrderAddress((Order) message.getMessageData());
+			UpdateDB.UpdateTypeOrder((Order) message.getMessageData());
+			messageFromServer = new Message(MessageType.Update_succesfuly, null);
+		}
+			break;
+
+		default: {
+			messageFromServer = new Message(MessageType.Error, null);
+		}
+			break;
+		}
+		this.sendToAllClients(messageFromServer);
 	}
 
 	/**

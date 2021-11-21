@@ -3,76 +3,91 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Entities.MessageType;
+import Entities.OrderType;
+import client.ChatClient;
+import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class UpdateFormController {
 
-	ShowUpdateController showupdatecontroller;
+    @FXML
+    private ResourceBundle resources;
 
-	@FXML
-	private ResourceBundle resources;
+    @FXML
+    private URL location;
 
-	@FXML
-	private URL location;
+    @FXML
+    private Button backBtn;
 
-	@FXML
-	private Button backBtn;
+    @FXML
+    private Button fUpdateBtn;
 
-	@FXML
-    private Button UpdateBtn;
+    @FXML
+    private Label lblAddress;
 
-	@FXML
-	private Label lblAddress;
+    @FXML
+    private Label lblType;
+    
+    @FXML
+    private Label updateLbl;
 
-	@FXML
-	private Label lblType;
+    @FXML
+    private TextField txtAddress; 
 
-	@FXML
-	private TextField txtAddress;
+    @FXML
+    private TextField txtType;
+    
+    public static boolean flagUpdate=false;
 
-	@FXML
-	private TextField txtType;
-
-	@FXML
-	void back(ActionEvent event) throws IOException {
-
-		FXMLLoader loader = new FXMLLoader();
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    @FXML
+    void back(ActionEvent event) throws IOException 
+    {
+    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Pane root = loader.load(getClass().getResource("/gui/Showupdate.fxml").openStream());
-		// UpdateFormController updateFormController = loader.getController();
-		// studentFormController.loadStudent(ChatClient.s1);
-		Scene scene = new Scene(root);
-		// scene.getStylesheets().add(getClass().getResource("/gui/StudentForm.css").toExternalForm());
-		primaryStage.setTitle("Update window");
-		primaryStage.setScene(scene);
-		primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
+		Parent root = FXMLLoader.load(getClass().getResource("Showupdate.fxml"));
+		Scene scene = new Scene(root);		
+		primaryStage.setTitle("BiteMe");
+		primaryStage.setScene(scene);		
 		primaryStage.show();
-	}
+    }
 
-	@FXML
-	void sendDataUpdate(ActionEvent event) {
+    @FXML
+    void sendDataUpdate(ActionEvent event) 
+    {
+		FXMLLoader loader = new FXMLLoader();
+		
+		if(txtAddress.getText().trim().isEmpty()||txtType.getText().trim().isEmpty())
+		{
+			System.out.println("In order to update you must enter all fields");	
+		}
+		StringBuilder str=new StringBuilder();
+		str.append(MessageType.Update_Orders);
+		str.append(txtAddress.getText()+"@");
+		str.append(txtType.getText());
+		ChatClient.chatClient.handleMessageFromClientUI(str);
+		//flagUpdate=true;
+		
+		if(flagUpdate==true)
+		{
+			updateLbl.setText("Update Successed!");	
+		}
+		else
+		{
+			updateLbl.setText("Update Failed!");
+		}
 
-	}
-
-	@FXML
-	void initialize() {
-		assert backBtn != null : "fx:id=\"backBtn\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-		assert UpdateBtn != null : "fx:id=\"fUpdateBtn\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-		assert lblAddress != null : "fx:id=\"lblAddress\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-		assert lblType != null : "fx:id=\"lblType\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-		assert txtAddress != null : "fx:id=\"txtAddress\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-		assert txtType != null : "fx:id=\"txtType\" was not injected: check your FXML file 'UpdateForm.fxml'.";
-	}
+    }  
 
 }
