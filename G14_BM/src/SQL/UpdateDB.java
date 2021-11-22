@@ -5,36 +5,32 @@ import java.sql.Statement;
 import Entities.Order;
 
 public class UpdateDB {
-	
-	public static void UpdateOrderAddress(Order order) {
+
+	public static void UpdateOrderAddress(String address) {
 		Statement stmt;
 		String query = "";
 		try {
-			if(DBConnect.conn!= null) {
+			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.createStatement();
-				query = "UPDATE Order "
-					  + "SET OrderAddress = '" + order.getOrderAddress() + "' "
-					  + "WHERE OrderNumber = '" + order.getOrderNumber() + "';";
-				stmt.executeUpdate(query);
-			}else {
+				// query = "UPDATE order.orders " + "SET OrderAddress = '" + address + "';";
+				stmt.executeUpdate("UPDATE order.orders " + "SET OrderAddress = '" + address + "';");
+			} else {
 				System.out.println("Conn is null");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void UpdateTypeOrder(Order order) {
+
+	public static void UpdateTypeOrder(String type) {
 		Statement stmt;
 		String query = "";
 		try {
-			if(DBConnect.conn!= null) {
+			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.createStatement();
-				query = "UPDATE Order "
-					  + "SET TypeOfOrder = '" + order.getOrderAddress() + "' "
-					  + "WHERE OrderNumber = '" + order.getOrderNumber() + "';";
-				stmt.executeUpdate(query);
-			}else {
+				// query = "UPDATE order.orders " + "SET TypeOfOrder = '" + type + "';";
+				stmt.executeUpdate("UPDATE order.orders " + "SET TypeOfOrder = '" + type + "';");
+			} else {
 				System.out.println("Conn is null");
 			}
 		} catch (SQLException e) {

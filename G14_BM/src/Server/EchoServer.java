@@ -36,18 +36,21 @@ public class EchoServer extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		System.out.println("Message received: " + msg + " from " + client);
 		Message message = (Message) msg;
+		
 		Message messageFromServer = null;
 
 		switch (message.getMessageType()) {
 		case Show_Orders: {//get all orders from DB
 			ArrayList<Order> order = ShowOrders.getOrders();
 			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
+			
 		}
 			break;
 
 		case Update_Orders: {
-			UpdateDB.UpdateOrderAddress((Order) message.getMessageData());
-			UpdateDB.UpdateTypeOrder((Order) message.getMessageData());
+			String[] DivededAdd= ((String)message.getMessageData()).split("@");		
+			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
+			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
 		}
 			break;

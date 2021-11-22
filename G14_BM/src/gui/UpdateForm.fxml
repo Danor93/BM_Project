@@ -31,5 +31,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label fx:id="updateLbl" layoutX="140.0" layoutY="259.0" prefHeight="38.0" prefWidth="86.0" />
    </children>
 </AnchorPane>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.Order;
+import Entities.OrderType;
 import client.ChatClient;
 import client.ClientController;
 import client.ClientUI;
@@ -28,91 +29,71 @@ import Entities.Message;
 import Entities.MessageType;
 
 public class ShowFormController implements Initializable {
-	
-	 public ResourceBundle getResources() {
+
+	public ResourceBundle getResources() {
 		return resources;
 	}
 
 	public URL getLocation() {
 		return location;
 	}
+
 	@FXML
 	private TableView<Order> table;
-	
+
 	ObservableList<Order> observableList;
-    
 
 	@FXML
-    private ResourceBundle resources;
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private TableColumn<Order, String> colAddress;
+	@FXML
+	private TableColumn<Order, String> colAddress;
 
+	@FXML
+	private TableColumn<Order, Integer> colOrdNum;
 
-    @FXML
-    private TableColumn<Order, String> colOrdNum;
+	@FXML
+	private TableColumn<Order, String> colOrdTime;
 
-    @FXML
-    private TableColumn<Order, String> colOrdTime;
+	@FXML
+	private TableColumn<Order, String> colPhone;
 
-    @FXML
-    private TableColumn<Order, String> colPhone;
+	@FXML
+	private TableColumn<Order, String> colRestaurant;
 
-    @FXML
-    private TableColumn<Order, String> colRestaurant;
+	@FXML
+	private TableColumn<Order, OrderType> colType;
 
-    @FXML
-    private TableColumn<Order, String> colType;
-     
-    @FXML
-    private Button backBtn;
-    
-    @FXML
-    private Button showOrderBtn;
-    
-    @FXML
-    void backToMain(ActionEvent event) throws IOException 
-    {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	@FXML
+	private Button backBtn;
+
+	@FXML
+	private Button showOrderBtn;
+
+	@FXML
+	void backToMain(ActionEvent event) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("Showupdate.fxml"));
-		Scene scene = new Scene(root);		
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe");
-		primaryStage.setScene(scene);		
+		primaryStage.setScene(scene);
 		primaryStage.show();
-    }
-    
-    @FXML
-    void showOrders(ActionEvent event) {
-    	Message message = new Message(MessageType.Show_Orders, null);
-    	showOrderBtn.setDisable(true);
-    	ChatClient.chatClient.handleMessageFromClientUI(message);
-    	loadOrders(ChatClient.orders);
-    }
-    
-    public void loadOrders(ArrayList<Order> orderlist) {
-		table.getItems().clear();
-		for (Order order : orderlist) {
-			table.getItems().add(order);
-		}
-		showOrderBtn.setDisable(false);
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) 
-	{
+	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<Order> observableList = FXCollections.observableArrayList(ChatClient.orders);
-		colRestaurant.setCellValueFactory(new PropertyValueFactory<Order,String>("restaurant"));
-		colOrdNum.setCellValueFactory(new PropertyValueFactory<Order,String>("orderNumber"));
-		colOrdTime.setCellValueFactory(new PropertyValueFactory<Order,String>("orderTime"));
-		colPhone.setCellValueFactory(new PropertyValueFactory<Order,String>("phone"));
-		colType.setCellValueFactory(new PropertyValueFactory<Order,String>("type"));
-		colAddress.setCellValueFactory(new PropertyValueFactory<Order,String>("address"));
+		//colRestaurant.setCellValueFactory(new PropertyValueFactory<Order, String>("Restaurant"));
+		colOrdNum.setCellValueFactory(new PropertyValueFactory<Order, Integer>("OrderNumber"));
+		colOrdTime.setCellValueFactory(new PropertyValueFactory<Order, String>("OrderTime"));
+		colPhone.setCellValueFactory(new PropertyValueFactory<Order, String>("PhoneNumber"));
+		colType.setCellValueFactory(new PropertyValueFactory<Order, OrderType>("OrderType"));
+		colAddress.setCellValueFactory(new PropertyValueFactory<Order, String>("OrderAddress"));
 		table.setItems(observableList);
 	}
 
 }
-

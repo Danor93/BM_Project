@@ -17,6 +17,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import Entities.Message;
+import Entities.MessageType;
 
 public class ShowUpdateController {
 
@@ -39,7 +41,8 @@ public class ShowUpdateController {
     void showOrders(ActionEvent event) throws IOException {
     	
     	FXMLLoader loader = new FXMLLoader();
-    	//ClientUI.chat.accept("show");
+    	Message msg = new Message(MessageType.Show_Orders,null);
+    	ClientUI.chat.accept(msg);
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("/gui/ShowForm.fxml").openStream());

@@ -3,9 +3,6 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import Entities.MessageType;
-import Entities.OrderType;
 import client.ChatClient;
 import client.ClientUI;
 import javafx.event.ActionEvent;
@@ -19,6 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import Entities.Message;
+import Entities.MessageType;
 
 public class UpdateFormController {
 
@@ -64,7 +63,7 @@ public class UpdateFormController {
     }
 
     @FXML
-    void sendDataUpdate(ActionEvent event) 
+    void sendDataUpdate(ActionEvent event)
     {
 		FXMLLoader loader = new FXMLLoader();
 		
@@ -73,15 +72,15 @@ public class UpdateFormController {
 			System.out.println("In order to update you must enter all fields");	
 		}
 		StringBuilder str=new StringBuilder();
-		str.append(MessageType.Update_Orders);
 		str.append(txtAddress.getText()+"@");
 		str.append(txtType.getText());
-		ChatClient.chatClient.handleMessageFromClientUI(str);
-		//flagUpdate=true;
+		Message msg = new Message(MessageType.Show_Orders,str);
+		ChatClient.chatClient.handleMessageFromClientUI(msg);
 		
 		if(flagUpdate==true)
 		{
 			updateLbl.setText("Update Successed!");	
+			flagUpdate=false;
 		}
 		else
 		{

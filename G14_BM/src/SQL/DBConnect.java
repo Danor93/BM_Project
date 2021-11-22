@@ -11,7 +11,7 @@ public class DBConnect {
 	public static Connection conn;
 	@SuppressWarnings("deprecation")
 	public static Connection connect() {
-		Connection con = null;
+		//Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			//EchoServer.serverController.addToTextArea("Driver definition succeed.");
@@ -21,7 +21,7 @@ public class DBConnect {
 		}
 
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/order?serverTimezone=IST", "root",
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/order?serverTimezone=IST", "root",
 					"Ds0502660865");
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 		} catch (SQLException ex) {/* handle any errors */
@@ -29,7 +29,7 @@ public class DBConnect {
 			EchoServer.serverUIFController.addToTextArea("SQLState: " + ex.getSQLState()+".");
 			EchoServer.serverUIFController.addToTextArea("VendorError: " + ex.getErrorCode()+".");
 		}
-		return con;
+		return conn;
 	}
 	
 }

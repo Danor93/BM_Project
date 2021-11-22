@@ -15,16 +15,16 @@ public class ShowOrders {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.createStatement();
-				query = "SELECT * FROM Order";
-				ResultSet rs = stmt.executeQuery(query);
+				//query = "SELECT * FROM order.order";
+				ResultSet rs = stmt.executeQuery("SELECT * FROM order.orders");
 				while (rs.next()) {
-					String resturant = rs.getString("Resturant");
-					int OrderNumber = Integer.parseInt(rs.getString("orderNumber"));
+					String restaurant = rs.getString("Restaurant");
+					int OrderNumber = Integer.parseInt(rs.getString("OrderNumber"));
 					String OrderTime = rs.getString("OrderTime");
 					String PhoneNumber = rs.getString("PhoneNumber");
-					OrderType orderType = OrderType.toOrderType(rs.getString("OrderType"));
+					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
 					String OrderAddress = rs.getString("OrderAddress");
-					orders.add(new Order(resturant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
+					orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
 				}
 				rs.close();
 			} else {

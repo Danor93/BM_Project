@@ -18,7 +18,7 @@ public enum OrderType {
 		if(type.equals("take out")) {
 			return OrderType.take_out;
 		}
-		if(type.equals("shared selivery")) {
+		if(type.equals("shared delivery")) {
 			return OrderType.Shared_Delivery;
 		}
 		return null;

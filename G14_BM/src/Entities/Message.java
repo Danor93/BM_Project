@@ -8,7 +8,13 @@ public class Message implements Serializable{
 	private MessageType messageType;
 	private Object messageData;
 	
-	public Message(MessageType messageType,Object messageData) {
+/*	public Message(MessageType messageType,Object messageData) {
+		this.messageType = messageType;
+		this.messageData = messageData;
+	}*/
+
+	public Message(MessageType messageType, Object messageData) {
+		super();
 		this.messageType = messageType;
 		this.messageData = messageData;
 	}

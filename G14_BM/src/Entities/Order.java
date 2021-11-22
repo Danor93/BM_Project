@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String Resturant;
+	private String Restaurant;
 	private int OrderNumber;
 	private String OrderTime;
 	private String PhoneNumber;
@@ -14,8 +14,8 @@ public class Order implements Serializable {
 
 	public Order(String resturant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType orderType,
 			String orderAddress) {
-		super();
-		this.Resturant = resturant;
+		//super();
+		this.Restaurant = resturant;
 		this.OrderNumber = orderNumber;
 		this.OrderTime = orderTime;
 		this.PhoneNumber = phoneNumber;
@@ -24,11 +24,11 @@ public class Order implements Serializable {
 	}
 
 	public String getResturant() {
-		return Resturant;
+		return Restaurant;
 	}
 
 	public void setResturant(String resturant) {
-		Resturant = resturant;
+		Restaurant = resturant;
 	}
 
 	public int getOrderNumber() {
