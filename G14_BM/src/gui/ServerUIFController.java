@@ -14,10 +14,13 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -35,6 +38,9 @@ public class ServerUIFController {
 	final public static int DEFAULT_PORT = 5555;
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
+
+	public static boolean flagon = false;
+	Alert a = new Alert(AlertType.ERROR);
 
 	@FXML
 	private URL location;
@@ -72,6 +78,12 @@ public class ServerUIFController {
 	@FXML
 	private Button ClearLogBtn;
 
+	@FXML
+	private TextField usertxt;
+
+	@FXML
+	private TextField Passtxt;
+
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
@@ -85,11 +97,16 @@ public class ServerUIFController {
 	@FXML
 	void ConnectServer(ActionEvent event) {
 		ServerConnection.startServer(null, this);
-		Statuslbl.setText("ON");
-		Statuslbl.setStyle("-fx-text-fill: green");
-		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
-		Connection connection = DBConnect.connect();
-		ClientTable.refresh();
+		String username, password;
+		username = usertxt.getText();
+		password = Passtxt.getText();
+		Connection connection = DBConnect.connect(username, password);
+		if (flagon == true) {
+			Statuslbl.setText("ON");
+			Statuslbl.setStyle("-fx-text-fill: green");
+			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+			ClientTable.refresh();
+		}
 	}
 
 	@FXML
@@ -100,6 +117,7 @@ public class ServerUIFController {
 		addToTextArea("Server has stopped listening for connections on port: " + DEFAULT_PORT);
 		ClientTable.getItems().clear();
 		ClientTable.refresh();
+		flagon = false;
 	}
 
 	/** This method add message to the log area */

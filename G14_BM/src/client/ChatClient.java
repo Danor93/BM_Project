@@ -52,6 +52,7 @@ public class ChatClient extends AbstractClient {
 	public ChatClient(String host, int port) throws IOException {
 		super(host, port);
 		chatClient = this;
+		openConnection();
 	}
 
 	// Instance methods ************************************************
