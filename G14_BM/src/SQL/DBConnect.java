@@ -21,7 +21,7 @@ public class DBConnect {
 
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/order?serverTimezone=IST", "root",
-					"Ds0502660865");
+					"Aa123456");
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 		} catch (SQLException ex) {/* handle any errors */
 			EchoServer.serverUIFController.addToTextArea("SQLException:" + ex.getMessage()+".");
