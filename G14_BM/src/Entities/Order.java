@@ -14,7 +14,7 @@ public class Order implements Serializable {
 
 	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType orderType,
 			String orderAddress) {
-		//super();
+		super();
 		this.Restaurant = Restaurant;
 		this.OrderNumber = orderNumber;
 		this.OrderTime = orderTime;
@@ -23,11 +23,11 @@ public class Order implements Serializable {
 		this.OrderAddress = orderAddress;
 	}
 
-	public String getResturant() {
+	public String getRestaurant() {
 		return Restaurant;
 	}
 
-	public void setResturant(String resturant) {
+	public void setRestaurant(String resturant) {
 		Restaurant = resturant;
 	}
 

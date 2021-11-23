@@ -93,10 +93,7 @@ public class ShowFormController implements Initializable {
 		colPhone.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
 		colType.setCellValueFactory(new PropertyValueFactory<>("OrderType"));
 		colAddress.setCellValueFactory(new PropertyValueFactory<>("OrderAddress"));
-		table.getItems().clear();
-		for(Order o:observableList){
-			table.getItems().add(o);
-		}
+		table.setItems(observableList);
 	}
 
 }

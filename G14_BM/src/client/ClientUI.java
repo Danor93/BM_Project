@@ -21,7 +21,7 @@ public class ClientUI extends Application {
 	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		chat= new ClientController("localhost", 5555);
+		chat= new ClientController("192.168.0.132", 5555);
 		
 		mainStage=primaryStage;
 						  		

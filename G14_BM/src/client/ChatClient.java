@@ -52,7 +52,6 @@ public class ChatClient extends AbstractClient {
 	public ChatClient(String host, int port) throws IOException {
 		super(host, port);
 		chatClient = this;
-		openConnection();
 	}
 
 	// Instance methods ************************************************
@@ -87,8 +86,8 @@ public class ChatClient extends AbstractClient {
 
 	public void handleMessageFromClientUI(Object message) {
 		try {
-			openConnection();// in order to send more than one message
 			waitingForResponse = true;
+			openConnection();
 			sendToServer(message);
 			// wait for response
 			while (waitingForResponse) {
