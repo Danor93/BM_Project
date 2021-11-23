@@ -15,7 +15,6 @@ public class ShowOrders {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.createStatement();
-				//query = "SELECT * FROM order.order";
 				ResultSet rs = stmt.executeQuery("SELECT * FROM order.orders");
 				while (rs.next()) {
 					String restaurant = rs.getString("Restaurant");

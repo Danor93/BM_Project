@@ -61,8 +61,8 @@ public class ShowFormController implements Initializable {
 	@FXML
 	private TableColumn<Order, String> colPhone;
 
-	@FXML
-	private TableColumn<Order, String> colRestaurant;
+    @FXML
+    private TableColumn<Order,String> colRes;
 
 	@FXML
 	private TableColumn<Order, OrderType> colType;
@@ -87,13 +87,16 @@ public class ShowFormController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<Order> observableList = FXCollections.observableArrayList(ChatClient.orders);
-		//colRestaurant.setCellValueFactory(new PropertyValueFactory<Order, String>("Restaurant"));
-		colOrdNum.setCellValueFactory(new PropertyValueFactory<Order, Integer>("OrderNumber"));
-		colOrdTime.setCellValueFactory(new PropertyValueFactory<Order, String>("OrderTime"));
-		colPhone.setCellValueFactory(new PropertyValueFactory<Order, String>("PhoneNumber"));
-		colType.setCellValueFactory(new PropertyValueFactory<Order, OrderType>("OrderType"));
-		colAddress.setCellValueFactory(new PropertyValueFactory<Order, String>("OrderAddress"));
-		table.setItems(observableList);
+		colRes.setCellValueFactory(new PropertyValueFactory<>("Restaurant"));
+		colOrdNum.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
+		colOrdTime.setCellValueFactory(new PropertyValueFactory<>("OrderTime"));
+		colPhone.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
+		colType.setCellValueFactory(new PropertyValueFactory<>("OrderType"));
+		colAddress.setCellValueFactory(new PropertyValueFactory<>("OrderAddress"));
+		table.getItems().clear();
+		for(Order o:observableList){
+			table.getItems().add(o);
+		}
 	}
 
 }

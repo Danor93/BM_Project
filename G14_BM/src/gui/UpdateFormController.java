@@ -65,16 +65,16 @@ public class UpdateFormController {
     @FXML
     void sendDataUpdate(ActionEvent event)
     {
-		FXMLLoader loader = new FXMLLoader();
-		
+		//FXMLLoader loader = new FXMLLoader();
 		if(txtAddress.getText().trim().isEmpty()||txtType.getText().trim().isEmpty())
 		{
 			System.out.println("In order to update you must enter all fields");	
 		}
 		StringBuilder str=new StringBuilder();
-		str.append(txtAddress.getText()+"@");
+		str.append(txtAddress.getText());
+		str.append("@");
 		str.append(txtType.getText());
-		Message msg = new Message(MessageType.Show_Orders,str);
+		Message msg = new Message(MessageType.Update_Orders,str.toString());
 		ChatClient.chatClient.handleMessageFromClientUI(msg);
 		
 		if(flagUpdate==true)

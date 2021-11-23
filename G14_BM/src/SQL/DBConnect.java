@@ -11,10 +11,9 @@ public class DBConnect {
 	public static Connection conn;
 	@SuppressWarnings("deprecation")
 	public static Connection connect() {
-		//Connection conn = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			//EchoServer.serverController.addToTextArea("Driver definition succeed.");
+			EchoServer.serverUIFController.addToTextArea("Driver definition succeed.");
 		} catch (Exception ex) {
 			/* handle the error */
 			EchoServer.serverUIFController.addToTextArea("Driver definition failed.");

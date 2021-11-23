@@ -13,6 +13,7 @@ import Entities.Order;
 import SQL.ShowOrders;
 import SQL.UpdateDB;
 import gui.ServerUIFController;
+import gui.UpdateClientTable;
 import ocsf.server.*;
 
 /**
@@ -28,37 +29,34 @@ public class EchoServer extends AbstractServer {
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
 
-	
 	public EchoServer(int port) {
 		super(port);
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		System.out.println("Message received: " + msg + " from " + client);
+		System.out.println(("Message received: " + msg + " from " + client));
+		//UpdateClientTable.UpdateClientTable(msg, client);
 		Message message = (Message) msg;
-		
 		Message messageFromServer = null;
 
 		switch (message.getMessageType()) {
-		case Show_Orders: {//get all orders from DB
+		case Show_Orders: {// get all orders from DB
 			ArrayList<Order> order = ShowOrders.getOrders();
 			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
-			
-		}
 			break;
-
+		}
 		case Update_Orders: {
-			String[] DivededAdd= ((String)message.getMessageData()).split("@");		
+			String[] DivededAdd = ((String) message.getMessageData()).split("@");
 			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
 			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
-		}
 			break;
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);
-		}
 			break;
+		}
 		}
 		this.sendToAllClients(messageFromServer);
 	}

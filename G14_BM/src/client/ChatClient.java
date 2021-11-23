@@ -9,6 +9,7 @@ import client.*;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import Server.EchoServer;
 import gui.ShowFormController;
 import gui.UpdateFormController;
 import javafx.fxml.FXMLLoader;
@@ -61,23 +62,22 @@ public class ChatClient extends AbstractClient {
 	 * @param msg The message from the server.
 	 */
 	public void handleMessageFromServer(Object msg) {
-		System.out.println("--> get message from server ");
-
+		System.out.println("--> get message from server");
 		waitingForResponse = false;
 		Message mssg = (Message) msg;
-
+		int i=0;
 		if (mssg.getMessageType().equals(MessageType.Show_Orders_succ)) {
 			ArrayList<Order> arr = (ArrayList<Order>) mssg.getMessageData();
-			orders= arr; 
-			
-		
-
+			while(i<arr.size())
+			{
+				orders.add(arr.get(i));
+				i++;
+			}
 		}
 		if (mssg.getMessageType().equals(MessageType.Update_succesfuly)) {
 			UpdateFormController.flagUpdate = true;
 		}
 	}
-
 	/**
 	 * 
 	 *

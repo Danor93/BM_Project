@@ -84,12 +84,12 @@ public class ServerUIFController {
 
 	@FXML
 	void ConnectServer(ActionEvent event) {
-		// Connection connection = DBConnect.connect();
 		ServerConnection.startServer(null, this);
 		Statuslbl.setText("ON");
 		Statuslbl.setStyle("-fx-text-fill: green");
 		addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 		Connection connection = DBConnect.connect();
+		ClientTable.refresh();
 	}
 
 	@FXML
@@ -125,7 +125,6 @@ public class ServerUIFController {
 
 	/** This method will update the table */
 	public void Update(ArrayList<ClientConnection> client) {
-
 		addToTextArea("New connection: " + client);
 		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
 		ClientTable.setItems(data);
@@ -138,7 +137,6 @@ public class ServerUIFController {
 		IpCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("ipAddress"));
 		HostCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("hostName"));
 		StatusCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("status"));
-
 	}
 
 }
