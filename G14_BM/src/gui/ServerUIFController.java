@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.sql.*;
 import Server.ServerConnection;
+import client.ClientController;
 import extra.ClientConnection;
 import Server.EchoServer;
 import javafx.application.Platform;
@@ -31,10 +32,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import ocsf.server.ConnectionToClient;
 import SQL.*;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
+	public ArrayList<ClientConnection> clients=new ArrayList<>();
 	final public static int DEFAULT_PORT = 5555;
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
@@ -100,11 +103,11 @@ public class ServerUIFController {
 		String username, password;
 		username = usertxt.getText();
 		password = Passtxt.getText();
-		Connection connection = DBConnect.connect(username, password);
+		Connection connection = DBConnect.connect(username,password);
 		if (flagon == true) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");
-			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+			//addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 			ClientTable.refresh();
 		}
 	}
@@ -142,9 +145,9 @@ public class ServerUIFController {
 	}
 
 	/** This method will update the table */
-	public void Update(ArrayList<ClientConnection> client) {
-		addToTextArea("New connection: " + client);
-		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
+	public void Update(ClientConnection client) {
+		clients.add(client);
+		ObservableList<ClientConnection> data = FXCollections.observableArrayList(clients);
 		ClientTable.setItems(data);
 		ClientTable.refresh();
 	}

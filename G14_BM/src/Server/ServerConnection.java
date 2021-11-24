@@ -1,7 +1,5 @@
 package Server;
 
-
-
 import java.io.IOException;
 
 import gui.ServerUIFController;

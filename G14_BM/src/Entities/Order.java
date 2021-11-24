@@ -12,14 +12,14 @@ public class Order implements Serializable {
 	private OrderType OrderType;
 	private String OrderAddress;
 
-	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType orderType,
+	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType OrderType,
 			String orderAddress) {
 		super();
 		this.Restaurant = Restaurant;
 		this.OrderNumber = orderNumber;
 		this.OrderTime = orderTime;
 		this.PhoneNumber = phoneNumber;
-		this.OrderType = orderType;
+		this.OrderType = OrderType;
 		this.OrderAddress = orderAddress;
 	}
 
@@ -59,8 +59,8 @@ public class Order implements Serializable {
 		return OrderType;
 	}
 
-	public void setOrderType(OrderType orderType) {
-		OrderType = orderType;
+	public void setOrderType(OrderType OrderType) {
+		this.OrderType = OrderType;
 	}
 
 	public String getOrderAddress() {

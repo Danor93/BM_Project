@@ -39,8 +39,8 @@ public class ShowUpdateController {
 
     @FXML
     void showOrders(ActionEvent event) throws IOException {
-    	
     	FXMLLoader loader = new FXMLLoader();
+    	
     	Message msg = new Message(MessageType.Show_Orders,null);
     	ClientUI.chat.accept(msg);
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
@@ -62,7 +62,6 @@ public class ShowUpdateController {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
 		Pane root = loader.load(getClass().getResource("/gui/UpdateForm.fxml").openStream());
-		//UpdateFormController updateFormController = loader.getController();
 		Scene scene = new Scene(root);			
 		primaryStage.setTitle("Update window");
 		primaryStage.setScene(scene);
@@ -73,13 +72,14 @@ public class ShowUpdateController {
 	public void Close(ActionEvent event) {
 		Stage stage = (Stage) CloseBtn.getScene().getWindow();
 	    stage.close();
+		Message msg = new Message(MessageType.Disconected,null);
+    	ClientUI.chat.accept(msg);
 	}
 
     @FXML
     void initialize() {
         assert showBtn != null : "fx:id=\"showBtn\" was not injected: check your FXML file 'Showupdate.fxml'.";
         assert updateBtn != null : "fx:id=\"updateBtn\" was not injected: check your FXML file 'Showupdate.fxml'.";
-
     }
   
 	public void start(Stage primaryStage) throws IOException 

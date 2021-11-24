@@ -87,6 +87,7 @@ public class ShowFormController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<Order> observableList = FXCollections.observableArrayList(ChatClient.orders);
+		table.getItems().clear();
 		colRes.setCellValueFactory(new PropertyValueFactory<>("Restaurant"));
 		colOrdNum.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
 		colOrdTime.setCellValueFactory(new PropertyValueFactory<>("OrderTime"));
@@ -95,5 +96,4 @@ public class ShowFormController implements Initializable {
 		colAddress.setCellValueFactory(new PropertyValueFactory<>("OrderAddress"));
 		table.setItems(observableList);
 	}
-
 }

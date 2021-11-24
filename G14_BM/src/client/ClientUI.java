@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 
 
 import java.util.Vector;
+
+import gui.ClientMenuUiController;
 import gui.ShowUpdateController;
 import client.ClientController;
 
@@ -12,7 +14,9 @@ public class ClientUI extends Application {
 	
 	public static Stage mainStage;
 
-	public static ClientController chat; //only one instance
+	//public static ClientController chat;
+
+	public static ClientController chat; 
 
 	public static void main( String args[] ) throws Exception
 	   { 
@@ -21,12 +25,9 @@ public class ClientUI extends Application {
 	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		chat= new ClientController("192.168.0.132", 5555);
 		
-		mainStage=primaryStage;
-						  		
-		ShowUpdateController firstPage = new ShowUpdateController (); // create StudentFrame
-		 
+		mainStage=primaryStage;	  		
+		ClientMenuUiController firstPage = new ClientMenuUiController (); 
 		firstPage.start(mainStage);
 	}
 	

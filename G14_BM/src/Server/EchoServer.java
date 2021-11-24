@@ -12,8 +12,10 @@ import Entities.MessageType;
 import Entities.Order;
 import SQL.ShowOrders;
 import SQL.UpdateDB;
+import client.ClientController;
+import client.ClientUI;
+import extra.ClientConnection;
 import gui.ServerUIFController;
-import gui.UpdateClientTable;
 import ocsf.server.*;
 
 /**
@@ -28,17 +30,16 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
+	public static ClientController ClientController;
 
 	public EchoServer(int port) {
 		super(port);
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		System.out.println(("Message received: " + msg + " from " + client));
-		//UpdateClientTable.UpdateClientTable(msg, client);
+		//System.out.println(("Message received: " + msg + " from " + client));
 		Message message = (Message) msg;
 		Message messageFromServer = null;
-
 		switch (message.getMessageType()) {
 		case Show_Orders: {// get all orders from DB
 			ArrayList<Order> order = ShowOrders.getOrders();
@@ -52,6 +53,20 @@ public class EchoServer extends AbstractServer {
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
 			break;
 		}
+		case login:{
+			ClientConnection clients= new ClientConnection(client);
+			if(!(ServerUIFController.serveruifconroller.clients.contains(clients))) {
+			ServerUIFController.serveruifconroller.Update(clients);
+			messageFromServer = new Message(MessageType.login, null);
+			break;
+			}
+		}
+		case Disconected:{
+			messageFromServer = new Message(MessageType.Disconected, null);
+			
+			break;
+		}
+				
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);
@@ -103,5 +118,7 @@ public class EchoServer extends AbstractServer {
 			System.out.println("ERROR - Could not listen for clients!");
 		}
 	}
+		
+	
 }
 //End of EchoServer class
