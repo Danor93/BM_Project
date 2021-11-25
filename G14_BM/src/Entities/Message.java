@@ -7,11 +7,6 @@ public class Message implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private MessageType messageType;
 	private Object messageData;
-	
-/*	public Message(MessageType messageType,Object messageData) {
-		this.messageType = messageType;
-		this.messageData = messageData;
-	}*/
 
 	public Message(MessageType messageType, Object messageData) {
 		super();

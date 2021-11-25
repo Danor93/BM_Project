@@ -37,7 +37,7 @@ import SQL.*;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
-	public ArrayList<ClientConnection> clients=new ArrayList<>();
+	public ArrayList<ClientConnection> clients = new ArrayList<>();
 	final public static int DEFAULT_PORT = 5555;
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
@@ -103,11 +103,11 @@ public class ServerUIFController {
 		String username, password;
 		username = usertxt.getText();
 		password = Passtxt.getText();
-		Connection connection = DBConnect.connect(username,password);
+		Connection connection = DBConnect.connect(username, password);
 		if (flagon == true) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");
-			//addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 			ClientTable.refresh();
 		}
 	}
