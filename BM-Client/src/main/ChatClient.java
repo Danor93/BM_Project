@@ -4,18 +4,12 @@
 
 package main;
 
-import client.*;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
 import ocsf.client.AbstractClient;
 
 import java.io.*;
