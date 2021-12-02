@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -64,6 +65,18 @@ public class BranchManagerScreenController {
         assert btnUploadPDF != null : "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnViewBranchsReports != null : "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-
     }
+    
+    public void start(Stage primaryStage) throws IOException {
+		FXMLLoader load = new FXMLLoader();
+		primaryStage.setTitle("BiteMe");
+		Pane root = load.load(getClass().getResource("/client/controllers/BranchManagerScreen.fxml").openStream());
+		Scene home = new Scene(root);
+		primaryStage.setScene(home);
+	//	lblName.setText(TempName); 
+		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
+		//lblName.setText("test"); 
+		primaryStage.show();
+		//lblName.setText("test"); 
+	}
 }

@@ -29,10 +29,9 @@ public class CustomerScreenController {
 
     @FXML
     private Button btnBack;
+    
     @FXML
     private Label lblName;
-    
-    
     
     public void start(Stage primaryStage) throws IOException {
     //	lblName.setText(str); 
@@ -57,11 +56,8 @@ public class CustomerScreenController {
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
-
     }
-    
-
-
+   
     @FXML
     void initialize() {
     }

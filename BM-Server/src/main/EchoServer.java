@@ -79,8 +79,8 @@ public class EchoServer extends AbstractServer {
 			else if(result.equals("BranchManager")) {
 				messageFromServer = new Message(MessageType.BranchManager, null);
 			}		
-			else if(result=="CEO") {
-				
+			else if(result.equals("CEO")) {
+				messageFromServer = new Message(MessageType.CEO, null);
 			}
 			else {
 				messageFromServer = new Message(MessageType.loginWrongInput, null);

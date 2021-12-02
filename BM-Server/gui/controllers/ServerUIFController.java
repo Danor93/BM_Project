@@ -41,7 +41,7 @@ public class ServerUIFController {
 
 	public static boolean flagon = false;
 	Alert a = new Alert(AlertType.ERROR);
-
+	
 	@FXML
 	private URL location;
 
@@ -104,7 +104,7 @@ public class ServerUIFController {
 		if (flagon == true) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");
-			// addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
 			ClientTable.refresh();
 		}
 	}

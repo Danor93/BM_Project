@@ -56,20 +56,13 @@ public class LoginScreenController {
 		str.append("@");
 		str.append(txtPassword.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
-		// ChatClient.chatClient.handleMessageFromClientUI(msg);
 		ClientUI.chat.accept(msg);
-		// System.out.println(BMflag);
+		System.out.println(msg.getMessageData().toString());
 		if (BMflag == true) {
-			FXMLLoader loader = new FXMLLoader();
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
-			Pane root = loader
-					.load(getClass().getResource("/client/controllers/BranchManagerScreen.fxml").openStream());
-			Scene scene = new Scene(root);
-			primaryStage.setTitle("BiteMe");
-			primaryStage.setScene(scene);
-			// primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
-			primaryStage.show();
+			BranchManagerScreenController aFrame = new BranchManagerScreenController();
+			aFrame.start(primaryStage);
 			BMflag = false;
 
 		} else if (Customerflag == true) {
@@ -78,19 +71,14 @@ public class LoginScreenController {
 			Stage primaryStage = new Stage();
 			CustomerScreenController aFrame = new CustomerScreenController();
 			aFrame.start(primaryStage);
-			/*
-			 * FXMLLoader loader = new FXMLLoader(); ((Node)
-			 * event.getSource()).getScene().getWindow().hide(); Stage primaryStage = new
-			 * Stage(); Pane root =
-			 * loader.load(getClass().getResource("/client/controllers/CustomerScreen.fxml")
-			 * .openStream()); Scene scene = new Scene(root);
-			 * primaryStage.setTitle("BiteMe"); primaryStage.setScene(scene);
-			 * //primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
-			 * primaryStage.show();
-			 */
-
 			Customerflag = false;
-
+			
+		} else if (CEOflag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			CEOScreenController aFrame = new CEOScreenController();
+			aFrame.start(primaryStage);
+			CEOflag = false;
 		}
 	}
 

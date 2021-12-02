@@ -65,6 +65,12 @@ public class ChatClient extends AbstractClient {
 			//System.out.println(LoginScreenController.BMflag);
 		
 		}
+		if(mssg.getMessageType().equals(MessageType.CEO))
+		{
+			LoginScreenController.CEOflag=true; 
+			//System.out.println(LoginScreenController.BMflag);
+		
+		}
 		if(mssg.getMessageType().equals(MessageType.ReturnFirstName_success))
 		{
 			LoginScreenController.Name= mssg.getMessageData().toString();
