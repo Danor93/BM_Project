@@ -36,5 +36,10 @@
          </font>
       </Label>
       <Button fx:id="btnLogin" layoutX="173.0" layoutY="290.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="78.0" style="-fx-background-color: #6AFB05; -fx-background-radius: 30;" text="Login" />
+      <Label fx:id="WrongInputInLoggin" layoutX="151.0" layoutY="256.0" prefHeight="26.0" prefWidth="120.0" text=" " textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

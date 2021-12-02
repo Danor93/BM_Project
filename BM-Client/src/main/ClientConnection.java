@@ -1,6 +1,6 @@
 package main;
 
-import ocsf.server.ConnectionToClient;
+import server.ConnectionToClient;
 
 /**
  * A function that connects the client to the server and 

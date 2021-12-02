@@ -50,8 +50,8 @@ import main.ClientUI;
 	    	else
 	    	{
 	    		ClientUI.chat= new ClientController(ip, 5555);
-	    		Message msg = new Message(MessageType.login,null);
-	        	ClientUI.chat.accept(msg);
+	    		//Message msg = new Message(MessageType.login,null);
+	        	//ClientUI.chat.accept(msg);
 	    		FXMLLoader loader = new FXMLLoader();
 	    		((Node) event.getSource()).getScene().getWindow().hide();
 	    		Stage primaryStage = new Stage();

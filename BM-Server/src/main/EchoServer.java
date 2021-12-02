@@ -5,16 +5,25 @@ package main;
 // license found at www.lloseng.com 
 
 import java.util.ArrayList;
+
+import javax.swing.text.AbstractDocument.BranchElement;
+
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import controllers.ServerUIFController;
-import ocsf.server.AbstractServer;
-import ocsf.server.ConnectionToClient;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import querys.DBCheck;
 import querys.DBConnect;
+import querys.DBFirstName;
 import querys.ShowOrders;
 import querys.UpdateDB;
+import server.AbstractServer;
+import server.ConnectionToClient;
 
 
 /**
@@ -54,24 +63,45 @@ public class EchoServer extends AbstractServer {
 			break;
 		}
 		
-		case loginSystem:{
+		case loginSystem: {
 			String result; 
 			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			result= DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);			
-		}
-		/*case login:{
-			ClientConnection clients= new ClientConnection(client);
-			if(!(ServerUIFController.serveruifconroller.clients.contains(clients))) {
-			ServerUIFController.serveruifconroller.Update(clients);
-			messageFromServer = new Message(MessageType.login, null);
-			break;
+			result = DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);	
+			System.out.println(result);
+			if(result.equals("Customer")) {
+			//	messageFromServer = new Message(MessageType.Customer, null);
+				String result2; 
+				String[] DivededAdd2 = ((String) message.getMessageData()).split("@");
+				result2 = DBFirstName.DBFirstName(DivededAdd2[0],DivededAdd2[1]);
+				System.out.println(result2);
+				messageFromServer = new Message(MessageType.Customer, null);
+				
 			}
+			else if(result.equals("BranchManager")) {
+				messageFromServer = new Message(MessageType.BranchManager, null);
+			}		
+			else if(result=="CEO") {
+				
+			}
+			else {
+				messageFromServer = new Message(MessageType.loginWrongInput, null);
+			}
+			break;
 		}
-		case Disconected:{
-			messageFromServer = new Message(MessageType.Disconected, null);
-			
+		
+	/*	case ReturnFirstName:
+		{
+			String result; 
+			String[] DivededAdd = ((String) message.getMessageData()).split("@");
+			result = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);	
+			System.out.println(result);
+			messageFromServer = new Message(MessageType.ReturnFirstName_success, result);
 			break;
 		}*/
+		case Disconected:{
+			messageFromServer = new Message(MessageType.Disconected, null);		
+			break;
+		}
 				
 
 		default: {

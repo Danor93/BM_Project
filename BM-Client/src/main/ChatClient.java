@@ -4,17 +4,27 @@
 
 package main;
 
+import client.*;
+import client.controllers.BranchManagerScreenController;
+import client.controllers.CustomerScreenController;
+import client.controllers.LoginScreenController;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import ocsf.client.AbstractClient;
+import javafx.stage.Stage;
+
 
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.security.auth.login.LoginContext;
 
 public class ChatClient extends AbstractClient {
 	public static ChatClient chatClient;
@@ -38,15 +48,33 @@ public class ChatClient extends AbstractClient {
 		if (mssg.getMessageType().equals(MessageType.Update_succesfuly)) {
 			UpdateFormController.flagUpdate = true;
 		}
-		
 		if(mssg.getMessageType().equals(MessageType.login))
 		{
 			
 		}
+		if(mssg.getMessageType().equals(MessageType.BranchManager))
+		{
+			LoginScreenController.BMflag=true; 
+			//System.out.println(LoginScreenController.BMflag);
 		
+		}
+		if(mssg.getMessageType().equals(MessageType.Customer))
+		{
+			LoginScreenController.Customerflag=true; 
+			LoginScreenController.Name=mssg.getMessageData().toString();
+			//System.out.println(LoginScreenController.BMflag);
+		
+		}
+		if(mssg.getMessageType().equals(MessageType.ReturnFirstName_success))
+		{
+			LoginScreenController.Name= mssg.getMessageData().toString();
+		}
 		if(mssg.getMessageType().equals(MessageType.Disconected))
 		{
 			
+		}
+		if(mssg.getMessageType().equals(MessageType.loginWrongInput)) {
+			//LoginScreenController.flag=true;
 		}
 	}
 	public void handleMessageFromClientUI(Object message) {
