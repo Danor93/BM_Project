@@ -32,7 +32,7 @@ import server.ConnectionToClient;
  */
 public class EchoServer extends AbstractServer {
 	// Class variables *************************************************
-	//aviel12345.
+	//sahar
 	/**
 	 * The default port to listen on.
 	 */
