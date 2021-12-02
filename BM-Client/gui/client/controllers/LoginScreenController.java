@@ -27,6 +27,7 @@ public class LoginScreenController {
 	public static boolean BMflag = false;
 	public static boolean CEOflag = false;
 	public static boolean Customerflag = false;
+	public static boolean Supplierflag = false;
 	public static String Name = null;
 	public static ActionEvent mainevent;
 	// public static String Name;
@@ -80,8 +81,16 @@ public class LoginScreenController {
 			aFrame.start(primaryStage);
 			CEOflag = false;
 		}
+		
+		else if (Supplierflag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			SupplierScreenController aFrame = new SupplierScreenController();
+			aFrame.start(primaryStage);
+			Supplierflag = false;
+		}
 	}
-
+	
 	@FXML
 	void getUserName(InputMethodEvent event) {
 

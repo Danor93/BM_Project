@@ -56,24 +56,28 @@ public class ChatClient extends AbstractClient {
 		{
 			LoginScreenController.BMflag=true; 
 			//System.out.println(LoginScreenController.BMflag);
-		
 		}
 		if(mssg.getMessageType().equals(MessageType.Customer))
 		{
 			LoginScreenController.Customerflag=true; 
 			LoginScreenController.Name=mssg.getMessageData().toString();
 			//System.out.println(LoginScreenController.BMflag);
-		
 		}
 		if(mssg.getMessageType().equals(MessageType.CEO))
 		{
-			LoginScreenController.CEOflag=true; 
-			//System.out.println(LoginScreenController.BMflag);
-		
+			LoginScreenController.CEOflag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.Supplier))
+		{
+			LoginScreenController.Supplierflag=true; 		
 		}
 		if(mssg.getMessageType().equals(MessageType.ReturnFirstName_success))
 		{
 			LoginScreenController.Name= mssg.getMessageData().toString();
+		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewAccount))
+		{
+			BranchManagerScreenController.OpenNewAccountFlag=true; 		
 		}
 		if(mssg.getMessageType().equals(MessageType.Disconected))
 		{
