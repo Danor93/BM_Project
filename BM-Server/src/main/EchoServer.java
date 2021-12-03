@@ -1,6 +1,8 @@
 package main;
 // This file contains material supporting section 3.7 of the textbook:
 
+import java.io.IOException;
+
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
@@ -63,53 +65,48 @@ public class EchoServer extends AbstractServer {
 		}
 		
 		case loginSystem: {
-			String result; 
+			String result, result2; 
 			String[] DivededAdd = ((String) message.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);	
 			System.out.println(result);
-			if(result.equals("Customer")) {
-			//	messageFromServer = new Message(MessageType.Customer, null);
-				String result2; 
-				String[] DivededAdd2 = ((String) message.getMessageData()).split("@");
-				result2 = DBFirstName.DBFirstName(DivededAdd2[0],DivededAdd2[1]);
-				System.out.println(result2);
+			result2 = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);
+			System.out.println(result2);
+			if(result.equals("Customer"))
 				messageFromServer = new Message(MessageType.Customer, null);
-				
-			}
-			else if(result.equals("BranchManager")) {
+			else if(result.equals("BranchManager"))
 				messageFromServer = new Message(MessageType.BranchManager, null);
-			}		
-			else if(result.equals("CEO")) {
+			else if(result.equals("CEO"))
 				messageFromServer = new Message(MessageType.CEO, null);
-			}
-			else {
+			else if(result.equals("Supplier"))
+				messageFromServer = new Message(MessageType.Supplier, null);
+			else
 				messageFromServer = new Message(MessageType.loginWrongInput, null);
-			}
 			break;
 		}
 		
-	/*	case ReturnFirstName:
-		{
-			String result; 
-			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			result = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);	
-			System.out.println(result);
-			messageFromServer = new Message(MessageType.ReturnFirstName_success, result);
-			break;
-		}*/
 		case Disconected:{
-			messageFromServer = new Message(MessageType.Disconected, null);		
+			messageFromServer = new Message(MessageType.Disconected, null);	
 			break;
 		}
-				
+		
+		case OpenNewAccount:{
+			messageFromServer = new Message(MessageType.OpenNewAccount, null);	
+			break;
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);
 			break;
 		}
-		}
-		this.sendToAllClients(messageFromServer);
 	}
+		//this.sendToAllClients(messageFromServer);
+		try {
+			client.sendToClient(messageFromServer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+}
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server

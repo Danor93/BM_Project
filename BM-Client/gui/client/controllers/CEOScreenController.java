@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class CEOScreenController {
-
     @FXML
     private ResourceBundle resources;
 
@@ -55,17 +54,12 @@ public class CEOScreenController {
     }
     
     public void start(Stage primaryStage) throws IOException {
-        //	lblName.setText(str); 
     		FXMLLoader load = new FXMLLoader();
     		primaryStage.setTitle("BiteMe");
     		Pane root = load.load(getClass().getResource("/client/controllers/CEOScreen.fxml").openStream());
     		Scene home = new Scene(root);
     		primaryStage.setScene(home);
-    	//	lblName.setText(TempName); 
-    		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
-    		//lblName.setText("test"); 
     		primaryStage.show();
-    		//lblName.setText("test"); 
     	}
 
         @FXML

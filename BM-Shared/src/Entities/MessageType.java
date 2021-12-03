@@ -10,9 +10,9 @@ public enum MessageType {
 	
 	/*type of users*/
 	
-	BranchManager,CEO,Customer, 
+	BranchManager,CEO,Customer,Supplier,
 	
-	ReturnFirstName,ReturnFirstName_success,
+	ReturnFirstName,ReturnFirstName_success,OpenNewAccount,
 	
 	
 	/*Error*/
