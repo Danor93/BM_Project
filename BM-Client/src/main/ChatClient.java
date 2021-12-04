@@ -84,7 +84,7 @@ public class ChatClient extends AbstractClient {
 			
 		}
 		if(mssg.getMessageType().equals(MessageType.loginWrongInput)) {
-			//LoginScreenController.flag=true;
+			LoginScreenController.nullflag=true; 		
 		}
 	}
 	public void handleMessageFromClientUI(Object message) {

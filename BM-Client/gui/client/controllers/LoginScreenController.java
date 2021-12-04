@@ -28,6 +28,7 @@ public class LoginScreenController {
 	public static boolean CEOflag = false;
 	public static boolean Customerflag = false;
 	public static boolean Supplierflag = false;
+	public static boolean nullflag = false;
 	public static String Name = null;
 	public static ActionEvent mainevent;
 	// public static String Name;
@@ -89,6 +90,12 @@ public class LoginScreenController {
 			aFrame.start(primaryStage);
 			Supplierflag = false;
 		}
+		
+		else if (nullflag == true) {
+			WrongInputInLoggin.setText("Wrong Input");
+			nullflag = false;
+		}
+
 	}
 	
 	@FXML

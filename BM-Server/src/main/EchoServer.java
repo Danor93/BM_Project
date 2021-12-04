@@ -79,7 +79,7 @@ public class EchoServer extends AbstractServer {
 				messageFromServer = new Message(MessageType.CEO, null);
 			else if(result.equals("Supplier"))
 				messageFromServer = new Message(MessageType.Supplier, null);
-			else
+			else if(result.equals("AlreadyLoggedIn"))
 				messageFromServer = new Message(MessageType.loginWrongInput, null);
 			break;
 		}
