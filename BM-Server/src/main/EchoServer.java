@@ -44,7 +44,6 @@ public class EchoServer extends AbstractServer {
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		// System.out.println(("Message received: " + msg + " from " + client));
 		if (!(ServerUIFController.clients.contains(client))) {
 			ClientConnection newClient = new ClientConnection(client);
 			ServerUIFController.clients.add(newClient);
@@ -136,12 +135,6 @@ public class EchoServer extends AbstractServer {
 			break;
 		}
 	}
-		try {
-			client.sendToClient(messageFromServer);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 }
 
 	/**
@@ -149,7 +142,7 @@ public class EchoServer extends AbstractServer {
 	 * starts listening for connections.
 	 */
 	protected void serverStarted() {
-		System.out.println("Server listening for connections on port " + getPort());
+		//System.out.println("Server listening for connections on port " + getPort());
 	}
 
 	/**
@@ -157,7 +150,7 @@ public class EchoServer extends AbstractServer {
 	 * listening for connections.
 	 */
 	protected void serverStopped() {
-		System.out.println("Server has stopped listening for connections.");
+		//System.out.println("Server has stopped listening for connections.");
 	}
 
 	// Class methods ***************************************************
