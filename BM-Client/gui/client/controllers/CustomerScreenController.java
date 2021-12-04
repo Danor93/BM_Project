@@ -37,7 +37,7 @@ public class CustomerScreenController {
 		//lblName.setText("test"); 
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/client/controllers/CustomerScreen.fxml").openStream());
+		Pane root = load.load(getClass().getResource("/fxml/CustomerScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
 	//	lblName.setText(TempName); 
@@ -51,7 +51,7 @@ public class CustomerScreenController {
     void Back(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 		Scene scene = new Scene(root);		
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
