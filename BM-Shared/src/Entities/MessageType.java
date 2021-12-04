@@ -3,7 +3,7 @@ package Entities;
 public enum MessageType {
 
 	/*Server Message*/
-	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,loginWrongInput,
+	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,AlreadyLoggedIn,WrongInput,
 	
 	/*Client Message*/
 	Update_Orders,Show_Orders,
@@ -13,6 +13,7 @@ public enum MessageType {
 	BranchManager,CEO,Customer,Supplier,
 	
 	ReturnFirstName,ReturnFirstName_success,OpenNewAccount,
+	OpenNewBussinesAccount,OpenNewPrivateAccount,ConfirmOpenNewBusinessAccount,ConfirmOpenNewPrivateAccount,
 	
 	
 	/*Error*/

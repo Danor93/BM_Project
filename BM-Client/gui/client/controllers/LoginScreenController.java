@@ -28,7 +28,8 @@ public class LoginScreenController {
 	public static boolean CEOflag = false;
 	public static boolean Customerflag = false;
 	public static boolean Supplierflag = false;
-	public static boolean nullflag = false;
+	public static boolean AlreadyLoggedInFlag = false;
+	public static boolean WrongInputFlag = false;
 	public static String Name = null;
 	public static ActionEvent mainevent;
 	// public static String Name;
@@ -91,10 +92,16 @@ public class LoginScreenController {
 			Supplierflag = false;
 		}
 		
-		else if (nullflag == true) {
-			WrongInputInLoggin.setText("Wrong Input");
-			nullflag = false;
+		else if (AlreadyLoggedInFlag == true) {
+			WrongInputInLoggin.setText("The user is already logged in");
+			AlreadyLoggedInFlag = false;
 		}
+		
+		else if (WrongInputFlag == true) {
+			WrongInputInLoggin.setText("Wrong input");
+			WrongInputFlag = false;
+		}
+
 
 	}
 	

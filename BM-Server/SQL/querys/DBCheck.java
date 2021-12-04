@@ -13,7 +13,7 @@ public class DBCheck {
 
 	public static String DBCheck(String userName, String password) {
 		
-		String rs1=null, rs2=null;
+		String rs1="null", rs2=null;
 		PreparedStatement stmt;
 		try {
 			if(DBConnect.conn != null) {

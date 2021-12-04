@@ -8,6 +8,9 @@ import client.*;
 import client.controllers.BranchManagerScreenController;
 import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
+import client.controllers.OpenNewAccountController;
+import client.controllers.OpenNewBussinessAccountController;
+import client.controllers.OpenNewPrivateAccountController;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;
@@ -79,12 +82,30 @@ public class ChatClient extends AbstractClient {
 		{
 			BranchManagerScreenController.OpenNewAccountFlag=true; 		
 		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewBussinesAccount))
+		{
+			OpenNewAccountController.OpenNewBussinesAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewPrivateAccount))
+		{
+			OpenNewAccountController.OpenNewPrivateAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.WrongInput))
+		{
+			LoginScreenController.WrongInputFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.AlreadyLoggedIn)) {
+			LoginScreenController.AlreadyLoggedInFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ConfirmOpenNewBusinessAccount)) {
+			OpenNewBussinessAccountController.ConfirmOpenNewBusinessAccountControllerFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ConfirmOpenNewPrivateAccount)) {
+			OpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true; 		
+		}
 		if(mssg.getMessageType().equals(MessageType.Disconected))
 		{
 			
-		}
-		if(mssg.getMessageType().equals(MessageType.loginWrongInput)) {
-			LoginScreenController.nullflag=true; 		
 		}
 	}
 	public void handleMessageFromClientUI(Object message) {

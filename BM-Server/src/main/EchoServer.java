@@ -80,7 +80,9 @@ public class EchoServer extends AbstractServer {
 			else if(result.equals("Supplier"))
 				messageFromServer = new Message(MessageType.Supplier, null);
 			else if(result.equals("AlreadyLoggedIn"))
-				messageFromServer = new Message(MessageType.loginWrongInput, null);
+				messageFromServer = new Message(MessageType.AlreadyLoggedIn, null);
+			else if(result.equals("null"))
+				messageFromServer = new Message(MessageType.WrongInput, null);
 			break;
 		}
 		
@@ -91,6 +93,26 @@ public class EchoServer extends AbstractServer {
 		
 		case OpenNewAccount:{
 			messageFromServer = new Message(MessageType.OpenNewAccount, null);	
+			break;
+		}
+		
+		case OpenNewPrivateAccount:{
+			messageFromServer = new Message(MessageType.OpenNewPrivateAccount, null);	
+			break;
+		}
+		
+		case OpenNewBussinesAccount:{
+			messageFromServer = new Message(MessageType.OpenNewBussinesAccount, null);	
+			break;
+		}
+		
+		case ConfirmOpenNewBusinessAccount:{
+			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);	
+			break;
+		}
+		
+		case ConfirmOpenNewPrivateAccount:{
+			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);	
 			break;
 		}
 

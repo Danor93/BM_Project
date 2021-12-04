@@ -18,8 +18,8 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnBusinessAccount" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Business account" />
-      <Button fx:id="btnPrivateAccount" layoutX="209.0" layoutY="144.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Private account" />
+      <Button fx:id="btnBusinessAccount" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#BusinessAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Business account" />
+      <Button fx:id="btnPrivateAccount" layoutX="209.0" layoutY="144.0" mnemonicParsing="false" onAction="#PrivateAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Private account" />
       <Button fx:id="btnBackToBranchManager" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#BackToBranchManagerScreen" text="Back to Branch manager page" />
    </children>
 </Pane>
