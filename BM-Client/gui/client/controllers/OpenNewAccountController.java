@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.ClientUI;
 
 public class OpenNewAccountController {
+	public static boolean OpenNewPrivateAccountFlag = false;
+	public static boolean OpenNewBussinesAccountFlag = false;
 
     @FXML
     private ResourceBundle resources;
@@ -44,14 +49,40 @@ public class OpenNewAccountController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Branch Manager Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
+    }
+    
+    @FXML
+    void BusinessAccount(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.OpenNewBussinesAccount, null);
+		ClientUI.chat.accept(msg);
+		if (OpenNewBussinesAccountFlag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			OpenNewBussinessAccountController aFrame = new OpenNewBussinessAccountController();
+			aFrame.start(primaryStage);
+			OpenNewBussinesAccountFlag = false;
+		}
+    }
+
+    @FXML
+    void PrivateAccount(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.OpenNewPrivateAccount, null);
+		ClientUI.chat.accept(msg);
+		if (OpenNewPrivateAccountFlag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			OpenNewPrivateAccountController aFrame = new OpenNewPrivateAccountController();
+			aFrame.start(primaryStage);
+			OpenNewPrivateAccountFlag = false;
+		}
     }
 
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Open New Account Panel");
 		Pane root = load.load(getClass().getResource("/fxml/OpenNewAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

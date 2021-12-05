@@ -43,7 +43,7 @@ public class SupplierScreenController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
 		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
@@ -59,7 +59,7 @@ public class SupplierScreenController {
     
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Supplier Panel");
 		Pane root = load.load(getClass().getResource("/fxml/SupplierScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
