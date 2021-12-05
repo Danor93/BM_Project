@@ -6,7 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
+<AnchorPane prefHeight="547.0" prefWidth="976.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ShowFormController">
+=======
 <AnchorPane prefHeight="547.0" prefWidth="976.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="client.controllers.ShowFormController">
+>>>>>>> master
    <children>
       <TableView fx:id="table" layoutX="25.0" layoutY="6.0" prefHeight="478.0" prefWidth="976.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>

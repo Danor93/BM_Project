@@ -84,8 +84,8 @@ public class ServerUIFController {
 	public void start(Stage primaryStage) throws IOException {
 		
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/controllers/ServerUIF.fxml").openStream());
+		primaryStage.setTitle("BiteMe Server Panel");
+		Pane root = load.load(getClass().getResource("/fxml/ServerUIF.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
 		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
