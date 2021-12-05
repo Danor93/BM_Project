@@ -56,7 +56,7 @@ public class CEOScreenController {
     public void start(Stage primaryStage) throws IOException {
     		FXMLLoader load = new FXMLLoader();
     		primaryStage.setTitle("BiteMe");
-    		Pane root = load.load(getClass().getResource("/client/controllers/CEOScreen.fxml").openStream());
+    		Pane root = load.load(getClass().getResource("/fxml/CEOScreen.fxml").openStream());
     		Scene home = new Scene(root);
     		primaryStage.setScene(home);
     		primaryStage.show();
@@ -66,7 +66,7 @@ public class CEOScreenController {
         void Back(ActionEvent event) throws IOException {
         	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
     		Stage primaryStage = new Stage();
-    		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/LoginScreen.fxml"));
+    		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
     		Scene scene = new Scene(root);		
     		primaryStage.setTitle("BiteMe");
     		primaryStage.setScene(scene);		

@@ -55,7 +55,7 @@ import main.ClientUI;
 	    		FXMLLoader loader = new FXMLLoader();
 	    		((Node) event.getSource()).getScene().getWindow().hide();
 	    		Stage primaryStage = new Stage();
-	    		Pane root = loader.load(getClass().getResource("/client/controllers/LoginScreen.fxml").openStream());
+	    		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
 	    		Scene scene = new Scene(root);			
 	    		primaryStage.setTitle("BiteMe");
 	    		primaryStage.setScene(scene);
@@ -66,7 +66,7 @@ import main.ClientUI;
 	    
 	    public void start(Stage primaryStage) throws Exception {
 			primaryStage.setTitle("BiteMe");
-			Parent root=FXMLLoader.load(getClass().getResource("/client/controllers/ClientMainUi.fxml"));
+			Parent root=FXMLLoader.load(getClass().getResource("/fxml/ClientMainUi.fxml"));
 			Scene home=new Scene(root);
 			primaryStage.setScene(home);
 			//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));

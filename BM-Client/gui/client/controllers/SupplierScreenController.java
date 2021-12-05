@@ -41,7 +41,7 @@ public class SupplierScreenController {
     void Back(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 		Scene scene = new Scene(root);		
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
@@ -60,7 +60,7 @@ public class SupplierScreenController {
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/client/controllers/SupplierScreen.fxml").openStream());
+		Pane root = load.load(getClass().getResource("/fxml/SupplierScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
 		primaryStage.show();

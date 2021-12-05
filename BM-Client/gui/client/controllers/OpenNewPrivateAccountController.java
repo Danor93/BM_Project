@@ -56,7 +56,7 @@ public class OpenNewPrivateAccountController {
     void BackToNewAccountScreen(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/OpenNewAccount.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
 		Scene scene = new Scene(root);		
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
@@ -93,7 +93,7 @@ public class OpenNewPrivateAccountController {
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/client/controllers/OpenNewPrivateAccount.fxml").openStream());
+		Pane root = load.load(getClass().getResource("/fxml/OpenNewPrivateAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
 		primaryStage.show();		

@@ -44,7 +44,7 @@ public class ShowUpdateController {
     	ClientUI.chat.accept(msg);
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Pane root = loader.load(getClass().getResource("/client/controllers/ShowForm.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/fxml/ShowForm.fxml").openStream());
 		ShowFormController showFormController  = loader.getController();		
 		showFormController.initialize(showFormController.getLocation(), showFormController.getResources());
 		Scene scene = new Scene(root);			
@@ -60,7 +60,7 @@ public class ShowUpdateController {
 		FXMLLoader loader = new FXMLLoader();
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = new Stage();
-		Pane root = loader.load(getClass().getResource("/client/controllers/UpdateForm.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/fxml/UpdateForm.fxml").openStream());
 		Scene scene = new Scene(root);			
 		primaryStage.setTitle("Update window");
 		primaryStage.setScene(scene);
