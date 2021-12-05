@@ -5,11 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
+
 <AnchorPane prefHeight="332.0" prefWidth="343.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ShowUpdateController">
-=======
+
 <AnchorPane prefHeight="332.0" prefWidth="343.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="client.controllers.ShowUpdateController">
->>>>>>> master
    <children>
       <Button fx:id="showBtn" layoutX="51.0" layoutY="144.0" mnemonicParsing="false" onAction="#showOrders" prefHeight="43.0" prefWidth="118.0" style="-fx-background-radius: 30;" text="Show Orders" textFill="#e10c0c">
          <font>
