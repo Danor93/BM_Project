@@ -21,8 +21,6 @@ import main.ClientUI;
 
 	public class ClientMenuUiController {
 	
-		//public static Stage mainStage;
-		//public static ClientController chat;
 		public static ShowUpdateController ShowUpdateController;
 
 	    @FXML
@@ -62,7 +60,11 @@ import main.ClientUI;
 	    }
 	    
 	    public void start(Stage primaryStage) throws Exception {
+<<<<<<< HEAD
 			primaryStage.setTitle("BiteMe Main Client Panel");
+=======
+			primaryStage.setTitle("BiteMe");
+>>>>>>> master
 			Parent root=FXMLLoader.load(getClass().getResource("/fxml/ClientMainUi.fxml"));
 			Scene home=new Scene(root);
 			primaryStage.setScene(home);

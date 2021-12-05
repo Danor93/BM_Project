@@ -38,7 +38,7 @@ public class ChatClient extends AbstractClient {
 		super(host, port);
 		chatClient = this;
 		openConnection();
-	}
+	} //
 
 	public void handleMessageFromServer(Object msg) {
 		waitingForResponse = false;

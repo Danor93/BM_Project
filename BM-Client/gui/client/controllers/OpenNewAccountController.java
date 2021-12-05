@@ -82,7 +82,11 @@ public class OpenNewAccountController {
 
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
+<<<<<<< HEAD
 		primaryStage.setTitle("BiteMe Open New Account Panel");
+=======
+		primaryStage.setTitle("BiteMe");
+>>>>>>> master
 		Pane root = load.load(getClass().getResource("/fxml/OpenNewAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

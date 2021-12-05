@@ -84,7 +84,7 @@ public class ShowUpdateController {
 	public void start(Stage primaryStage) throws IOException 
 	{
 		primaryStage.setTitle("BiteMe");
-		Parent root=FXMLLoader.load(getClass().getResource("/gui/client.controllers/Showupdate.fxml"));
+		Parent root=FXMLLoader.load(getClass().getResource("/fxml/Showupdate.fxml"));
 		Scene home=new Scene(root);
 		primaryStage.setScene(home);
 		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
