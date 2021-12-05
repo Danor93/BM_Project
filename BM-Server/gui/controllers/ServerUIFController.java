@@ -82,6 +82,7 @@ public class ServerUIFController {
 	private TextField Passtxt;
 
 	public void start(Stage primaryStage) throws IOException {
+		
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe");
 		Pane root = load.load(getClass().getResource("/controllers/ServerUIF.fxml").openStream());
