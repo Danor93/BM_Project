@@ -36,7 +36,7 @@ public class CustomerScreenController {
     public void start(Stage primaryStage) throws IOException {
 		//lblName.setText("test"); 
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Costomer Panel");
+		primaryStage.setTitle("BiteMe Costumer Panel");
 		Pane root = load.load(getClass().getResource("/fxml/CustomerScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
@@ -53,7 +53,7 @@ public class CustomerScreenController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }

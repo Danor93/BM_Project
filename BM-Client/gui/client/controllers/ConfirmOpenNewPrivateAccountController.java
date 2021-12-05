@@ -30,7 +30,7 @@ public class ConfirmOpenNewPrivateAccountController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Branch Manager");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }

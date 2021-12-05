@@ -43,7 +43,7 @@ public class ConfirmOpenNewBusinessAccountController {
 
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Branch Manager Panel ");
+		primaryStage.setTitle("BiteMe Confirm Open New Business Account");
 		Pane root = load.load(getClass().getResource("/fxml/ConfirmOpenNewBusinessAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

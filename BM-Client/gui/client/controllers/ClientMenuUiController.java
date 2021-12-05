@@ -54,7 +54,7 @@ import main.ClientUI;
 	    		Stage primaryStage = new Stage();
 	    		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
 	    		Scene scene = new Scene(root);			
-	    		primaryStage.setTitle("BiteMe");
+	    		primaryStage.setTitle("BiteMe Login Panel");
 	    		primaryStage.setScene(scene);
 	    		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 	    		primaryStage.show();
