@@ -15,11 +15,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewPrivateAccountController {
+public class OpenNewPrivateAccountController extends Controller {
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 
     @FXML
@@ -51,6 +52,9 @@ public class OpenNewPrivateAccountController {
 
     @FXML
     private Button btnConfirm;
+    
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     void BackToNewAccountScreen(ActionEvent event) throws IOException {
@@ -79,6 +83,7 @@ public class OpenNewPrivateAccountController {
 
     @FXML
     void initialize() {
+    	setImage(BackImage,"background.jpeg");
         assert btnBackToOpenNewAccount != null : "fx:id=\"btnBackToOpenNewAccount\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
         assert txtFirstName != null : "fx:id=\"txtFirstName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
         assert txtLastName != null : "fx:id=\"txtLastName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";

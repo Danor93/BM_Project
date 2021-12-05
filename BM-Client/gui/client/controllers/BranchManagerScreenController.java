@@ -12,12 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
 
-public class BranchManagerScreenController {
+public class BranchManagerScreenController extends Controller{
 	public static boolean OpenNewAccountFlag = false;
 
     @FXML
@@ -46,6 +48,13 @@ public class BranchManagerScreenController {
 
     @FXML
     private Button btnBack;
+    
+    @FXML
+    private Label nameLabel;
+    
+
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -61,6 +70,7 @@ public class BranchManagerScreenController {
 
     @FXML
     void initialize() {
+    	setImage(BackImage, "background.jpeg");
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";

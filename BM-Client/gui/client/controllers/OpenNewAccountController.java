@@ -13,11 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewAccountController {
+public class OpenNewAccountController extends Controller {
 	public static boolean OpenNewPrivateAccountFlag = false;
 	public static boolean OpenNewBussinesAccountFlag = false;
 
@@ -35,9 +36,13 @@ public class OpenNewAccountController {
 
     @FXML
     private Button btnBackToBranchManager;
+    
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     void initialize() {
+    	setImage(BackImage,"background.jpeg");
         assert btnBusinessAccount != null : "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
         assert btnPrivateAccount != null : "fx:id=\"btnPrivateAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
         assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
@@ -88,5 +93,6 @@ public class OpenNewAccountController {
 		primaryStage.setScene(home);
 		primaryStage.show();
 	}
+    
 
 }

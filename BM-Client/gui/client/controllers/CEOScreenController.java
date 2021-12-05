@@ -11,10 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CEOScreenController {
+public class CEOScreenController extends Controller {
     @FXML
     private ResourceBundle resources;
 
@@ -41,9 +42,13 @@ public class CEOScreenController {
 
     @FXML
     private Button btnCreateOrder;
+    
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     void initialize() {
+    	setImage(BackImage,"background.jpeg");
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'CEOScreen.fxml'.";

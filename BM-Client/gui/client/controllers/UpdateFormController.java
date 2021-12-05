@@ -17,7 +17,7 @@ import main.ChatClient;
 import Entities.Message;
 import Entities.MessageType;
 
-public class UpdateFormController {
+public class UpdateFormController extends Controller {
 
     @FXML
     private ResourceBundle resources;

@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.ChatClient;
 
-public class ShowFormController implements Initializable {
+public class ShowFormController extends Controller implements Initializable {
 
 	public ResourceBundle getResources() {
 		return resources;

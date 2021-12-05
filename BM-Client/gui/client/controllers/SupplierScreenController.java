@@ -13,11 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class SupplierScreenController {
+public class SupplierScreenController extends Controller {
 
     @FXML
     private ResourceBundle resources;
@@ -36,6 +37,9 @@ public class SupplierScreenController {
 
     @FXML
     private Button btnBack;
+    
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -51,6 +55,7 @@ public class SupplierScreenController {
 
     @FXML
     void initialize() {
+    	setImage(BackImage,"background.jpeg");
         assert btnCreateMenu != null : "fx:id=\"btnCreateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
         assert btnUpdateMenu != null : "fx:id=\"btnUpdateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
         assert btnUpdateOrderStatus != null : "fx:id=\"btnUpdateOrderStatus\" was not injected: check your FXML file 'SupplierScreen.fxml'.";

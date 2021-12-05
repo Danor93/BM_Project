@@ -2,13 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="client.controllers.BranchManagerScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="711.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerScreenController">
    <children>
-      <Text fill="WHITE" layoutX="660.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fx:id="BackImage" fitHeight="495.0" fitWidth="718.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fill="WHITE" layoutX="522.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -30,6 +32,6 @@
       <Button fx:id="btnUploadPDF" layoutX="213.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
       <Button fx:id="btnViewBranchsReports" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="view branch's reports" />
       <Button fx:id="btnUploadPDF1" layoutX="213.0" layoutY="229.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Create order" />
-      <Button fx:id="btnBack" layoutX="24.0" layoutY="498.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+      <Button fx:id="btnBack" layoutX="38.0" layoutY="449.0" mnemonicParsing="false" onAction="#Back" text="Back" />
    </children>
 </Pane>

@@ -19,7 +19,7 @@ import main.ClientUI;
 import Entities.Message;
 import Entities.MessageType;
 
-public class ShowUpdateController {
+public class ShowUpdateController extends Controller {
 
     @FXML
     private ResourceBundle resources;

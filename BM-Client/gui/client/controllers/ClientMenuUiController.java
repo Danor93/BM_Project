@@ -14,12 +14,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientController;
 import main.ClientUI;
 
-	public class ClientMenuUiController {
+	public class ClientMenuUiController extends Controller {
 	
 		//public static Stage mainStage;
 		//public static ClientController chat;
@@ -36,6 +37,9 @@ import main.ClientUI;
 
 	    @FXML
 	    private TextField ipTxt;
+	    
+	    @FXML
+	    private ImageView LogoImage;
 	    
 	    @FXML
 	    void ConnectToServer(ActionEvent event) throws IOException {
@@ -69,5 +73,14 @@ import main.ClientUI;
 			//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 			primaryStage.show();
 		}
+	    
+	    @FXML
+	    void initialize() {
+	    	super.setImage(LogoImage, "ClientMenuUi.jpeg");
+	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+
+	    }
 
 }

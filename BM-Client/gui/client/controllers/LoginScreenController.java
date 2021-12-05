@@ -3,7 +3,6 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -15,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -23,7 +24,7 @@ import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 
-public class LoginScreenController {
+public class LoginScreenController extends Controller {
 	public static boolean BMflag = false;
 	public static boolean CEOflag = false;
 	public static boolean Customerflag = false;
@@ -50,6 +51,9 @@ public class LoginScreenController {
 
 	@FXML
 	private Label WrongInputInLoggin;
+	
+    @FXML
+    private ImageView loginImage;
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
@@ -112,6 +116,7 @@ public class LoginScreenController {
 
 	@FXML
 	void initialize() {
+		super.setImage(loginImage, "LoginScreen.jpeg");
 		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";

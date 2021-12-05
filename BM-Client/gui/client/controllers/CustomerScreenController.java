@@ -11,10 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CustomerScreenController {
+public class CustomerScreenController extends Controller{
 
 	public String TempName; 
 	public static CustomerScreenController cs; 
@@ -32,6 +33,9 @@ public class CustomerScreenController {
     
     @FXML
     private Label lblName;
+    
+    @FXML
+    private ImageView BackImage;
     
     public void start(Stage primaryStage) throws IOException {
 		//lblName.setText("test"); 
@@ -60,5 +64,6 @@ public class CustomerScreenController {
    
     @FXML
     void initialize() {
+    	setImage(BackImage,"background.jpeg");
     }
 }
