@@ -7,25 +7,17 @@ import java.io.IOException;
 // license found at www.lloseng.com 
 
 import java.util.ArrayList;
-
-import javax.swing.text.AbstractDocument.BranchElement;
-
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import controllers.ServerUIFController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import querys.DBCheck;
-import querys.DBConnect;
 import querys.DBFirstName;
 import querys.ShowOrders;
 import querys.UpdateDB;
 import server.AbstractServer;
 import server.ConnectionToClient;
+
 
 /**
  * This class overrides some of the methods in the abstract superclass in order
@@ -38,28 +30,17 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
+	//public static ClientController ClientController;
 
+	
 	public EchoServer(int port) {
 		super(port);
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-<<<<<<< HEAD
-=======
-		if (!(ServerUIFController.clients.contains(client))) {
-			ClientConnection newClient = new ClientConnection(client);
-			ServerUIFController.clients.add(newClient);
-			ServerUIFController.serveruifconroller.Update(ServerUIFController.clients);
-		}
->>>>>>> master
 		Message message = (Message) msg;
 		Message messageFromServer = null;
-
 		switch (message.getMessageType()) {
-
-		case login:
-			break;
-
 		case Show_Orders: {// get all orders from DB
 			ArrayList<Order> order = ShowOrders.getOrders();
 			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
@@ -72,26 +53,12 @@ public class EchoServer extends AbstractServer {
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
 			break;
 		}
-
+		
 		case loginSystem: {
-			String result,result2;
- 
+			String result, result2; 
 			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			result = DBCheck.DBCheck(DivededAdd[0], DivededAdd[1]);
+			result = DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);	
 			System.out.println(result);
-			if (result.equals("Customer")) {
-				// messageFromServer = new Message(MessageType.Customer, null);
-				String[] DivededAdd2 = ((String) message.getMessageData()).split("@");
-				result2 = DBFirstName.DBFirstName(DivededAdd2[0], DivededAdd2[1]);
-				System.out.println(result2);
-				messageFromServer = new Message(MessageType.Customer, null);
-
-			} else if (result.equals("BranchManager")) {
-				messageFromServer = new Message(MessageType.BranchManager, null);
-			} else if (result.equals("CEO")) {
-				messageFromServer = new Message(MessageType.CEO, null);
-			} else {
-
 			result2 = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);
 			System.out.println(result2);
 			if(result.equals("Customer"))
@@ -108,26 +75,10 @@ public class EchoServer extends AbstractServer {
 				messageFromServer = new Message(MessageType.WrongInput, null);
 			break;
 		}
-		}
-
-
-		/*
-		 * case ReturnFirstName: { String result; String[] DivededAdd = ((String)
-		 * message.getMessageData()).split("@"); result =
-		 * DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);
-		 * System.out.println(result); messageFromServer = new
-		 * Message(MessageType.ReturnFirstName_success, result); break; }
-		 */
-		case Disconected: {
-			ClientConnection newClient = new ClientConnection(client);
-			for (int i = 0; i < ServerUIFController.clients.size(); i++) {
-				if (ServerUIFController.clients.get(i).getHostName().equals(newClient.getHostName())) {
-					ServerUIFController.clients.get(i).setStatus("Disconnected");
-				}
-			}
-			serverUIFController.Update(ServerUIFController.clients);
-			
-			messageFromServer = new Message(MessageType.Disconected, null);
+		
+		case Disconected:{
+			messageFromServer = new Message(MessageType.Disconected, null);	
+			break;
 		}
 		
 		case OpenNewAccount:{
@@ -160,6 +111,13 @@ public class EchoServer extends AbstractServer {
 			break;
 		}
 	}
+		//this.sendToAllClients(messageFromServer);
+		try {
+			client.sendToClient(messageFromServer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 }
 
 	/**

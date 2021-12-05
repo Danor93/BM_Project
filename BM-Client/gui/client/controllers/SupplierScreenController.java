@@ -59,11 +59,7 @@ public class SupplierScreenController {
     
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-<<<<<<< HEAD
 		primaryStage.setTitle("BiteMe Supplier Panel");
-=======
-		primaryStage.setTitle("BiteMe");
->>>>>>> master
 		Pane root = load.load(getClass().getResource("/fxml/SupplierScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

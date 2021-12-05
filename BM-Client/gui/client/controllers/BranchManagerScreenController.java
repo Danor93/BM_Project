@@ -3,7 +3,6 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -15,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.ChatClient;
-import main.ClientController;
 import main.ClientUI;
 
 
@@ -75,11 +72,7 @@ public class BranchManagerScreenController {
     
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-<<<<<<< HEAD
 		primaryStage.setTitle("BiteMe Branch Manager Panel");
-=======
-		primaryStage.setTitle("BiteMe");
->>>>>>> master
 		Pane root = load.load(getClass().getResource("/fxml/BranchManagerScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
