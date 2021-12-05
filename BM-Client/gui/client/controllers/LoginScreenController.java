@@ -60,7 +60,7 @@ public class LoginScreenController {
 		str.append(txtPassword.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
 		ClientUI.chat.accept(msg);
-		System.out.println(msg.getMessageData().toString());
+		//System.out.println(msg.getMessageData().toString());
 		if (BMflag == true) {
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();

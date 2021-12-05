@@ -49,7 +49,7 @@ public class OpenNewAccountController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Branch Manager Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
@@ -82,7 +82,7 @@ public class OpenNewAccountController {
 
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Open New Account Panel");
 		Pane root = load.load(getClass().getResource("/fxml/OpenNewAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

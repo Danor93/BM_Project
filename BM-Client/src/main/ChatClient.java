@@ -41,7 +41,6 @@ public class ChatClient extends AbstractClient {
 	}
 
 	public void handleMessageFromServer(Object msg) {
-		System.out.println("--> get message from server");
 		waitingForResponse = false;
 		Message mssg = (Message) msg;
 		if (mssg.getMessageType().equals(MessageType.Show_Orders_succ)) {

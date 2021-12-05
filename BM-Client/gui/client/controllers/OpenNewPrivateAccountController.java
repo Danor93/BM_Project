@@ -58,7 +58,7 @@ public class OpenNewPrivateAccountController {
 		Stage primaryStage = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Open New Account Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
     }
@@ -92,7 +92,7 @@ public class OpenNewPrivateAccountController {
 
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
+		primaryStage.setTitle("BiteMe Open New Private Account");
 		Pane root = load.load(getClass().getResource("/fxml/OpenNewPrivateAccount.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);

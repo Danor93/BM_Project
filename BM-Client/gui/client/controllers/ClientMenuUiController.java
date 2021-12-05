@@ -42,7 +42,6 @@ import main.ClientUI;
 	    	
 	    	String ip;
 	    	ip=ipTxt.getText();
-	    	System.out.println(ip);
 	    	if(ipTxt.getText().trim().isEmpty())
 			{
 				System.out.println("In order to update you must enter all fields");	
@@ -50,8 +49,6 @@ import main.ClientUI;
 	    	else
 	    	{
 	    		ClientUI.chat= new ClientController(ip, 5555);
-	    		//Message msg = new Message(MessageType.login,null);
-	        	//ClientUI.chat.accept(msg);
 	    		FXMLLoader loader = new FXMLLoader();
 	    		((Node) event.getSource()).getScene().getWindow().hide();
 	    		Stage primaryStage = new Stage();
@@ -65,7 +62,7 @@ import main.ClientUI;
 	    }
 	    
 	    public void start(Stage primaryStage) throws Exception {
-			primaryStage.setTitle("BiteMe");
+			primaryStage.setTitle("BiteMe Main Client Panel");
 			Parent root=FXMLLoader.load(getClass().getResource("/fxml/ClientMainUi.fxml"));
 			Scene home=new Scene(root);
 			primaryStage.setScene(home);
