@@ -31,10 +31,7 @@ import querys.DBConnect;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
-	public static ArrayList<ClientConnection> clients = new ArrayList<ClientConnection>();
 	final public static int DEFAULT_PORT = 5555;
-	@FXML // ResourceBundle that was given to the FXMLLoader
-	private ResourceBundle resources;
 
 	public static boolean flagon = false;
 	Alert a = new Alert(AlertType.ERROR);
@@ -142,7 +139,7 @@ public class ServerUIFController {
 	/** This method will update the table */
 	public void Update(ArrayList<ClientConnection> client) {
 		addToTextArea("New connection: " + client);
-		ObservableList<ClientConnection> data = FXCollections.observableArrayList(clients);
+		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
 		ClientTable.setItems(data);
 		ClientTable.refresh();
 	}

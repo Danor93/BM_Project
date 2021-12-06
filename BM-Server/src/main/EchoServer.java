@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import controllers.LogicController;
 import controllers.ServerUIFController;
 import querys.DBCheck;
 import querys.DBFirstName;
@@ -30,14 +31,15 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
-	//public static ClientController ClientController;
-
+	private static ArrayList<ClientConnection> clients = null;
 	
 	public EchoServer(int port) {
 		super(port);
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
+		
+		LogicController.UpdateClientTable(msg, client);
 		Message message = (Message) msg;
 		Message messageFromServer = null;
 		switch (message.getMessageType()) {
@@ -73,11 +75,6 @@ public class EchoServer extends AbstractServer {
 				messageFromServer = new Message(MessageType.AlreadyLoggedIn, null);
 			else if(result.equals("null"))
 				messageFromServer = new Message(MessageType.WrongInput, null);
-			break;
-		}
-		
-		case Disconected:{
-			messageFromServer = new Message(MessageType.Disconected, null);	
 			break;
 		}
 		

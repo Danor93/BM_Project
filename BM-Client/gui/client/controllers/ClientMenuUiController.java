@@ -17,13 +17,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 
 	public class ClientMenuUiController extends Controller {
 	
-		//public static Stage mainStage;
-		//public static ClientController chat;
+	
 		public static ShowUpdateController ShowUpdateController;
 
 	    @FXML
@@ -53,6 +53,8 @@ import main.ClientUI;
 	    	else
 	    	{
 	    		ClientUI.chat= new ClientController(ip, 5555);
+	    		Message msg = new Message(MessageType.login, null);
+	    		ClientUI.chat.accept(msg);
 	    		FXMLLoader loader = new FXMLLoader();
 	    		((Node) event.getSource()).getScene().getWindow().hide();
 	    		Stage primaryStage = new Stage();

@@ -275,6 +275,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('a','a','CEO','adi','sasson','123','a@a.co.il','054789','0','0','0'),('b','b','BranchManager','aviel','gabay','456','b@b.co.il','054123','0','0','0'),('c','c','Supplier','sahar','oz','789','s@s.co.il','054456','0','0','0');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -287,4 +288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-03  9:58:52
+-- Dump completed on 2021-12-06  8:26:06
