@@ -3,10 +3,10 @@ package Entities;
 public enum MessageType {
 
 	/*Server Message*/
-	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,AlreadyLoggedIn,WrongInput,
+	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,AlreadyLoggedIn,WrongInput,ID_Exists_True,ID_Exists_False,
 	
 	/*Client Message*/
-	Update_Orders,Show_Orders,
+	Update_Orders,Show_Orders,ID_exists,
 	
 	/*type of users*/
 	

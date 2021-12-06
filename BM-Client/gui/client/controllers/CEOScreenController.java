@@ -77,4 +77,15 @@ public class CEOScreenController extends Controller {
     		primaryStage.setScene(scene);		
     		primaryStage.show();
         }
+        
+        @FXML
+        void ChangeInfoDB(ActionEvent event) throws IOException {
+        	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+        	Stage primaryStage = new Stage();
+    		Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChangeInfoDB.fxml"));
+    		Scene scene = new Scene(root);		
+    		primaryStage.setTitle("BiteMe Change Info from DB");
+    		primaryStage.setScene(scene);		
+    		primaryStage.show();
+        }
 }

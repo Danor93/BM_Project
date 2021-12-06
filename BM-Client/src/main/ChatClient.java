@@ -6,6 +6,7 @@ package main;
 
 import client.*;
 import client.controllers.BranchManagerScreenController;
+import client.controllers.ChangeInfoDBController;
 import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
 import client.controllers.OpenNewAccountController;
@@ -105,6 +106,11 @@ public class ChatClient extends AbstractClient {
 		if(mssg.getMessageType().equals(MessageType.Disconected))
 		{
 			
+		}
+		
+		if(mssg.getMessageType().equals(MessageType.ID_Exists_False))
+		{
+			ChangeInfoDBController.idFalseFlag=true;
 		}
 	}
 	public void handleMessageFromClientUI(Object message) {

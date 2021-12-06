@@ -102,6 +102,19 @@ public class EchoServer extends AbstractServer {
 			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);	
 			break;
 		}
+		
+		case ID_exists:{
+			String id;
+			id = DBCheck.IDcheck((String)message.getMessageData());
+			if(id==null)
+			{
+				messageFromServer = new Message(MessageType.ID_Exists_False, null);	
+			}
+			else {
+				messageFromServer = new Message(MessageType.ID_Exists_True, null);	
+			}
+				
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

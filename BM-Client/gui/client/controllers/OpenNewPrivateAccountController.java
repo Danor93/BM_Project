@@ -69,7 +69,8 @@ public class OpenNewPrivateAccountController extends Controller {
 
     @FXML
     void Confirm(ActionEvent event) throws IOException {
-    	Account account = new Account(null, null, null, null, null, null, null, null);
+    	
+    	Account account = new Account(null, null, txtFirstName.getText(), txtLastName.getText(),"Customer", txtID.getText(), txtEmail.getText(), txtTelephone.getText());
 		Message msg = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 		ClientUI.chat.accept(msg);
 		if (ConfirmOpenNewPrivateAccountFlag == true) {
