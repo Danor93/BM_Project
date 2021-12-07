@@ -3,8 +3,7 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import Entities.Message;
-import Entities.MessageType;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.ClientUI;
 
 
-public class BranchManagerScreenController extends Controller{
-	public static boolean OpenNewAccountFlag = false;
+public class BranchManagerScreenController {
 
     @FXML
     private ResourceBundle resources;
@@ -48,29 +43,21 @@ public class BranchManagerScreenController extends Controller{
 
     @FXML
     private Button btnBack;
-    
-    @FXML
-    private Label nameLabel;
-    
-
-    @FXML
-    private ImageView BackImage;
 
     @FXML
     void Back(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/LoginScreen.fxml"));
 		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Login Panel");
+		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
-		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
-}
+    	
+    }
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.jpeg");
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
@@ -82,25 +69,14 @@ public class BranchManagerScreenController extends Controller{
     
     public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Branch Manager Panel");
-		Pane root = load.load(getClass().getResource("/fxml/BranchManagerScreen.fxml").openStream());
+		primaryStage.setTitle("BiteMe");
+		Pane root = load.load(getClass().getResource("/client/controllers/BranchManagerScreen.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
+	//	lblName.setText(TempName); 
 		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
 		//lblName.setText("test"); 
 		primaryStage.show();
+		//lblName.setText("test"); 
 	}
-    
-    @FXML
-    void OpenNewAccount(ActionEvent event) throws IOException {
-		Message msg = new Message(MessageType.OpenNewAccount, null);
-		ClientUI.chat.accept(msg);
-		if (OpenNewAccountFlag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			OpenNewAccountController aFrame = new OpenNewAccountController();
-			aFrame.start(primaryStage);
-			OpenNewAccountFlag = false;
-		}
-    }
 }
