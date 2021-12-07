@@ -12,7 +12,7 @@ public class Order implements Serializable {
 	private OrderType OrderType;
 	private String OrderAddress;
 
-	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, OrderType OrderType,
+	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType OrderType,
 			String orderAddress) {
 		super();
 		this.Restaurant = Restaurant;

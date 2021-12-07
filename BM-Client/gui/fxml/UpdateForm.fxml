@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="334.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateFormController">
+<AnchorPane prefHeight="334.0" prefWidth="393.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="client.controllers.UpdateFormController">
    <children>
       <Label fx:id="lblAddress" layoutX="44.0" layoutY="98.0" prefHeight="18.0" prefWidth="86.0" text="Order address:">
          <font>

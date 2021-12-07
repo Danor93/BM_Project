@@ -3,10 +3,8 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Entities.Message;
 import Entities.MessageType;
-import Entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -24,10 +24,16 @@ import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 
-public class LoginScreenController {
-	public static boolean LoginFlag = false;
-	public static User user;
-
+public class LoginScreenController extends Controller {
+	public static boolean BMflag = false;
+	public static boolean CEOflag = false;
+	public static boolean Customerflag = false;
+	public static boolean Supplierflag = false;
+	public static boolean AlreadyLoggedInFlag = false;
+	public static boolean WrongInputFlag = false;
+	public static String Name = null;
+	public static ActionEvent mainevent;
+	// public static String Name;
 
 	@FXML
 	private ResourceBundle resources;
@@ -45,61 +51,63 @@ public class LoginScreenController {
 
 	@FXML
 	private Label WrongInputInLoggin;
+	
+    @FXML
+    private ImageView loginImage;
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
+		mainevent = event;
 		StringBuilder str = new StringBuilder();
-		//need to check if the fields are empty
 		str.append(txtUserName.getText());
 		str.append("@");
 		str.append(txtPassword.getText());
-
 		Message msg = new Message(MessageType.loginSystem, str.toString());
-		
 		ClientUI.chat.accept(msg);
-		
-		if(LoginFlag)
-		{
-			LoginFlag=false;
+		if (BMflag == true) {
 			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
-			if (user.getRole().equals("BranchManager")) {
-				BranchManagerScreenController aFrame = new BranchManagerScreenController();
-				//aFrame.start(primaryStage);
+			Stage primaryStage = new Stage();
+			BranchManagerScreenController aFrame = new BranchManagerScreenController();
+			aFrame.start(primaryStage);
+			BMflag = false;
 
-			} else if (user.getRole().equals("Customer")) {	
-				FXMLLoader load = new FXMLLoader(getClass().getResource("/client/controllers/CustomerScreen.fxml"));
-				Parent root=load.load();
-				CustomerScreenController aFrame = load.getController();
-				aFrame.display(user.getFirstN());
-				aFrame.start(primaryStage,root);
-				
-				
-			} else if (user.getRole().equals("CEO")) {
-				CEOScreenController aFrame = new CEOScreenController();
-				//aFrame.start(primaryStage);
-			}
+		} else if (Customerflag == true) {
+			// CustomerScreenController.TempName=Name;
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			CustomerScreenController aFrame = new CustomerScreenController();
+			aFrame.start(primaryStage);
+			Customerflag = false;
+			
+		} else if (CEOflag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			CEOScreenController aFrame = new CEOScreenController();
+			aFrame.start(primaryStage);
+			CEOflag = false;
 		}
 		
-		else
-		{
-			WrongInputInLoggin.setText("User name or password are incorrect, please try again!");
+		else if (Supplierflag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			SupplierScreenController aFrame = new SupplierScreenController();
+			aFrame.start(primaryStage);
+			Supplierflag = false;
 		}
 		
+		else if (AlreadyLoggedInFlag == true) {
+			WrongInputInLoggin.setText("The user is already logged in");
+			AlreadyLoggedInFlag = false;
+		}
+		
+		else if (WrongInputFlag == true) {
+			WrongInputInLoggin.setText("Wrong input");
+			WrongInputFlag = false;
+		}
+
+
 	}
 	
-    public void start(Stage primaryStage) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/client/controllers/LoginScreen.fxml").openStream());
-		Scene scene = new Scene(root);			
-		primaryStage.setTitle("BiteMe");
-		primaryStage.setScene(scene);
-		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
-		primaryStage.show();
-
-	}
-
 	@FXML
 	void getUserName(InputMethodEvent event) {
 
@@ -107,6 +115,7 @@ public class LoginScreenController {
 
 	@FXML
 	void initialize() {
+		super.setImage(loginImage, "LoginScreen.jpeg");
 		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";

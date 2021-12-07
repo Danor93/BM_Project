@@ -14,15 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 
-	public class ClientMenuUiController {
+	public class ClientMenuUiController extends Controller {
 	
-		//public static Stage mainStage;
-		//public static ClientController chat;
+	
 		public static ShowUpdateController ShowUpdateController;
 
 	    @FXML
@@ -38,33 +39,50 @@ import main.ClientUI;
 	    private TextField ipTxt;
 	    
 	    @FXML
+	    private ImageView LogoImage;
+	    
+	    @FXML
 	    void ConnectToServer(ActionEvent event) throws IOException {
-	    	String ip=ipTxt.getText();
-	    	System.out.println(ip);
+	    	
+	    	String ip;
+	    	ip=ipTxt.getText();
 	    	if(ipTxt.getText().trim().isEmpty())
 			{
-				System.out.println("In order to connect you must enter all fields");	
+				System.out.println("In order to update you must enter all fields");	
 			}
 	    	else
 	    	{
-	    		ClientUI.chat= new ClientController("localhost", 5555);
-	    		//Message msg = new Message(MessageType.login,null);
-	        	//ClientUI.chat.accept(msg);
+	    		ClientUI.chat= new ClientController(ip, 5555);
+	    		Message msg = new Message(MessageType.login, null);
+	    		ClientUI.chat.accept(msg);
+	    		FXMLLoader loader = new FXMLLoader();
 	    		((Node) event.getSource()).getScene().getWindow().hide();
-	    		LoginScreenController loginScreenController=new LoginScreenController();
-	    		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	    		loginScreenController.start(stage);
-
+	    		Stage primaryStage = new Stage();
+	    		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
+	    		Scene scene = new Scene(root);			
+	    		primaryStage.setTitle("BiteMe Login Panel");
+	    		primaryStage.setScene(scene);
+	    		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
+	    		primaryStage.show();
 	    	}
 	    }
 	    
 	    public void start(Stage primaryStage) throws Exception {
-			primaryStage.setTitle("BiteMe");
-			Parent root=FXMLLoader.load(getClass().getResource("/client/controllers/ClientMainUi.fxml"));
+			primaryStage.setTitle("BiteMe Main Client Panel");
+			Parent root=FXMLLoader.load(getClass().getResource("/fxml/ClientMainUi.fxml"));
 			Scene home=new Scene(root);
 			primaryStage.setScene(home);
 			//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 			primaryStage.show();
 		}
+	    
+	    @FXML
+	    void initialize() {
+	    	super.setImage(LogoImage, "ClientMenuUi.jpeg");
+	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
+
+	    }
 
 }

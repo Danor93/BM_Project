@@ -17,7 +17,7 @@ import main.ChatClient;
 import Entities.Message;
 import Entities.MessageType;
 
-public class UpdateFormController {
+public class UpdateFormController extends Controller {
 
     @FXML
     private ResourceBundle resources;
@@ -53,7 +53,7 @@ public class UpdateFormController {
     {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/Showupdate.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Showupdate.fxml"));
 		Scene scene = new Scene(root);		
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);		
