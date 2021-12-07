@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="714.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="714.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="497.0" fitWidth="718.0" layoutX="2.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="525.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
@@ -25,7 +25,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnConfirmEmployerRegistration" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm employer registration" />
+      <Button fx:id="btnConfirmEmployerRegistration" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#ConfirmEmployerRegistration" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm employer registration" />
       <Button fx:id="btnOpenNewAccount" layoutX="10.0" layoutY="229.0" mnemonicParsing="false" onAction="#OpenNewAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="open new account" />
       <Button fx:id="btnChangePersonalInformation" layoutX="213.0" layoutY="120.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="change personal information in DB" />
       <Button fx:id="btnConfirmSupplierRegistration" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm supplier registration" />

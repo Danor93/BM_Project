@@ -102,6 +102,16 @@ public class EchoServer extends AbstractServer {
 			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);	
 			break;
 		}
+		
+		case ConfirmEmployerRegistration:{
+			messageFromServer = new Message(MessageType.ConfirmEmployerRegistration, null);	
+			break;
+		}
+		
+		case CreateMenu:{
+			messageFromServer = new Message(MessageType.CreateMenu, null);	
+			break;
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

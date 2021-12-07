@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 public class SupplierScreenController extends Controller {
+	public static boolean CreateMenuFlag = false;
 
     @FXML
     private ResourceBundle resources;
@@ -70,5 +71,18 @@ public class SupplierScreenController extends Controller {
 		primaryStage.setScene(home);
 		primaryStage.show();
 	}
+    
+    @FXML
+    void CreateMenu(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.CreateMenu, null);
+		ClientUI.chat.accept(msg);
+		if (CreateMenuFlag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			CreateMenuScreenController aFrame = new CreateMenuScreenController();
+			aFrame.start(primaryStage);
+			CreateMenuFlag = false;
+		}
+    }
 
 }

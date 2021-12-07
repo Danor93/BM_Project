@@ -104,8 +104,6 @@ public class LoginScreenController extends Controller {
 			WrongInputInLoggin.setText("Wrong input");
 			WrongInputFlag = false;
 		}
-
-
 	}
 	
 	@FXML

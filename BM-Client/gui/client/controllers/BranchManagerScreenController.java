@@ -21,6 +21,7 @@ import main.ClientUI;
 
 public class BranchManagerScreenController extends Controller{
 	public static boolean OpenNewAccountFlag = false;
+	public static boolean ConfirmEmployerRegistrationFlag = false;
 
     @FXML
     private ResourceBundle resources;
@@ -51,7 +52,6 @@ public class BranchManagerScreenController extends Controller{
     
     @FXML
     private Label nameLabel;
-    
 
     @FXML
     private ImageView BackImage;
@@ -65,12 +65,13 @@ public class BranchManagerScreenController extends Controller{
 		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);		
 		primaryStage.show();
-		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+		//ClientUI.chat.accept(new Message(MessageType.Disconected,null));
 }
-
+    
     @FXML
     void initialize() {
     	setImage(BackImage, "background.jpeg");
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
@@ -78,6 +79,7 @@ public class BranchManagerScreenController extends Controller{
         assert btnUploadPDF != null : "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnViewBranchsReports != null : "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
     }
     
     public void start(Stage primaryStage) throws IOException {
@@ -101,6 +103,19 @@ public class BranchManagerScreenController extends Controller{
 			OpenNewAccountController aFrame = new OpenNewAccountController();
 			aFrame.start(primaryStage);
 			OpenNewAccountFlag = false;
+		}
+    }
+    
+    @FXML
+    void ConfirmEmployerRegistration(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.ConfirmEmployerRegistration, null);
+		ClientUI.chat.accept(msg);
+		if (ConfirmEmployerRegistrationFlag == true) {
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			ConfirmEpmloyerRegistartionController aFrame = new ConfirmEpmloyerRegistartionController();
+			aFrame.start(primaryStage);
+			ConfirmEmployerRegistrationFlag = false;
 		}
     }
 }

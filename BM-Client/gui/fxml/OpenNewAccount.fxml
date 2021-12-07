@@ -7,10 +7,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="707.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.OpenNewAccountController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="707.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.OpenNewAccountController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="497.0" fitWidth="709.0" layoutX="5.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="526.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="WHITE" layoutX="649.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -11,6 +11,7 @@ import client.controllers.LoginScreenController;
 import client.controllers.OpenNewAccountController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
+import client.controllers.SupplierScreenController;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;
@@ -101,6 +102,14 @@ public class ChatClient extends AbstractClient {
 		}
 		if(mssg.getMessageType().equals(MessageType.ConfirmOpenNewPrivateAccount)) {
 			OpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ConfirmEmployerRegistration))
+		{
+			BranchManagerScreenController.ConfirmEmployerRegistrationFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.CreateMenu))
+		{
+			SupplierScreenController.CreateMenuFlag=true; 		
 		}
 		if(mssg.getMessageType().equals(MessageType.Disconected))
 		{

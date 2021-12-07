@@ -12,8 +12,9 @@ public enum MessageType {
 	
 	BranchManager,CEO,Customer,Supplier,
 	
-	ReturnFirstName,ReturnFirstName_success,OpenNewAccount,
+	ReturnFirstName,ReturnFirstName_success,OpenNewAccount,ConfirmEmployerRegistration,
 	OpenNewBussinesAccount,OpenNewPrivateAccount,ConfirmOpenNewBusinessAccount,ConfirmOpenNewPrivateAccount,
+	CreateMenu,
 	
 	
 	/*Error*/
