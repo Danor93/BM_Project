@@ -3,17 +3,16 @@ package Entities;
 public enum MessageType {
 
 	/*Server Message*/
-	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,AlreadyLoggedIn,WrongInput,ID_Exists_True,ID_Exists_False,
+	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,loginWrongInput,
 	
 	/*Client Message*/
-	Update_Orders,Show_Orders,ID_exists,
+	Update_Orders,Show_Orders,ConfirmW4c,Show_Cities,
 	
 	/*type of users*/
 	
-	BranchManager,CEO,Customer,Supplier,
+	BranchManager,CEO,Customer, 
 	
-	ReturnFirstName,ReturnFirstName_success,OpenNewAccount,
-	OpenNewBussinesAccount,OpenNewPrivateAccount,ConfirmOpenNewBusinessAccount,ConfirmOpenNewPrivateAccount,
+	ReturnFirstName,ReturnFirstName_success,
 	
 	
 	/*Error*/
