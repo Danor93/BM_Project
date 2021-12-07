@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import Parsing.Parsing;
 import controllers.LogicController;
 import controllers.ServerUIFController;
 import querys.DBCheck;
 import querys.DBFirstName;
 import querys.ShowOrders;
 import querys.UpdateDB;
+import querys.showCities;
 import server.AbstractServer;
 import server.ConnectionToClient;
 
@@ -32,6 +34,7 @@ public class EchoServer extends AbstractServer {
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
 	private static ArrayList<ClientConnection> clients = null;
+	private Message resMessage;
 	
 	public EchoServer(int port) {
 		super(port);
@@ -40,90 +43,9 @@ public class EchoServer extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		
 		LogicController.UpdateClientTable(msg, client);
-		Message message = (Message) msg;
-		Message messageFromServer = null;
-		switch (message.getMessageType()) {
-		case Show_Orders: {// get all orders from DB
-			ArrayList<Order> order = ShowOrders.getOrders();
-			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
-			break;
-		}
-		case Update_Orders: {
-			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
-			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
-			messageFromServer = new Message(MessageType.Update_succesfuly, null);
-			break;
-		}
-		
-		case loginSystem: {
-			String result, result2; 
-			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			result = DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);	
-			System.out.println(result);
-			result2 = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);
-			System.out.println(result2);
-			if(result.equals("Customer"))
-				messageFromServer = new Message(MessageType.Customer, null);
-			else if(result.equals("BranchManager"))
-				messageFromServer = new Message(MessageType.BranchManager, null);
-			else if(result.equals("CEO"))
-				messageFromServer = new Message(MessageType.CEO, null);
-			else if(result.equals("Supplier"))
-				messageFromServer = new Message(MessageType.Supplier, null);
-			else if(result.equals("AlreadyLoggedIn"))
-				messageFromServer = new Message(MessageType.AlreadyLoggedIn, null);
-			else if(result.equals("null"))
-				messageFromServer = new Message(MessageType.WrongInput, null);
-			break;
-		}
-		
-		case OpenNewAccount:{
-			messageFromServer = new Message(MessageType.OpenNewAccount, null);	
-			break;
-		}
-		
-		case OpenNewPrivateAccount:{
-			messageFromServer = new Message(MessageType.OpenNewPrivateAccount, null);	
-			break;
-		}
-		
-		case OpenNewBussinesAccount:{
-			messageFromServer = new Message(MessageType.OpenNewBussinesAccount, null);	
-			break;
-		}
-		
-		case ConfirmOpenNewBusinessAccount:{
-			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);	
-			break;
-		}
-		
-		case ConfirmOpenNewPrivateAccount:{
-			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);	
-			break;
-		}
-		
-		case ID_exists:{
-			String id;
-			id = DBCheck.IDcheck((String)message.getMessageData());
-			if(id==null)
-			{
-				messageFromServer = new Message(MessageType.ID_Exists_False, null);	
-			}
-			else {
-				messageFromServer = new Message(MessageType.ID_Exists_True, null);	
-			}
-				
-		}
-
-		default: {
-			messageFromServer = new Message(MessageType.Error, null);
-			break;
-		}
-	}
-		//this.sendToAllClients(messageFromServer);
+		resMessage = Parsing.parsing(msg, client);
 		try {
-			client.sendToClient(messageFromServer);
+			client.sendToClient(resMessage);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

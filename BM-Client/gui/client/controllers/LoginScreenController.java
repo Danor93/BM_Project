@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,8 @@ import main.ClientController;
 import main.ClientUI;
 
 public class LoginScreenController extends Controller {
+	public static User user;
+	public static boolean LoginFlag = false;
 	public static boolean BMflag = false;
 	public static boolean CEOflag = false;
 	public static boolean Customerflag = false;
@@ -63,55 +66,60 @@ public class LoginScreenController extends Controller {
 		str.append("@");
 		str.append(txtPassword.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
+		
 		ClientUI.chat.accept(msg);
-		if (BMflag == true) {
+		
+		if(LoginFlag)
+		{
+			LoginFlag=false;
 			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			BranchManagerScreenController aFrame = new BranchManagerScreenController();
-			aFrame.start(primaryStage);
-			BMflag = false;
-
-		} else if (Customerflag == true) {
-			// CustomerScreenController.TempName=Name;
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			CustomerScreenController aFrame = new CustomerScreenController();
-			aFrame.start(primaryStage);
-			Customerflag = false;
+			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			
-		} else if (CEOflag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			CEOScreenController aFrame = new CEOScreenController();
-			aFrame.start(primaryStage);
-			CEOflag = false;
-		}
-		
-		else if (Supplierflag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			SupplierScreenController aFrame = new SupplierScreenController();
-			aFrame.start(primaryStage);
-			Supplierflag = false;
-		}
-		
-		else if (AlreadyLoggedInFlag == true) {
-			WrongInputInLoggin.setText("The user is already logged in");
-			AlreadyLoggedInFlag = false;
-		}
-		
-		else if (WrongInputFlag == true) {
-			WrongInputInLoggin.setText("Wrong input");
-			WrongInputFlag = false;
-		}
+			if (user.getRole().equals("BranchManager")) {
+				BranchManagerScreenController aFrame = new BranchManagerScreenController();
+				aFrame.start(primaryStage);
 
-
+			} else if (user.getRole().equals("Customer")) {	
+				FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
+				Parent root=load.load();
+				CustomerScreenController aFrame = load.getController();
+				aFrame.display(user.getFirstN());
+				aFrame.start(primaryStage,root);
+				
+				
+			} else if (user.getRole().equals("CEO")) {
+				CEOScreenController aFrame = new CEOScreenController();
+				aFrame.start(primaryStage);
+			}
+			else if (user.getRole().equals("Supplier")) {
+				SupplierScreenController aFrame = new SupplierScreenController();
+				aFrame.start(primaryStage);
+			}
+		}
+		
+		else
+		{
+			WrongInputInLoggin.setText("User name or password are incorrect, please try again!");
+		}
+		
 	}
 	
 	@FXML
 	void getUserName(InputMethodEvent event) {
 
 	}
+	
+    public void start(Stage primaryStage) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
+		Scene scene = new Scene(root);			
+		primaryStage.setTitle("BiteMe Login Panel");
+		primaryStage.setScene(scene);
+		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
+		primaryStage.show();
+
+	}
+
 
 	@FXML
 	void initialize() {

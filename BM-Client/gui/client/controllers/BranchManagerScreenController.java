@@ -20,7 +20,6 @@ import main.ClientUI;
 
 
 public class BranchManagerScreenController extends Controller{
-	public static boolean OpenNewAccountFlag = false;
 
     @FXML
     private ResourceBundle resources;
@@ -93,14 +92,18 @@ public class BranchManagerScreenController extends Controller{
     
     @FXML
     void OpenNewAccount(ActionEvent event) throws IOException {
-		Message msg = new Message(MessageType.OpenNewAccount, null);
-		ClientUI.chat.accept(msg);
-		if (OpenNewAccountFlag == true) {
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			OpenNewAccountController aFrame = new OpenNewAccountController();
 			aFrame.start(primaryStage);
-			OpenNewAccountFlag = false;
-		}
     }
+    
+    @FXML
+    void ChangeInfoDB(ActionEvent event) throws IOException {
+		 
+			((Node) event.getSource()).getScene().getWindow().hide();
+			Stage primaryStage = new Stage();
+			ChangeInfoDBController aFrame = new ChangeInfoDBController();
+			aFrame.start(primaryStage);
+		}
 }

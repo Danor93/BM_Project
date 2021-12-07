@@ -27,7 +27,7 @@
       </Label>
       <Button fx:id="btnConfirmEmployerRegistration" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm employer registration" />
       <Button fx:id="btnOpenNewAccount" layoutX="10.0" layoutY="229.0" mnemonicParsing="false" onAction="#OpenNewAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="open new account" />
-      <Button fx:id="btnChangePersonalInformation" layoutX="213.0" layoutY="120.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="change personal information in DB" />
+      <Button fx:id="btnChangePersonalInformation" layoutX="213.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeInfoDB" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="change personal information in DB" />
       <Button fx:id="btnConfirmSupplierRegistration" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm supplier registration" />
       <Button fx:id="btnUploadPDF" layoutX="213.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
       <Button fx:id="btnViewBranchsReports" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="view branch's reports" />

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="502.0" fitWidth="732.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="534.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
@@ -20,7 +20,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="btnCreateMenu" layoutX="108.0" layoutY="150.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Create menu" />
+      <Button fx:id="btnCreateMenu" layoutX="108.0" layoutY="150.0" mnemonicParsing="false" onAction="#CreateMenu" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Create menu" />
       <Label layoutX="65.0" layoutY="75.0" text="Supplier page" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />

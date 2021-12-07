@@ -1,5 +1,6 @@
 package client.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,10 +8,14 @@ import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import main.ClientUI;
 
 public class ChangeInfoDBController extends Controller {
@@ -54,9 +59,6 @@ public class ChangeInfoDBController extends Controller {
     		//here we need to add FXML document.
     	}
     }
-   
-    
-    
 
     }
 
@@ -69,5 +71,14 @@ public class ChangeInfoDBController extends Controller {
         assert lblError != null : "fx:id=\"lblError\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
 
     }
+
+	public void start(Stage primaryStage) throws IOException {
+		FXMLLoader load = new FXMLLoader();
+		primaryStage.setTitle("BiteMe Branch Manager Panel");
+		Pane root = load.load(getClass().getResource("/fxml/ChangeInfoDB.fxml").openStream());
+		Scene home = new Scene(root);
+		primaryStage.setScene(home);
+		primaryStage.show();	
+	}
 
 }

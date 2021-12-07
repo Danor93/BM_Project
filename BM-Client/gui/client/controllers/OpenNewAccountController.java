@@ -19,8 +19,6 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 public class OpenNewAccountController extends Controller {
-	public static boolean OpenNewPrivateAccountFlag = false;
-	public static boolean OpenNewBussinesAccountFlag = false;
 
     @FXML
     private ResourceBundle resources;
@@ -61,28 +59,18 @@ public class OpenNewAccountController extends Controller {
     
     @FXML
     void BusinessAccount(ActionEvent event) throws IOException {
-		Message msg = new Message(MessageType.OpenNewBussinesAccount, null);
-		ClientUI.chat.accept(msg);
-		if (OpenNewBussinesAccountFlag == true) {
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			OpenNewBussinessAccountController aFrame = new OpenNewBussinessAccountController();
 			aFrame.start(primaryStage);
-			OpenNewBussinesAccountFlag = false;
-		}
     }
 
     @FXML
     void PrivateAccount(ActionEvent event) throws IOException {
-		Message msg = new Message(MessageType.OpenNewPrivateAccount, null);
-		ClientUI.chat.accept(msg);
-		if (OpenNewPrivateAccountFlag == true) {
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			OpenNewPrivateAccountController aFrame = new OpenNewPrivateAccountController();
 			aFrame.start(primaryStage);
-			OpenNewPrivateAccountFlag = false;
-		}
     }
 
     public void start(Stage primaryStage) throws IOException {
