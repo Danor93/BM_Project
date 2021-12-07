@@ -1,28 +1,21 @@
 package main;
 // This file contains material supporting section 3.7 of the textbook:
 
+import java.io.IOException;
+
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
 import java.util.ArrayList;
-
-import javax.swing.text.AbstractDocument.BranchElement;
-
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import controllers.LogicController;
 import controllers.ServerUIFController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import querys.DBCheck;
-import querys.DBConnect;
 import querys.DBFirstName;
 import querys.ShowOrders;
 import querys.UpdateDB;
-import querys.showCities;
 import server.AbstractServer;
 import server.ConnectionToClient;
 
@@ -38,15 +31,15 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
-	//public static ClientController ClientController;
-
+	private static ArrayList<ClientConnection> clients = null;
 	
 	public EchoServer(int port) {
 		super(port);
 	}
 
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		//System.out.println(("Message received: " + msg + " from " + client));
+		
+		LogicController.UpdateClientTable(msg, client);
 		Message message = (Message) msg;
 		Message messageFromServer = null;
 		switch (message.getMessageType()) {
@@ -64,52 +57,85 @@ public class EchoServer extends AbstractServer {
 		}
 		
 		case loginSystem: {
-			String result; 
-			String[] DivededUandP = ((String) message.getMessageData()).split("@");
-			result = DBCheck.DBCheck(DivededUandP[0],DivededUandP[1]);
-			System.out.println(result);
-			messageFromServer = new Message(MessageType.login,result);
-			break;
-
-		}
-		
-		case Show_Cities: {
-			ArrayList<String> city = showCities.getCities();
-			messageFromServer = new Message(MessageType.Show_Cities, city);
-			break;
-		}
-		
-	/*	case ReturnFirstName:
-		{
-			String result; 
+			String result, result2; 
 			String[] DivededAdd = ((String) message.getMessageData()).split("@");
-			result = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);	
+			result = DBCheck.DBCheck(DivededAdd[0],DivededAdd[1]);	
 			System.out.println(result);
-			messageFromServer = new Message(MessageType.ReturnFirstName_success, result);
-			break;
-		}*/
-		case Disconected:{
-			messageFromServer = new Message(MessageType.Disconected, null);		
+			result2 = DBFirstName.DBFirstName(DivededAdd[0],DivededAdd[1]);
+			System.out.println(result2);
+			if(result.equals("Customer"))
+				messageFromServer = new Message(MessageType.Customer, null);
+			else if(result.equals("BranchManager"))
+				messageFromServer = new Message(MessageType.BranchManager, null);
+			else if(result.equals("CEO"))
+				messageFromServer = new Message(MessageType.CEO, null);
+			else if(result.equals("Supplier"))
+				messageFromServer = new Message(MessageType.Supplier, null);
+			else if(result.equals("AlreadyLoggedIn"))
+				messageFromServer = new Message(MessageType.AlreadyLoggedIn, null);
+			else if(result.equals("null"))
+				messageFromServer = new Message(MessageType.WrongInput, null);
 			break;
 		}
-			
+		
+		case OpenNewAccount:{
+			messageFromServer = new Message(MessageType.OpenNewAccount, null);	
+			break;
+		}
+		
+		case OpenNewPrivateAccount:{
+			messageFromServer = new Message(MessageType.OpenNewPrivateAccount, null);	
+			break;
+		}
+		
+		case OpenNewBussinesAccount:{
+			messageFromServer = new Message(MessageType.OpenNewBussinesAccount, null);	
+			break;
+		}
+		
+		case ConfirmOpenNewBusinessAccount:{
+			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);	
+			break;
+		}
+		
+		case ConfirmOpenNewPrivateAccount:{
+			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);	
+			break;
+		}
+		
+		case ID_exists:{
+			String id;
+			id = DBCheck.IDcheck((String)message.getMessageData());
+			if(id==null)
+			{
+				messageFromServer = new Message(MessageType.ID_Exists_False, null);	
+			}
+			else {
+				messageFromServer = new Message(MessageType.ID_Exists_True, null);	
+			}
+				
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);
 			break;
 		}
-		}
-		
-		
-		this.sendToAllClients(messageFromServer);
 	}
+		//this.sendToAllClients(messageFromServer);
+		try {
+			client.sendToClient(messageFromServer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+}
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server
 	 * starts listening for connections.
 	 */
 	protected void serverStarted() {
-		System.out.println("Server listening for connections on port " + getPort());
+		//System.out.println("Server listening for connections on port " + getPort());
 	}
 
 	/**
@@ -117,7 +143,7 @@ public class EchoServer extends AbstractServer {
 	 * listening for connections.
 	 */
 	protected void serverStopped() {
-		System.out.println("Server has stopped listening for connections.");
+		//System.out.println("Server has stopped listening for connections.");
 	}
 
 	// Class methods ***************************************************

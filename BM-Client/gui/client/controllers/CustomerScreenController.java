@@ -11,11 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CustomerScreenController {
+public class CustomerScreenController extends Controller{
 
 	public String TempName; 
 	public static CustomerScreenController cs; 
@@ -32,50 +32,38 @@ public class CustomerScreenController {
     private Button btnBack;
     
     @FXML
-    private Label welcome;
-
+    private Label lblName;
     
-    public void start(Stage primaryStage,Parent root) throws IOException{
-		/*FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
-		Pane root;
-		
-		try {
-			root = load.load(getClass().getResource("/client/controllers/CustomerScreen.fxml").openStream());
-			//welcome.setText(LoginScreenController.name);
-			Scene home = new Scene(root);
-			primaryStage.setScene(home);
-			//welcome.setText(LoginScreenController.name);
-			primaryStage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-    	
-    	Scene home = new Scene(root);
+    @FXML
+    private ImageView BackImage;
+    
+    public void start(Stage primaryStage) throws IOException {
+		//lblName.setText("test"); 
+		FXMLLoader load = new FXMLLoader();
+		primaryStage.setTitle("BiteMe Costumer Panel");
+		Pane root = load.load(getClass().getResource("/fxml/CustomerScreen.fxml").openStream());
+		Scene home = new Scene(root);
 		primaryStage.setScene(home);
+	//	lblName.setText(TempName); 
+		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
+		//lblName.setText("test"); 
 		primaryStage.show();
+		//lblName.setText("test"); 
 	}
 
     @FXML
     void Back(ActionEvent event) throws IOException {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		LoginScreenController loginScreenController=new LoginScreenController();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		loginScreenController.start(stage);
+		Stage primaryStage = new Stage();
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
+		Scene scene = new Scene(root);		
+		primaryStage.setTitle("BiteMe Login Panel");
+		primaryStage.setScene(scene);		
+		primaryStage.show();
     }
-    
-
+   
     @FXML
-    void createOrder(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-    	IdentifyW4cController identifyW4cController=new IdentifyW4cController();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		identifyW4cController.start(stage);
+    void initialize() {
+    	setImage(BackImage,"background.jpeg");
     }
-
-	public void display(String firstN) {
-		welcome.setText("Welcome "+firstN);
-		
-	}
-
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="703.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.OpenNewBussinessAccountController">
+   <children>
+      <ImageView fx:id="BackImage" fitHeight="490.0" fitWidth="702.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fill="WHITE" layoutX="521.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="14.0" layoutY="37.0" text="New business account" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnBackToOpenNewAccount" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#BackToNewAccountScreen" text="Back to Open new account page" />
+      <Label layoutX="41.0" layoutY="129.0" text="First Name" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="168.0" text="Last Name" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="204.0" text="ID" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="245.0" text="Telephone" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="284.0" text="Email" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="327.0" text="Employer's name" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="369.0" text="Monthly billing ceiling" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFirstName" layoutX="169.0" layoutY="131.0" />
+      <TextField fx:id="txtLastName" layoutX="169.0" layoutY="169.0" />
+      <TextField fx:id="txtID" layoutX="169.0" layoutY="205.0" />
+      <TextField fx:id="txtTelephone" layoutX="169.0" layoutY="246.0" />
+      <TextField fx:id="txtEmail" layoutX="168.0" layoutY="285.0" />
+      <TextField fx:id="txtEmployersName" layoutX="168.0" layoutY="328.0" />
+      <TextField fx:id="txtMonthlyBillingCeiling" layoutX="169.0" layoutY="370.0" />
+      <Text fill="WHITE" layoutX="41.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You must fill in all the following details">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnConfirm" layoutX="254.0" layoutY="406.0" mnemonicParsing="false" onAction="#Confirm" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
+   </children>
+</Pane>
