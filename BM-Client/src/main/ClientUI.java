@@ -4,8 +4,6 @@ import javafx.stage.Stage;
 import client.controllers.ClientMenuUiController;
 
 public class ClientUI extends Application {
-	
-	public static Stage mainStage;
 
 	public static ClientController chat; 
 
@@ -16,10 +14,8 @@ public class ClientUI extends Application {
 	 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		mainStage=primaryStage;	  		
 		ClientMenuUiController firstPage = new ClientMenuUiController (); 
-		firstPage.start(mainStage);
+		firstPage.start(primaryStage);
 	}
 	
 	
