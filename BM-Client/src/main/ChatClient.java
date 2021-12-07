@@ -6,15 +6,16 @@ package main;
 
 import client.*;
 import client.controllers.BranchManagerScreenController;
-import client.controllers.ChooseRestController;
+import client.controllers.ChangeInfoDBController;
 import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
+import client.controllers.OpenNewAccountController;
+import client.controllers.OpenNewBussinessAccountController;
+import client.controllers.OpenNewPrivateAccountController;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
-import Entities.User;
-import Entities.homeBranches;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -38,58 +39,79 @@ public class ChatClient extends AbstractClient {
 		super(host, port);
 		chatClient = this;
 		openConnection();
-		///adi1234
-	}
+	} 
 
-	@SuppressWarnings("unchecked")
 	public void handleMessageFromServer(Object msg) {
-		System.out.println("--> get message from server");
 		waitingForResponse = false;
 		Message mssg = (Message) msg;
-		
-		/*if (mssg.getMessageType().equals(MessageType.Show_Orders_succ)) {
+		if (mssg.getMessageType().equals(MessageType.Show_Orders_succ)) {
 			ArrayList<Order> arr = (ArrayList<Order>) mssg.getMessageData();
 			orders=arr;
 		}
 		if (mssg.getMessageType().equals(MessageType.Update_succesfuly)) {
 			UpdateFormController.flagUpdate = true;
-		}*/
-		
-		switch(mssg.getMessageType())
+		}
+		if(mssg.getMessageType().equals(MessageType.login))
 		{
-		case login:
-		{
-			String[] DivedMsg = ((String) mssg.getMessageData()).split("@");
 			
-			if(!DivedMsg[0].equals("WrongInput"))
-			{
-				LoginScreenController.user=new User(DivedMsg[0],DivedMsg[1],DivedMsg[2],DivedMsg[3],DivedMsg[4],homeBranches.toHomeBranchType(DivedMsg[5]));
-				LoginScreenController.LoginFlag=true;
-
-			}
+		}
+		if(mssg.getMessageType().equals(MessageType.BranchManager))
+		{
+			LoginScreenController.BMflag=true; 
+			//System.out.println(LoginScreenController.BMflag);
+		}
+		if(mssg.getMessageType().equals(MessageType.Customer))
+		{
+			LoginScreenController.Customerflag=true; 
+			LoginScreenController.Name=mssg.getMessageData().toString();
+			//System.out.println(LoginScreenController.BMflag);
+		}
+		if(mssg.getMessageType().equals(MessageType.CEO))
+		{
+			LoginScreenController.CEOflag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.Supplier))
+		{
+			LoginScreenController.Supplierflag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ReturnFirstName_success))
+		{
+			LoginScreenController.Name= mssg.getMessageData().toString();
+		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewAccount))
+		{
+			BranchManagerScreenController.OpenNewAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewBussinesAccount))
+		{
+			OpenNewAccountController.OpenNewBussinesAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.OpenNewPrivateAccount))
+		{
+			OpenNewAccountController.OpenNewPrivateAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.WrongInput))
+		{
+			LoginScreenController.WrongInputFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.AlreadyLoggedIn)) {
+			LoginScreenController.AlreadyLoggedInFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ConfirmOpenNewBusinessAccount)) {
+			OpenNewBussinessAccountController.ConfirmOpenNewBusinessAccountControllerFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.ConfirmOpenNewPrivateAccount)) {
+			OpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true; 		
+		}
+		if(mssg.getMessageType().equals(MessageType.Disconected))
+		{
 			
-			break;
 		}
 		
-		case Show_Cities:{
-			ChooseRestController.cities=(ArrayList<String>)mssg.getMessageData();
-			break;
-		}
-		
-		
-		case Disconected:
+		if(mssg.getMessageType().equals(MessageType.ID_Exists_False))
 		{
-			break;
+			ChangeInfoDBController.idFalseFlag=true;
 		}
-		
-		default:
-		{
-			break;
-		}
-		}
-
-
-
 	}
 	public void handleMessageFromClientUI(Object message) {
 		try {

@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import main.ChatClient;
 
-public class ShowFormController implements Initializable {
+public class ShowFormController extends Controller implements Initializable {
 
 	public ResourceBundle getResources() {
 		return resources;
@@ -72,7 +72,7 @@ public class ShowFormController implements Initializable {
 	void backToMain(ActionEvent event) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/client/controllers/Showupdate.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Showupdate.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe");
 		primaryStage.setScene(scene);
