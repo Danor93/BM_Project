@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CreateMenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CreateMenuScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="623.0" fitWidth="718.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="31.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0">
@@ -20,27 +20,27 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Button fx:id="btnSalad" layoutX="31.0" layoutY="95.0" mnemonicParsing="false" onAction="#HandleClicks" onMouseClicked="#openSalads" text="Salads" textFill="#132248">
+      <Button fx:id="btnSalad" layoutX="31.0" layoutY="95.0" mnemonicParsing="false" onAction="#openSalads" onMouseClicked="#openSalads" text="Salads" textFill="#132248">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnStart" layoutX="33.0" layoutY="138.0" mnemonicParsing="false" onAction="#HandleClicks" onMouseClicked="#openStarts" text="Starts">
+      <Button fx:id="btnStart" layoutX="33.0" layoutY="138.0" mnemonicParsing="false" onAction="#openStarts" onMouseClicked="#openStarts" text="Starts">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnMainDishes" layoutX="14.0" layoutY="181.0" mnemonicParsing="false" onAction="#HandleClicks" onMouseClicked="#openMainDishes" text="Main dishes">
+      <Button fx:id="btnMainDishes" layoutX="14.0" layoutY="181.0" mnemonicParsing="false" onAction="#openMainDishes" onMouseClicked="#openMainDishes" text="Main dishes">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnDessert" layoutX="27.0" layoutY="224.0" mnemonicParsing="false" onAction="#HandleClicks" onMouseClicked="#openDesert" text="Dessert">
+      <Button fx:id="btnDessert" layoutX="27.0" layoutY="224.0" mnemonicParsing="false" onAction="#openDesert" onMouseClicked="#openDesert" text="Dessert">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button fx:id="btnDrinks" layoutX="31.0" layoutY="269.0" mnemonicParsing="false" onAction="#HandleClicks" onMouseClicked="#openDrinks" text="Drinks">
+      <Button fx:id="btnDrinks" layoutX="31.0" layoutY="269.0" mnemonicParsing="false" onAction="#openDrinks" onMouseClicked="#openDrinks" text="Drinks">
          <font>
             <Font size="15.0" />
          </font>

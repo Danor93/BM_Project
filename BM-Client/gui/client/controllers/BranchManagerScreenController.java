@@ -100,7 +100,6 @@ public class BranchManagerScreenController extends Controller{
     
     @FXML
     void ChangeInfoDB(ActionEvent event) throws IOException {
-		 
 			((Node) event.getSource()).getScene().getWindow().hide();
 			Stage primaryStage = new Stage();
 			ChangeInfoDBController aFrame = new ChangeInfoDBController();

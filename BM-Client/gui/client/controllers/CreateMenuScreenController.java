@@ -73,39 +73,29 @@ public class CreateMenuScreenController extends Controller {
     }
 
     @FXML
-    void HandleClicks(ActionEvent event) {
-    	if(event.getSource() == btnSalad) {
-    		miniLabel.setText("Salads");
-    		SaladsPane.toFront();
-    	}
-    	else if (event.getSource() == btnMainDishes) {
-    		miniLabel.setText("Main dishes");
-    		MainDishesPain.toFront();
-    	}
-    }
-
-    @FXML
-    void openDesert(MouseEvent event) {
+    void openDesert(ActionEvent event) {
 
     }
 
     @FXML
-    void openDrinks(MouseEvent event) {
+    void openDrinks(ActionEvent event) {
+    }
+
+    @FXML
+    void openMainDishes(ActionEvent event) {
 
     }
 
     @FXML
-    void openMainDishes(MouseEvent event) {
-
+    void openSalads(ActionEvent event) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = new Stage();
+		AddNewSaladToMenuController aFrame = new AddNewSaladToMenuController();
+		aFrame.start(primaryStage);
     }
 
     @FXML
-    void openSalads(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openStarts(MouseEvent event) {
+    void openStarts(ActionEvent event) {
 
     }
 
