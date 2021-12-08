@@ -62,18 +62,6 @@ public class ChooseRestController extends Controller implements Initializable {
     	cityName=combo1.getSelectionModel().getSelectedItem().toString();
     }
 
-	public void start(Stage stage) throws IOException  {
-    	
-		FXMLLoader loader = new FXMLLoader();
-		Pane root;
-			root = loader.load(getClass().getResource("/fxml/ChooseRestaurant.fxml").openStream());
-			Scene scene = new Scene(root);			
-			stage.setTitle("BiteMe Choose Restaurant");
-			stage.setScene(scene);
-			stage.show();		
-	}
-	
-
     @FXML
     void proceedToRest(ActionEvent event) throws IOException {
     	if(cityName!=null && !cityName.equals("select"))
