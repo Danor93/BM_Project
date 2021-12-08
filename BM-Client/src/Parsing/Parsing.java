@@ -22,13 +22,17 @@ public class Parsing {
 
 		case login: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
-
-			if (!DivedMsg[0].equals("WrongInput")) {
-				LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3], DivedMsg[4],
-						homeBranches.toHomeBranchType(DivedMsg[5]));
-				LoginScreenController.LoginFlag = true;
+			if (!receivedMessage.getMessageData().equals("WrongInput")) {
+				if (receivedMessage.getMessageData().equals("Already")) {
+					LoginScreenController.AlreadyLoggedInFlag = true;
+					LoginScreenController.LoginFlag = true;
+				} else {
+					LoginScreenController.LoginFlag = true;
+					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+							DivedMsg[4], homeBranches.toHomeBranchType(DivedMsg[5]), DivedMsg[6], DivedMsg[7],
+							DivedMsg[8]);
+				}
 			}
-
 			break;
 		}
 

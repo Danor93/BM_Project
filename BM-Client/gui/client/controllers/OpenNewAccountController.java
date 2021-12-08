@@ -48,39 +48,17 @@ public class OpenNewAccountController extends Controller {
     
     @FXML
     void BackToBranchManagerScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Branch Manager Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event, "BranchManagerScreen", "Branch Manager");
     }
     
     @FXML
     void BusinessAccount(ActionEvent event) throws IOException {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			OpenNewBussinessAccountController aFrame = new OpenNewBussinessAccountController();
-			aFrame.start(primaryStage);
+    	startScreen(event, "OpenNewBussinessAccount", "Open New Bussiness Account");
     }
 
     @FXML
     void PrivateAccount(ActionEvent event) throws IOException {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			OpenNewPrivateAccountController aFrame = new OpenNewPrivateAccountController();
-			aFrame.start(primaryStage);
-    }
-
-    public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Open New Account Panel");
-		Pane root = load.load(getClass().getResource("/fxml/OpenNewAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();
-	}
-    
+    	startScreen(event, "OpenNewPrivateAccount", "Open New Private Account");
+    }   
 
 }

@@ -27,7 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ChooseRestController extends Controller {
+public class ChooseRestController extends Controller implements Initializable {
 	
 
     @FXML
@@ -75,12 +75,10 @@ public class ChooseRestController extends Controller {
 	
 
     @FXML
-    void proceedToRest(ActionEvent event) {
+    void proceedToRest(ActionEvent event) throws IOException {
     	if(cityName!=null && !cityName.equals("select"))
     	{
-    		RestListFormController restListFormController = new RestListFormController();
-        	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        	restListFormController.start(stage);
+    		startScreen(event, "restListForm", "Restaurant list");
     	}
     	
     	else
@@ -103,13 +101,8 @@ public class ChooseRestController extends Controller {
 	
 	
 	@FXML
-	public void BackToCostumer(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
-		Parent root=load.load();
-		CustomerScreenController aFrame = load.getController();
-		//aFrame.display(user.getFirstN());
-		aFrame.start(primaryStage,root);
+	public void BackToW4CScreen(ActionEvent event) throws IOException {
+		startScreen(event, "InsertCodeOfW4C","Insert W4C");
 	}
 	
 

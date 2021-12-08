@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="506.0" prefWidth="732.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="client.controllers.ChangeInfoDBController">
+<AnchorPane prefHeight="506.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ChangeInfoDBController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="512.0" fitWidth="736.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="35.0" layoutY="28.0" prefHeight="38.0" prefWidth="351.0" text="Change personal user in DB" textFill="#fffefe">
@@ -30,6 +29,11 @@
       <Button fx:id="btncon" layoutX="346.0" layoutY="399.0" mnemonicParsing="false" onAction="#Continue" prefHeight="50.0" prefWidth="172.0" style="-fx-background-radius: 30;" text="Continue">
          <font>
             <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="BackBtn" layoutX="35.0" layoutY="399.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 30;" text="Back">
+         <font>
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
    </children>

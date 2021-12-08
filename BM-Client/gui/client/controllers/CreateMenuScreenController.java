@@ -63,13 +63,7 @@ public class CreateMenuScreenController extends Controller {
     
     @FXML
     void BackToSupplierPage(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/SupplierScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Supplier Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event,"SupplierScreen","Supplier");
     }
 
     @FXML
@@ -122,13 +116,4 @@ public class CreateMenuScreenController extends Controller {
         assert SaladsPane != null : "fx:id=\"SaladsPane\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Create Menu Panel");
-		Pane root = load.load(getClass().getResource("/fxml/CreateMenuScreen.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();	
-	}
 }

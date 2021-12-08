@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 import Entities.Message;
 import Entities.MessageType;
-import main.ClientConnection;
+import extra.ClientConnection;
+import ocsf.server.ConnectionToClient;
+
 
 public class LogicController {
 
 	private static ArrayList<ClientConnection> clients = null;
 
-	public static void UpdateClientTable(Object msg, server.ConnectionToClient client) {
+	public static void UpdateClientTable(Object msg, ConnectionToClient client) {
 		ClientConnection newClient = new ClientConnection(client);
 		Message recivedMessage = (Message) msg;
 		int flag = 0;

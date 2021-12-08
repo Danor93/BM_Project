@@ -57,32 +57,15 @@ public class CEOScreenController extends Controller {
         assert btnViewBranchsReports != null : "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnCreateOrder != null : "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CEOScreen.fxml'.";
     }
-    
-    public void start(Stage primaryStage) throws IOException {
-    		FXMLLoader load = new FXMLLoader();
-    		primaryStage.setTitle("BiteMe CEO Panel");
-    		Pane root = load.load(getClass().getResource("/fxml/CEOScreen.fxml").openStream());
-    		Scene home = new Scene(root);
-    		primaryStage.setScene(home);
-    		primaryStage.show();
-    	}
+   
 
         @FXML
         void Back(ActionEvent event) throws IOException {
-        	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-    		Stage primaryStage = new Stage();
-    		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
-    		Scene scene = new Scene(root);		
-    		primaryStage.setTitle("BiteMe Login Panel");
-    		primaryStage.setScene(scene);		
-    		primaryStage.show();
+        	startScreen(event,"LoginScreen","Login");
         }
         
         @FXML
         void ChangeInfoDBCEO(ActionEvent event) throws IOException {
-        	((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ChangeInfoDBController aFrame = new ChangeInfoDBController();
-			aFrame.start(primaryStage);
+        	startScreen(event, "ChangeInfoDB", "Change Information");
         }
 }

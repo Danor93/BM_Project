@@ -30,13 +30,7 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
 
     @FXML
     void BackToBranchManagerScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Branch Manager");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event, "BranchManagerScreen", "Branch Manager");
     }
 
     @FXML
@@ -45,13 +39,4 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
         assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmOpenNewPrivateAccount.fxml'.";
 
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/fxml/ConfirmOpenNewPrivateAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();		
-	}
 }

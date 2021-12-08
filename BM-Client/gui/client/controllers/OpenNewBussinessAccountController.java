@@ -65,23 +65,14 @@ public class OpenNewBussinessAccountController extends Controller {
 		Message msg = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
 		ClientUI.chat.accept(msg);
 		if (ConfirmOpenNewBusinessAccountControllerFlag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ConfirmOpenNewBusinessAccountController aFrame = new ConfirmOpenNewBusinessAccountController();
-			aFrame.start(primaryStage);
+			startScreen(event, "ConfirmOpenNewBusinessAccount", "Confirm Open New Bussiness Account");
 			ConfirmOpenNewBusinessAccountControllerFlag = false;
 		}
     }
 
     @FXML
     void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Open New Account Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event, "OpenNewAccount", "Open New Account");
     }
     
     @FXML
@@ -97,13 +88,4 @@ public class OpenNewBussinessAccountController extends Controller {
         assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'OpenNewBussinessAccount.fxml'.";
 
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Open New Bussiness Account Panel");
-		Pane root = load.load(getClass().getResource("/fxml/OpenNewBussinessAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();				
-	}
 }
