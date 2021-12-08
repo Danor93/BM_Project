@@ -39,6 +39,10 @@ public class ChangeInfoDBController extends Controller {
 
     @FXML
     private Label lblError;
+    
+
+    @FXML
+    private Button BackBtn;
 
     @FXML
     void Continue(ActionEvent event) {
@@ -71,14 +75,10 @@ public class ChangeInfoDBController extends Controller {
         assert lblError != null : "fx:id=\"lblError\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
 
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Branch Manager Panel");
-		Pane root = load.load(getClass().getResource("/fxml/ChangeInfoDB.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();	
-	}
+    
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+    	startScreen(event,"BranchManagerScreen","Branch Manager");
+    }
 
 }

@@ -40,7 +40,7 @@ public class IdentifyW4cController extends Controller {
 	public static boolean rightIdentify = false;
 
 	@FXML
-	void confirm(ActionEvent event) {
+	void confirm(ActionEvent event) throws IOException {
 		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) {
 			allertLbl.setText("Please enter W4C code or press the QR button");
 		}
@@ -58,31 +58,18 @@ public class IdentifyW4cController extends Controller {
 	}
 
 	@FXML
-	void getW4cFromQR(ActionEvent event) {
+	void getW4cFromQR(ActionEvent event) throws IOException {
 		w4cManually.setText(LoginScreenController.user.getW4c());
 		switchScene(event);
 	}
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/fxml/InsertCodeOfW4C.fxml").openStream());
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+	private void switchScene(ActionEvent event) throws IOException {
+		startScreen(event, "ChooseRestaurant", "Choose Restaurant");
 	}
-
-	private void switchScene(ActionEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		ChooseRestController chooseRestController = new ChooseRestController();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		try {
-			chooseRestController.start(stage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	@FXML
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "CustomerScreen","Customer");
 	}
 
 	@FXML

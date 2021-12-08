@@ -58,13 +58,7 @@ public class OpenNewPrivateAccountController extends Controller {
 
     @FXML
     void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Open New Account Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event, "OpenNewAccount", "Open New Account");
     }
 
     @FXML
@@ -74,10 +68,7 @@ public class OpenNewPrivateAccountController extends Controller {
 		Message msg = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 		ClientUI.chat.accept(msg);
 		if (ConfirmOpenNewPrivateAccountFlag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ConfirmOpenNewPrivateAccountController aFrame = new ConfirmOpenNewPrivateAccountController();
-			aFrame.start(primaryStage);
+			startScreen(event, "ConfirmOpenNewPrivateAccount", "Confrim New Private Account");
 			ConfirmOpenNewPrivateAccountFlag = false;
 		}
     }
@@ -95,13 +86,4 @@ public class OpenNewPrivateAccountController extends Controller {
         assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
 
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Open New Private Account");
-		Pane root = load.load(getClass().getResource("/fxml/OpenNewPrivateAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();		
-	}
 }

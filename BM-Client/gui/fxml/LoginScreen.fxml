@@ -37,10 +37,13 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="206.0" layoutY="233.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="78.0" style="-fx-background-color: #6AFB05; -fx-background-radius: 30;" text="Login" />
-      <Label fx:id="WrongInputInLoggin" layoutX="50.0" layoutY="283.0" prefHeight="26.0" prefWidth="260.0" text=" " textAlignment="CENTER" textFill="RED">
+      <Button fx:id="btnLogin" layoutX="206.0" layoutY="233.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="78.0" style="-fx-background-color: #6AFB05; -fx-background-radius: 30;" text="Login">
          <font>
             <Font name="System Bold" size="17.0" />
+         </font></Button>
+      <Label fx:id="WrongInputInLoggin" layoutX="50.0" layoutY="283.0" prefHeight="26.0" prefWidth="260.0" text=" " textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
    </children>

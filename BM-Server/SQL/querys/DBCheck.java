@@ -18,7 +18,7 @@ public class DBCheck {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT Role,ID,FirstName,LastName,w4cPrivate,homeBranch FROM bytemedatabase.users WHERE userName=? AND password=?");
+						"SELECT Role,ID,FirstName,LastName,w4cPrivate,homeBranch,userName,password,isLoggedIn FROM bytemedatabase.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -35,6 +35,12 @@ public class DBCheck {
 					result.append(rs.getString(5));
 					result.append("@");
 					result.append(rs.getString(6));
+					result.append("@");
+					result.append(rs.getString(7));
+					result.append("@");
+					result.append(rs.getString(8));
+					result.append("@");
+					result.append(rs.getString(9));
 				}
 				rs.close();
 
@@ -57,7 +63,7 @@ public class DBCheck {
 				}
 				else
 				{
-					System.out.println("already Log In");
+					return "Already";
 				}
 			}
 		} catch (SQLException e) {

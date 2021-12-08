@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+
+import extra.ClientConnection;
+
 import java.sql.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -25,7 +28,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import main.ClientConnection;
 import main.ServerConnection;
 import querys.DBConnect;
 

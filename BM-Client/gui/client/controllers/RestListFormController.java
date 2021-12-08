@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class RestListFormController extends Controller implements Initializable {
@@ -39,27 +40,32 @@ public class RestListFormController extends Controller implements Initializable 
     @FXML
     private TableView<?> table;
     
+    @FXML
+    private ImageView BackImage;
+    
     public static ArrayList<Restaurant> restaurants=new ArrayList<>();
 
     @FXML
     void backToCity(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/ChooseRestaurant.fxml"));
-		Parent root=load.load();
-		ChooseRestController aFrame = load.getController();
-		aFrame.start(primaryStage);
-
+		startScreen(event,"ChooseRestaurant", "Choose Restaurant");
     }
 
     @FXML
     void proceedToOrder(ActionEvent event) {
 
     }
-
-	public void start(Stage stage) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+    @FXML
+    void initialize() {
+    	setImage(BackImage,"background.jpeg");
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert backBtn != null : "fx:id=\"backBtn\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert colAdd != null : "fx:id=\"colAdd\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert colOpen != null : "fx:id=\"colOpen\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert colRes != null : "fx:id=\"colRes\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert nextbtn != null : "fx:id=\"nextbtn\" was not injected: check your FXML file 'restListForm.fxml'.";
+        assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'restListForm.fxml'.";
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

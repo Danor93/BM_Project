@@ -55,15 +55,7 @@ import main.ClientUI;
 	    		ClientUI.chat= new ClientController(ip, 5555);
 	    		Message msg = new Message(MessageType.login, null);
 	    		ClientUI.chat.accept(msg);
-	    		FXMLLoader loader = new FXMLLoader();
-	    		((Node) event.getSource()).getScene().getWindow().hide();
-	    		Stage primaryStage = new Stage();
-	    		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
-	    		Scene scene = new Scene(root);			
-	    		primaryStage.setTitle("BiteMe Login Panel");
-	    		primaryStage.setScene(scene);
-	    		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
-	    		primaryStage.show();
+	    		startScreen(event,"LoginScreen","Login");
 	    	}
 	    }
 	    

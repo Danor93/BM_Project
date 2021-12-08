@@ -63,16 +63,15 @@ public class CreateMenuScreenController extends Controller {
     
     @FXML
     void BackToSupplierPage(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/SupplierScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Supplier Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
+    	startScreen(event,"SupplierScreen","Supplier");
     }
 
     @FXML
+    void openDesert(ActionEvent event) {
+
+    }
+    
+    
     void HandleClicks(ActionEvent event) {
     	if(event.getSource() == btnSalad) {
     		miniLabel.setText("Salads");
@@ -85,27 +84,21 @@ public class CreateMenuScreenController extends Controller {
     }
 
     @FXML
-    void openDesert(MouseEvent event) {
+    void openDrinks(ActionEvent event) {
+    }
+
+    @FXML
+    void openMainDishes(ActionEvent event) {
 
     }
 
     @FXML
-    void openDrinks(MouseEvent event) {
-
+    void openSalads(ActionEvent event) throws IOException {
+    	startScreen(event,"AddNewSaladToMenu","Add New Salad");
     }
 
     @FXML
-    void openMainDishes(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openSalads(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openStarts(MouseEvent event) {
+    void openStarts(ActionEvent event) {
 
     }
 
@@ -122,13 +115,4 @@ public class CreateMenuScreenController extends Controller {
         assert SaladsPane != null : "fx:id=\"SaladsPane\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Create Menu Panel");
-		Pane root = load.load(getClass().getResource("/fxml/CreateMenuScreen.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();	
-	}
 }

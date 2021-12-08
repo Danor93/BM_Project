@@ -32,10 +32,13 @@
          </font>
       </Text>
       <TextField fx:id="w4cManually" layoutX="81.0" layoutY="174.0" prefHeight="25.0" prefWidth="172.0" promptText="Enter W4C code manually" />
-      <Button fx:id="confirmBtn" layoutX="144.0" layoutY="260.0" mnemonicParsing="false" onAction="#confirm" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
+      <Button fx:id="confirmBtn" layoutX="144.0" layoutY="260.0" mnemonicParsing="false" onAction="#confirm" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Button fx:id="QR" layoutX="39.0" layoutY="254.0" mnemonicParsing="false" onAction="#getW4cFromQR" prefHeight="64.0" prefWidth="80.0" text="QR" />
       <Label fx:id="allertLbl" layoutX="59.0" layoutY="217.0" prefHeight="17.0" prefWidth="211.0" textAlignment="CENTER" textFill="#f60202" />
-      <Button fx:id="BackBtn" layoutX="33.0" layoutY="433.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="91.0" style="-fx-background-radius: 30;" text="Back" textFill="WHITE">
+      <Button fx:id="BackBtn" layoutX="33.0" layoutY="433.0" mnemonicParsing="false" onAction="#Back" prefHeight="53.0" prefWidth="91.0" style="-fx-background-radius: 30;" text="Back">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
