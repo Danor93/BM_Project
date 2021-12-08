@@ -50,7 +50,7 @@ public class SupplierScreenController extends Controller {
 		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
 	}
 
 	@FXML

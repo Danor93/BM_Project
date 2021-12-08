@@ -26,7 +26,7 @@ import main.ClientController;
 import main.ClientUI;
 
 public class LoginScreenController extends Controller {
-	public static User user;
+	public static User user = new User (null, null, null, null, null, null, null, null, null);
 	public static boolean LoginFlag = false;
 	public static boolean BMflag = false;
 	public static boolean CEOflag = false;
@@ -36,7 +36,6 @@ public class LoginScreenController extends Controller {
 	public static boolean WrongInputFlag = false;
 	public static String Name = null;
 	public static ActionEvent mainevent;
-	// public static String Name;
 
 	@FXML
 	private ResourceBundle resources;
@@ -54,9 +53,9 @@ public class LoginScreenController extends Controller {
 
 	@FXML
 	private Label WrongInputInLoggin;
-	
-    @FXML
-    private ImageView loginImage;
+
+	@FXML
+	private ImageView loginImage;
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
@@ -66,60 +65,60 @@ public class LoginScreenController extends Controller {
 		str.append("@");
 		str.append(txtPassword.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
-		
 		ClientUI.chat.accept(msg);
-		
-		if(LoginFlag)
-		{
-			LoginFlag=false;
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
-			if (user.getRole().equals("BranchManager")) {
-				BranchManagerScreenController aFrame = new BranchManagerScreenController();
-				aFrame.start(primaryStage);
 
-			} else if (user.getRole().equals("Customer")) {	
-				FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
-				Parent root=load.load();
-				CustomerScreenController aFrame = load.getController();
-				aFrame.display(user.getFirstN());
-				aFrame.start(primaryStage,root);
-				
-				
-			} else if (user.getRole().equals("CEO")) {
-				CEOScreenController aFrame = new CEOScreenController();
-				aFrame.start(primaryStage);
-			}
-			else if (user.getRole().equals("Supplier")) {
-				SupplierScreenController aFrame = new SupplierScreenController();
-				aFrame.start(primaryStage);
+		if (LoginFlag) {
+			if (AlreadyLoggedInFlag) {
+				WrongInputInLoggin.setText("Already LoggedIn");
+				AlreadyLoggedInFlag = false;
+				LoginFlag = false;
+			} else {
+				LoginFlag = false;
+				((Node) event.getSource()).getScene().getWindow().hide();
+				Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+				if (user.getRole().equals("BranchManager")) {
+					BranchManagerScreenController aFrame = new BranchManagerScreenController();
+					aFrame.start(primaryStage);
+
+				} else if (user.getRole().equals("Customer")) {
+					FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
+					Parent root = load.load();
+					CustomerScreenController aFrame = load.getController();
+					aFrame.display(user.getFirstN());
+					aFrame.start(primaryStage, root);
+
+				} else if (user.getRole().equals("CEO")) {
+					CEOScreenController aFrame = new CEOScreenController();
+					aFrame.start(primaryStage);
+				} else if (user.getRole().equals("Supplier")) {
+					SupplierScreenController aFrame = new SupplierScreenController();
+					aFrame.start(primaryStage);
+				}
 			}
 		}
-		
-		else
-		{
+
+		else {
 			WrongInputInLoggin.setText("User name or password are incorrect, please try again!");
 		}
-		
+
 	}
-	
+
 	@FXML
 	void getUserName(InputMethodEvent event) {
 
 	}
-	
-    public void start(Stage primaryStage) throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
+
+	public void start(Stage primaryStage) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
-		Scene scene = new Scene(root);			
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);
-		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
+		// primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 		primaryStage.show();
 
 	}
-
 
 	@FXML
 	void initialize() {

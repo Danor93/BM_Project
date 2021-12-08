@@ -13,6 +13,7 @@ import querys.UpdateDB;
 import querys.showCities;
 
 public class Parsing {
+	public static String result2;
 
 	public static Message parsing(Object msg, server.ConnectionToClient client) {
 		Message receivedMessage;
@@ -31,13 +32,13 @@ public class Parsing {
 			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
 			return messageFromServer;
-
 		}
 
 		case loginSystem: {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
+			result2 = DivededUandP[0];
 			System.out.println(result);
 			messageFromServer = new Message(MessageType.login, result);
 			return messageFromServer;
@@ -68,6 +69,12 @@ public class Parsing {
 				messageFromServer = new Message(MessageType.ID_Exists_True, null);
 			}
 
+			return messageFromServer;
+		}
+
+		case Disconected: {
+			UpdateDB.UpdateisLoggedIn(result2);
+			messageFromServer = new Message(MessageType.Disconected, null);
 			return messageFromServer;
 		}
 

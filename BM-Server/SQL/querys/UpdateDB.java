@@ -38,4 +38,21 @@ public class UpdateDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void UpdateisLoggedIn(String userName) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.users SET isLoggedIn = '0' WHERE userName=?");
+				stmt.setString(1,userName);
+		 		stmt.executeUpdate();
+
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

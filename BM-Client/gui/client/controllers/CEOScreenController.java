@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.ClientUI;
 
 public class CEOScreenController extends Controller {
     @FXML
@@ -76,6 +79,7 @@ public class CEOScreenController extends Controller {
     		primaryStage.setTitle("BiteMe Login Panel");
     		primaryStage.setScene(scene);		
     		primaryStage.show();
+    		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
         }
         
         @FXML
