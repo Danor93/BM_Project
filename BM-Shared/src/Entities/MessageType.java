@@ -7,7 +7,7 @@ public enum MessageType {
 	loginWrongInput,
 	
 	/*Client Message*/
-	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,
+	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,show_Restaurants,
 
 	
 	/*type of users*/

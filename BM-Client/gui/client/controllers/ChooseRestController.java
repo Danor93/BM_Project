@@ -27,7 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ChooseRestController extends Controller {
+public class ChooseRestController extends Controller implements Initializable{
 	
 
     @FXML
@@ -65,8 +65,7 @@ public class ChooseRestController extends Controller {
 	public void start(Stage stage) throws IOException  {
     	
 		FXMLLoader loader = new FXMLLoader();
-		Pane root;
-			root = loader.load(getClass().getResource("/fxml/ChooseRestaurant.fxml").openStream());
+			Pane root = loader.load(getClass().getResource("/fxml/ChooseRestaurant.fxml").openStream());
 			Scene scene = new Scene(root);			
 			stage.setTitle("BiteMe Choose Restaurant");
 			stage.setScene(scene);
@@ -93,10 +92,6 @@ public class ChooseRestController extends Controller {
 	public void initialize(URL location, ResourceBundle resources) {
 		Message msg=new Message(MessageType.Show_Cities,null);
 		ClientUI.chat.accept(msg);
-		for(String s:cities)
-		{
-			System.out.println(s);
-		}
 		observableList=FXCollections.observableArrayList(cities);
 		combo1.setItems(observableList);	
 	}
@@ -108,19 +103,7 @@ public class ChooseRestController extends Controller {
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
 		Parent root=load.load();
 		CustomerScreenController aFrame = load.getController();
-		//aFrame.display(user.getFirstN());
 		aFrame.start(primaryStage,root);
 	}
-	
 
-    @FXML
-    void initialize() {
-    	setImage(BackImage,"background.jpeg");
-        assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-        assert combo1 != null : "fx:id=\"combo1\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-        assert next != null : "fx:id=\"next\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-        assert noSelect != null : "fx:id=\"noSelect\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-
-    }
 }

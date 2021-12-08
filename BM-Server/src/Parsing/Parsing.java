@@ -45,6 +45,11 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
+			
+			for(String s:city)
+			{
+				System.out.println(s);
+			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
 			return messageFromServer;
 		}
