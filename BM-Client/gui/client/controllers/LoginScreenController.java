@@ -66,7 +66,6 @@ public class LoginScreenController extends Controller {
 		str.append(txtPassword.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
 		ClientUI.chat.accept(msg);
-
 		if (LoginFlag) {
 			if (AlreadyLoggedInFlag) {
 				WrongInputInLoggin.setText("Already LoggedIn");
@@ -78,22 +77,14 @@ public class LoginScreenController extends Controller {
 				Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 				if (user.getRole().equals("BranchManager")) {
-					BranchManagerScreenController aFrame = new BranchManagerScreenController();
-					aFrame.start(primaryStage);
+					startScreen(event, "BranchManagerScreen", "Branch Manager");
 
 				} else if (user.getRole().equals("Customer")) {
-					FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
-					Parent root = load.load();
-					CustomerScreenController aFrame = load.getController();
-					aFrame.display(user.getFirstN());
-					aFrame.start(primaryStage, root);
-
+					startScreen(event, "CustomerScreen", "Customer");
 				} else if (user.getRole().equals("CEO")) {
-					CEOScreenController aFrame = new CEOScreenController();
-					aFrame.start(primaryStage);
+					startScreen(event, "CEOScreen", "CEO");
 				} else if (user.getRole().equals("Supplier")) {
-					SupplierScreenController aFrame = new SupplierScreenController();
-					aFrame.start(primaryStage);
+					startScreen(event, "SupplierScreen", "Supplier");
 				}
 			}
 		}
@@ -108,21 +99,10 @@ public class LoginScreenController extends Controller {
 	void getUserName(InputMethodEvent event) {
 
 	}
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/fxml/LoginScreen.fxml").openStream());
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe Login Panel");
-		primaryStage.setScene(scene);
-		// primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
-		primaryStage.show();
-
-	}
-
+	
 	@FXML
 	void initialize() {
-		super.setImage(loginImage, "LoginScreen.jpeg");
+		setImage(loginImage, "LoginScreen.jpeg");
 		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";

@@ -40,11 +40,6 @@ public class RestListFormController extends Controller {
     void proceedToOrder(ActionEvent event) {
 
     }
-
-	public void start(Stage stage) {
-		// TODO Auto-generated method stub
-		
-	}
 	
     @FXML
     void initialize() {

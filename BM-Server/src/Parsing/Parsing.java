@@ -2,20 +2,19 @@ package Parsing;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
-import ocsf.server.ConnectionToClient;
 import querys.DBCheck;
 import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.showCities;
+import ocsf.server.ConnectionToClient;
 
 public class Parsing {
 	public static String result2;
 
-	public static Message parsing(Object msg, server.ConnectionToClient client) {
+	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message receivedMessage;
 		Message messageFromServer;
 		receivedMessage = (Message) msg;
@@ -71,7 +70,7 @@ public class Parsing {
 
 			return messageFromServer;
 		}
-
+		
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn(result2);
 			messageFromServer = new Message(MessageType.Disconected, null);

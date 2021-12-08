@@ -31,8 +31,9 @@ public class Parsing {
 							DivedMsg[4], homeBranches.toHomeBranchType(DivedMsg[5]), DivedMsg[6], DivedMsg[7],
 							DivedMsg[8]);
 				}
-			} else
-				break;
+
+			}
+			break;
 		}
 
 		case Show_Cities: {
