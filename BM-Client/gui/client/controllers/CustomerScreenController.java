@@ -3,6 +3,9 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.ClientUI;
 
 public class CustomerScreenController extends Controller {
 
@@ -42,6 +46,7 @@ public class CustomerScreenController extends Controller {
     @FXML
     void Back(ActionEvent event) throws IOException {
     	startScreen(event,"LoginScreen","Login");
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,null));
     }
     
 

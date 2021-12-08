@@ -77,6 +77,7 @@ public class CreateMenuScreenController extends Controller {
     		MainDishesPain.toFront();
     	}
     }
+    
 
     @FXML
     void openDesert(MouseEvent event) {
@@ -99,7 +100,7 @@ public class CreateMenuScreenController extends Controller {
     }
 
     @FXML
-    void openStarts(MouseEvent event) {
+    void openStarts(ActionEvent event) {
 
     }
 

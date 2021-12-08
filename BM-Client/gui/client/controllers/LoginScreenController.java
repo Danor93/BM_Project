@@ -26,7 +26,7 @@ import main.ClientController;
 import main.ClientUI;
 
 public class LoginScreenController extends Controller {
-	public static User user = new User(null, null, null, null, null, null, null, null, null);
+	public static User user = new User (null, null, null, null, null, null, null, null, null);
 	public static boolean LoginFlag = false;
 	public static boolean BMflag = false;
 	public static boolean CEOflag = false;
