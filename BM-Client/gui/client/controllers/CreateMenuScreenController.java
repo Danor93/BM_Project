@@ -94,10 +94,7 @@ public class CreateMenuScreenController extends Controller {
 
     @FXML
     void openSalads(ActionEvent event) throws IOException {
-		((Node) event.getSource()).getScene().getWindow().hide();
-		Stage primaryStage = new Stage();
-		AddNewSaladToMenuController aFrame = new AddNewSaladToMenuController();
-		aFrame.start(primaryStage);
+    	startScreen(event,"AddNewSaladToMenu","Add New Salad");
     }
 
     @FXML

@@ -32,6 +32,9 @@
       <Button fx:id="btnUploadPDF" layoutX="213.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
       <Button fx:id="btnViewBranchsReports" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="view branch's reports" />
       <Button fx:id="btnUploadPDF1" layoutX="213.0" layoutY="229.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Create order" />
-      <Button fx:id="btnBack" layoutX="38.0" layoutY="449.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+      <Button fx:id="btnBack" layoutX="28.0" layoutY="439.0" mnemonicParsing="false" onAction="#Back" text="Back">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
    </children>
 </Pane>

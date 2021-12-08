@@ -62,6 +62,7 @@ public class AddNewSaladToMenuController extends Controller implements Initializ
 
     @FXML
     void initialize() {
+    	setImage(BackImage, "background.jpeg");
         assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
         assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
         assert btnPlusType != null : "fx:id=\"btnPlusType\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
@@ -74,14 +75,5 @@ public class AddNewSaladToMenuController extends Controller implements Initializ
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-	}
-
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/fxml/AddNewSaladToMenu.fxml").openStream());
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe Add new salad to menu Panel");
-		primaryStage.setScene(scene);
-		primaryStage.show();		
 	}
 }

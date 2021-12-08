@@ -43,17 +43,7 @@ public class SupplierScreenController extends Controller {
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
-<<<<<<< HEAD
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe Login Panel");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-=======
 		startScreen(event,"LoginScreen", "Login");
->>>>>>> master
 		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
 	}
 
