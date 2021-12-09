@@ -30,10 +30,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ServerConnection;
 import querys.DBConnect;
+import querys.Query;
 
 public class ServerUIFController {
 	public static ServerUIFController serveruifconroller;
 	final public static int DEFAULT_PORT = 5555;
+	public Stage stage;
 
 	public static boolean flagon = false;
 	Alert a = new Alert(AlertType.ERROR);
@@ -79,6 +81,14 @@ public class ServerUIFController {
 
 	@FXML
 	private TextField Passtxt;
+	
+    @FXML
+    private Button ImportBtn;
+    
+    @FXML
+    void importDatabase(ActionEvent event) {
+    	Query.importData();
+    }
 
 	public void start(Stage primaryStage) throws IOException {
 		
@@ -144,6 +154,14 @@ public class ServerUIFController {
 		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);
 		ClientTable.setItems(data);
 		ClientTable.refresh();
+	}
+	
+	public void message(String msg, String title) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(msg);
+		alert.showAndWait();
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
