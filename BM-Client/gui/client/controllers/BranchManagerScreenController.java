@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 
-public class BranchManagerScreenController extends Controller{
+public class BranchManagerScreenController extends Controller implements ControllerInterface{
 
     @FXML
     private ResourceBundle resources;
@@ -55,11 +55,12 @@ public class BranchManagerScreenController extends Controller{
     @FXML
     private ImageView BackImage;
 
-    @FXML
-    void Back(ActionEvent event) throws IOException {
-    	startScreen(event,"LoginScreen","Login");
-		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
-}
+ @Override
+public void Back(ActionEvent event) throws IOException {
+	 ClientUI.chat.accept(new Message(MessageType.Disconected,null));	
+	 startScreen(event,"LoginScreen","Login");	
+}  
+    
 
     @FXML
     void initialize() {

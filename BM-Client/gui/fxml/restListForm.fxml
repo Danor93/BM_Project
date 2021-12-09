@@ -40,6 +40,6 @@
             <TableColumn fx:id="colOpen" prefWidth="160.66668701171875" text="Opening time" />
          </columns>
       </TableView>
-      <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
+      <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
    </children>
 </Pane>

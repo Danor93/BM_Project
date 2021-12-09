@@ -21,7 +21,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnBackToOpenNewAccount" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#BackToNewAccountScreen" text="Back to Open new account page" />
+      <Button fx:id="btnBackToOpenNewAccount" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#Back" text="Back to Open new account page" />
       <Label layoutX="41.0" layoutY="129.0" text="First Name" textFill="WHITE">
          <font>
             <Font size="13.0" />

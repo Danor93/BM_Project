@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class ConfirmOpenNewPrivateAccountController extends Controller {
+public class ConfirmOpenNewPrivateAccountController extends Controller implements ControllerInterface {
 
     @FXML
     private ResourceBundle resources;
@@ -28,10 +28,6 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
     @FXML
     private ImageView BackImage;
 
-    @FXML
-    void BackToBranchManagerScreen(ActionEvent event) throws IOException {
-    	startScreen(event, "BranchManagerScreen", "Branch Manager");
-    }
 
     @FXML
     void initialize() {
@@ -39,4 +35,9 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
         assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmOpenNewPrivateAccount.fxml'.";
 
     }
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerScreen", "Branch Manager");
+	}
 }

@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class CreateMenuScreenController extends Controller {
+public class CreateMenuScreenController extends Controller implements ControllerInterface{
 
     @FXML
     private ResourceBundle resources;
@@ -60,11 +60,6 @@ public class CreateMenuScreenController extends Controller {
     
     @FXML
     private ImageView BackImage;
-    
-    @FXML
-    void BackToSupplierPage(ActionEvent event) throws IOException {
-    	startScreen(event,"SupplierScreen","Supplier");
-    }
 
     @FXML
     void openDesert(ActionEvent event) {
@@ -115,4 +110,9 @@ public class CreateMenuScreenController extends Controller {
         assert SaladsPane != null : "fx:id=\"SaladsPane\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event,"SupplierScreen","Supplier");
+	}
 }

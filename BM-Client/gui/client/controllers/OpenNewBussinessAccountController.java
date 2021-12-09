@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewBussinessAccountController extends Controller {
+public class OpenNewBussinessAccountController extends Controller implements ControllerInterface {
 	public static boolean ConfirmOpenNewBusinessAccountControllerFlag = false;
 
 	@FXML
@@ -69,11 +69,6 @@ public class OpenNewBussinessAccountController extends Controller {
 			ConfirmOpenNewBusinessAccountControllerFlag = false;
 		}
     }
-
-    @FXML
-    void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	startScreen(event, "OpenNewAccount", "Open New Account");
-    }
     
     @FXML
     void initialize() {
@@ -88,4 +83,9 @@ public class OpenNewBussinessAccountController extends Controller {
         assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'OpenNewBussinessAccount.fxml'.";
 
     }
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "OpenNewAccount", "Open New Account");
+	}
 }

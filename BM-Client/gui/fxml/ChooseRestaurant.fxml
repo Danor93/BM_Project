@@ -41,7 +41,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Button fx:id="BackBtn" layoutX="19.0" layoutY="429.0" mnemonicParsing="false" onAction="#BackToW4CScreen" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 30;" text="Back" textFill="#0b0b0b">
+      <Button fx:id="BackBtn" layoutX="19.0" layoutY="429.0" mnemonicParsing="false" onAction="#Back" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 30;" text="Back" textFill="#0b0b0b">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

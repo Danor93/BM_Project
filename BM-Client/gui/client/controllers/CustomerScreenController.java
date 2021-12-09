@@ -20,52 +20,51 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class CustomerScreenController extends Controller {
+public class CustomerScreenController extends Controller implements ControllerInterface {
 
-	public String TempName; 
-	public static CustomerScreenController cs; 
-    @FXML
-    private ResourceBundle resources;
+	public String TempName;
+	public static CustomerScreenController cs;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Button btnCreateOrder;
+	@FXML
+	private Button btnCreateOrder;
 
-    @FXML
-    private Button btnBack;
-    
-    @FXML
-    private Label welcome;
-    
-    @FXML
-    private ImageView BackImage;
+	@FXML
+	private Button btnBack;
 
+	@FXML
+	private Label welcome;
 
-    @FXML
-    void Back(ActionEvent event) throws IOException {
-    	startScreen(event,"LoginScreen","Login");
-    	ClientUI.chat.accept(new Message(MessageType.Disconected,null));
-    }
-    
+	@FXML
+	private ImageView BackImage;
 
-    @FXML
-    void createOrder(ActionEvent event) throws IOException {
-    	startScreen(event, "InsertCodeOfW4C", "Create Order");
-    }
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		startScreen(event, "LoginScreen", "Login");
+	}
+
+	@FXML
+	void createOrder(ActionEvent event) throws IOException {
+		startScreen(event, "InsertCodeOfW4C", "Create Order");
+	}
 
 	public void display(String firstN) {
-		welcome.setText("Welcome "+firstN);
+		welcome.setText("Welcome " + firstN);
 	}
-	
-    @FXML
-    void initialize() {
-    	setImage(BackImage,"background.jpeg");
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert btnCreateOrder != null : "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert welcome != null : "fx:id=\"welcome\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
 
-    }
+	@FXML
+	void initialize() {
+		setImage(BackImage, "background.jpeg");
+		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
+		assert btnCreateOrder != null
+				: "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
+		assert welcome != null : "fx:id=\"welcome\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
+
+	}
 
 }

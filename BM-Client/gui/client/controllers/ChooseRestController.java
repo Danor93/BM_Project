@@ -27,7 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class ChooseRestController extends Controller implements Initializable{
+public class ChooseRestController extends Controller implements Initializable,ControllerInterface {
 
     @FXML
     private ResourceBundle resources;
@@ -81,11 +81,12 @@ public class ChooseRestController extends Controller implements Initializable{
 		observableList=FXCollections.observableArrayList(cities);
 		combo1.setItems(observableList);	
 	}
-	
-	
-	@FXML
-	public void BackToW4CScreen(ActionEvent event) throws IOException {
+
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "InsertCodeOfW4C","Insert W4C");
+		
 	}
 
 }

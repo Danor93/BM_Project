@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class CEOScreenController extends Controller {
+public class CEOScreenController extends Controller implements ControllerInterface {
     @FXML
     private ResourceBundle resources;
 
@@ -62,13 +62,13 @@ public class CEOScreenController extends Controller {
     }
    
 
-        @FXML
-        void Back(ActionEvent event) throws IOException {
-
-    		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
-        	startScreen(event,"LoginScreen","Login");
-        }
-        
+     @Override
+    public void Back(ActionEvent event) throws IOException {
+    	 ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+     	startScreen(event,"LoginScreen","Login");	
+    }
+     
+     
         @FXML
         void ChangeInfoDBCEO(ActionEvent event) throws IOException {
         	startScreen(event, "ChangeInfoDB", "Change Information");

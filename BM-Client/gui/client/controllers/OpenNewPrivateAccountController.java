@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewPrivateAccountController extends Controller {
+public class OpenNewPrivateAccountController extends Controller implements ControllerInterface {
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 
     @FXML
@@ -57,11 +57,6 @@ public class OpenNewPrivateAccountController extends Controller {
     private ImageView BackImage;
 
     @FXML
-    void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	startScreen(event, "OpenNewAccount", "Open New Account");
-    }
-
-    @FXML
     void Confirm(ActionEvent event) throws IOException {
     	
     	Account account = new Account(null, null, txtFirstName.getText(), txtLastName.getText(),"Customer", txtID.getText(), txtEmail.getText(), txtTelephone.getText());
@@ -86,4 +81,9 @@ public class OpenNewPrivateAccountController extends Controller {
         assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
 
     }
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "OpenNewAccount", "Open New Account");
+	}
 }

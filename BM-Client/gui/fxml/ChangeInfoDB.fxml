@@ -31,7 +31,7 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Button>
-      <Button fx:id="BackBtn" layoutX="35.0" layoutY="399.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 30;" text="Back">
+      <Button fx:id="BackBtn" layoutX="35.0" layoutY="399.0" mnemonicParsing="false" onAction="#Back" prefHeight="50.0" prefWidth="110.0" style="-fx-background-radius: 30;" text="Back">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

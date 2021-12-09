@@ -17,7 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class IdentifyW4cController extends Controller {
+public class IdentifyW4cController extends Controller implements ControllerInterface {
 
 	@FXML
 	private Button QR;
@@ -66,10 +66,11 @@ public class IdentifyW4cController extends Controller {
 	private void switchScene(ActionEvent event) throws IOException {
 		startScreen(event, "ChooseRestaurant", "Choose Restaurant");
 	}
-	
-	@FXML
+
+	@Override
 	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "CustomerScreen","Customer");
+		startScreen(event, "CustomerScreen", "Customer");
+
 	}
 
 	@FXML

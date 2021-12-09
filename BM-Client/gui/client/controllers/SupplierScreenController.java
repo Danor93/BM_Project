@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class SupplierScreenController extends Controller {
+public class SupplierScreenController extends Controller implements ControllerInterface {
 
 	@FXML
 	private ResourceBundle resources;
@@ -41,10 +41,10 @@ public class SupplierScreenController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
-	@FXML
-	void Back(ActionEvent event) throws IOException {
-		startScreen(event,"LoginScreen", "Login");
-		ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		startScreen(event, "LoginScreen", "Login");
 	}
 
 	@FXML
@@ -61,6 +61,6 @@ public class SupplierScreenController extends Controller {
 
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
-		startScreen(event,"CreateMenuScreen", "Create Menu");
+		startScreen(event, "CreateMenuScreen", "Create Menu");
 	}
 }
