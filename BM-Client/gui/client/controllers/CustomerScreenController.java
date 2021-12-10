@@ -39,9 +39,6 @@ public class CustomerScreenController extends Controller implements ControllerIn
     
     @FXML
     private Label welcome;
-
-	@FXML
-	private ImageView BackImage;
     
 
     @FXML
@@ -90,7 +87,7 @@ public class CustomerScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.jpeg");
+		setImage(costumerImage, "backg.png");
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
         assert btnCreateOrder != null : "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
 	}

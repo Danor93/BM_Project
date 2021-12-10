@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -9,17 +10,9 @@
 
 <AnchorPane style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CustomerScreenController">
    <children>
-<<<<<<< HEAD
       <ImageView fx:id="costumerImage" fitHeight="478.0" fitWidth="786.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/backg.jpg" />
-         </image>
       </ImageView>
       <Text fill="WHITE" layoutX="658.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
-=======
-      <ImageView fx:id="BackImage" fitHeight="502.0" fitWidth="725.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="530.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
->>>>>>> master
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

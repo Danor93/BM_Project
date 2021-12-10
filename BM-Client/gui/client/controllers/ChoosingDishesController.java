@@ -23,7 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ChoosingDishesController implements Initializable {
+public class ChoosingDishesController extends Controller implements Initializable,ControllerInterface {
 
     @FXML
     private Button addToOrder;
@@ -46,17 +46,18 @@ public class ChoosingDishesController implements Initializable {
     void addDishToOrder(ActionEvent event) {
 
     }
-
-    @FXML
-    void backToMenu(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
+    
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader();
 		Parent root=load.load();
 		MenuScreenController aFrame = load.getController();
 		aFrame.display(RestListFormController.chosenRst.getSupplierName());
 		aFrame.start(primaryStage,root);
-
-    }
+		startScreen(event, "MenuScreen", "Menu");
+		
+	}
 
 	public void start(Stage stage, Parent root) {
 		Scene scene = new Scene(root);		
@@ -93,5 +94,7 @@ public class ChoosingDishesController implements Initializable {
 		
 		
 	}
+
+
 
 }
