@@ -18,67 +18,62 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class ChangeInfoDBController extends Controller {
+public class ChangeInfoDBController extends Controller implements ControllerInterface {
 
-	public static boolean idFalseFlag=false;
-	
-    @FXML
-    private ResourceBundle resources;
+	public static boolean idFalseFlag = false;
 
-    @FXML
-    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private ImageView BackImage;
+	@FXML
+	private URL location;
 
-    @FXML
-    private TextField TxtID;
+	@FXML
+	private ImageView BackImage;
 
-    @FXML
-    private Button btncon;
+	@FXML
+	private TextField TxtID;
 
-    @FXML
-    private Label lblError;
+	@FXML
+	private Button btncon;
 
-    @FXML
-    void Continue(ActionEvent event) {
-    	
-    if(TxtID.getText()==null)
-    {
-    	lblError.setText("ID filed is empty!");
-    }
-    else {
-    	String id = TxtID.getText();
-    	Message m = new Message(MessageType.ID_exists,id);
-    	ClientUI.chat.accept(m);
-    	if(idFalseFlag==false)
-    	{
-    		lblError.setText("ID not Exsits on the DB!");
-    	}
-    	else {
-    		//here we need to add FXML document.
-    	}
-    }
+	@FXML
+	private Label lblError;
 
-    }
+	@FXML
+	private Button BackBtn;
 
-    @FXML
-    void initialize() {
-    	setImage(BackImage,"background.jpeg");
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
-        assert TxtID != null : "fx:id=\"TxtID\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
-        assert btncon != null : "fx:id=\"btncon\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
-        assert lblError != null : "fx:id=\"lblError\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
+	@FXML
+	void Continue(ActionEvent event) {
 
-    }
+		if (TxtID.getText() == null) {
+			lblError.setText("ID filed is empty!");
+		} else {
+			String id = TxtID.getText();
+			Message m = new Message(MessageType.ID_exists, id);
+			ClientUI.chat.accept(m);
+			if (idFalseFlag == false) {
+				lblError.setText("ID not Exsits on the DB!");
+			} else {
+				// here we need to add FXML document.
+			}
+		}
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Branch Manager Panel");
-		Pane root = load.load(getClass().getResource("/fxml/ChangeInfoDB.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();	
+	}
+
+	@FXML
+	void initialize() {
+		setImage(BackImage, "background.jpeg");
+		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
+		assert TxtID != null : "fx:id=\"TxtID\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
+		assert btncon != null : "fx:id=\"btncon\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
+		assert lblError != null : "fx:id=\"lblError\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
+
+	}
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 
 }

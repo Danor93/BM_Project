@@ -33,7 +33,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="36.0" layoutY="502.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="36.0" layoutY="502.0" mnemonicParsing="false" onAction="#Back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

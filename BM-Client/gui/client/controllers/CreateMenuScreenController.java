@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class CreateMenuScreenController extends Controller {
+public class CreateMenuScreenController extends Controller implements ControllerInterface{
 
     @FXML
     private ResourceBundle resources;
@@ -60,19 +60,13 @@ public class CreateMenuScreenController extends Controller {
     
     @FXML
     private ImageView BackImage;
-    
-    @FXML
-    void BackToSupplierPage(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/SupplierScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Supplier Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
-    }
 
     @FXML
+    void openDesert(ActionEvent event) {
+
+    }
+    
+    
     void HandleClicks(ActionEvent event) {
     	if(event.getSource() == btnSalad) {
     		miniLabel.setText("Salads");
@@ -85,27 +79,21 @@ public class CreateMenuScreenController extends Controller {
     }
 
     @FXML
-    void openDesert(MouseEvent event) {
+    void openDrinks(ActionEvent event) {
+    }
+
+    @FXML
+    void openMainDishes(ActionEvent event) {
 
     }
 
     @FXML
-    void openDrinks(MouseEvent event) {
-
+    void openSalads(ActionEvent event) throws IOException {
+    	startScreen(event,"AddNewSaladToMenu","Add New Salad");
     }
 
     @FXML
-    void openMainDishes(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openSalads(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openStarts(MouseEvent event) {
+    void openStarts(ActionEvent event) {
 
     }
 
@@ -123,12 +111,8 @@ public class CreateMenuScreenController extends Controller {
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Create Menu Panel");
-		Pane root = load.load(getClass().getResource("/fxml/CreateMenuScreen.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();	
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event,"SupplierScreen","Supplier");
 	}
 }

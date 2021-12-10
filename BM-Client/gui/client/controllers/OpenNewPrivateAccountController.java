@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewPrivateAccountController extends Controller {
+public class OpenNewPrivateAccountController extends Controller implements ControllerInterface {
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 
     @FXML
@@ -57,27 +57,13 @@ public class OpenNewPrivateAccountController extends Controller {
     private ImageView BackImage;
 
     @FXML
-    void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Open New Account Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
-    }
-
-    @FXML
     void Confirm(ActionEvent event) throws IOException {
     	
     	Account account = new Account(null, null, txtFirstName.getText(), txtLastName.getText(),"Customer", txtID.getText(), txtEmail.getText(), txtTelephone.getText());
 		Message msg = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 		ClientUI.chat.accept(msg);
 		if (ConfirmOpenNewPrivateAccountFlag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ConfirmOpenNewPrivateAccountController aFrame = new ConfirmOpenNewPrivateAccountController();
-			aFrame.start(primaryStage);
+			startScreen(event, "ConfirmOpenNewPrivateAccount", "Confrim New Private Account");
 			ConfirmOpenNewPrivateAccountFlag = false;
 		}
     }
@@ -96,12 +82,8 @@ public class OpenNewPrivateAccountController extends Controller {
 
     }
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Open New Private Account");
-		Pane root = load.load(getClass().getResource("/fxml/OpenNewPrivateAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();		
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "OpenNewAccount", "Open New Account");
 	}
 }

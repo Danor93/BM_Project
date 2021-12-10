@@ -2,23 +2,28 @@ package Parsing;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.Restaurant;
 import ocsf.server.ConnectionToClient;
+import Entities.Message;
+import Entities.MessageType;
+import Entities.Order;
 import querys.DBCheck;
 import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.getDishes;
 import querys.showCities;
 import querys.showRestaurants;
+import ocsf.server.ConnectionToClient;
+
 
 public class Parsing {
+	public static String result2;
 
-	public static Message parsing(Object msg, server.ConnectionToClient client) {
+	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message messageFromServer;
 		Message receivedMessage = (Message) msg;
 
@@ -34,13 +39,13 @@ public class Parsing {
 			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
 			messageFromServer = new Message(MessageType.Update_succesfuly, null);
 			return messageFromServer;
-
 		}
 
 		case loginSystem: {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
+			result2 = DivededUandP[0];
 			System.out.println(result);
 			messageFromServer = new Message(MessageType.login, result);
 			return messageFromServer;
@@ -48,6 +53,11 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
+			
+			for(String s:city)
+			{
+				System.out.println(s);
+			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
 			return messageFromServer;
 		}
@@ -83,6 +93,12 @@ public class Parsing {
 				messageFromServer = new Message(MessageType.ID_Exists_True, null);
 			}
 
+			return messageFromServer;
+		}
+		
+		case Disconected: {
+			UpdateDB.UpdateisLoggedIn(result2);
+			messageFromServer = new Message(MessageType.Disconected, null);
 			return messageFromServer;
 		}
 

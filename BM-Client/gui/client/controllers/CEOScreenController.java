@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import main.ClientUI;
 
-public class CEOScreenController extends Controller {
+public class CEOScreenController extends Controller implements ControllerInterface {
     @FXML
     private ResourceBundle resources;
 
@@ -57,32 +60,17 @@ public class CEOScreenController extends Controller {
         assert btnViewBranchsReports != null : "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnCreateOrder != null : "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CEOScreen.fxml'.";
     }
-    
-    public void start(Stage primaryStage) throws IOException {
-    		FXMLLoader load = new FXMLLoader();
-    		primaryStage.setTitle("BiteMe CEO Panel");
-    		Pane root = load.load(getClass().getResource("/fxml/CEOScreen.fxml").openStream());
-    		Scene home = new Scene(root);
-    		primaryStage.setScene(home);
-    		primaryStage.show();
-    	}
+   
 
-        @FXML
-        void Back(ActionEvent event) throws IOException {
-        	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-    		Stage primaryStage = new Stage();
-    		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
-    		Scene scene = new Scene(root);		
-    		primaryStage.setTitle("BiteMe Login Panel");
-    		primaryStage.setScene(scene);		
-    		primaryStage.show();
-        }
-        
+     @Override
+    public void Back(ActionEvent event) throws IOException {
+    	 ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+     	startScreen(event,"LoginScreen","Login");	
+    }
+     
+     
         @FXML
         void ChangeInfoDBCEO(ActionEvent event) throws IOException {
-        	((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ChangeInfoDBController aFrame = new ChangeInfoDBController();
-			aFrame.start(primaryStage);
+        	startScreen(event, "ChangeInfoDB", "Change Information");
         }
 }

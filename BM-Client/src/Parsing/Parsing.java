@@ -18,20 +18,24 @@ public class Parsing {
 
 	public static void Message(Object msg) throws Exception {
 		Message receivedMessage = null;
-
 		receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 
 		case login: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+			if (!receivedMessage.getMessageData().equals("WrongInput")) {
+				if (receivedMessage.getMessageData().equals("Already")) {
+					LoginScreenController.AlreadyLoggedInFlag = true;
+					LoginScreenController.LoginFlag = true;
+				} else {
+					LoginScreenController.LoginFlag = true;
+					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+							DivedMsg[4], homeBranches.toHomeBranchType(DivedMsg[5]), DivedMsg[6], DivedMsg[7],
+							DivedMsg[8]);
+				}
 
-			if (!DivedMsg[0].equals("WrongInput")) {
-				LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3], DivedMsg[4],
-						homeBranches.toHomeBranchType(DivedMsg[5]));
-				LoginScreenController.LoginFlag = true;
 			}
-
 			break;
 		}
 
@@ -64,11 +68,6 @@ public class Parsing {
 			break;
 		}
 
-		case AlreadyLoggedIn: {
-			LoginScreenController.AlreadyLoggedInFlag = true;
-			break;
-		}
-
 		case ConfirmOpenNewBusinessAccount: {
 			OpenNewBussinessAccountController.ConfirmOpenNewBusinessAccountControllerFlag = true;
 			break;
@@ -89,7 +88,5 @@ public class Parsing {
 		}
 
 		}
-
 	}
-
 }

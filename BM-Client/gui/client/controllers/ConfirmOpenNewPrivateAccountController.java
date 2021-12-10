@@ -14,7 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class ConfirmOpenNewPrivateAccountController extends Controller {
+public class ConfirmOpenNewPrivateAccountController extends Controller implements ControllerInterface {
 
     @FXML
     private ResourceBundle resources;
@@ -28,16 +28,6 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
     @FXML
     private ImageView BackImage;
 
-    @FXML
-    void BackToBranchManagerScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/BranchManagerScreen.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Branch Manager");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
-    }
 
     @FXML
     void initialize() {
@@ -46,12 +36,8 @@ public class ConfirmOpenNewPrivateAccountController extends Controller {
 
     }
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe");
-		Pane root = load.load(getClass().getResource("/fxml/ConfirmOpenNewPrivateAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();		
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 }

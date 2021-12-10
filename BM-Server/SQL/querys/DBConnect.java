@@ -10,6 +10,7 @@ import main.EchoServer;
 public class DBConnect {
 
 	public static Connection conn;
+	/*this is for the login to DB with username and password.*/
 	@SuppressWarnings("deprecation")
 	public static Connection connect(String username,String password) {
 		try {
@@ -32,5 +33,4 @@ public class DBConnect {
 		}
 		return conn;
 	}
-	
 }

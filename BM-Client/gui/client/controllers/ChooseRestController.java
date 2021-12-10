@@ -27,12 +27,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+
 /** This class describes the start of the choosing restaurant process,starting from choosing city
  * @author Adi & Talia
  *
  */
-public class ChooseRestController extends Controller implements Initializable{
-	
+
+public class ChooseRestController extends Controller implements Initializable,ControllerInterface {
+
 
     @FXML
     private ResourceBundle resources;
@@ -70,22 +72,6 @@ public class ChooseRestController extends Controller implements Initializable{
     	cityName=combo1.getSelectionModel().getSelectedItem().toString();
     }
 
-    
-    
-	/** 
-	 * @param stage
-	 * @throws IOException
-	 */
-	public void start(Stage stage) throws IOException  {
-			FXMLLoader loader = new FXMLLoader();
-			Pane root = loader.load(getClass().getResource("/fxml/ChooseRestaurant.fxml").openStream());
-			Scene scene = new Scene(root);			
-			stage.setTitle("BiteMe Choose Restaurant");
-			stage.setScene(scene);
-			stage.show();		
-	}
-	
-
     /** Checks if the costumer chose a city from the combo box 
      * @param event					pressing the "next" button
      * @throws IOException
@@ -94,12 +80,7 @@ public class ChooseRestController extends Controller implements Initializable{
     void proceedToRest(ActionEvent event) throws IOException {
     	if(cityName!=null && !cityName.equals("select"))
     	{
-        	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        	FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
-			Parent root=load.load();
-			RestListFormController aFrame = load.getController();
-			aFrame.display(cityName);
-			aFrame.start(stage,root);
+    		startScreen(event, "restListForm", "Restaurant list");
     	}
     	
     	else
@@ -108,29 +89,17 @@ public class ChooseRestController extends Controller implements Initializable{
     	}
     	
     }
-
-	/**
-	 *
-	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		Message msg=new Message(MessageType.Show_Cities,null);
 		ClientUI.chat.accept(msg);
 		observableList=FXCollections.observableArrayList(cities);
 		combo1.setItems(observableList);	
 	}
-	
-	
-	/** This method meant to get back to costumer page
-	 * @param event				pressing the "back" button 
-	 * @throws IOException
-	 */
-	@FXML
-	public void BackToCostumer(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
-		Parent root=load.load();
-		CustomerScreenController aFrame = load.getController();
-		aFrame.start(primaryStage,root);
+
+/** This method meant to get back to costumer page**/
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "InsertCodeOfW4C","Insert W4C");
 	}
 	
 

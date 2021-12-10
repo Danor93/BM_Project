@@ -20,8 +20,5 @@ public class ClientUI extends Application {
 		mainStage=primaryStage;	  		
 		ClientMenuUiController firstPage = new ClientMenuUiController (); 
 		firstPage.start(mainStage);
-	}
-	
-	
+	}	
 }
-

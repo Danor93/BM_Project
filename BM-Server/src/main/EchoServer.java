@@ -3,9 +3,6 @@ package main;
 
 import java.io.IOException;
 
-// "Object Oriented Software Engineering" and is issued under the open-source
-// license found at www.lloseng.com 
-
 import java.util.ArrayList;
 import Entities.Message;
 import Entities.MessageType;
@@ -13,19 +10,17 @@ import Entities.Order;
 import Parsing.Parsing;
 import controllers.LogicController;
 import controllers.ServerUIFController;
-import querys.DBCheck;
-import querys.DBFirstName;
-import querys.ShowOrders;
-import querys.UpdateDB;
-import querys.showCities;
-import server.AbstractServer;
-import server.ConnectionToClient;
+import extra.ClientConnection;
+import ocsf.server.AbstractServer;
+import ocsf.server.ConnectionToClient;
 
 
 /**
  * This class overrides some of the methods in the abstract superclass in order
  * to give more functionality to the server.
  */
+
+
 public class EchoServer extends AbstractServer {
 	// Class variables *************************************************
 	/**
@@ -40,8 +35,9 @@ public class EchoServer extends AbstractServer {
 		super(port);
 	}
 
-	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		
+	@Override
+	
+	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		LogicController.UpdateClientTable(msg, client);
 		resMessage = Parsing.parsing(msg, client);
 		try {
@@ -51,22 +47,6 @@ public class EchoServer extends AbstractServer {
 			e.printStackTrace();
 		}
 }
-
-	/**
-	 * This method overrides the one in the superclass. Called when the server
-	 * starts listening for connections.
-	 */
-	protected void serverStarted() {
-		//System.out.println("Server listening for connections on port " + getPort());
-	}
-
-	/**
-	 * This method overrides the one in the superclass. Called when the server stops
-	 * listening for connections.
-	 */
-	protected void serverStopped() {
-		//System.out.println("Server has stopped listening for connections.");
-	}
 
 	// Class methods ***************************************************
 

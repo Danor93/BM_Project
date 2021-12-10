@@ -20,7 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewBussinessAccountController extends Controller {
+public class OpenNewBussinessAccountController extends Controller implements ControllerInterface {
 	public static boolean ConfirmOpenNewBusinessAccountControllerFlag = false;
 
 	@FXML
@@ -65,23 +65,9 @@ public class OpenNewBussinessAccountController extends Controller {
 		Message msg = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
 		ClientUI.chat.accept(msg);
 		if (ConfirmOpenNewBusinessAccountControllerFlag == true) {
-			((Node) event.getSource()).getScene().getWindow().hide();
-			Stage primaryStage = new Stage();
-			ConfirmOpenNewBusinessAccountController aFrame = new ConfirmOpenNewBusinessAccountController();
-			aFrame.start(primaryStage);
+			startScreen(event, "ConfirmOpenNewBusinessAccount", "Confirm Open New Bussiness Account");
 			ConfirmOpenNewBusinessAccountControllerFlag = false;
 		}
-    }
-
-    @FXML
-    void BackToNewAccountScreen(ActionEvent event) throws IOException {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/OpenNewAccount.fxml"));
-		Scene scene = new Scene(root);		
-		primaryStage.setTitle("BiteMe Open New Account Panel");
-		primaryStage.setScene(scene);		
-		primaryStage.show();
     }
     
     @FXML
@@ -98,12 +84,8 @@ public class OpenNewBussinessAccountController extends Controller {
 
     }
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Open New Bussiness Account Panel");
-		Pane root = load.load(getClass().getResource("/fxml/OpenNewBussinessAccount.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();				
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "OpenNewAccount", "Open New Account");
 	}
 }

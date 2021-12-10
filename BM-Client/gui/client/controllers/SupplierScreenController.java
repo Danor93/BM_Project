@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class SupplierScreenController extends Controller {
+public class SupplierScreenController extends Controller implements ControllerInterface {
 
 	@FXML
 	private ResourceBundle resources;
@@ -41,16 +41,10 @@ public class SupplierScreenController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
-	@FXML
-	void Back(ActionEvent event) throws IOException {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginScreen.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe Login Panel");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	@Override
+	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		startScreen(event, "LoginScreen", "Login");
 	}
 
 	@FXML
@@ -65,20 +59,8 @@ public class SupplierScreenController extends Controller {
 		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 	}
 
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader load = new FXMLLoader();
-		primaryStage.setTitle("BiteMe Supplier Panel");
-		Pane root = load.load(getClass().getResource("/fxml/SupplierScreen.fxml").openStream());
-		Scene home = new Scene(root);
-		primaryStage.setScene(home);
-		primaryStage.show();
-	}
-
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
-		((Node) event.getSource()).getScene().getWindow().hide();
-		Stage primaryStage = new Stage();
-		CreateMenuScreenController aFrame = new CreateMenuScreenController();
-		aFrame.start(primaryStage);
+		startScreen(event, "CreateMenuScreen", "Create Menu");
 	}
 }

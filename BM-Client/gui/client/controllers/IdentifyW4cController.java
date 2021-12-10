@@ -17,11 +17,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-/** This class meant to identify the user as a costumer in the system
+/**
+ * This class meant to identify the user as a costumer in the system
+ * 
  * @author Adi & Talia
  *
  */
-public class IdentifyW4cController extends Controller {
+
+public class IdentifyW4cController extends Controller implements ControllerInterface {
 
 	@FXML
 	private Button QR;
@@ -41,12 +44,13 @@ public class IdentifyW4cController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
-
-	/**This method meant to confirm if the user is registered as a costumer
-	 * @param event			meant to check the manually entering of W4C
+	/**
+	 * This method meant to confirm if the user is registered as a costumer
+	 * 
+	 * @param event meant to check the manually entering of W4C
 	 */
 	@FXML
-	void confirm(ActionEvent event) {
+	void confirm(ActionEvent event) throws IOException {
 		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) {
 			allertLbl.setText("Please enter W4C code or press the QR button");
 		}
@@ -63,44 +67,24 @@ public class IdentifyW4cController extends Controller {
 
 	}
 
-	/**This method meant to get the W4C via QR
-	 * @param event		meant to check the W4C with QR
+	/**
+	 * This method meant to get the W4C via QR
+	 * 
+	 * @param event meant to check the W4C with QR
 	 */
 	@FXML
-	void getW4cFromQR(ActionEvent event) {
+	void getW4cFromQR(ActionEvent event) throws IOException {
 		w4cManually.setText(LoginScreenController.user.getW4c());
 		switchScene(event);
 	}
 
-	/** 
-	 * @param primaryStage
-	 * @throws IOException
-	 */
-	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/fxml/InsertCodeOfW4C.fxml").openStream());
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("BiteMe");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+	private void switchScene(ActionEvent event) throws IOException {
+		startScreen(event, "ChooseRestaurant", "Choose Restaurant");
 	}
 
-	/**   
-	 * @param event
-	 */
-	private void switchScene(ActionEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		ChooseRestController chooseRestController = new ChooseRestController();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		try {
-			chooseRestController.start(stage);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event, "CustomerScreen", "Customer");
 	}
-
-
 
 }
