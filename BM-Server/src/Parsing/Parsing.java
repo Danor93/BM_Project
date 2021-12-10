@@ -11,6 +11,7 @@ import querys.UpdateDB;
 import querys.showCities;
 import ocsf.server.ConnectionToClient;
 
+
 public class Parsing {
 	public static String result2;
 
@@ -44,7 +45,7 @@ public class Parsing {
 		}
 
 		case Show_Cities: {
-			ArrayList<String> city = showCities.getCities();
+			ArrayList<String> city = showCities.getCities(); 
 			
 			for(String s:city)
 			{
