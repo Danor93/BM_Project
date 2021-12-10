@@ -63,7 +63,7 @@ public class ChangeInfoDBController extends Controller implements ControllerInte
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.jpeg");
+		setImage(BackImage, "background.png");
 		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
 		assert TxtID != null : "fx:id=\"TxtID\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";
 		assert btncon != null : "fx:id=\"btncon\" was not injected: check your FXML file 'ChangeInfoDB.fxml'.";

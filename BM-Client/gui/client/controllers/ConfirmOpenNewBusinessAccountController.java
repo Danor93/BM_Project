@@ -32,7 +32,7 @@ public class ConfirmOpenNewBusinessAccountController extends Controller implemen
 
     @FXML
     void initialize() {
-    	setImage(BackImage,"background.jpeg");
+    	setImage(BackImage,"background.png");
         assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmOpenNewBusinessAccount.fxml'.";
 
     }

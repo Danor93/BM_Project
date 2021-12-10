@@ -94,7 +94,7 @@ public class LoginScreenController extends Controller {
 	}
 	
 	void initialize() {
-		setImage(loginImage, "loginScreen.jpeg");
+		setImage(loginImage, "loginScreen.png");
 		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";

@@ -64,7 +64,7 @@ public void Back(ActionEvent event) throws IOException {
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.jpeg");
+    	setImage(BackImage, "background.png");
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";

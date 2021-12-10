@@ -72,7 +72,7 @@ public class OpenNewBussinessAccountController extends Controller implements Con
     
     @FXML
     void initialize() {
-    	setImage(BackImage,"background.jpeg");
+    	setImage(BackImage,"background.png");
         assert txtFirstName != null : "fx:id=\"txtFirstName\" was not injected: check your FXML file 'OpenNewBussinessAccount.fxml'.";
         assert txtLastName != null : "fx:id=\"txtLastName\" was not injected: check your FXML file 'OpenNewBussinessAccount.fxml'.";
         assert txtID != null : "fx:id=\"txtID\" was not injected: check your FXML file 'OpenNewBussinessAccount.fxml'.";

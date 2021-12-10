@@ -104,7 +104,7 @@ public class RestListFormController extends Controller implements Initializable,
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.jpeg");
+		setImage(BackImage, "background.png");
 		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'restListForm.fxml'.";
 		assert backBtn != null : "fx:id=\"backBtn\" was not injected: check your FXML file 'restListForm.fxml'.";
 		assert colAdd != null : "fx:id=\"colAdd\" was not injected: check your FXML file 'restListForm.fxml'.";

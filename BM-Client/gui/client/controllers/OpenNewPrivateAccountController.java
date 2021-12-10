@@ -70,7 +70,7 @@ public class OpenNewPrivateAccountController extends Controller implements Contr
 
     @FXML
     void initialize() {
-    	setImage(BackImage,"background.jpeg");
+    	setImage(BackImage,"background.png");
         assert btnBackToOpenNewAccount != null : "fx:id=\"btnBackToOpenNewAccount\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
         assert txtFirstName != null : "fx:id=\"txtFirstName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
         assert txtLastName != null : "fx:id=\"txtLastName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";

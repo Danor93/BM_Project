@@ -62,7 +62,7 @@ public class AddNewSaladToMenuController extends Controller implements Initializ
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.jpeg");
+    	setImage(BackImage, "background.png");
         assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
         assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
         assert btnPlusType != null : "fx:id=\"btnPlusType\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";

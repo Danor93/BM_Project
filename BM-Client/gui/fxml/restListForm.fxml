@@ -40,15 +40,12 @@
             <TableColumn fx:id="colOpen" prefWidth="160.66668701171875" text="Opening time" />
          </columns>
       </TableView>
-<<<<<<< HEAD
       <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
       <Text fx:id="cityName" fill="WHITE" layoutX="220.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-=======
       <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
->>>>>>> master
    </children>
 </Pane>
