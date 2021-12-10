@@ -27,6 +27,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
+/** This class describes the start of the choosing restaurant process,starting from choosing city
+ * @author Adi & Talia
+ *
+ */
 public class ChooseRestController extends Controller implements Initializable{
 	
 
@@ -56,15 +60,24 @@ public class ChooseRestController extends Controller implements Initializable{
     
     @FXML
     private Button BackBtn;
-
+    
+    
+    /**This method selects the wanted city from the combo box
+     * @param event			pressing the combo box
+     */
     @FXML
     void selectCity(ActionEvent event) {
     	cityName=combo1.getSelectionModel().getSelectedItem().toString();
     }
 
+    
+    
+	/** 
+	 * @param stage
+	 * @throws IOException
+	 */
 	public void start(Stage stage) throws IOException  {
-    	
-		FXMLLoader loader = new FXMLLoader();
+			FXMLLoader loader = new FXMLLoader();
 			Pane root = loader.load(getClass().getResource("/fxml/ChooseRestaurant.fxml").openStream());
 			Scene scene = new Scene(root);			
 			stage.setTitle("BiteMe Choose Restaurant");
@@ -73,13 +86,20 @@ public class ChooseRestController extends Controller implements Initializable{
 	}
 	
 
+    /** Checks if the costumer chose a city from the combo box 
+     * @param event					pressing the "next" button
+     * @throws IOException
+     */
     @FXML
-    void proceedToRest(ActionEvent event) {
+    void proceedToRest(ActionEvent event) throws IOException {
     	if(cityName!=null && !cityName.equals("select"))
     	{
-    		RestListFormController restListFormController = new RestListFormController();
         	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        	restListFormController.start(stage);
+        	FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
+			Parent root=load.load();
+			RestListFormController aFrame = load.getController();
+			aFrame.display(cityName);
+			aFrame.start(stage,root);
     	}
     	
     	else
@@ -89,6 +109,9 @@ public class ChooseRestController extends Controller implements Initializable{
     	
     }
 
+	/**
+	 *
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		Message msg=new Message(MessageType.Show_Cities,null);
 		ClientUI.chat.accept(msg);
@@ -97,6 +120,10 @@ public class ChooseRestController extends Controller implements Initializable{
 	}
 	
 	
+	/** This method meant to get back to costumer page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
 	@FXML
 	public void BackToCostumer(ActionEvent event) throws IOException {
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -105,5 +132,17 @@ public class ChooseRestController extends Controller implements Initializable{
 		CustomerScreenController aFrame = load.getController();
 		aFrame.start(primaryStage,root);
 	}
+	
+
+    @FXML
+    void initialize() {
+    	setImage(BackImage, "background.jpeg");
+        assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
+        assert combo1 != null : "fx:id=\"combo1\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
+        assert next != null : "fx:id=\"next\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
+        assert noSelect != null : "fx:id=\"noSelect\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
+
+    }
 
 }

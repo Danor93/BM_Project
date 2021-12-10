@@ -28,10 +28,6 @@ import main.ClientUI;
 public class LoginScreenController extends Controller {
 	public static User user;
 	public static boolean LoginFlag = false;
-	public static boolean BMflag = false;
-	public static boolean CEOflag = false;
-	public static boolean Customerflag = false;
-	public static boolean Supplierflag = false;
 	public static boolean AlreadyLoggedInFlag = false;
 	public static boolean WrongInputFlag = false;
 	public static String Name = null;
@@ -83,7 +79,7 @@ public class LoginScreenController extends Controller {
 				FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CustomerScreen.fxml"));
 				Parent root=load.load();
 				CustomerScreenController aFrame = load.getController();
-				aFrame.display(user.getFirstN());
+				//aFrame.display(user.getFirstN());
 				aFrame.start(primaryStage,root);
 				
 				
@@ -115,7 +111,6 @@ public class LoginScreenController extends Controller {
 		Scene scene = new Scene(root);			
 		primaryStage.setTitle("BiteMe Login Panel");
 		primaryStage.setScene(scene);
-		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 		primaryStage.show();
 
 	}

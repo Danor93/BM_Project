@@ -23,7 +23,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="48.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose a restaurant">
+      <Text fill="WHITE" layoutX="48.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose a restaurant in">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="31.0" layoutY="121.0" prefHeight="334.0" prefWidth="481.0">
+      <TableView fx:id="table" layoutX="31.0" layoutY="122.0" prefHeight="334.0" prefWidth="481.0">
          <columns>
             <TableColumn fx:id="colRes" prefWidth="167.33333778381348" style="-fx-alignment: CENTER;" text="Restaurant" />
             <TableColumn fx:id="colAdd" prefWidth="152.6666717529297" style="-fx-alignment: CENTER;" text="Address" />
@@ -41,5 +41,10 @@
          </columns>
       </TableView>
       <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
+      <Text fx:id="cityName" fill="WHITE" layoutX="220.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="727.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
+   <children>
+      <ImageView fitHeight="554.0" fitWidth="720.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../back.jpg" />
+         </image></ImageView>
+      <Text fill="WHITE" layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="637.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text fx:id="restName" fill="WHITE" layoutX="123.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="back" layoutX="36.0" layoutY="502.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="starters" fitHeight="175.0" fitWidth="177.0" layoutX="28.0" layoutY="92.0" onMouseClicked="#showStarters" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/starters.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="81.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starters">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="salads" fitHeight="175.0" fitWidth="177.0" layoutX="249.0" layoutY="92.0" onMouseClicked="#showSalads" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/salad.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="305.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salads">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="main" fitHeight="175.0" fitWidth="177.0" layoutX="472.0" layoutY="93.0" onMouseClicked="#showMainDishes" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/mainDish.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="513.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Dishes">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="desserts" fitHeight="168.0" fitWidth="175.0" layoutX="28.0" layoutY="295.0" onMouseClicked="#showDesserts" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/dessert.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="79.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desserts">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="306.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drinks">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="drinks" fitHeight="168.0" fitWidth="175.0" layoutX="253.0" layoutY="295.0" onMouseClicked="#showDrinks" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/drinks.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="order" fitHeight="181.0" fitWidth="174.0" layoutX="471.0" layoutY="293.0" onMouseClicked="#proceedToDish" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/showOrder.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

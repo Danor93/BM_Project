@@ -1,11 +1,15 @@
 package Entities;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String supplierName,openning,city,address;
 	private homeBranches homeBranch;
+	private int restCode;
 	
-	public Restaurant(String supplierName, String openning, String city, String address,homeBranches homeBranch) {
-		
+	public Restaurant(int restCode,String supplierName, String openning, String city, String address,homeBranches homeBranch) {
+		this.restCode=restCode;
 		this.supplierName = supplierName;
 		this.openning = openning;
 		this.city = city;
@@ -32,6 +36,11 @@ public class Restaurant {
 
 	public homeBranches getHomeBranch() {
 		return homeBranch;
+	}
+
+
+	public int getRestCode() {
+		return restCode;
 	}
 	
 	

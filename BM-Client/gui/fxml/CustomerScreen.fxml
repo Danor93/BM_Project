@@ -4,28 +4,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="717.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CustomerScreenController">
+<AnchorPane style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CustomerScreenController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="502.0" fitWidth="725.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="costumerImage" fitHeight="478.0" fitWidth="786.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../WhatsApp%20Image%202021-12-05%20at%206.24.30%20PM.jpeg" />
+            <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/backg.jpg" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="530.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="WHITE" layoutX="658.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
-         </font></Text>
-      <Button fx:id="btnCreateOrder" layoutX="110.0" layoutY="138.0" mnemonicParsing="false" onAction="#createOrder" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Create Order" />
-      <Label layoutX="55.0" layoutY="65.0" text="Customer page" textFill="WHITE">
+         </font>
+      </Text>
+      <Button fx:id="btnCreateOrder" layoutX="272.0" layoutY="236.0" mnemonicParsing="false" onAction="#createOrder" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: yellow;" text="Create Order">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="214.0" layoutY="165.0" text="Customer page" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="39.0" />
          </font>
       </Label>
-      <Button fx:id="btnBack" layoutX="23.0" layoutY="464.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Label fx:id="welcome" layoutX="30.0" layoutY="14.0" />
+      <Button fx:id="btnBack" layoutX="24.0" layoutY="421.0" mnemonicParsing="false" onAction="#Back" prefHeight="31.0" prefWidth="63.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
-</Pane>
+</AnchorPane>

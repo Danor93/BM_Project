@@ -17,6 +17,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+/** This class meant to identify the user as a costumer in the system
+ * @author Adi & Talia
+ *
+ */
 public class IdentifyW4cController extends Controller {
 
 	@FXML
@@ -37,8 +41,10 @@ public class IdentifyW4cController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
-	public static boolean rightIdentify = false;
 
+	/**This method meant to confirm if the user is registered as a costumer
+	 * @param event			meant to check the manually entering of W4C
+	 */
 	@FXML
 	void confirm(ActionEvent event) {
 		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) {
@@ -57,12 +63,19 @@ public class IdentifyW4cController extends Controller {
 
 	}
 
+	/**This method meant to get the W4C via QR
+	 * @param event		meant to check the W4C with QR
+	 */
 	@FXML
 	void getW4cFromQR(ActionEvent event) {
 		w4cManually.setText(LoginScreenController.user.getW4c());
 		switchScene(event);
 	}
 
+	/** 
+	 * @param primaryStage
+	 * @throws IOException
+	 */
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/fxml/InsertCodeOfW4C.fxml").openStream());
@@ -73,6 +86,9 @@ public class IdentifyW4cController extends Controller {
 
 	}
 
+	/**   
+	 * @param event
+	 */
 	private void switchScene(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ChooseRestController chooseRestController = new ChooseRestController();
@@ -85,18 +101,6 @@ public class IdentifyW4cController extends Controller {
 		}
 	}
 
-	@FXML
-	void initialize() {
-		setImage(BackImage, "background.jpeg");
-		assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
-		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
-		assert QR != null : "fx:id=\"QR\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
-		assert allertLbl != null : "fx:id=\"allertLbl\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
-		assert confirmBtn != null
-				: "fx:id=\"confirmBtn\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
-		assert w4cManually != null
-				: "fx:id=\"w4cManually\" was not injected: check your FXML file 'InsertCodeOfW4C.fxml'.";
 
-	}
 
 }

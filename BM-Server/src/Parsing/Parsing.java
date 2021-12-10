@@ -3,21 +3,24 @@ package Parsing;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import Entities.Restaurant;
 import ocsf.server.ConnectionToClient;
 import querys.DBCheck;
 import querys.ShowOrders;
 import querys.UpdateDB;
+import querys.getDishes;
 import querys.showCities;
+import querys.showRestaurants;
 
 public class Parsing {
 
 	public static Message parsing(Object msg, server.ConnectionToClient client) {
-		Message receivedMessage;
 		Message messageFromServer;
-		receivedMessage = (Message) msg;
+		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 		case Show_Orders: {// get all orders from DB
@@ -45,12 +48,19 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-			
-			for(String s:city)
-			{
-				System.out.println(s);
-			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
+			return messageFromServer;
+		}
+		
+		case show_Restaurants: {
+			ArrayList<Restaurant> restaurants =showRestaurants.getRestaurants((String)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.show_Restaurants,restaurants);
+			return messageFromServer;
+		}
+		
+		case get_Dishes: {
+			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
 			return messageFromServer;
 		}
 

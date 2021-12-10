@@ -2,7 +2,9 @@ package Parsing;
 
 import java.util.ArrayList;
 
+import Entities.Dish;
 import Entities.Message;
+import Entities.Restaurant;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.ChangeInfoDBController;
@@ -10,6 +12,7 @@ import client.controllers.ChooseRestController;
 import client.controllers.LoginScreenController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
+import client.controllers.RestListFormController;
 
 public class Parsing {
 
@@ -34,6 +37,16 @@ public class Parsing {
 
 		case Show_Cities: {
 			ChooseRestController.cities = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case show_Restaurants: {
+			RestListFormController.restaurants= (ArrayList<Restaurant>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case get_Dishes: {
+			RestListFormController.dishes= (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
 
