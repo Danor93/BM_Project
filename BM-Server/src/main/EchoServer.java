@@ -3,9 +3,6 @@ package main;
 
 import java.io.IOException;
 
-// "Object Oriented Software Engineering" and is issued under the open-source
-// license found at www.lloseng.com 
-
 import java.util.ArrayList;
 import Entities.Message;
 import Entities.MessageType;
@@ -16,12 +13,6 @@ import controllers.ServerUIFController;
 import extra.ClientConnection;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
-import querys.DBCheck;
-import querys.DBFirstName;
-import querys.ShowOrders;
-import querys.UpdateDB;
-import querys.showCities;
-import extra.ClientConnection;
 
 
 /**

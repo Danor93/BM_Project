@@ -3,13 +3,13 @@ package Entities;
 public class Restaurant {
 	private String supplierName,openning,city,address;
 	private homeBranches homeBranch;
+	private int restCode;
 	
-	public Restaurant(String supplierName, String openning, String city, String address,homeBranches homeBranch) {
-		
+	public Restaurant(int restCode,String supplierName, String openning, String city, String address,homeBranches homeBranch) {
+		this.restCode=restCode;
 		this.supplierName = supplierName;
 		this.openning = openning;
 		this.city = city;
-		this.address = address;
 		this.homeBranch = homeBranch;
 	}
 
@@ -34,7 +34,8 @@ public class Restaurant {
 		return homeBranch;
 	}
 	
-	
-	
+	public int getRestCode() {
+		return restCode;
+	}
 
 }
