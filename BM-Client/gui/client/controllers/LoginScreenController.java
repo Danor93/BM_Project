@@ -31,6 +31,7 @@ public class LoginScreenController extends Controller {
 	public static boolean AlreadyLoggedInFlag = false;
 	public static boolean WrongInputFlag = false;
 	public static String Name = null;
+	public static String ID = null;
 	public static ActionEvent mainevent;
 
 	@FXML
@@ -77,6 +78,8 @@ public class LoginScreenController extends Controller {
 				} else if (user.getRole().equals("CEO")) {
 					startScreen(event, "CEOScreen", "CEO");
 				} else if (user.getRole().equals("Supplier")) {
+					Name = user.getFirstN();
+					ID = user.getId();
 					startScreen(event, "SupplierScreen", "Supplier");
 				}
 			}

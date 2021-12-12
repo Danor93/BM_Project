@@ -3,6 +3,8 @@ package querys;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import Entities.Dish;
+
 public class UpdateDB {
 
 	public static void UpdateOrderAddress(String address) {
@@ -54,4 +56,27 @@ public class UpdateDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void NewDish(Dish dish) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.dishes(dishName, dishType, restCode, supplierName, allOrdersQuentity, inventory, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+				stmt.setString(1,dish.getDishName());
+				stmt.setString(2,dish.getDishType().toString());
+				stmt.setString(3,dish.getRestCode());
+				stmt.setString(4,dish.getSupplierName());
+				stmt.setString(5,String.valueOf(dish.getInventory()));
+				stmt.setString(6,"123");
+				stmt.setString(7,String.valueOf(dish.getPrice()));
+		 		stmt.executeUpdate();
+
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

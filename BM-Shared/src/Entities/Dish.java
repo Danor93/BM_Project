@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Dish implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String dishName,supplierName,size,cookLevel,extra;
+	private String dishName,supplierName,size,cookLevel,extra, restCode;
 	private float price;
 	private int inventory;
 	private DishType dishType;
@@ -72,6 +72,16 @@ public class Dish implements Serializable{
 
 	public DishType getDishType() {
 		return dishType;
+	}
+
+
+	public String getRestCode() {
+		return restCode;
+	}
+
+
+	public void setRestCode(String restCode) {
+		this.restCode = restCode;
 	}
 	
 
