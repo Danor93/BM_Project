@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,11 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import main.ChatClient;
+import main.ClientUI;
 
 public class AddNewSaladToMenuController extends Controller {
-
-	@FXML
-	private TextField txtInvenorySalads;
 
 	@FXML
 	private Label txtMiniLabel;
@@ -40,6 +41,9 @@ public class AddNewSaladToMenuController extends Controller {
 
 	@FXML
 	private TextField txtPriceOfSalad;
+
+	@FXML
+	private TextField txtInventorySalad;
 
 	@FXML
 	private Button btnConfirm;
@@ -68,7 +72,7 @@ public class AddNewSaladToMenuController extends Controller {
 	}
 
 	@FXML
-	void ConfirmNewSalad(ActionEvent event) {
+	void ConfirmNewSalad(ActionEvent event) throws IOException {
 		Dish dish;
 		if (txtSaladName.getText().isEmpty()) {
 			miniLabel.setText("Name must be invailed!");
@@ -84,16 +88,19 @@ public class AddNewSaladToMenuController extends Controller {
 			if (MediumMark.isSelected())
 				sizeStr.append("M/");
 			if (LargeMark.isSelected())
-				sizeStr.append("L");
+				sizeStr.append("L/");
 			if (OneSizeMark.isSelected())
 				sizeStr.append("O");
 			dish = new Dish(txtSaladName.getText(), LoginScreenController.Name,
-					Float.parseFloat(txtPriceOfSalad.getText()), Integer.parseInt(txtInvenorySalads.getText()),
+					Float.parseFloat(txtPriceOfSalad.getText()), Integer.parseInt(txtInventorySalad.getText()),
 					DishType.toDishType("Salad"));
 			dish.setSize(sizeStr.toString());
 			dish.setExtra(txtIngredients.getText());
 			dish.setRestCode(LoginScreenController.ID);
+			System.out.println(dish);
 			CreateMenuScreenController.dishes.add(dish);
+			ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
+			startScreen(event, "CreateMenuScreen", "Create Menu");
 		}
 	}
 
@@ -106,6 +113,7 @@ public class AddNewSaladToMenuController extends Controller {
 
 	@FXML
 	void initialize() {
+		setImage(BackImage,"background.png");
 		assert BackImage != null
 				: "fx:id=\"BackImage\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
 		assert miniLabel != null
@@ -129,7 +137,7 @@ public class AddNewSaladToMenuController extends Controller {
 		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
 		assert txtMiniLabel != null
 				: "fx:id=\"txtMiniLabel\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
-		assert txtInvenorySalads != null
+		assert txtInventorySalad != null
 				: "fx:id=\"txtInvenorySalads\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
 	}
 }

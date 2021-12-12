@@ -4,10 +4,10 @@ public enum MessageType {
 
 	/*Server Message*/
 	Update_succesfuly,Show_Orders_succ,login,Disconected,loginSystem,AlreadyLoggedIn,WrongInput,ID_Exists_True,ID_Exists_False,
-	loginWrongInput,
+	loginWrongInput,Dish_add_succ,dish_add_fail,
 	
 	/*Client Message*/
-	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,show_Restaurants,get_Dishes,
+	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,show_Restaurants,get_Dishes,add_new_dish,
 
 	
 	/*type of users*/

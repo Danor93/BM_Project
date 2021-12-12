@@ -96,6 +96,13 @@ public class Parsing {
 			return messageFromServer;
 		}
 		
+		case add_new_dish:{
+			System.out.println(receivedMessage.getMessageData());
+			if(UpdateDB.NewDish((Dish)receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.Dish_add_succ, null);
+			}	
+		}
+		
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn(result2);
 			messageFromServer = new Message(MessageType.Disconected, null);

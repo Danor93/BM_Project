@@ -82,6 +82,10 @@ public class Parsing {
 			ChangeInfoDBController.idFalseFlag = true;
 			break;
 		}
+		
+		case Dish_add_succ:{
+			
+		}
 
 		default: {
 			break;
