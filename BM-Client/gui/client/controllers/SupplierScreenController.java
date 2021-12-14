@@ -63,4 +63,14 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	void CreateMenu(ActionEvent event) throws IOException {
 		startScreen(event, "CreateMenuScreen", "Create Menu");
 	}
+	
+    @FXML
+    void UpdateMenu(ActionEvent event) throws IOException {
+		startScreen(event, "UpdateMenuScreen", "Update Menu");
+    }
+    
+    @FXML
+    void UpdateOrderStatus(ActionEvent event) throws IOException {
+		startScreen(event, "ConfirmOrderApproval", "Update order status");
+    }
 }

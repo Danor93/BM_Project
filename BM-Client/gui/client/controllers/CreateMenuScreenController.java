@@ -63,13 +63,7 @@ public class CreateMenuScreenController extends Controller implements Controller
     private StackPane stackpane;
     
     @FXML
-    private ImageView BackImage;
-
-    @FXML
-    void openDesert(ActionEvent event) {
-
-    }
-    
+    private ImageView BackImage;    
     
     void HandleClicks(ActionEvent event) {
     	if(event.getSource() == btnSalad) {
@@ -81,25 +75,36 @@ public class CreateMenuScreenController extends Controller implements Controller
     		MainDishesPain.toFront();
     	}
     }
-
+    
     @FXML
-    void openDrinks(ActionEvent event) {
+    void openDesert(ActionEvent event) throws IOException {
+    	startScreen(event,"AddDishToMenu","Add New Dish");
     }
 
     @FXML
-    void openMainDishes(ActionEvent event) {
+    void openDrinks(ActionEvent event) throws IOException {
+    	startScreen(event,"AddDishToMenu","Add New Dish");
+    }
 
+    @FXML
+    void openMainDishes(ActionEvent event) throws IOException {
+    	startScreen(event,"AddDishToMenu","Add New Dish");
     }
 
     @FXML
     void openSalads(ActionEvent event) throws IOException {
-    	startScreen(event,"AddNewSaladToMenu","Add New Salad");
+    	startScreen(event,"AddDishToMenu","Add New Dish");
     }
 
     @FXML
-    void openStarts(ActionEvent event) {
-
+    void openStarts(ActionEvent event) throws IOException {
+    	startScreen(event,"AddDishToMenu","Add New Dish");
     }
+
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		startScreen(event,"SupplierScreen","Supplier");
+	}
 
     @FXML
     void initialize() {
@@ -114,9 +119,4 @@ public class CreateMenuScreenController extends Controller implements Controller
         assert SaladsPane != null : "fx:id=\"SaladsPane\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
-
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		startScreen(event,"SupplierScreen","Supplier");
-	}
 }

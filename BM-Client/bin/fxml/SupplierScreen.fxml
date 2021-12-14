@@ -26,8 +26,8 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnUpdateMenu" layoutX="108.0" layoutY="208.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update menu" />
-      <Button fx:id="btnUpdateOrderStatus" layoutX="108.0" layoutY="269.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update order status" />
+      <Button fx:id="btnUpdateMenu" layoutX="108.0" layoutY="208.0" mnemonicParsing="false" onAction="#UpdateMenu" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update menu" />
+      <Button fx:id="btnUpdateOrderStatus" layoutX="108.0" layoutY="269.0" mnemonicParsing="false" onAction="#UpdateOrderStatus" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update order status" />
       <Button fx:id="btnBack" layoutX="24.0" layoutY="468.0" mnemonicParsing="false" onAction="#Back" text="Back" />
    </children>
 </Pane>

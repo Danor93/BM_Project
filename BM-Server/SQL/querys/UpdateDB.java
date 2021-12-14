@@ -13,8 +13,8 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET OrderAddress = ?");
-				stmt.setString(1,address);
-		 		stmt.executeUpdate();
+				stmt.setString(1, address);
+				stmt.executeUpdate();
 
 			} else {
 				System.out.println("Conn is null");
@@ -30,8 +30,8 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET TypeOfOrder = ?");
-				stmt.setString(1,type);
-		 		stmt.executeUpdate();
+				stmt.setString(1, type);
+				stmt.executeUpdate();
 
 			} else {
 				System.out.println("Conn is null");
@@ -40,14 +40,15 @@ public class UpdateDB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void UpdateisLoggedIn(String userName) {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.users SET isLoggedIn = '0' WHERE userName=?");
-				stmt.setString(1,userName);
-		 		stmt.executeUpdate();
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bytemedatabase.users SET isLoggedIn = '0' WHERE userName=?");
+				stmt.setString(1, userName);
+				stmt.executeUpdate();
 
 			} else {
 				System.out.println("Conn is null");
@@ -56,20 +57,25 @@ public class UpdateDB {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static boolean NewDish(Dish dish) {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName,inventory, price) VALUES (?, ?, ?, ?,?, ?)");
-				stmt.setString(1,dish.getDishName());
-				stmt.setString(2,dish.getDishType().toString());
-				stmt.setString(3,dish.getRestCode());
-				stmt.setString(4,dish.getSupplierName());
-				stmt.setString(5,String.valueOf(dish.getInventory()));
-				stmt.setString(6,String.valueOf(dish.getPrice()));
-		 		stmt.executeUpdate();
-		 		return true;
+				stmt = DBConnect.conn.prepareStatement(
+						"INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName, price, inventory, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				stmt.setString(1, dish.getDishName());
+				stmt.setString(2, dish.getDishType().toString());
+				stmt.setString(3, dish.getRestCode());
+				stmt.setString(4, dish.getSupplierName());
+				stmt.setString(5, String.valueOf(dish.getPrice()));
+				stmt.setString(6, String.valueOf(dish.getInventory()));
+				stmt.setString(7, dish.getChoiceFactor());
+				stmt.setString(8, dish.getDetailsOfChoice());
+				stmt.setString(9, dish.getIngredients());
+				stmt.setString(10, dish.getExtra());
+				stmt.executeUpdate();
+				return true;
 
 			} else {
 				System.out.println("Conn is null");
