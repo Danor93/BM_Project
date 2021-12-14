@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import Entities.Employer;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
 
@@ -82,6 +85,39 @@ public class Query {
 	    {
 	        if (st != null) st.close();
 	    }
+	}
+	
+	
+	public static ArrayList<Employer> LoadEmployers() {
+		
+		ArrayList<Employer> employers = new ArrayList<>();
+		Statement stmt;
+		try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM bytemedatabase.company");
+				Employer employer = null;
+				while (rs.next()) {
+					employer.setW4cBussines(rs.getString("w4cBusiness"));
+					employer.setCompanyName(rs.getString("companyName"));
+					if(rs.getString("companyStatus").equals("approved")) {
+						employer.setCompanyStatus(true);
+					}
+					else {
+						employer.setCompanyStatus(false);
+					}
+					System.out.println(employer);
+					employers.add(employer);
+				}
+				rs.close();
+				
+				for(Employer s:employers)
+				{
+					System.out.println(s);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return employers;
 	}
 
 }

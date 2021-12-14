@@ -3,12 +3,14 @@ package Parsing;
 import java.util.ArrayList;
 
 import Entities.Dish;
+import Entities.Employer;
 import Entities.Message;
 import Entities.Restaurant;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.ChangeInfoDBController;
 import client.controllers.ChooseRestController;
+import client.controllers.ConfirmEmployerRegController;
 import client.controllers.LoginScreenController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
@@ -85,6 +87,10 @@ public class Parsing {
 		
 		case Dish_add_succ:{
 			
+		}
+		
+		case Employer_list:{
+			ConfirmEmployerRegController.Employers=(ArrayList<Employer>) receivedMessage.getMessageData();
 		}
 
 		default: {

@@ -3,6 +3,7 @@ package Parsing;
 import java.io.IOException;
 import java.util.ArrayList;
 import Entities.Dish;
+import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
@@ -12,6 +13,7 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import querys.DBCheck;
+import querys.Query;
 import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.getDishes;
@@ -100,7 +102,14 @@ public class Parsing {
 			System.out.println(receivedMessage.getMessageData());
 			if(UpdateDB.NewDish((Dish)receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_add_succ, null);
-			}	
+			}
+		}
+		
+		case get_Employer:{
+			ArrayList<Employer> employers;
+			employers = Query.LoadEmployers();
+			messageFromServer = new Message(MessageType.Employer_list,employers);
+			return messageFromServer;
 		}
 		
 		case Disconected: {

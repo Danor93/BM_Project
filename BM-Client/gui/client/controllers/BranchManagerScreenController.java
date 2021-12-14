@@ -88,9 +88,10 @@ public void Back(ActionEvent event) throws IOException {
     
     @FXML
     void ConfirmEmployerReg(ActionEvent event) throws IOException {
-    	
-    	
-    	ClientUI.chat.accept(new Message(MessageType.Employer_Confirm,ConfirmEmployerRegController.Employers));
+    	startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
+    	Stage primaryStage = new Stage();
+		ConfirmEmployerRegController aFrame = new ConfirmEmployerRegController();
+		aFrame.start(primaryStage);
     	
     }
     
