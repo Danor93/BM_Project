@@ -79,28 +79,34 @@ public class AddNewSaladToMenuController extends Controller {
 		} else if (txtPriceOfSalad.getText().isEmpty()) {
 			miniLabel.setText("price must be invailed!");
 		} else if (!OneSizeMark.isSelected()) {
-			if (!SmallMark.isSelected() && !MediumMark.isSelected() && !LargeMark.isSelected())
+			if (!(SmallMark.isSelected()) && !(MediumMark.isSelected()) && !(LargeMark.isSelected()))
 				txtMiniLabel.setText("Choose at least 1 size");
-		} else {
-			StringBuilder sizeStr = new StringBuilder();
-			if (SmallMark.isSelected())
-				sizeStr.append("S/");
-			if (MediumMark.isSelected())
-				sizeStr.append("M/");
-			if (LargeMark.isSelected())
-				sizeStr.append("L/");
-			if (OneSizeMark.isSelected())
-				sizeStr.append("O");
-			dish = new Dish(txtSaladName.getText(), LoginScreenController.Name,
-					Float.parseFloat(txtPriceOfSalad.getText()), Integer.parseInt(txtInventorySalad.getText()),
-					DishType.toDishType("Salad"));
-			dish.setSize(sizeStr.toString());
-			dish.setExtra(txtIngredients.getText());
-			dish.setRestCode(LoginScreenController.ID);
-			System.out.println(dish);
-			CreateMenuScreenController.dishes.add(dish);
-			ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
-			startScreen(event, "CreateMenuScreen", "Create Menu");
+
+			else {
+				StringBuilder sizeStr = new StringBuilder();
+				if (SmallMark.isSelected()) {
+					sizeStr.append("S/");
+				}
+				if (MediumMark.isSelected()) {
+					sizeStr.append("M/");
+				}
+				if (LargeMark.isSelected()) {
+					sizeStr.append("L/");
+				}
+				if (OneSizeMark.isSelected()) {
+					sizeStr.append("O");
+				}
+				dish = new Dish(txtSaladName.getText(), LoginScreenController.Name,
+						Float.parseFloat(txtPriceOfSalad.getText()), Integer.parseInt(txtInventorySalad.getText()),
+						DishType.toDishType("Salad"));
+				dish.setSize(sizeStr.toString());
+				dish.setExtra(txtIngredients.getText());
+				dish.setRestCode(LoginScreenController.ID);
+				System.out.println(dish);
+				CreateMenuScreenController.dishes.add(dish);
+				ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
+				startScreen(event, "CreateMenuScreen", "Create Menu");
+			}
 		}
 	}
 
@@ -113,7 +119,7 @@ public class AddNewSaladToMenuController extends Controller {
 
 	@FXML
 	void initialize() {
-		setImage(BackImage,"background.png");
+		setImage(BackImage, "background.png");
 		assert BackImage != null
 				: "fx:id=\"BackImage\" was not injected: check your FXML file 'AddNewSaladToMenu.fxml'.";
 		assert miniLabel != null

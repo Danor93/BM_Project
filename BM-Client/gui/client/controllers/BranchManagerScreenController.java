@@ -20,6 +20,8 @@ import main.ClientUI;
 
 
 public class BranchManagerScreenController extends Controller implements ControllerInterface{
+	
+	public static Stage stage;
 
     @FXML
     private ResourceBundle resources;
@@ -83,4 +85,13 @@ public void Back(ActionEvent event) throws IOException {
     void ChangeInfoDB(ActionEvent event) throws IOException {
     	startScreen(event, "ChangeInfoDB", "Change Information");
 		}
+    
+    @FXML
+    void ConfirmEmployerReg(ActionEvent event) throws IOException {
+    	
+    	
+    	ClientUI.chat.accept(new Message(MessageType.Employer_Confirm,ConfirmEmployerRegController.Employers));
+    	
+    }
+    
 }

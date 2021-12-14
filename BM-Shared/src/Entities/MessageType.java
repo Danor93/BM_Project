@@ -7,7 +7,7 @@ public enum MessageType {
 	loginWrongInput,Dish_add_succ,dish_add_fail,
 	
 	/*Client Message*/
-	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,show_Restaurants,get_Dishes,add_new_dish,
+	Update_Orders,Show_Orders,ID_exists,ConfirmW4c,Show_Cities,show_Restaurants,get_Dishes,add_new_dish,Employer_Confirm,
 
 	
 	/*type of users*/

@@ -61,13 +61,14 @@ public class UpdateDB {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName,inventory, price) VALUES (?, ?, ?, ?,?, ?)");
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName,inventory, price,size) VALUES (?, ?, ?, ?,?, ?,?)");
 				stmt.setString(1,dish.getDishName());
 				stmt.setString(2,dish.getDishType().toString());
 				stmt.setString(3,dish.getRestCode());
 				stmt.setString(4,dish.getSupplierName());
 				stmt.setString(5,String.valueOf(dish.getInventory()));
 				stmt.setString(6,String.valueOf(dish.getPrice()));
+				stmt.setString(7,dish.getSize());
 		 		stmt.executeUpdate();
 		 		return true;
 
