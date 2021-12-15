@@ -24,72 +24,120 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class ConfirmEmployerRegController extends Controller {
+public class ConfirmEmployerRegController extends Controller implements Initializable {
+
+	/*
+	 * Author:Danor
+	 * this Class for handle the confirm or refuse registration for the Branch Manager of Employers.
+	 */
 	
-	
-	public static ArrayList<Employer> Employers= new ArrayList<Employer>();
+	public static ArrayList<Employer> Employers = new ArrayList<Employer>();
 
+	@FXML
+	private ResourceBundle resources;
 
-	  @FXML
-	    private ResourceBundle resources;
+	@FXML
+	private URL location;
 
-	    @FXML
-	    private URL location;
+	@FXML
+	private ImageView BackImage;
 
-	    @FXML
-	    private ImageView BackImage;
+	@FXML
+	private ComboBox<String> ListofEmployers;
 
-	    @FXML
-	    private ComboBox<String> ListofEmployers;
+	@FXML
+	private Button btnBackToBranchManager;
 
-	    @FXML
-	    private Button btnBackToBranchManager;
+	@FXML
+	private Button btnConfirmEmployerRegistartion;
 
-	    @FXML
-	    private Button btnConfirmEmployerRegistartion;
+	@FXML
+	private Button btnRefuseEmployerRegistartion;
 
-	    @FXML
-	    private Button btnRefuseEmployerRegistartion;
+	public static String companyName;
 
-    @FXML
-    void BackToBranchManagerScreen(ActionEvent event) throws IOException {
-    	startScreen(event, "BranchManagerScreen", "Branch Manager");
-    }
+	/*this method is for the Combobox Selection*/
+	@FXML
+	void ChooseCompany(ActionEvent event) {
+		companyName = ListofEmployers.getSelectionModel().getSelectedItem();
+	}
 
-    @FXML
-    void ConfirmEmployerRegistartion(ActionEvent event) {
-    	
-    	
+	/*this method for update the DB and return to the branch manager screen.*/
+	@FXML
+	void BackToBranchManagerScreen(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.Employer_Update,Employers);
+		ClientUI.chat.accept(msg);
+		startScreen(event, "BranchManagerScreen", "Branch Manager Main");
+	}
 
-    }
-
-    @FXML
-    void RefuseEmployerRegistartion(ActionEvent event) {
-
-    }
-    
-    @FXML
-    public void start(Stage stage) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.get_Employer,null));
+	/*this method is for the "Confirm" Button for approved company*/
+	@FXML
+	void ConfirmEmployerRegistartion(ActionEvent event) {
+		ListofEmployers.setDisable(true);
+		for (int i = 0; i < Employers.size(); i++) {
+			if (Employers.get(i).getCompanyName().equals(companyName)) {
+				Employers.get(i).setCompanyStatus("approved");
+			}
+		}
+		ListofEmployers.getItems().clear();
 		loadEmployerstoComboBox(Employers);
-    }
-    
-    public void loadEmployerstoComboBox(ArrayList<Employer> Employers) {
-    	for(Employer e: Employers) {
-    		if(e.getCompanyStatus()==false) {
-    			ListofEmployers.getItems().add(e.getCompanyName());
-    		}
-    	}
-    }
+		ListofEmployers.setPromptText("List of employers awaiting approval");
+		ListofEmployers.setDisable(false);
+	}
 
-    @FXML
-    void initialize() {
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
-        assert ListofEmployers != null : "fx:id=\"ListofEmployers\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
-        assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
-        assert btnConfirmEmployerRegistartion != null : "fx:id=\"btnConfirmEmployerRegistartion\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
-        assert btnRefuseEmployerRegistartion != null : "fx:id=\"btnRefuseEmployerRegistartion\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
-        ListofEmployers.setDisable(false);
+	/*this method is for the "Refuse" Button for Not Approved company*/
+	@FXML
+	void RefuseEmployerRegistartion(ActionEvent event) {
+		ListofEmployers.setDisable(true);
+		for (int i = 0; i < Employers.size(); i++) {
+			if (Employers.get(i).getCompanyName().equals(companyName)) {
+				Employers.get(i).setCompanyStatus("not approved");
+			}
+		}
+		ListofEmployers.getItems().clear();
+		refreshcombobox(Employers);
+		ListofEmployers.setPromptText("List of employers awaiting approval");
+		ListofEmployers.setDisable(false);
 
-    }
+	}
+
+	/*this method is for load the not approved and waiting company names.*/
+	public void loadEmployerstoComboBox(ArrayList<Employer> Employers) {
+		for (Employer e : Employers) {
+			if (e.getCompanyStatus().equals("not approved") || e.getCompanyStatus().equals("waiting")) {
+				ListofEmployers.getItems().add(e.getCompanyName());
+			}
+		}
+	}
+
+	/*this method is for load only the waiting company names.*/
+	public void refreshcombobox(ArrayList<Employer> Employers) {
+		for (Employer e : Employers) {
+			if (e.getCompanyStatus().equals("waiting")) {
+				ListofEmployers.getItems().add(e.getCompanyName());
+			}
+		}
+	}
+
+	@FXML
+	void initialize() {
+		assert BackImage != null
+				: "fx:id=\"BackImage\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
+		assert ListofEmployers != null
+				: "fx:id=\"ListofEmployers\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
+		assert btnBackToBranchManager != null
+				: "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
+		assert btnConfirmEmployerRegistartion != null
+				: "fx:id=\"btnConfirmEmployerRegistartion\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
+		assert btnRefuseEmployerRegistartion != null
+				: "fx:id=\"btnRefuseEmployerRegistartion\" was not injected: check your FXML file 'ConfirmEmployerRegistartion.fxml'.";
+
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		Message msg = new Message(MessageType.get_Employer, null);
+		ClientUI.chat.accept(msg);
+		loadEmployerstoComboBox(Employers);
+	}
 }

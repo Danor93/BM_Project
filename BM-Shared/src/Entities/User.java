@@ -2,7 +2,7 @@ package Entities;
 
 public class User {
 	
-	private String userName,password,isLoggedIn,role,id,firstN,lastN,w4c;
+	private String userName,password,isLoggedIn,role,id,firstN,lastN,w4c,email,phone;
 	private homeBranches homeBranch;
 	
 	public User(String role,String id, String firstN, String lastN, String w4c, homeBranches homeBranch, String userName, String password, String isLoggedIn) {
@@ -64,4 +64,21 @@ public class User {
 	public void setIsLoggedIn(String isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
 }

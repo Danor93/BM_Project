@@ -18,81 +18,90 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+public class BranchManagerScreenController extends Controller implements ControllerInterface {
 
-public class BranchManagerScreenController extends Controller implements ControllerInterface{
-	
 	public static Stage stage;
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private Button btnConfirmEmployerRegistration;
+	@FXML
+	private Button btnConfirmEmployerRegistration;
 
-    @FXML
-    private Button btnOpenNewAccount;
+	@FXML
+	private Button btnOpenNewAccount;
 
-    @FXML
-    private Button btnChangePersonalInformation;
+	@FXML
+	private Button btnChangePersonalInformation;
 
-    @FXML
-    private Button btnConfirmSupplierRegistration;
+	@FXML
+	private Button btnConfirmSupplierRegistration;
 
-    @FXML
-    private Button btnUploadPDF;
+	@FXML
+	private Button btnUploadPDF;
 
-    @FXML
-    private Button btnViewBranchsReports;
+	@FXML
+	private Button btnViewBranchsReports;
 
-    @FXML
-    private Button btnBack;
-    
-    @FXML
-    private Label nameLabel;
-    
+	@FXML
+	private Button btnBack;
 
-    @FXML
-    private ImageView BackImage;
+	@FXML
+	private Label nameLabel;
 
- @Override
-public void Back(ActionEvent event) throws IOException {
-	 ClientUI.chat.accept(new Message(MessageType.Disconected,null));	
-	 startScreen(event,"LoginScreen","Login");	
-}  
-    
+	@FXML
+	private ImageView BackImage;
 
-    @FXML
-    void initialize() {
-    	setImage(BackImage, "background.png");
-        assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnConfirmSupplierRegistration != null : "fx:id=\"btnConfirmSupplierRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnUploadPDF != null : "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnViewBranchsReports != null : "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-    }
-    
-    @FXML
-    void OpenNewAccount(ActionEvent event) throws IOException {
-    	startScreen(event, "OpenNewAccount", "Open New Account");
-    }
-    
-    @FXML
-    void ChangeInfoDB(ActionEvent event) throws IOException {
-    	startScreen(event, "ChangeInfoDB", "Change Information");
-		}
-    
-    @FXML
-    void ConfirmEmployerReg(ActionEvent event) throws IOException {
-    	startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
-    	Stage primaryStage = new Stage();
-		ConfirmEmployerRegController aFrame = new ConfirmEmployerRegController();
-		aFrame.start(primaryStage);
-    	
-    }
-    
+	@Override
+	public void Back(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		startScreen(event, "LoginScreen", "Login");
+	}
+
+	@FXML
+	void initialize() {
+		setImage(BackImage, "background.png");
+		assert btnConfirmEmployerRegistration != null
+				: "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnOpenNewAccount != null
+				: "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnChangePersonalInformation != null
+				: "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnConfirmSupplierRegistration != null
+				: "fx:id=\"btnConfirmSupplierRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnUploadPDF != null
+				: "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnViewBranchsReports != null
+				: "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
+	}
+
+	@FXML
+	void OpenNewAccount(ActionEvent event) throws IOException {
+		startScreen(event, "OpenNewAccount", "Open New Account");
+	}
+
+	@FXML
+	void ChangeInfoDB(ActionEvent event) throws IOException {
+		startScreen(event, "ChangeInfoDB", "Change Information");
+	}
+
+	@FXML
+	void ConfirmEmployerReg(ActionEvent event) throws IOException {
+		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
+	}
+	
+	@FXML
+	void ConfirmSupplierReg(ActionEvent event) throws IOException {
+		startScreen(event, "ConfirmSupplierRegistartion", "Confirm Supplier");
+	}
+	
+	@FXML
+	void deleteAccount(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerCloseAccount","Close Account");
+	}
+
 }

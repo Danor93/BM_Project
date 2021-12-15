@@ -1,12 +1,15 @@
 package Entities;
 
-public class Employer {
+import java.io.Serializable;
 
+public class Employer implements Serializable  {
+	
+	private static final long serialVersionUID = 1L;
 	private String w4cBussines;
 	private String CompanyName;
-	private Boolean CompanyStatus;
+	private String CompanyStatus;
 
-	public Employer(String w4cBussines, String companyName, Boolean companyStatus) {
+	public Employer(String w4cBussines, String companyName, String companyStatus) {
 		super();
 		this.w4cBussines = w4cBussines;
 		CompanyName = companyName;
@@ -29,11 +32,11 @@ public class Employer {
 		CompanyName = companyName;
 	}
 
-	public Boolean getCompanyStatus() {
+	public String getCompanyStatus() {
 		return CompanyStatus;
 	}
 
-	public void setCompanyStatus(Boolean companyStatus) {
+	public void setCompanyStatus(String companyStatus) {
 		CompanyStatus = companyStatus;
 	}
 }

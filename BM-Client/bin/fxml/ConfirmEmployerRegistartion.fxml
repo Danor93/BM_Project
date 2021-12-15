@@ -38,7 +38,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ComboBox fx:id="ListofEmployers" layoutX="222.0" layoutY="176.0" prefHeight="25.0" prefWidth="234.0" promptText="List of employers awaiting approval" />
+      <ComboBox fx:id="ListofEmployers" layoutX="222.0" layoutY="176.0" onAction="#ChooseCompany" prefHeight="25.0" prefWidth="234.0" promptText="List of employers awaiting approval" />
       <Button fx:id="btnRefuseEmployerRegistartion" layoutX="267.0" layoutY="218.0" mnemonicParsing="false" onAction="#RefuseEmployerRegistartion" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: red;" text="Refuse" />
    </children>
 </Pane>

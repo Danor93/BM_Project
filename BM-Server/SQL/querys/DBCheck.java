@@ -72,24 +72,4 @@ public class DBCheck {
 
 		return result.toString();
 	}
-
-	public static String IDcheck(String ID) {
-
-		String rs1 = null;
-		PreparedStatement stmt;
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bytemedatabase.users WHERE ID=?");
-				stmt.setString(1, ID);
-				// stmt.setString(2, password);
-				ResultSet rs = stmt.executeQuery();
-				rs.next();
-				rs1 = rs.getString(1).toString();
-				rs.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs1;
-	}
 }

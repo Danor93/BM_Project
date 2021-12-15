@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
+import Entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import main.ClientUI;
 public class ChangeInfoDBController extends Controller implements ControllerInterface {
 
 	public static boolean idFalseFlag = false;
+	public static User user = new User(null, null, null, null, null, null, null, null, null);
 
 	@FXML
 	private ResourceBundle resources;
@@ -50,12 +52,11 @@ public class ChangeInfoDBController extends Controller implements ControllerInte
 			lblError.setText("ID filed is empty!");
 		} else {
 			String id = TxtID.getText();
-			Message m = new Message(MessageType.ID_exists, id);
-			ClientUI.chat.accept(m);
+			ClientUI.chat.accept(new Message(MessageType.ID_exists,id));
 			if (idFalseFlag == false) {
 				lblError.setText("ID not Exsits on the DB!");
 			} else {
-				// here we need to add FXML document.
+				
 			}
 		}
 

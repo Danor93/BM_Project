@@ -8,6 +8,8 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.Supplier;
+import Entities.User;
 import ocsf.server.ConnectionToClient;
 import Entities.Message;
 import Entities.MessageType;
@@ -20,7 +22,6 @@ import querys.getDishes;
 import querys.showCities;
 import querys.showRestaurants;
 import ocsf.server.ConnectionToClient;
-
 
 public class Parsing {
 	public static String result2;
@@ -55,24 +56,24 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-			
-			for(String s:city)
-			{
+
+			for (String s : city) {
 				System.out.println(s);
 			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
 			return messageFromServer;
 		}
-		
+
 		case show_Restaurants: {
-			ArrayList<Restaurant> restaurants =showRestaurants.getRestaurants((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.show_Restaurants,restaurants);
+			ArrayList<Restaurant> restaurants = showRestaurants
+					.getRestaurants((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.show_Restaurants, restaurants);
 			return messageFromServer;
 		}
-		
+
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 			return messageFromServer;
 		}
 
@@ -86,32 +87,50 @@ public class Parsing {
 			return messageFromServer;
 		}
 
-		case ID_exists: {
-			String id;
-			id = DBCheck.IDcheck((String) receivedMessage.getMessageData());
-			if (id == null) {
-				messageFromServer = new Message(MessageType.ID_Exists_False, null);
-			} else {
-				messageFromServer = new Message(MessageType.ID_Exists_True, null);
-			}
-
-			return messageFromServer;
-		}
-		
-		case add_new_dish:{
+		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
-			if(UpdateDB.NewDish((Dish)receivedMessage.getMessageData())) {
+			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_add_succ, null);
 			}
 		}
-		
-		case get_Employer:{
-			ArrayList<Employer> employers;
-			employers = Query.LoadEmployers();
-			messageFromServer = new Message(MessageType.Employer_list,employers);
+
+		case get_Employer: {
+			ArrayList<Employer> employers = Query.LoadEmployers();
+			messageFromServer = new Message(MessageType.Employer_list, employers);
+			return messageFromServer;
+		}
+
+		case Employer_Update: {
+			ArrayList<Employer> employers = (ArrayList<Employer>) receivedMessage.getMessageData();
+			for (int i = 0; i < employers.size(); i++) {
+				Query.UpdateEmployers(employers.get(i).getCompanyName(), employers.get(i).getCompanyStatus());
+			}
+			messageFromServer = new Message(MessageType.Employer_List_Update_succ, null);
+			return messageFromServer;
+		}
+
+		case get_Supplier: {
+			ArrayList<Supplier> Suppliers = Query.LoadSuppliers();
+			messageFromServer = new Message(MessageType.Supplier_list, Suppliers);
+			return messageFromServer;
+		}
+
+		case Supplier_Update: {
+			ArrayList<Supplier> Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
+			for (int i = 0; i < Suppliers.size(); i++) {
+				Query.UpdateSupplier(Suppliers.get(i).getSupplierName(), Suppliers.get(i).getSupplierStatus());
+			}
+			messageFromServer = new Message(MessageType.Supplier_List_Update_succ, null);
 			return messageFromServer;
 		}
 		
+		case get_Accounts:{
+			User user = (User) receivedMessage.getMessageData();
+			Query.DeleteAccount(user);
+			messageFromServer = new Message(MessageType.Delete_Account_Succ, null);
+			return messageFromServer;
+		}
+
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn(result2);
 			messageFromServer = new Message(MessageType.Disconected, null);

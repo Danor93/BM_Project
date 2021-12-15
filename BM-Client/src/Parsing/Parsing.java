@@ -6,11 +6,13 @@ import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
 import Entities.Restaurant;
+import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.ChangeInfoDBController;
 import client.controllers.ChooseRestController;
 import client.controllers.ConfirmEmployerRegController;
+import client.controllers.ConfirmSupplierRegController;
 import client.controllers.LoginScreenController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
@@ -79,11 +81,6 @@ public class Parsing {
 			OpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
 			break;
 		}
-
-		case ID_Exists_False: {
-			ChangeInfoDBController.idFalseFlag = true;
-			break;
-		}
 		
 		case Dish_add_succ:{
 			
@@ -91,6 +88,16 @@ public class Parsing {
 		
 		case Employer_list:{
 			ConfirmEmployerRegController.Employers=(ArrayList<Employer>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case Supplier_list:{
+			ConfirmSupplierRegController.Suppliers=(ArrayList<Supplier>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case Delete_Account_Succ:{
+			
 		}
 
 		default: {

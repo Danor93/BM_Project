@@ -28,10 +28,12 @@
       <Button fx:id="btnConfirmEmployerRegistration" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#ConfirmEmployerReg" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm employer registration" />
       <Button fx:id="btnOpenNewAccount" layoutX="10.0" layoutY="229.0" mnemonicParsing="false" onAction="#OpenNewAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="open new account" />
       <Button fx:id="btnChangePersonalInformation" layoutX="213.0" layoutY="120.0" mnemonicParsing="false" onAction="#ChangeInfoDB" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="change personal information in DB" />
-      <Button fx:id="btnConfirmSupplierRegistration" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm supplier registration" />
-      <Button fx:id="btnUploadPDF" layoutX="213.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
+      <Button fx:id="btnConfirmSupplierRegistration" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" onAction="#ConfirmSupplierReg" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm supplier registration" />
+      <Button fx:id="btnUploadPDF" layoutX="213.0" layoutY="175.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
       <Button fx:id="btnViewBranchsReports" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="view branch's reports" />
       <Button fx:id="btnBack" layoutX="31.0" layoutY="456.0" mnemonicParsing="false" onAction="#Back" text="Back" />
       <Label fx:id="nameLabel" layoutX="77.0" layoutY="9.0" prefHeight="17.0" prefWidth="122.0" text="Label" textFill="#fffdfd" />
+      <Button fx:id="ClostAccountBtn" layoutX="213.0" layoutY="229.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="Close Account" />
+      <Button fx:id="FreezeBtn" layoutX="213.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="210.0" style="-fx-background-radius: 30;" text="Freeze Account" />
    </children>
 </Pane>
