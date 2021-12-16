@@ -3,85 +3,73 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Entities.Message;
+import Entities.MessageType;
+import Parsing.Parsing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import main.ClientUI;
 
-public class UpdateMenuScreenController extends Controller{
+public class UpdateMenuScreenController extends Controller {
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private ImageView BackImage;
+	@FXML
+	private ImageView BackImage;
 
-    @FXML
-    private Button btnSalad;
+	@FXML
+	private Label miniLabel;
 
-    @FXML
-    private Button btnStart;
+	@FXML
+	private Button btnAddNewDishToMenu;
 
-    @FXML
-    private Button btnMainDishes;
+	@FXML
+	private Button btnBack;
 
-    @FXML
-    private Button btnDessert;
+	@FXML
+	private Label txtMiniLabel;
 
-    @FXML
-    private Button btnDrinks;
+	@FXML
+	private Button btnDeleteOrUpdateDish;
 
-    @FXML
-    private Button btnBack;
+	@FXML
+	void AddNewDishToMenu(ActionEvent event) {
 
-    @FXML
-    private Label miniLabel;
+	}
 
-    @FXML
-    void Back(ActionEvent event) throws IOException{
-		startScreen(event,"SupplierScreen","Supplier");
-    }
+	@FXML
+	void BackToSupplier(ActionEvent event) throws IOException {
+		startScreen(event, "SupplierScreen", "Supplier page");
+	}
 
-    @FXML
-    void openDesert(MouseEvent event) {
+	@FXML
+	void DeleteOrUpdateDish(ActionEvent event) throws IOException {
+		Message msg = new Message(MessageType.Show_Dishes, LoginScreenController.user.getId());
+		ClientUI.chat.accept(msg);
+		startScreen(event, "DeleteOrUpdateDish", "Delete or Update dish");
+	}
 
-    }
+	@FXML
+	void initialize() {
+		assert BackImage != null
+				: "fx:id=\"BackImage\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
+		assert miniLabel != null
+				: "fx:id=\"miniLabel\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
+		assert btnAddNewDishToMenu != null
+				: "fx:id=\"btnAddNewDishToMenu\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
+		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
+		assert txtMiniLabel != null
+				: "fx:id=\"txtMiniLabel\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
+		assert btnDeleteOrUpdateDish != null
+				: "fx:id=\"btnDeleteOrUpdateDish\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
 
-    @FXML
-    void openDrinks(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openMainDishes(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openSalads(MouseEvent event) {
-
-    }
-
-    @FXML
-    void openStarts(MouseEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnSalad != null : "fx:id=\"btnSalad\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnStart != null : "fx:id=\"btnStart\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnMainDishes != null : "fx:id=\"btnMainDishes\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnDessert != null : "fx:id=\"btnDessert\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnDrinks != null : "fx:id=\"btnDrinks\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-        assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
-
-    }
+	}
 }

@@ -15,36 +15,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="13.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Text>
-      <Button fx:id="btnSalad" layoutX="31.0" layoutY="95.0" mnemonicParsing="false" onAction="#openSalads" onMouseClicked="#openSalads" text="Salads" textFill="#132248">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnStart" layoutX="33.0" layoutY="138.0" mnemonicParsing="false" onAction="#openStarts" onMouseClicked="#openStarts" text="Starts">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnMainDishes" layoutX="14.0" layoutY="181.0" mnemonicParsing="false" onAction="#openMainDishes" onMouseClicked="#openMainDishes" text="Main dishes">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnDessert" layoutX="27.0" layoutY="224.0" mnemonicParsing="false" onAction="#openDesert" onMouseClicked="#openDesert" text="Dessert">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnDrinks" layoutX="31.0" layoutY="269.0" mnemonicParsing="false" onAction="#openDrinks" onMouseClicked="#openDrinks" text="Drinks">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
       <Text fill="WHITE" layoutX="512.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="58.14619140625007">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -55,15 +25,18 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="btnBack" layoutX="20.0" layoutY="447.0" mnemonicParsing="false" onAction="#Back" onMouseClicked="#openDrinks" text="Back to suplier page">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Label fx:id="miniLabel" layoutX="163.0" layoutY="30.0" prefHeight="47.0" prefWidth="418.0" textFill="WHITE">
+      <Label fx:id="miniLabel" layoutX="189.0" layoutY="29.0" prefHeight="47.0" prefWidth="212.0" text="Update Menu" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
+      <Button fx:id="btnAddNewDishToMenu" layoutX="211.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddNewDishToMenu" prefHeight="39.0" prefWidth="169.0" style="-fx-background-radius: 30;" text="Add a new dish to the menu" />
+      <Button fx:id="btnBack" layoutX="31.0" layoutY="450.0" mnemonicParsing="false" onAction="#BackToSupplier" text="Back" />
+      <Label fx:id="txtMiniLabel" layoutX="479.0" layoutY="408.0" prefHeight="20.0" prefWidth="165.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnDeleteOrUpdateDish" layoutX="211.0" layoutY="163.0" mnemonicParsing="false" onAction="#DeleteOrUpdateDish" prefHeight="39.0" prefWidth="169.0" style="-fx-background-radius: 30;" text="Delete / Update existing dish" />
    </children>
 </Pane>

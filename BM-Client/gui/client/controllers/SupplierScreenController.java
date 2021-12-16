@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
+import Entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,11 +62,11 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
-		startScreen(event, "CreateMenuScreen", "Create Menu");
+		startScreen(event, "AddDishToMenu", "Create Menu");
 	}
 	
     @FXML
-    void UpdateMenu(ActionEvent event) throws IOException {
+    void UpdateMenu(ActionEvent event) throws IOException {    	
 		startScreen(event, "UpdateMenuScreen", "Update Menu");
     }
     

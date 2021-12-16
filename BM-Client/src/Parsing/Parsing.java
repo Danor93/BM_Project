@@ -9,13 +9,13 @@ import Entities.User;
 import Entities.homeBranches;
 import client.controllers.ChangeInfoDBController;
 import client.controllers.ChooseRestController;
+import client.controllers.DeleteOrUpdateDishController;
 import client.controllers.LoginScreenController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
 import client.controllers.RestListFormController;
 
 public class Parsing {
-
 	public static void Message(Object msg) throws Exception {
 		Message receivedMessage = null;
 		receivedMessage = (Message) msg;
@@ -43,14 +43,14 @@ public class Parsing {
 			ChooseRestController.cities = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		case show_Restaurants: {
-			RestListFormController.restaurants= (ArrayList<Restaurant>) receivedMessage.getMessageData();
+			RestListFormController.restaurants = (ArrayList<Restaurant>) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		case get_Dishes: {
-			RestListFormController.dishes= (ArrayList<Dish>) receivedMessage.getMessageData();
+			RestListFormController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -82,9 +82,18 @@ public class Parsing {
 			ChangeInfoDBController.idFalseFlag = true;
 			break;
 		}
+
+		case Show_Dishes_succ: {
+			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
+			break;
+		}
+
+		case Dish_add_succ: {
+
+		}
 		
-		case Dish_add_succ:{
-			
+		case Dish_update_succ: {
+
 		}
 
 		default: {

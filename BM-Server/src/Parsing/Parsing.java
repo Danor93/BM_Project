@@ -12,13 +12,13 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import querys.DBCheck;
+import querys.ShowDishes;
 import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.getDishes;
 import querys.showCities;
 import querys.showRestaurants;
 import ocsf.server.ConnectionToClient;
-
 
 public class Parsing {
 	public static String result2;
@@ -53,24 +53,24 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-			
-			for(String s:city)
-			{
+
+			for (String s : city) {
 				System.out.println(s);
 			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
 			return messageFromServer;
 		}
-		
+
 		case show_Restaurants: {
-			ArrayList<Restaurant> restaurants =showRestaurants.getRestaurants((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.show_Restaurants,restaurants);
+			ArrayList<Restaurant> restaurants = showRestaurants
+					.getRestaurants((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.show_Restaurants, restaurants);
 			return messageFromServer;
 		}
-		
+
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 			return messageFromServer;
 		}
 
@@ -95,18 +95,34 @@ public class Parsing {
 
 			return messageFromServer;
 		}
-		
-		case add_new_dish:{
+
+		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
-			if(UpdateDB.NewDish((Dish)receivedMessage.getMessageData())) {
+			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_add_succ, null);
-			}	
+			}
 		}
-		
+
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn(result2);
 			messageFromServer = new Message(MessageType.Disconected, null);
 			return messageFromServer;
+		}
+
+		case Show_Dishes: {// get all orders from DB
+			System.out.println(receivedMessage.getMessageData());
+			ArrayList<Dish> dishes = ShowDishes.getDishes(receivedMessage.getMessageData());
+			for (int i = 0; i < dishes.size(); i++)
+				System.out.println(dishes.get(i).getDishName());
+			messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
+			return messageFromServer;
+		}
+
+		case updateDish: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.Dish_update_succ, null);
+			}
 		}
 
 		default: {

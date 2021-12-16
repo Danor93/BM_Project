@@ -14,6 +14,7 @@ import client.controllers.OpenNewAccountController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
 import client.controllers.UpdateFormController;
+import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
@@ -35,6 +36,7 @@ import javax.security.auth.login.LoginContext;
 public class ChatClient extends AbstractClient {
 	public static ChatClient chatClient;
 	public static ArrayList<Order> orders = new ArrayList<Order>();
+	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 	public static boolean waitingForResponse = false;
 
 	public ChatClient(String host, int port) throws IOException {

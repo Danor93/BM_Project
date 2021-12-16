@@ -17,9 +17,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 
 public class AddDishToMenuController extends Controller implements Initializable {
+	private boolean clearNameFlag = false;
+	private boolean clearChoiceDetailsFlag = false;
+	private boolean clearPriceFlag = false;
+	private boolean clearInventoryFlag = false;
+	private boolean clearChoiceFactorFlag = false;
+	private boolean clearIngredientsFlag = false;
+	private boolean clearRemovableIngredientsFlag = false;
+	public static String TypeOfDish;
 
 	@FXML
 	private ResourceBundle resources;
@@ -68,34 +77,125 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
-		startScreen(event, "CreateMenuScreen", "Create Menu");
+		startScreen(event, "SupplierScreen", "Supplier page");
 	}
+	
+	@FXML
+    void ChooceTypeDish(ActionEvent event) {
+		TypeOfDish = btnTypeDish.getSelectionModel().getSelectedItem();
+    }
 
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
-		Dish dish;
+		Dish dish = new Dish(null, null, 0, 0, null);
+		//System.out.println(btnTypeDish.getValue());
 		if (txtNameDish.getText().isEmpty())
-			miniLabel.setText("Name must be invailed!");
+			txtMiniLabel.setText("Name must be invailed!");
 		else if (txtPriceDish.getText().isEmpty())
-			miniLabel.setText("price must be invailed!");
-		else if (btnTypeDish.toString().equals("example: Salad"))
-			miniLabel.setText("type must be selected!");
+			txtMiniLabel.setText("price must be invailed!");
 		else if (txtInventoryDish.getText().isEmpty())
-			miniLabel.setText("Inventory must be invailed!");
+			txtMiniLabel.setText("Inventory must be invailed!");
 		else {
+			try {
+				Float price = Float.parseFloat(txtPriceDish.getText());
+			} catch (Exception e) {
+				txtMiniLabel.setText("The price must be invalid number");
+				e.printStackTrace();
+			}
+			try {
+				Integer inventory = Integer.parseInt(txtInventoryDish.getText());
+			} catch (Exception e) {
+				txtMiniLabel.setText("The inventory must be invalid number");
+				e.printStackTrace();
+			}
+
+			System.out.println(TypeOfDish);
+			try {
 			dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, Float.parseFloat(txtPriceDish.getText()),
-					Integer.parseInt(txtInventoryDish.getText()),
-					DishType.toDishType(btnTypeDish.getValue().toString()));
-			dish.setExtra(txtIngredientsToRemove.getText());
-			dish.setIngredients(txtIngredients.getText());
+					Integer.parseInt(txtInventoryDish.getText()),DishType.toDishType(TypeOfDish));
+					//DishType.toDishType(btnTypeDish.getValue().toString()));
+			} catch (NullPointerException e) {
+				txtMiniLabel.setText("type must be selected!");
+				e.setStackTrace(null);
+			}
 			dish.setRestCode(LoginScreenController.ID);
+			if (txtChoiceDish.getText().equals("example: Size"))
+				txtChoiceDish.setText(null);
 			dish.setChoiceFactor(txtChoiceDish.getText());
+			if (txtChoiceDetailsDish.getText().equals("example: S/M/L"))
+				txtChoiceDetailsDish.setText(null);
 			dish.setDetailsOfChoice(txtChoiceDetailsDish.getText());
-			System.out.println(DishType.toDishType(btnTypeDish.getValue().toString()));
+			if (txtIngredients.getText()
+					.equals("Put in the ingredients of the dish. \r\n"
+							+ "Example: lettuce, cucumber, tomato, tuna and black olives. \r\n"
+							+ "The salad is seasoned with parsley, olive oil and lemon."))
+				txtIngredients.setText(null);
+			dish.setIngredients(txtIngredients.getText());
+			if (txtIngredientsToRemove.getText().equals("Insert the removable dish ingredients. \r\n"
+					+ "Example: cucumber, tomato, parsley, olive oil and lemon."))
+				txtChoiceDetailsDish.setText(null);
+			dish.setExtra(txtIngredientsToRemove.getText());
+
 			System.out.println(dish);
 			CreateMenuScreenController.dishes.add(dish);
 			ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
-			startScreen(event, "CreateMenuScreen", "Create Menu");
+			startScreen(event, "AddDishToMenu", "Delete or Update dish");
+		}
+	}
+
+	@FXML
+	void clearName(MouseEvent event) {
+		if (clearNameFlag == false) {
+			txtNameDish.clear();
+			clearNameFlag = true;
+		}
+	}
+
+	@FXML
+	void clearPrice(MouseEvent event) {
+		if (clearPriceFlag == false) {
+			txtPriceDish.clear();
+			clearPriceFlag = true;
+		}
+	}
+
+	@FXML
+	void clearInventory(MouseEvent event) {
+		if (clearInventoryFlag == false) {
+			txtInventoryDish.clear();
+			clearInventoryFlag = true;
+		}
+	}
+
+	@FXML
+	void clearChoiceFactor(MouseEvent event) {
+		if (clearChoiceFactorFlag == false) {
+			txtChoiceDish.clear();
+			clearChoiceFactorFlag = true;
+		}
+	}
+
+	@FXML
+	void clearChoiceDetails(MouseEvent event) {
+		if (clearChoiceDetailsFlag == false) {
+			txtChoiceDetailsDish.clear();
+			clearChoiceDetailsFlag = true;
+		}
+	}
+
+	@FXML
+	void clearIngredients(MouseEvent event) {
+		if (clearIngredientsFlag == false) {
+			txtIngredients.clear();
+			clearIngredientsFlag = true;
+		}
+	}
+
+	@FXML
+	void clearRemovableIngredients(MouseEvent event) {
+		if (clearRemovableIngredientsFlag == false) {
+			txtIngredientsToRemove.clear();
+			clearRemovableIngredientsFlag = true;
 		}
 	}
 
@@ -127,6 +227,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnTypeDish.getItems().addAll("Salad", "Starter", "MainDish", "Dessert", "Drink");
+		btnTypeDish.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
 	}
 }

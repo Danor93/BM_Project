@@ -28,16 +28,16 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Label fx:id="miniLabel" layoutX="163.0" layoutY="30.0" prefHeight="47.0" prefWidth="418.0" textFill="WHITE">
+      <Label fx:id="miniLabel" layoutX="167.0" layoutY="29.0" prefHeight="47.0" prefWidth="201.0" text="Create Menu" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNameDish" layoutX="285.0" layoutY="87.0" text="example: Greek" />
-      <TextField fx:id="txtPriceDish" layoutX="285.0" layoutY="148.0" text="example: 29.99" />
-      <TextField fx:id="txtInventoryDish" layoutX="285.0" layoutY="179.0" text="example: 50" />
-      <Button fx:id="btnConfirm" layoutX="512.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfirmNewDish" style="-fx-background-radius: 30;" text="Confirm" />
-      <TextArea fx:id="txtIngredients" layoutX="121.0" layoutY="288.0" prefHeight="78.0" prefWidth="331.0" text="Put in the ingredients of the dish. &#10;Example: lettuce, cucumber, tomato, tuna and black olives. &#10;The salad is seasoned with parsley, olive oil and lemon." />
+      <TextField fx:id="txtNameDish" layoutX="285.0" layoutY="87.0" onMouseClicked="#clearName" text="example: Greek" />
+      <TextField fx:id="txtPriceDish" layoutX="285.0" layoutY="148.0" onMouseClicked="#clearPrice" text="example: 29.99" />
+      <TextField fx:id="txtInventoryDish" layoutX="285.0" layoutY="179.0" onMouseClicked="#clearInventory" text="example: 50" />
+      <Button fx:id="btnConfirm" layoutX="483.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfirmNewDish" style="-fx-background-radius: 30;" text="Confirm dish" />
+      <TextArea fx:id="txtIngredients" layoutX="121.0" layoutY="288.0" onMouseEntered="#clearIngredients" prefHeight="78.0" prefWidth="331.0" text="Put in the ingredients of the dish. &#10;Example: lettuce, cucumber, tomato, tuna and black olives. &#10;The salad is seasoned with parsley, olive oil and lemon." />
       <Button fx:id="btnBack" layoutX="31.0" layoutY="450.0" mnemonicParsing="false" onAction="#Back" text="Back" />
       <Label layoutX="121.0" layoutY="183.0" text="Insert inventory" textFill="WHITE">
          <font>
@@ -69,14 +69,14 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtChoiceDish" layoutX="285.0" layoutY="211.0" text="example: Size" />
-      <TextField fx:id="txtChoiceDetailsDish" layoutX="285.0" layoutY="243.0" text="example: S/M/L" />
+      <TextField fx:id="txtChoiceDish" layoutX="285.0" layoutY="211.0" onMouseClicked="#clearChoiceFactor" text="example: Size" />
+      <TextField fx:id="txtChoiceDetailsDish" layoutX="285.0" layoutY="243.0" onMouseClicked="#clearChoiceDetails" text="example: S/M/L" />
       <Label layoutX="121.0" layoutY="119.0" text="Choose type" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="btnTypeDish" layoutX="284.0" layoutY="117.0" prefWidth="150.0" promptText="example: Salad" />
-      <TextArea fx:id="txtIngredientsToRemove" layoutX="121.0" layoutY="379.0" prefHeight="78.0" prefWidth="331.0" text="Insert the removable dish ingredients. &#10;Example: cucumber, tomato, parsley, olive oil and lemon." />
+      <ComboBox fx:id="btnTypeDish" layoutX="284.0" layoutY="117.0" onAction="#ChooceTypeDish" prefWidth="150.0" promptText="example: Salad" />
+      <TextArea fx:id="txtIngredientsToRemove" layoutX="121.0" layoutY="379.0" onMouseEntered="#clearRemovableIngredients" prefHeight="78.0" prefWidth="331.0" text="Insert the removable dish ingredients. &#10;Example: cucumber, tomato, parsley, olive oil and lemon." />
    </children>
 </Pane>

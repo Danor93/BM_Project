@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import Entities.Dish;
+import Entities.DishType;
 
 public class UpdateDB {
 
@@ -65,7 +66,8 @@ public class UpdateDB {
 				stmt = DBConnect.conn.prepareStatement(
 						"INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName, price, inventory, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				stmt.setString(1, dish.getDishName());
-				stmt.setString(2, dish.getDishType().toString());
+				//stmt.setString(2, dish.getDishType().toString());
+				stmt.setString(2, DishType.typeToString(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
 				stmt.setString(4, dish.getSupplierName());
 				stmt.setString(5, String.valueOf(dish.getPrice()));
@@ -87,4 +89,28 @@ public class UpdateDB {
 		}
 	}
 
+	public static boolean UpdateDish(Dish dish) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.dishes SET dishName='" + dish.getDishName()
+						+ "', dishType='" + dish.getDishType() + "', restId1='" + dish.getRestCode() + "', supplierName='"
+						+ dish.getSupplierName() + "', price='" + dish.getPrice() + "', inventory='" + dish.getInventory()
+						+ "', choiceFactor='" + dish.getChoiceFactor() + "', choiceDetails='" + dish.getDetailsOfChoice()
+						+ "', ingredients='" + dish.getIngredients() + "', extra='" + dish.getExtra()
+						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
+				stmt.setString(1, dish.getDishName());
+				stmt.setString(2, DishType.typeToString(dish.getDishType()));
+				stmt.setString(3, dish.getRestCode());
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
