@@ -73,4 +73,5 @@ public class CEOScreenController extends Controller implements ControllerInterfa
         void ChangeInfoDBCEO(ActionEvent event) throws IOException {
         	startScreen(event, "ChangeInfoDB", "Change Information");
         }
+
 }

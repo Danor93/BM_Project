@@ -9,10 +9,7 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="727.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
    <children>
-      <ImageView fitHeight="554.0" fitWidth="720.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../back.jpg" />
-         </image></ImageView>
+      <ImageView fitHeight="554.0" fitWidth="720.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="14.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -33,7 +30,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="36.0" layoutY="502.0" mnemonicParsing="false" onAction="#Back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="36.0" layoutY="502.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -73,12 +70,12 @@
             <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/dessert.jpg" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="79.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desserts">
+      <Text fill="WHITE" layoutX="79.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desserts">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="306.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drinks">
+      <Text fill="WHITE" layoutX="306.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Drinks">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -88,7 +85,7 @@
             <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/drinks.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="order" fitHeight="181.0" fitWidth="174.0" layoutX="471.0" layoutY="293.0" onMouseClicked="#proceedToDish" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="order" fitHeight="181.0" fitWidth="174.0" layoutX="471.0" layoutY="293.0" onMouseClicked="#orderNow" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="file:///C:/Users/Adi/OneDrive/Desktop/G14g_BM/BM_Project/BM-Client/gui/Image/showOrder.jpg" />
          </image>

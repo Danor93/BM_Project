@@ -63,4 +63,5 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	void CreateMenu(ActionEvent event) throws IOException {
 		startScreen(event, "CreateMenuScreen", "Create Menu");
 	}
+
 }

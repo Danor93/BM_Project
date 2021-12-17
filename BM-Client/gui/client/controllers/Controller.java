@@ -5,13 +5,14 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class Controller  {
+public abstract class  Controller  {
 	/** setImage this method setImage for give imageview */
 	public void setImage(ImageView img, String ImageName) {
 		Image image;
@@ -27,7 +28,25 @@ public class Controller  {
 		Scene scene = new Scene(root);			
 		primaryStage.setTitle("BiteMe" + " " + PanelName + " " + "Panel");
 		primaryStage.setScene(scene);
-		//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 		primaryStage.show();
 	}
+	
+	
+	public void start(ActionEvent event,String fxmlName,String title,String toDisplay) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/"+fxmlName+".fxml"));
+		Parent root=load.load();
+		Controller aFrame = load.getController();
+		//aFrame.display(toDisplay);
+		Scene scene = new Scene(root);			
+		stage.setTitle("BiteMe" + " " + title);
+		stage.setScene(scene);
+		stage.show();		
+	}
+	
+
+	//public abstract void display(String string);
+	
+
 }

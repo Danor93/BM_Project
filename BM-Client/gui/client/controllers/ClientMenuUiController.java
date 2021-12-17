@@ -56,6 +56,12 @@ import main.ClientUI;
 	    		Message msg = new Message(MessageType.login, null);
 	    		ClientUI.chat.accept(msg);
 	    		startScreen(event,"LoginScreen","Login");
+	    	/*	try {
+	    			startScreen(event,"ChooseRestaurant","Choose restaurant");
+	    		} catch (IOException e1) {
+	    			// TODO Auto-generated catch block
+	    			e1.printStackTrace();
+	    		}*/
 	    	}
 	    }
 	    
@@ -76,5 +82,7 @@ import main.ClientUI;
 	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 
 	    }
+
+
 
 }

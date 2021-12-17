@@ -42,19 +42,14 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <VBox layoutX="110.0" layoutY="46.0" prefHeight="405.0" prefWidth="382.0" style="-fx-background-color: white;">
+      <VBox layoutX="79.0" layoutY="49.0" prefHeight="359.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-radius: 30;">
          <children>
-            <Text fx:id="foodKind" fill="#a39b9b" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="390.8034210205078">
+            <Text fx:id="foodKind" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="226.16099548339844">
                <font>
-                  <Font name="Bernard MT Condensed" size="30.0" />
+                  <Font name="Century" size="29.0" />
                </font>
             </Text>
-            <ListView fx:id="list" prefHeight="326.0" prefWidth="443.0" />
-            <Label fx:id="priceLabel" prefHeight="43.0" prefWidth="391.0" text="                               " textAlignment="CENTER" textFill="#fb0202">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
+            <ListView fx:id="list" onMouseClicked="#getDishPrice" prefHeight="326.0" prefWidth="295.0" />
          </children>
       </VBox>
       <Button fx:id="back" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
@@ -67,10 +62,25 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="218.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="164.91928100585943">
+      <Text fx:id="notify" fill="RED" layoutX="215.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="212.91928100585943">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
+      <VBox fx:id="ingredientPane" layoutX="396.0" layoutY="129.0" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #272727; -fx-background-radius: 30;">
+         <children>
+            <Text fx:id="ingredientLabel" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="237.58590698242188">
+               <font>
+                  <Font name="Century" size="25.0" />
+               </font>
+            </Text>
+            <Label fx:id="DishIng" prefHeight="135.0" prefWidth="238.0" />
+            <Text fx:id="price" fill="#fb0000" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="232.91928100585938">
+               <font>
+                  <Font name="Century" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
    </children>
 </Pane>

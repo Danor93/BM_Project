@@ -32,4 +32,36 @@ public static DishType toDishType(String type) {
 		}
 
 }
+
+
+public static String fromTypeToStr(DishType dishType)
+{
+	switch(dishType)
+	{
+	case Starter:{
+		return "Starter";
+	}
+	
+	case Salad :{
+		return "Salad";
+	}
+	
+	case MainDish:{
+		return "Main dish";
+	}
+	
+	case Dessert :{
+		return "Dessert";
+	}
+	
+	default:
+	{
+		return "Drink";
+	}
+	
+	}
+	
+	
+}
+
 }

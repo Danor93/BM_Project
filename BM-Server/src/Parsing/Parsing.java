@@ -52,6 +52,7 @@ public class Parsing {
 		}
 
 		case Show_Cities: {
+			System.out.println("hi adi");
 			ArrayList<String> city = showCities.getCities();
 			
 			for(String s:city)
@@ -69,10 +70,11 @@ public class Parsing {
 		}
 		
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
+			ArrayList<Dish> dishesOfRest =getDishes.getDishes((Integer)receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
 			return messageFromServer;
 		}
+
 
 		case ConfirmOpenNewBusinessAccount: {
 			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);

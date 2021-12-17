@@ -27,14 +27,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-
 /** This class describes the start of the choosing restaurant process,starting from choosing city
  * @author Adi & Talia
  *
  */
-
-public class ChooseRestController extends Controller implements Initializable,ControllerInterface {
-
+public class ChooseRestController extends Controller implements Initializable{
+	
 
     @FXML
     private ResourceBundle resources;
@@ -44,6 +42,10 @@ public class ChooseRestController extends Controller implements Initializable,Co
 
     @FXML
     private Button next;
+    
+
+    @FXML
+    private Button back;
     
 	@FXML
     private ComboBox<String> combo1;
@@ -72,6 +74,8 @@ public class ChooseRestController extends Controller implements Initializable,Co
     	cityName=combo1.getSelectionModel().getSelectedItem().toString();
     }
 
+
+
     /** Checks if the costumer chose a city from the combo box 
      * @param event					pressing the "next" button
      * @throws IOException
@@ -80,7 +84,12 @@ public class ChooseRestController extends Controller implements Initializable,Co
     void proceedToRest(ActionEvent event) throws IOException {
     	if(cityName!=null && !cityName.equals("select"))
     	{
-    		startScreen(event, "restListForm", "Restaurant list");
+        	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        	FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
+			Parent root=load.load();
+			RestListFormController aFrame = load.getController();
+			aFrame.display(cityName);
+			aFrame.start(stage,root);
     	}
     	
     	else
@@ -89,23 +98,32 @@ public class ChooseRestController extends Controller implements Initializable,Co
     	}
     	
     }
+
+	/**
+	 *
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		Message msg=new Message(MessageType.Show_Cities,null);
 		ClientUI.chat.accept(msg);
 		observableList=FXCollections.observableArrayList(cities);
 		combo1.setItems(observableList);	
 	}
-
-/** This method meant to get back to costumer page**/
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "InsertCodeOfW4C","Insert W4C");
-	}
 	
+	
+	/** This method meant to get back to costumer page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
+
+    @FXML
+    void back(ActionEvent event) throws IOException {
+    	startScreen(event,"InsertCodeOfW4C","Insert W4C code");
+    }
+
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.png");
+    	setImage(BackImage, "background.jpeg");
         assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
         assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
         assert combo1 != null : "fx:id=\"combo1\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
@@ -113,5 +131,7 @@ public class ChooseRestController extends Controller implements Initializable,Co
         assert noSelect != null : "fx:id=\"noSelect\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
 
     }
+
+
 
 }

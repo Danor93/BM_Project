@@ -64,4 +64,5 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 
+
 }

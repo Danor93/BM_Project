@@ -86,4 +86,5 @@ public class OpenNewPrivateAccountController extends Controller implements Contr
 	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "OpenNewAccount", "Open New Account");
 	}
+
 }

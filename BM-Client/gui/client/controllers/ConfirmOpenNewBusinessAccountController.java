@@ -42,4 +42,6 @@ public class ConfirmOpenNewBusinessAccountController extends Controller implemen
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 		
 	}
+
+
 }

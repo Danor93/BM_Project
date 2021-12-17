@@ -76,4 +76,6 @@ public class ChangeInfoDBController extends Controller implements ControllerInte
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 
+
+
 }

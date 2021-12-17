@@ -9,16 +9,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.RestListFormController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="688.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.RestListFormController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="553.0" fitWidth="718.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="nextbtn" layoutX="419.0" layoutY="465.0" mnemonicParsing="false" onAction="#proceedToOrder" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="next" />
-      <Text fill="WHITE" layoutX="660.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fx:id="BackImage" fitHeight="553.0" fitWidth="655.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="nextbtn" layoutX="599.0" layoutY="478.0" mnemonicParsing="false" onAction="#proceedToOrder" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: green;" text="next" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Text fill="WHITE" layoutX="621.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fill="WHITE" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -33,19 +36,21 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="31.0" layoutY="122.0" prefHeight="334.0" prefWidth="481.0">
+      <TableView fx:id="table" layoutX="31.0" layoutY="121.0" prefHeight="335.0" prefWidth="477.0" style="-fx-background-radius: 30;">
          <columns>
             <TableColumn fx:id="colRes" prefWidth="167.33333778381348" style="-fx-alignment: CENTER;" text="Restaurant" />
             <TableColumn fx:id="colAdd" prefWidth="152.6666717529297" style="-fx-alignment: CENTER;" text="Address" />
             <TableColumn fx:id="colOpen" prefWidth="160.66668701171875" text="Opening time" />
          </columns>
       </TableView>
-      <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
+      <Button fx:id="backBtn" layoutX="20.0" layoutY="478.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: red;" text="back" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <Text fx:id="cityName" fill="WHITE" layoutX="220.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button fx:id="backBtn" layoutX="48.0" layoutY="465.0" mnemonicParsing="false" onAction="#Back" prefHeight="32.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="back" />
    </children>
 </Pane>

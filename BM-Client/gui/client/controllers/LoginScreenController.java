@@ -50,8 +50,9 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private Label WrongInputInLoggin;
 
-	@FXML
-	private ImageView loginImage;
+
+    @FXML
+    private ImageView backImage;
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
@@ -93,10 +94,14 @@ public class LoginScreenController extends Controller {
 
 	}
 	
+	@FXML
 	void initialize() {
-		setImage(loginImage, "loginScreen.png");
+	//	setImage(backImage, "backg.png");
+        assert backImage != null : "fx:id=\"backImage\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
 	}
+
+
 }
