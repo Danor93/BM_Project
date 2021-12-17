@@ -26,7 +26,13 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 	public static String TypeOfDish;
 	public static String NameOfDish;
+	public static float PriceOfDish;
+	public static int InvOfDish;
+	public DishType dishtype;
 	public static int PlaceOfDish;
+	private boolean NameAndTypeCorrect = false;
+	private boolean CorrectPrice = false;
+	private boolean CorrectInv = false;
 
 	@FXML
 	private ResourceBundle resources;
@@ -85,14 +91,17 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	void ChoocTypeOfDish(ActionEvent event) {
 		btnDish.getItems().clear();
 		for (int i = 0; i < dishes.size(); i++) {
-			System.out.println(dishes.get(i).getDishName().toString() + "\n");
+			System.out.println("this here!"+dishes.get(i).getDishName().toString() );
 		}
 		TypeOfDish = btnDishType.getSelectionModel().getSelectedItem();
 		System.out.println("TypeOfDish= " + TypeOfDish);
 		for (int i = 0; i < dishes.size(); i++) {
-			System.out.println(DeleteOrUpdateDishController.dishes.get(i).getDishName());
-			if (DishType.typeToString(dishes.get(i).getDishType()).equals(TypeOfDish)) {
-				btnDish.getItems().add(dishes.get(i).getDishName().toString());
+			// System.out.println("all the dishes of the supp : "+ d.getDishName());
+			if (dishes.get(i) != null) {
+				if (DishType.typeToString(dishes.get(i).getDishType()).equals(TypeOfDish)) {
+					System.out.println("dishes in this type: " + dishes.get(i).getDishName());
+					btnDish.getItems().add(dishes.get(i).getDishName());
+				}
 			}
 		}
 	}
@@ -116,47 +125,71 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
 		Dish dish = new Dish(null, null, 0, 0, null);
-		if (txtNewPriceDish.getText().isEmpty())
-			txtMiniLabel.setText("price must be invailed!");
-		else if (txtNewInventoryDish.getText().isEmpty())
-			txtMiniLabel.setText("Inventory must be invailed!");
-		else {
-			try {
-				Float price = Float.parseFloat(txtNewPriceDish.getText());
-			} catch (Exception e) {
-				txtMiniLabel.setText("The price must be invalid number");
-				e.printStackTrace();
-			}
-			try {
-				Integer inventory = Integer.parseInt(txtNewInventoryDish.getText());
-			} catch (Exception e) {
-				txtMiniLabel.setText("The inventory must be invalid number");
-				e.printStackTrace();
-			}
-			try {
-				String dishType = btnDishType.getSelectionModel().getSelectedItem();
-			} catch (NullPointerException e) {
-				txtMiniLabel.setText("Type must be selected!");
-				e.printStackTrace();
-			}
-			try {
-				String dishName = btnDish.getSelectionModel().getSelectedItem();
-			} catch (NullPointerException e) {
+
+		try {
+			dishtype = DishType.toDishType(TypeOfDish);
+			// NameOfDish = btnDish.getSelectionModel().getSelectedItem();
+			if (NameOfDish == null) {
 				txtMiniLabel.setText("Name must be selected!");
-				e.printStackTrace();
+			} else {
+				System.out.println("NameOfdish=" + NameOfDish);
+				NameAndTypeCorrect = true;
 			}
-			dish = new Dish(btnDish.getSelectionModel().getSelectedItem(), LoginScreenController.Name,
-					Float.parseFloat(txtNewPriceDish.getText()), Integer.parseInt(txtNewInventoryDish.getText()),
-					DishType.toDishType(TypeOfDish));
-			dish.setRestCode(LoginScreenController.ID);
-			dish.setChoiceFactor(txtNewChoiceDish.getText());
-			dish.setDetailsOfChoice(txtNewChoiceDetailsDish.getText());
-			dish.setIngredients(txtNewIngredients.getText());
-			dish.setExtra(txtNewIngredientsToRemove.getText());
-			System.out.println(dish);
-			ClientUI.chat.accept(new Message(MessageType.updateDish, dish));
-			startScreen(event, "DeleteOrUpdateDish", "Create Menu");
+
+		} catch (NullPointerException e) {
+			txtMiniLabel.setText("Type must be selected!");
+			e.printStackTrace();
 		}
+		if (NameAndTypeCorrect) {
+			if (txtNewPriceDish.getText().isEmpty())
+				txtMiniLabel.setText("price must be invailed!");
+			else if (txtNewInventoryDish.getText().isEmpty())
+				txtMiniLabel.setText("Inventory must be invailed!");
+			else {
+				try {
+					PriceOfDish = Float.parseFloat(txtNewPriceDish.getText());
+					CorrectPrice = true;
+				} catch (Exception e) {
+					txtMiniLabel.setText("The price must be invalid number");
+					e.printStackTrace();
+				}
+				try {
+					InvOfDish = Integer.parseInt(txtNewInventoryDish.getText());
+					CorrectInv = true;
+				} catch (Exception e) {
+					txtMiniLabel.setText("The inventory must be invalid number");
+					e.printStackTrace();
+				}
+
+			}
+			if (NameAndTypeCorrect && CorrectPrice && CorrectInv) {
+				String SupplierName = LoginScreenController.Name;
+				dish = new Dish(NameOfDish, SupplierName, PriceOfDish, InvOfDish, dishtype);
+				dish.setRestCode(LoginScreenController.ID);
+				if (txtNewChoiceDish.getText().equals("null")) {
+					txtNewChoiceDish.setText("");
+				}
+				dish.setChoiceFactor(txtNewChoiceDish.getText());
+				if (txtNewChoiceDetailsDish.getText().equals("null")) {
+					txtNewChoiceDetailsDish.setText("");
+				}
+				dish.setDetailsOfChoice(txtNewChoiceDetailsDish.getText());
+				if (txtNewIngredients.getText().equals("null")) {
+					txtNewIngredients.setText("");
+				}
+
+				dish.setIngredients(txtNewIngredients.getText());
+				if (txtNewIngredientsToRemove.getText().equals("null")) {
+					txtNewIngredientsToRemove.setText("");
+				}
+				dish.setExtra(txtNewIngredientsToRemove.getText());
+				System.out.println(dish.toString());
+				ClientUI.chat.accept(new Message(MessageType.updateDish, dish));
+				startScreen(event, "DeleteOrUpdateDish", "Create Menu");
+				dish = null;
+			}
+		}
+
 	}
 
 	@FXML

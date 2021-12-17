@@ -1,5 +1,6 @@
 package Parsing;
 
+//server
 import java.io.IOException;
 import java.util.ArrayList;
 import Entities.Dish;
@@ -112,6 +113,7 @@ public class Parsing {
 		case Show_Dishes: {// get all orders from DB
 			System.out.println(receivedMessage.getMessageData());
 			ArrayList<Dish> dishes = ShowDishes.getDishes(receivedMessage.getMessageData());
+			System.out.println("in server : ");
 			for (int i = 0; i < dishes.size(); i++)
 				System.out.println(dishes.get(i).getDishName());
 			messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
@@ -123,6 +125,17 @@ public class Parsing {
 			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_update_succ, null);
 			}
+		}
+		case MenuExist: {
+			
+			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.MenuExistTrue, null);
+			}else 
+			{
+				messageFromServer = new Message(MessageType.MenuExistFalse, null);
+			}
+			return messageFromServer;
+
 		}
 
 		default: {

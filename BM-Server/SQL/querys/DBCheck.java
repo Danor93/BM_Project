@@ -13,7 +13,7 @@ public class DBCheck {
 	public static String DBCheck(String userName, String password) {
 
 		StringBuilder result = new StringBuilder();
-		String rs2=null;
+		String rs2 = null;
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
@@ -60,9 +60,7 @@ public class DBCheck {
 					stmt.setString(1, userName);
 					stmt.setString(2, password);
 					stmt.executeUpdate();
-				}
-				else
-				{
+				} else {
 					return "Already";
 				}
 			}
@@ -92,4 +90,31 @@ public class DBCheck {
 		}
 		return rs1;
 	}
+
+	public static Boolean MenuExistingCheck(String ID) {
+
+		String rs1 = null;
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bytemedatabase.dishes WHERE restId1=?");
+				stmt.setString(1, ID);
+				// stmt.setString(2, password);
+				ResultSet rs = stmt.executeQuery();
+				rs.next();
+				rs1 = rs.getString(1).toString();
+				rs.close();
+				
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("return false");
+			return false; 
+		}
+		System.out.println("in sql before false rs1="+ rs1);
+			return true; 
+			
+	}
+
 }

@@ -19,5 +19,5 @@ public enum MessageType {
 	
 	
 	/*Error*/
-	Error
+	Error, MenuExist, MenuExistTrue, MenuExistFalse
 }

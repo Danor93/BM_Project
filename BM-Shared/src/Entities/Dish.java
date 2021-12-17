@@ -77,4 +77,11 @@ public class Dish implements Serializable{
 	public void setDetailsOfChoice(String detailsOfChoice) {
 		this.detailsOfChoice = detailsOfChoice;
 	}
+
+	@Override
+	public String toString() {
+		return "Dish [dishName=" + dishName + ", supplierName=" + supplierName + ", extra=" + extra + ", ingredients="
+				+ ingredients + ", restCode=" + restCode + ", choiceFactor=" + choiceFactor + ", detailsOfChoice="
+				+ detailsOfChoice + ", price=" + price + ", inventory=" + inventory + ", dishType=" + dishType + "]";
+	}
 }

@@ -1,5 +1,5 @@
 package Parsing;
-
+//client
 import java.util.ArrayList;
 
 import Entities.Dish;
@@ -14,6 +14,7 @@ import client.controllers.LoginScreenController;
 import client.controllers.OpenNewBussinessAccountController;
 import client.controllers.OpenNewPrivateAccountController;
 import client.controllers.RestListFormController;
+import client.controllers.SupplierScreenController;
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
@@ -86,6 +87,16 @@ public class Parsing {
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
+		}
+		case MenuExistTrue: 
+		{
+			SupplierScreenController.ExisingMenuFlag=true; 
+			break; 
+		}
+		case MenuExistFalse: 
+		{
+			SupplierScreenController.ExisingMenuFlag=false; 
+			break; 
 		}
 
 		case Dish_add_succ: {

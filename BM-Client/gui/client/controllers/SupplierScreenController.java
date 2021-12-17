@@ -14,15 +14,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
 public class SupplierScreenController extends Controller implements ControllerInterface {
-
+	public static boolean ExisingMenuFlag = false;
 	@FXML
 	private ResourceBundle resources;
+	@FXML
+	private Label ExistLbl;
 
 	@FXML
 	private URL location;
@@ -51,6 +54,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void initialize() {
 		setImage(BackImage, "background.png");
+		assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnCreateMenu != null
 				: "fx:id=\"btnCreateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnUpdateMenu != null
@@ -62,16 +66,21 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
-		startScreen(event, "AddDishToMenu", "Create Menu");
+		ClientUI.chat.accept(new Message(MessageType.MenuExist, LoginScreenController.ID));
+		if (ExisingMenuFlag == true) {
+			ExistLbl.setText("Menu already exists, you can update it");
+		} else {
+			startScreen(event, "AddDishToMenu", "Create Menu");
+		}
 	}
-	
-    @FXML
-    void UpdateMenu(ActionEvent event) throws IOException {    	
+
+	@FXML
+	void UpdateMenu(ActionEvent event) throws IOException {
 		startScreen(event, "UpdateMenuScreen", "Update Menu");
-    }
-    
-    @FXML
-    void UpdateOrderStatus(ActionEvent event) throws IOException {
+	}
+
+	@FXML
+	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmOrderApproval", "Update order status");
-    }
+	}
 }

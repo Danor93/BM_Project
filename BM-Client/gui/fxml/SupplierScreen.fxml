@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="502.0" fitWidth="732.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="534.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
@@ -29,5 +29,10 @@
       <Button fx:id="btnUpdateMenu" layoutX="108.0" layoutY="208.0" mnemonicParsing="false" onAction="#UpdateMenu" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update menu" />
       <Button fx:id="btnUpdateOrderStatus" layoutX="108.0" layoutY="269.0" mnemonicParsing="false" onAction="#UpdateOrderStatus" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30;" text="Update order status" />
       <Button fx:id="btnBack" layoutX="24.0" layoutY="468.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+      <Label fx:id="ExistLbl" layoutX="268.0" layoutY="143.0" prefHeight="47.0" prefWidth="415.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
