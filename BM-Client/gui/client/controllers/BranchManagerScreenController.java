@@ -83,26 +83,32 @@ public class BranchManagerScreenController extends Controller implements Control
 		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
+	/*open a screen for confirm an employer*/
 	@FXML
 	void ConfirmEmployerReg(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
 	}
 
+	/*open a screen for confirm an Supplier*/
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmSupplierRegistartion", "Confirm Supplier");
 	}
 
+	/*open a screen for close an account*/
 	@FXML
 	void deleteAccount(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerCloseAccount", "Close Account");
 	}
-
+	
+	
+	/*open a screen for Freeze an account*/
 	@FXML
 	void FreezeAccount(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerFreezeAccount", "Freeze Account");
 	}
 
+	/*for upload the quarterly PDF.*/
 	@FXML
 	void UploadPDF(ActionEvent event) {
 		try {

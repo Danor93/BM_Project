@@ -31,6 +31,10 @@ import Entities.BussinessAccount;
 
 public class BranchManagerOpenNewBussinessAccountController extends Controller implements ControllerInterface, Initializable {
 
+	/*
+	 * Author:danor
+	 * this class is for open business account
+	  */
 	public static BussinessAccount  BAccount = new BussinessAccount(null, null, null, null, null, null, null, null, null, null, null, null);
 	public static Boolean AprrovedFlag=false;
 	public static Boolean ConfirmFlag=false;
@@ -76,12 +80,12 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
+	/*for confirm button*/
 	@FXML
 	void ConfirmBussinessAccount(ActionEvent event) {
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
 				|| txtTelephone.getText().isEmpty() || txtEmail.getText().isEmpty()
 				|| txtEmployersName.getText().isEmpty() || txtMonthlyBillingCeiling.getText().isEmpty()) {
-			
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		}
 		else {

@@ -19,6 +19,10 @@ import javafx.fxml.Initializable;
 
 public class BranchManagerFreezeAccountController extends Controller implements Initializable {
 
+	/*
+	 * Author:Danor
+	 * this class for freeze an active account
+	 */
 	public static ArrayList<User> Users = new ArrayList<>();
 	public static String AccountName;
 	public static String AccountID;
@@ -39,12 +43,14 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 	@FXML
 	private Button BackBMBtn;
 
+	/*choose an account from the combo box*/
 	@FXML
 	void ChooseAccount(ActionEvent event) {
 		AccountName = ActiveAccountComboBox.getSelectionModel().getSelectedItem();
 		ConfrimBtn.setDisable(false);
 	}
 
+	/*for the confirm button*/
 	@FXML
 	void ConfrimFreezeAccount(ActionEvent event) {
 		for (int i = 0; i < Users.size();i++) {
@@ -64,12 +70,14 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 			}
 		}
 	}
-
+	
+	/*back to the branch manager screen.*/
 	@FXML
 	void BackToBranchManager(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 
+	/*load account*/
 	public void loadAccounts(ArrayList<User> Users) {
 		for (User u : Users) {
 			ActiveAccountComboBox.getItems().add(u.getFirstN());

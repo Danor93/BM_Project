@@ -18,6 +18,11 @@ import main.ClientUI;
 
 public class BranchManagerCloseAccountController extends Controller implements Initializable {
 
+	/*
+	 * Author:Danor
+	 * This class is for close an account.
+	 */
+	
 	public static ArrayList<User> Users;
 	public static String userName;
 	
@@ -42,11 +47,13 @@ public class BranchManagerCloseAccountController extends Controller implements I
     	startScreen(event, "BranchManagerScreen", "Branch Manager Main");
     }
 
+    /*for the combo box*/
    @FXML
    void ChooseUserName(ActionEvent event) {
 	   userName = AccountComboBox.getSelectionModel().getSelectedItem();
    }
    
+   /*for confirm button*/
    @FXML
    void ConfrimDelete(ActionEvent event) {
 	   User user = null;
@@ -67,7 +74,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
         assert AccountComboBox != null : "fx:id=\"AccountComboBox\" was not injected: check your FXML file 'BranchManagerCloseAccount.fxml'.";
     }
 
-
+    /*load account for the combo box*/
     public void loadAccounts(ArrayList<User> Users) {
     	for(User u:Users) {
     		AccountComboBox.getItems().add(u.getUserName());

@@ -20,6 +20,10 @@ import main.ClientUI;
 
 public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface {
 
+	/*
+	 * author:Danor
+	 * this class for open new account
+	 */
 	@FXML
 	private ResourceBundle resources;
 
@@ -49,16 +53,19 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 				: "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
 	}
 
+	/*for business account*/
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
 		startScreen(event,"BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account");
 	}
 
+	/*for private account*/
 	@FXML
 	void PrivateAccount(ActionEvent event) throws IOException {
 		startScreen(event,"BranchManagerOpenNewPrivateAccount", "Open New Private Account");
 	}
 
+	/*for back to the branch manager screen*/
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerScreen", "Branch Manager");

@@ -26,6 +26,11 @@ import main.PopUpMessage;
 
 public class BranchManagerOpenNewPrivateAccountController extends Controller
 		implements ControllerInterface, Initializable {
+	
+	/*
+	 * Author:Danor
+	 * this class is for open new account
+	 */
 	public static Client PAccount = new Client(null, null, null, null, null, null, null, null, null, null, null);
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 
@@ -62,6 +67,7 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 	@FXML
 	private ImageView BackImage;
 
+	/*for confirm button*/
 	@FXML
 	void Confirm(ActionEvent event) throws IOException {
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
