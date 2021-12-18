@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewAccountController extends Controller implements ControllerInterface {
+public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface {
 
 	@FXML
 	private ResourceBundle resources;
@@ -51,12 +51,12 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewBussinessAccount", "Open New Bussiness Account");
+		startScreen(event,"BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account");
 	}
 
 	@FXML
 	void PrivateAccount(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewPrivateAccount", "Open New Private Account");
+		startScreen(event,"BranchManagerOpenNewPrivateAccount", "Open New Private Account");
 	}
 
 	@Override

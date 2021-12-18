@@ -44,7 +44,6 @@ public class LogicController {
 							clients.get(i).setStatus("Disconnected");
 					ServerUIFController.serveruifconroller.Update(clients); // update the table
 				}
-
 			}
 		}
 	}

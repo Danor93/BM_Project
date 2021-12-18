@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Employer implements Serializable  {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6417617441257991130L;
 	private String w4cBussines;
 	private String CompanyName;
 	private String CompanyStatus;

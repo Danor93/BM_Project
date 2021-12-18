@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="709.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.OpenNewPrivateAccountController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="709.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewPrivateAccountController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="501.0" fitWidth="707.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="521.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
@@ -16,12 +16,15 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="14.0" layoutY="37.0" text="New private account" textFill="WHITE">
+      <Label layoutX="14.0" layoutY="37.0" text="New Private Account" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnBackToOpenNewAccount" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#Back" text="Back to Open new account page" />
+      <Button fx:id="btnBackToOpenNewAccount" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#Back" text="Back to Open new account page">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
       <Label layoutX="41.0" layoutY="129.0" text="First Name" textFill="WHITE">
          <font>
             <Font size="13.0" />
@@ -32,7 +35,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="66.0" layoutY="204.0" text="ID" textFill="WHITE">
+      <Label layoutX="44.0" layoutY="208.0" text="ID" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -42,12 +45,12 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="57.0" layoutY="284.0" text="Email" textFill="WHITE">
+      <Label layoutX="41.0" layoutY="288.0" text="Email" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="331.0" text="Credit card number" textFill="WHITE">
+      <Label layoutX="41.0" layoutY="331.0" text="Credit card number" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -63,6 +66,9 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnConfirm" layoutX="255.0" layoutY="373.0" mnemonicParsing="false" onAction="#Confirm" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
+      <Button fx:id="btnConfirm" layoutX="211.0" layoutY="375.0" mnemonicParsing="false" onAction="#Confirm" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </Pane>

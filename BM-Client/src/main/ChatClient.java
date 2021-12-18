@@ -6,13 +6,12 @@ package main;
 
 import client.*;
 import client.controllers.BranchManagerScreenController;
-import client.controllers.ChangeInfoDBController;
 import client.controllers.ChooseRestController;
 import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
-import client.controllers.OpenNewAccountController;
-import client.controllers.OpenNewBussinessAccountController;
-import client.controllers.OpenNewPrivateAccountController;
+import client.controllers.BranchManagerOpenNewAccountController;
+import client.controllers.BranchManagerOpenNewBussinessAccountController;
+import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.UpdateFormController;
 import Entities.Message;
 import Entities.MessageType;

@@ -56,13 +56,13 @@ public class IdentifyW4cController extends Controller implements ControllerInter
 		}
 
 		else {
-			if (!w4cManually.getText().equals(LoginScreenController.user.getW4c())) {
+		/*	if (!w4cManually.getText().equals(LoginScreenController())) {
 				allertLbl.setText("Wrong W4c, please try again or press the QR button");
 			}
 
 			else {
 				switchScene(event);
-			}
+			}*/
 		}
 
 	}
@@ -73,10 +73,10 @@ public class IdentifyW4cController extends Controller implements ControllerInter
 	 * @param event meant to check the W4C with QR
 	 */
 	@FXML
-	void getW4cFromQR(ActionEvent event) throws IOException {
+	/**void getW4cFromQR(ActionEvent event) throws IOException {
 		w4cManually.setText(LoginScreenController.user.getW4c());
 		switchScene(event);
-	}
+	}**/
 
 	private void switchScene(ActionEvent event) throws IOException {
 		startScreen(event, "ChooseRestaurant", "Choose Restaurant");

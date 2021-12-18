@@ -24,9 +24,10 @@ import javafx.stage.Stage;
 import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
+import main.PopUpMessage;
 
 public class LoginScreenController extends Controller {
-	public static User user = new User (null, null, null, null, null, null, null, null, null);
+	public static User user = new User(null, null, null, null, null, null, null, null);
 	public static boolean LoginFlag = false;
 	public static boolean AlreadyLoggedInFlag = false;
 	public static boolean WrongInputFlag = false;
@@ -66,7 +67,7 @@ public class LoginScreenController extends Controller {
 		ClientUI.chat.accept(msg);
 		if (LoginFlag) {
 			if (AlreadyLoggedInFlag) {
-				WrongInputInLoggin.setText("Already LoggedIn");
+				PopUpMessage.errorMessage("The User is Already logged in");
 				AlreadyLoggedInFlag = false;
 				LoginFlag = false;
 			} else {
@@ -87,7 +88,7 @@ public class LoginScreenController extends Controller {
 		}
 
 		else {
-			WrongInputInLoggin.setText("User name or password are incorrect, please try again!");
+			PopUpMessage.errorMessage("Wrong UserName/Password!");
 		}
 
 	}

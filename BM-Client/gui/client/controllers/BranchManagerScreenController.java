@@ -1,10 +1,14 @@
 package client.controllers;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.MyFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 
@@ -35,9 +40,6 @@ public class BranchManagerScreenController extends Controller implements Control
 	private Button btnOpenNewAccount;
 
 	@FXML
-	private Button btnChangePersonalInformation;
-
-	@FXML
 	private Button btnConfirmSupplierRegistration;
 
 	@FXML
@@ -47,7 +49,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	private Button btnViewBranchsReports;
 
 	@FXML
-	private Button btnBack;
+	private Button btnLogout;
 
 	@FXML
 	private Label nameLabel;
@@ -68,40 +70,70 @@ public class BranchManagerScreenController extends Controller implements Control
 				: "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 		assert btnOpenNewAccount != null
 				: "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnChangePersonalInformation != null
-				: "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 		assert btnConfirmSupplierRegistration != null
 				: "fx:id=\"btnConfirmSupplierRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 		assert btnUploadPDF != null
 				: "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 		assert btnViewBranchsReports != null
 				: "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 	}
 
 	@FXML
 	void OpenNewAccount(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewAccount", "Open New Account");
-	}
-
-	@FXML
-	void ChangeInfoDB(ActionEvent event) throws IOException {
-		startScreen(event, "ChangeInfoDB", "Change Information");
+		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
 	@FXML
 	void ConfirmEmployerReg(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
 	}
-	
+
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmSupplierRegistartion", "Confirm Supplier");
 	}
-	
+
 	@FXML
 	void deleteAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerCloseAccount","Close Account");
+		startScreen(event, "BranchManagerCloseAccount", "Close Account");
+	}
+
+	@FXML
+	void FreezeAccount(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerFreezeAccount", "Freeze Account");
+	}
+
+	@FXML
+	void UploadPDF(ActionEvent event) {
+		try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open Resource File");
+			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+			File file = fileChooser.showOpenDialog(BranchManagerScreenController.stage);
+			if (file != null) {
+				String path = file.getPath();
+				File f = new File(path);
+				MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
+				try {
+					File newFile = new File(path);
+					byte[] mybytearray = new byte[(int) newFile.length()];
+					msg.initArray(mybytearray.length);
+					msg.setSize(mybytearray.length);
+
+					FileInputStream fis = new FileInputStream(newFile);
+					BufferedInputStream bis = new BufferedInputStream(fis);
+
+					bis.read(msg.getMybytearray(), 0, mybytearray.length);
+					ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
+
+				} catch (Exception e) {
+					System.out.println("Error send (Files)msg) to Server");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

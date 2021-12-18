@@ -57,6 +57,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
 		   }
 	   }
 	   ClientUI.chat.accept(new Message(MessageType.Delete_Account,user));
+	   loadAccounts(Users);
    }
     
     
