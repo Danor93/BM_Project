@@ -31,7 +31,7 @@ public class ShowDishes {
 				while (rs.next()) {
 					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
 							query, query, query, query, Float.parseFloat(rs.getString("price")), Integer.parseInt(rs.getString("inventory")),
-							DishType.toDishType(rs.getString("dishType")));
+							DishType.toDishType(rs.getString("dishType")));//need to be fix.
 					dish.setRestCode(rs.getString("restId1"));
 					dish.setChoiceFactor(rs.getString("choiceFactor"));
 					dish.setDetailsOfChoice(rs.getString("choiceDetails"));
