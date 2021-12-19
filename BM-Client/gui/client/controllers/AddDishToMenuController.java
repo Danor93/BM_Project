@@ -124,7 +124,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 			dish.setChoiceFactor(txtChoiceDish.getText());
 			if (txtChoiceDetailsDish.getText().equals("example: S/M/L"))
 				txtChoiceDetailsDish.setText(null);
-			dish.setDetailsOfChoice(txtChoiceDetailsDish.getText());
+			//dish.setDetailsOfChoice(txtChoiceDetailsDish.getText());//fix.
 			if (txtIngredients.getText()
 					.equals("Put in the ingredients of the dish. \r\n"
 							+ "Example: lettuce, cucumber, tomato, tuna and black olives. \r\n"

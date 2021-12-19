@@ -99,7 +99,7 @@ public class AddNewSaladToMenuController extends Controller {
 				dish = new Dish(txtSaladName.getText(), LoginScreenController.Name,
 						null, null, null, null, Float.parseFloat(txtPriceOfSalad.getText()), Integer.parseInt(txtInventorySalad.getText()),
 						DishType.toDishType("Salad"));
-				dish.setSize(sizeStr.toString());
+				//dish.setSize(sizeStr.toString());//fix
 				dish.setExtra(txtIngredients.getText());
 				dish.setRestCode(LoginScreenController.ID);
 				System.out.println(dish);

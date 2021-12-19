@@ -114,7 +114,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				txtNewPriceDish.setText(String.valueOf(dishes.get(i).getPrice()));
 				txtNewInventoryDish.setText(String.valueOf(dishes.get(i).getInventory()));
 				txtNewChoiceDish.setText(dishes.get(i).getChoiceFactor());
-				txtNewChoiceDetailsDish.setText(dishes.get(i).getDetailsOfChoice());
+				//txtNewChoiceDetailsDish.setText(dishes.get(i).getDetailsOfChoice());//fix
 				txtNewIngredients.setText(dishes.get(i).getIngredients());
 				txtNewIngredientsToRemove.setText(dishes.get(i).getExtra());
 				PlaceOfDish = i;
@@ -173,7 +173,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				if (txtNewChoiceDetailsDish.getText().equals("null")) {
 					txtNewChoiceDetailsDish.setText("");
 				}
-				dish.setDetailsOfChoice(txtNewChoiceDetailsDish.getText());
+				//dish.setDetailsOfChoice(txtNewChoiceDetailsDish.getText());//fix.
 				if (txtNewIngredients.getText().equals("null")) {
 					txtNewIngredients.setText("");
 				}

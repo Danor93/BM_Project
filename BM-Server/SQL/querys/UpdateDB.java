@@ -73,7 +73,7 @@ public class UpdateDB {
 				stmt.setString(5, String.valueOf(dish.getPrice()));
 				stmt.setString(6, String.valueOf(dish.getInventory()));
 				stmt.setString(7, dish.getChoiceFactor());
-				stmt.setString(8, dish.getDetailsOfChoice());
+				//stmt.setString(8, dish.getDetailsOfChoice());//fix
 				stmt.setString(9, dish.getIngredients());
 				stmt.setString(10, dish.getExtra());
 				stmt.executeUpdate();
@@ -89,7 +89,7 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean UpdateDish(Dish dish) {
+	/**public static boolean UpdateDish(Dish dish) {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
@@ -112,5 +112,5 @@ public class UpdateDB {
 			e.printStackTrace();
 			return false;
 		}
-	}
+	}**/
 }

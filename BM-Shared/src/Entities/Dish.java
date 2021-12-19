@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 public class Dish implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
-	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,restCode,size,detailsOfChoice;;
+	
+	private static final long serialVersionUID = 3722018100294979572L;
+	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,restCode;
 	private float price;
 	private int inventory;
 	private DishType dishType;
 
-
 	public Dish(String dishName, String supplierName, String choiceFactor, String choiceDetails, String ingredients,
-			String extra, float price, int inventory, DishType dishType) {
-
+			String extra,float price, int inventory, DishType dishType) {
 		this.dishName = dishName;
 		this.supplierName = supplierName;
 		this.choiceFactor = choiceFactor;
@@ -25,17 +24,6 @@ public class Dish implements Serializable{
 		this.dishType = dishType;
 	}
 
-	
-	
-	public String getSize() {
-		return size;
-	}
-
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
 	public void setExtra(String extra) {
 		this.extra = extra;
 	}
@@ -44,30 +32,22 @@ public class Dish implements Serializable{
 		return extra;
 	}
 
-
-
+	
 	public String getChoiceFactor() {
 		return choiceFactor;
 	}
-
-
 
 	public void setChoiceFactor(String choiceFactor) {
 		this.choiceFactor = choiceFactor;
 	}
 
-
-
 	public String getChoiceDetails() {
 		return choiceDetails;
 	}
 
-
-
 	public void setChoiceDetails(String choiceDetails) {
 		this.choiceDetails = choiceDetails;
 	}
-
 
 
 	public String getIngredients() {
@@ -108,18 +88,10 @@ public class Dish implements Serializable{
 		this.ingredients = ingredients;
 	}
 
-	public String getDetailsOfChoice() {
-		return detailsOfChoice;
-	}
-
-	public void setDetailsOfChoice(String detailsOfChoice) {
-		this.detailsOfChoice = detailsOfChoice;
-	}
-
 	@Override
 	public String toString() {
 		return "Dish [dishName=" + dishName + ", supplierName=" + supplierName + ", extra=" + extra + ", ingredients="
-				+ ingredients + ", restCode=" + restCode + ", choiceFactor=" + choiceFactor + ", detailsOfChoice="
-				+ detailsOfChoice + ", price=" + price + ", inventory=" + inventory + ", dishType=" + dishType + "]";
+				+ ingredients + ", restCode=" + restCode + ", choiceFactor=" + choiceFactor + ", Choice Details="
+				+ choiceDetails + ", price=" + price + ", inventory=" + inventory + ", dishType=" + dishType + "]";
 	}
 }

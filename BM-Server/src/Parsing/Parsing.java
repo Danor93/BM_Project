@@ -230,12 +230,13 @@ public class Parsing {
 			return messageFromServer;
 		}
 
-		case updateDish: {
+		/**case updateDish: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_update_succ, null);
 			}
-		}
+		}**///fix
+		
 		case MenuExist: {
 			
 			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {

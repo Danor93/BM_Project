@@ -34,7 +34,7 @@ public class ShowDishes {
 							DishType.toDishType(rs.getString("dishType")));//need to be fix.
 					dish.setRestCode(rs.getString("restId1"));
 					dish.setChoiceFactor(rs.getString("choiceFactor"));
-					dish.setDetailsOfChoice(rs.getString("choiceDetails"));
+					//dish.setde(rs.getString("choiceDetails"));
 					dish.setIngredients(rs.getString("ingredients"));
 					dish.setExtra(rs.getString("extra"));
 					dishes.add(dish);
