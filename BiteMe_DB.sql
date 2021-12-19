@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: bytemedatabase
+-- Host: localhost    Database: bytemedatabase
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -16,29 +16,57 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `busclient`
+-- Table structure for table `buss_client`
 --
 
-DROP TABLE IF EXISTS `busclient`;
+DROP TABLE IF EXISTS `buss_client`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `busclient` (
+CREATE TABLE `buss_client` (
   `ID` varchar(45) NOT NULL,
   `companyName` varchar(45) NOT NULL,
-  `w4cBusiness` varchar(45) NOT NULL,
   `budget` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `id_fk1` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `id_fk1_idx` (`ID`),
+  CONSTRAINT `id_fk1` FOREIGN KEY (`ID`) REFERENCES `users` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `busclient`
+-- Dumping data for table `buss_client`
 --
 
-LOCK TABLES `busclient` WRITE;
-/*!40000 ALTER TABLE `busclient` DISABLE KEYS */;
-/*!40000 ALTER TABLE `busclient` ENABLE KEYS */;
+LOCK TABLES `buss_client` WRITE;
+/*!40000 ALTER TABLE `buss_client` DISABLE KEYS */;
+/*!40000 ALTER TABLE `buss_client` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `client`
+--
+
+DROP TABLE IF EXISTS `client`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `client` (
+  `client_id` varchar(45) NOT NULL,
+  `w4c_private` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL,
+  `CreditCardNumber` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`client_id`),
+  KEY `userId` (`client_id`),
+  CONSTRAINT `userId_fk` FOREIGN KEY (`client_id`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client`
+--
+
+LOCK TABLES `client` WRITE;
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES ('123','777','Freeze',NULL),('134','888','Active',NULL),('3111','789','Active','02346511');
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -51,8 +79,8 @@ DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `w4cBusiness` varchar(45) NOT NULL,
   `companyName` varchar(45) NOT NULL,
-  `companyStatus` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`w4cBusiness`)
+  `companyStatus` varchar(45) NOT NULL,
+  PRIMARY KEY (`w4cBusiness`,`companyName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -62,7 +90,6 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('123','intel','approved'),('258','nvidia','approved'),('321','refael','approved'),('456','elbit','approved'),('654','apple','approved'),('789','microsoft','approved'),('854','amdocs','approved'),('987','google','approved');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,17 +131,17 @@ DROP TABLE IF EXISTS `dishes`;
 CREATE TABLE `dishes` (
   `dishName` varchar(45) NOT NULL,
   `dishType` varchar(45) NOT NULL,
-  `restId1` int NOT NULL,
+  `restId1` varchar(45) NOT NULL,
   `supplierName` varchar(45) NOT NULL,
   `inventory` int DEFAULT NULL,
   `price` float NOT NULL,
-  `size` varchar(45) DEFAULT NULL,
-  `cookLevel` varchar(45) DEFAULT NULL,
-  `extra` varchar(45) DEFAULT NULL,
+  `choiceFactor` varchar(45) DEFAULT NULL,
+  `choiceDetails` varchar(45) DEFAULT NULL,
+  `ingredients` varchar(200) DEFAULT NULL,
+  `extra` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`dishName`,`restId1`),
   KEY `restId` (`restId1`),
-  KEY `restId1` (`restId1`) /*!80000 INVISIBLE */,
-  CONSTRAINT `restId_fk1` FOREIGN KEY (`restId1`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `restID_fkk` FOREIGN KEY (`restId1`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -124,7 +151,7 @@ CREATE TABLE `dishes` (
 
 LOCK TABLES `dishes` WRITE;
 /*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
-INSERT INTO `dishes` VALUES ('greek','Salad',3,'aviel',20,30,NULL,NULL,NULL),('greek salad','Salad',1,'vivino',3,3.5,'*','*','*'),('halomi','Salad',3,'aviel',50,20,NULL,NULL,NULL);
+INSERT INTO `dishes` VALUES ('cheese cake','Dessert','1','vivino',5,6,'with','Strawberries / blueberries','cheese,aggs,cramble','no cramble'),('greek salad','Salad','1','vivino',3,3.5,'size','S/M/L','tomato,cucamber,onion','no onion/ no pinuts/extra cheese'),('home salad','Salad','1','vivino',4,7.5,'','','tomato,cucamber,onion','');
 /*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,13 +165,13 @@ DROP TABLE IF EXISTS `dishesinorder`;
 CREATE TABLE `dishesinorder` (
   `dishName` varchar(45) NOT NULL,
   `orderNum` varchar(45) NOT NULL,
-  `size` varchar(45) DEFAULT NULL,
-  `cookLevel` varchar(45) DEFAULT NULL,
+  `restID` varchar(45) NOT NULL,
+  `choiceFactor` varchar(45) DEFAULT NULL,
+  `choiceDetails` varchar(45) DEFAULT NULL,
   `extra` varchar(45) DEFAULT NULL,
-  `restID` int NOT NULL,
   PRIMARY KEY (`dishName`,`orderNum`,`restID`),
   KEY `restID` (`restID`),
-  CONSTRAINT `restID_fk` FOREIGN KEY (`restID`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `rstId_fk` FOREIGN KEY (`restID`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -155,6 +182,36 @@ CREATE TABLE `dishesinorder` (
 LOCK TABLES `dishesinorder` WRITE;
 /*!40000 ALTER TABLE `dishesinorder` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dishesinorder` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `import_users`
+--
+
+DROP TABLE IF EXISTS `import_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `import_users` (
+  `userName` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `id` varchar(45) NOT NULL,
+  `Email` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`,`userName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `import_users`
+--
+
+LOCK TABLES `import_users` WRITE;
+/*!40000 ALTER TABLE `import_users` DISABLE KEYS */;
+INSERT INTO `import_users` VALUES ('ds','ds','danor','sinai','3111','d@gmail.com','050266','Customer');
+/*!40000 ALTER TABLE `import_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -173,14 +230,12 @@ CREATE TABLE `order` (
   `dateOfOrder` varchar(45) DEFAULT NULL,
   `orderStatus` varchar(45) DEFAULT NULL,
   `costumerID` varchar(45) NOT NULL,
-  `rstID` int NOT NULL,
-  `restId` int DEFAULT NULL,
+  `rstID` varchar(45) NOT NULL,
   PRIMARY KEY (`orderNumber`),
   KEY `costumerID` (`costumerID`),
-  KEY `restId` (`restId`),
-  KEY `rstID` (`rstID`),
+  KEY `restID_fk_idx` (`rstID`),
   CONSTRAINT `costumerID_fk` FOREIGN KEY (`costumerID`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `rstID_fk` FOREIGN KEY (`rstID`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `restID_fk` FOREIGN KEY (`rstID`) REFERENCES `supplier` (`restId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -225,7 +280,7 @@ DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `supplier` (
-  `restId` int NOT NULL AUTO_INCREMENT,
+  `restId` varchar(45) NOT NULL,
   `supplierName` varchar(45) NOT NULL,
   `openingTime` varchar(45) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
@@ -233,7 +288,7 @@ CREATE TABLE `supplier` (
   `supplierStatus` varchar(45) DEFAULT NULL,
   `homeBranch` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`restId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +297,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'vivino','1','haifa','haifa','approved','north'),(2,'refaelo','2','haifa','haifa','approved','east'),(3,'aviel','3','Telaviv','telaviv','approved','center'),(4,'Mcdonalds','10:00-23:00','Kiryat Haim','Ahi Eilat','not approved','north'),(5,'Japanika','11:00-24:00','Kiryat Ata','Big center','approved','north'),(6,'Limozin','12:00-23:00','Ramat Ishay','center','approved','north');
+INSERT INTO `supplier` VALUES ('1','vivino','1','haifa','haifa','approved','north'),('2','refaelo','2','haifa','haifa','approved','center');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,9 +318,7 @@ CREATE TABLE `users` (
   `Email` varchar(45) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `isLoggedIn` int DEFAULT '0',
-  `w4cPrivate` varchar(45) DEFAULT NULL,
   `homeBranch` varchar(45) NOT NULL,
-  `userStatus` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `homeBranch` (`homeBranch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -277,7 +330,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('a','a','Customer','adi','sasson','123','***','***',0,'***','north','active'),('b','b','Customer','talia','blum','134','111','111',0,'222','east','active'),('d','d','Supplier','aviel','gabay','3','d@d.co.il','052123',0,'0','0','active'),('e','e','Coustomer','danor','sinai','426','e@e.co.il','052897',0,'0','0','active'),('c','c','BranchManager','sahar','oz','456','c@c.co.il','054879',1,'0','0','active');
+INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('a','a','Customer','adi','sasson','123','***','***',0,''),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ds','ds','Customer','danor','sinai','3111','d@gmail.com','050266',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -290,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 19:59:44
+-- Dump completed on 2021-12-19 12:18:40
