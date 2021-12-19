@@ -12,19 +12,21 @@ import Entities.homeBranches;
 
 public class getDishes {
 
-	public static ArrayList<Dish> getDishes(String restCode) {
+	public static ArrayList<Dish> getDishes(Integer restCode) {
 		ArrayList<Dish> dishes=new ArrayList<>();
 		PreparedStatement stmt;
 		String query = "";
 		try {
-				stmt = DBConnect.conn.prepareStatement("SELECT dishName,supplierName,price,inventory,dishType FROM bytemedatabase.dishes WHERE restId1=?");
-				stmt.setString(1,restCode);
+				stmt = DBConnect.conn.prepareStatement("SELECT dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,price,inventory,dishType FROM bytemedatabase.dishes WHERE restId1=?");
+				stmt.setInt(1,restCode);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					Dish dish=new Dish(rs.getString(1),rs.getString(2),rs.getFloat(3),rs.getInt(4),DishType.toDishType(rs.getString(5)));
+					Dish dish= new Dish(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getFloat(7),rs.getInt(8),DishType.toDishType(rs.getString(9)));
+					System.out.println(dish.getDishName());
 					dishes.add(dish);
 				}
 				rs.close();
+				
 		}
 
 		 catch (SQLException e) {

@@ -105,8 +105,10 @@ public class ServerUIFController {
 	void ConnectServer(ActionEvent event) {
 		ServerConnection.startServer(null, this);
 		String username, password;
-		username = usertxt.getText();
-		password = Passtxt.getText();
+		//username = usertxt.getText();
+		//password = Passtxt.getText();
+		username = "root";
+		password = "Aa123456";
 		Connection connection = DBConnect.connect(username, password);
 		if (flagon == true) {
 			Statuslbl.setText("ON");

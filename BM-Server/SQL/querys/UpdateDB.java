@@ -67,7 +67,7 @@ public class UpdateDB {
 						"INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName, price, inventory, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				stmt.setString(1, dish.getDishName());
 				//stmt.setString(2, dish.getDishType().toString());
-				stmt.setString(2, DishType.typeToString(dish.getDishType()));
+				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
 				stmt.setString(4, dish.getSupplierName());
 				stmt.setString(5, String.valueOf(dish.getPrice()));
@@ -100,7 +100,7 @@ public class UpdateDB {
 						+ "', ingredients='" + dish.getIngredients() + "', extra='" + dish.getExtra()
 						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
 				stmt.setString(1, dish.getDishName());
-				stmt.setString(2, DishType.typeToString(dish.getDishType()));
+				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
 				stmt.executeUpdate();
 				return true;

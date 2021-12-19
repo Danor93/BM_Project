@@ -14,6 +14,7 @@ public class Restaurant implements Serializable {
 		this.supplierName = supplierName;
 		this.openning = openning;
 		this.city = city;
+		this.address=address;
 		this.homeBranch = homeBranch;
 	}
 

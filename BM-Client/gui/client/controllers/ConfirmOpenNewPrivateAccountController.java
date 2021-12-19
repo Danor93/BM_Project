@@ -40,4 +40,5 @@ public class ConfirmOpenNewPrivateAccountController extends Controller implement
 	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
+
 }

@@ -51,7 +51,7 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 
     @FXML
     void initialize() {
-    	setImage(BackImage,"background.png");
+    	//setImage(BackImage,"background.png");
         assert btnConfirmEmployerRegistration != null : "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnOpenNewAccount != null : "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'CEOScreen.fxml'.";
         assert btnChangePersonalInformation != null : "fx:id=\"btnChangePersonalInformation\" was not injected: check your FXML file 'CEOScreen.fxml'.";
@@ -73,4 +73,5 @@ public class CEOScreenController extends Controller implements ControllerInterfa
         void ChangeInfoDBCEO(ActionEvent event) throws IOException {
         	startScreen(event, "ChangeInfoDB", "Change Information");
         }
+
 }

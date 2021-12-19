@@ -5,18 +5,28 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import Entities.BussinessAccount;
+import Entities.Client;
+import Entities.Employer;
+import Entities.MyFile;
+import Entities.Supplier;
+import Entities.User;
+import Entities.homeBranches;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
 
 public class Query {
 
-	/*importData 
-	 * this method import the database script
-	 * */
+	/*
+	 * importData this method import the database script
+	 */
 	public static void importData() {
 
 		FileChooser fileChooser = new FileChooser();
@@ -26,62 +36,379 @@ public class Query {
 		String path;
 		if (file != null) {
 			path = file.getPath();
-			if(DBConnect.conn==null) {
-			ServerUIFController.serveruifconroller.message("First insert user and password,press Start and then import", "Error");
-			}
-			else {
-			Connection connection= DBConnect.conn;
-			InputStream targetStream = null;
-			try {
-				targetStream = new FileInputStream(path);
-			} catch (FileNotFoundException e1) {
-				ServerUIFController.serveruifconroller.message("The database file is incorrect", "Error");
-				e1.printStackTrace();
-			}
-			try {
-				readtScript(connection, targetStream);
-			} catch (SQLException e) {
-				ServerUIFController.serveruifconroller.message("The database file is incorrect", "Error");
-				e.printStackTrace();
-			}
-			ServerUIFController.serveruifconroller.message("The database was successfully imported", "Success");
+			if (DBConnect.conn == null) {
+				ServerUIFController.serveruifconroller
+						.message("First insert user and password,press Start and then import", "Error");
+			} else {
+				Connection connection = DBConnect.conn;
+				InputStream targetStream = null;
+				try {
+					targetStream = new FileInputStream(path);
+				} catch (FileNotFoundException e1) {
+					ServerUIFController.serveruifconroller.message("The database file is incorrect", "Error");
+					e1.printStackTrace();
+				}
+				try {
+					readtScript(connection, targetStream);
+				} catch (SQLException e) {
+					ServerUIFController.serveruifconroller.message("The database file is incorrect", "Error");
+					e.printStackTrace();
+				}
+				ServerUIFController.serveruifconroller.message("The database was successfully imported", "Success");
 			}
 		} else {
 			System.out.println("error"); // or something else
 		}
 	}
-	
-	/**readtScript this method get script and executed it into database
-	 * @param conn - the connection to db
-	 * @param in - the script file
-	 */
-	public static void readtScript(Connection conn, InputStream in) throws SQLException
-	{
-	    Scanner s = new Scanner(in);
-	    s.useDelimiter("(;(\r)?\n)|(--\n)");
-	    Statement st = null;
-	    try
-	    {
-	        st = conn.createStatement();
-	        while (s.hasNext())
-	        {
-	            String line = s.next();
-	            if (line.startsWith("/*!") && line.endsWith("*/"))
-	            {
-	                int i = line.indexOf(' ');
-	                line = line.substring(i + 1, line.length() - " */".length());
-	            }
 
-	            if (line.trim().length() > 0)
-	            {
-	                st.execute(line);
-	            }
-	        }
-	    }
-	    finally
-	    {
-	        if (st != null) st.close();
-	    }
+	/**
+	 * readtScript this method get script and executed it into database
+	 * 
+	 * @param conn - the connection to db
+	 * @param in   - the script file
+	 */
+	public static void readtScript(Connection conn, InputStream in) throws SQLException {
+		Scanner s = new Scanner(in);
+		s.useDelimiter("(;(\r)?\n)|(--\n)");
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			while (s.hasNext()) {
+				String line = s.next();
+				if (line.startsWith("/*!") && line.endsWith("*/")) {
+					int i = line.indexOf(' ');
+					line = line.substring(i + 1, line.length() - " */".length());
+				}
+
+				if (line.trim().length() > 0) {
+					st.execute(line);
+				}
+			}
+		} finally {
+			if (st != null)
+				st.close();
+		}
 	}
 
+	/*
+	 * Author:Danor this method is for a Execute a Query which return the company
+	 * that not approved or waiting for approved by the Branch Manager.
+	 */
+	public static ArrayList<Employer> LoadEmployers() {
+		ArrayList<Employer> employers = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT w4cBusiness,companyName,companyStatus FROM bytemedatabase.company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+							+ "");
+			while (rs.next()) {
+				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
+				employers.add(employer);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return employers;
+	}
+
+	/*
+	 * Author:Danor this method Execute an Update for the companyStatus on the
+	 * company table
+	 */
+	public static void UpdateEmployers(String CompanyName, String CompanyStatus) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE company SET companyStatus= '" + CompanyStatus + "'"
+						+ " WHERE companyName= '" + CompanyName + "'  ;");
+				stmt.executeUpdate();
+			}
+
+			else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+	}
+
+	public static ArrayList<Supplier> LoadSuppliers() {
+		ArrayList<Supplier> suppliers = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM supplier WHERE supplierStatus='not approved' or supplierStatus ='waiting'" + "");
+			while (rs.next()) {
+				Supplier supplier = new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), homeBranches.toHomeBranchType(rs.getString(7)));
+				suppliers.add(supplier);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return suppliers;
+	}
+
+	public static void UpdateSupplier(String SupplierName, String SupplierStatus) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE supplier SET supplierStatus= '" + SupplierStatus + "'"
+						+ " WHERE supplierName= '" + SupplierName + "'  ;");
+				stmt.executeUpdate();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+	}
+
+	public static User IDcheck(String ID) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("SELECT * FROM users WHERE ID= '" + ID + "'" + "'  ;");
+				ResultSet rs = stmt.executeQuery();
+				if (rs != null) {
+					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
+							homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
+							rs.getString(9));
+					user.setEmail(rs.getString(7));
+					user.setPhone(rs.getString(8));
+					rs.close();
+					return user;
+				} else {
+					return null;
+				}
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return null;
+	}
+
+	public static ArrayList<User> getAccount() {
+		ArrayList<User> users = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+			while (rs.next()) {
+				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
+						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
+						rs.getString(9));
+				user.setEmail(rs.getString(7));
+				user.setPhone(rs.getString(8));
+				users.add(user);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return users;
+	}
+
+	public static void DeleteAccount(User user) {
+		if (DBConnect.conn != null) {
+			try {
+				PreparedStatement stmt = DBConnect.conn
+						.prepareStatement("DELETE FROM users WHERE ID = '" + user.getId() + "' ;");
+				stmt.executeUpdate();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+	}
+
+	public static Boolean checkEmployerStatus(String CompanyName) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt
+						.executeQuery("SELECT companyStatus FROM company WHERE companyName= '" + CompanyName + "' ;");
+				while (rs.next()) {
+					String status = rs.getString(1);
+					if (status.equals("approved")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static void addNewBAccount(BussinessAccount BAccount) {
+		if (DBConnect.conn != null) {
+			try {
+				PreparedStatement stmt = DBConnect.conn.prepareStatement(
+						"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+								+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
+				stmt.setString(1, "e");
+				stmt.setString(2, "e");
+				stmt.setString(3, "Customer");
+				stmt.setString(4, BAccount.getFirstN());
+				stmt.setString(5, BAccount.getLastN());
+				stmt.setString(6, BAccount.getId());
+				stmt.setString(7, BAccount.getEmail());
+				stmt.setString(8, BAccount.getPhone());
+				stmt.setInt(9, 0);
+				stmt.setString(10, homeBranches.North.toString());
+				stmt.executeUpdate();
+
+				PreparedStatement stmt2 = DBConnect.conn
+						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
+				stmt2.setString(1, BAccount.getId());
+				stmt2.setString(2, "456");
+				stmt2.setString(3, "Active");
+				stmt2.executeUpdate();
+
+				PreparedStatement stmt3 = DBConnect.conn
+						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget) VALUES(?,?,?)");
+				stmt3.setString(1, BAccount.getId());
+				stmt3.setString(2, BAccount.getCompanyName());
+				stmt3.setString(3, BAccount.getBudget());
+				stmt3.executeUpdate();
+
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+	}
+
+	public static Boolean checkPrivateAccount(String ID) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + ID + "' ;");
+				if (rs != null) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static void addNewPAccount(Client PAccount) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT userName,password,role FROM import_users WHERE id= '" + PAccount.getId() + "' ;");
+				while (rs.next()) {
+					String UserName = rs.getString(1);
+					String Password = rs.getString(2);
+					String Role = rs.getString(3);
+
+					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
+							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
+					stmt2.setString(1, UserName);
+					stmt2.setString(2, Password);
+					stmt2.setString(3, Role);
+					stmt2.setString(4, PAccount.getFirstN());
+					stmt2.setString(5, PAccount.getLastN());
+					stmt2.setString(6, PAccount.getId());
+					stmt2.setString(7, PAccount.getEmail());
+					stmt2.setString(8, PAccount.getPhone());
+					stmt2.setInt(9, 0);
+					stmt2.setString(10, homeBranches.North.toString());
+					stmt2.executeUpdate();
+
+					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
+							"INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
+					stmt3.setString(1, PAccount.getId());
+					stmt3.setString(2, "789");
+					stmt3.setString(3, "Active");
+					stmt3.setString(4, PAccount.getCreditCardNumber());
+					stmt3.executeUpdate();
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+	}
+
+	public static ArrayList<User> GetAccountForFreeze() {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' ");
+				ArrayList<User> users = new ArrayList<>();
+				while (rs.next()) {
+					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
+							homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
+							rs.getString(9));
+					user.setEmail(rs.getString(7));
+					user.setPhone(rs.getString(8));
+					users.add(user);
+				}
+				rs.close();
+				return users;
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public static Boolean CheckAccountStatus(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT status FROM client WHERE client_id= '" + AccountID + "' ;");
+				while (rs.next()) {
+					String status = rs.getString(1);
+					if (status.equals("Active")) {
+						rs.close();
+						return true;
+					} else {
+						rs.close();
+						return false;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static void UpdateAccountStatusToFreeze(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				PreparedStatement stmt = DBConnect.conn
+						.prepareStatement("UPDATE client SET status='Freeze' WHERE client_id= '" + AccountID + "'  ;");
+				stmt.executeUpdate();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+	}
+	
+	
+	/*need to be fix*/
+	public static void updateFile(MyFile file) {
+		Connection connection = DBConnect.conn;
+		Statement StatementOfResultSet;
+		String sql= "INSERT INTO  values(?)";
+		try {
+		StatementOfResultSet = connection.createStatement();
+		StatementOfResultSet.executeUpdate(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

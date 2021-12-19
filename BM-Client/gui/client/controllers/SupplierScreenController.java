@@ -53,7 +53,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.png");
+		//setImage(BackImage, "background.png");
 		assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnCreateMenu != null
 				: "fx:id=\"btnCreateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
@@ -83,4 +83,5 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmOrderApproval", "Update order status");
 	}
+
 }

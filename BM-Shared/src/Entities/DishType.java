@@ -35,27 +35,29 @@ public enum DishType {
 
 	}
 
-	public static String typeToString(DishType dishType) {
+	public static String fromTypeToStr(DishType dishType) {
 		switch (dishType) {
-		case MainDish: {
-			return "Main dish";
-		}
-		case Drink: {
-			return "Drink";
-		}
 		case Starter: {
 			return "Starter";
 		}
-		case Dessert: {
-			return "Dessert";
-		}
+
 		case Salad: {
 			return "Salad";
 		}
+
+		case MainDish: {
+			return "Main dish";
+		}
+
+		case Dessert: {
+			return "Dessert";
+		}
+
 		default: {
-			return null;
+			return "Drink";
 		}
 
 		}
+
 	}
 }

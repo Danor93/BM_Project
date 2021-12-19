@@ -108,7 +108,7 @@ public class CreateMenuScreenController extends Controller implements Controller
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.png");
+    	//setImage(BackImage, "background.png");
         assert btnSalad != null : "fx:id=\"btnSalad\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert btnStart != null : "fx:id=\"btnStart\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert btnMainDishes != null : "fx:id=\"btnMainDishes\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";

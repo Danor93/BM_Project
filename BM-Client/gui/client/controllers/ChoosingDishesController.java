@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
-import Entities.Restaurant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,10 +19,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ChoosingDishesController extends Controller implements Initializable,ControllerInterface {
+public class ChoosingDishesController extends Controller implements Initializable {
 
     @FXML
     private Button addToOrder;
@@ -35,29 +39,91 @@ public class ChoosingDishesController extends Controller implements Initializabl
     private Text foodKind;
 
     @FXML
-    private ListView<?> list;
-
-    @FXML
-    private Label priceLabel;
+    private ListView<String> list;
     
-   
+    @FXML
+    private Label DishIng;
+    
+    @FXML
+    private Text notify;
+    
+    @FXML
+    private Text ingredientLabel;
+
+  /*  @FXML
+    private AnchorPane ingredientPane;
+*/
+    @FXML
+    private VBox ingredientPane;
+    
+    @FXML
+    private Text price;
+
+    public ArrayList<String> dishNames;
+	public ArrayList<Dish> dishListOfType;
+	public static Dish chosenDish;
 
     @FXML
-    void addDishToOrder(ActionEvent event) {
+    void addDishToOrder(ActionEvent event) throws IOException 
+    {
+    	String selectedDish =list.getSelectionModel().getSelectedItem();
+    	
+    	if(selectedDish==null)
+    	{
+    		notify.setText("Please choose dish");
+    	}
+    	
+    	else
+    	{
+    		int indexOfDish=dishNames.indexOf(selectedDish);
+        	chosenDish=dishListOfType.get(indexOfDish);
+        	//System.out.println(chosenDish.getChoiceFactor());
+        	if(!chosenDish.getChoiceFactor().equals("")||!chosenDish.getExtra().equals(""))
+        	{
+        		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishOptions.fxml"));
+        		Parent root=load.load();
+        		DishOptionsController aFrame = load.getController();
+        		aFrame.setValue();
+        		aFrame.start(primaryStage, root);
+        	}
+        	
+        	else
+        	{
+        		SingletonOrder.getInstance().myOrder.add(chosenDish);
+        		notify.setFill(Color.GREEN);
+        		notify.setText("The dish was successfully added to your order");
+        	}
+    	}
+    	
 
     }
-    
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader();
+
+    @FXML
+    void backToMenu(ActionEvent event) throws IOException {
+    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
 		Parent root=load.load();
 		MenuScreenController aFrame = load.getController();
 		aFrame.display(RestListFormController.chosenRst.getSupplierName());
 		aFrame.start(primaryStage,root);
-		startScreen(event, "MenuScreen", "Menu");
-		
-	}
+
+    }
+    
+    @FXML
+    void getDishPrice(MouseEvent event)
+    {
+    	String s="price : ";
+    	String selectedDish =list.getSelectionModel().getSelectedItem();
+    	int indexOfDish=dishNames.indexOf(selectedDish);
+    	ingredientPane.setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
+    	ingredientLabel.setText(selectedDish);
+    	price.setText(s+dishListOfType.get(indexOfDish).getPrice()+"$");
+    	DishIng.setText(dishListOfType.get(indexOfDish).getIngredients());
+    	ingredientPane.setStyle("-fx-background-radius: 30");
+
+    }
+
 
 	public void start(Stage stage, Parent root) {
 		Scene scene = new Scene(root);		
@@ -69,32 +135,29 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	public void display(String string) 
 	{
 		foodKind.setText(string);
-		
-		
+
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		ArrayList<String> dishType=new ArrayList<>();
-		ArrayList<Float> priceOfDish= new ArrayList<>();
+		dishNames=new ArrayList<>();
+		dishListOfType= new ArrayList<>();
 		for(Dish dish:RestListFormController.dishes)
 		{
-			if(DishType.toDishType( foodKind.getText()).equals(dish.getDishType()))
+			if((MenuScreenController.chosenFoodType).equals(DishType.fromTypeToStr(dish.getDishType())))
 			{
-				dishType.add(dish.getDishName());
-				priceOfDish.add(dish.getPrice());
+				System.out.println(dish.getDishName());
+				dishNames.add(dish.getDishName());
+				dishListOfType.add(dish);
 			}
 					
 		}
-		
-		
-		
-		ObservableList<String> observableList = FXCollections.observableArrayList(dishType);
-		
-		
+
+		ObservableList<String> observableList = FXCollections.observableArrayList(dishNames);
+		list.getItems().addAll(observableList);	
 	}
-
-
-
 }
+
+
+

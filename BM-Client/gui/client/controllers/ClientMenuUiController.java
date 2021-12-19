@@ -46,18 +46,18 @@ import main.ClientUI;
 	    	
 	    	String ip;
 	    	ip=ipTxt.getText();
-	    	if(ipTxt.getText().trim().isEmpty())
+	    	/*if(ipTxt.getText().trim().isEmpty())
 			{
 				System.out.println("In order to update you must enter all fields");	
 			}
 	    	else
-	    	{
-	    		ClientUI.chat= new ClientController(ip, 5555);
+	    	{*/
+	    		//ClientUI.chat= new ClientController(ip, 5555);
+	    		ClientUI.chat= new ClientController("localhost", 5555);
 	    		Message msg = new Message(MessageType.login, null);
 	    		ClientUI.chat.accept(msg);
 	    		startScreen(event,"LoginScreen","Login");
 	    	}
-	    }
 	    
 	    public void start(Stage primaryStage) throws Exception {
 			primaryStage.setTitle("BiteMe Main Client Panel");
@@ -70,11 +70,13 @@ import main.ClientUI;
 	    
 	    @FXML
 	    void initialize() {
-	    	super.setImage(LogoImage, "ClientMenuUi.png");
+	    	//setImage(LogoImage, "ClientMenuUi.jpeg");
 	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 
 	    }
+
+
 
 }

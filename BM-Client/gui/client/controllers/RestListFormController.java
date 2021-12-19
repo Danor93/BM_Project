@@ -25,11 +25,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import main.ChatClient;
 import main.ClientUI;
-
 
 
 /**This class shows the customer list of restaurant in specific city 
@@ -37,13 +35,10 @@ import main.ClientUI;
  * 
  *
  */
+public class RestListFormController extends Controller implements Initializable {
 
-public class RestListFormController extends Controller implements Initializable, ControllerInterface {
-
-
-	@FXML
-	private Button backBtn;
-
+    @FXML
+    private Button backBtn;
 
     @FXML
     private TableColumn<Restaurant, String> colAdd;
@@ -71,7 +66,15 @@ public class RestListFormController extends Controller implements Initializable,
     public static Restaurant chosenRst;
     
 
-	private ImageView BackImage;
+    /**
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    void backToCity(ActionEvent event) throws IOException {
+		startScreen(event,"ChooseRestaurant","Choose restaurant");
+
+    }
 
     
     /**This method proceed to the menu of the restaurant
@@ -88,32 +91,40 @@ public class RestListFormController extends Controller implements Initializable,
 		if(supplier!=null)
 		{
 			String address=table.getSelectionModel().getSelectedItem().getAddress();
-			Message msg= new Message(MessageType.get_Dishes,table.getSelectionModel().getSelectedItem().getRestCode());
+			Message msg= new Message(MessageType.get_Dishes,(Integer)table.getSelectionModel().getSelectedItem().getRestCode());
 			ClientUI.chat.accept(msg);
+			System.out.println(dishes.get(0).getDishName());
 
 			
 			for(Restaurant r:restaurants)
 			{
 				if(supplier.equals(r.getSupplierName())&& address.equals(r.getAddress()))
-					chosenRst=r;	
+					chosenRst=r;
+				
 			}
+			
+
 			aFrame.display(supplier);
 			aFrame.start(primaryStage,root);
-		} 	
-    }
+		}
+		
+    	
 
-	@FXML
-	void initialize() {
-		setImage(BackImage, "background.png");
-		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert backBtn != null : "fx:id=\"backBtn\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert colAdd != null : "fx:id=\"colAdd\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert colOpen != null : "fx:id=\"colOpen\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert colRes != null : "fx:id=\"colRes\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert nextbtn != null : "fx:id=\"nextbtn\" was not injected: check your FXML file 'restListForm.fxml'.";
-		assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'restListForm.fxml'.";
+    }
+		
+    
+
+	/**
+	 * @param stage
+	 * @param root
+	 */
+	public void start(Stage stage,Parent root) {
+			Scene scene = new Scene(root);			
+			stage.setTitle("BiteMe Choose Restaurant");
+			stage.setScene(scene);
+			stage.show();	
 	}
-	
+
 	
 	/**This method is initializes the table with the restaurant in the wanted city  
 	 *
@@ -128,18 +139,14 @@ public class RestListFormController extends Controller implements Initializable,
 		colRes.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
 		table.setItems(observableList);
 	}
+
 	
 	/**
 	 * @param city
 	 */
 	public void display(String city) {
 		cityName.setText(city);
-		Message msg = new Message(MessageType.show_Restaurants, ChooseRestController.cityName);
-	}
-
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "ChooseRestaurant", "Choose Restaurant");
+		
 	}
 
 }

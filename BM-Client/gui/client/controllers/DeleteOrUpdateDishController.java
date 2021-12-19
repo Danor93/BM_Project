@@ -98,7 +98,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		for (int i = 0; i < dishes.size(); i++) {
 			// System.out.println("all the dishes of the supp : "+ d.getDishName());
 			if (dishes.get(i) != null) {
-				if (DishType.typeToString(dishes.get(i).getDishType()).equals(TypeOfDish)) {
+				if (DishType.fromTypeToStr(dishes.get(i).getDishType()).equals(TypeOfDish)) {
 					System.out.println("dishes in this type: " + dishes.get(i).getDishName());
 					btnDish.getItems().add(dishes.get(i).getDishName());
 				}
@@ -124,7 +124,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
-		Dish dish = new Dish(null, null, 0, 0, null);
+		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
 
 		try {
 			dishtype = DishType.toDishType(TypeOfDish);
@@ -164,7 +164,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 			}
 			if (NameAndTypeCorrect && CorrectPrice && CorrectInv) {
 				String SupplierName = LoginScreenController.Name;
-				dish = new Dish(NameOfDish, SupplierName, PriceOfDish, InvOfDish, dishtype);
+				//dish = new Dish(NameOfDish, SupplierName, PriceOfDish, InvOfDish, dishtype);/*need to be fit the the ned dish entity.*/
 				dish.setRestCode(LoginScreenController.ID);
 				if (txtNewChoiceDish.getText().equals("null")) {
 					txtNewChoiceDish.setText("");

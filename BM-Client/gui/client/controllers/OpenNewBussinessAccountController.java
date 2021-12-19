@@ -88,4 +88,5 @@ public class OpenNewBussinessAccountController extends Controller implements Con
 	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "OpenNewAccount", "Open New Account");
 	}
+
 }

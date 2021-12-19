@@ -17,14 +17,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-/**
- * This class meant to identify the user as a costumer in the system
- * 
+/** This class meant to identify the user as a costumer in the system
  * @author Adi & Talia
  *
  */
-
-public class IdentifyW4cController extends Controller implements ControllerInterface {
+public class IdentifyW4cController extends Controller {
 
 	@FXML
 	private Button QR;
@@ -38,53 +35,66 @@ public class IdentifyW4cController extends Controller implements ControllerInter
 	@FXML
 	private Label allertLbl;
 
-	@FXML
-	private Button BackBtn;
+
+    @FXML
+    private Button back;
 
 	@FXML
 	private ImageView BackImage;
 
-	/**
-	 * This method meant to confirm if the user is registered as a costumer
-	 * 
-	 * @param event meant to check the manually entering of W4C
+
+	/**This method meant to confirm if the user is registered as a costumer
+	 * @param event			meant to check the manually entering of W4C
 	 */
 	@FXML
-	void confirm(ActionEvent event) throws IOException {
+	void confirm(ActionEvent event) {
 		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) {
 			allertLbl.setText("Please enter W4C code or press the QR button");
 		}
 
 		else {
-			if (!w4cManually.getText().equals(LoginScreenController.user.getW4c())) {
+		/*	if (!w4cManually.getText().equals(LoginScreenController())) {
 				allertLbl.setText("Wrong W4c, please try again or press the QR button");
 			}
 
 			else {
 				switchScene(event);
-			}
+			}*/
 		}
 
 	}
 
-	/**
-	 * This method meant to get the W4C via QR
-	 * 
-	 * @param event meant to check the W4C with QR
+	/**This method meant to get the W4C via QR
+	 * @param event		meant to check the W4C with QR
 	 */
+	
 	@FXML
 	void getW4cFromQR(ActionEvent event) throws IOException {
-		w4cManually.setText(LoginScreenController.user.getW4c());
+		//w4cManually.setText(LoginScreenController.user.getW4c());//getw4c need to be fix
 		switchScene(event);
 	}
 
-	private void switchScene(ActionEvent event) throws IOException {
-		startScreen(event, "ChooseRestaurant", "Choose Restaurant");
-	}
 
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "CustomerScreen", "Customer");
+	
+	/**   
+	 * @param event
+	 */
+	private void switchScene(ActionEvent event) {
+		try {
+			startScreen(event,"ChooseRestaurant","Choose restaurant");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
+	
+    @FXML
+    void back(ActionEvent event) throws IOException {
+    	startScreen(event,"CustomerScreen","Costumer Screen");
+    }
+
+
+
 
 }

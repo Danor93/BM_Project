@@ -62,6 +62,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES ('123','intel','approved'),('258','nvidia','approved'),('321','refael','approved'),('456','elbit','approved'),('654','apple','approved'),('789','microsoft','approved'),('854','amdocs','approved'),('987','google','approved');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,7 +233,7 @@ CREATE TABLE `supplier` (
   `supplierStatus` varchar(45) DEFAULT NULL,
   `homeBranch` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`restId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +242,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES (1,'vivino','1','haifa','haifa','approved','north'),(2,'refaelo','2','haifa','haifa','approved','east'),(3,'aviel','3','Telaviv','telaviv','approved','center');
+INSERT INTO `supplier` VALUES (1,'vivino','1','haifa','haifa','approved','north'),(2,'refaelo','2','haifa','haifa','approved','east'),(3,'aviel','3','Telaviv','telaviv','approved','center'),(4,'Mcdonalds','10:00-23:00','Kiryat Haim','Ahi Eilat','not approved','north'),(5,'Japanika','11:00-24:00','Kiryat Ata','Big center','approved','north'),(6,'Limozin','12:00-23:00','Ramat Ishay','center','approved','north');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,6 +265,7 @@ CREATE TABLE `users` (
   `isLoggedIn` int DEFAULT '0',
   `w4cPrivate` varchar(45) DEFAULT NULL,
   `homeBranch` varchar(45) NOT NULL,
+  `userStatus` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `homeBranch` (`homeBranch`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -275,7 +277,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('a','a','Customer','adi','sasson','123','***','***',0,'***','north'),('b','b','Customer','talia','blum','134','111','111',0,'222','east'),('d','d','Supplier','aviel','gabay','3','d@d.co.il','052123',0,'0','0'),('c','c','BranchManager','sahar','oz','456','c@c.co.il','054879',0,'0','0');
+INSERT INTO `users` VALUES ('a','a','Customer','adi','sasson','123','***','***',0,'***','north','active'),('b','b','Customer','talia','blum','134','111','111',0,'222','east','active'),('d','d','Supplier','aviel','gabay','3','d@d.co.il','052123',0,'0','0','active'),('e','e','Coustomer','danor','sinai','426','e@e.co.il','052897',0,'0','0','active'),('c','c','BranchManager','sahar','oz','456','c@c.co.il','054879',1,'0','0','active');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -288,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-12 20:50:26
+-- Dump completed on 2021-12-15 19:59:44
