@@ -97,8 +97,6 @@ public class LoginScreenController extends Controller {
 	void getUserName(InputMethodEvent event) {
 
 	}
-	
-
 
     @FXML
     void initialize() {

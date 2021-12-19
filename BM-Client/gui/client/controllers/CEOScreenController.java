@@ -19,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class CEOScreenController extends BranchManagerScreenController implements ControllerInterface,Initializable {
+public class CEOScreenController extends BranchManagerScreenController implements ControllerInterface, Initializable {
 	@FXML
 	private ResourceBundle resources;
 
@@ -47,17 +47,15 @@ public class CEOScreenController extends BranchManagerScreenController implement
 	@FXML
 	private ImageView BackImage;
 
-
-/**	@Override
+	@Override
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
 		startScreen(event, "LoginScreen", "Login");
-	}**/
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		
+
 	}
 
 }

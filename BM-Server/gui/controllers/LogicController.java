@@ -16,14 +16,13 @@ public class LogicController {
 		ClientConnection newClient = new ClientConnection(client);
 		Message recivedMessage = (Message) msg;
 		int flag = 0;
-		if (recivedMessage.getMessageType().equals(MessageType.login)) {
+		if (recivedMessage.getMessageType().equals(MessageType.loginSystem)) {
 			if (clients == null) {// first client
 
 				clients = new ArrayList<ClientConnection>();
 				clients.add(newClient);
 				ServerUIFController.serveruifconroller.Update(clients); // update the table
 			} else {
-
 				for (int i = 0; i < clients.size(); i++) {// check if the client already connected to server
 					if (clients.get(i).getHostName().equals(newClient.getHostName())) {
 						clients.get(i).setStatus("Connected");// change to connect
@@ -37,14 +36,13 @@ public class LogicController {
 					clients.add(newClient);// new client
 					ServerUIFController.serveruifconroller.Update(clients); // update the table
 				}
-
-				if (recivedMessage.getMessageType().equals(MessageType.Disconected)) {/*if client disconnected.*/
-					for (int i = 0; i < clients.size(); i++)
-						if (clients.get(i).getHostName().equals(newClient.getHostName()))
-							clients.get(i).setStatus("Disconnected");
-					ServerUIFController.serveruifconroller.Update(clients); // update the table
-				}
 			}
+		}
+		else if (recivedMessage.getMessageType().equals(MessageType.Disconected)) {/*if client disconnected.*/
+			for (int i = 0; i < clients.size(); i++)
+				if (clients.get(i).getHostName().equals(newClient.getHostName()))
+					clients.get(i).setStatus("Disconnected");
+			ServerUIFController.serveruifconroller.Update(clients); // update the table
 		}
 	}
 }

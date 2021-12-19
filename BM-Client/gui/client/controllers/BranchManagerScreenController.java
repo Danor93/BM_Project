@@ -12,6 +12,7 @@ import Entities.MyFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class BranchManagerScreenController extends Controller implements ControllerInterface {
+public class BranchManagerScreenController extends Controller implements ControllerInterface,Initializable {
 
 	public static Stage stage;
 
@@ -140,6 +141,12 @@ public class BranchManagerScreenController extends Controller implements Control
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
