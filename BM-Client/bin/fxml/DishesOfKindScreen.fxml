@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ChoosingDishesController">
+   <children>
+      <ImageView fitHeight="502.0" fitWidth="718.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fill="WHITE" layoutX="8.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="M">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="660.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="13.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="e">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="n">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="u">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <VBox layoutX="79.0" layoutY="49.0" prefHeight="359.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-radius: 30;">
+         <children>
+            <Text fx:id="foodKind" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="226.16099548339844">
+               <font>
+                  <Font name="Century" size="29.0" />
+               </font>
+            </Text>
+            <ListView fx:id="list" onMouseClicked="#getDishPrice" prefHeight="326.0" prefWidth="295.0" />
+         </children>
+      </VBox>
+      <Button fx:id="back" layoutX="33.0" layoutY="496.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="addToOrder" layoutX="569.0" layoutY="495.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="29.0" prefWidth="130.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="add to my order" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Text fx:id="notify" fill="RED" layoutX="215.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="212.91928100585943">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <VBox fx:id="ingredientPane" layoutX="396.0" layoutY="129.0" prefHeight="200.0" prefWidth="235.0" style="-fx-background-color: #272727; -fx-background-radius: 30;">
+         <children>
+            <Text fx:id="ingredientLabel" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="237.58590698242188">
+               <font>
+                  <Font name="Century" size="25.0" />
+               </font>
+            </Text>
+            <Label fx:id="DishIng" prefHeight="135.0" prefWidth="238.0" />
+            <Text fx:id="price" fill="#fb0000" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="232.91928100585938">
+               <font>
+                  <Font name="Century" size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+   </children>
+</Pane>

@@ -76,7 +76,7 @@ import main.ClientUI;
 	    
 	    @FXML
 	    void initialize() {
-	    	super.setImage(LogoImage, "ClientMenuUi.png");
+	    	//setImage(LogoImage, "ClientMenuUi.jpeg");
 	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";

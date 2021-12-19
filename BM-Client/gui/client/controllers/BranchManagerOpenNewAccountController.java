@@ -18,8 +18,12 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class OpenNewAccountController extends Controller implements ControllerInterface {
+public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface {
 
+	/*
+	 * author:Danor
+	 * this class for open new account
+	 */
 	@FXML
 	private ResourceBundle resources;
 
@@ -40,7 +44,7 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.png");
+		//setImage(BackImage, "background.png");
 		assert btnBusinessAccount != null
 				: "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
 		assert btnPrivateAccount != null
@@ -49,16 +53,19 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 				: "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
 	}
 
+	/*for business account*/
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewBussinessAccount", "Open New Bussiness Account");
+		startScreen(event,"BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account");
 	}
 
+	/*for private account*/
 	@FXML
 	void PrivateAccount(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewPrivateAccount", "Open New Private Account");
+		startScreen(event,"BranchManagerOpenNewPrivateAccount", "Open New Private Account");
 	}
 
+	/*for back to the branch manager screen*/
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerScreen", "Branch Manager");

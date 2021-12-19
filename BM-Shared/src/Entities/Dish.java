@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Dish implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra;
+	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,restCode,size;
 	private float price;
 	private int inventory;
 	private DishType dishType;
@@ -25,7 +25,14 @@ public class Dish implements Serializable{
 	}
 	
 	
+	public String getSize() {
+		return size;
+	}
 
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 	public void setExtra(String extra) {
 		this.extra = extra;
@@ -90,6 +97,16 @@ public class Dish implements Serializable{
 
 	public DishType getDishType() {
 		return dishType;
+	}
+
+
+	public String getRestCode() {
+		return restCode;
+	}
+
+
+	public void setRestCode(String restCode) {
+		this.restCode = restCode;
 	}
 	
 

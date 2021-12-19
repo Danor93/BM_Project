@@ -49,7 +49,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.png");
+		//setImage(BackImage, "background.png");
 		assert btnCreateMenu != null
 				: "fx:id=\"btnCreateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnUpdateMenu != null

@@ -123,7 +123,7 @@ public class ChooseRestController extends Controller implements Initializable{
 
     @FXML
     void initialize() {
-    	setImage(BackImage, "background.jpeg");
+    	//setImage(BackImage, "background.jpeg");
         assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
         assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
         assert combo1 != null : "fx:id=\"combo1\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";

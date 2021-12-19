@@ -53,13 +53,13 @@ public class IdentifyW4cController extends Controller {
 		}
 
 		else {
-			if (!w4cManually.getText().equals(LoginScreenController.user.getW4c())) {
+		/*	if (!w4cManually.getText().equals(LoginScreenController())) {
 				allertLbl.setText("Wrong W4c, please try again or press the QR button");
 			}
 
 			else {
 				switchScene(event);
-			}
+			}*/
 		}
 
 	}
@@ -67,9 +67,10 @@ public class IdentifyW4cController extends Controller {
 	/**This method meant to get the W4C via QR
 	 * @param event		meant to check the W4C with QR
 	 */
+	
 	@FXML
-	void getW4cFromQR(ActionEvent event) {
-		w4cManually.setText(LoginScreenController.user.getW4c());
+	void getW4cFromQR(ActionEvent event) throws IOException {
+		//w4cManually.setText(LoginScreenController.user.getW4c());//getw4c need to be fix
 		switchScene(event);
 	}
 

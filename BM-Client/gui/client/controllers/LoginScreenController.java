@@ -24,13 +24,15 @@ import javafx.stage.Stage;
 import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
+import main.PopUpMessage;
 
 public class LoginScreenController extends Controller {
-	public static User user = new User (null, null, null, null, null, null, null, null, null);
+	public static User user = new User(null, null, null, null, null, null, null, null);
 	public static boolean LoginFlag = false;
 	public static boolean AlreadyLoggedInFlag = false;
 	public static boolean WrongInputFlag = false;
 	public static String Name = null;
+	public static String ID = null;
 	public static ActionEvent mainevent;
 
 	@FXML
@@ -52,7 +54,7 @@ public class LoginScreenController extends Controller {
 
 
     @FXML
-    private ImageView backImage;
+    private ImageView BackImage;
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
@@ -65,7 +67,7 @@ public class LoginScreenController extends Controller {
 		ClientUI.chat.accept(msg);
 		if (LoginFlag) {
 			if (AlreadyLoggedInFlag) {
-				WrongInputInLoggin.setText("Already LoggedIn");
+				PopUpMessage.errorMessage("The User is Already logged in");
 				AlreadyLoggedInFlag = false;
 				LoginFlag = false;
 			} else {
@@ -78,13 +80,15 @@ public class LoginScreenController extends Controller {
 				} else if (user.getRole().equals("CEO")) {
 					startScreen(event, "CEOScreen", "CEO");
 				} else if (user.getRole().equals("Supplier")) {
+					Name = user.getFirstN();
+					ID = user.getId();
 					startScreen(event, "SupplierScreen", "Supplier");
 				}
 			}
 		}
 
 		else {
-			WrongInputInLoggin.setText("User name or password are incorrect, please try again!");
+			PopUpMessage.errorMessage("Wrong UserName/Password!");
 		}
 
 	}
@@ -94,14 +98,17 @@ public class LoginScreenController extends Controller {
 
 	}
 	
-	@FXML
-	void initialize() {
-	//	setImage(backImage, "backg.png");
-        assert backImage != null : "fx:id=\"backImage\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-	}
 
+
+    @FXML
+    void initialize() {
+    	//setImage(BackImage, "loginPage.jpg");
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'LoginScreen.fxml'.";
+        assert WrongInputInLoggin != null : "fx:id=\"WrongInputInLoggin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
+        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
+        assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
+        assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
+
+    }
 
 }

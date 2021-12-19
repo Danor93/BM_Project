@@ -18,7 +18,7 @@ public class DBCheck {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT Role,ID,FirstName,LastName,w4cPrivate,homeBranch,userName,password,isLoggedIn FROM bytemedatabase.users WHERE userName=? AND password=?");
+						"SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bytemedatabase.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -39,8 +39,6 @@ public class DBCheck {
 					result.append(rs.getString(7));
 					result.append("@");
 					result.append(rs.getString(8));
-					result.append("@");
-					result.append(rs.getString(9));
 				}
 				rs.close();
 
@@ -71,25 +69,5 @@ public class DBCheck {
 		}
 
 		return result.toString();
-	}
-
-	public static String IDcheck(String ID) {
-
-		String rs1 = null;
-		PreparedStatement stmt;
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bytemedatabase.users WHERE ID=?");
-				stmt.setString(1, ID);
-				// stmt.setString(2, password);
-				ResultSet rs = stmt.executeQuery();
-				rs.next();
-				rs1 = rs.getString(1).toString();
-				rs.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs1;
 	}
 }
