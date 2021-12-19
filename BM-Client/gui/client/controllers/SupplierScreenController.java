@@ -53,7 +53,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		//setImage(BackImage, "background.png");
+		// setImage(BackImage, "background.png");
 		assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnCreateMenu != null
 				: "fx:id=\"btnCreateMenu\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
@@ -70,8 +70,10 @@ public class SupplierScreenController extends Controller implements ControllerIn
 		if (ExisingMenuFlag == true) {
 			ExistLbl.setText("Menu already exists, you can update it");
 		} else {
+			AddDishToMenuController.indicator = false;
 			startScreen(event, "AddDishToMenu", "Create Menu");
 		}
+
 	}
 
 	@FXML

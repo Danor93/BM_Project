@@ -30,13 +30,10 @@ public class ShowDishes {
 
 				while (rs.next()) {
 					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
-							query, query, query, query, Float.parseFloat(rs.getString("price")), Integer.parseInt(rs.getString("inventory")),
-							DishType.toDishType(rs.getString("dishType")));//need to be fix.
+							rs.getString("choiceFactor"), rs.getString("choiceDetails"), rs.getString("ingredients"),
+							rs.getString("extra"), Float.parseFloat(rs.getString("price")),
+							Integer.parseInt(rs.getString("inventory")), DishType.toDishType(rs.getString("dishType")));
 					dish.setRestCode(rs.getString("restId1"));
-					dish.setChoiceFactor(rs.getString("choiceFactor"));
-					//dish.setde(rs.getString("choiceDetails"));
-					dish.setIngredients(rs.getString("ingredients"));
-					dish.setExtra(rs.getString("extra"));
 					dishes.add(dish);
 				}
 				rs.close();

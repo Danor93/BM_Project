@@ -83,11 +83,10 @@ public class Parsing {
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((Integer)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			ArrayList<Dish> dishesOfRest = getDishes.getDishes((Integer) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 			return messageFromServer;
 		}
-
 
 		case ConfirmOpenNewBusinessAccount: {
 			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
@@ -135,79 +134,76 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.Supplier_List_Update_succ, null);
 			return messageFromServer;
 		}
-		
-		case get_Accounts:{
+
+		case get_Accounts: {
 			ArrayList<User> Users = Query.getAccount();
 			messageFromServer = new Message(MessageType.Account_list, Users);
 			return messageFromServer;
 		}
-		
-		case Delete_Account:{
+
+		case Delete_Account: {
 			User user = (User) receivedMessage.getMessageData();
 			Query.DeleteAccount(user);
 			messageFromServer = new Message(MessageType.Delete_Account_Succ, null);
 			return messageFromServer;
 		}
-		
-		case check_account_employer_approved:{
+
+		case check_account_employer_approved: {
 			String Employer_name = (String) receivedMessage.getMessageData();
-			if((Query.checkEmployerStatus(Employer_name))==true) {
+			if ((Query.checkEmployerStatus(Employer_name)) == true) {
 				messageFromServer = new Message(MessageType.employer_approved, null);
-			}
-			else {
+			} else {
 				messageFromServer = new Message(MessageType.employer_approved, null);
 			}
 			return messageFromServer;
 		}
-		
-		case New_BAccount:{
+
+		case New_BAccount: {
 			BussinessAccount BA = (BussinessAccount) receivedMessage.getMessageData();
 			Query.addNewBAccount(BA);
 			messageFromServer = new Message(MessageType.BAccount_succ, null);
 			return messageFromServer;
 		}
-		
-		case check_Private_accout_exits:{
-			String ID= (String) receivedMessage.getMessageData();
-			if(Query.checkPrivateAccount(ID)) {
+
+		case check_Private_accout_exits: {
+			String ID = (String) receivedMessage.getMessageData();
+			if (Query.checkPrivateAccount(ID)) {
 				messageFromServer = new Message(MessageType.PAccount_exits, null);
 				return messageFromServer;
-			}
-			else {
+			} else {
 				messageFromServer = new Message(MessageType.PAccount_NOT_exits, null);
 				return messageFromServer;
 			}
 		}
-		
-		case add_new_private_account:{
+
+		case add_new_private_account: {
 			Client paccount = (Client) receivedMessage.getMessageData();
 			Query.addNewPAccount(paccount);
 			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 			return messageFromServer;
 		}
-		
-		case get_accounts_for_freeze:{
+
+		case get_accounts_for_freeze: {
 			ArrayList<User> Users = Query.GetAccountForFreeze();
 			return messageFromServer = new Message(MessageType.return_accounts_for_freeze, Users);
 		}
-		
-		case check_if_account_freeze:{
+
+		case check_if_account_freeze: {
 			String AccountID = (String) receivedMessage.getMessageData();
-			if(Query.CheckAccountStatus(AccountID)) {
+			if (Query.CheckAccountStatus(AccountID)) {
 				return messageFromServer = new Message(MessageType.Account_Active, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.Account_Freeze, null);
 			}
 		}
-		
-		case Account_For_Freeze:{
+
+		case Account_For_Freeze: {
 			String AccountID = (String) receivedMessage.getMessageData();
 			Query.UpdateAccountStatusToFreeze(AccountID);
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
 		}
-		
-		case send_PDF:{
+
+		case send_PDF: {
 			MyFile file = (MyFile) receivedMessage.getMessageData();
 			Query.updateFile(file);
 			return messageFromServer = new Message(MessageType.send_PDF, null);
@@ -230,24 +226,31 @@ public class Parsing {
 			return messageFromServer;
 		}
 
-		/**case updateDish: {
+		case updateDish: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_update_succ, null);
+				return messageFromServer;
 			}
-		}**///fix
-		
+		}
+
 		case MenuExist: {
-			
 			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.MenuExistTrue, null);
-			}else 
-			{
+			} else {
 				messageFromServer = new Message(MessageType.MenuExistFalse, null);
 			}
 			return messageFromServer;
-
 		}
+		
+		case deleteDish: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.Dish_delete_succ, null);
+				return messageFromServer;
+			}
+		}
+
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

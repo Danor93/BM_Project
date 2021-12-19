@@ -1,10 +1,6 @@
 /Parsing/
-<<<<<<< HEAD
-/querys/
 /controllers/
 /extra/
 /fxml/
-=======
-/controllers/
->>>>>>> master
 /main/
+/querys/

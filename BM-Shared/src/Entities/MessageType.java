@@ -12,7 +12,7 @@ public enum MessageType {
 	Update_Orders, Show_Orders, ConfirmW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
 	Employer_Update, get_Supplier, Supplier_Update, get_Accounts, Delete_Account,check_account_employer_approved,
 	New_BAccount,check_Private_accout_exits,add_new_private_account,get_accounts_for_freeze,check_if_account_freeze,Account_For_Freeze,
-	send_PDF,Show_Dishes,Dish_update_succ,
+	send_PDF,Show_Dishes,Dish_update_succ, deleteDish, Dish_delete_succ,
 
 
 	/* type of users */

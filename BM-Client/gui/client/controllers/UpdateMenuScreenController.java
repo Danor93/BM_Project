@@ -41,8 +41,9 @@ public class UpdateMenuScreenController extends Controller {
 	private Button btnDeleteOrUpdateDish;
 
 	@FXML
-	void AddNewDishToMenu(ActionEvent event) {
-
+	void AddNewDishToMenu(ActionEvent event) throws IOException {
+		AddDishToMenuController.indicator = true;
+		startScreen(event, "AddDishToMenu", "Create Menu");
 	}
 
 	@FXML

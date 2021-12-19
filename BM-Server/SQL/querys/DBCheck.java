@@ -97,7 +97,6 @@ public class DBCheck {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bytemedatabase.dishes WHERE restId1=?");
 				stmt.setString(1, ID);
-				// stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
 				rs1 = rs.getString(1).toString();
