@@ -1,8 +1,12 @@
 package Parsing;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 //server
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
 
@@ -209,6 +213,9 @@ public class Parsing {
 		
 		case send_PDF:{
 			MyFile file = (MyFile) receivedMessage.getMessageData();
+			DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+			LocalDateTime nowTime = LocalDateTime.now();
+			file.setDate(time.format(nowTime).toString());
 			Query.updateFile(file);
 			return messageFromServer = new Message(MessageType.send_PDF, null);
 		}

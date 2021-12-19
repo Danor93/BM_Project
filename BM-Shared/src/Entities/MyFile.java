@@ -8,6 +8,46 @@ public class MyFile implements Serializable {
 	private static final long serialVersionUID = 3037364578344496376L;
 	private String Description = null;
 	private String fileName = null;
+	private String quertar;
+	private String date;
+	private String year;
+	
+	
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	private homeBranches homebranch;
+	
+	
+	public String getQuertar() {
+		return quertar;
+	}
+
+	public void setQuertar(String quertar) {
+		this.quertar = quertar;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public homeBranches getHomebranch() {
+		return homebranch;
+	}
+
+	public void setHomebranch(homeBranches homebranch) {
+		this.homebranch = homebranch;
+	}
+
 	private int size = 0;
 	public byte[] mybytearray;
 

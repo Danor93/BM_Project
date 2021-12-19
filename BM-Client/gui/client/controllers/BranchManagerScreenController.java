@@ -111,36 +111,8 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	/*for upload the quarterly PDF.*/
 	@FXML
-	void UploadPDF(ActionEvent event) {
-		try {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Resource File");
-			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-			File file = fileChooser.showOpenDialog(BranchManagerScreenController.stage);
-			if (file != null) {
-				String path = file.getPath();
-				File f = new File(path);
-				MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
-				try {
-					File newFile = new File(path);
-					byte[] mybytearray = new byte[(int) newFile.length()];
-					msg.initArray(mybytearray.length);
-					msg.setSize(mybytearray.length);
-
-					FileInputStream fis = new FileInputStream(newFile);
-					BufferedInputStream bis = new BufferedInputStream(fis);
-
-					bis.read(msg.getMybytearray(), 0, mybytearray.length);
-					ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
-
-				} catch (Exception e) {
-					System.out.println("Error send (Files)msg) to Server");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	void UploadPDF(ActionEvent event) throws IOException {
+	startScreen(event, "BranchManagerUploadPDF", "Upload PDF");
 	}
 
 	@Override

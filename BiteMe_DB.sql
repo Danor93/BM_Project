@@ -90,6 +90,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES ('111','microsoft','waiting'),('222','amazon','not approved'),('22233','elbit','approved'),('333','intel','approved'),('444','google','waiting'),('555','facebook','approved'),('666','refael','waiting'),('777','nivdia','not approved');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,6 +274,33 @@ LOCK TABLES `refund` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reports` (
+  `quertar` varchar(50) NOT NULL,
+  `year` varchar(50) NOT NULL,
+  `date_added` datetime NOT NULL,
+  `file_name` varchar(50) NOT NULL,
+  `upload_file` longblob,
+  `homebranch` varchar(50) NOT NULL,
+  PRIMARY KEY (`quertar`,`date_added`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reports`
+--
+
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `supplier`
 --
 
@@ -297,7 +325,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1','vivino','1','haifa','haifa','approved','north'),('2','refaelo','2','haifa','haifa','approved','center');
+INSERT INTO `supplier` VALUES ('1','vivino','1','haifa','haifa','approved','north'),('2','refaelo','2','haifa','haifa','approved','center'),('3','mcdonald','11:00-12:00','kiryat ata','big center','not approved ','north');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,7 +358,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('a','a','Customer','adi','sasson','123','***','***',0,''),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ds','ds','Customer','danor','sinai','3111','d@gmail.com','050266',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,'');
+INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('a','a','Customer','adi','sasson','123','***','***',0,''),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ds','ds','Customer','danor','sinai','3111','d@gmail.com','050266',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',1,''),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -343,4 +371,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-19 12:18:40
+-- Dump completed on 2021-12-19 19:45:15
