@@ -5,69 +5,87 @@ import java.io.Serializable;
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String Restaurant;
-	private int OrderNumber;
-	private String OrderTime;
-	private String PhoneNumber;
-	private OrderType OrderType;
-	private String OrderAddress;
-
-	public Order(String Restaurant, int orderNumber, String orderTime, String phoneNumber, Entities.OrderType OrderType,
-			String orderAddress) {
-		super();
-		this.Restaurant = Restaurant;
-		this.OrderNumber = orderNumber;
-		this.OrderTime = orderTime;
-		this.PhoneNumber = phoneNumber;
-		this.OrderType = OrderType;
-		this.OrderAddress = orderAddress;
+	
+	private int orderNum;
+	private String restName,timeOfOrder,dateOfOrder,orderStatus,costumerId,restId;
+	private float totalPrice;
+	private OrderType orderType;
+	
+	public Order(OrderType orderType, String restName, String timeOfOrder, String dateOfOrder, String orderStatus, String costumerId,
+			String restId, float totalPrice) {
+		this.orderType = orderType;
+		this.restName = restName;
+		this.timeOfOrder = timeOfOrder;
+		this.dateOfOrder = dateOfOrder;
+		this.orderStatus = orderStatus;
+		this.costumerId = costumerId;
+		this.restId = restId;
+		this.totalPrice = totalPrice;
 	}
 
-	public String getRestaurant() {
-		return Restaurant;
+	public int getOrderNum() {
+		return orderNum;
+	}
+	
+	public String getRestName() {
+		return restName;
 	}
 
-	public void setRestaurant(String resturant) {
-		Restaurant = resturant;
+
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
 	}
 
-	public int getOrderNumber() {
-		return OrderNumber;
-	}
-
-	public void setOrderNumber(int orderNumber) {
-		OrderNumber = orderNumber;
-	}
-
-	public String getOrderTime() {
-		return OrderTime;
-	}
-
-	public void setOrderTime(String orderTime) {
-		OrderTime = orderTime;
-	}
-
-	public String getPhoneNumber() {
-		return PhoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
-	}
 
 	public OrderType getOrderType() {
-		return OrderType;
+		return orderType;
 	}
 
-	public void setOrderType(OrderType OrderType) {
-		this.OrderType = OrderType;
+
+	public void setOrderType(OrderType orderType) {
+		this.orderType = orderType;
 	}
 
-	public String getOrderAddress() {
-		return OrderAddress;
+
+	public String getTimeOfOrder() {
+		return timeOfOrder;
 	}
 
-	public void setOrderAddress(String orderAddress) {
-		OrderAddress = orderAddress;
+
+	public void setTimeOfOrder(String timeOfOrder) {
+		this.timeOfOrder = timeOfOrder;
+	}
+
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public String getDateOfOrder() {
+		return dateOfOrder;
+	}
+
+	public void setDateOfOrder(String dateOfOrder) {
+		this.dateOfOrder = dateOfOrder;
+	}
+	
+	@Override
+	public String toString() {
+		return orderNum+String.valueOf(orderType)+restId+timeOfOrder+dateOfOrder;
+		
+	}
+
+	public String getCostumerId() {
+		return costumerId;
 	}
 }

@@ -2,7 +2,7 @@ package Entities;
 
 public enum OrderType {
 
-	Order_in,Single_Delivery,take_out,Shared_Delivery;
+	Order_in,Single_Delivery,take_Away,Shared_Delivery;
 	
 	
 	public static OrderType toOrderType(String type) {
@@ -16,7 +16,7 @@ public enum OrderType {
 			return OrderType.Single_Delivery;
 		}
 		if(type.equals("take out")) {
-			return OrderType.take_out;
+			return OrderType.take_Away;
 		}
 		if(type.equals("shared delivery")) {
 			return OrderType.Shared_Delivery;

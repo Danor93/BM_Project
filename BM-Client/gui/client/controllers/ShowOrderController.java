@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import Entities.Dish;
-import Entities.DishType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Cell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.skin.VirtualFlow;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class ShowOrderController extends Controller implements Initializable{
@@ -46,6 +39,8 @@ public class ShowOrderController extends Controller implements Initializable{
     
     ArrayList<String> myDishes=new ArrayList<>();
     
+    private double total=0;
+    
     
    
 
@@ -60,12 +55,31 @@ public class ShowOrderController extends Controller implements Initializable{
     }
 
     @FXML
-    void proceedToDelivery(ActionEvent event) {
-
+    void proceed(ActionEvent event) throws IOException {
+    	
+    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickUp.fxml"));
+		Parent root=load.load();
+		DeliveryOrPickupController aFrame = load.getController();
+		aFrame.start(primaryStage, root);
     }
 
     @FXML
-    void removeOrder(ActionEvent event) {
+    void removeOrder(ActionEvent event) 
+    {
+    	String s=listOrder.getSelectionModel().getSelectedItem();
+    	int index=myDishes.indexOf(s);
+    	myDishes.remove(s);
+    	Dish removeDish=SingletonOrder.getInstance().myOrder.get(index);
+    	SingletonOrder.getInstance().myOrder.remove(index);
+    	for(Dish d:SingletonOrder.getInstance().myOrder)
+    	{
+    		System.out.println("t "+d.getDishName());
+    	}
+    	total-=removeDish.getPrice();
+    	totalPrice.setText("Total price: "+total+" $");
+    	orders=FXCollections.observableArrayList(myDishes);
+		listOrder.setItems(orders);
 
     }
 
@@ -75,8 +89,10 @@ public class ShowOrderController extends Controller implements Initializable{
 		
 		for(Dish dish: SingletonOrder.getInstance().myOrder)
 		{
+			total+=dish.getPrice();
 			StringBuilder dishString=new StringBuilder();
 			dishString.append(dish.getDishName()+":       ");
+			
 			if(dish.getChoiceFactor()!=null)
 			{
 				dishString.append(dish.getChoiceFactor()+": ");
@@ -92,6 +108,7 @@ public class ShowOrderController extends Controller implements Initializable{
 			myDishes.add(dishString.toString());
 		}
 		
+		totalPrice.setText("Total price: "+total+" $");
 		orders=FXCollections.observableArrayList(myDishes);
 		listOrder.setItems(orders);
 		
@@ -113,8 +130,5 @@ public class ShowOrderController extends Controller implements Initializable{
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
-
 }
-

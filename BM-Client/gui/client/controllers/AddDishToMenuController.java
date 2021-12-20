@@ -28,7 +28,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	private boolean clearChoiceFactorFlag = false;
 	private boolean clearIngredientsFlag = false;
 	private boolean clearRemovableIngredientsFlag = false;
-	public static boolean indicator;//in case indicator=false then createMenu, if indicator=true then addNewDish
+	public static boolean indicator;// in case indicator=false then createMenu, if indicator=true then addNewDish
 	public static String TypeOfDish;
 
 	@FXML
@@ -80,16 +80,15 @@ public class AddDishToMenuController extends Controller implements Initializable
 	void Back(ActionEvent event) throws IOException {
 		startScreen(event, "SupplierScreen", "Supplier page");
 	}
-	
+
 	@FXML
-    void ChooceTypeDish(ActionEvent event) {
+	void ChooceTypeDish(ActionEvent event) {
 		TypeOfDish = btnTypeDish.getSelectionModel().getSelectedItem();
-    }
+	}
 
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
 		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
-		//System.out.println(btnTypeDish.getValue());
 		if (txtNameDish.getText().isEmpty())
 			txtMiniLabel.setText("Name must be invailed!");
 		else if (txtPriceDish.getText().isEmpty())
@@ -112,9 +111,9 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 			System.out.println(TypeOfDish);
 			try {
-			dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null, Float.parseFloat(txtPriceDish.getText()),
-					Integer.parseInt(txtInventoryDish.getText()),DishType.toDishType(TypeOfDish));
-					//DishType.toDishType(btnTypeDish.getValue().toString()));
+				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
+						Float.parseFloat(txtPriceDish.getText()), Integer.parseInt(txtInventoryDish.getText()),
+						DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				txtMiniLabel.setText("type must be selected!");
 				e.printStackTrace();
@@ -202,11 +201,11 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	void initialize() {
-		if(indicator==false)
+		if (indicator == false)
 			miniLabel.setText("Create Menu");
 		else
-			miniLabel.setText("Add new dish to menu");
-		
+			miniLabel.setText("Add new dish");
+
 		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert txtNameDish != null

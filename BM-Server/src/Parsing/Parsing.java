@@ -250,6 +250,36 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
+		
+		case get_orders_to_approve: {
+			ArrayList<Order> orders = Query.LoadOrders();
+			messageFromServer = new Message(MessageType.Orders_List, orders);
+			return messageFromServer;
+		}
+		
+		case Order_not_approved: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.updateOrderStatusToNotApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
+				return messageFromServer;
+			}
+		}
+
+		case Order_approved: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.updateOrderStatusToApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
+				return messageFromServer;
+			}
+		}
+		
+		case RegistrationOfEmployer: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
+				return messageFromServer;
+			}
+		}
 
 
 		default: {

@@ -1,42 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
+<AnchorPane prefHeight="532.0" prefWidth="721.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
    <children>
-      <Text fill="WHITE" layoutX="660.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="WHITE" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change order status">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="647.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="158.0" layoutY="37.0" text="Change order status" textFill="WHITE">
+      <Button fx:id="back" layoutX="31.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font size="14.0" />
          </font>
-      </Label>
-      <Button fx:id="btnBackToSupplier" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#BackToSupplierScreen" text="Back to Supplier page" />
-      <Label layoutX="74.0" layoutY="179.0" text="Orders are awaiting confirmation" textFill="WHITE">
+      </Button>
+      <Button fx:id="Refuse" layoutX="627.0" layoutY="182.0" mnemonicParsing="false" onAction="#refuseOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
-            <Font size="13.0" />
+            <Font size="14.0" />
          </font>
-      </Label>
-      <Text fill="WHITE" layoutX="14.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are orders approved by the customer waiting for approval from the supplier.">
+      </Button>
+      <Button fx:id="Confirm" layoutX="626.0" layoutY="286.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font size="14.0" />
          </font>
-      </Text>
-      <Button fx:id="btnConfirmOrderApproval" layoutX="406.0" layoutY="217.0" mnemonicParsing="false" onAction="#ConfirmOrderApproval" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
-      <Text fill="WHITE" layoutX="138.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the orders for the start of execution.">
+      </Button>
+      <Text fill="WHITE" layoutX="20.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are orders approved by the customer waiting for approval from the supplier.">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ComboBox layoutX="284.0" layoutY="176.0" prefHeight="25.0" prefWidth="234.0" promptText="List of orders awaiting approval" />
-      <Button fx:id="btnRefuseOrderApproval" layoutX="334.0" layoutY="217.0" mnemonicParsing="false" onAction="#RefuseOrderApproval" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: red;" text="Refuse" />
+      <Text fill="WHITE" layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the orders for the start of execution.">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Text>
+      <TableView fx:id="table" layoutX="20.0" layoutY="112.0" prefHeight="378.0" prefWidth="598.0">
+        <columns>
+          <TableColumn fx:id="orderNumber" prefWidth="78.39999771118164" text="orderNumber" />
+          <TableColumn fx:id="orderType" prefWidth="72.00003051757812" text="orderType" />
+            <TableColumn fx:id="restName" prefWidth="75.0" text="restName" />
+            <TableColumn fx:id="totalPrice" prefWidth="75.0" text="totalPrice" />
+            <TableColumn fx:id="timeOfOrder" prefWidth="75.0" text="timeOfOrder" />
+            <TableColumn fx:id="dateOfOrder" prefWidth="75.0" text="dateOfOrder" />
+            <TableColumn fx:id="orderStatus" prefWidth="75.0" text="orderStatus" />
+            <TableColumn fx:id="costumerID" prefWidth="75.0" text="costumerID" />
+        </columns>
+      </TableView>
    </children>
-</Pane>
+</AnchorPane>

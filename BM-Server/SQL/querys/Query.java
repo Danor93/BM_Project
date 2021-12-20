@@ -16,6 +16,8 @@ import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Employer;
 import Entities.MyFile;
+import Entities.Order;
+import Entities.OrderType;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -397,18 +399,39 @@ public class Query {
 			}
 		}
 	}
-	
-	
-	/*need to be fix*/
+
+	/* need to be fix */
 	public static void updateFile(MyFile file) {
 		Connection connection = DBConnect.conn;
 		Statement StatementOfResultSet;
-		String sql= "INSERT INTO  values(?)";
+		String sql = "INSERT INTO  values(?)";
 		try {
-		StatementOfResultSet = connection.createStatement();
-		StatementOfResultSet.executeUpdate(sql);
+			StatementOfResultSet = connection.createStatement();
+			StatementOfResultSet.executeUpdate(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static ArrayList<Order> LoadOrders() {
+		ArrayList<Order> orders = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber FROM bytemedatabase.order WHERE orderStatus ='waiting'"
+							+ "");
+			while (rs.next()) {
+				Order order = new Order(OrderType.toOrderType(rs.getString(1)), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+						Float.parseFloat(rs.getString(8)));
+				order.setOrderNum(Integer.parseInt(rs.getString(9)));
+				orders.add(order);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return orders;
 	}
 }

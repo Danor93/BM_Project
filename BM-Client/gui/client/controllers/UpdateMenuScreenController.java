@@ -43,7 +43,7 @@ public class UpdateMenuScreenController extends Controller {
 	@FXML
 	void AddNewDishToMenu(ActionEvent event) throws IOException {
 		AddDishToMenuController.indicator = true;
-		startScreen(event, "AddDishToMenu", "Create Menu");
+		startScreen(event, "AddDishToMenu", "Add new dish");
 	}
 
 	@FXML

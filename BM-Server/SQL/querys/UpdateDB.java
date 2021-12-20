@@ -2,9 +2,12 @@ package querys;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.Employer;
+import Entities.Order;
 
 public class UpdateDB {
 
@@ -92,11 +95,12 @@ public class UpdateDB {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.dishes SET dishName='" + dish.getDishName()
-						+ "', dishType='" + dish.getDishType() + "', restId1='" + dish.getRestCode() + "', supplierName='"
-						+ dish.getSupplierName() + "', price='" + dish.getPrice() + "', inventory='" + dish.getInventory()
-						+ "', choiceFactor='" + dish.getChoiceFactor() + "', choiceDetails='" + dish.getChoiceDetails()
-						+ "', ingredients='" + dish.getIngredients() + "', extra='" + dish.getExtra()
+				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.dishes SET dishName='"
+						+ dish.getDishName() + "', dishType='" + dish.getDishType() + "', restId1='"
+						+ dish.getRestCode() + "', supplierName='" + dish.getSupplierName() + "', price='"
+						+ dish.getPrice() + "', inventory='" + dish.getInventory() + "', choiceFactor='"
+						+ dish.getChoiceFactor() + "', choiceDetails='" + dish.getChoiceDetails() + "', ingredients='"
+						+ dish.getIngredients() + "', extra='" + dish.getExtra()
 						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
 				stmt.setString(1, dish.getDishName());
 				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
@@ -117,8 +121,8 @@ public class UpdateDB {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn
-						.prepareStatement("DELETE FROM bytemedatabase.dishes WHERE dishName=? AND dishType=? AND restId1=?");
+				stmt = DBConnect.conn.prepareStatement(
+						"DELETE FROM bytemedatabase.dishes WHERE dishName=? AND dishType=? AND restId1=?");
 				stmt.setString(1, dish.getDishName());
 				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
@@ -132,5 +136,71 @@ public class UpdateDB {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public static boolean updateOrderStatusToNotApproved(ArrayList<Order> arrayList) {
+			PreparedStatement stmt;
+			int i=0;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn
+							.prepareStatement("UPDATE bytemedatabase.order SET orderStatus = 'not approved' WHERE orderNumber=?");
+					stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
+					i++;
+					stmt.executeUpdate();
+					return true;
+
+				} else {
+					System.out.println("Conn is null");
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return true;
+			}
+		}
+
+	public static boolean updateOrderStatusToApproved(ArrayList<Order> arrayList) {
+		PreparedStatement stmt;
+		int i=0;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bytemedatabase.order SET orderStatus = 'approved' WHERE orderNumber=?");
+				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
+				i++;
+				stmt.executeUpdate();
+				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	public static boolean RegistrationOfEmployer(Employer employer) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement(
+						"INSERT INTO bytemedatabase.company(w4cBusiness, companyName, companyStatus) VALUES (?, ?, ?)");
+				stmt.setString(1, employer.getW4cBussines());
+				stmt.setString(2, employer.getCompanyName());
+				stmt.setString(3, employer.getCompanyStatus());
+				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
 	}
 }
