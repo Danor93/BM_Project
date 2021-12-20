@@ -211,13 +211,23 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
 		}
 		
+		case check_year_and_quertar:{
+			String[] Divededyandq = ((String) receivedMessage.getMessageData()).split("@");
+			if((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1]))==true) {
+				return messageFromServer = new Message(MessageType.year_and_querter_ok, null);
+			}
+			else {
+				return messageFromServer = new Message(MessageType.year_and_querter_not_ok, null);
+			}
+		}
+		
 		case send_PDF:{
 			MyFile file = (MyFile) receivedMessage.getMessageData();
 			DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 			LocalDateTime nowTime = LocalDateTime.now();
 			file.setDate(time.format(nowTime).toString());
 			Query.updateFile(file);
-			return messageFromServer = new Message(MessageType.send_PDF, null);
+			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
 		}
 
 		case Disconected: {

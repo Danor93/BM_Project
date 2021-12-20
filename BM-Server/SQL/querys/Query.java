@@ -402,23 +402,43 @@ public class Query {
 			}
 		}
 	}
-	
-	
-	/*need to be fix*/
+
+	public static Boolean checkYearAndQuarter(String quarter, String year) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT quertar,year FROM reports");
+				while (rs.next()) {
+					String quarter2 = rs.getString(1);
+					String year2 = rs.getString(2);
+					if ((year.equals(year2)) && (quarter.equals(quarter2))) {
+						rs.close();
+						return false;
+					}
+				}
+				rs.close();
+				return true;
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	public static void updateFile(MyFile file) {
-		String sql= "INSERT INTO report(quertar,year,date,file_name,homebranch,upload_file) values(?,?,?,?,?,?)";
+		String sql = "INSERT INTO reports(quertar,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
 		try {
 			Timestamp date = new java.sql.Timestamp(new Date().getTime());
 			InputStream is = new ByteArrayInputStream(file.getMybytearray());
 			PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
-			stmt.setString(1,file.getQuertar());
-			stmt.setString(2,file.getYear());
+			stmt.setString(1, file.getQuertar());
+			stmt.setString(2, file.getYear());
 			stmt.setTimestamp(3, date);
-			stmt.setString(4,file.getFileName());
-			stmt.setString(5,file.getHomebranch().toString());
-			stmt.setBlob(6,is);
+			stmt.setString(4, file.getFileName());
+			stmt.setBlob(5, is);
+			// stmt.setString(6,file.getHomebranch());//fix.
 			stmt.executeUpdate();
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

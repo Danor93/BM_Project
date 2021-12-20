@@ -11,6 +11,7 @@ public class MyFile implements Serializable {
 	private String quertar;
 	private String date;
 	private String year;
+	private homeBranches homebranch;
 	
 	
 	public String getYear() {
@@ -20,9 +21,6 @@ public class MyFile implements Serializable {
 	public void setYear(String year) {
 		this.year = year;
 	}
-
-	private homeBranches homebranch;
-	
 	
 	public String getQuertar() {
 		return quertar;
@@ -40,8 +38,8 @@ public class MyFile implements Serializable {
 		this.date = date;
 	}
 
-	public homeBranches getHomebranch() {
-		return homebranch;
+	public String getHomebranch() {
+		return homebranch.toString();
 	}
 
 	public void setHomebranch(homeBranches homebranch) {

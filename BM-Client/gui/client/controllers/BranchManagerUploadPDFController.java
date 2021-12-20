@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
+import main.PopUpMessage;
 import javafx.fxml.Initializable;
 
 public class BranchManagerUploadPDFController extends Controller implements Initializable {
@@ -25,6 +26,9 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	public static String Quertar;
 	public static String Year;
 	public static Stage stage;
+	public static Boolean yearandqflag=false;
+	public static Boolean succesUpload=false;
+	public StringBuilder yearandQ=new StringBuilder();
 
 	@FXML
 	private ResourceBundle resources;
@@ -59,48 +63,69 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		Quertar = QuertarComboBox.getSelectionModel().getSelectedItem();
 		YearComboBox.getItems().add("2021");
 		YearComboBox.getItems().add("2020");
-		YearComboBox.getItems().add("2020");
+		YearComboBox.getItems().add("2019");
 		YearComboBox.setDisable(false);
 	}
 
 	@FXML
 	void chooseYear(ActionEvent event) {
 		Year = YearComboBox.getSelectionModel().getSelectedItem();
+		yearandQ.append(Quertar);
+		yearandQ.append("@");
+		yearandQ.append(Year);
+		UploadBtn.setDisable(false);
 	}
 
 	@FXML
 	void UploadPDF(ActionEvent event) {
-		try {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Resource File");
-			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-			File file = fileChooser.showOpenDialog(BranchManagerUploadPDFController.stage);
-			if (file != null) {
-				String path = file.getPath();
-				File f = new File(path);
-				MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
-				try {
-					File newFile = new File(path);
-					byte[] mybytearray = new byte[(int) newFile.length()];
-					msg.initArray(mybytearray.length);
-					msg.setSize(mybytearray.length);
+		ClientUI.chat.accept(new Message(MessageType.check_year_and_quertar, yearandQ.toString()));
+		if(yearandqflag==true) {
+			yearandqflag=false;
+			try {
+				FileChooser fileChooser = new FileChooser();
+				fileChooser.setTitle("Open Resource File");
+				fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+				File file = fileChooser.showOpenDialog(BranchManagerUploadPDFController.stage);
+				if (file != null) {
+					String path = file.getPath();
+					File f = new File(path);
+					MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
+					try {
+						File newFile = new File(path);
+						byte[] mybytearray = new byte[(int) newFile.length()];
+						msg.initArray(mybytearray.length);
+						msg.setSize(mybytearray.length);
 
-					FileInputStream fis = new FileInputStream(newFile);
-					BufferedInputStream bis = new BufferedInputStream(fis);
+						FileInputStream fis = new FileInputStream(newFile);
+						BufferedInputStream bis = new BufferedInputStream(fis);
 
-					bis.read(msg.getMybytearray(), 0, mybytearray.length);
-					msg.setQuertar(Quertar);
-					msg.setYear(Year);
-					msg.setHomebranch(homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
-					ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
+						bis.read(msg.getMybytearray(), 0, mybytearray.length);
+						msg.setQuertar(Quertar);
+						msg.setYear(Year);
+						//msg.setHomebranch((LoginScreenController.user.getHomeBranch()));//fix.
+						ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
+						if(succesUpload==true)
+						{
+							PopUpMessage.successMessage("Succes to upload the " + Year + "' " + Quertar + " PDF file!");
+						}
+						else {
+							PopUpMessage.errorMessage("could not upload " + Year + "' " + Quertar + " PDF file!,tryagain");
+						}
 
-				} catch (Exception e) {
-					System.out.println("Error send (Files)msg) to Server");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		else {
+			PopUpMessage.errorMessage("there is a report for " + Year + " " + Quertar + " already!");
+		}
+		
+		
+		
 	}
 
 	@Override
@@ -110,6 +135,7 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		QuertarComboBox.getItems().add("3");
 		QuertarComboBox.getItems().add("4");
 		YearComboBox.setDisable(true);
+		UploadBtn.setDisable(true);
 	}
 	
 

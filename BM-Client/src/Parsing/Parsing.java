@@ -1,4 +1,5 @@
 package Parsing;
+
 //client
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ import client.controllers.LoginScreenController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.BranchManagerScreenController;
+import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.RestListFormController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
@@ -40,7 +42,7 @@ public class Parsing {
 				} else {
 					LoginScreenController.LoginFlag = true;
 					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-							homeBranches.toHomeBranchType(DivedMsg[4]),DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 				}
 
 			}
@@ -85,87 +87,95 @@ public class Parsing {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
-		case MenuExistTrue: 
-		{
-			SupplierScreenController.ExisingMenuFlag=true; 
-			break; 
+		case MenuExistTrue: {
+			SupplierScreenController.ExisingMenuFlag = true;
+			break;
 		}
-		case MenuExistFalse: 
-		{
-			SupplierScreenController.ExisingMenuFlag=false; 
-			break; 
+		case MenuExistFalse: {
+			SupplierScreenController.ExisingMenuFlag = false;
+			break;
 		}
 
 		case Dish_add_succ: {
 
 		}
-		
+
 		case Dish_update_succ: {
 
 		}
-		
-		case Employer_list:{
-			ConfirmEmployerRegController.Employers=(ArrayList<Employer>) receivedMessage.getMessageData();
+
+		case Employer_list: {
+			ConfirmEmployerRegController.Employers = (ArrayList<Employer>) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case Supplier_list:{
-			ConfirmSupplierRegController.Suppliers=(ArrayList<Supplier>) receivedMessage.getMessageData();
+
+		case Supplier_list: {
+			ConfirmSupplierRegController.Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case Account_list:{
+
+		case Account_list: {
 			BranchManagerCloseAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case employer_approved:{
-			BranchManagerOpenNewBussinessAccountController.AprrovedFlag=true;
+
+		case employer_approved: {
+			BranchManagerOpenNewBussinessAccountController.AprrovedFlag = true;
 			break;
 		}
-		
-		case employer_not_approved:{
-			BranchManagerOpenNewBussinessAccountController.AprrovedFlag=false;
+
+		case employer_not_approved: {
+			BranchManagerOpenNewBussinessAccountController.AprrovedFlag = false;
 			break;
 		}
-		
-		case BAccount_succ:{
-			BranchManagerOpenNewBussinessAccountController.ConfirmFlag=true;
+
+		case BAccount_succ: {
+			BranchManagerOpenNewBussinessAccountController.ConfirmFlag = true;
 			break;
 		}
-		
-		case PAccount_exits:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true;
+
+		case PAccount_exits: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
 			break;
 		}
-		
-		case PAccount_NOT_exits:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=false;
+
+		case PAccount_NOT_exits: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = false;
 			break;
 		}
-		
-		case return_accounts_for_freeze:{
+
+		case return_accounts_for_freeze: {
 			BranchManagerFreezeAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case Account_Active:{
-			BranchManagerFreezeAccountController.FreezeAccount=false;
+
+		case Account_Active: {
+			BranchManagerFreezeAccountController.FreezeAccount = false;
 			break;
 		}
-		
-		case Account_Freeze:{
-			BranchManagerFreezeAccountController.FreezeAccount=true;
+
+		case Account_Freeze: {
+			BranchManagerFreezeAccountController.FreezeAccount = true;
 			break;
 		}
-		
-		case pdf_succ:{
-			PopUpMessage.successMessage("Success import the pdf file!");
+
+		case year_and_querter_ok: {
+			BranchManagerUploadPDFController.yearandqflag = true;
 			break;
 		}
-		
-		case Delete_Account_Succ:{
-			
+
+		case year_and_querter_not_ok: {
+			BranchManagerUploadPDFController.yearandqflag = false;
+			break;
+		}
+
+		case upload_pdf_succ: {
+			BranchManagerUploadPDFController.succesUpload = true;
+			break;
+		}
+
+		case Delete_Account_Succ: {
+
 		}
 
 		default: {
