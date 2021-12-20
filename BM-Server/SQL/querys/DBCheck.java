@@ -101,16 +101,32 @@ public class DBCheck {
 				rs.next();
 				rs1 = rs.getString(1).toString();
 				rs.close();
-				
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("return false");
-			return false; 
+			return false;
 		}
-		System.out.println("in sql before false rs1="+ rs1);
-			return true; 
-			
+		System.out.println("in sql before false rs1=" + rs1);
+		return true;
+	}
+
+	public static ArrayList<String> w4cBusinessGet() {
+		ArrayList<String> rs1 = new ArrayList<String>();
+		Statement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT w4cBusiness FROM bytemedatabase.company");
+				while (rs.next()) {
+					rs1.add(rs.getString(1).toString());
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs1;
 	}
 }

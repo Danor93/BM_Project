@@ -3,6 +3,7 @@ package Parsing;
 //client
 import java.util.ArrayList;
 
+import Entities.BusinessAccountTracking;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
@@ -15,6 +16,8 @@ import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerFreezeAccountController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
+import client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController;
+import client.controllers.HRManagerRegistrationOfEmployersController;
 import client.controllers.ConfirmEmployerRegController;
 import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
@@ -178,11 +181,22 @@ public class Parsing {
 		}
 
 		case RegistrationOfEmployer_succ: {
+			HRManagerRegistrationOfEmployersController.RegistrationFlag = true;
+			break;
 
+		}
+		case RegistrationOfEmployer_failed: {
+			HRManagerRegistrationOfEmployersController.RegistrationFlag = false;
+			break;
 		}
 
 		case Delete_Account_Succ: {
 
+		}
+
+		case businessAccountsTracking: {
+			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
+			break;
 		}
 
 		default: {

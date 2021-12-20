@@ -191,6 +191,7 @@ public class UpdateDB {
 				stmt.setString(1, employer.getW4cBussines());
 				stmt.setString(2, employer.getCompanyName());
 				stmt.setString(3, employer.getCompanyStatus());
+				stmt.executeUpdate();
 				return true;
 
 			} else {

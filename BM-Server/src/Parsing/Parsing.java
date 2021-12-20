@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
 
+import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Dish;
@@ -278,9 +279,17 @@ public class Parsing {
 			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
 				return messageFromServer;
+			} else {
+				messageFromServer = new Message(MessageType.RegistrationOfEmployer_failed, null);
+				return messageFromServer;
 			}
 		}
-
+		
+		case get_business_account_details: {
+			ArrayList<BusinessAccountTracking> businessAccount = Query.LoadBusinessAccountDetails();
+			messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
+			return messageFromServer;
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

@@ -77,12 +77,18 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		ArrayList<Order> ordersToChange = new ArrayList<Order>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(0).getOrderNum());
 			ordersToChange.add(list.get(i));
 		}
 		ClientUI.chat.accept(new Message(MessageType.Order_approved, ordersToChange));
+		for (int i = 0; i < allOrders.size(); i++) {
+			for (int j = 0; j < ordersToChange.size(); j++) {
+				if (allOrders.get(i).equals(ordersToChange.get(j)))
+					allOrders.remove(i);
+			}
+		}
 		ordersToChange.clear();
-		startScreen(event, "ConfirmOrderApproval", "Update order status");
+		list = FXCollections.observableArrayList(allOrders);
+		table.setItems(list);
 	}
 
 	@FXML
@@ -90,12 +96,18 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		ArrayList<Order> ordersToChange = new ArrayList<Order>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(0).getOrderNum());
 			ordersToChange.add(list.get(i));
 		}
 		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, ordersToChange));
+		for (int i = 0; i < allOrders.size(); i++) {
+			for (int j = 0; j < ordersToChange.size(); j++) {
+				if (allOrders.get(i).equals(ordersToChange.get(j)))
+					allOrders.remove(i);
+			}
+		}
 		ordersToChange.clear();
-		startScreen(event, "ConfirmOrderApproval", "Update order status");
+		list = FXCollections.observableArrayList(allOrders);
+		table.setItems(list);
 	}
 
 	@FXML

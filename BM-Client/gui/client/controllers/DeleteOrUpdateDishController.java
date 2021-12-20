@@ -98,6 +98,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		System.out.println("TypeOfDish= " + TypeOfDish);
 		for (int i = 0; i < dishes.size(); i++) {
 			if (dishes.get(i) != null) {
+				System.out.println("this here again!" + dishes.get(i).getDishName());
 				if (DishType.fromTypeToStr(dishes.get(i).getDishType()).equals(TypeOfDish)) {
 					System.out.println("dishes in this type: " + dishes.get(i).getDishName());
 					btnDish.getItems().add(dishes.get(i).getDishName());

@@ -22,5 +22,5 @@ public enum MessageType {
 	ReturnFirstName, ReturnFirstName_success, ConfirmOpenNewBusinessAccount, ConfirmOpenNewPrivateAccount,
 
 	/* Error */
-	Error, MenuExist, MenuExistTrue, MenuExistFalse, get_orders_to_approve, Orders_List, Order_not_approved, changed_status_to_notApproved_succ, Order_approved, changed_status_to_Approved_succ, RegistrationOfEmployer, RegistrationOfEmployer_succ
+	Error, MenuExist, MenuExistTrue, MenuExistFalse, get_orders_to_approve, Orders_List, Order_not_approved, changed_status_to_notApproved_succ, Order_approved, changed_status_to_Approved_succ, RegistrationOfEmployer, RegistrationOfEmployer_succ, RegistrationOfEmployer_failed, get_business_account_details, businessAccountsTracking
 }

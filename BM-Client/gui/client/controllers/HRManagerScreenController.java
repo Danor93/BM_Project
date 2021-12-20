@@ -3,11 +3,15 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import main.ClientUI;
 
 public class HRManagerScreenController extends Controller{
 
@@ -34,12 +38,13 @@ public class HRManagerScreenController extends Controller{
 
     @FXML
     void Back(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
 		startScreen(event, "LoginScreen", "Login");
     }
 
     @FXML
     void ConfirmationOfOpeningABusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event, "LoginScreen", "Login");
+		startScreen(event, "HRManagerConfirmationOfOpeningABusinessAccount", "ConfirmationOfOpeningABusinessAccount");
     }
 
     @FXML

@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Employer;
@@ -433,5 +434,26 @@ public class Query {
 			s.printStackTrace();
 		}
 		return orders;
+	}
+
+	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails() {
+		ArrayList<BusinessAccountTracking> businessAccountTracking = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT ID,companyName,budget FROM bytemedatabase.buss_client WHERE status ='waiting'"
+							+ "");
+			while (rs.next()) {
+				BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2), rs.getString(3));
+				BAT.setStatus("waiting");
+				
+				businessAccountTracking.add(BAT);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return businessAccountTracking;
 	}
 }

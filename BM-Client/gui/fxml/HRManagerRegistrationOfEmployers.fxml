@@ -20,24 +20,18 @@
          </font>
       </Label>
       <Button fx:id="btnBack" layoutX="6.0" layoutY="4.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Label layoutX="56.0" layoutY="142.0" text="W4C Business" textFill="WHITE">
+      <Label layoutX="46.0" layoutY="152.0" text="Company name" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="48.0" layoutY="185.0" text="Company name" textFill="WHITE">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TextField fx:id="w4cBusiness" layoutX="184.0" layoutY="144.0" />
-      <TextField fx:id="companyName" layoutX="184.0" layoutY="182.0" />
+      <TextField fx:id="companyName" layoutX="182.0" layoutY="149.0" />
       <Text fill="WHITE" layoutX="41.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You must fill in all the following details">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnConfirm" layoutX="257.0" layoutY="240.0" mnemonicParsing="false" onAction="#confirm" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
+      <Button fx:id="btnConfirm" layoutX="256.0" layoutY="194.0" mnemonicParsing="false" onAction="#confirm" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm" />
       <Label fx:id="mibiLabel" layoutX="17.0" layoutY="240.0" prefHeight="26.0" prefWidth="231.0" textFill="RED">
          <font>
             <Font name="System Bold" size="17.0" />
