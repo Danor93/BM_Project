@@ -360,7 +360,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('a','a','Customer','adi','sasson','123','***','***',0,''),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ds','ds','Customer','danor','sinai','3111','d@gmail.com','050266',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,''),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
+INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('h','h','HR Manager','avi','sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','adi','sasson','123','***','***',0,''),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ds','ds','Customer','danor','sinai','3111','d@gmail.com','050266',0,'north'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,''),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -373,4 +373,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-21 11:47:40
+-- Dump completed on 2021-12-21 12:13:41

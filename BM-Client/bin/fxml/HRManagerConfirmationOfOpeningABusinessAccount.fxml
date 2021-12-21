@@ -7,14 +7,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="532.0" prefWidth="721.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
+<AnchorPane prefHeight="532.0" prefWidth="808.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
    <children>
       <Text fill="WHITE" layoutX="10.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation Of Opening A Business Account">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="647.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="WHITE" layoutX="744.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -24,12 +24,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Refuse" layoutX="627.0" layoutY="182.0" mnemonicParsing="false" onAction="#refuseBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
+      <Button fx:id="Refuse" layoutX="667.0" layoutY="182.0" mnemonicParsing="false" onAction="#refuseBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Confirm" layoutX="626.0" layoutY="286.0" mnemonicParsing="false" onAction="#confirmBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
+      <Button fx:id="Confirm" layoutX="667.0" layoutY="283.0" mnemonicParsing="false" onAction="#confirmBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -44,11 +44,11 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <TableView fx:id="table" layoutX="20.0" layoutY="112.0" prefHeight="378.0" prefWidth="598.0">
+      <TableView fx:id="table" layoutX="20.0" layoutY="112.0" prefHeight="378.0" prefWidth="639.0">
          <columns>
             <TableColumn fx:id="ID" prefWidth="182.39996910095215" text="ID" />
-            <TableColumn fx:id="companyName" prefWidth="209.60003662109375" text="CompanyName" />
-            <TableColumn fx:id="budget" prefWidth="206.39993286132812" text="Budget" />
+            <TableColumn fx:id="companyName" prefWidth="253.59991455078125" text="CompanyName" />
+            <TableColumn fx:id="budget" prefWidth="203.2000732421875" text="Budget" />
          </columns>
       </TableView>
    </children>
