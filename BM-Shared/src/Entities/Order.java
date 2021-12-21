@@ -4,8 +4,7 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 2360410765980564003L;
 	private int orderNum;
 	private String restName,timeOfOrder,dateOfOrder,orderStatus,costumerId,restId;
 	private float totalPrice;

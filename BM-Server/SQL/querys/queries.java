@@ -180,7 +180,7 @@ public class queries {
 					String PhoneNumber = rs.getString("PhoneNumber");
 					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
 					String OrderAddress = rs.getString("OrderAddress");
-					orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
+					//orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));//fix.
 				}
 				rs.close();
 			} else {
