@@ -82,11 +82,6 @@ public class Parsing {
 			break;
 		}
 
-		case ConfirmOpenNewPrivateAccount: {
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
-			break;
-		}
-
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
@@ -132,19 +127,24 @@ public class Parsing {
 			BranchManagerOpenNewBussinessAccountController.AprrovedFlag = false;
 			break;
 		}
-
-		case BAccount_succ: {
-			BranchManagerOpenNewBussinessAccountController.ConfirmFlag = true;
+		
+		case Baccount_details_not_ok:{
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils=false;
 			break;
 		}
 
-		case PAccount_exits: {
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
+		case ConfirmOpenNewBusinessAccount: {
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils=true;
 			break;
 		}
-
-		case PAccount_NOT_exits: {
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = false;
+		
+		case PAccount_details_not_ok:{
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=false;
+			break;
+		}
+		
+		case ConfirmOpenNewPrivateAccount:{
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true;
 			break;
 		}
 
@@ -183,6 +183,7 @@ public class Parsing {
 
 		case RegistrationOfEmployer_failed: {
 			HRManagerRegistrationOfEmployersController.RegistrationFlag = false;
+			break;
 		}
 
 		case year_and_querter_ok: {
@@ -208,6 +209,15 @@ public class Parsing {
 			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
 			break;
 		}
+		
+		case changed_BusinessAccount_status_to_Approved_succ: {
+
+		}
+
+		case changed_BusinessAccount_status_to_NotApproved_succ: {
+
+		}
+
 
 		default: {
 			break;

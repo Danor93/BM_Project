@@ -254,6 +254,33 @@ public class Query {
 		return false;
 	}
 
+	public static Boolean checkAccountDetails(BussinessAccount Account) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT firstName,lastName,Email,phone FROM import_users WHERE id = '"
+						+ Account.getId() + "' ;");
+				while (rs.next()) {
+					String FirstName = rs.getString(1);
+					String LastName = rs.getString(2);
+					String Email = rs.getString(3);
+					String Phone = rs.getString(4);
+					if ((!FirstName.equals(Account.getFirstN())) || (!LastName.equals(Account.getLastN()))
+							|| (!Email.equals(Account.getEmail())) || (!Phone.equals(Account.getPhone()))) {
+						rs.close();
+						return false;
+					} else {
+						rs.close();
+						return true;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
@@ -292,15 +319,24 @@ public class Query {
 		}
 	}
 
-	public static Boolean checkPrivateAccount(String ID) {
+	public static Boolean checkPrivateAccount(Client client) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + ID + "' ;");
-				if (rs != null) {
-					return true;
-				} else {
-					return false;
+				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + client.getId() + "' ;");
+				while (rs.next()) {
+					String FirstName = rs.getString(1);
+					String LastName = rs.getString(2);
+					String Email = rs.getString(3);
+					String Phone = rs.getString(4);
+					if ((!FirstName.equals(client.getFirstN())) || (!LastName.equals(client.getLastN()))
+							|| (!Email.equals(client.getEmail())) || (!Phone.equals(client.getPhone()))) {
+						rs.close();
+						return false;
+					} else {
+						rs.close();
+						return true;
+					}
 				}
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -406,7 +442,6 @@ public class Query {
 		}
 	}
 
-
 	public static Boolean checkYearAndQuarter(String quarter, String year) {
 		if (DBConnect.conn != null) {
 			try {
@@ -474,13 +509,13 @@ public class Query {
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT ID,companyName,budget FROM bytemedatabase.buss_client WHERE status ='waiting'"
-							+ "");
+			ResultSet rs = stmt
+					.executeQuery("SELECT ID,companyName,budget FROM buss_client WHERE status ='waiting'" + "");
 			while (rs.next()) {
-				BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2), rs.getString(3));
+				BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2),
+						rs.getString(3));
 				BAT.setStatus("waiting");
-				
+
 				businessAccountTracking.add(BAT);
 			}
 			rs.close();

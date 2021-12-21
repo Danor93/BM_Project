@@ -75,20 +75,24 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 				|| txtCreditCardNumber.getText().isEmpty()) {
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		} else {
-			ClientUI.chat.accept(new Message(MessageType.check_Private_accout_exits, txtID.getText().toString()));
-			if (ConfirmOpenNewPrivateAccountFlag) {
 				PAccount.setFirstN(txtFirstName.getText());
 				PAccount.setLastN(txtLastName.getText());
 				PAccount.setId(txtID.getText());
 				PAccount.setPhone(txtTelephone.getText());
 				PAccount.setEmail(txtEmail.getText());
 				PAccount.setCreditCardNumber(txtCreditCardNumber.getText());
-				ClientUI.chat.accept(new Message(MessageType.add_new_private_account, PAccount));
-				PopUpMessage.successMessage("Account " + PAccount.getFirstN() + " has been added succefuly!");
+				ClientUI.chat.accept(new Message(MessageType.check_PAccount_details, PAccount));
+				if(ConfirmOpenNewPrivateAccountFlag) {
+				PopUpMessage.successMessage("Account " + PAccount.getFirstN() + " " + PAccount.getLastN() +  " has been added succefuly!");
 				ConfirmOpenNewPrivateAccountFlag = false;
+				}
+				else
+				{
+					PopUpMessage.errorMessage("one or more of the deatils is wrong!");
+					ConfirmOpenNewPrivateAccountFlag=false;
+				}
 			}
 		}
-	}
 
 	@FXML
 	void initialize() {

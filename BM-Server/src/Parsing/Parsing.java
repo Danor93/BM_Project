@@ -70,7 +70,6 @@ public class Parsing {
 		}
 
 		case Show_Cities: {
-			System.out.println("hi adi");
 			ArrayList<String> city = showCities.getCities();
 
 			for (String s : city) {
@@ -90,16 +89,6 @@ public class Parsing {
 		case get_Dishes: {
 			ArrayList<Dish> dishesOfRest = getDishes.getDishes((Integer) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
-			return messageFromServer;
-		}
-
-		case ConfirmOpenNewBusinessAccount: {
-			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
-			return messageFromServer;
-		}
-
-		case ConfirmOpenNewPrivateAccount: {
-			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 			return messageFromServer;
 		}
 
@@ -162,30 +151,27 @@ public class Parsing {
 			}
 			return messageFromServer;
 		}
-
-		case New_BAccount: {
-			BussinessAccount BA = (BussinessAccount) receivedMessage.getMessageData();
-			Query.addNewBAccount(BA);
-			messageFromServer = new Message(MessageType.BAccount_succ, null);
-			return messageFromServer;
-		}
-
-		case check_Private_accout_exits: {
-			String ID = (String) receivedMessage.getMessageData();
-			if (Query.checkPrivateAccount(ID)) {
-				messageFromServer = new Message(MessageType.PAccount_exits, null);
-				return messageFromServer;
-			} else {
-				messageFromServer = new Message(MessageType.PAccount_NOT_exits, null);
-				return messageFromServer;
+		
+		case check_Baccount_details:{
+			BussinessAccount BAccount = (BussinessAccount) receivedMessage.getMessageData();
+			if((Query.checkAccountDetails(BAccount))==true) {
+				Query.addNewBAccount(BAccount);
+				return messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
+			}
+			else {
+				return messageFromServer = new Message(MessageType.Baccount_details_not_ok, null);
 			}
 		}
-
-		case add_new_private_account: {
-			Client paccount = (Client) receivedMessage.getMessageData();
-			Query.addNewPAccount(paccount);
-			messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
-			return messageFromServer;
+		
+		case check_PAccount_details:{
+			Client Pclient = (Client) receivedMessage.getMessageData();
+			if((Query.checkPrivateAccount(Pclient))==true) {
+				Query.addNewPAccount(Pclient);
+				return messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
+			}
+			else {
+				return messageFromServer = new Message(MessageType.PAccount_details_not_ok, null);
+			}
 		}
 
 		case get_accounts_for_freeze: {
@@ -307,6 +293,21 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
 			return messageFromServer;
 		}
+		
+		case update_status_approved_businessAccount: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.BusinessAccountStatusToApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ, null);
+			}
+		}
+
+		case update_status_NotApproved_businessAccount: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.BusinessAccountStatusToNotApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ, null);	
+			}
+		}
+
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

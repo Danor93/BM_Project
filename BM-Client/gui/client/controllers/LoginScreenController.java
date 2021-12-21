@@ -35,6 +35,7 @@ public class LoginScreenController extends Controller {
 	public static String Name = null;
 	public static String ID = null;
 	public static ActionEvent mainevent;
+	public static String CompanyName = null;
 
 	@FXML
 	private ResourceBundle resources;
@@ -44,8 +45,8 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private TextField txtUserName;
 
-    @FXML
-    private PasswordField PasswordField;
+	@FXML
+	private PasswordField PasswordField;
 
 	@FXML
 	private Button btnLogin;
@@ -59,6 +60,7 @@ public class LoginScreenController extends Controller {
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
 		mainevent = event;
+		String[] DivededUandP;
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());
 		str.append("@");
@@ -83,8 +85,12 @@ public class LoginScreenController extends Controller {
 					Name = user.getFirstN();
 					ID = user.getId();
 					startScreen(event, "SupplierScreen", "Supplier");
-				} else if (user.getRole().equals("HR Manager")) {
-					startScreen(event, "HRManagerScreen", "HR Manager");
+				} else {
+					DivededUandP = ((String) user.getRole()).split(" ");
+					if (DivededUandP[0].equals("HR")) {
+						CompanyName = DivededUandP[1];
+						startScreen(event, "HRManagerScreen", "HR Manager");
+					}
 				}
 			}
 		}

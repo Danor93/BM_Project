@@ -40,7 +40,7 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 
 	@FXML
 	void initialize() {
-		setImage(BackImage, "background.png");
+		//setImage(BackImage, "background.png");
 		assert btnBusinessAccount != null
 				: "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
 		assert btnPrivateAccount != null

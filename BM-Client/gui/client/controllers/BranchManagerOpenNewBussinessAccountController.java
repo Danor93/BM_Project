@@ -37,7 +37,7 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 	  */
 	public static BussinessAccount  BAccount = new BussinessAccount(null, null, null, null, null, null, null, null, null, null, null, null);
 	public static Boolean AprrovedFlag=false;
-	public static Boolean ConfirmFlag=false;
+	public static Boolean Checkdeatils=false;
 
 	@FXML
 	private ResourceBundle resources;
@@ -99,14 +99,19 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 				BAccount.setCompanyName( txtEmployersName.getText());
 				BAccount.setBudget(txtMonthlyBillingCeiling.getText());
 				AprrovedFlag=false;
-				ClientUI.chat.accept(new Message(MessageType.New_BAccount,BAccount));
-				if(ConfirmFlag==true) {
-					PopUpMessage.successMessage("The bussiness account has beed confirmed!");
-					ConfirmFlag=false;
+				ClientUI.chat.accept(new Message(MessageType.check_Baccount_details,BAccount));
+				if(Checkdeatils) {
+					PopUpMessage.successMessage("The bussiness account " + BAccount.getFirstN() + " " + BAccount.getLastN() +  " has been confirmed!");
+					Checkdeatils=false;
+				}
+				else {
+					PopUpMessage.errorMessage("one or more of the deatils is wrong!");
+					Checkdeatils=false;
 				}
 			}
 			else {
-				PopUpMessage.errorMessage("your Employer doesn't Approved yet!");
+				PopUpMessage.errorMessage("your Employer -'" + BAccount.getCompanyName() + "' doesn't Approved yet!");
+				AprrovedFlag=false;
 			}
 		}
 
@@ -115,6 +120,8 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//setImage(BackImage, "background.png");
+		Checkdeatils=false;
+		AprrovedFlag=false;
 	}
 	
     @FXML

@@ -20,9 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
-// Dont touch Dont touch Dont touch Dont touch Dont touch Dont touch Dont touch
-// שאילתה approved & refuse clientUi
-
 public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
 
@@ -62,12 +59,12 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
-		/**ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
 			ordersToChange.add(list.get(i));
-		}// Dont touch
-		ClientUI.chat.accept(new Message(MessageType.????, ordersToChange));
+		}
+		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, ordersToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
 			for (int j = 0; j < ordersToChange.size(); j++) {
 				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
@@ -76,17 +73,17 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		}
 		ordersToChange.clear();
 		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);**/
+		table.setItems(list);
 	}
 
 	@FXML
 		void refuseBusinessAccount(ActionEvent event) {
-		/**ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
 			ordersToChange.add(list.get(i));
-		}// Dont touch
-		ClientUI.chat.accept(new Message(MessageType.????, ordersToChange));
+		}
+		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, ordersToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
 			for (int j = 0; j < ordersToChange.size(); j++) {
 				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
@@ -95,7 +92,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		}
 		ordersToChange.clear();
 		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);**/
+		table.setItems(list);
 	}
 
 	@FXML

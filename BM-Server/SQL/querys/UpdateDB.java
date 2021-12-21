@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Entities.BusinessAccountTracking;
 import Entities.Dish;
 import Entities.DishType;
 import Entities.Employer;
@@ -139,34 +140,34 @@ public class UpdateDB {
 	}
 
 	public static boolean updateOrderStatusToNotApproved(ArrayList<Order> arrayList) {
-			PreparedStatement stmt;
-			int i=0;
-			try {
-				if (DBConnect.conn != null) {
-					stmt = DBConnect.conn
-							.prepareStatement("UPDATE bytemedatabase.order SET orderStatus = 'not approved' WHERE orderNumber=?");
-					stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
-					i++;
-					stmt.executeUpdate();
-					return true;
-
-				} else {
-					System.out.println("Conn is null");
-					return false;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+		PreparedStatement stmt;
+		int i = 0;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement(
+						"UPDATE bytemedatabase.order SET orderStatus = 'not approved' WHERE orderNumber=?");
+				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
+				i++;
+				stmt.executeUpdate();
 				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
 		}
+	}
 
 	public static boolean updateOrderStatusToApproved(ArrayList<Order> arrayList) {
 		PreparedStatement stmt;
-		int i=0;
+		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bytemedatabase.order SET orderStatus = 'approved' WHERE orderNumber=?");
+				stmt = DBConnect.conn.prepareStatement(
+						"UPDATE bytemedatabase.order SET orderStatus = 'approved' WHERE orderNumber=?");
 				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
 				i++;
 				stmt.executeUpdate();
@@ -202,6 +203,50 @@ public class UpdateDB {
 			e.printStackTrace();
 			return false;
 		}
-
 	}
+	
+	public static boolean BusinessAccountStatusToApproved(ArrayList<BusinessAccountTracking> arrayList) {
+		PreparedStatement stmt;
+		int i=0;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bytemedatabase.buss_client SET status = 'approved' WHERE ID=?");
+				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
+				i++;
+				stmt.executeUpdate();
+				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	public static boolean BusinessAccountStatusToNotApproved(ArrayList<BusinessAccountTracking> arrayList) {
+		PreparedStatement stmt;
+		int i = 0;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bytemedatabase.buss_client SET status = 'Not approved' WHERE ID=?");
+				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
+				i++;
+				stmt.executeUpdate();
+				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
 }
