@@ -15,7 +15,8 @@ public enum MessageType {
 	Employer_Update, get_Supplier, Supplier_Update, get_Accounts, Delete_Account,check_account_employer_approved,
 	New_BAccount,get_accounts_for_freeze,check_if_account_freeze,Account_For_Freeze,
 	send_PDF,Show_Dishes,Dish_update_succ, deleteDish, Dish_delete_succ,check_year_and_quertar,check_Baccount_details,check_PAccount_details,
-	update_status_approved_businessAccount,update_status_NotApproved_businessAccount,
+	update_status_approved_businessAccount,update_status_NotApproved_businessAccount,get_Revenue_report,get_Orders_report,
+	get_Performance_report,
 
 
 
