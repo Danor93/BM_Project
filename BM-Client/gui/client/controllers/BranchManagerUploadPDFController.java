@@ -23,6 +23,10 @@ import javafx.fxml.Initializable;
 
 public class BranchManagerUploadPDFController extends Controller implements Initializable {
 
+	/*
+	 * author:Danor
+	 * this class is for the branch manager upload a quarterly pdf functionality */
+	
 	public static String Quertar;
 	public static String Year;
 	public static Stage stage;
@@ -122,10 +126,7 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		}
 		else {
 			PopUpMessage.errorMessage("there is a report for " + Year + " " + Quertar + " already!");
-		}
-		
-		
-		
+		}	
 	}
 
 	@Override
