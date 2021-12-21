@@ -12,6 +12,7 @@ import Entities.MyFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class BranchManagerScreenController extends Controller implements ControllerInterface {
+public class BranchManagerScreenController extends Controller implements ControllerInterface,Initializable {
 
 	public static Stage stage;
 
@@ -110,36 +111,14 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	/*for upload the quarterly PDF.*/
 	@FXML
-	void UploadPDF(ActionEvent event) {
-		try {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Resource File");
-			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-			File file = fileChooser.showOpenDialog(BranchManagerScreenController.stage);
-			if (file != null) {
-				String path = file.getPath();
-				File f = new File(path);
-				MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
-				try {
-					File newFile = new File(path);
-					byte[] mybytearray = new byte[(int) newFile.length()];
-					msg.initArray(mybytearray.length);
-					msg.setSize(mybytearray.length);
+	void UploadPDF(ActionEvent event) throws IOException {
+	startScreen(event, "BranchManagerUploadPDF", "Upload PDF");
+	}
 
-					FileInputStream fis = new FileInputStream(newFile);
-					BufferedInputStream bis = new BufferedInputStream(fis);
-
-					bis.read(msg.getMybytearray(), 0, mybytearray.length);
-					ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
-
-				} catch (Exception e) {
-					System.out.println("Error send (Files)msg) to Server");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

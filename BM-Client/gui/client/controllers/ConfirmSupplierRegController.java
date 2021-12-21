@@ -43,7 +43,7 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    private ComboBox<String> ListofSupplier;
 
 	    @FXML
-	    private Button btnBackToBranchManager;
+	    private Button BackBtn;
 
 	    @FXML
 	    private Button btnConfirmSupplierRegistartion;
@@ -53,9 +53,14 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	    /*this method for update the DB and return to the branch manager screen.*/
 	    @FXML
-	    void BackToBranchManagerScreen(ActionEvent event) throws IOException {
+	    void Back(ActionEvent event) throws IOException {
 	    	ClientUI.chat.accept(new Message(MessageType.Supplier_Update,Suppliers));
-	    	startScreen(event, "BranchManagerScreen", "Branch Manager Main");
+	    	if(LoginScreenController.user.getRole().equals("CEO")) {
+				startScreen(event, "CEOScreen", "CEO");
+			}
+			if(LoginScreenController.user.getRole().equals("BranchManager")) {
+				startScreen(event, "BranchManagerScreen", "Branch Manager");
+			}
 	    }
 
 	    /*this method is for the Combobox Selection*/
@@ -111,20 +116,17 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 				}
 			}
 		}
-
-	    @FXML
-	    void initialize() {
-	        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'ConfirmSupplierRegistartion.fxml'.";
-	        assert ListofSupplier != null : "fx:id=\"ListofSupplier\" was not injected: check your FXML file 'ConfirmSupplierRegistartion.fxml'.";
-	        assert btnBackToBranchManager != null : "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'ConfirmSupplierRegistartion.fxml'.";
-	        assert btnConfirmSupplierRegistartion != null : "fx:id=\"btnConfirmSupplierRegistartion\" was not injected: check your FXML file 'ConfirmSupplierRegistartion.fxml'.";
-	        assert btnRefuseSupplierRegistartion != null : "fx:id=\"btnRefuseSupplierRegistartion\" was not injected: check your FXML file 'ConfirmSupplierRegistartion.fxml'.";
-	    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.chat.accept(new Message(MessageType.get_Supplier, null));
 		loadSupplierstoComboBox(Suppliers);
+		if(LoginScreenController.user.getRole().equals("CEO")) {
+			BackBtn.setText("Back to CEO Panel");
+		}
+		if(LoginScreenController.user.getRole().equals("BranchManager")) {
+			BackBtn.setText("Back to Branch Manager Panel");
+		}
 	}
 
 }

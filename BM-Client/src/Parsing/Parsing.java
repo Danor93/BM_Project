@@ -26,6 +26,7 @@ import client.controllers.LoginScreenController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.BranchManagerScreenController;
+import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.RestListFormController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
@@ -48,7 +49,6 @@ public class Parsing {
 					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 				}
-
 			}
 			break;
 		}
@@ -163,11 +163,6 @@ public class Parsing {
 			break;
 		}
 
-		case pdf_succ: {
-			PopUpMessage.successMessage("Success import the pdf file!");
-			break;
-		}
-
 		case Orders_List: {
 			ConfirmOrderApprovalController.allOrders = (ArrayList<Order>) receivedMessage.getMessageData();
 			break;
@@ -185,8 +180,23 @@ public class Parsing {
 			break;
 
 		}
+
 		case RegistrationOfEmployer_failed: {
 			HRManagerRegistrationOfEmployersController.RegistrationFlag = false;
+		}
+
+		case year_and_querter_ok: {
+			BranchManagerUploadPDFController.yearandqflag = true;
+			break;
+		}
+
+		case year_and_querter_not_ok: {
+			BranchManagerUploadPDFController.yearandqflag = false;
+			break;
+		}
+
+		case upload_pdf_succ: {
+			BranchManagerUploadPDFController.succesUpload = true;
 			break;
 		}
 

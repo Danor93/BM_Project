@@ -25,6 +25,7 @@ import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 import main.PopUpMessage;
+import javafx.scene.control.PasswordField;
 
 public class LoginScreenController extends Controller {
 	public static User user = new User(null, null, null, null, null, null, null, null);
@@ -43,8 +44,8 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private TextField txtUserName;
 
-	@FXML
-	private TextField txtPassword;
+    @FXML
+    private PasswordField PasswordField;
 
 	@FXML
 	private Button btnLogin;
@@ -61,7 +62,7 @@ public class LoginScreenController extends Controller {
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());
 		str.append("@");
-		str.append(txtPassword.getText());
+		str.append(PasswordField.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
 		ClientUI.chat.accept(msg);
 		if (LoginFlag) {
@@ -98,17 +99,4 @@ public class LoginScreenController extends Controller {
 	void getUserName(InputMethodEvent event) {
 
 	}
-
-	@FXML
-	void initialize() {
-		// setImage(BackImage, "loginPage.jpg");
-		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert WrongInputInLoggin != null
-				: "fx:id=\"WrongInputInLoggin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert txtPassword != null : "fx:id=\"txtPassword\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-		assert txtUserName != null : "fx:id=\"txtUserName\" was not injected: check your FXML file 'LoginScreen.fxml'.";
-
-	}
-
 }

@@ -28,7 +28,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <Button fx:id="btnBackToBranchManager" layoutX="5.0" layoutY="15.0" mnemonicParsing="false" onAction="#Back" text="Back to Branch manager page">
+      <Button fx:id="BackBtn" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#Back" text="Back">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>

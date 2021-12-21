@@ -62,7 +62,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		/**ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
 			ordersToChange.add(list.get(i));
@@ -76,12 +76,12 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		}
 		ordersToChange.clear();
 		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);
+		table.setItems(list);**/
 	}
 
 	@FXML
-	void refuseBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		void refuseBusinessAccount(ActionEvent event) {
+		/**ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
 			ordersToChange.add(list.get(i));
@@ -95,7 +95,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		}
 		ordersToChange.clear();
 		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);
+		table.setItems(list);**/
 	}
 
 	@FXML

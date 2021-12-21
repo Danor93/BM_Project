@@ -54,8 +54,8 @@ import main.ClientUI;
 	    	{*/
 	    		//ClientUI.chat= new ClientController(ip, 5555);
 	    		ClientUI.chat= new ClientController("localhost", 5555);
-	    		Message msg = new Message(MessageType.login, null);
-	    		ClientUI.chat.accept(msg);
+	    		//Message msg = new Message(MessageType.login, null);
+	    		//ClientUI.chat.accept(msg);
 	    		startScreen(event,"LoginScreen","Login");
 	    	}
 	    

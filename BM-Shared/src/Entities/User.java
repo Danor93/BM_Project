@@ -6,7 +6,6 @@ public class User implements Serializable {
 	
 	private static final long serialVersionUID = 8530287836358627004L;
 	private String userName,password,isLoggedIn,role,id,firstN,lastN,email,phone;
-
 	private homeBranches homeBranch;
 	
 	public User(String role,String id, String firstN, String lastN,homeBranches homeBranch, String userName, String password, String isLoggedIn) {

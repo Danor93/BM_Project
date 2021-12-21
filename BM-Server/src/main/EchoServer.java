@@ -28,7 +28,6 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	public static ServerUIFController serverUIFController;
-	private static ArrayList<ClientConnection> clients = null;
 	private Message resMessage;
 	
 	public EchoServer(int port) {

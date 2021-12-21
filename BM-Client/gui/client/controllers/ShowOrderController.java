@@ -60,8 +60,8 @@ public class ShowOrderController extends Controller implements Initializable{
     	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickUp.fxml"));
 		Parent root=load.load();
-		DeliveryOrPickupController aFrame = load.getController();
-		aFrame.start(primaryStage, root);
+		//DeliveryOrPickupController aFrame = load.getController();//need to be fix
+		//aFrame.start(primaryStage, root);
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package querys;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import Entities.BusinessAccountTracking;
@@ -103,7 +108,7 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT w4cBusiness,companyName,companyStatus FROM bytemedatabase.company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='not approved' or companyStatus ='waiting'"
 							+ "");
 			while (rs.next()) {
 				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -401,14 +406,42 @@ public class Query {
 		}
 	}
 
-	/* need to be fix */
+
+	public static Boolean checkYearAndQuarter(String quarter, String year) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT quertar,year FROM reports");
+				while (rs.next()) {
+					String quarter2 = rs.getString(1);
+					String year2 = rs.getString(2);
+					if ((year.equals(year2)) && (quarter.equals(quarter2))) {
+						rs.close();
+						return false;
+					}
+				}
+				rs.close();
+				return true;
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	public static void updateFile(MyFile file) {
-		Connection connection = DBConnect.conn;
-		Statement StatementOfResultSet;
-		String sql = "INSERT INTO  values(?)";
+		String sql = "INSERT INTO reports(quertar,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
 		try {
-			StatementOfResultSet = connection.createStatement();
-			StatementOfResultSet.executeUpdate(sql);
+			Timestamp date = new java.sql.Timestamp(new Date().getTime());
+			InputStream is = new ByteArrayInputStream(file.getMybytearray());
+			PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
+			stmt.setString(1, file.getQuertar());
+			stmt.setString(2, file.getYear());
+			stmt.setTimestamp(3, date);
+			stmt.setString(4, file.getFileName());
+			stmt.setBlob(5, is);
+			// stmt.setString(6,file.getHomebranch());//fix.
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -56,7 +56,6 @@ public enum DishType {
 		case Drink: {
 			return "Drink";
 		}
-
 		default: {
 			return null;
 		}

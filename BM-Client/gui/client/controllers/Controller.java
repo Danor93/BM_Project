@@ -74,7 +74,4 @@ public abstract class  Controller  {
 		stage.setScene(scene);
 		stage.show();		
 	}
-	//public abstract void display(String string);
-	
-
 }

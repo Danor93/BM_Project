@@ -9,6 +9,7 @@ import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface {
+public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface,Initializable {
 
 	/*
 	 * author:Danor
@@ -36,8 +37,8 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 	@FXML
 	private Button btnPrivateAccount;
 
-	@FXML
-	private Button btnBackToBranchManager;
+	 @FXML
+	 private Button BackBtn;
 
 	@FXML
 	private ImageView BackImage;
@@ -49,8 +50,7 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 				: "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
 		assert btnPrivateAccount != null
 				: "fx:id=\"btnPrivateAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
-		assert btnBackToBranchManager != null
-				: "fx:id=\"btnBackToBranchManager\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
+	    assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerOpenNewAccount.fxml'.";
 	}
 
 	/*for business account*/
@@ -68,8 +68,21 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 	/*for back to the branch manager screen*/
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerScreen", "Branch Manager");
+		if(LoginScreenController.user.getRole().equals("CEO")) {
+			startScreen(event, "CEOScreen", "CEO");
+		}
+		if(LoginScreenController.user.getRole().equals("BranchManager")) {
+			startScreen(event, "BranchManagerScreen", "Branch Manager");
+		}
 	}
 
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if(LoginScreenController.user.getRole().equals("CEO")) {
+			BackBtn.setText("Back to CEO Panel");
+		}
+		if(LoginScreenController.user.getRole().equals("BranchManager")) {
+			BackBtn.setText("Back to Branch Manager Panel");
+		}
+	}
 }
