@@ -8,9 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Entities.BussinessAccount;
+import Entities.Client;
+import Entities.Dish;
+import Entities.DishType;
 import Entities.Order;
 import Entities.OrderType;
 import Entities.Restaurant;
+import Entities.SingletonOrder;
 import Entities.homeBranches;
 import controllers.ServerUIFController;
 import main.EchoServer;
@@ -18,6 +23,7 @@ import main.EchoServer;
 public class queries {
 	
 	public static Connection conn;
+	
 	@SuppressWarnings("deprecation")
 	public static Connection connect(String username,String password) {
 		try {
@@ -162,36 +168,7 @@ public class queries {
 	}
 	
 	
-	/**
-	 * @return
-	 */
-	public static ArrayList<Order> getOrders() {
-		ArrayList<Order> orders = new ArrayList<>();
-		Statement stmt;
-		String query = "";
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM order.orders");
-				while (rs.next()) {
-					String restaurant = rs.getString("Restaurant");
-					int OrderNumber = Integer.parseInt(rs.getString("OrderNumber"));
-					String OrderTime = rs.getString("OrderTime");
-					String PhoneNumber = rs.getString("PhoneNumber");
-					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
-					String OrderAddress = rs.getString("OrderAddress");
-					orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
-				}
-				rs.close();
-			} else {
-				System.out.println("Conn is null");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return orders;
-	}
+	
 	
 	/**
 	 * @param city
@@ -207,7 +184,7 @@ public class queries {
 				stmt.setString(2,"approved");
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					Restaurant rst=new Restaurant(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
+					Restaurant rst=new Restaurant(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
 					rest.add(rst);
 				}
 				rs.close();
@@ -259,6 +236,155 @@ public class queries {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public static Client checkAccountKind(String id)
+	{
+		Client client=null;
+		PreparedStatement stmt1,stmt2,stmt3;
+		String w4c=null;
+
+		try {
+			stmt1 = DBConnect.conn.prepareStatement("SELECT w4c_private FROM bytemedatabase.client WHERE client_id=?");
+			stmt1.setString(1,id);
+			ResultSet rs = stmt1.executeQuery();
+			while (rs.next()) {
+				w4c=rs.getString(1);
+			}
+			rs.close();
+			
+			
+			stmt2 = DBConnect.conn.prepareStatement("SELECT companyName,budget FROM bytemedatabase.buss_client WHERE ID=?");
+			stmt2.setString(1,id);
+			ResultSet rs2 = stmt2.executeQuery();
+			while (rs2.next()) {
+				client = new BussinessAccount(rs2.getString(1),w4c,rs2.getString(2));
+			}
+			rs2.close();
+			
+
+			if(client instanceof BussinessAccount)
+			{
+				BussinessAccount bussinessAccount=(BussinessAccount)client;
+				stmt3 = DBConnect.conn.prepareStatement("SELECT w4cBusiness FROM bytemedatabase.company WHERE companyName=?");
+				stmt3.setString(1,bussinessAccount.getCompanyName());
+				ResultSet rs3 = stmt3.executeQuery();
+				while (rs3.next()) {
+					bussinessAccount.setEmployerCode(rs3.getString(1));
+				}
+				rs3.close();
+
+			}
+			
+			else
+			{
+				client=new Client(w4c);
+			}
+		}
+
+		 catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return client;
+	}
 
 
+	public static String getRefundSum(Order order) {
+		PreparedStatement stmt;
+		String ammount = null;
+
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT ammount FROM bytemedatabase.refund WHERE ID=? and restId=?");
+			stmt.setString(1,order.getCostumerId());
+			stmt.setString(2, order.getRestId());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				ammount=rs.getString(1);
+			}
+			rs.close();
+		}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+				return ammount;
+	}
+
+
+	public static Integer insertOrder(Order msg)
+	{
+		Integer orderNum = null;
+		PreparedStatement stmt,stmt1 ;
+
+		try {
+			stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.order VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			stmt.setString(1,null);
+			stmt.setString(2, msg.getOrderType());
+			stmt.setString(3, msg.getRestName());
+			stmt.setString(4, msg.getRestId());
+			stmt.setString(5,Float.toString(msg.getTotalPrice()));
+			stmt.setString(6, msg.getTimeOfOrder());
+			stmt.setString(7, msg.getDateOfOrder());
+			stmt.setString(8, msg.getOrderStatus());
+			stmt.setString(9, msg.getCostumerId());
+			stmt.setString(10, msg.getUseRefund());
+			stmt.setInt(11, msg.getUseBudget());
+			stmt.executeUpdate();
+			
+			stmt1 = DBConnect.conn.prepareStatement("SELECT LAST_INSERT_ID()");
+			ResultSet rs = stmt1.executeQuery();
+			while (rs.next()) {
+				orderNum=rs.getInt(1);
+			}
+			rs.close();
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return orderNum;
+
+		
+	}
+
+
+	public static String insertDishesOrder(ArrayList<Dish> message) {
+		PreparedStatement stmt;
+		int orderNumber=message.get(0).getOrderNumber();
+
+		try {
+			
+			
+			for(Dish dish:message)
+			{
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO bytemedatabase.dishesinorder VALUES(?,?,?,?,?,?,?,?,?)");
+				stmt.setString(1,null);
+				stmt.setInt(2,orderNumber);
+				stmt.setString(3,dish.getDishName() );
+				stmt.setString(4, dish.getRestCode());
+				stmt.setString(5, DishType.fromTypeToStr(dish.getDishType()));
+				stmt.setString(6,dish.getChoiceFactor());
+				stmt.setString(7,dish.getChoiceDetails());
+				stmt.setString(8,dish.getExtra());
+				stmt.setInt(9, dish.getQuentity());
+				stmt.executeUpdate();
+			}
+			return "success!";
+			
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 }
+		
+
+
+
+

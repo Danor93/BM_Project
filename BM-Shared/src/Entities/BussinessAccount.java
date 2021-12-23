@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class BussinessAccount extends Client implements Serializable {
 	
 	private static final long serialVersionUID = 3754841791740654616L;
-	private String CompanyName,budget;
+	private String CompanyName,budget,employerCode;
 	
 	public BussinessAccount(String role, String id, String firstN, String lastN, homeBranches homeBranch,
 			String userName, String password, String isLoggedIn, String w4c_private, String status, String companyName,
@@ -14,7 +14,17 @@ public class BussinessAccount extends Client implements Serializable {
 		CompanyName = companyName;
 		this.budget = budget;
 	}
+	
+	
 
+	public BussinessAccount(String CompanyName,String w4c_private,String budget)
+	{
+		super(w4c_private);
+		this.CompanyName=CompanyName;
+		this.budget=budget;
+	}
+
+	
 	public String getCompanyName() {
 		return CompanyName;
 	}
@@ -30,4 +40,14 @@ public class BussinessAccount extends Client implements Serializable {
 	public void setBudget(String budget) {
 		this.budget = budget;
 	}
+	
+	public String getEmployerCode() {
+		return employerCode;
+	}
+
+
+	public void setEmployerCode(String employerCode) {
+		this.employerCode = employerCode;
+	}
+
 }

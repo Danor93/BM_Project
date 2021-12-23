@@ -2,6 +2,8 @@ package client.controllers;
 
 import java.io.IOException;
 
+import Entities.BussinessAccount;
+import Entities.Client;
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -42,27 +44,37 @@ public class IdentifyW4cController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
+    public static Client client=null; 
+    
 
 	/**This method meant to confirm if the user is registered as a costumer
 	 * @param event			meant to check the manually entering of W4C
 	 */
 	@FXML
 	void confirm(ActionEvent event) {
-		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) {
+		
+		if(client==null)
+		{
+			Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
+			ClientUI.chat.accept(msg);
+		}
+		
+		if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) 
+		{
 			allertLbl.setText("Please enter W4C code or press the QR button");
 		}
-
-		else {
-		/*	if (!w4cManually.getText().equals(LoginScreenController())) {
-				allertLbl.setText("Wrong W4c, please try again or press the QR button");
-			}
-
-			else {
+		
+		else
+		{
+			if(w4cManually.getText().equals(client.getW4c_private()))
 				switchScene(event);
-			}*/
+			else
+				allertLbl.setText("Wrong W4c, please try again or press the QR button");
 		}
 
 	}
+	
+	
 
 	/**This method meant to get the W4C via QR
 	 * @param event		meant to check the W4C with QR
@@ -70,7 +82,12 @@ public class IdentifyW4cController extends Controller {
 	
 	@FXML
 	void getW4cFromQR(ActionEvent event) throws IOException {
-		//w4cManually.setText(LoginScreenController.user.getW4c());//getw4c need to be fix
+		
+		if(client==null)
+		{
+			Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
+			ClientUI.chat.accept(msg);
+		}
 		switchScene(event);
 	}
 
@@ -88,6 +105,7 @@ public class IdentifyW4cController extends Controller {
 		}
 		
 	}
+	
 	
     @FXML
     void back(ActionEvent event) throws IOException {

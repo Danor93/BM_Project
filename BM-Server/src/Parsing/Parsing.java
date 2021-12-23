@@ -1,38 +1,31 @@
 package Parsing;
 
 //server
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.IllegalFormatPrecisionException;
-
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Dish;
+import Entities.DishType;
 import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import controllers.LogicController;
-import controllers.ServerUIFController;
 import ocsf.server.ConnectionToClient;
-import Entities.Message;
-import Entities.MessageType;
-import Entities.Order;
 import querys.DBCheck;
 import querys.ShowDishes;
-import querys.DBConnect;
 import querys.Query;
-import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.getDishes;
+import querys.queries;
 import querys.showCities;
 import querys.showRestaurants;
-import ocsf.server.ConnectionToClient;
+
 
 public class Parsing {
 	public static String result2;
@@ -42,11 +35,7 @@ public class Parsing {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
-		case Show_Orders: {// get all orders from DB
-			ArrayList<Order> order = ShowOrders.getOrders();
-			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
-			return messageFromServer;
-		}
+
 		case Update_Orders: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split("@");
 			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
@@ -63,9 +52,14 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.login, result);
 			return messageFromServer;
 		}
+		
+		case IdentifyW4c: {
+			Client costumer=queries.checkAccountKind((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
+			return messageFromServer;
+		}
 
 		case Show_Cities: {
-			System.out.println("hi adi");
 			ArrayList<String> city = showCities.getCities();
 
 			for (String s : city) {
@@ -83,11 +77,32 @@ public class Parsing {
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((Integer)receivedMessage.getMessageData());
+			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
 			return messageFromServer;
 		}
-
+		
+		case getRefundDetails:{
+			String refundSum=queries.getRefundSum((Order)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.getRefundDetails,refundSum);
+			return messageFromServer;
+		}
+		
+		case InsertOrder:
+		{
+			Integer insert=queries.insertOrder((Order)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertOrder,insert);
+			return messageFromServer;
+		}
+		
+		case InsertDishesOrder:
+		{
+			String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			//String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDishesOrder,insert);
+			return messageFromServer;
+		}
+			
 
 		case ConfirmOpenNewBusinessAccount: {
 			messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);

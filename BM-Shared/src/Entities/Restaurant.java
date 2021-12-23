@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class Restaurant implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String supplierName, openning, city, address;
+	private String supplierName, openning, city, address,restCode;
 	private homeBranches homeBranch;
-	private int restCode;
 
-	public Restaurant(int restCode, String supplierName, String openning, String city, String address,
+
+	public Restaurant(String restCode, String supplierName, String openning, String city, String address,
 			homeBranches homeBranch) {
 		this.restCode = restCode;
 		this.supplierName = supplierName;
@@ -38,7 +38,7 @@ public class Restaurant implements Serializable {
 		return homeBranch;
 	}
 
-	public int getRestCode() {
+	public String getRestCode() {
 		return restCode;
 	}
 

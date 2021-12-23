@@ -22,7 +22,7 @@ public class showRestaurants {
 				stmt.setString(2,"approved");
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					Restaurant rst=new Restaurant(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
+					Restaurant rst=new Restaurant(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
 					rest.add(rst);
 				}
 				rs.close();
