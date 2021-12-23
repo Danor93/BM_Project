@@ -39,6 +39,7 @@ public class DBCheck {
 					result.append(rs.getString(7));
 					result.append("@");
 					result.append(rs.getString(8));
+					System.out.println(result.toString());
 				}
 				rs.close();
 

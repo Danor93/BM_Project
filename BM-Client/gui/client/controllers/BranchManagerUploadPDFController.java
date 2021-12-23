@@ -106,14 +106,14 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						bis.read(msg.getMybytearray(), 0, mybytearray.length);
 						msg.setQuertar(Quertar);
 						msg.setYear(Year);
-						//msg.setHomebranch((LoginScreenController.user.getHomeBranch()));//fix.
+						msg.setHomebranch((LoginScreenController.user.getHomeBranch()));
 						ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
 						if(succesUpload==true)
 						{
 							PopUpMessage.successMessage("Succes to upload the " + Year + "' " + Quertar + " PDF file!");
 						}
 						else {
-							PopUpMessage.errorMessage("could not upload " + Year + "' " + Quertar + " PDF file!,tryagain");
+							PopUpMessage.errorMessage("Could not upload " + Year + "' " + Quertar + " PDF file!,try again");
 						}
 
 					} catch (Exception e) {

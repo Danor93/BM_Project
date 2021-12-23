@@ -67,6 +67,8 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    @FXML
 	    void ChooseSupplier(ActionEvent event) {
 	    	supplierName = ListofSupplier.getSelectionModel().getSelectedItem();
+	    	btnConfirmSupplierRegistartion.setDisable(false);
+			btnRefuseSupplierRegistartion.setDisable(false);
 	    }
 
 	    /*this method is for the "Confirm" Button for approved Supplier*/
@@ -127,6 +129,8 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 		if(LoginScreenController.user.getRole().equals("BranchManager")) {
 			BackBtn.setText("Back to Branch Manager Panel");
 		}
+		btnConfirmSupplierRegistartion.setDisable(true);
+		btnRefuseSupplierRegistartion.setDisable(true);
 	}
 
 }

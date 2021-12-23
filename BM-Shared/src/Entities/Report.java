@@ -1,26 +1,27 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Report implements Serializable {
 
 	private static final long serialVersionUID = 583542510006825068L;
-	private Restaurant restaurant;
+	private ArrayList<Restaurant> Restaurant;
 	private String month,year;
 	
-	public Report(Restaurant restaurant, String month, String year) {
+	public Report(ArrayList<Entities.Restaurant> restaurant, String month, String year) {
 		super();
-		this.restaurant = restaurant;
+		Restaurant = restaurant;
 		this.month = month;
 		this.year = year;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public ArrayList<Restaurant> getRestaurant() {
+		return Restaurant;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setRestaurant(ArrayList<Restaurant> restaurant) {
+		Restaurant = restaurant;
 	}
 
 	public String getMonth() {

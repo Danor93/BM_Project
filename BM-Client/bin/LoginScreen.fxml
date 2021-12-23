@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="693.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.LoginScreenController">
+   <children>
+      <ImageView fx:id="BackImage" fitHeight="503.0" fitWidth="693.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="107.0" layoutY="39.0" prefHeight="56.0" prefWidth="121.0" text="Login" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="39.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="36.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName" wrappingWidth="78.33668518066406">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtUserName" layoutX="128.0" layoutY="144.0" onAction="#ConnectSystem" onInputMethodTextChanged="#getUserName" promptText="UserName" />
+      <PasswordField fx:id="PasswordField" layoutX="128.0" layoutY="204.0" prefHeight="25.0" prefWidth="149.0" promptText="Password" />
+      <Text fill="WHITE" layoutX="36.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="78.33668518066406">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Text>
+      <Label layoutX="36.0" layoutY="103.0" text="Fill in the following details" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLogin" layoutX="163.0" layoutY="263.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="78.0" style="-fx-background-color: #6AFB05; -fx-background-radius: 30;" text="Login">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Button>
+      <Label fx:id="WrongInputInLoggin" layoutX="373.0" layoutY="256.0" prefHeight="26.0" prefWidth="260.0" text=" " textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

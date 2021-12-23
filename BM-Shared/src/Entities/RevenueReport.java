@@ -8,7 +8,7 @@ public class RevenueReport extends Report {
 	private ArrayList<Order> Data = new ArrayList<>();
 	private int sum;
 
-	public RevenueReport(Restaurant restaurant, String month, String year) {
+	public RevenueReport(ArrayList<Restaurant> restaurant, String month, String year) {
 		super(restaurant, month, year);
 		sum = 0;
 	}
@@ -24,8 +24,8 @@ public class RevenueReport extends Report {
 		return Data.size();
 	}
 	
-	public void setData(ArrayList<Order> Data) {
-		this.Data=Data;
+	public void addToData (Order order) {
+		Data.add(order);
 	}
 	
 	public ArrayList<Order> getData(){

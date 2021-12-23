@@ -27,8 +27,8 @@ import main.ClientUI;
 public class ConfirmEmployerRegController extends Controller implements Initializable {
 
 	/*
-	 * Author:Danor this Class for handle the confirm or refuse registration for the
-	 * Branch Manager of Employers.
+	 * Author:Danor 
+	 * this Class for handle the confirm or refuse registration for the Branch Manager of Employers.
 	 */
 
 	public static ArrayList<Employer> Employers = new ArrayList<Employer>();
@@ -60,6 +60,8 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	@FXML
 	void ChooseCompany(ActionEvent event) {
 		companyName = ListofEmployers.getSelectionModel().getSelectedItem();
+		btnConfirmEmployerRegistartion.setDisable(false);
+		btnRefuseEmployerRegistartion.setDisable(false);
 	}
 
 	/* this method for update the DB and return to the branch manager screen. */
@@ -85,7 +87,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		}
 		ListofEmployers.getItems().clear();
 		loadEmployerstoComboBox(Employers);
-		ListofEmployers.setPromptText("List of employers awaiting approval");
+		ListofEmployers.setPromptText("List of employers awaiting for approval");
 		ListofEmployers.setDisable(false);
 	}
 
@@ -136,5 +138,8 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
 			BackBtn.setText("Back to Branch Manager Panel");
 		}
+		btnConfirmEmployerRegistartion.setDisable(true);
+		btnRefuseEmployerRegistartion.setDisable(true);
+		
 	}
 }

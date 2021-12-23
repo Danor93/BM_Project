@@ -2,7 +2,6 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import Entities.Message;
@@ -21,8 +20,9 @@ import main.ClientUI;
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
 
 	public static String Branch, reportType, year;
-	public static StringBuilder details = new StringBuilder();
 	public static int month;
+	public static StringBuilder details = new StringBuilder();
+	
 
 	@FXML
 	private ResourceBundle resources;
@@ -46,13 +46,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private Pane Orders;
 
 	@FXML
-	private TableView<String> Performance;
+	private TableView<String> PerformanceTable;
 
 	@FXML
-	private TableView<?> PerformanceTable;
-
-	@FXML
-	private TableView<?> RevenueTable;
+	private TableView<String> RevenueTable;
 
 	@FXML
 	private StackPane ReportPane;
@@ -72,8 +69,8 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	@FXML
 	private Button btnBack;
 
-	@FXML
-	private TableView<?> orders;
+    @FXML
+    private TableView<String> OrdersTable;
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
@@ -120,6 +117,8 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 		case "Revenue": {
 			RevenueReport();
+			Revenue.toFront();
+			RevenueTable.setVisible(true);
 		}
 
 		case "Orders": {
@@ -135,7 +134,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	public void RevenueReport() {
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-
+		
 	}
 
 	public void OrdersReport() {
@@ -176,4 +175,21 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		Year.getItems().add("2020");
 		Year.getItems().add("2019");
 	}
+	
+    @FXML
+    void initialize() {
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert BranchChoose != null : "fx:id=\"BranchChoose\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert GetReport != null : "fx:id=\"GetReport\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert Month != null : "fx:id=\"Month\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert Orders != null : "fx:id=\"Orders\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert PerformanceTable != null : "fx:id=\"PerformanceTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert ReportPane != null : "fx:id=\"ReportPane\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert ReportType != null : "fx:id=\"ReportType\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert Revenue != null : "fx:id=\"Revenue\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert RevenueTable != null : "fx:id=\"RevenueTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert Year != null : "fx:id=\"Year\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+        assert main != null : "fx:id=\"main\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+    }
 }

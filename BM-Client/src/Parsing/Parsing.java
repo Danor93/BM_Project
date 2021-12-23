@@ -48,6 +48,7 @@ public class Parsing {
 					LoginScreenController.LoginFlag = true;
 					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+				
 				}
 			}
 			break;
@@ -217,6 +218,8 @@ public class Parsing {
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
 
 		}
+		
+		
 
 
 		default: {

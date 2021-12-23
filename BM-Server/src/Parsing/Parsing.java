@@ -20,6 +20,7 @@ import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import controllers.LogicController;
@@ -151,25 +152,23 @@ public class Parsing {
 			}
 			return messageFromServer;
 		}
-		
-		case check_Baccount_details:{
+
+		case check_Baccount_details: {
 			BussinessAccount BAccount = (BussinessAccount) receivedMessage.getMessageData();
-			if((Query.checkAccountDetails(BAccount))==true) {
+			if ((Query.checkAccountDetails(BAccount)) == true) {
 				Query.addNewBAccount(BAccount);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.Baccount_details_not_ok, null);
 			}
 		}
-		
-		case check_PAccount_details:{
+
+		case check_PAccount_details: {
 			Client Pclient = (Client) receivedMessage.getMessageData();
-			if((Query.checkPrivateAccount(Pclient))==true) {
+			if ((Query.checkPrivateAccount(Pclient)) == true) {
 				Query.addNewPAccount(Pclient);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.PAccount_details_not_ok, null);
 			}
 		}
@@ -193,18 +192,17 @@ public class Parsing {
 			Query.UpdateAccountStatusToFreeze(AccountID);
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
 		}
-		
-		case check_year_and_quertar:{
+
+		case check_year_and_quertar: {
 			String[] Divededyandq = ((String) receivedMessage.getMessageData()).split("@");
-			if((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1]))==true) {
+			if ((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1])) == true) {
 				return messageFromServer = new Message(MessageType.year_and_querter_ok, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.year_and_querter_not_ok, null);
 			}
 		}
-		
-		case send_PDF:{
+
+		case send_PDF: {
 			MyFile file = (MyFile) receivedMessage.getMessageData();
 			DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 			LocalDateTime nowTime = LocalDateTime.now();
@@ -246,7 +244,7 @@ public class Parsing {
 			}
 			return messageFromServer;
 		}
-		
+
 		case deleteDish: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
@@ -254,13 +252,13 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
 		case get_orders_to_approve: {
 			ArrayList<Order> orders = Query.LoadOrders();
 			messageFromServer = new Message(MessageType.Orders_List, orders);
 			return messageFromServer;
 		}
-		
+
 		case Order_not_approved: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToNotApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
@@ -276,7 +274,7 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
 		case RegistrationOfEmployer: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
@@ -287,27 +285,36 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
 		case get_business_account_details: {
 			ArrayList<BusinessAccountTracking> businessAccount = Query.LoadBusinessAccountDetails();
 			messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
 			return messageFromServer;
 		}
-		
+
 		case update_status_approved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
-				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ, null);
+			if (UpdateDB.BusinessAccountStatusToApproved(
+					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
+						null);
 			}
 		}
 
 		case update_status_NotApproved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToNotApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
-				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ, null);	
+			if (UpdateDB.BusinessAccountStatusToNotApproved(
+					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
+						null);
 			}
 		}
 
+		case get_Revenue_report: {
+			String[] details = ((String) receivedMessage.getMessageData()).split("@");
+			RevenueReport Revenuereport = Query.getRevenueReport(details[0], details[1], details[2]);
+			return messageFromServer = new Message(MessageType.send_Revenue_Report,Revenuereport);
+		}
 
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);

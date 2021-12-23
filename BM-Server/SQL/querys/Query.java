@@ -24,6 +24,9 @@ import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.Report;
+import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -296,7 +299,7 @@ public class Query {
 				stmt.setString(7, BAccount.getEmail());
 				stmt.setString(8, BAccount.getPhone());
 				stmt.setInt(9, 0);
-				stmt.setString(10, homeBranches.North.toString());
+				stmt.setString(10,BAccount.getHomeBranch().toString());
 				stmt.executeUpdate();
 
 				PreparedStatement stmt2 = DBConnect.conn
@@ -368,7 +371,7 @@ public class Query {
 					stmt2.setString(7, PAccount.getEmail());
 					stmt2.setString(8, PAccount.getPhone());
 					stmt2.setInt(9, 0);
-					stmt2.setString(10, homeBranches.North.toString());
+					stmt2.setString(10,PAccount.getHomeBranch().toString());
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
@@ -465,7 +468,7 @@ public class Query {
 	}
 
 	public static void updateFile(MyFile file) {
-		String sql = "INSERT INTO reports(quertar,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
+		String sql = "INSERT INTO reports(quertar,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
 		try {
 			Timestamp date = new java.sql.Timestamp(new Date().getTime());
 			InputStream is = new ByteArrayInputStream(file.getMybytearray());
@@ -475,7 +478,7 @@ public class Query {
 			stmt.setTimestamp(3, date);
 			stmt.setString(4, file.getFileName());
 			stmt.setBlob(5, is);
-			// stmt.setString(6,file.getHomebranch());//fix.
+			stmt.setString(6,file.getHomebranch().toString());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -523,5 +526,45 @@ public class Query {
 			s.printStackTrace();
 		}
 		return businessAccountTracking;
+	}
+	
+	public static RevenueReport getRevenueReport (String Branch,String Month,String Year) {
+		ArrayList<Restaurant> restaurants= new ArrayList<>();
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt
+						.executeQuery("SELECT restId,supplierName,openingTime,city,address,homeBranch FROM supplier WHERE supplierStatus ='approved' AND homeBranch= '" + Branch + "' ;");
+				while(rs.next()) {
+					Restaurant res = new Restaurant(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+							rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
+				restaurants.add(res);
+				}
+				rs.close();
+				RevenueReport Revenuereport = new RevenueReport(restaurants, Month, Year);
+				for(int i=0;i<restaurants.size();i++) {
+				int rsID = restaurants.get(i).getRestCode();	
+				PreparedStatement stmt2 = DBConnect.conn.prepareStatement("SELECT * FROM order WHERE orderStatus='done' AND rstID=? AND YEAR(dateOfOrder)= '" + Year + "' AND MONTH(dateOfOrder)= '" + Month + "' ;");
+				stmt2.setInt(1, rsID);
+				ResultSet rs2 = stmt2.executeQuery();
+				while(rs2.next()) {
+					//int month = rs2.getDate(6).getMonth();
+					//int year = rs2.getDate(6).getYear();
+					//if(Integer.parseInt(Year)==year && Integer.parseInt(Month)==month) {
+					Order order = new Order(OrderType.toOrderType(rs2.getString(2)),rs2.getString(3),rs2.getString(5) ,rs2.getDate(6).toString(), null,rs2.getString(7), rs2.getString(9), rs2.getFloat(4));
+					System.out.println(order);
+					Revenuereport.addToData(order);
+					}
+				//}
+				rs2.close();
+				}
+				return Revenuereport;
+				
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return null;
+		
 	}
 }

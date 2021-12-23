@@ -60,7 +60,8 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 			if (FreezeAccount == false) {
 				ClientUI.chat.accept(new Message(MessageType.Account_For_Freeze, AccountID));
 				PopUpMessage.successMessage(AccountName + " has been freezed!");
-				break;
+				ActiveAccountComboBox.getItems().remove(AccountName);
+				
 			} else {
 				PopUpMessage.errorMessage("The Account Already Freeze!");
 				break;

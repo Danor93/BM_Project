@@ -8,7 +8,7 @@ public enum MessageType {
 	Account_list, Delete_Account_Succ,employer_approved,employer_not_approved,BAccount_succ,ConfirmOpenNewPrivateAccount,
 	return_accounts_for_freeze,Account_Freeze,Account_Active,Account_Freeze_succ,Show_Dishes_succ,updateDish,
 	year_and_querter_ok,year_and_querter_not_ok,upload_pdf_succ,Baccount_details_not_ok,PAccount_details_not_ok,
-	changed_BusinessAccount_status_to_Approved_succ,changed_BusinessAccount_status_to_NotApproved_succ,
+	changed_BusinessAccount_status_to_Approved_succ,changed_BusinessAccount_status_to_NotApproved_succ,send_Revenue_Report,
 
 	/* Client Message */
 	Update_Orders, Show_Orders, ConfirmW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
