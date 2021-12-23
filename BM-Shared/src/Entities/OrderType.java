@@ -2,41 +2,36 @@ package Entities;
 
 public enum OrderType {
 
-	Regular,take_Away,Shared,robot;
-	
-	
+	Regular, take_Away, Shared, robot;
+
 	public static OrderType toOrderType(String type) {
-		if(type == null || type.equals("")) {
+		if (type == null || type.equals("")) {
 			return null;
 		}
-		
-		else
-		{
-			switch(type)
-			{
-			case "Take Away":
-			{
+
+		else {
+			switch (type) {
+			case "Take Away": {
 				return take_Away;
 			}
-			
-			case "Regular":
-			{
+
+			case "Regular": {
 				return Regular;
 			}
-			
-			case "Shared":
-			{
+
+			case "Shared": {
 				return Shared;
 			}
 			
-			default:
-			{
+			case "Robot":{
+				return robot;
+			}
+
+			default: {
 				return null;
 			}
 			}
 		}
-		
-		
 
 	}
 }

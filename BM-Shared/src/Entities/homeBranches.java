@@ -2,7 +2,7 @@ package Entities;
 
 public enum homeBranches {
 	
-	North,Center,East;
+	North,Center,South;
 	
 	public static homeBranches toHomeBranchType(String type) {
 		
@@ -12,12 +12,24 @@ public enum homeBranches {
 			return North;
 		}
 		
+		case "north":{
+			return North;
+		}
+		
 		case "Center":{
 			return Center;
 		}
 		
-		case "East":{
-			return East;
+		case "center":{
+			return Center;
+		}
+		
+		case "South":{
+			return South;
+		}
+		
+		case "south":{
+			return South;
 		}
 		
 		default:

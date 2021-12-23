@@ -17,7 +17,7 @@ public class getDishes {
 		PreparedStatement stmt;
 		String query = "";
 		try {
-				stmt = DBConnect.conn.prepareStatement("SELECT dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,price,inventory,dishType FROM bytemedatabase.dishes WHERE restId1=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,price,inventory,dishType FROM bitemedb.dishes WHERE restId1=?");
 				stmt.setString(1,restCode);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {

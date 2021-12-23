@@ -1,5 +1,6 @@
 package querys;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,13 +10,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
+import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Employer;
 import Entities.MyFile;
+import Entities.Order;
+import Entities.OrderType;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -100,7 +108,7 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT w4cBusiness,companyName,companyStatus FROM bytemedatabase.company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='not approved' or companyStatus ='waiting'"
 							+ "");
 			while (rs.next()) {
 				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -246,53 +254,98 @@ public class Query {
 		return false;
 	}
 
+	public static Boolean checkAccountDetails(BussinessAccount Account) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT firstName,lastName,Email,phone FROM import_users WHERE id = '"
+						+ Account.getId() + "' ;");
+				while (rs.next()) {
+					String FirstName = rs.getString(1);
+					String LastName = rs.getString(2);
+					String Email = rs.getString(3);
+					String Phone = rs.getString(4);
+					if ((!FirstName.equals(Account.getFirstN())) || (!LastName.equals(Account.getLastN()))
+							|| (!Email.equals(Account.getEmail())) || (!Phone.equals(Account.getPhone()))) {
+						rs.close();
+						return false;
+					} else {
+						rs.close();
+						return true;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
-				PreparedStatement stmt = DBConnect.conn.prepareStatement(
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
+				while (rs.next()) {
+					String UserName = rs.getString(1);
+					String Password = rs.getString(2);
+					String Role = rs.getString(3);
+				PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
 						"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 								+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-				stmt.setString(1, "e");
-				stmt.setString(2, "e");
-				stmt.setString(3, "Customer");
-				stmt.setString(4, BAccount.getFirstN());
-				stmt.setString(5, BAccount.getLastN());
-				stmt.setString(6, BAccount.getId());
-				stmt.setString(7, BAccount.getEmail());
-				stmt.setString(8, BAccount.getPhone());
-				stmt.setInt(9, 0);
-				stmt.setString(10, homeBranches.North.toString());
-				stmt.executeUpdate();
-
-				PreparedStatement stmt2 = DBConnect.conn
-						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
-				stmt2.setString(1, BAccount.getId());
-				stmt2.setString(2, "456");
-				stmt2.setString(3, "Active");
+				stmt2.setString(1, UserName);
+				stmt2.setString(2, Password);
+				stmt2.setString(3, Role);
+				stmt2.setString(4, BAccount.getFirstN());
+				stmt2.setString(5, BAccount.getLastN());
+				stmt2.setString(6, BAccount.getId());
+				stmt2.setString(7, BAccount.getEmail());
+				stmt2.setString(8, BAccount.getPhone());
+				stmt2.setInt(9, 0);
+				stmt2.setString(10,BAccount.getBranch().toString());
 				stmt2.executeUpdate();
 
 				PreparedStatement stmt3 = DBConnect.conn
-						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget) VALUES(?,?,?)");
+						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
 				stmt3.setString(1, BAccount.getId());
-				stmt3.setString(2, BAccount.getCompanyName());
-				stmt3.setString(3, BAccount.getBudget());
+				stmt3.setString(2, "456");
+				stmt3.setString(3, "Active");
 				stmt3.executeUpdate();
 
+				PreparedStatement stmt4 = DBConnect.conn
+						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
+				stmt4.setString(1, BAccount.getId());
+				stmt4.setString(2, BAccount.getCompanyName());
+				stmt4.setString(3, BAccount.getBudget());
+				stmt4.setString(4,"Waiting");
+				stmt4.executeUpdate();
+				}
+				rs.close();
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
 		}
 	}
 
-	public static Boolean checkPrivateAccount(String ID) {
+	public static Boolean checkPrivateAccount(Client client) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + ID + "' ;");
-				if (rs != null) {
-					return true;
-				} else {
-					return false;
+				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + client.getId() + "' ;");
+				while (rs.next()) {
+					String FirstName = rs.getString(1);
+					String LastName = rs.getString(2);
+					String Email = rs.getString(3);
+					String Phone = rs.getString(4);
+					if ((!FirstName.equals(client.getFirstN())) || (!LastName.equals(client.getLastN()))
+							|| (!Email.equals(client.getEmail())) || (!Phone.equals(client.getPhone()))) {
+						rs.close();
+						return false;
+					} else {
+						rs.close();
+						return true;
+					}
 				}
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -324,7 +377,7 @@ public class Query {
 					stmt2.setString(7, PAccount.getEmail());
 					stmt2.setString(8, PAccount.getPhone());
 					stmt2.setInt(9, 0);
-					stmt2.setString(10, homeBranches.North.toString());
+					stmt2.setString(10,PAccount.getHomeBranch().toString());
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
@@ -335,6 +388,7 @@ public class Query {
 					stmt3.setString(4, PAccount.getCreditCardNumber());
 					stmt3.executeUpdate();
 				}
+				rs.close();
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
@@ -397,18 +451,87 @@ public class Query {
 			}
 		}
 	}
-	
-	
-	/*need to be fix*/
+
+	public static Boolean checkYearAndQuarter(String quarter, String year) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT quarter,year FROM reports");
+				while (rs.next()) {
+					String quarter2 = rs.getString(1);
+					String year2 = rs.getString(2);
+					if ((year.equals(year2)) && (quarter.equals(quarter2))) {
+						rs.close();
+						return false;
+					}
+				}
+				rs.close();
+				return true;
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 	public static void updateFile(MyFile file) {
-		Connection connection = DBConnect.conn;
-		Statement StatementOfResultSet;
-		String sql= "INSERT INTO  values(?)";
+		String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
 		try {
-		StatementOfResultSet = connection.createStatement();
-		StatementOfResultSet.executeUpdate(sql);
+			Timestamp date = new java.sql.Timestamp(new Date().getTime());
+			InputStream is = new ByteArrayInputStream(file.getMybytearray());
+			PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
+			stmt.setString(1, file.getQuertar());
+			stmt.setString(2, file.getYear());
+			stmt.setTimestamp(3, date);
+			stmt.setString(4, file.getFileName());
+			stmt.setBlob(5, is);
+			// stmt.setString(6,file.getHomebranch());//fix.
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static ArrayList<Order> LoadOrders() {
+		ArrayList<Order> orders = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber FROM bytemedatabase.order WHERE orderStatus ='waiting'"
+							+ "");
+			while (rs.next()) {
+				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+						Float.parseFloat(rs.getString(8)));
+				order.setOrderNum(Integer.parseInt(rs.getString(9)));
+				orders.add(order);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return orders;
+	}
+
+	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails() {
+		ArrayList<BusinessAccountTracking> businessAccountTracking = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt
+					.executeQuery("SELECT ID,companyName,budget FROM buss_client WHERE status ='waiting'" + "");
+			while (rs.next()) {
+				BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2),
+						rs.getString(3));
+				BAT.setStatus("waiting");
+
+				businessAccountTracking.add(BAT);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return businessAccountTracking;
 	}
 }

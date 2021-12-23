@@ -15,7 +15,7 @@ public class showCities {
 		Statement stmt;
 		try {
 				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT DISTINCT city FROM bytemedatabase.supplier");
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT city FROM bitemedb.supplier");
 				while (rs.next()) {
 					cities.add(rs.getString(1));
 				}

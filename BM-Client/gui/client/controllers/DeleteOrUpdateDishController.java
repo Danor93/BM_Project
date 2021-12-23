@@ -31,6 +31,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	public DishType dishtype;
 	public static int PlaceOfDish;
 	private boolean NameAndTypeCorrect = false;
+	private boolean NameAndTypeCorrectToDelete = false;
 	private boolean CorrectPrice = false;
 	private boolean CorrectInv = false;
 
@@ -91,13 +92,13 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	void ChoocTypeOfDish(ActionEvent event) {
 		btnDish.getItems().clear();
 		for (int i = 0; i < dishes.size(); i++) {
-			System.out.println("this here!"+dishes.get(i).getDishName().toString() );
+			System.out.println("this here!" + dishes.get(i).getDishName());
 		}
 		TypeOfDish = btnDishType.getSelectionModel().getSelectedItem();
 		System.out.println("TypeOfDish= " + TypeOfDish);
 		for (int i = 0; i < dishes.size(); i++) {
-			// System.out.println("all the dishes of the supp : "+ d.getDishName());
 			if (dishes.get(i) != null) {
+				System.out.println("this here again!" + dishes.get(i).getDishName());
 				if (DishType.fromTypeToStr(dishes.get(i).getDishType()).equals(TypeOfDish)) {
 					System.out.println("dishes in this type: " + dishes.get(i).getDishName());
 					btnDish.getItems().add(dishes.get(i).getDishName());
@@ -114,7 +115,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				txtNewPriceDish.setText(String.valueOf(dishes.get(i).getPrice()));
 				txtNewInventoryDish.setText(String.valueOf(dishes.get(i).getInventory()));
 				txtNewChoiceDish.setText(dishes.get(i).getChoiceFactor());
-				//txtNewChoiceDetailsDish.setText(dishes.get(i).getDetailsOfChoice());//fix
+				txtNewChoiceDetailsDish.setText(dishes.get(i).getChoiceDetails());
 				txtNewIngredients.setText(dishes.get(i).getIngredients());
 				txtNewIngredientsToRemove.setText(dishes.get(i).getExtra());
 				PlaceOfDish = i;
@@ -128,7 +129,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 
 		try {
 			dishtype = DishType.toDishType(TypeOfDish);
-			// NameOfDish = btnDish.getSelectionModel().getSelectedItem();
 			if (NameOfDish == null) {
 				txtMiniLabel.setText("Name must be selected!");
 			} else {
@@ -164,7 +164,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 			}
 			if (NameAndTypeCorrect && CorrectPrice && CorrectInv) {
 				String SupplierName = LoginScreenController.Name;
-				//dish = new Dish(NameOfDish, SupplierName, PriceOfDish, InvOfDish, dishtype);/*need to be fit the the ned dish entity.*/
+				dish = new Dish(NameOfDish, SupplierName, null, null, null, null, PriceOfDish, InvOfDish, dishtype);
 				dish.setRestCode(LoginScreenController.ID);
 				if (txtNewChoiceDish.getText().equals("null")) {
 					txtNewChoiceDish.setText("");
@@ -173,7 +173,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				if (txtNewChoiceDetailsDish.getText().equals("null")) {
 					txtNewChoiceDetailsDish.setText("");
 				}
-				//dish.setDetailsOfChoice(txtNewChoiceDetailsDish.getText());//fix.
+				dish.setChoiceDetails(txtNewChoiceDetailsDish.getText());
 				if (txtNewIngredients.getText().equals("null")) {
 					txtNewIngredients.setText("");
 				}
@@ -193,8 +193,28 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	}
 
 	@FXML
-	void DeleteDish(ActionEvent event) {
+	void DeleteDish(ActionEvent event) throws IOException {
+		try {
+			dishtype = DishType.toDishType(TypeOfDish);
+			if (NameOfDish == null) {
+				txtMiniLabel.setText("Name must be selected!");
+			} else {
+				System.out.println("NameOfdish=" + NameOfDish);
+				NameAndTypeCorrectToDelete = true;
+			}
 
+		} catch (NullPointerException e) {
+			txtMiniLabel.setText("Type must be selected!");
+			e.printStackTrace();
+		}
+		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, 0, dishtype);
+		if (NameAndTypeCorrectToDelete) {
+			dish.setRestCode(LoginScreenController.ID);
+			System.out.println(dish.toString());
+			ClientUI.chat.accept(new Message(MessageType.deleteDish, dish));
+			startScreen(event, "DeleteOrUpdateDish", "Create Menu");
+			dish = null;
+		}
 	}
 
 	@FXML

@@ -28,6 +28,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	private boolean clearChoiceFactorFlag = false;
 	private boolean clearIngredientsFlag = false;
 	private boolean clearRemovableIngredientsFlag = false;
+	public static boolean indicator;// in case indicator=false then createMenu, if indicator=true then addNewDish
 	public static String TypeOfDish;
 
 	@FXML
@@ -79,16 +80,15 @@ public class AddDishToMenuController extends Controller implements Initializable
 	void Back(ActionEvent event) throws IOException {
 		startScreen(event, "SupplierScreen", "Supplier page");
 	}
-	
+
 	@FXML
-    void ChooceTypeDish(ActionEvent event) {
+	void ChooceTypeDish(ActionEvent event) {
 		TypeOfDish = btnTypeDish.getSelectionModel().getSelectedItem();
-    }
+	}
 
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
 		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
-		//System.out.println(btnTypeDish.getValue());
 		if (txtNameDish.getText().isEmpty())
 			txtMiniLabel.setText("Name must be invailed!");
 		else if (txtPriceDish.getText().isEmpty())
@@ -111,29 +111,29 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 			System.out.println(TypeOfDish);
 			try {
-			dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null, Float.parseFloat(txtPriceDish.getText()),
-					Integer.parseInt(txtInventoryDish.getText()),DishType.toDishType(TypeOfDish));
-					//DishType.toDishType(btnTypeDish.getValue().toString()));
+				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
+						Float.parseFloat(txtPriceDish.getText()), Integer.parseInt(txtInventoryDish.getText()),
+						DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				txtMiniLabel.setText("type must be selected!");
-				e.setStackTrace(null);
+				e.printStackTrace();
 			}
 			dish.setRestCode(LoginScreenController.ID);
 			if (txtChoiceDish.getText().equals("example: Size"))
-				txtChoiceDish.setText(null);
+				txtChoiceDish.setText("");
 			dish.setChoiceFactor(txtChoiceDish.getText());
 			if (txtChoiceDetailsDish.getText().equals("example: S/M/L"))
-				txtChoiceDetailsDish.setText(null);
-			//dish.setDetailsOfChoice(txtChoiceDetailsDish.getText());//fix.
+				txtChoiceDetailsDish.setText("");
+			dish.setChoiceDetails(txtChoiceDetailsDish.getText());
 			if (txtIngredients.getText()
 					.equals("Put in the ingredients of the dish. \r\n"
 							+ "Example: lettuce, cucumber, tomato, tuna and black olives. \r\n"
 							+ "The salad is seasoned with parsley, olive oil and lemon."))
-				txtIngredients.setText(null);
+				txtIngredients.setText("");
 			dish.setIngredients(txtIngredients.getText());
 			if (txtIngredientsToRemove.getText().equals("Insert the removable dish ingredients. \r\n"
 					+ "Example: cucumber, tomato, parsley, olive oil and lemon."))
-				txtChoiceDetailsDish.setText(null);
+				txtChoiceDetailsDish.setText("");
 			dish.setExtra(txtIngredientsToRemove.getText());
 
 			System.out.println(dish);
@@ -201,6 +201,11 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	void initialize() {
+		if (indicator == false)
+			miniLabel.setText("Create Menu");
+		else
+			miniLabel.setText("Add new dish");
+
 		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert txtNameDish != null

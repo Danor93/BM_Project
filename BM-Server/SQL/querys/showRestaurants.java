@@ -17,7 +17,7 @@ public class showRestaurants {
 		PreparedStatement stmt;
 		String query = "";
 		try {
-				stmt = DBConnect.conn.prepareStatement("SELECT restId,supplierName,openingTime,city,address,homeBranch FROM bytemedatabase.supplier WHERE city=? and supplierStatus=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT restId,supplierName,openingTime,city,address,homeBranch FROM bitemedb.supplier WHERE city=? and supplierStatus=?");
 				stmt.setString(1,city);
 				stmt.setString(2,"approved");
 				ResultSet rs = stmt.executeQuery();

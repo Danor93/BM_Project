@@ -44,10 +44,11 @@ public class ShowOrderController extends Controller implements Initializable{
     
     ArrayList<String> myDishes=new ArrayList<>();
     
-    private float total=0;
-    
+    private float total=0;   
     public static Order finalOrder;
     public static String refund=null;
+
+
     
     
    
@@ -123,13 +124,10 @@ public class ShowOrderController extends Controller implements Initializable{
 		listOrder.setItems(orders);
 
 	}
-
+	
 	public void start(Stage primaryStage, Parent root) {
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
-
 }
-
