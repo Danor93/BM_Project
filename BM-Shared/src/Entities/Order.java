@@ -6,7 +6,9 @@ public class Order implements Serializable {
 
 	private static final long serialVersionUID = 2360410765980564003L;
 	private int orderNum, useBudget;
-	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund;
+	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund,EarlyOrder;
+
+
 	private float totalPrice;
 	private String orderType;
 
@@ -114,5 +116,13 @@ public class Order implements Serializable {
 
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
+	}
+	
+	public String getEarlyOrder() {
+		return EarlyOrder;
+	}
+
+	public void setEarlyOrder(String earlyOrder) {
+		EarlyOrder = earlyOrder;
 	}
 }
