@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry excluding="extra/|extra/|extra/|Image/" kind="src" path="gui"/>
-	<classpathentry kind="src" path="fxml"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/BM-Shared"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>

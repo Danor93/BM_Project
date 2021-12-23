@@ -1,17 +1,3 @@
+/client/
+/fxml/
 /Parsing/
-<<<<<<< HEAD
-/client/
-/fxml/
-=======
-<<<<<<< HEAD
-/client/
-/fxml/
-/icons/
-/main/
-=======
->>>>>>> master
->>>>>>> master
-/Delivery.fxml
-/DeliveryOrPickup.fxml
-/OrderConfirm.fxml
-/bussDetails.fxml

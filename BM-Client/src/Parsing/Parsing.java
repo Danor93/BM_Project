@@ -11,10 +11,12 @@ import Entities.MessageType;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
+import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerFreezeAccountController;
 import client.controllers.ChooseRestController;
@@ -241,6 +243,11 @@ public class Parsing {
 
 		case businessAccountsTracking: {
 			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case send_Revenue_Report:{
+			BranchManagerChooseReportToViewController.revenueReport = (RevenueReport) receivedMessage.getMessageData();
 			break;
 		}
 		

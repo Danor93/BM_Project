@@ -55,17 +55,6 @@
       <Button fx:id="GetReport" layoutX="185.0" layoutY="262.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" text="Get Report" />
       <StackPane fx:id="ReportPane" layoutX="390.0" layoutY="132.0" prefHeight="632.0" prefWidth="624.0" style="-fx-background-color: Grey;">
          <children>
-            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: green;">
-               <children>
-                  <TableView fx:id="RevenueTable" layoutY="302.0" prefHeight="330.0" prefWidth="624.0" visible="false">
-                    <columns>
-                      <TableColumn prefWidth="157.59991455078125" text="Restaurant " />
-                      <TableColumn minWidth="0.0" prefWidth="276.00006103515625" text="Number of Orders" />
-                        <TableColumn prefWidth="190.4000244140625" text="Income" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
             <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;">
                <children>
                   <TableView fx:id="OrdersTable" prefHeight="384.0" prefWidth="474.0" visible="false">
@@ -82,6 +71,17 @@
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: green;">
+               <children>
+                  <TableView fx:id="RevenueTable" prefHeight="632.0" prefWidth="624.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="RestaurantCol" prefWidth="180.0" text="Restaurant " />
+                      <TableColumn fx:id="NumOfOrdersCol" minWidth="0.0" prefWidth="261.5999755859375" text="Number of Orders" />
+                        <TableColumn fx:id="IncomeCol" prefWidth="184.800048828125" text="Income" />
                     </columns>
                   </TableView>
                </children>

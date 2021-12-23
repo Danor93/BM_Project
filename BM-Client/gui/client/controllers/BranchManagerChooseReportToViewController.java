@@ -4,24 +4,34 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Entities.BusinessAccountTracking;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.Restaurant;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import main.ClientUI;
+import Entities.RevenueReport;
 
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
-
+	
+	private static BranchManagerChooseReportToViewController instance = new BranchManagerChooseReportToViewController();
 	public static String Branch, reportType, year;
 	public static int month;
 	public static StringBuilder details = new StringBuilder();
+	public static RevenueReport revenueReport;
+	ObservableList<RevenueReport> revenueReportList;
 	
 
 	@FXML
@@ -49,7 +59,16 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private TableView<String> PerformanceTable;
 
 	@FXML
-	private TableView<String> RevenueTable;
+	private TableView<RevenueReport> RevenueTable;
+	
+    @FXML
+    private TableColumn<RevenueReport, String> IncomeCol;
+    
+    @FXML
+    private TableColumn<RevenueReport, String> NumOfOrdersCol;
+    
+    @FXML
+    private TableColumn<Restaurant, String> RestaurantCol;
 
 	@FXML
 	private StackPane ReportPane;
@@ -116,9 +135,9 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		switch (reportType) {
 
 		case "Revenue": {
-			RevenueReport();
 			Revenue.toFront();
 			RevenueTable.setVisible(true);
+			RevenueReport();
 		}
 
 		case "Orders": {
@@ -134,7 +153,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	public void RevenueReport() {
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-		
+		RestaurantCol.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Restaurant"));
+		NumOfOrdersCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Number Of Orders"));
+		IncomeCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Income"));
+		revenueReportList = FXCollections.observableArrayList(revenueReport);
+		RevenueTable.setItems(revenueReportList);
 	}
 
 	public void OrdersReport() {
@@ -162,6 +185,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			BranchChoose.setDisable(true);
 			Month.setDisable(true);
 			Year.setDisable(true);
+			GetReport.setDisable(true);
 			Branch = LoginScreenController.user.getHomeBranch().toString();
 		}
 		main.toFront();
@@ -174,6 +198,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		Year.getItems().add("2021");
 		Year.getItems().add("2020");
 		Year.getItems().add("2019");
+	}
+	
+	public static BranchManagerChooseReportToViewController getInstance() {
+		return instance;
 	}
 	
     @FXML

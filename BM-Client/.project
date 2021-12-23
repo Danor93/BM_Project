@@ -17,11 +17,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>fxml</name>
-			<type>2</type>
-			<location>C:/Users/danor/Desktop/G14_BM_Project/BM_Project/BM-Client/gui/fxml</location>
-		</link>
-	</linkedResources>
 </projectDescription>

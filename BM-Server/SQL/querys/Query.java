@@ -564,14 +564,12 @@ public class Query {
 							Order order = new Order(rs2.getString(2), rs2.getString(3), rs2.getString(6),
 									rs2.getString(7), null, rs2.getString(7), rs2.getString(9),
 									rs2.getFloat(4));
-							System.out.println(order);
 							Revenuereport.addToData(order);
 						}
 					}
 					rs2.close();
 				}
 				return Revenuereport;
-
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
