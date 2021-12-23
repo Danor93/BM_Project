@@ -9,6 +9,7 @@ import Entities.Account;
 import Entities.Client;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.homeBranches;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +82,7 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 				PAccount.setPhone(txtTelephone.getText());
 				PAccount.setEmail(txtEmail.getText());
 				PAccount.setCreditCardNumber(txtCreditCardNumber.getText());
+				PAccount.setBranch(homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
 				ClientUI.chat.accept(new Message(MessageType.check_PAccount_details, PAccount));
 				if(ConfirmOpenNewPrivateAccountFlag) {
 				PopUpMessage.successMessage("Account " + PAccount.getFirstN() + " " + PAccount.getLastN() +  " has been added succefuly!");

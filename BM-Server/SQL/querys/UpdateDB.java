@@ -51,7 +51,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bytemedatabase.users SET isLoggedIn = '0' WHERE userName=?");
+						.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
 				stmt.setString(1, userName);
 				stmt.executeUpdate();
 
@@ -68,7 +68,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"INSERT INTO bytemedatabase.dishes(dishName, dishType, restId1, supplierName, price, inventory, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+						"INSERT INTO bitemedb.dishes(dishName, dishType, restId1, supplierName, price, inventory, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 				stmt.setString(1, dish.getDishName());
 				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
@@ -96,7 +96,7 @@ public class UpdateDB {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bytemedatabase.dishes SET dishName='"
+				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.dishes SET dishName='"
 						+ dish.getDishName() + "', dishType='" + dish.getDishType() + "', restId1='"
 						+ dish.getRestCode() + "', supplierName='" + dish.getSupplierName() + "', price='"
 						+ dish.getPrice() + "', inventory='" + dish.getInventory() + "', choiceFactor='"
@@ -123,7 +123,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"DELETE FROM bytemedatabase.dishes WHERE dishName=? AND dishType=? AND restId1=?");
+						"DELETE FROM bitemedb.dishes WHERE dishName=? AND dishType=? AND restId1=?");
 				stmt.setString(1, dish.getDishName());
 				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
@@ -145,7 +145,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"UPDATE bytemedatabase.order SET orderStatus = 'not approved' WHERE orderNumber=?");
+						"UPDATE bitemedb.order SET orderStatus = 'not approved' WHERE orderNumber=?");
 				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
 				i++;
 				stmt.executeUpdate();
@@ -167,7 +167,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"UPDATE bytemedatabase.order SET orderStatus = 'approved' WHERE orderNumber=?");
+						"UPDATE bitemedb.order SET orderStatus = 'approved' WHERE orderNumber=?");
 				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
 				i++;
 				stmt.executeUpdate();
@@ -188,7 +188,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"INSERT INTO bytemedatabase.company(w4cBusiness, companyName, companyStatus) VALUES (?, ?, ?)");
+						"INSERT INTO bitemedb.company(w4cBusiness, companyName, companyStatus) VALUES (?, ?, ?)");
 				stmt.setString(1, employer.getW4cBussines());
 				stmt.setString(2, employer.getCompanyName());
 				stmt.setString(3, employer.getCompanyStatus());
@@ -211,7 +211,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bytemedatabase.buss_client SET status = 'approved' WHERE ID=?");
+						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'approved' WHERE ID=?");
 				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
 				i++;
 				stmt.executeUpdate();
@@ -233,7 +233,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bytemedatabase.buss_client SET status = 'Not approved' WHERE ID=?");
+						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Not approved' WHERE ID=?");
 				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
 				i++;
 				stmt.executeUpdate();

@@ -2,13 +2,16 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
-
-import Entities.BusinessAccountTracking;
+import Entities.BussinessAccount;
+import Entities.Client;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
+import Entities.MessageType;
+import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -16,6 +19,9 @@ import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerFreezeAccountController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
+import client.controllers.DeliveryController;
+import client.controllers.DeliveryOrPickupController;
+import client.controllers.IdentifyW4cController;
 import client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController;
 import client.controllers.HRManagerRegistrationOfEmployersController;
 import client.controllers.ConfirmEmployerRegController;
@@ -23,13 +29,15 @@ import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.ConfirmSupplierRegController;
 import client.controllers.LoginScreenController;
-import client.controllers.BranchManagerOpenNewBussinessAccountController;
+import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.BranchManagerScreenController;
 import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.RestListFormController;
+import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
+
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
@@ -68,6 +76,31 @@ public class Parsing {
 			RestListFormController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
+		
+
+		case IdentifyW4c:{
+			IdentifyW4cController.client=(Client) receivedMessage.getMessageData();
+			break;
+		}
+		
+		case getRefundDetails:{
+			ShowOrderController.refund=(String) receivedMessage.getMessageData();		
+			break;
+		}
+		
+		case InsertOrder:
+		{
+			ShowOrderController.finalOrder.setOrderNum((Integer)receivedMessage.getMessageData());
+			//SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
+			break;
+		}
+		
+		case InsertDishesOrder:
+		{
+			OrderConfimController.isSuccess=(String)receivedMessage.getMessageData();
+			break;
+		}
+		
 
 		case Disconected: {
 			break;

@@ -12,7 +12,7 @@ public class DBFirstName {
 		PreparedStatement stmt;
 		try {
 			if(DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bytemedatabase.users WHERE userName=? AND password=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bitemedb.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();

@@ -22,7 +22,7 @@ public class DBConnect {
 		}
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/bytemedatabase?serverTimezone=IST", username,password);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", username,password);
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 			ServerUIFController.flagon=true;
 		} catch (SQLException ex) {/* handle any errors */

@@ -287,35 +287,46 @@ public class Query {
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
-				PreparedStatement stmt = DBConnect.conn.prepareStatement(
-						"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
-								+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-				stmt.setString(1, "e");
-				stmt.setString(2, "e");
-				stmt.setString(3, "Customer");
-				stmt.setString(4, BAccount.getFirstN());
-				stmt.setString(5, BAccount.getLastN());
-				stmt.setString(6, BAccount.getId());
-				stmt.setString(7, BAccount.getEmail());
-				stmt.setString(8, BAccount.getPhone());
-				stmt.setInt(9, 0);
-				stmt.setString(10,BAccount.getHomeBranch().toString());
-				stmt.executeUpdate();
-
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
+				while (rs.next()) {
+					String UserName = rs.getString(1);
+					String Password = rs.getString(2);
+					String Role = rs.getString(3);
 				PreparedStatement stmt2 = DBConnect.conn
 						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
 				stmt2.setString(1, BAccount.getId());
 				stmt2.setString(2, "456");
 				stmt2.setString(3, "Active");
+				stmt2.setString(1, UserName);
+				stmt2.setString(2, Password);
+				stmt2.setString(3, Role);
+				stmt2.setString(4, BAccount.getFirstN());
+				stmt2.setString(5, BAccount.getLastN());
+				stmt2.setString(6, BAccount.getId());
+				stmt2.setString(7, BAccount.getEmail());
+				stmt2.setString(8, BAccount.getPhone());
+				stmt2.setInt(9, 0);
+				stmt2.setString(10,BAccount.getBranch().toString());
 				stmt2.executeUpdate();
 
 				PreparedStatement stmt3 = DBConnect.conn
-						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget) VALUES(?,?,?)");
+						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
 				stmt3.setString(1, BAccount.getId());
-				stmt3.setString(2, BAccount.getCompanyName());
-				stmt3.setString(3, BAccount.getBudget());
+				stmt3.setString(2, "456");
+				stmt3.setString(3, "Active");
 				stmt3.executeUpdate();
 
+				PreparedStatement stmt4 = DBConnect.conn
+						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
+				stmt4.setString(1, BAccount.getId());
+				stmt4.setString(2, BAccount.getCompanyName());
+				stmt4.setString(3, BAccount.getBudget());
+				stmt4.setString(4,"Waiting");
+				stmt4.executeUpdate();
+				}
+				rs.close();
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
@@ -382,6 +393,7 @@ public class Query {
 					stmt3.setString(4, PAccount.getCreditCardNumber());
 					stmt3.executeUpdate();
 				}
+				rs.close();
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
@@ -449,7 +461,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT quertar,year FROM reports");
+				ResultSet rs = stmt.executeQuery("SELECT quarter,year FROM reports");
 				while (rs.next()) {
 					String quarter2 = rs.getString(1);
 					String year2 = rs.getString(2);
@@ -494,7 +506,7 @@ public class Query {
 					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber FROM bytemedatabase.order WHERE orderStatus ='waiting'"
 							+ "");
 			while (rs.next()) {
-				Order order = new Order(OrderType.toOrderType(rs.getString(1)), rs.getString(2), rs.getString(3),
+				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
 						Float.parseFloat(rs.getString(8)));
 				order.setOrderNum(Integer.parseInt(rs.getString(9)));
@@ -536,22 +548,22 @@ public class Query {
 				ResultSet rs = stmt
 						.executeQuery("SELECT restId,supplierName,openingTime,city,address,homeBranch FROM supplier WHERE supplierStatus ='approved' AND homeBranch= '" + Branch + "' ;");
 				while(rs.next()) {
-					Restaurant res = new Restaurant(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					Restaurant res = new Restaurant(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 							rs.getString(5),homeBranches.toHomeBranchType(rs.getString(6)));
 				restaurants.add(res);
 				}
 				rs.close();
 				RevenueReport Revenuereport = new RevenueReport(restaurants, Month, Year);
 				for(int i=0;i<restaurants.size();i++) {
-				int rsID = restaurants.get(i).getRestCode();	
+				String rsID = restaurants.get(i).getRestCode();	
 				PreparedStatement stmt2 = DBConnect.conn.prepareStatement("SELECT * FROM order WHERE orderStatus='done' AND rstID=? AND YEAR(dateOfOrder)= '" + Year + "' AND MONTH(dateOfOrder)= '" + Month + "' ;");
-				stmt2.setInt(1, rsID);
+				stmt2.setString(1, rsID);
 				ResultSet rs2 = stmt2.executeQuery();
 				while(rs2.next()) {
 					//int month = rs2.getDate(6).getMonth();
 					//int year = rs2.getDate(6).getYear();
 					//if(Integer.parseInt(Year)==year && Integer.parseInt(Month)==month) {
-					Order order = new Order(OrderType.toOrderType(rs2.getString(2)),rs2.getString(3),rs2.getString(5) ,rs2.getDate(6).toString(), null,rs2.getString(7), rs2.getString(9), rs2.getFloat(4));
+					Order order = new Order(rs2.getString(2),rs2.getString(3),rs2.getString(5) ,rs2.getDate(6).toString(), null,rs2.getString(7), rs2.getString(9), rs2.getFloat(4));
 					System.out.println(order);
 					Revenuereport.addToData(order);
 					}

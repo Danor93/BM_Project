@@ -3,17 +3,19 @@ package Parsing;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 //server
+
+import java.util.ArrayList;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
-
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Dish;
+import Entities.DishType;
 import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
@@ -21,24 +23,20 @@ import Entities.MyFile;
 import Entities.Order;
 import Entities.Restaurant;
 import Entities.RevenueReport;
+import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import controllers.LogicController;
-import controllers.ServerUIFController;
 import ocsf.server.ConnectionToClient;
-import Entities.Message;
-import Entities.MessageType;
-import Entities.Order;
 import querys.DBCheck;
 import querys.ShowDishes;
-import querys.DBConnect;
 import querys.Query;
-import querys.ShowOrders;
 import querys.UpdateDB;
 import querys.getDishes;
+import querys.queries;
 import querys.showCities;
 import querys.showRestaurants;
-import ocsf.server.ConnectionToClient;
+
 
 public class Parsing {
 	public static String result2;
@@ -48,11 +46,7 @@ public class Parsing {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
-		case Show_Orders: {// get all orders from DB
-			ArrayList<Order> order = ShowOrders.getOrders();
-			messageFromServer = new Message(MessageType.Show_Orders_succ, order);
-			return messageFromServer;
-		}
+
 		case Update_Orders: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split("@");
 			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
@@ -67,6 +61,12 @@ public class Parsing {
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
 			result2 = DivededUandP[0];
 			messageFromServer = new Message(MessageType.login, result);
+			return messageFromServer;
+		}
+		
+		case IdentifyW4c: {
+			Client costumer=queries.checkAccountKind((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 			return messageFromServer;
 		}
 
@@ -88,15 +88,36 @@ public class Parsing {
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest = getDishes.getDishes((Integer) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
+			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			return messageFromServer;
+		}
+		
+		case getRefundDetails:{
+			String refundSum=queries.getRefundSum((Order)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.getRefundDetails,refundSum);
+			return messageFromServer;
+		}
+		
+		case InsertOrder:
+		{
+			Integer insert=queries.insertOrder((Order)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertOrder,insert);
+			return messageFromServer;
+		}
+		
+		case InsertDishesOrder:
+		{
+			String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			//String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDishesOrder,insert);
 			return messageFromServer;
 		}
 
 		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
 			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.Dish_add_succ, null);
+				return messageFromServer = new Message(MessageType.Dish_add_succ, null);
 			}
 		}
 

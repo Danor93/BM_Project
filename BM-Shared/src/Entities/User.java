@@ -18,6 +18,11 @@ public class User implements Serializable {
 		setPassword(password);
 		this.isLoggedIn="0";
 	}
+	
+	public User()
+	{
+		
+	}
 
 	public String getId() {
 		return id;

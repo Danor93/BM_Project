@@ -18,7 +18,7 @@ public class DBCheck {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bytemedatabase.users WHERE userName=? AND password=?");
+						"SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -47,7 +47,7 @@ public class DBCheck {
 					result.append("WrongInput");
 				}
 				stmt = DBConnect.conn.prepareStatement(
-						"SELECT isLoggedIn FROM bytemedatabase.users WHERE userName=? AND password=?");
+						"SELECT isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				rs = stmt.executeQuery();
@@ -55,7 +55,7 @@ public class DBCheck {
 				rs2 = rs.getString(1).toString(); // isLoggedIn of userName
 				if (rs2.equals("0")) {
 					stmt = DBConnect.conn.prepareStatement(
-							"UPDATE bytemedatabase.users SET isLoggedIn='1' WHERE userName=? AND password=?");
+							"UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
 					stmt.setString(1, userName);
 					stmt.setString(2, password);
 					stmt.executeUpdate();
@@ -76,7 +76,7 @@ public class DBCheck {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bytemedatabase.users WHERE ID=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bitemedb.users WHERE ID=?");
 				stmt.setString(1, ID);
 				// stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -96,7 +96,7 @@ public class DBCheck {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bytemedatabase.dishes WHERE restId1=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bitemedb.dishes WHERE restId1=?");
 				stmt.setString(1, ID);
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
@@ -119,7 +119,7 @@ public class DBCheck {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT w4cBusiness FROM bytemedatabase.company");
+				ResultSet rs = stmt.executeQuery("SELECT w4cBusiness FROM bitemedb.company");
 				while (rs.next()) {
 					rs1.add(rs.getString(1).toString());
 				}

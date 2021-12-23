@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
@@ -40,21 +43,29 @@ public class ChoosingDishesController extends Controller implements Initializabl
 
     @FXML
     private ListView<String> list;
+
     
     @FXML
-    private Label DishIng;
+    private TextArea ingredients;
+
     
     @FXML
     private Text notify;
     
     @FXML
-    private Text ingredientLabel;
-
-  /*  @FXML
-    private AnchorPane ingredientPane;
-*/
+    private Text dishLbl;
+    
     @FXML
-    private VBox ingredientPane;
+    private Button minus;
+
+    @FXML
+    private Button plus;
+    
+    @FXML
+    private Label quantity;
+
+    @FXML
+    private AnchorPane ingPane;
     
     @FXML
     private Text price;
@@ -62,6 +73,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
     public ArrayList<String> dishNames;
 	public ArrayList<Dish> dishListOfType;
 	public static Dish chosenDish;
+	public static int quentity=1;
 
     @FXML
     void addDishToOrder(ActionEvent event) throws IOException 
@@ -75,9 +87,9 @@ public class ChoosingDishesController extends Controller implements Initializabl
     	
     	else
     	{
+    		
     		int indexOfDish=dishNames.indexOf(selectedDish);
         	chosenDish=dishListOfType.get(indexOfDish);
-        	//System.out.println(chosenDish.getChoiceFactor());
         	if(!chosenDish.getChoiceFactor().equals("")||!chosenDish.getExtra().equals(""))
         	{
         		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -90,13 +102,13 @@ public class ChoosingDishesController extends Controller implements Initializabl
         	
         	else
         	{
+        		chosenDish.setRestCode(RestListFormController.chosenRst.getRestCode());
+        		chosenDish.setQuentity(quentity);
         		SingletonOrder.getInstance().myOrder.add(chosenDish);
         		notify.setFill(Color.GREEN);
         		notify.setText("The dish was successfully added to your order");
         	}
     	}
-    	
-
     }
 
     @FXML
@@ -113,15 +125,35 @@ public class ChoosingDishesController extends Controller implements Initializabl
     @FXML
     void getDishPrice(MouseEvent event)
     {
+    	quantity.setText("1");
+    	quentity=1;
     	String s="price : ";
     	String selectedDish =list.getSelectionModel().getSelectedItem();
     	int indexOfDish=dishNames.indexOf(selectedDish);
-    	ingredientPane.setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
-    	ingredientLabel.setText(selectedDish);
+    	ingPane.setVisible(true);
+    	dishLbl.setText(selectedDish);
     	price.setText(s+dishListOfType.get(indexOfDish).getPrice()+"$");
-    	DishIng.setText(dishListOfType.get(indexOfDish).getIngredients());
-    	ingredientPane.setStyle("-fx-background-radius: 30");
+    	ingredients.setText(dishListOfType.get(indexOfDish).getIngredients());
+    	minus.setDisable(false);
+    	plus.setDisable(false);
 
+    }
+    
+    @FXML
+    void decQuentity(ActionEvent event) {
+    	if(quentity>1)
+    		quentity--;
+    	
+    	quantity.setText(""+quentity);
+    	
+
+    }
+    
+    
+    @FXML
+    void incQuentity(ActionEvent event) {
+    	quentity++;
+    	quantity.setText(""+quentity);
     }
 
 

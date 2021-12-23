@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import Entities.BussinessAccount;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.homeBranches;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +36,7 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 	 * Author:danor
 	 * this class is for open business account
 	  */
-	public static BussinessAccount  BAccount = new BussinessAccount(null, null, null, null, null, null, null, null, null, null, null, null);
+	public static BussinessAccount  BAccount = new BussinessAccount(null, null, null, null,null, null, null, null, null, null, null, null);
 	public static Boolean AprrovedFlag=false;
 	public static Boolean Checkdeatils=false;
 
@@ -98,6 +99,7 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 				BAccount.setEmail(txtEmail.getText());
 				BAccount.setCompanyName( txtEmployersName.getText());
 				BAccount.setBudget(txtMonthlyBillingCeiling.getText());
+				BAccount.setBranch(homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
 				AprrovedFlag=false;
 				ClientUI.chat.accept(new Message(MessageType.check_Baccount_details,BAccount));
 				if(Checkdeatils) {

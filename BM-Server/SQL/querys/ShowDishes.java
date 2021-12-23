@@ -24,7 +24,7 @@ public class ShowDishes {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("SELECT * FROM bytemedatabase.dishes WHERE restId1=? ORDER BY dishType");
+						.prepareStatement("SELECT * FROM bitemedb.dishes WHERE restId1=? ORDER BY dishType");
 				stmt.setString(1, ID);
 				ResultSet rs = stmt.executeQuery();
 

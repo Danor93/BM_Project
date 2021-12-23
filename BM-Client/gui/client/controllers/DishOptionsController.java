@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -117,6 +118,8 @@ public class DishOptionsController extends Controller implements Initializable{
 			 dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),null,temp.getPrice(),temp.getInventory(),temp.getDishType());
 
 		}
+		dish.setQuentity(ChoosingDishesController.quentity);
+		dish.setRestCode(RestListFormController.chosenRst.getRestCode());
 		SingletonOrder.getInstance().myOrder.add(dish);
 		notify.setFill(Color.GREEN);
 		notify.setText("The dish was successfully added to your order");

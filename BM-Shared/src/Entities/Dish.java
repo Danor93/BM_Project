@@ -8,7 +8,15 @@ public class Dish implements Serializable{
 	private static final long serialVersionUID = 3722018100294979572L;
 	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,restCode;
 	private float price;
-	private int inventory;
+	private int inventory,quentity,orderNumber;
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
 	private DishType dishType;
 
 	public Dish(String dishName, String supplierName, String choiceFactor, String choiceDetails, String ingredients,
@@ -86,6 +94,15 @@ public class Dish implements Serializable{
 
 	public void setIngredients(String ingredients) {
 		this.ingredients = ingredients;
+	}
+	
+
+	public int getQuentity() {
+		return quentity;
+	}
+
+	public void setQuentity(int quentity) {
+		this.quentity = quentity;
 	}
 
 	@Override
