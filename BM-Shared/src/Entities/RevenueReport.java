@@ -39,7 +39,6 @@ public class RevenueReport extends Report {
 		ArrayList<Order> tempArray = new ArrayList<>();
 		for (Restaurant r : super.Restaurant) {
 			for (Order o : Data) {
-				System.out.println(o.getOrderNum() + o.getRestName() + o.getTotalPrice());
 				if (o.getRestId().equals(r.getRestCode()))
 					tempArray.add(o);
 			}

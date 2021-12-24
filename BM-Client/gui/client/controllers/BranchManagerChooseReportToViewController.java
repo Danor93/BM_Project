@@ -41,18 +41,16 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		private Float Income;
 
 		RelavantData(Restaurant rest) {
-			ArrayList<Order> Orders = new ArrayList<>();
 			float sum = 0;
 			int numberoforders = 0;
 			this.Restaurant = rest.getSupplierName();
-			Orders = BranchManagerChooseReportToViewController.revenueReport.getOrgizedData()
+			ArrayList<Order> Orders = BranchManagerChooseReportToViewController.revenueReport.getOrgizedData()
 					.get(rest.getSupplierName());
 			for (Order o : Orders) {
 
 				if (o.getRestId().equals(rest.getRestCode())) {
 					sum += o.getTotalPrice();
 					numberoforders++;
-					System.out.println(o.getRestName() + " " + o.getTotalPrice() + " " + o.getRestId());
 				}
 			}
 			NumberOfOrders = numberoforders;

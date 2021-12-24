@@ -592,7 +592,7 @@ public class Query {
 				for (int i = 0; i < restaurants.size(); i++) {
 					String rsID = restaurants.get(i).getRestCode();
 					Statement stmt2 = DBConnect.conn.createStatement();
-					ResultSet rs2 = stmt2.executeQuery("SELECT * FROM bitemedb.order WHERE orderStatus='Sended' AND rstID='" + rsID + "' ;");
+					ResultSet rs2 = stmt2.executeQuery("SELECT * FROM bitemedb.order WHERE orderStatus='done' AND rstID='" + rsID + "' ;");
 					while (rs2.next()) {
 						String[] monthYear = rs2.getString(7).split("-");
 						if (Year.equals(monthYear[0]) && Month.equals(monthYear[1])) {
