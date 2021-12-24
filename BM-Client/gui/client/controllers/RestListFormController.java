@@ -93,7 +93,6 @@ public class RestListFormController extends Controller implements Initializable 
 			String address=table.getSelectionModel().getSelectedItem().getAddress();
 			Message msg= new Message(MessageType.get_Dishes,table.getSelectionModel().getSelectedItem().getRestCode());
 			ClientUI.chat.accept(msg);
-			System.out.println(dishes.get(0).getDishName());
 
 			
 			for(Restaurant r:restaurants)

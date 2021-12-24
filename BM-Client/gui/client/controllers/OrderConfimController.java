@@ -77,7 +77,7 @@ public class OrderConfimController {
     		no.setSelected(false);
     		if(Float.parseFloat(ShowOrderController.refund)>=calPrice)
     		{
-    			refundDec.setText("-"+priceAfterRef+"credit");
+    			refundDec.setText("-"+priceAfterRef+"$ credit");
     			priceAfterRef=0;
     		}
     		
@@ -102,16 +102,15 @@ public class OrderConfimController {
     			ShowOrderController.finalOrder.setTotalPrice(priceAfterRef);
     			ShowOrderController.finalOrder.setUseRefund(ShowOrderController.refund);
     		}
-    		
-    		else
-    		{
-    			ShowOrderController.finalOrder.setTotalPrice(calPrice);
     			
-    		}
-    		
-    		
-    		
     	}
+    	
+		else
+		{
+			ShowOrderController.finalOrder.setTotalPrice(calPrice);
+			
+		}
+
     	if(ShowOrderController.finalOrder.getUseBudget()==1)
     	{
     		BussinessAccount buss=(BussinessAccount)IdentifyW4cController.client;
@@ -207,8 +206,9 @@ public class OrderConfimController {
 		{
 			orderDetails.appendText("Take Away- Free of charge\n");	
 		}
+
 		
-		if(DeliveryOrPickupController.earlyOrder)
+		if(ShowOrderController.finalOrder.getEarlyOrder().equals("yes"))
 		{
 			orderDetails.appendText("-10% Early order");
 			calPrice-=calPrice*0.1;

@@ -113,7 +113,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		for (int i = 0; i < dishes.size(); i++) {
 			if (NameOfDish.equals(dishes.get(i).getDishName().toString())) {
 				txtNewPriceDish.setText(String.valueOf(dishes.get(i).getPrice()));
-				txtNewInventoryDish.setText(String.valueOf(dishes.get(i).getInventory()));
 				txtNewChoiceDish.setText(dishes.get(i).getChoiceFactor());
 				txtNewChoiceDetailsDish.setText(dishes.get(i).getChoiceDetails());
 				txtNewIngredients.setText(dishes.get(i).getIngredients());
@@ -125,7 +124,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
-		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
+		Dish dish = new Dish(null, null, null, null, null, null,0, null);
 
 		try {
 			dishtype = DishType.toDishType(TypeOfDish);
@@ -164,7 +163,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 			}
 			if (NameAndTypeCorrect && CorrectPrice && CorrectInv) {
 				String SupplierName = LoginScreenController.Name;
-				dish = new Dish(NameOfDish, SupplierName, null, null, null, null, PriceOfDish, InvOfDish, dishtype);
+				dish = new Dish(NameOfDish, SupplierName, null, null, null, null, PriceOfDish, dishtype);
 				dish.setRestCode(LoginScreenController.ID);
 				if (txtNewChoiceDish.getText().equals("null")) {
 					txtNewChoiceDish.setText("");
@@ -207,7 +206,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 			txtMiniLabel.setText("Type must be selected!");
 			e.printStackTrace();
 		}
-		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, 0, dishtype);
+		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, dishtype);
 		if (NameAndTypeCorrectToDelete) {
 			dish.setRestCode(LoginScreenController.ID);
 			System.out.println(dish.toString());

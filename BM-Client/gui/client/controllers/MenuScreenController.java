@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MenuScreenController {
+public class MenuScreenController extends Controller{
 
     @FXML
     private ResourceBundle resources;
@@ -156,7 +156,6 @@ public class MenuScreenController {
 
     @FXML
     void initialize() {
-    	
         assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'MenuScreen.fxml'.";
         assert desserts != null : "fx:id=\"desserts\" was not injected: check your FXML file 'MenuScreen.fxml'.";
         assert drinks != null : "fx:id=\"drinks\" was not injected: check your FXML file 'MenuScreen.fxml'.";

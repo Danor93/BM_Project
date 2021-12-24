@@ -74,11 +74,10 @@ public class UpdateDB {
 				stmt.setString(3, dish.getRestCode());
 				stmt.setString(4, dish.getSupplierName());
 				stmt.setString(5, String.valueOf(dish.getPrice()));
-				stmt.setString(6, String.valueOf(dish.getInventory()));
-				stmt.setString(7, dish.getChoiceFactor());
-				stmt.setString(8, dish.getChoiceDetails());
-				stmt.setString(9, dish.getIngredients());
-				stmt.setString(10, dish.getExtra());
+				stmt.setString(6, dish.getChoiceFactor());
+				stmt.setString(7, dish.getChoiceDetails());
+				stmt.setString(8, dish.getIngredients());
+				stmt.setString(9, dish.getExtra());
 				stmt.executeUpdate();
 				return true;
 
@@ -99,7 +98,7 @@ public class UpdateDB {
 				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.dishes SET dishName='"
 						+ dish.getDishName() + "', dishType='" + dish.getDishType() + "', restId1='"
 						+ dish.getRestCode() + "', supplierName='" + dish.getSupplierName() + "', price='"
-						+ dish.getPrice() + "', inventory='" + dish.getInventory() + "', choiceFactor='"
+						+ dish.getPrice() + "''"  + "', choiceFactor='"
 						+ dish.getChoiceFactor() + "', choiceDetails='" + dish.getChoiceDetails() + "', ingredients='"
 						+ dish.getIngredients() + "', extra='" + dish.getExtra()
 						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
