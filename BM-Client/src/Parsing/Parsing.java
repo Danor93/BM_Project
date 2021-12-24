@@ -18,7 +18,7 @@ import Entities.User;
 import Entities.homeBranches;
 import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
-import client.controllers.BranchManagerFreezeAccountController;
+import client.controllers.BranchManagerChangePermissionsController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
 import client.controllers.DeliveryController;
@@ -185,17 +185,17 @@ public class Parsing {
 		}
 
 		case return_accounts_for_freeze: {
-			BranchManagerFreezeAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
+			BranchManagerChangePermissionsController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
 
 		case Account_Status_Active:{
 			Boolean status = (Boolean) receivedMessage.getMessageData();
 			if(status) {
-				BranchManagerFreezeAccountController.ActiveAccount=true;
+				BranchManagerChangePermissionsController.ActiveAccount=true;
 			}
 			else {
-				BranchManagerFreezeAccountController.ActiveAccount=false;
+				BranchManagerChangePermissionsController.ActiveAccount=false;
 			}
 			break;
 		}
@@ -203,10 +203,10 @@ public class Parsing {
 		case Account_Status_Freeze:{
 			Boolean status = (Boolean) receivedMessage.getMessageData();
 			if(status) {
-				BranchManagerFreezeAccountController.FreezeAccount=true;
+				BranchManagerChangePermissionsController.FreezeAccount=true;
 			}
 			else {
-				BranchManagerFreezeAccountController.FreezeAccount=false;
+				BranchManagerChangePermissionsController.FreezeAccount=false;
 			}
 			break;
 		}

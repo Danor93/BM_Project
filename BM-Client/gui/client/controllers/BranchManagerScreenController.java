@@ -60,6 +60,9 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@FXML
 	private ImageView BackImage;
+	
+	  @FXML
+	    private Button ChangePBtn;
 
 	@Override
 	public void Back(ActionEvent event) throws IOException {
@@ -107,8 +110,8 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	/* open a screen for Freeze an account */
 	@FXML
-	void FreezeAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerFreezeAccount", "Freeze Account");
+	void ChangePermissions(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerChangePermissions", "Freeze Account");
 	}
 
 	/* for upload the quarterly PDF. */

@@ -16,7 +16,7 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.fxml.Initializable;
 
-public class BranchManagerFreezeAccountController extends Controller implements Initializable {
+public class BranchManagerChangePermissionsController extends Controller implements Initializable {
 
 	/*
 	 * Author:Danor this class for freeze an active account
