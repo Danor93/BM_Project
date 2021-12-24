@@ -208,7 +208,7 @@ public class Query {
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer'");
 			while (rs.next()) {
 				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
 						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
