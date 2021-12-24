@@ -545,7 +545,7 @@ public class Query {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT restId,supplierName,openingTime,city,address,homeBranch FROM supplier WHERE supplierStatus ='approved' AND homeBranch= '"
+						"SELECT restId,supplierName,openingTime,city,address,homeBranch FROM bitemedb.supplier WHERE supplierStatus ='approved' AND homeBranch= '"
 								+ Branch + "' ;");
 				while (rs.next()) {
 					Restaurant res = new Restaurant(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
@@ -557,18 +557,19 @@ public class Query {
 				for (int i = 0; i < restaurants.size(); i++) {
 					String rsID = restaurants.get(i).getRestCode();
 					Statement stmt2 = DBConnect.conn.createStatement();
-					ResultSet rs2 = stmt2.executeQuery("SELECT * FROM bitemedb.order WHERE orderStatus='done' AND rstID='" + rsID + "' ;");
+					ResultSet rs2 = stmt2.executeQuery("SELECT * FROM bitemedb.order WHERE orderStatus='Sended' AND rstID='" + rsID + "' ;");
 					while (rs2.next()) {
 						String[] monthYear = rs2.getString(7).split("-");
 						if (Year.equals(monthYear[0]) && Month.equals(monthYear[1])) {
-							Order order = new Order(rs2.getString(2), rs2.getString(3), rs2.getString(6),
-									rs2.getString(7), null, rs2.getString(7), rs2.getString(9),
-									rs2.getFloat(4));
+							Order order = new Order(rs2.getString(2), rs2.getString(3), null,
+									null, null, null, rsID,
+								Float.parseFloat(rs2.getString(5)));
 							Revenuereport.addToData(order);
 						}
 					}
 					rs2.close();
 				}
+				Revenuereport.OrgenizeData();
 				return Revenuereport;
 			} catch (SQLException s) {
 				s.printStackTrace();

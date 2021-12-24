@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Report implements Serializable {
 
 	private static final long serialVersionUID = 583542510006825068L;
-	private ArrayList<Restaurant> Restaurant;
+	protected ArrayList<Restaurant> Restaurant;
 	private String month,year;
 	
-	public Report(ArrayList<Entities.Restaurant> restaurant, String month, String year) {
+	public Report(ArrayList<Restaurant> restaurant, String month, String year) {
 		super();
 		Restaurant = restaurant;
 		this.month = month;

@@ -2,11 +2,13 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.BusinessAccountTracking;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.Order;
 import Entities.Restaurant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,15 +27,59 @@ import main.ClientUI;
 import Entities.RevenueReport;
 
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
-	
+
 	private static BranchManagerChooseReportToViewController instance = new BranchManagerChooseReportToViewController();
 	public static String Branch, reportType, year;
 	public static int month;
 	public static StringBuilder details = new StringBuilder();
 	public static RevenueReport revenueReport;
-	ObservableList<RevenueReport> revenueReportList;
 	
+	public class RelavantData {
 
+		private String Restaurant;
+		private Integer NumberOfOrders;
+		private Float Income;
+
+		RelavantData(Restaurant rest) {
+			ArrayList<Order> Orders = new ArrayList<>();
+			float sum = 0;
+			int numberoforders = 0;
+			this.Restaurant = rest.getSupplierName();
+			Orders = BranchManagerChooseReportToViewController.revenueReport.getOrgizedData()
+					.get(rest.getSupplierName());
+			for (Order o : Orders) {
+
+				if (o.getRestId().equals(rest.getRestCode())) {
+					sum += o.getTotalPrice();
+					numberoforders++;
+					System.out.println(o.getRestName() + " " + o.getTotalPrice() + " " + o.getRestId());
+				}
+			}
+			NumberOfOrders = numberoforders;
+			Income = sum;
+
+		}
+
+		public String getRestaurant() {
+			return this.Restaurant;
+		}
+
+		public Integer getNumberOfOrders() {
+			return this.NumberOfOrders;
+		}
+
+		public Float getIncome() {
+			return Income;
+		}
+
+		public String toString() {
+			return "The Rstaurat is: " + Restaurant + " the number of orders is: " + String.valueOf(NumberOfOrders)
+					+ " Total income is: " + Income.toString();
+		}
+	}
+
+	ObservableList<RelavantData> revenueReportList;
+	private ArrayList<RelavantData> RevenueData = new ArrayList<>();
 	@FXML
 	private ResourceBundle resources;
 
@@ -59,16 +105,16 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private TableView<String> PerformanceTable;
 
 	@FXML
-	private TableView<RevenueReport> RevenueTable;
-	
-    @FXML
-    private TableColumn<RevenueReport, String> IncomeCol;
-    
-    @FXML
-    private TableColumn<RevenueReport, String> NumOfOrdersCol;
-    
-    @FXML
-    private TableColumn<Restaurant, String> RestaurantCol;
+	private TableView<RelavantData> RevenueTable;
+
+	@FXML
+	private TableColumn<RelavantData, Float> Income;
+
+	@FXML
+	private TableColumn<RelavantData, Integer> NumberOfOrders;
+
+	@FXML
+	private TableColumn<RelavantData, String> Restaurant;
 
 	@FXML
 	private StackPane ReportPane;
@@ -88,8 +134,8 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	@FXML
 	private Button btnBack;
 
-    @FXML
-    private TableView<String> OrdersTable;
+	@FXML
+	private TableView<String> OrdersTable;
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
@@ -153,11 +199,24 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	public void RevenueReport() {
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-		RestaurantCol.setCellValueFactory(new PropertyValueFactory<Restaurant, String>("Restaurant"));
-		NumOfOrdersCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Number Of Orders"));
-		IncomeCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Income"));
-		revenueReportList = FXCollections.observableArrayList(revenueReport);
-		RevenueTable.setItems(revenueReportList);
+		RevenueData = getRelavantDataArray();
+		Restaurant.setCellValueFactory(new PropertyValueFactory<RelavantData, String>("Restaurant"));
+		NumberOfOrders.setCellValueFactory(new PropertyValueFactory<RelavantData, Integer>("NumberOfOrders"));
+		Income.setCellValueFactory(new PropertyValueFactory<RelavantData, Float>("Income"));
+		revenueReportList = FXCollections.observableArrayList(RevenueData);
+		RevenueTable.getItems().addAll(revenueReportList);
+		RevenueTable.refresh();
+	}
+
+	ArrayList<RelavantData> getRelavantDataArray() {
+		ArrayList<RelavantData> relevantDataArray = new ArrayList<>();
+		for (Restaurant rest : revenueReport.getRestaurant()) {
+			RelavantData r = new RelavantData(rest);
+			System.out.println(r.toString());
+			relevantDataArray.add(r);
+		}
+
+		return relevantDataArray;
 	}
 
 	public void OrdersReport() {
@@ -199,25 +258,38 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		Year.getItems().add("2020");
 		Year.getItems().add("2019");
 	}
-	
+
 	public static BranchManagerChooseReportToViewController getInstance() {
 		return instance;
 	}
-	
-    @FXML
-    void initialize() {
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert BranchChoose != null : "fx:id=\"BranchChoose\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert GetReport != null : "fx:id=\"GetReport\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert Month != null : "fx:id=\"Month\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert Orders != null : "fx:id=\"Orders\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert PerformanceTable != null : "fx:id=\"PerformanceTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert ReportPane != null : "fx:id=\"ReportPane\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert ReportType != null : "fx:id=\"ReportType\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert Revenue != null : "fx:id=\"Revenue\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert RevenueTable != null : "fx:id=\"RevenueTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert Year != null : "fx:id=\"Year\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-        assert main != null : "fx:id=\"main\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-    }
+
+	@FXML
+	void initialize() {
+		assert BackImage != null
+				: "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert BranchChoose != null
+				: "fx:id=\"BranchChoose\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert GetReport != null
+				: "fx:id=\"GetReport\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert Month != null
+				: "fx:id=\"Month\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert Orders != null
+				: "fx:id=\"Orders\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert PerformanceTable != null
+				: "fx:id=\"PerformanceTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert ReportPane != null
+				: "fx:id=\"ReportPane\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert ReportType != null
+				: "fx:id=\"ReportType\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert Revenue != null
+				: "fx:id=\"Revenue\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert RevenueTable != null
+				: "fx:id=\"RevenueTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert Year != null
+				: "fx:id=\"Year\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert btnBack != null
+				: "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+		assert main != null
+				: "fx:id=\"main\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+	}
 }
