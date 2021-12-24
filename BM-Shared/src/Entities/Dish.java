@@ -20,7 +20,7 @@ public class Dish implements Serializable{
 	private DishType dishType;
 
 	public Dish(String dishName, String supplierName, String choiceFactor, String choiceDetails, String ingredients,
-			String extra,float price, int inventory, DishType dishType) {
+			String extra,float price, DishType dishType) {
 		this.dishName = dishName;
 		this.supplierName = supplierName;
 		this.choiceFactor = choiceFactor;
@@ -28,7 +28,6 @@ public class Dish implements Serializable{
 		this.ingredients = ingredients;
 		this.extra = extra;
 		this.price = price;
-		this.inventory = inventory;
 		this.dishType = dishType;
 	}
 
@@ -75,9 +74,6 @@ public class Dish implements Serializable{
 		return price;
 	}
 
-	public int getInventory() {
-		return inventory;
-	}
 
 	public DishType getDishType() {
 		return dishType;

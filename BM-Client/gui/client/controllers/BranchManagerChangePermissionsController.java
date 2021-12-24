@@ -16,7 +16,7 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.fxml.Initializable;
 
-public class BranchManagerFreezeAccountController extends Controller implements Initializable {
+public class BranchManagerChangePermissionsController extends Controller implements Initializable {
 
 	/*
 	 * Author:Danor this class for freeze an active account
@@ -24,7 +24,8 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 	public static ArrayList<User> Users = new ArrayList<>();
 	public static String AccountName;
 	public static String AccountID;
-	public static Boolean FreezeAccount = true;
+	public static Boolean ActiveAccount;
+	public static Boolean FreezeAccount;
 
 	@FXML
 	private ResourceBundle resources;
@@ -36,7 +37,10 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 	private ComboBox<String> ActiveAccountComboBox;
 
 	@FXML
-	private Button ConfrimBtn;
+	private Button ActiveBtn;
+
+	@FXML
+	private Button FreezeBtn;
 
 	@FXML
 	private Button BackBMBtn;
@@ -45,28 +49,53 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 	@FXML
 	void ChooseAccount(ActionEvent event) {
 		AccountName = ActiveAccountComboBox.getSelectionModel().getSelectedItem();
-		ConfrimBtn.setDisable(false);
+		ActiveBtn.setDisable(false);
+		FreezeBtn.setDisable(false);
 	}
 
-	/* for the confirm button */
+	/* for the Active button */
 	@FXML
-	void ConfrimFreezeAccount(ActionEvent event) {
+	void ActiveAccount(ActionEvent event) {
 		for (int i = 0; i < Users.size(); i++) {
 			if (Users.get(i).getFirstN().equals(AccountName)) {
 				AccountID = Users.get(i).getId();
-				ClientUI.chat.accept(new Message(MessageType.check_if_account_freeze, Users.get(i).getId()));
+				ClientUI.chat.accept(new Message(MessageType.check_account_status_Active, Users.get(i).getId()));
 			}
 
-			if (FreezeAccount == false) {
-				ClientUI.chat.accept(new Message(MessageType.Account_For_Freeze, AccountID));
-				PopUpMessage.successMessage(AccountName + " has been freezed!");
+			if (!ActiveAccount) {
+				ClientUI.chat.accept(new Message(MessageType.Update_Status_to_Active, AccountID));
+				PopUpMessage.successMessage(AccountName + " has been change to Active!");
 				ActiveAccountComboBox.getItems().remove(AccountName);
-				
+				ActiveAccount = false;
+				break;
 			} else {
-				PopUpMessage.errorMessage("The Account Already Freeze!");
+				PopUpMessage.errorMessage("The Account " + AccountName + " Already Active!");
 				break;
 			}
 		}
+	}
+
+	/* for the Freeze button */
+	@FXML
+	void FreezeAccount(ActionEvent event) {
+		for (int i = 0; i < Users.size(); i++) {
+			if (Users.get(i).getFirstN().equals(AccountName)) {
+				AccountID = Users.get(i).getId();
+				ClientUI.chat.accept(new Message(MessageType.check_account_status_Freeze, Users.get(i).getId()));
+			}
+
+			if (!FreezeAccount) {
+				ClientUI.chat.accept(new Message(MessageType.Update_Status_to_Freeze, AccountID));
+				PopUpMessage.successMessage(AccountName + " has been change to Freeze!");
+				ActiveAccountComboBox.getItems().remove(AccountName);
+				FreezeAccount = false;
+				break;
+			} else {
+				PopUpMessage.errorMessage("The Account " + AccountName + " Already Freeze!");
+				break;
+			}
+		}
+
 	}
 
 	/* back to the branch manager screen. */
@@ -77,6 +106,8 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 
 	/* load account */
 	public void loadAccounts(ArrayList<User> Users) {
+		ActiveAccountComboBox.getItems().clear();
+		ActiveAccountComboBox.setPromptText("Choose an Account");
 		for (User u : Users) {
 			ActiveAccountComboBox.getItems().add(u.getFirstN());
 		}
@@ -85,8 +116,10 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.chat.accept(new Message(MessageType.get_accounts_for_freeze, null));
-		FreezeAccount = true;
-		ConfrimBtn.setDisable(true);
+		ActiveAccount = false;
+		FreezeAccount = false;
+		ActiveBtn.setDisable(true);
+		FreezeBtn.setDisable(true);
 		loadAccounts(Users);
 	}
 

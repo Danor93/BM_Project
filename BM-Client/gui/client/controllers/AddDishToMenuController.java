@@ -88,7 +88,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
-		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
+		Dish dish = new Dish(null, null, null, null, null, null, 0, null);
 		if (txtNameDish.getText().isEmpty())
 			txtMiniLabel.setText("Name must be invailed!");
 		else if (txtPriceDish.getText().isEmpty())
@@ -112,8 +112,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 			System.out.println(TypeOfDish);
 			try {
 				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
-						Float.parseFloat(txtPriceDish.getText()), Integer.parseInt(txtInventoryDish.getText()),
-						DishType.toDishType(TypeOfDish));
+						Float.parseFloat(txtPriceDish.getText()),DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				txtMiniLabel.setText("type must be selected!");
 				e.printStackTrace();

@@ -54,10 +54,6 @@ public class DeliveryOrPickupController extends Controller {
     @FXML
     private Label bussLabel;
 
-    
-    
-    public static boolean earlyOrder=false;
-
     @FXML
     void back(ActionEvent event) {
 
@@ -81,7 +77,9 @@ public class DeliveryOrPickupController extends Controller {
 	    			ShowOrderController.finalOrder.setUseBudget(1);	
 	    		}
 	    	}
-    		earlyOrder=checkEarlyOrder();
+    		//earlyOrder=checkEarlyOrder();
+    		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
+    		//ShowOrderController.finalOrder.setEarlyOrder(earlyOrder);
     		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/Delivery.fxml"));
     		Parent root=load.load();
@@ -97,8 +95,9 @@ public class DeliveryOrPickupController extends Controller {
     {
     	if(getTimeAndDate()==true)
     	{
-    		earlyOrder=checkEarlyOrder();
     		ShowOrderController.finalOrder.setOrderType("Take Away");
+    		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
+
 	    	if(IdentifyW4cController.client instanceof BussinessAccount)
 	    	{
 	    		if(yes.isSelected())
@@ -214,22 +213,23 @@ public class DeliveryOrPickupController extends Controller {
     	
 	}
 	
-	private boolean checkEarlyOrder()
+	private String checkEarlyOrder()
 	{
 		LocalDate orderDate=date.getValue();
 		
 		if(orderDate.isAfter(LocalDate.now()))
-			return true;
+			return "yes";
 		
 		else
 		{
 			if(java.time.Duration.between(LocalTime.now(),LocalTime.parse(time.getText())).toHours()>=2)
 			{
-				return true;
+
+				return "yes";
 			}
 			
 			else
-				return false;
+				return "no";
 		}
 		
 	}
