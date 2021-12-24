@@ -199,16 +199,31 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.return_accounts_for_freeze, Users);
 		}
 
-		case check_if_account_freeze: {
+		case check_account_status_Active: {
 			String AccountID = (String) receivedMessage.getMessageData();
-			if (Query.CheckAccountStatus(AccountID)) {
-				return messageFromServer = new Message(MessageType.Account_Active, null);
+			if (Query.CheckAccountStatusActive(AccountID)) {
+				return messageFromServer = new Message(MessageType.Account_Status_Active, true);
 			} else {
-				return messageFromServer = new Message(MessageType.Account_Freeze, null);
+				return messageFromServer = new Message(MessageType.Account_Status_Active, false);
+			}
+		}
+		
+		case check_account_status_Freeze:{
+			String AccountID = (String) receivedMessage.getMessageData();
+			if (Query.CheckAccountStatusFreeze(AccountID)) {
+				return messageFromServer = new Message(MessageType.Account_Status_Freeze, true);
+			} else {
+				return messageFromServer = new Message(MessageType.Account_Status_Freeze, false);
 			}
 		}
 
-		case Account_For_Freeze: {
+		case Update_Status_to_Active: {
+			String AccountID = (String) receivedMessage.getMessageData();
+			Query.UpdateAccountStatusToActive(AccountID);
+			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
+		}
+		
+		case Update_Status_to_Freeze:{
 			String AccountID = (String) receivedMessage.getMessageData();
 			Query.UpdateAccountStatusToFreeze(AccountID);
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);

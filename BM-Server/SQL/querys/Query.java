@@ -32,6 +32,7 @@ import Entities.User;
 import Entities.homeBranches;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
+import Entities.MessageType;
 
 public class Query {
 
@@ -404,7 +405,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' ");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' AND homeBranch='north'");
 				ArrayList<User> users = new ArrayList<>();
 				while (rs.next()) {
 					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
@@ -423,7 +424,7 @@ public class Query {
 		return null;
 	}
 
-	public static Boolean CheckAccountStatus(String AccountID) {
+	public static Boolean CheckAccountStatusActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
@@ -433,7 +434,7 @@ public class Query {
 					if (status.equals("Active")) {
 						rs.close();
 						return true;
-					} else {
+					}else {
 						rs.close();
 						return false;
 					}
@@ -443,6 +444,40 @@ public class Query {
 			}
 		}
 		return false;
+	}
+	
+	public static Boolean CheckAccountStatusFreeze(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT status FROM client WHERE client_id= '" + AccountID + "' ;");
+				while (rs.next()) {
+					String status = rs.getString(1);
+					if (status.equals("Freeze")) {
+						rs.close();
+						return true;
+					}else {
+						rs.close();
+						return false;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	public static void UpdateAccountStatusToActive(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				PreparedStatement stmt = DBConnect.conn
+						.prepareStatement("UPDATE client SET status='Active' WHERE client_id= '" + AccountID + "'  ;");
+				stmt.executeUpdate();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
 	}
 
 	public static void UpdateAccountStatusToFreeze(String AccountID) {

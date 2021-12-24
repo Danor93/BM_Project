@@ -9,25 +9,33 @@
 
 <AnchorPane prefHeight="529.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerFreezeAccountController">
    <children>
-      <Pane layoutY="-25.0" prefHeight="574.0" prefWidth="796.0">
+      <Pane layoutY="-26.0" prefHeight="574.0" prefWidth="796.0">
          <children>
-            <Label layoutX="109.0" layoutY="161.0" prefHeight="21.0" prefWidth="186.0" text="Choose Account to freeze: ">
+            <Label layoutX="23.0" layoutY="161.0" prefHeight="21.0" prefWidth="274.0" text="Choose Account to Change Permissions: ">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <ComboBox fx:id="ActiveAccountComboBox" layoutX="311.0" layoutY="159.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
-            <Label layoutX="185.0" layoutY="70.0" prefHeight="53.0" prefWidth="392.0" text="Freeze Account Screen">
+            <Label layoutX="76.0" layoutY="80.0" prefHeight="53.0" prefWidth="668.0" text="Change Permissions Account Screen">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Button fx:id="ConfrimBtn" layoutX="350.0" layoutY="239.0" mnemonicParsing="false" onAction="#ConfrimFreezeAccount" prefHeight="25.0" prefWidth="96.0" style="-fx-background-radius: 30;" text="Confirm">
+            <Button fx:id="FreezeBtn" layoutX="481.0" layoutY="221.0" mnemonicParsing="false" onAction="#FreezeAccount" prefHeight="37.0" prefWidth="79.0" style="-fx-background-radius: 30;" text="Freeze">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="BackBMBtn" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#BackToBranchManager" text="Back To Branch Manager" />
+            <Button fx:id="BackBMBtn" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#BackToBranchManager" text="Back To Branch Manager">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="ActiveBtn" layoutX="311.0" layoutY="221.0" mnemonicParsing="false" onAction="#ActiveAccount" style="-fx-background-radius: 30;" text="Active">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

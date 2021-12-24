@@ -189,13 +189,25 @@ public class Parsing {
 			break;
 		}
 
-		case Account_Active: {
-			BranchManagerFreezeAccountController.FreezeAccount = false;
+		case Account_Status_Active:{
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if(status) {
+				BranchManagerFreezeAccountController.ActiveAccount=true;
+			}
+			else {
+				BranchManagerFreezeAccountController.ActiveAccount=false;
+			}
 			break;
 		}
-
-		case Account_Freeze: {
-			BranchManagerFreezeAccountController.FreezeAccount = true;
+		
+		case Account_Status_Freeze:{
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if(status) {
+				BranchManagerFreezeAccountController.FreezeAccount=true;
+			}
+			else {
+				BranchManagerFreezeAccountController.FreezeAccount=false;
+			}
 			break;
 		}
 
@@ -205,10 +217,11 @@ public class Parsing {
 		}
 
 		case changed_status_to_notApproved_succ: {
+			break;
 		}
 
 		case changed_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case RegistrationOfEmployer_succ: {
@@ -238,7 +251,7 @@ public class Parsing {
 		}
 
 		case Delete_Account_Succ: {
-
+			break;
 		}
 
 		case businessAccountsTracking: {
@@ -252,11 +265,11 @@ public class Parsing {
 		}
 		
 		case changed_BusinessAccount_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
-
+			break;
 		}
 		
 		
