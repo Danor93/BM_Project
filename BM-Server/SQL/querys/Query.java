@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 import Entities.BusinessAccountTracking;
@@ -112,7 +113,7 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='Not approved' or companyStatus ='Waiting'"
 							+ "");
 			while (rs.next()) {
 				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -146,13 +147,13 @@ public class Query {
 		}
 	}
 
-	public static ArrayList<Supplier> LoadSuppliers() {
+	public static ArrayList<Supplier> LoadSuppliers(String Branch) {
 		ArrayList<Supplier> suppliers = new ArrayList<>();
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM supplier WHERE supplierStatus='not approved' or supplierStatus ='waiting'" + "");
+					"SELECT * FROM supplier WHERE homeBranch= '" + Branch + "' AND supplierStatus='Not approved' or supplierStatus ='Waiting'");
 			while (rs.next()) {
 				Supplier supplier = new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), homeBranches.toHomeBranchType(rs.getString(7)));
@@ -165,6 +166,7 @@ public class Query {
 		return suppliers;
 	}
 
+	
 	public static void UpdateSupplier(String SupplierName, String SupplierStatus) {
 		PreparedStatement stmt;
 		try {
@@ -288,17 +290,18 @@ public class Query {
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
-				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery(
+				Statement stmt1 = DBConnect.conn.createStatement();
+				ResultSet rs = stmt1.executeQuery(
 						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
-					PreparedStatement stmt2 = DBConnect.conn
-							.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
+					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
+							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, BAccount.getId());
-					stmt2.setString(2, "456");
+					stmt2.setString(2, Password);
 					stmt2.setString(3, "Active");
 					stmt2.setString(1, UserName);
 					stmt2.setString(2, Password);
@@ -315,7 +318,10 @@ public class Query {
 					PreparedStatement stmt3 = DBConnect.conn
 							.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
 					stmt3.setString(1, BAccount.getId());
-					stmt3.setString(2, "456");
+					Random rand = new Random(); // instance of random class
+					int int_random = rand.nextInt(1000);
+					String w4cNew = "P" + String.valueOf(int_random);
+					stmt3.setString(2, w4cNew);
 					stmt3.setString(3, "Active");
 					stmt3.executeUpdate();
 
@@ -333,6 +339,7 @@ public class Query {
 			}
 		}
 	}
+
 
 	public static Boolean checkPrivateAccount(Client client) {
 		if (DBConnect.conn != null) {
@@ -383,13 +390,16 @@ public class Query {
 					stmt2.setString(7, PAccount.getEmail());
 					stmt2.setString(8, PAccount.getPhone());
 					stmt2.setInt(9, 0);
-					stmt2.setString(10, PAccount.getHomeBranch().toString());
+					stmt2.setString(10,PAccount.getBranch().toString());
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
 							"INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
 					stmt3.setString(1, PAccount.getId());
-					stmt3.setString(2, "789");
+					Random rand = new Random(); // instance of random class
+					int int_random = rand.nextInt(1000);
+					String w4cNew = "P" + String.valueOf(int_random);
+					stmt3.setString(2, w4cNew);
 					stmt3.setString(3, "Active");
 					stmt3.setString(4, PAccount.getCreditCardNumber());
 					stmt3.executeUpdate();
@@ -400,6 +410,7 @@ public class Query {
 			}
 		}
 	}
+
 
 	public static ArrayList<User> GetAccountForFreeze() {
 		if (DBConnect.conn != null) {

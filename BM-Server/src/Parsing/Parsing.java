@@ -137,7 +137,8 @@ public class Parsing {
 		}
 
 		case get_Supplier: {
-			ArrayList<Supplier> Suppliers = Query.LoadSuppliers();
+			String Branch = (String) receivedMessage.getMessageData();
+			ArrayList<Supplier> Suppliers = Query.LoadSuppliers(Branch);
 			messageFromServer = new Message(MessageType.Supplier_list, Suppliers);
 			return messageFromServer;
 		}
