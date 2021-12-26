@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -480,7 +482,7 @@ public class Query {
 	}
 
 	public static void updateFile(MyFile file) {
-		String sql = "INSERT INTO reports(quertar,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
+		String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
 		try {
 			Timestamp date = new java.sql.Timestamp(new Date().getTime());
 			InputStream is = new ByteArrayInputStream(file.getMybytearray());
@@ -496,6 +498,74 @@ public class Query {
 			e.printStackTrace();
 		}
 	}
+
+	// maybe not needed
+	public static Boolean checkBranchAndQuarterAndYear(String branch, String quarter, String year) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT homebranch,quarter,year FROM reports");
+				while (rs.next()) {
+					String branch2 = rs.getString(1);
+					String quarter2 = rs.getString(2);
+					String year2 = rs.getString(3);
+					if ((branch.equals(branch2)) && (year.equals(year2)) && (quarter.equals(quarter2))) {
+						rs.close();
+						return false;
+					}
+				}
+				rs.close();
+				return true;
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static MyFile downloadFile(String branch, String quarter, String year) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("SELECT upload_file FROM reports WHERE homebranch= '" + branch
+						+ "' AND quarter= '" + quarter + "' AND year= '" + year + "';");
+				ResultSet rs = stmt.executeQuery();
+				if (rs != null) {
+					MyFile downloadFile = new MyFile("");
+					downloadFile.setHomebranch(homeBranches.toHomeBranchType(branch));
+					downloadFile.setQuertar(quarter);
+					downloadFile.setYear(year);
+					downloadFile.setFileName(rs.getString(4));
+					Blob fileData = rs.getBlob(5);
+					downloadFile.initArray((int) fileData.length());
+					downloadFile.setSize((int) fileData.length());
+					downloadFile.setMybytearray(fileData.getBytes(0, (int) fileData.length()));
+					downloadFile.setDate(new java.sql.Timestamp(new Date().getTime()).toString());
+
+					rs.close();
+					return downloadFile;
+				} else {
+					return null;
+				}
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return null;
+
+	}
+
+	/*
+	 * public static User IDcheck(String ID) { PreparedStatement stmt; try { if
+	 * (DBConnect.conn != null) { stmt =
+	 * DBConnect.conn.prepareStatement("SELECT * FROM users WHERE ID= '" + ID + "'"
+	 * + "'  ;"); ResultSet rs = stmt.executeQuery(); if (rs != null) { User user =
+	 * new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
+	 * homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1),
+	 * rs.getString(2), rs.getString(9)); user.setEmail(rs.getString(7));
+	 * user.setPhone(rs.getString(8)); rs.close(); return user; } else { return
+	 * null; } } } catch (SQLException s) { s.printStackTrace(); } return null; }
+	 */
 
 	public static ArrayList<Order> LoadOrders() {
 		ArrayList<Order> orders = new ArrayList<>();
@@ -557,13 +627,13 @@ public class Query {
 				for (int i = 0; i < restaurants.size(); i++) {
 					String rsID = restaurants.get(i).getRestCode();
 					Statement stmt2 = DBConnect.conn.createStatement();
-					ResultSet rs2 = stmt2.executeQuery("SELECT * FROM bitemedb.order WHERE orderStatus='done' AND rstID='" + rsID + "' ;");
+					ResultSet rs2 = stmt2.executeQuery(
+							"SELECT * FROM bitemedb.order WHERE orderStatus='done' AND rstID='" + rsID + "' ;");
 					while (rs2.next()) {
 						String[] monthYear = rs2.getString(7).split("-");
 						if (Year.equals(monthYear[0]) && Month.equals(monthYear[1])) {
 							Order order = new Order(rs2.getString(2), rs2.getString(3), rs2.getString(6),
-									rs2.getString(7), null, rs2.getString(7), rs2.getString(9),
-									rs2.getFloat(4));
+									rs2.getString(7), null, rs2.getString(7), rs2.getString(9), rs2.getFloat(4));
 							Revenuereport.addToData(order);
 						}
 					}

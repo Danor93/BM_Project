@@ -19,7 +19,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class CEOScreenController extends BranchManagerScreenController implements ControllerInterface, Initializable {
+/**
+ * 
+ * @author Lior
+ *
+ */
+
+public class CEOScreenController extends Controller implements ControllerInterface, Initializable {
+
 	@FXML
 	private ResourceBundle resources;
 
@@ -27,22 +34,16 @@ public class CEOScreenController extends BranchManagerScreenController implement
 	private URL location;
 
 	@FXML
-	private Button btnConfirmEmployerRegistration;
-
-	@FXML
-	private Button btnOpenNewAccount;
-
-	@FXML
-	private Button btnConfirmSupplierRegistration;
-
-	@FXML
-	private Button btnUploadPDF;
+	private Button btnDownloadQuarterlyReport;
 
 	@FXML
 	private Button btnViewBranchsReports;
 
 	@FXML
-	private Button btnCreateOrder;
+	private Button btnViewRevenueReport;
+
+	@FXML
+	private Button btnLogout;
 
 	@FXML
 	private ImageView BackImage;
@@ -51,6 +52,26 @@ public class CEOScreenController extends BranchManagerScreenController implement
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
 		startScreen(event, "LoginScreen", "Login");
+	}
+
+	@FXML
+	void ViewBranchManagerReport(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerChooseReportToView", "View Report");
+	}
+	
+	@FXML
+	void revenueReport(ActionEvent event) throws IOException {
+		startScreen(event, "BarChartRevenueReport", "Revenue Report");
+	}
+
+	@FXML
+	void downloadQuarterlyReport(ActionEvent event) throws IOException {
+		Stage stage = new Stage();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/CEODownloadQuarterlyReport.fxml"));
+		Parent root = load.load();
+		CEODownloadQuarterlyReportController aFrame = load.getController();
+		aFrame.start(stage, root);
+
 	}
 
 	@Override

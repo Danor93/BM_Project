@@ -8,6 +8,7 @@ import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.MyFile;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Restaurant;
@@ -35,11 +36,11 @@ import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.BranchManagerScreenController;
 import client.controllers.BranchManagerUploadPDFController;
+import client.controllers.CEODownloadQuarterlyReportController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
-
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
@@ -58,7 +59,7 @@ public class Parsing {
 					LoginScreenController.LoginFlag = true;
 					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-				
+
 				}
 			}
 			break;
@@ -78,31 +79,27 @@ public class Parsing {
 			RestListFormController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
-		
 
-		case IdentifyW4c:{
-			IdentifyW4cController.client=(Client) receivedMessage.getMessageData();
+		case IdentifyW4c: {
+			IdentifyW4cController.client = (Client) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case getRefundDetails:{
-			ShowOrderController.refund=(String) receivedMessage.getMessageData();		
+
+		case getRefundDetails: {
+			ShowOrderController.refund = (String) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case InsertOrder:
-		{
-			ShowOrderController.finalOrder.setOrderNum((Integer)receivedMessage.getMessageData());
-			//SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
+
+		case InsertOrder: {
+			ShowOrderController.finalOrder.setOrderNum((Integer) receivedMessage.getMessageData());
+			// SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
-		
-		case InsertDishesOrder:
-		{
-			OrderConfimController.isSuccess=(String)receivedMessage.getMessageData();
+
+		case InsertDishesOrder: {
+			OrderConfimController.isSuccess = (String) receivedMessage.getMessageData();
 			break;
 		}
-		
 
 		case Disconected: {
 			break;
@@ -163,24 +160,24 @@ public class Parsing {
 			BranchManagerOpenNewBussinessAccountController.AprrovedFlag = false;
 			break;
 		}
-		
-		case Baccount_details_not_ok:{
-			BranchManagerOpenNewBussinessAccountController.Checkdeatils=false;
+
+		case Baccount_details_not_ok: {
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils = false;
 			break;
 		}
 
 		case ConfirmOpenNewBusinessAccount: {
-			BranchManagerOpenNewBussinessAccountController.Checkdeatils=true;
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils = true;
 			break;
 		}
-		
-		case PAccount_details_not_ok:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=false;
+
+		case PAccount_details_not_ok: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = false;
 			break;
 		}
-		
-		case ConfirmOpenNewPrivateAccount:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true;
+
+		case ConfirmOpenNewPrivateAccount: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
 			break;
 		}
 
@@ -242,15 +239,16 @@ public class Parsing {
 		}
 
 		case businessAccountsTracking: {
-			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
+			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage
+					.getMessageData();
 			break;
 		}
-		
-		case send_Revenue_Report:{
+
+		case send_Revenue_Report: {
 			BranchManagerChooseReportToViewController.revenueReport = (RevenueReport) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		case changed_BusinessAccount_status_to_Approved_succ: {
 
 		}
@@ -258,9 +256,21 @@ public class Parsing {
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
 
 		}
-		
-		
 
+		case DownloadFileDetails_ok: {
+			CEODownloadQuarterlyReportController.branchAndQuarterlyAndYearFlaf = true;
+			break;
+		}
+
+		case DownloadFileDetails_not_ok: {
+			CEODownloadQuarterlyReportController.branchAndQuarterlyAndYearFlaf = false;
+			break;
+		}
+
+		case download_pdf_succ: {
+			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
+			break;
+		}
 
 		default: {
 			break;

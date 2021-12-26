@@ -231,6 +231,22 @@ public class Parsing {
 			Query.updateFile(file);
 			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
 		}
+		
+		case checkDownloadFileDetails: {
+			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
+			if ((Query.checkBranchAndQuarterAndYear(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2])) == true) {
+				return messageFromServer = new Message(MessageType.DownloadFileDetails_ok, null);
+			} else {
+				return messageFromServer = new Message(MessageType.DownloadFileDetails_not_ok, null);
+			}
+		}
+
+		case downloadPDF: {
+			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
+			MyFile file = Query.downloadFile(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2]);
+			messageFromServer = new Message(MessageType.download_pdf_succ, file);
+			return messageFromServer;
+		}
 
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn(result2);

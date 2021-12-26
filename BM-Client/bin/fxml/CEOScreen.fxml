@@ -20,20 +20,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Label layoutX="282.0" layoutY="53.0" text="CEO page" textFill="WHITE">
+      <Label layoutX="235.0" layoutY="100.0" text="CEO page" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnConfirmEmployerRegistration" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#ConfirmEmployerReg" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm employer registration" />
-      <Button fx:id="btnOpenNewAccount" layoutX="10.0" layoutY="229.0" mnemonicParsing="false" onAction="#OpenNewAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="open new account" />
-      <Button fx:id="btnConfirmSupplierRegistration" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" onAction="#ConfirmSupplierReg" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="confirm supplier registration" />
-      <Button fx:id="btnUploadPDF" layoutX="364.0" layoutY="120.0" mnemonicParsing="false" onAction="#UploadPDF" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="upload PDF quarterly report" />
-      <Button fx:id="btnViewBranchsReports" layoutX="10.0" layoutY="284.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="view branch's reports" />
-      <Button fx:id="btnUploadPDF1" layoutX="364.0" layoutY="198.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Create order" />
-      <Button fx:id="btnBack" layoutX="28.0" layoutY="439.0" mnemonicParsing="false" onAction="#Back" text="Back">
+      <Button fx:id="btnViewRevenueReport" layoutX="348.0" layoutY="185.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="View Revenue Report" />
+      <Button fx:id="btnViewBranchsReports" layoutX="92.0" layoutY="185.0" mnemonicParsing="false" onAction="#ViewBranchManagerReport" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="View Branch's Reports" />
+      <Button fx:id="btnLogout" layoutX="28.0" layoutY="439.0" mnemonicParsing="false" onAction="#Back" text="Logout">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
+      <Button fx:id="btnDownloadQuarterlyReport" layoutX="225.0" layoutY="276.0" mnemonicParsing="false" onAction="#downloadQuarterlyReport" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Download Quarterly Report" />
    </children>
 </Pane>

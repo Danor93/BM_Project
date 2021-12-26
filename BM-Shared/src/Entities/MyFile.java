@@ -1,6 +1,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 public class MyFile implements Serializable {
 
@@ -12,7 +13,7 @@ public class MyFile implements Serializable {
 	private String date;
 	private String year;
 	private homeBranches homebranch;
-	
+
 	
 	public String getYear() {
 		return year;
