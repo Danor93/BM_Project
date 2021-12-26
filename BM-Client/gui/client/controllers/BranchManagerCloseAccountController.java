@@ -78,7 +78,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
     /*load account for the combo box*/
     public void loadAccounts(ArrayList<User> Users) {
     	for(User u:Users) {
-    		AccountComboBox.getItems().add(u.getUserName());
+    		AccountComboBox.getItems().add(u.getFirstN());
     	}
     }
 
