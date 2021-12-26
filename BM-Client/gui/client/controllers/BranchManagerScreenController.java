@@ -128,4 +128,10 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

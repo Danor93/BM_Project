@@ -123,4 +123,10 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DeliveryOrPickupController">
+   <children>
+      <Text fill="WHITE" layoutX="660.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Label layoutX="75.0" layoutY="48.0" text="Create Order" textFill="#f6c3c3">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="time" layoutX="427.0" layoutY="155.0" prefHeight="25.0" prefWidth="122.0" />
+      <Text fill="#fbbbbb" layoutX="41.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Before payment, Please specify the required time for your order ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="date" layoutX="89.0" layoutY="155.0" onAction="#chooseDate" />
+      <Text fill="WHITE" layoutX="41.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="379.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="takeAway" fitHeight="111.0" fitWidth="99.0" layoutX="160.0" layoutY="352.0" onMouseClicked="#chooseTakeAway" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../שיטות-חלק%203/pictures/takeAway.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="delivery" fitHeight="129.0" fitWidth="99.0" layoutX="421.0" layoutY="352.0" onMouseClicked="#chooseDelivery" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../שיטות-חלק%203/pictures/delivery-man.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="#f4b2b2" layoutX="38.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose the way you'd like to except your food :">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="180.0" layoutY="453.0" text="Take Away" textFill="#ffb5b5">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="446.0" layoutY="454.0" text="Delivery" textFill="#ffb5b5">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="23.0" layoutY="497.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="notify" alignment="CENTER" layoutX="-1.0" layoutY="207.0" prefHeight="17.0" prefWidth="718.0" textAlignment="CENTER" textFill="#fd0000">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="bussLabel" disable="true" layoutX="41.0" layoutY="227.0" prefHeight="27.0" prefWidth="194.0" text="* Paying with Bussiness card?" textFill="#fbbbbb" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="yes" disable="true" layoutX="264.0" layoutY="232.0" mnemonicParsing="false" onAction="#chooseYes" text="Yes" textFill="WHITE" visible="false" />
+      <CheckBox fx:id="no" disable="true" layoutX="350.0" layoutY="233.0" mnemonicParsing="false" onAction="#chooseNo" text="No" textFill="WHITE" visible="false" />
+   </children>
+</Pane>

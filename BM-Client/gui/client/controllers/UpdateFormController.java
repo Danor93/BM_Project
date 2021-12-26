@@ -87,5 +87,11 @@ public class UpdateFormController extends Controller {
 
     }
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

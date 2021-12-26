@@ -139,4 +139,10 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
         assert txtMonthlyBillingCeiling != null : "fx:id=\"txtMonthlyBillingCeiling\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
         assert txtTelephone != null : "fx:id=\"txtTelephone\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

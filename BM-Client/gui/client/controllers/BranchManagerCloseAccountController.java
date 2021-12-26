@@ -89,4 +89,10 @@ public class BranchManagerCloseAccountController extends Controller implements I
 		loadAccounts(Users);
 		ConfirmBtn.setDisable(true);
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

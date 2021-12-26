@@ -64,4 +64,10 @@ public class OpenNewAccountController extends Controller implements ControllerIn
 		startScreen(event, "BranchManagerScreen", "Branch Manager");
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

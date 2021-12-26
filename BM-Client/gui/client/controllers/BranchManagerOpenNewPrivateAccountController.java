@@ -126,4 +126,10 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 	public void initialize(URL location, ResourceBundle resources) {
 		ConfirmOpenNewPrivateAccountFlag = false;
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

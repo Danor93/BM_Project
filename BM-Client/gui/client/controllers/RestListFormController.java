@@ -8,25 +8,19 @@ import java.util.ResourceBundle;
 import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
-import Entities.Order;
 import Entities.Restaurant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import main.ChatClient;
 import main.ClientUI;
 
 
@@ -37,8 +31,15 @@ import main.ClientUI;
  */
 public class RestListFormController extends Controller implements Initializable {
 
-    @FXML
-    private Button backBtn;
+	@FXML
+	private ImageView BackImage;
+
+	@FXML
+	private Button backBtn;
+
+	@FXML
+	private Text cityName;
+
 
     @FXML
     private TableColumn<Restaurant, String> colAdd;
@@ -53,7 +54,14 @@ public class RestListFormController extends Controller implements Initializable 
     private Button nextbtn;
     
     @FXML
-    private Text cityName;
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+    
+
+    @FXML
+    private Text userName;
 
     @FXML
     private TableView<Restaurant> table;
@@ -65,14 +73,37 @@ public class RestListFormController extends Controller implements Initializable 
     
     public static Restaurant chosenRst;
     
+    
+	/** This method meant to get back to costumer page
+	 * @param event				pressing the "home" image 
+	 * @throws IOException
+	 */
+    @FXML
+    void backToHome(MouseEvent event) throws IOException {
+    	start(event, "CustomerScreen", "CustomerScreen","");
+    }
+    
+    
+	/** This method meant to get back to login page and logout the customer
+	 * @param event				pressing the "logout" button 
+	 * @throws IOException
+	 */
 
-    /**
-     * @param event
-     * @throws IOException
-     */
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		start(event, "LoginScreen", "Login","");
+    }
+    
+
+	/** This method meant to get back to choosing city
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
+
     @FXML
     void backToCity(ActionEvent event) throws IOException {
-		startScreen(event,"ChooseRestaurant","Choose restaurant");
+		start(event,"ChooseRestaurant","Choose city","");
 
     }
 
@@ -83,10 +114,6 @@ public class RestListFormController extends Controller implements Initializable 
      */
     @FXML
     void proceedToOrder(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
-		Parent root=load.load();
-		MenuScreenController aFrame = load.getController();
 		String supplier=table.getSelectionModel().getSelectedItem().getSupplierName();
 		if(supplier!=null)
 		{
@@ -101,28 +128,15 @@ public class RestListFormController extends Controller implements Initializable 
 					chosenRst=r;
 				
 			}
+			start(event,"MenuScreen","Restaurant's menu","");
+			
+			
 			
 
-			aFrame.display(supplier);
-			aFrame.start(primaryStage,root);
+			//aFrame.display(supplier,"");
+			//aFrame.start(primaryStage,root);
 		}
-		
-    	
-
     }
-		
-    
-
-	/**
-	 * @param stage
-	 * @param root
-	 */
-	public void start(Stage stage,Parent root) {
-			Scene scene = new Scene(root);			
-			stage.setTitle("BiteMe Choose Restaurant");
-			stage.setScene(scene);
-			stage.show();	
-	}
 
 	
 	/**This method is initializes the table with the restaurant in the wanted city  
@@ -145,7 +159,8 @@ public class RestListFormController extends Controller implements Initializable 
 	 */
 	public void display(String city) {
 		cityName.setText(city);
-		
+		userName.setText(LoginScreenController.user.getFirstN());
+
 	}
 
 }

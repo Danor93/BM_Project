@@ -233,4 +233,10 @@ public class AddDishToMenuController extends Controller implements Initializable
 	public void initialize(URL location, ResourceBundle resources) {
 		btnTypeDish.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

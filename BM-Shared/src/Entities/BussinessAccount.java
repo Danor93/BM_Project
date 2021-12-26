@@ -18,6 +18,13 @@ public class BussinessAccount extends Client implements Serializable {
 		businessAccountTracking = new BusinessAccountTracking(id, companyName, budget);
 	}
 
+	public BussinessAccount(String CompanyName,String w4c_private,String budget)
+	{
+		super(w4c_private);
+		this.CompanyName=CompanyName;
+		this.budget=budget;
+	}
+
 	public BusinessAccountTracking getBusinessAccountTracking() {
 		return this.businessAccountTracking;
 	}

@@ -133,4 +133,10 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 		btnRefuseSupplierRegistartion.setDisable(true);
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -90,4 +90,10 @@ public class BranchManagerFreezeAccountController extends Controller implements 
 		loadAccounts(Users);
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

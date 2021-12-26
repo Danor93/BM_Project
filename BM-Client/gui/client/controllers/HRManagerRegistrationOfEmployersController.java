@@ -84,4 +84,10 @@ public class HRManagerRegistrationOfEmployersController extends Controller {
 		assert mibiLabel != null
 				: "fx:id=\"mibiLabel\" was not injected: check your FXML file 'HRManagerRegistrationOfEmployers.fxml'.";
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
