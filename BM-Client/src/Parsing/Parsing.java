@@ -19,7 +19,7 @@ import Entities.User;
 import Entities.homeBranches;
 import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
-import client.controllers.BranchManagerFreezeAccountController;
+import client.controllers.BranchManagerChangePermissionsController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
 import client.controllers.DeliveryController;
@@ -203,17 +203,29 @@ public class Parsing {
 		}
 
 		case return_accounts_for_freeze: {
-			BranchManagerFreezeAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
+			BranchManagerChangePermissionsController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
 
-		case Account_Active: {
-			BranchManagerFreezeAccountController.FreezeAccount = false;
+		case Account_Status_Active:{
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if(status) {
+				BranchManagerChangePermissionsController.ActiveAccount=true;
+			}
+			else {
+				BranchManagerChangePermissionsController.ActiveAccount=false;
+			}
 			break;
 		}
-
-		case Account_Freeze: {
-			BranchManagerFreezeAccountController.FreezeAccount = true;
+		
+		case Account_Status_Freeze:{
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if(status) {
+				BranchManagerChangePermissionsController.FreezeAccount=true;
+			}
+			else {
+				BranchManagerChangePermissionsController.FreezeAccount=false;
+			}
 			break;
 		}
 
@@ -223,10 +235,11 @@ public class Parsing {
 		}
 
 		case changed_status_to_notApproved_succ: {
+			break;
 		}
 
 		case changed_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case RegistrationOfEmployer_succ: {
@@ -256,7 +269,7 @@ public class Parsing {
 		}
 
 		case Delete_Account_Succ: {
-
+			break;
 		}
 
 		case businessAccountsTracking: {
@@ -270,11 +283,11 @@ public class Parsing {
 		}
 		
 		case changed_BusinessAccount_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
-
+			break;
 		}
 		
 		

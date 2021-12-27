@@ -79,9 +79,9 @@
                <children>
                   <TableView fx:id="RevenueTable" prefHeight="632.0" prefWidth="624.0" visible="false">
                     <columns>
-                      <TableColumn fx:id="RestaurantCol" prefWidth="180.0" text="Restaurant " />
-                      <TableColumn fx:id="NumOfOrdersCol" minWidth="0.0" prefWidth="261.5999755859375" text="Number of Orders" />
-                        <TableColumn fx:id="IncomeCol" prefWidth="184.800048828125" text="Income" />
+                      <TableColumn fx:id="Restaurant" prefWidth="180.0" text="Restaurant " />
+                      <TableColumn fx:id="NumberOfOrders" minWidth="0.0" prefWidth="261.5999755859375" text="NumberOfOrders" />
+                        <TableColumn fx:id="Income" prefWidth="184.800048828125" text="Income" />
                     </columns>
                   </TableView>
                </children>
