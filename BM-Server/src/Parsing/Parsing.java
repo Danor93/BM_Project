@@ -196,7 +196,7 @@ public class Parsing {
 		}
 
 		case get_accounts_for_freeze: {
-			ArrayList<User> Users = Query.GetAccountForFreeze();
+			ArrayList<User> Users = Query.GetAccountForFreeze((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.return_accounts_for_freeze, Users);
 		}
 

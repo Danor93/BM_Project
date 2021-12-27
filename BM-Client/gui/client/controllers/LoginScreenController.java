@@ -59,7 +59,6 @@ public class LoginScreenController extends Controller {
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
-		mainevent = event;
 		String[] DivededUandP;
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());

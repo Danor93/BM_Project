@@ -412,11 +412,11 @@ public class Query {
 	}
 
 
-	public static ArrayList<User> GetAccountForFreeze() {
+	public static ArrayList<User> GetAccountForFreeze(String Branch) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' AND homeBranch='north'");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE homeBranch= '" + Branch + "' AND Role='Customer'");
 				ArrayList<User> users = new ArrayList<>();
 				while (rs.next()) {
 					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),

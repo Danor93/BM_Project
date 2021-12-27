@@ -138,7 +138,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ChangePermissions(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChangePermissions", "Freeze Account");
+		startScreen(event, "BranchManagerChangePermissions", "Change Permissions");
 	}
 
 	

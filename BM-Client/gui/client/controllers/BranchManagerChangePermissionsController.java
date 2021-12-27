@@ -115,7 +115,8 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.chat.accept(new Message(MessageType.get_accounts_for_freeze, null));
+		String Branch = LoginScreenController.user.getHomeBranch().toString();
+		ClientUI.chat.accept(new Message(MessageType.get_accounts_for_freeze, Branch));
 		ActiveAccount = false;
 		FreezeAccount = false;
 		ActiveBtn.setDisable(true);
