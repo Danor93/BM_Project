@@ -14,12 +14,12 @@
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DeliveryController">
    <children>
       <ImageView fitHeight="291.0" fitWidth="292.0" layoutX="375.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../שיטות-חלק%203/pictures/delivery.jpg" />
-         </image>
          <effect>
             <InnerShadow height="32.67" radius="13.89" width="24.89" />
          </effect>
+         <image>
+            <Image url="@/images/delivery.png" />
+         </image>
       </ImageView>
       <Text fill="WHITE" layoutX="660.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
@@ -96,8 +96,8 @@
          </font>
       </Label>
       <CheckBox fx:id="regular" layoutX="136.0" layoutY="356.0" mnemonicParsing="false" onAction="#chooseRegular" text="Regular" textFill="WHITE" />
-      <CheckBox fx:id="shared" layoutX="209.0" layoutY="357.0" mnemonicParsing="false" onAction="#chooseShared" text="Shared" textFill="WHITE" />
-      <CheckBox fx:id="robot" layoutX="281.0" layoutY="358.0" mnemonicParsing="false" onAction="#chooseRobot" text="By robot" textFill="WHITE" />
+      <CheckBox fx:id="shared" layoutX="214.0" layoutY="356.0" mnemonicParsing="false" onAction="#chooseShared" text="Shared" textFill="WHITE" />
+      <CheckBox fx:id="robot" layoutX="284.0" layoutY="356.0" mnemonicParsing="false" onAction="#chooseRobot" text="By robot" textFill="WHITE" />
       <Label fx:id="notifyAdd" layoutX="140.0" layoutY="160.0" prefHeight="17.0" prefWidth="150.0" textFill="#f80202" />
       <Label fx:id="notifyCity" layoutX="138.0" layoutY="209.0" prefHeight="17.0" prefWidth="180.0" textFill="#f80202" />
       <Label fx:id="notifyName" layoutX="140.0" layoutY="269.0" prefHeight="17.0" prefWidth="150.0" textFill="#f80202" />

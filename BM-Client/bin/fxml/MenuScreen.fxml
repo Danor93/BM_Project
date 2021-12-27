@@ -21,25 +21,37 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <ImageView fx:id="starters" fitHeight="142.0" fitWidth="144.0" layoutX="114.0" layoutY="109.0" onMouseClicked="#showStarters" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="starters" fitHeight="142.0" fitWidth="144.0" layoutX="114.0" layoutY="109.0" onMouseClicked="#showStarters" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/starter.jpg" />
+         </image></ImageView>
       <Text layoutX="152.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Starters">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ImageView fx:id="salads" fitHeight="142.0" fitWidth="150.0" layoutX="276.0" layoutY="110.0" onMouseClicked="#showSalads" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="salads" fitHeight="142.0" fitWidth="150.0" layoutX="276.0" layoutY="110.0" onMouseClicked="#showSalads" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/salad2.jpg" />
+         </image></ImageView>
       <Text layoutX="325.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salads">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ImageView fx:id="main" fitHeight="142.0" fitWidth="144.0" layoutX="451.0" layoutY="112.0" onMouseClicked="#showMainDishes" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="main" fitHeight="142.0" fitWidth="144.0" layoutX="451.0" layoutY="112.0" onMouseClicked="#showMainDishes" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/main.dish.jpg" />
+         </image></ImageView>
       <Text layoutX="474.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Main Dishes">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ImageView fx:id="desserts" fitHeight="142.0" fitWidth="150.0" layoutX="107.0" layoutY="321.0" onMouseClicked="#showDesserts" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="desserts" fitHeight="142.0" fitWidth="150.0" layoutX="107.0" layoutY="321.0" onMouseClicked="#showDesserts" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/dessert2.png" />
+         </image></ImageView>
       <Text layoutX="144.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desserts">
          <font>
             <Font name="System Bold" size="17.0" />
@@ -50,8 +62,14 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <ImageView fx:id="drinks" fitHeight="142.0" fitWidth="150.0" layoutX="276.0" layoutY="321.0" onMouseClicked="#showDrinks" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="order" fitHeight="121.0" fitWidth="125.0" layoutX="462.0" layoutY="324.0" onMouseClicked="#orderNow" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="drinks" fitHeight="142.0" fitWidth="150.0" layoutX="276.0" layoutY="321.0" onMouseClicked="#showDrinks" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/drink.jpg" />
+         </image></ImageView>
+      <ImageView fx:id="order" fitHeight="121.0" fitWidth="125.0" layoutX="462.0" layoutY="324.0" onMouseClicked="#orderNow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/cart.png" />
+         </image></ImageView>
       <Text fx:id="dishAdded" fill="GREEN" layoutX="446.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -71,9 +89,8 @@
             </Text>
             <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="36.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
-               </image>
-            </ImageView>
+                  <Image url="@/images/home.png" />
+               </image></ImageView>
             <Button fx:id="back" layoutX="20.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
                <font>
                   <Font name="System Bold" size="14.0" />

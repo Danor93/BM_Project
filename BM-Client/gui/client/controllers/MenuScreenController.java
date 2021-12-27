@@ -1,5 +1,6 @@
 package client.controllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -251,12 +252,6 @@ public class MenuScreenController extends Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		/*setImage(desserts, "/Images/dessert2.jpg‬");
-		setImage(drinks, "/Images/drink.jpg‬");
-		setImage(salads, "/Images/salad2.jpg‬");
-		setImage(order, "/Images/showOrder.jpg");
-		setImage(starters,"/Images/starter.jpg‬");
-		setImage(main, "/Images/main.dish.jpg‬");*/
+		
 	}
-
 }

@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -53,11 +52,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="backBtn" layoutX="12.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
                <font>
                   <Font name="System Bold" size="14.0" />
