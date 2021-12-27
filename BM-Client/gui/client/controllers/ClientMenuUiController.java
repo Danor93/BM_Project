@@ -77,6 +77,12 @@ import main.ClientUI;
 
 	    }
 
+		@Override
+		public void display(String string) {
+			// TODO Auto-generated method stub
+			
+		}
+
 
 
 }

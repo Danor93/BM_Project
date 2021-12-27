@@ -289,5 +289,12 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 				: "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
 		assert main != null
 				: "fx:id=\"main\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
+
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

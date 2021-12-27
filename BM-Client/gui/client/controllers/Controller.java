@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -64,16 +65,64 @@ public abstract class  Controller  {
 	
 	public void start(ActionEvent event,String fxmlName,String title,String toDisplay) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/"+fxmlName+".fxml"));
 		Parent root=load.load();
 		Controller aFrame = load.getController();
-		//aFrame.display(toDisplay);
+		aFrame.display(toDisplay);
 		Scene scene = new Scene(root);			
-		stage.setTitle("BiteMe" + " " + title);
-		stage.setScene(scene);
-		stage.show();		
+		primaryStage.setTitle("BiteMe" + " " + title);
+		primaryStage.setScene(scene);
+		primaryStage.show();	
+		
+		if (!(fxmlName.equals("LoginScreen"))) {
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+				@Override
+				public void handle(WindowEvent event) {
+					event.consume();
+					boolean ans = PopUpMessage.confirmDialog("Do you want to logout and exit from system?",
+							primaryStage);
+					if (ans) {
+						ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+						primaryStage.close();
+					}
+				}
+
+			});
+		}
 	}
 	
-	//public abstract void display(String string);
+	public void start(MouseEvent event,String fxmlName,String title,String toDisplay) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide();
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/"+fxmlName+".fxml"));
+		Parent root=load.load();
+		Controller aFrame = load.getController();
+		aFrame.display(toDisplay);
+		Scene scene = new Scene(root);			
+		primaryStage.setTitle("BiteMe" + " " + title);
+		primaryStage.setScene(scene);
+		primaryStage.show();	
+		
+		if (!(fxmlName.equals("LoginScreen"))) {
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+				@Override
+				public void handle(WindowEvent event) {
+					event.consume();
+					boolean ans = PopUpMessage.confirmDialog("Do you want to logout and exit from system?",
+							primaryStage);
+					if (ans) {
+						ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+						primaryStage.close();
+					}
+				}
+
+			});
+		}
+	}
+
+	
+	public abstract void display(String string);
 }

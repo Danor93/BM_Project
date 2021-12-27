@@ -250,4 +250,10 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	public void initialize(URL location, ResourceBundle resources) {
 		btnDishType.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

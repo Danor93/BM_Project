@@ -4,6 +4,7 @@ package Parsing;
 import java.util.ArrayList;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
@@ -30,6 +31,7 @@ import client.controllers.ConfirmEmployerRegController;
 import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.ConfirmSupplierRegController;
+import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
 import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
@@ -39,6 +41,7 @@ import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
+
 
 
 public class Parsing {
@@ -79,6 +82,13 @@ public class Parsing {
 			break;
 		}
 		
+		case ClientConfirm:
+		{
+			CustomerScreenController.orderConfirm=(ArrayList<Order>) receivedMessage.getMessageData();
+			break;
+		}
+
+		
 
 		case IdentifyW4c:{
 			IdentifyW4cController.client=(Client) receivedMessage.getMessageData();
@@ -93,7 +103,6 @@ public class Parsing {
 		case InsertOrder:
 		{
 			ShowOrderController.finalOrder.setOrderNum((Integer)receivedMessage.getMessageData());
-			//SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
 		
@@ -103,6 +112,15 @@ public class Parsing {
 			break;
 		}
 		
+		case InsertDelivery:
+		{
+			break;
+		}
+		
+		case orderDone:
+		{
+			break;
+		}
 
 		case Disconected: {
 			break;

@@ -73,4 +73,10 @@ public class UpdateMenuScreenController extends Controller {
 				: "fx:id=\"btnDeleteOrUpdateDish\" was not injected: check your FXML file 'UpdateMenuScreen.fxml'.";
 
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -3,48 +3,64 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="651.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.IdentifyW4cController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="653.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.IdentifyW4cController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="537.0" fitWidth="661.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="532.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fx:id="BackImage" fitHeight="524.0" fitWidth="626.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="576.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Label layoutX="55.0" layoutY="65.0" text="Create order" textFill="WHITE">
+      <Label layoutX="111.0" layoutY="65.0" text="Insert code:">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Text fill="WHITE" layoutX="14.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You must fill in at least one of the following fields :">
+      <Text layoutX="113.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In order to proceed please enter your W4C code or use the QR scanner :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="w4cManually" layoutX="81.0" layoutY="174.0" prefHeight="25.0" prefWidth="172.0" promptText="Enter W4C code manually" />
-      <Button fx:id="confirmBtn" layoutX="151.0" layoutY="260.0" mnemonicParsing="false" onAction="#confirm" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+      <TextField fx:id="w4cManually" layoutX="139.0" layoutY="178.0" prefHeight="33.0" prefWidth="191.0" promptText="Enter W4C code manually" />
+      <Button fx:id="confirmBtn" layoutX="356.0" layoutY="173.0" mnemonicParsing="false" onAction="#confirm" prefHeight="47.0" prefWidth="148.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="Confirm">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="QR" layoutX="28.0" layoutY="244.0" mnemonicParsing="false" onAction="#getW4cFromQR" prefHeight="83.0" prefWidth="105.0" text="use QR scanner">
+      <Button fx:id="QR" layoutX="356.0" layoutY="250.0" mnemonicParsing="false" onAction="#getW4cFromQR" prefHeight="47.0" prefWidth="148.0" style="-fx-border-color: black; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 2;" text="use QR scanner">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Label fx:id="allertLbl" layoutX="59.0" layoutY="217.0" prefHeight="17.0" prefWidth="211.0" textAlignment="CENTER" textFill="#f60202" />
-      <Button fx:id="back" layoutX="25.0" layoutY="459.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
+      <Label fx:id="allertLbl" layoutX="111.0" layoutY="229.0" prefHeight="17.0" prefWidth="248.0" textAlignment="CENTER" textFill="#f60202" />
+      <AnchorPane layoutX="-7.0" prefHeight="531.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

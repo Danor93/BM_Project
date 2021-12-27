@@ -149,4 +149,10 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 
     }
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

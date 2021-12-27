@@ -77,7 +77,8 @@ public class LoginScreenController extends Controller {
 					startScreen(event, "BranchManagerScreen", "Branch Manager");
 
 				} else if (user.getRole().equals("Customer")) {
-					startScreen(event, "CustomerScreen", "Customer");
+					start(event, "CustomerScreen", "CustomerScreen",user.getFirstN());
+					
 				} else if (user.getRole().equals("CEO")) {
 					startScreen(event, "CEOScreen", "CEO");
 				} else if (user.getRole().equals("Supplier")) {
@@ -103,5 +104,11 @@ public class LoginScreenController extends Controller {
 	@FXML
 	void getUserName(InputMethodEvent event) {
 
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

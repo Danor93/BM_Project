@@ -142,4 +142,10 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		btnRefuseEmployerRegistartion.setDisable(true);
 		
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

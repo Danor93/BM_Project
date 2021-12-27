@@ -124,4 +124,10 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 		loadAccounts(Users);
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

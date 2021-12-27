@@ -14,6 +14,7 @@ import java.util.IllegalFormatPrecisionException;
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
 import Entities.Dish;
 import Entities.DishType;
 import Entities.Employer;
@@ -46,6 +47,8 @@ public class Parsing {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
+		
+	
 
 		case Update_Orders: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split("@");
@@ -72,11 +75,14 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-
-			for (String s : city) {
-				System.out.println(s);
-			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
+			return messageFromServer;
+		}
+		
+		case ClientConfirm:
+		{
+			ArrayList<Order> orders=queries.ConfirmClient((String)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.ClientConfirm, orders);
 			return messageFromServer;
 		}
 
@@ -109,8 +115,21 @@ public class Parsing {
 		case InsertDishesOrder:
 		{
 			String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
-			//String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.InsertDishesOrder,insert);
+			return messageFromServer;
+		}
+		
+		case InsertDelivery:
+		{
+			String insert=queries.insertDelivery((Delivery)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDelivery,insert);
+			return messageFromServer;
+		}
+		
+		case orderDone:
+		{
+			String checkRef=queries.checkRefund((Order)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDelivery,checkRef);
 			return messageFromServer;
 		}
 

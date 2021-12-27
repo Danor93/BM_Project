@@ -74,6 +74,8 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	public ArrayList<Dish> dishListOfType;
 	public static Dish chosenDish;
 	public static int quentity=1;
+	String selectedDish;
+	float priceDish;
 
     @FXML
     void addDishToOrder(ActionEvent event) throws IOException 
@@ -102,11 +104,21 @@ public class ChoosingDishesController extends Controller implements Initializabl
         	
         	else
         	{
-        		chosenDish.setRestCode(RestListFormController.chosenRst.getRestCode());
-        		chosenDish.setQuentity(quentity);
-        		SingletonOrder.getInstance().myOrder.add(chosenDish);
-        		notify.setFill(Color.GREEN);
-        		notify.setText("The dish was successfully added to your order");
+        		Dish dish=new Dish(chosenDish.getDishName(),chosenDish.getSupplierName(),chosenDish.getChoiceFactor(),null,chosenDish.getIngredients(),null,chosenDish.getPrice(),chosenDish.getDishType());
+        		dish.setRestCode(RestListFormController.chosenRst.getRestCode());
+        		dish.setQuentity(quentity);
+        		SingletonOrder.getInstance().myOrder.add(dish);
+        		
+        		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
+        		Parent root=load.load();
+        		MenuScreenController aFrame = load.getController();
+        		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"The dish was successfully added to your order");
+        		aFrame.display("The dish was successfully added to your order");
+
+        		aFrame.start(primaryStage,root);
+    
+        		
         	}
     	}
     }
@@ -117,7 +129,8 @@ public class ChoosingDishesController extends Controller implements Initializabl
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
 		Parent root=load.load();
 		MenuScreenController aFrame = load.getController();
-		aFrame.display(RestListFormController.chosenRst.getSupplierName());
+		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"");
+		aFrame.display("");
 		aFrame.start(primaryStage,root);
 
     }
@@ -128,14 +141,19 @@ public class ChoosingDishesController extends Controller implements Initializabl
     	quantity.setText("1");
     	quentity=1;
     	String s="price : ";
-    	String selectedDish =list.getSelectionModel().getSelectedItem();
-    	int indexOfDish=dishNames.indexOf(selectedDish);
-    	ingPane.setVisible(true);
-    	dishLbl.setText(selectedDish);
-    	price.setText(s+dishListOfType.get(indexOfDish).getPrice()+"$");
-    	ingredients.setText(dishListOfType.get(indexOfDish).getIngredients());
-    	minus.setDisable(false);
-    	plus.setDisable(false);
+    	selectedDish =list.getSelectionModel().getSelectedItem();
+    	if(selectedDish!=null)
+    	{
+    		int indexOfDish=dishNames.indexOf(selectedDish);
+        	ingPane.setVisible(true);
+        	dishLbl.setText(selectedDish);
+        	priceDish=dishListOfType.get(indexOfDish).getPrice();
+        	price.setText(s+priceDish+"$");
+        	ingredients.setText(dishListOfType.get(indexOfDish).getIngredients());
+        	minus.setDisable(false);
+        	plus.setDisable(false);
+    	}
+    	
 
     }
     
@@ -145,7 +163,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
     		quentity--;
     	
     	quantity.setText(""+quentity);
-    	
+    	price.setText("price : "+priceDish*quentity+"$");
 
     }
     
@@ -154,6 +172,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
     void incQuentity(ActionEvent event) {
     	quentity++;
     	quantity.setText(""+quentity);
+    	price.setText("price : "+priceDish*quentity+"$");
     }
 
 
