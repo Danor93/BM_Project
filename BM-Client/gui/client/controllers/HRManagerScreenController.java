@@ -2,8 +2,11 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
+import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -14,6 +17,10 @@ import javafx.scene.image.ImageView;
 import main.ClientUI;
 
 public class HRManagerScreenController extends Controller{
+	public static ArrayList<String> w4cBusiness = new ArrayList<String>();
+	public static boolean RegistrationFlag = false;
+	private boolean RandomSuccess = false;
+	private boolean marker = false;
 
     @FXML
     private ResourceBundle resources;
@@ -25,7 +32,7 @@ public class HRManagerScreenController extends Controller{
     private ImageView BackImage;
 
     @FXML
-    private Button btnRegistrationOfEmployers;
+    private Button btnRegistrationOfEmploye;
 
     @FXML
     private Button btnConfirmationOfOpeningABusinessAccount;
@@ -48,14 +55,37 @@ public class HRManagerScreenController extends Controller{
     }
 
     @FXML
-    void RegistrationOfEmployers(ActionEvent event) throws IOException {
-		startScreen(event, "HRManagerRegistrationOfEmployers", "RegistrationOfEmployers");
+    void RegistrationOfEmploye(ActionEvent event) throws IOException {
+		String w4cNew=null;
+		ClientUI.chat.accept(new Message(MessageType.getAllW4CBusiness, null));
+		while (RandomSuccess == false) {
+			Random rand = new Random(); // instance of random class
+			int int_random = rand.nextInt(1000);
+			w4cNew = "B"+String.valueOf(int_random);
+			for (String s : w4cBusiness) {
+				if (w4cNew.equals(s)) {
+					marker = true;
+				}
+			}
+			if (marker == false)
+				RandomSuccess = true;
+		}
+		RandomSuccess = false;
+
+		Employer employer = new Employer(w4cNew, LoginScreenController.fullCompanyName, "Waiting");
+		ClientUI.chat.accept(new Message(MessageType.RegistrationOfEmployer, employer));
+		if (RegistrationFlag) {
+			ExistLbl.setText("Registration succeeded");
+			System.out.println(employer.getCompanyName() + " " + employer.getW4cBussines());
+		} else {
+			ExistLbl.setText("Registration failed! The employe already signed");
+		}
     }
 
     @FXML
     void initialize() {
         assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
-        assert btnRegistrationOfEmployers != null : "fx:id=\"btnRegistrationOfEmployers\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
+        assert btnRegistrationOfEmploye != null : "fx:id=\"btnRegistrationOfEmployers\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
         assert btnConfirmationOfOpeningABusinessAccount != null : "fx:id=\"btnConfirmationOfOpeningABusinessAccount\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
         assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";

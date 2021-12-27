@@ -36,7 +36,6 @@ import querys.queries;
 import querys.showCities;
 import querys.showRestaurants;
 
-
 public class Parsing {
 	public static String result2;
 
@@ -62,9 +61,9 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.login, result);
 			return messageFromServer;
 		}
-		
+
 		case IdentifyW4c: {
-			Client costumer=queries.checkAccountKind((String) receivedMessage.getMessageData());
+			Client costumer = queries.checkAccountKind((String) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 			return messageFromServer;
 		}
@@ -87,29 +86,28 @@ public class Parsing {
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 			return messageFromServer;
 		}
-		
-		case getRefundDetails:{
-			String refundSum=queries.getRefundSum((Order)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.getRefundDetails,refundSum);
+
+		case getRefundDetails: {
+			String refundSum = queries.getRefundSum((Order) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.getRefundDetails, refundSum);
 			return messageFromServer;
 		}
-		
-		case InsertOrder:
-		{
-			Integer insert=queries.insertOrder((Order)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertOrder,insert);
+
+		case InsertOrder: {
+			Integer insert = queries.insertOrder((Order) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertOrder, insert);
 			return messageFromServer;
 		}
-		
-		case InsertDishesOrder:
-		{
-			String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
-			//String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertDishesOrder,insert);
+
+		case InsertDishesOrder: {
+			String insert = queries.insertDishesOrder((ArrayList<Dish>) receivedMessage.getMessageData());
+			// String
+			// insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDishesOrder, insert);
 			return messageFromServer;
 		}
 
@@ -117,6 +115,8 @@ public class Parsing {
 			System.out.println(receivedMessage.getMessageData());
 			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.Dish_add_succ, null);
+			} else {
+				return messageFromServer = new Message(MessageType.dish_add_fail, null);
 			}
 		}
 
@@ -172,25 +172,23 @@ public class Parsing {
 			}
 			return messageFromServer;
 		}
-		
-		case check_Baccount_details:{
+
+		case check_Baccount_details: {
 			BussinessAccount BAccount = (BussinessAccount) receivedMessage.getMessageData();
-			if((Query.checkAccountDetails(BAccount))==true) {
+			if ((Query.checkAccountDetails(BAccount)) == true) {
 				Query.addNewBAccount(BAccount);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.Baccount_details_not_ok, null);
 			}
 		}
-		
-		case check_PAccount_details:{
+
+		case check_PAccount_details: {
 			Client Pclient = (Client) receivedMessage.getMessageData();
-			if((Query.checkPrivateAccount(Pclient))==true) {
+			if ((Query.checkPrivateAccount(Pclient)) == true) {
 				Query.addNewPAccount(Pclient);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.PAccount_details_not_ok, null);
 			}
 		}
@@ -214,18 +212,17 @@ public class Parsing {
 			Query.UpdateAccountStatusToFreeze(AccountID);
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
 		}
-		
-		case check_year_and_quertar:{
+
+		case check_year_and_quertar: {
 			String[] Divededyandq = ((String) receivedMessage.getMessageData()).split("@");
-			if((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1]))==true) {
+			if ((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1])) == true) {
 				return messageFromServer = new Message(MessageType.year_and_querter_ok, null);
-			}
-			else {
+			} else {
 				return messageFromServer = new Message(MessageType.year_and_querter_not_ok, null);
 			}
 		}
-		
-		case send_PDF:{
+
+		case send_PDF: {
 			MyFile file = (MyFile) receivedMessage.getMessageData();
 			DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 			LocalDateTime nowTime = LocalDateTime.now();
@@ -267,7 +264,7 @@ public class Parsing {
 			}
 			return messageFromServer;
 		}
-		
+
 		case deleteDish: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
@@ -275,13 +272,29 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
 		case get_orders_to_approve: {
-			ArrayList<Order> orders = Query.LoadOrders();
+			ArrayList<Order> orders = Query.LoadOrders((String) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.Orders_List, orders);
 			return messageFromServer;
 		}
-		
+
+		case Use_Refund: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.updateRefundAmmount((ArrayList<Order>) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.update_RefundTable, null);
+				return messageFromServer;
+			}
+		}
+
+		case Use_Budget: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.updateBudgetValue((ArrayList<Order>) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
+				return messageFromServer;
+			}
+		}
+
 		case Order_not_approved: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToNotApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
@@ -297,7 +310,27 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
+		case Order_sended: {
+			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
+			if (UpdateDB.updateOrderStatusSended((ArrayList<Order>) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
+				return messageFromServer;
+			}
+		}
+
+		case get_Phone_Number: {
+			String phoneNumber = Query.LoadPhoneNumber((ArrayList<Order>) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.set_Phone_number, phoneNumber);
+			return messageFromServer;
+		}
+
+		case getAllW4CBusiness: {
+			ArrayList<String> w4cBusiness = Query.LoadW4CBusiness();
+			messageFromServer = new Message(MessageType.W4C_Business_List, w4cBusiness);
+			return messageFromServer;
+		}
+
 		case RegistrationOfEmployer: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
@@ -308,28 +341,43 @@ public class Parsing {
 				return messageFromServer;
 			}
 		}
-		
+
+		case get_Company_Status: {
+			if (Query.LoadCompanyStatus((StringBuilder) receivedMessage.getMessageData())) {
+				messageFromServer = new Message(MessageType.Company_Status_Equale_To_Approved, null);
+				return messageFromServer;
+			} else {
+				messageFromServer = new Message(MessageType.Company_Status_Not_Equale_To_Approved, null);
+				return messageFromServer;
+			}
+		}
+
 		case get_business_account_details: {
-			ArrayList<BusinessAccountTracking> businessAccount = Query.LoadBusinessAccountDetails();
+			ArrayList<BusinessAccountTracking> businessAccount = Query
+					.LoadBusinessAccountDetails((StringBuilder) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
 			return messageFromServer;
 		}
-		
+
 		case update_status_approved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
-				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ, null);
+			if (UpdateDB.BusinessAccountStatusToApproved(
+					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
+						null);
 			}
 		}
 
 		case update_status_NotApproved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToNotApproved((ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
-				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ, null);	
+			if (UpdateDB.BusinessAccountStatusToNotApproved(
+					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
+						null);
 			}
+
 		}
 
-		
 		default: {
 			messageFromServer = new Message(MessageType.Error, null);
 			return messageFromServer;

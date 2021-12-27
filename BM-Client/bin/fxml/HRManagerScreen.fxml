@@ -20,7 +20,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="btnRegistrationOfEmployers" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" onAction="#RegistrationOfEmployers" prefHeight="47.0" prefWidth="194.0" style="-fx-background-radius: 30;" text="Registration of employers" />
+      <Button fx:id="btnRegistrationOfEmploye" layoutX="100.0" layoutY="150.0" mnemonicParsing="false" onAction="#RegistrationOfEmploye" prefHeight="47.0" prefWidth="194.0" style="-fx-background-radius: 30;" text="Registration of employe" />
       <Label layoutX="44.0" layoutY="77.0" text="HR Manager page" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -28,7 +28,7 @@
       </Label>
       <Button fx:id="btnConfirmationOfOpeningABusinessAccount" layoutX="56.0" layoutY="207.0" mnemonicParsing="false" onAction="#ConfirmationOfOpeningABusinessAccount" prefHeight="47.0" prefWidth="282.0" style="-fx-background-radius: 30;" text="Confirmation of opening a business account" />
       <Button fx:id="btnBack" layoutX="24.0" layoutY="468.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Label fx:id="ExistLbl" layoutX="268.0" layoutY="143.0" prefHeight="47.0" prefWidth="415.0" textFill="RED">
+      <Label fx:id="ExistLbl" layoutX="294.0" layoutY="150.0" prefHeight="47.0" prefWidth="415.0" textFill="RED">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>

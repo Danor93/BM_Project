@@ -35,7 +35,8 @@ public class LoginScreenController extends Controller {
 	public static String Name = null;
 	public static String ID = null;
 	public static ActionEvent mainevent;
-	public static String CompanyName = null;
+	public static StringBuilder CompanyName = null;
+	public static String fullCompanyName= null;
 
 	@FXML
 	private ResourceBundle resources;
@@ -88,7 +89,11 @@ public class LoginScreenController extends Controller {
 				} else {
 					DivededUandP = ((String) user.getRole()).split(" ");
 					if (DivededUandP[0].equals("HR")) {
-						CompanyName = DivededUandP[1];
+						CompanyName = new StringBuilder();
+						for (int i = 1; i < DivededUandP.length; i++)
+							CompanyName.append(DivededUandP[i] + " ");
+						CompanyName.deleteCharAt(CompanyName.length()-1);
+						fullCompanyName = String.valueOf(CompanyName);
 						startScreen(event, "HRManagerScreen", "HR Manager");
 					}
 				}

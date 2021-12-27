@@ -19,17 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import main.ClientUI;
+import main.PopUpMessage;
 
 public class AddDishToMenuController extends Controller implements Initializable {
-	private boolean clearNameFlag = false;
-	private boolean clearChoiceDetailsFlag = false;
-	private boolean clearPriceFlag = false;
-	private boolean clearInventoryFlag = false;
-	private boolean clearChoiceFactorFlag = false;
-	private boolean clearIngredientsFlag = false;
-	private boolean clearRemovableIngredientsFlag = false;
 	public static boolean indicator;// in case indicator=false then createMenu, if indicator=true then addNewDish
 	public static String TypeOfDish;
+	public static boolean dishAdd = false;
 
 	@FXML
 	private ResourceBundle resources;
@@ -48,9 +43,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	private TextField txtPriceDish;
-
-	@FXML
-	private TextField txtInventoryDish;
 
 	@FXML
 	private Button btnConfirm;
@@ -74,7 +66,14 @@ public class AddDishToMenuController extends Controller implements Initializable
 	private ComboBox<String> btnTypeDish;
 
 	@FXML
-	private TextArea txtIngredientsToRemove;
+	private TextArea txtExtra;
+
+	private boolean typeDishIsValid = true;
+	private boolean choiceDetailsIsValid = true;
+	private boolean choiceFactorIsValid = true;
+	private boolean continuedFlag = true;
+	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
+	private boolean ingredientsIsValid = true;
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
@@ -88,132 +87,103 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
-		Dish dish = new Dish(null, null, null, null, null, null, 0, 0, null);
+		Dish dish = new Dish(null, null, null, null, null, null, 0, null);
 		if (txtNameDish.getText().isEmpty())
 			txtMiniLabel.setText("Name must be invailed!");
 		else if (txtPriceDish.getText().isEmpty())
-			txtMiniLabel.setText("price must be invailed!");
-		else if (txtInventoryDish.getText().isEmpty())
-			txtMiniLabel.setText("Inventory must be invailed!");
+			txtMiniLabel.setText("Price must be invailed!");
+
 		else {
 			try {
 				Float price = Float.parseFloat(txtPriceDish.getText());
 			} catch (Exception e) {
-				txtMiniLabel.setText("The price must be invalid number");
+				txtMiniLabel.setText("Price must be invailed number!");
 				e.printStackTrace();
 			}
-			try {
-				Integer inventory = Integer.parseInt(txtInventoryDish.getText());
-			} catch (Exception e) {
-				txtMiniLabel.setText("The inventory must be invalid number");
-				e.printStackTrace();
-			}
-
-			System.out.println(TypeOfDish);
 			try {
 				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
-						Float.parseFloat(txtPriceDish.getText()), Integer.parseInt(txtInventoryDish.getText()),
-						DishType.toDishType(TypeOfDish));
+						Float.parseFloat(txtPriceDish.getText()), DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
-				txtMiniLabel.setText("type must be selected!");
 				e.printStackTrace();
+				typeDishIsValid = false;
 			}
-			dish.setRestCode(LoginScreenController.ID);
-			if (txtChoiceDish.getText().equals("example: Size"))
-				txtChoiceDish.setText("");
-			dish.setChoiceFactor(txtChoiceDish.getText());
-			if (txtChoiceDetailsDish.getText().equals("example: S/M/L"))
-				txtChoiceDetailsDish.setText("");
-			dish.setChoiceDetails(txtChoiceDetailsDish.getText());
-			if (txtIngredients.getText()
-					.equals("Put in the ingredients of the dish. \r\n"
-							+ "Example: lettuce, cucumber, tomato, tuna and black olives. \r\n"
-							+ "The salad is seasoned with parsley, olive oil and lemon."))
-				txtIngredients.setText("");
-			dish.setIngredients(txtIngredients.getText());
-			if (txtIngredientsToRemove.getText().equals("Insert the removable dish ingredients. \r\n"
-					+ "Example: cucumber, tomato, parsley, olive oil and lemon."))
-				txtChoiceDetailsDish.setText("");
-			dish.setExtra(txtIngredientsToRemove.getText());
-
-			System.out.println(dish);
-			CreateMenuScreenController.dishes.add(dish);
-			ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
-			startScreen(event, "AddDishToMenu", "Delete or Update dish");
-		}
-	}
-
-	@FXML
-	void clearName(MouseEvent event) {
-		if (clearNameFlag == false) {
-			txtNameDish.clear();
-			clearNameFlag = true;
-		}
-	}
-
-	@FXML
-	void clearPrice(MouseEvent event) {
-		if (clearPriceFlag == false) {
-			txtPriceDish.clear();
-			clearPriceFlag = true;
-		}
-	}
-
-	@FXML
-	void clearInventory(MouseEvent event) {
-		if (clearInventoryFlag == false) {
-			txtInventoryDish.clear();
-			clearInventoryFlag = true;
-		}
-	}
-
-	@FXML
-	void clearChoiceFactor(MouseEvent event) {
-		if (clearChoiceFactorFlag == false) {
-			txtChoiceDish.clear();
-			clearChoiceFactorFlag = true;
-		}
-	}
-
-	@FXML
-	void clearChoiceDetails(MouseEvent event) {
-		if (clearChoiceDetailsFlag == false) {
-			txtChoiceDetailsDish.clear();
-			clearChoiceDetailsFlag = true;
-		}
-	}
-
-	@FXML
-	void clearIngredients(MouseEvent event) {
-		if (clearIngredientsFlag == false) {
-			txtIngredients.clear();
-			clearIngredientsFlag = true;
-		}
-	}
-
-	@FXML
-	void clearRemovableIngredients(MouseEvent event) {
-		if (clearRemovableIngredientsFlag == false) {
-			txtIngredientsToRemove.clear();
-			clearRemovableIngredientsFlag = true;
+			if (typeDishIsValid == true) {
+				dish.setRestCode(LoginScreenController.ID);
+				if (txtChoiceDish.getText().isEmpty()) {
+					dish.setChoiceFactor("");
+					choiceFactorIsValid = false;
+					if (!txtChoiceDetailsDish.getText().isEmpty()) {
+						choiceDetailsWithoutChoiceFactorFlag = false;
+					}
+				} else {
+					dish.setChoiceFactor(txtChoiceDish.getText());
+				}
+				if (choiceDetailsWithoutChoiceFactorFlag) {
+					if (txtChoiceDetailsDish.getText().isEmpty()) {
+						if (choiceFactorIsValid) {
+							continuedFlag = false;
+						} else {
+							dish.setChoiceDetails("");
+						}
+					} else {
+						String[] choiceDetailsDish = ((String[]) txtChoiceDetailsDish.getText().split("/"));
+						if (choiceDetailsDish.length == 1) {
+							choiceDetailsIsValid = false;
+						} else
+							dish.setChoiceDetails(txtChoiceDetailsDish.getText());
+					}
+				}
+				if (continuedFlag) {
+					if (choiceDetailsIsValid) {
+						if (choiceDetailsWithoutChoiceFactorFlag) {
+							if (txtIngredients.getText().isEmpty())
+								ingredientsIsValid = false;
+							else
+								dish.setIngredients(txtIngredients.getText());
+							if (ingredientsIsValid) {
+								if (txtExtra.getText().isEmpty())
+									dish.setExtra("");
+								else
+									dish.setExtra(txtExtra.getText());
+								CreateMenuScreenController.dishes.add(dish);
+								ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
+								if (dishAdd == false) {
+									txtMiniLabel.setText("Update failed. This dish is already on the menu");
+								} else {
+									startScreen(event, "AddDishToMenu", "Delete or Update dish");
+								}
+							} else {
+								txtMiniLabel.setText("You must enter the ingredients of the dish");
+								ingredientsIsValid = true;
+							}
+						} else {
+							txtMiniLabel.setText(
+									"You cannot enter a value for the Choice details without entering a value for the Choice factor");
+							choiceDetailsWithoutChoiceFactorFlag = true;
+						}
+					} else {
+						txtMiniLabel.setText("You must separate the choice details by the character - '/'");
+						choiceDetailsIsValid = true;
+					}
+				} else {
+					txtMiniLabel.setText("If you entered a choice factor, you must also enter choice details");
+					continuedFlag = true;
+				}
+			} else {
+				txtMiniLabel.setText("Type must be selected!");
+				typeDishIsValid = true;
+			}
 		}
 	}
 
 	@FXML
 	void initialize() {
-		if (indicator == false)
-			miniLabel.setText("Create Menu");
-		else
-			miniLabel.setText("Add new dish");
-
 		assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert miniLabel != null : "fx:id=\"miniLabel\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert txtNameDish != null
 				: "fx:id=\"txtNameDish\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert txtPriceDish != null
 				: "fx:id=\"txtPriceDish\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
-		assert txtInventoryDish != null
-				: "fx:id=\"txtInventoryDish\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert txtIngredients != null
 				: "fx:id=\"txtIngredients\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
@@ -226,12 +196,17 @@ public class AddDishToMenuController extends Controller implements Initializable
 				: "fx:id=\"txtChoiseDetailsDish\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 		assert btnTypeDish != null
 				: "fx:id=\"btnTypeDish\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
-		assert txtIngredientsToRemove != null
+		assert txtExtra != null
 				: "fx:id=\"txtIngredientsToRemove\" was not injected: check your FXML file 'AddDishToMenu.fxml'.";
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if (indicator == false)
+			miniLabel.setText("Create Menu");
+		else
+			miniLabel.setText("Add new dish");
+
 		btnTypeDish.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
 	}
 }

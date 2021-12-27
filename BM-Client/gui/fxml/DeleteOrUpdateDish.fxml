@@ -34,15 +34,9 @@
          </font>
       </Label>
       <TextField fx:id="txtNewPriceDish" layoutX="309.0" layoutY="148.0" />
-      <TextField fx:id="txtNewInventoryDish" layoutX="309.0" layoutY="179.0" />
       <Button fx:id="btnDeleteDish" layoutX="483.0" layoutY="450.0" mnemonicParsing="false" onAction="#DeleteDish" style="-fx-background-radius: 30;" text="Delete dish" />
-      <TextArea fx:id="txtNewIngredients" layoutX="121.0" layoutY="288.0" prefHeight="78.0" prefWidth="331.0" />
+      <TextArea fx:id="txtNewIngredients" layoutX="121.0" layoutY="263.0" prefHeight="78.0" prefWidth="331.0" />
       <Button fx:id="btnBack" layoutX="31.0" layoutY="450.0" mnemonicParsing="false" onAction="#BackToUpdateMenu" text="Back" />
-      <Label layoutX="121.0" layoutY="183.0" text="Insert new inventory" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
       <Label fx:id="txtMiniLabel" layoutX="479.0" layoutY="408.0" prefHeight="20.0" prefWidth="165.0" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -58,25 +52,25 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="215.0" text="Insert new choice factor" textFill="WHITE">
+      <Label layoutX="121.0" layoutY="182.0" text="Insert new choice factor" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="245.0" text="Insert new choice details" textFill="WHITE">
+      <Label layoutX="121.0" layoutY="211.0" text="Insert new choice details" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNewChoiceDish" layoutX="309.0" layoutY="211.0" />
-      <TextField fx:id="txtNewChoiceDetailsDish" layoutX="309.0" layoutY="243.0" />
+      <TextField fx:id="txtNewChoiceDish" layoutX="309.0" layoutY="178.0" />
+      <TextField fx:id="txtNewChoiceDetailsDish" layoutX="309.0" layoutY="209.0" />
       <Label layoutX="121.0" layoutY="119.0" text="Choose dish" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <ComboBox fx:id="btnDish" layoutX="308.0" layoutY="117.0" onAction="#ChooseDish" prefWidth="150.0" promptText="example: Greek" />
-      <TextArea fx:id="txtNewIngredientsToRemove" layoutX="121.0" layoutY="379.0" prefHeight="78.0" prefWidth="331.0" />
+      <TextArea fx:id="txtNewIngredientsToRemove" layoutX="121.0" layoutY="354.0" prefHeight="78.0" prefWidth="331.0" />
       <ComboBox fx:id="btnDishType" layoutX="308.0" layoutY="87.0" onAction="#ChoocTypeOfDish" prefWidth="150.0" promptText="example: Salad" />
       <Button fx:id="btnConfirm" layoutX="570.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfirmUpdate" style="-fx-background-radius: 30;" text="Confirm updare" />
    </children>

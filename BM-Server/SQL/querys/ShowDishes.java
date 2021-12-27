@@ -32,7 +32,7 @@ public class ShowDishes {
 					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
 							rs.getString("choiceFactor"), rs.getString("choiceDetails"), rs.getString("ingredients"),
 							rs.getString("extra"), Float.parseFloat(rs.getString("price")),
-							Integer.parseInt(rs.getString("inventory")), DishType.toDishType(rs.getString("dishType")));
+							DishType.toDishType(rs.getString("dishType")));
 					dish.setRestCode(rs.getString("restId1"));
 					dishes.add(dish);
 				}

@@ -80,4 +80,24 @@ public class PopUpMessage {
 
 		alert.showAndWait();
 	}
+	
+	/**
+	 * method simulationMessage This method will opens new simulation alert box with the message that
+	 * user write
+	 * @param msg   - string that user put and will shows in the alert box
+	 */
+	public static void simulationMessage(String msg) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Simulation");
+		alert.setHeaderText(null);
+		alert.setContentText(msg);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		
+		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add(PopUpMessage.class.getResource("/css/fontSize.css").toExternalForm());
+		dialogPane.getStyleClass().add("font18");
+
+		alert.showAndWait();
+	}
+
 }

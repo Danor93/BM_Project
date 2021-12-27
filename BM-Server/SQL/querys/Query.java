@@ -108,7 +108,7 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+					"SELECT w4cBusiness,companyName,companyStatus FROM bitemedb.company WHERE companyStatus='not approved' or companyStatus ='waiting'"
 							+ "");
 			while (rs.next()) {
 				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -129,8 +129,8 @@ public class Query {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE company SET companyStatus= '" + CompanyStatus + "'"
-						+ " WHERE companyName= '" + CompanyName + "'  ;");
+				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.company SET companyStatus= '" + CompanyStatus
+						+ "'" + " WHERE companyName= '" + CompanyName + "'  ;");
 				stmt.executeUpdate();
 			}
 
@@ -148,7 +148,8 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM supplier WHERE supplierStatus='not approved' or supplierStatus ='waiting'" + "");
+					"SELECT * FROM bitemedb.supplier WHERE supplierStatus='not approved' or supplierStatus ='waiting'"
+							+ "");
 			while (rs.next()) {
 				Supplier supplier = new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), homeBranches.toHomeBranchType(rs.getString(7)));
@@ -165,8 +166,8 @@ public class Query {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE supplier SET supplierStatus= '" + SupplierStatus + "'"
-						+ " WHERE supplierName= '" + SupplierName + "'  ;");
+				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.supplier SET supplierStatus= '" + SupplierStatus
+						+ "'" + " WHERE supplierName= '" + SupplierName + "'  ;");
 				stmt.executeUpdate();
 			} else {
 				System.out.println("Conn is null");
@@ -180,7 +181,7 @@ public class Query {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT * FROM users WHERE ID= '" + ID + "'" + "'  ;");
+				stmt = DBConnect.conn.prepareStatement("SELECT * FROM bitemedb.users WHERE ID= '" + ID + "'" + "'  ;");
 				ResultSet rs = stmt.executeQuery();
 				if (rs != null) {
 					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
@@ -205,7 +206,7 @@ public class Query {
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.users");
 			while (rs.next()) {
 				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
 						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
@@ -225,7 +226,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				PreparedStatement stmt = DBConnect.conn
-						.prepareStatement("DELETE FROM users WHERE ID = '" + user.getId() + "' ;");
+						.prepareStatement("DELETE FROM bitemedb.users WHERE ID = '" + user.getId() + "' ;");
 				stmt.executeUpdate();
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -237,8 +238,8 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt
-						.executeQuery("SELECT companyStatus FROM company WHERE companyName= '" + CompanyName + "' ;");
+				ResultSet rs = stmt.executeQuery(
+						"SELECT companyStatus FROM bitemedb.company WHERE companyName= '" + CompanyName + "' ;");
 				while (rs.next()) {
 					String status = rs.getString(1);
 					if (status.equals("approved")) {
@@ -258,8 +259,9 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT firstName,lastName,Email,phone FROM import_users WHERE id = '"
-						+ Account.getId() + "' ;");
+				ResultSet rs = stmt
+						.executeQuery("SELECT firstName,lastName,Email,phone FROM bitemedb.import_users WHERE id = '"
+								+ Account.getId() + "' ;");
 				while (rs.next()) {
 					String FirstName = rs.getString(1);
 					String LastName = rs.getString(2);
@@ -285,41 +287,41 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery(
-						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
+				ResultSet rs = stmt.executeQuery("SELECT userName,password,role FROM bitemedb.import_users WHERE id= '"
+						+ BAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
-				PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-						"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
-								+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
-				stmt2.setString(1, UserName);
-				stmt2.setString(2, Password);
-				stmt2.setString(3, Role);
-				stmt2.setString(4, BAccount.getFirstN());
-				stmt2.setString(5, BAccount.getLastN());
-				stmt2.setString(6, BAccount.getId());
-				stmt2.setString(7, BAccount.getEmail());
-				stmt2.setString(8, BAccount.getPhone());
-				stmt2.setInt(9, 0);
-				stmt2.setString(10,BAccount.getBranch().toString());
-				stmt2.executeUpdate();
+					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
+							"INSERT INTO bitemedb.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
+					stmt2.setString(1, UserName);
+					stmt2.setString(2, Password);
+					stmt2.setString(3, Role);
+					stmt2.setString(4, BAccount.getFirstN());
+					stmt2.setString(5, BAccount.getLastN());
+					stmt2.setString(6, BAccount.getId());
+					stmt2.setString(7, BAccount.getEmail());
+					stmt2.setString(8, BAccount.getPhone());
+					stmt2.setInt(9, 0);
+					stmt2.setString(10, BAccount.getBranch().toString());
+					stmt2.executeUpdate();
 
-				PreparedStatement stmt3 = DBConnect.conn
-						.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
-				stmt3.setString(1, BAccount.getId());
-				stmt3.setString(2, "456");
-				stmt3.setString(3, "Active");
-				stmt3.executeUpdate();
+					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
+							"INSERT INTO bitemedb.client (client_id,w4c_private,status) VALUES(?,?,?)");
+					stmt3.setString(1, BAccount.getId());
+					stmt3.setString(2, "456");
+					stmt3.setString(3, "Active");
+					stmt3.executeUpdate();
 
-				PreparedStatement stmt4 = DBConnect.conn
-						.prepareStatement("INSERT INTO buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
-				stmt4.setString(1, BAccount.getId());
-				stmt4.setString(2, BAccount.getCompanyName());
-				stmt4.setString(3, BAccount.getBudget());
-				stmt4.setString(4,"Waiting");
-				stmt4.executeUpdate();
+					PreparedStatement stmt4 = DBConnect.conn.prepareStatement(
+							"INSERT INTO bitemedb.buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
+					stmt4.setString(1, BAccount.getId());
+					stmt4.setString(2, BAccount.getCompanyName());
+					stmt4.setString(3, BAccount.getBudget());
+					stmt4.setString(4, "Waiting");
+					stmt4.executeUpdate();
 				}
 				rs.close();
 			} catch (SQLException s) {
@@ -332,7 +334,8 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT id FROM import_users WHERE id= '" + client.getId() + "' ;");
+				ResultSet rs = stmt
+						.executeQuery("SELECT id FROM bitemedb.import_users WHERE id= '" + client.getId() + "' ;");
 				while (rs.next()) {
 					String FirstName = rs.getString(1);
 					String LastName = rs.getString(2);
@@ -358,15 +361,15 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery(
-						"SELECT userName,password,role FROM import_users WHERE id= '" + PAccount.getId() + "' ;");
+				ResultSet rs = stmt.executeQuery("SELECT userName,password,role FROM bitemedb.import_users WHERE id= '"
+						+ PAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
 
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+							"INSERT INTO bitemedb.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, UserName);
 					stmt2.setString(2, Password);
@@ -377,11 +380,11 @@ public class Query {
 					stmt2.setString(7, PAccount.getEmail());
 					stmt2.setString(8, PAccount.getPhone());
 					stmt2.setInt(9, 0);
-					stmt2.setString(10,PAccount.getHomeBranch().toString());
+					stmt2.setString(10, PAccount.getHomeBranch().toString());
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
-							"INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
+							"INSERT INTO bitemedb.client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
 					stmt3.setString(1, PAccount.getId());
 					stmt3.setString(2, "789");
 					stmt3.setString(3, "Active");
@@ -399,7 +402,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' ");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.users WHERE Role='Customer' ");
 				ArrayList<User> users = new ArrayList<>();
 				while (rs.next()) {
 					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
@@ -422,7 +425,8 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT status FROM client WHERE client_id= '" + AccountID + "' ;");
+				ResultSet rs = stmt
+						.executeQuery("SELECT status FROM bitemedb.client WHERE client_id= '" + AccountID + "' ;");
 				while (rs.next()) {
 					String status = rs.getString(1);
 					if (status.equals("Active")) {
@@ -443,8 +447,8 @@ public class Query {
 	public static void UpdateAccountStatusToFreeze(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
-				PreparedStatement stmt = DBConnect.conn
-						.prepareStatement("UPDATE client SET status='Freeze' WHERE client_id= '" + AccountID + "'  ;");
+				PreparedStatement stmt = DBConnect.conn.prepareStatement(
+						"UPDATE bitemedb.client SET status='Freeze' WHERE client_id= '" + AccountID + "'  ;");
 				stmt.executeUpdate();
 			} catch (SQLException s) {
 				s.printStackTrace();
@@ -456,7 +460,7 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT quarter,year FROM reports");
+				ResultSet rs = stmt.executeQuery("SELECT quarter,year FROM bitemedb.reports");
 				while (rs.next()) {
 					String quarter2 = rs.getString(1);
 					String year2 = rs.getString(2);
@@ -475,7 +479,7 @@ public class Query {
 	}
 
 	public static void updateFile(MyFile file) {
-		String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
+		String sql = "INSERT INTO bitemedb.reports(quarter,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
 		try {
 			Timestamp date = new java.sql.Timestamp(new Date().getTime());
 			InputStream is = new ByteArrayInputStream(file.getMybytearray());
@@ -492,19 +496,21 @@ public class Query {
 		}
 	}
 
-	public static ArrayList<Order> LoadOrders() {
+	public static ArrayList<Order> LoadOrders(String ID) {
 		ArrayList<Order> orders = new ArrayList<>();
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber FROM bytemedatabase.order WHERE orderStatus ='waiting'"
-							+ "");
+					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE rstID='"
+							+ ID + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
 			while (rs.next()) {
-				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
-						Float.parseFloat(rs.getString(8)));
+				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), Float.parseFloat(rs.getString(8)));
 				order.setOrderNum(Integer.parseInt(rs.getString(9)));
+				order.setUseRefund(rs.getString(10));
+				order.setUseBudget(Integer.parseInt(rs.getString(11)));
+				order.setEarlyOrder(rs.getString(12));
 				orders.add(order);
 			}
 			rs.close();
@@ -514,17 +520,18 @@ public class Query {
 		return orders;
 	}
 
-	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails() {
+	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails(StringBuilder companyName) {
 		ArrayList<BusinessAccountTracking> businessAccountTracking = new ArrayList<>();
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt
-					.executeQuery("SELECT ID,companyName,budget FROM buss_client WHERE status ='waiting'" + "");
+					.executeQuery("SELECT ID,companyName,budget FROM bitemedb.buss_client WHERE companyName='"
+							+ companyName + "' AND status ='Waiting' ORDER BY companyName" + "");
 			while (rs.next()) {
 				BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2),
 						rs.getString(3));
-				BAT.setStatus("waiting");
+				BAT.setStatus("Waiting");
 
 				businessAccountTracking.add(BAT);
 			}
@@ -533,5 +540,55 @@ public class Query {
 			s.printStackTrace();
 		}
 		return businessAccountTracking;
+	}
+
+	public static ArrayList<String> LoadW4CBusiness() {
+		ArrayList<String> w4cBusiness = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT w4cBusiness FROM bitemedb.company" + "");
+			while (rs.next()) {
+				w4cBusiness.add(rs.getString(1));
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return w4cBusiness;
+	}
+
+	public static boolean LoadCompanyStatus(StringBuilder companyName) {
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT companyStatus FROM bitemedb.company WHERE companyName='"
+					+ companyName + "' AND companyStatus='Approved' ORDER BY companyName" + "");
+			while (rs.next()) {
+				return true;
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+
+	public static String LoadPhoneNumber(ArrayList<Order> arrayList) {
+		Statement stmt;
+		String phoneNumber=null;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT phone FROM bitemedb.users WHERE ID='" + arrayList.get(0).getCostumerId() + "'" + "");
+			while (rs.next()) {
+				phoneNumber = rs.getString(1);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return phoneNumber;
 	}
 }

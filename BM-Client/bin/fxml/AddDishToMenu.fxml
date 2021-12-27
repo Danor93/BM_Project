@@ -28,22 +28,16 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Label fx:id="miniLabel" layoutX="167.0" layoutY="29.0" prefHeight="47.0" prefWidth="201.0" text="Create Menu" textFill="WHITE">
+      <Label fx:id="miniLabel" layoutX="138.0" layoutY="29.0" prefHeight="47.0" prefWidth="299.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNameDish" layoutX="285.0" layoutY="87.0" onMouseClicked="#clearName" text="example: Greek" />
-      <TextField fx:id="txtPriceDish" layoutX="285.0" layoutY="148.0" onMouseClicked="#clearPrice" text="example: 29.99" />
-      <TextField fx:id="txtInventoryDish" layoutX="285.0" layoutY="179.0" onMouseClicked="#clearInventory" text="example: 50" />
+      <TextField fx:id="txtNameDish" layoutX="285.0" layoutY="87.0" promptText="Example: Greek" />
+      <TextField fx:id="txtPriceDish" layoutX="285.0" layoutY="148.0" promptText="Example: 29.99" />
       <Button fx:id="btnConfirm" layoutX="483.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfirmNewDish" style="-fx-background-radius: 30;" text="Confirm dish" />
-      <TextArea fx:id="txtIngredients" layoutX="121.0" layoutY="288.0" onMouseEntered="#clearIngredients" prefHeight="78.0" prefWidth="331.0" text="Put in the ingredients of the dish. &#10;Example: lettuce, cucumber, tomato, tuna and black olives. &#10;The salad is seasoned with parsley, olive oil and lemon." />
+      <TextArea fx:id="txtIngredients" layoutX="121.0" layoutY="261.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients of the dish. Example: tomato, cucumber, black olives and cheese" />
       <Button fx:id="btnBack" layoutX="31.0" layoutY="450.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Label layoutX="121.0" layoutY="183.0" text="Insert inventory" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
       <Label fx:id="txtMiniLabel" layoutX="479.0" layoutY="408.0" prefHeight="20.0" prefWidth="165.0" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -59,24 +53,24 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="215.0" text="Insert choice factor" textFill="WHITE">
+      <Label layoutX="121.0" layoutY="182.0" text="Insert choice factor" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="245.0" text="Insert choice details" textFill="WHITE">
+      <Label layoutX="121.0" layoutY="210.0" text="Insert choice details" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtChoiceDish" layoutX="285.0" layoutY="211.0" onMouseClicked="#clearChoiceFactor" text="example: Size" />
-      <TextField fx:id="txtChoiceDetailsDish" layoutX="285.0" layoutY="243.0" onMouseClicked="#clearChoiceDetails" text="example: S/M/L" />
+      <TextField fx:id="txtChoiceDish" layoutX="285.0" layoutY="178.0" promptText="Example: Size" />
+      <TextField fx:id="txtChoiceDetailsDish" layoutX="285.0" layoutY="208.0" promptText="Example: S/M/L" />
       <Label layoutX="121.0" layoutY="119.0" text="Choose type" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="btnTypeDish" layoutX="284.0" layoutY="117.0" onAction="#ChooceTypeDish" prefWidth="150.0" promptText="example: Salad" />
-      <TextArea fx:id="txtIngredientsToRemove" layoutX="121.0" layoutY="379.0" onMouseEntered="#clearRemovableIngredients" prefHeight="78.0" prefWidth="331.0" text="Insert the removable dish ingredients. &#10;Example: cucumber, tomato, parsley, olive oil and lemon." />
+      <ComboBox fx:id="btnTypeDish" layoutX="284.0" layoutY="117.0" onAction="#ChooceTypeDish" prefWidth="150.0" promptText="Example: Salad" />
+      <TextArea fx:id="txtExtra" layoutX="121.0" layoutY="352.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients that can be removed / added. Example: no tomato / extra chees" />
    </children>
 </Pane>

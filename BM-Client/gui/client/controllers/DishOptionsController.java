@@ -109,13 +109,13 @@ public class DishOptionsController extends Controller implements Initializable{
 			{
 				b.append(s+" ");	
 			}
-			dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),b.toString(),temp.getPrice(),temp.getInventory(),temp.getDishType());
+			dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),b.toString(),temp.getPrice(),temp.getDishType());
 
 		}
 		
 		else 
 		{
-			 dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),null,temp.getPrice(),temp.getInventory(),temp.getDishType());
+			 dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),null,temp.getPrice(),temp.getDishType());
 
 		}
 		dish.setQuentity(ChoosingDishesController.quentity);

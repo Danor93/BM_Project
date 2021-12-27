@@ -15,6 +15,7 @@ import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
+import client.controllers.AddDishToMenuController;
 import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerFreezeAccountController;
 import client.controllers.ChooseRestController;
@@ -23,7 +24,7 @@ import client.controllers.DeliveryController;
 import client.controllers.DeliveryOrPickupController;
 import client.controllers.IdentifyW4cController;
 import client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController;
-import client.controllers.HRManagerRegistrationOfEmployersController;
+import client.controllers.HRManagerScreenController;
 import client.controllers.ConfirmEmployerRegController;
 import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
@@ -37,7 +38,6 @@ import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
-
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
@@ -75,31 +75,27 @@ public class Parsing {
 			RestListFormController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
-		
 
-		case IdentifyW4c:{
-			IdentifyW4cController.client=(Client) receivedMessage.getMessageData();
+		case IdentifyW4c: {
+			IdentifyW4cController.client = (Client) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case getRefundDetails:{
-			ShowOrderController.refund=(String) receivedMessage.getMessageData();		
+
+		case getRefundDetails: {
+			ShowOrderController.refund = (String) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case InsertOrder:
-		{
-			ShowOrderController.finalOrder.setOrderNum((Integer)receivedMessage.getMessageData());
-			//SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
+
+		case InsertOrder: {
+			ShowOrderController.finalOrder.setOrderNum((Integer) receivedMessage.getMessageData());
+			// SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
-		
-		case InsertDishesOrder:
-		{
-			OrderConfimController.isSuccess=(String)receivedMessage.getMessageData();
+
+		case InsertDishesOrder: {
+			OrderConfimController.isSuccess = (String) receivedMessage.getMessageData();
 			break;
 		}
-		
 
 		case Disconected: {
 			break;
@@ -129,7 +125,13 @@ public class Parsing {
 		}
 
 		case Dish_add_succ: {
+			AddDishToMenuController.dishAdd = true;
+			break;
+		}
 
+		case dish_add_fail: {
+			AddDishToMenuController.dishAdd = false;
+			break;
 		}
 
 		case Dish_update_succ: {
@@ -160,24 +162,24 @@ public class Parsing {
 			BranchManagerOpenNewBussinessAccountController.AprrovedFlag = false;
 			break;
 		}
-		
-		case Baccount_details_not_ok:{
-			BranchManagerOpenNewBussinessAccountController.Checkdeatils=false;
+
+		case Baccount_details_not_ok: {
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils = false;
 			break;
 		}
 
 		case ConfirmOpenNewBusinessAccount: {
-			BranchManagerOpenNewBussinessAccountController.Checkdeatils=true;
+			BranchManagerOpenNewBussinessAccountController.Checkdeatils = true;
 			break;
 		}
-		
-		case PAccount_details_not_ok:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=false;
+
+		case PAccount_details_not_ok: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = false;
 			break;
 		}
-		
-		case ConfirmOpenNewPrivateAccount:{
-			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag=true;
+
+		case ConfirmOpenNewPrivateAccount: {
+			BranchManagerOpenNewPrivateAccountController.ConfirmOpenNewPrivateAccountFlag = true;
 			break;
 		}
 
@@ -201,21 +203,49 @@ public class Parsing {
 			break;
 		}
 
+		case update_RefundTable: {
+		}
+
+		case update_Budget_bussClient: {
+		}
+
 		case changed_status_to_notApproved_succ: {
 		}
 
 		case changed_status_to_Approved_succ: {
+		}
 
+		case changed_status_to_sended_succ: {
+		}
+		
+		case set_Phone_number:{
+			ConfirmOrderApprovalController.phoneNumber = (String)receivedMessage.getMessageData();
+			break;
+		}
+
+		case W4C_Business_List: {
+			HRManagerScreenController.w4cBusiness = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
 		}
 
 		case RegistrationOfEmployer_succ: {
-			HRManagerRegistrationOfEmployersController.RegistrationFlag = true;
+			HRManagerScreenController.RegistrationFlag = true;
 			break;
 
 		}
 
+		case Company_Status_Equale_To_Approved: {
+			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = true;
+			break;*/
+		}
+
+		case Company_Status_Not_Equale_To_Approved: {
+			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = false;
+			break;*/
+		}
+
 		case RegistrationOfEmployer_failed: {
-			HRManagerRegistrationOfEmployersController.RegistrationFlag = false;
+			HRManagerScreenController.RegistrationFlag = false;
 			break;
 		}
 
@@ -239,10 +269,11 @@ public class Parsing {
 		}
 
 		case businessAccountsTracking: {
-			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
+			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage
+					.getMessageData();
 			break;
 		}
-		
+
 		case changed_BusinessAccount_status_to_Approved_succ: {
 
 		}
@@ -250,7 +281,6 @@ public class Parsing {
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
 
 		}
-
 
 		default: {
 			break;

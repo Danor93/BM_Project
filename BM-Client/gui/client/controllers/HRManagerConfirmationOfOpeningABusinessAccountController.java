@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.BusinessAccountTracking;
+import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
+import main.PopUpMessage;
 
 public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
@@ -77,7 +79,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	}
 
 	@FXML
-		void refuseBusinessAccount(ActionEvent event) {
+	void refuseBusinessAccount(ActionEvent event) {
 		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
 		list = table.getSelectionModel().getSelectedItems();
 		for (int i = 0; i < list.size(); i++) {
@@ -119,7 +121,13 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		ID.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("ID"));
 		companyName.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("companyName"));
 		budget.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("budget"));
-		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, null));
+		/*
+		 * ClientUI.chat.accept(new Message(MessageType.get_Company_Status,
+		 * LoginScreenController.CompanyName)); if (!CompanyStatusApproved) { list =
+		 * FXCollections.observableArrayList(); table.setItems(list);
+		 * PopUpMessage.errorMessage("The employe not Approved yet"); } else {
+		 */
+		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, LoginScreenController.CompanyName));
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}

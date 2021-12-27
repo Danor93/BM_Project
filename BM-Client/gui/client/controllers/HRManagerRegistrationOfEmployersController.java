@@ -49,6 +49,7 @@ public class HRManagerRegistrationOfEmployersController extends Controller {
 	@FXML
 	void confirm(ActionEvent event) {
 		String w4cNew=null;
+		ClientUI.chat.accept(new Message(MessageType.getAllW4CBusiness, null));
 		while (RandomSuccess == false) {
 			Random rand = new Random(); // instance of random class
 			int int_random = rand.nextInt(1000);
