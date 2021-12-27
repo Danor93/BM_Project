@@ -50,96 +50,78 @@ public class MenuScreenController extends Controller implements Initializable {
 	@FXML
 	private ImageView salads;
 
-<<<<<<< HEAD
-    @FXML
-    private ImageView starters;
-    
-    @FXML
-    private ImageView homePage;
-
-    @FXML
-    private Button logout;
-
-    @FXML
-    private Text userName;
-    
-
-    @FXML
-    private Text dishAdded;
-    
-    public static String chosenFoodType;
-    
-    /** This method meant to get back to costumer page
-	 * @param event				pressing the "home" image 
-	 * @throws IOException
-	 */
-    @FXML
-    void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen","");
-    }
-    
-    
-	/** This method meant to get back to login page and logout the customer
-	 * @param event				pressing the "logout" button 
-	 * @throws IOException
-	 */
-
-    @FXML
-    void logout(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
-		start(event, "LoginScreen", "Login","");
-    }
-=======
 	@FXML
 	private ImageView starters;
->>>>>>> master
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
+	@FXML
+	private Text userName;
+
+	@FXML
+	private Text dishAdded;
 
 	public static String chosenFoodType;
 
-<<<<<<< HEAD
-    @FXML
-    void backToRestChoose(ActionEvent event) throws IOException {
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-	@FXML
-	void backToRestChoose(ActionEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
-		Parent root = load.load();
-		RestListFormController aFrame = load.getController();
-<<<<<<< HEAD
-		aFrame.start(primaryStage, root);*/
-    }
-    
-
-	/** This method meant to show the dishes in the order
-	 * @param event				pressing the "order now" image 
+	/**
+	 * This method meant to get back to costumer page
+	 * 
+	 * @param event pressing the "home" image
 	 * @throws IOException
 	 */
-    
-    @FXML
-    void orderNow(MouseEvent event) throws IOException {
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-		aFrame.start(primaryStage, root);
-	}
-
 	@FXML
-	void orderNow(MouseEvent event) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/ShowOrder.fxml"));
-		Parent root = load.load();
-		ShowOrderController aFrame = load.getController();
-		aFrame.start(primaryStage, root);
-		*/
-		start(event, "ShowOrder", "Your order","");
-
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "CustomerScreen", "CustomerScreen", "");
 	}
 
-<<<<<<< HEAD
-    /**This method meant to show the desserts of the restaurant
+	/**
+	 * This method meant to get back to login page and logout the customer
+	 * 
+	 * @param event pressing the "logout" button
+	 * @throws IOException
+	 */
+
+	  @FXML
+	    void logout(ActionEvent event) throws IOException {
+			ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+			start(event, "LoginScreen", "Login","");
+	    }
+
+	
+
+	 @FXML
+	    void backToRestChoose(ActionEvent event) throws IOException {
+	    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
+			Parent root=load.load();
+			RestListFormController aFrame = load.getController();
+			aFrame.start(primaryStage, root);*/
+	    }
+
+	/**
+	 * This method meant to show the dishes in the order
+	 * 
+	 * @param event pressing the "order now" image
+	 * @throws IOException
+	 */
+
+	 @FXML
+	    void orderNow(MouseEvent event) throws IOException {
+	    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/ShowOrder.fxml"));
+			Parent root=load.load();
+			ShowOrderController aFrame = load.getController();
+			aFrame.start(primaryStage, root);
+			*/
+			start(event, "ShowOrder", "Your order","");
+
+	    }
+
+	/**This method meant to show the desserts of the restaurant
      * @param event              pressing the dessert image
      * @throws IOException
      */
@@ -147,28 +129,17 @@ public class MenuScreenController extends Controller implements Initializable {
     void showDesserts(MouseEvent event) throws IOException {
     	chosenFoodType="Dessert";
     	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-	@FXML
-	void showDesserts(MouseEvent event) throws IOException {
-		chosenFoodType = "Dessert";
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root = load.load();
+		Parent root=load.load();
 		ChoosingDishesController aFrame = load.getController();
 		aFrame.display(chosenFoodType);
-<<<<<<< HEAD
 		aFrame.start(primaryStage,root);*/
     	
     	start(event, "DishesOfKindScreen", "Restaurant's desserts",chosenFoodType);
-=======
-		aFrame.start(primaryStage, root);
->>>>>>> master
 
-	}
+    }
 
-<<<<<<< HEAD
-    /**This method meant to show the drinks of the restaurant
+	/**This method meant to show the drinks of the restaurant
      * @param event              pressing the drink image
      * @throws IOException
      */
@@ -176,114 +147,74 @@ public class MenuScreenController extends Controller implements Initializable {
     void showDrinks(MouseEvent event) throws IOException {
     	chosenFoodType="Drink";
     	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-	@FXML
-	void showDrinks(MouseEvent event) throws IOException {
-		chosenFoodType = "Drink";
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root = load.load();
+		Parent root=load.load();
 		ChoosingDishesController aFrame = load.getController();
-
+			
 		aFrame.display(chosenFoodType);
-<<<<<<< HEAD
 		aFrame.start(primaryStage,root);*/
 		
 		start(event, "DishesOfKindScreen", "Restaurant's drinks",chosenFoodType);
-		
-=======
-		aFrame.start(primaryStage, root);
->>>>>>> master
+    }
 
-	}
 
-<<<<<<< HEAD
-    /**This method meant to show the main dishes of the restaurant
-     * @param event              pressing the main dish image
-     * @throws IOException
-     */
+
+	/**
+	 * This method meant to show the main dishes of the restaurant
+	 * 
+	 * @param event pressing the main dish image
+	 * @throws IOException
+	 */
     @FXML
     void showMainDishes(MouseEvent event) throws IOException {
     	chosenFoodType= "Main dish";
     	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-	@FXML
-	void showMainDishes(MouseEvent event) throws IOException {
-		chosenFoodType = "Main dish";
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root = load.load();
+		Parent root=load.load();
 		ChoosingDishesController aFrame = load.getController();
-
+			
 		aFrame.display("Main dish");
-<<<<<<< HEAD
 		aFrame.start(primaryStage,root);*/
     	
     	start(event, "DishesOfKindScreen", "Restaurant's Main dishes",chosenFoodType);
     }
 
-    /**This method meant to show the salads of the restaurant
-     * @param event              pressing the salad image
-     * @throws IOException
-     */
-    @FXML
-    void showSalads(MouseEvent event) throws IOException {
-		chosenFoodType="Salad";
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-		aFrame.start(primaryStage, root);
-	}
-
+	/**
+	 * This method meant to show the salads of the restaurant
+	 * 
+	 * @param event pressing the salad image
+	 * @throws IOException
+	 */
 	@FXML
 	void showSalads(MouseEvent event) throws IOException {
 		chosenFoodType = "Salad";
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root = load.load();
-		ChoosingDishesController aFrame = load.getController();
-		System.out.println(chosenFoodType);
-		aFrame.display(chosenFoodType);
-<<<<<<< HEAD
-		aFrame.start(primaryStage,root);*/
-		
-		start(event, "DishesOfKindScreen", "Restaurant's salads",chosenFoodType);
-    }
+		/*
+		 * Stage primaryStage = (Stage) ((Node)
+		 * event.getSource()).getScene().getWindow(); FXMLLoader load = new
+		 * FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml")); Parent
+		 * root=load.load(); ChoosingDishesController aFrame = load.getController();
+		 * System.out.println(chosenFoodType); aFrame.display(chosenFoodType);
+		 * aFrame.start(primaryStage,root);
+		 */
 
-    @FXML
-    void showStarters(MouseEvent event) throws IOException {
-    	chosenFoodType="Starter";
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-=======
-		aFrame.start(primaryStage, root);
+		start(event, "DishesOfKindScreen", "Restaurant's salads", chosenFoodType);
 	}
 
 	@FXML
 	void showStarters(MouseEvent event) throws IOException {
 		chosenFoodType = "Starter";
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
->>>>>>> master
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root = load.load();
-		ChoosingDishesController aFrame = load.getController();
-<<<<<<< HEAD
-			
-		aFrame.display(chosenFoodType);
-		aFrame.start(primaryStage,root);*/
-    	
-    	start(event, "DishesOfKindScreen", "Restaurant's starters",chosenFoodType);
-    }
-    
-=======
+		/*
+		 * Stage primaryStage = (Stage) ((Node)
+		 * event.getSource()).getScene().getWindow(); FXMLLoader load = new
+		 * FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml")); Parent
+		 * root=load.load(); ChoosingDishesController aFrame = load.getController();
+		 * 
+		 * aFrame.display(chosenFoodType); aFrame.start(primaryStage,root);
+		 */
 
-		aFrame.display(chosenFoodType);
-		aFrame.start(primaryStage, root);
-
+		start(event, "DishesOfKindScreen", "Restaurant's starters", chosenFoodType);
 	}
 
->>>>>>> master
 	/**
 	 * @param stage
 	 * @param root
@@ -298,18 +229,11 @@ public class MenuScreenController extends Controller implements Initializable {
 	/**
 	 * @param supplier
 	 */
-<<<<<<< HEAD
 	public void display(String string) {
 		restName.setText(RestListFormController.chosenRst.getSupplierName());
 		userName.setText(LoginScreenController.user.getFirstN());
-		//restName.setText(supplier);
+		// restName.setText(supplier);
 		dishAdded.setText(string);
-		
-=======
-	public void display(String supplier) {
-		restName.setText(supplier);
-
->>>>>>> master
 	}
 
 	@FXML
@@ -327,13 +251,12 @@ public class MenuScreenController extends Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setImage(desserts,"/Images/dessert.jpg");
-		setImage(drinks,"/Images/drinks.jpg");
-		setImage(salads,"/Images/salad.jpg");
-		setImage(order,"/Images/showOrder.jpg");
-		//setImage(starters,"/Images/starters.gif‬");
-		setImage(main,"/Images/mainDish.png");
+		/*setImage(desserts, "/Images/dessert2.jpg‬");
+		setImage(drinks, "/Images/drink.jpg‬");
+		setImage(salads, "/Images/salad2.jpg‬");
+		setImage(order, "/Images/showOrder.jpg");
+		setImage(starters,"/Images/starter.jpg‬");
+		setImage(main, "/Images/main.dish.jpg‬");*/
 	}
-
 
 }

@@ -12,10 +12,7 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="653.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.IdentifyW4cController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="524.0" fitWidth="626.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
-         </image></ImageView>
+      <ImageView fx:id="BackImage" fitHeight="524.0" fitWidth="626.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="576.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />

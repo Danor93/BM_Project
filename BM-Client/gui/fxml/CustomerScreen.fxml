@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -10,10 +9,7 @@
 
 <AnchorPane prefHeight="550.0" prefWidth="565.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CustomerScreenController">
    <children>
-      <ImageView fx:id="backImg" fitHeight="571.0" fitWidth="565.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/Nbackground.jpg" />
-         </image></ImageView>
+      <ImageView fx:id="backImg" fitHeight="571.0" fitWidth="565.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Adi" wrappingWidth="106.00001271565748">
          <font>
             <Font name="System Bold" size="19.0" />
