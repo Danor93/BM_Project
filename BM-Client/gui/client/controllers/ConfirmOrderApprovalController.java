@@ -95,28 +95,23 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	void confirmOrder(ActionEvent event) throws IOException {
-		ArrayList<Order> ordersToChange = new ArrayList<Order>();
+		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		if (!ordersToChange.get(0).getOrderStatus().equals("Approved")) {
-			if (!ordersToChange.get(0).getUseRefund().equals("0")) {
-				ordersToChange.get(0).setTotalPrice(
-						ordersToChange.get(0).getTotalPrice() - Float.parseFloat(ordersToChange.get(0).getUseRefund()));
-				ClientUI.chat.accept(new Message(MessageType.Use_Refund, ordersToChange));
-			}
-			if (ordersToChange.get(0).getUseBudget() == 1)
-				ClientUI.chat.accept(new Message(MessageType.Use_Budget, ordersToChange));
-
-			ClientUI.chat.accept(new Message(MessageType.Order_approved, ordersToChange));
+		orderToChange = list.get(0);
+		if (!orderToChange.getOrderStatus().equals("Approved")) {
+			if (!orderToChange.getUseRefund().equals("0")) {
+				orderToChange.setTotalPrice(
+						orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
+				ClientUI.chat.accept(new Message(MessageType.Use_Refund, orderToChange));
+			}			
+			if (orderToChange.getUseBudget() == 1)
+				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));			
+			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange));
 			for (int i = 0; i < allOrders.size(); i++) {
-				for (int j = 0; j < ordersToChange.size(); j++) {
-					if (allOrders.get(i).equals(ordersToChange.get(j)))
+					if (allOrders.get(i).equals(orderToChange))
 						allOrders.get(i).setOrderStatus("Approved");
 				}
-			}
-			ordersToChange.clear();
+			orderToChange = null;;
 			table.refresh();
 			list = FXCollections.observableArrayList(allOrders);
 			table.setItems(list);
@@ -125,19 +120,15 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	void refuseOrder(ActionEvent event) throws IOException {
-		ArrayList<Order> ordersToChange = new ArrayList<Order>();
+		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, ordersToChange));
+		orderToChange = list.get(0);
+		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange));
 		for (int i = 0; i < allOrders.size(); i++) {
-			for (int j = 0; j < ordersToChange.size(); j++) {
-				if (allOrders.get(i).equals(ordersToChange.get(j)))
+				if (allOrders.get(i).equals(orderToChange))
 					allOrders.remove(i);
 			}
-		}
-		ordersToChange.clear();
+		orderToChange = null;
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
 	}
@@ -145,26 +136,22 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	@FXML
 	void SendOrder(ActionEvent event) {
 		boolean continueFlag = true;
-		ArrayList<Order> ordersToChange = new ArrayList<Order>();
+		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		if (!ordersToChange.get(0).getOrderStatus().equals("Approved"))
+		orderToChange = list.get(0);
+		if (!orderToChange.getOrderStatus().equals("Approved"))
 			PopUpMessage.errorMessage("Order must be approved before sended to client");
 		else {
 			for (int i = 0; i < allOrders.size(); i++) {
-				for (int j = 0; j < ordersToChange.size(); j++) {
-					if (allOrders.get(i).equals(ordersToChange.get(j)))
+					if (allOrders.get(i).equals(orderToChange))
 						allOrders.remove(i);
 				}
-			}
-			ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, ordersToChange));
+			ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, orderToChange));
 			StringBuilder str = new StringBuilder();
 			str.append("successfully. The phone is - ");
 			str.append(phoneNumber);
-			if (ordersToChange.get(0).getOrderType().equals("Regular")
-					|| ordersToChange.get(0).getOrderType().equals("Shared")) {
+			if (orderToChange.getOrderType().equals("Regular")
+					|| orderToChange.getOrderType().equals("Shared")) {
 				RegularOrSharedFlag = true;
 			}
 			if (RegularOrSharedFlag) {
@@ -187,7 +174,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 					RegularOrSharedFlag = false;
 					continueFlag = false;
 					str.setLength(0);
-					ordersToChange.clear();
+					orderToChange = null;
 					setArrivalTimeIsPlaaned.clear();
 				}
 
@@ -195,17 +182,13 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 			if (continueFlag) {
 				RegularOrSharedFlag = false;
 				waitForArrivalTimeFlag = false;
-				ClientUI.chat.accept(new Message(MessageType.Order_sended, ordersToChange));
+				ClientUI.chat.accept(new Message(MessageType.Order_sended, orderToChange));
 				PopUpMessage.simulationMessage(str.toString());
-				ordersToChange.clear();
+				orderToChange = null;
 				list = FXCollections.observableArrayList(allOrders);
 				table.setItems(list);
 				str.setLength(0);
 				setArrivalTimeIsPlaaned.clear();
-				/*
-				 * labelArrivalTime.setVisible(false);
-				 * setArrivalTimeIsPlaaned.setVisible(false);
-				 */
 			}
 		}
 	}
@@ -252,7 +235,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		dateOfOrder.setCellValueFactory(new PropertyValueFactory<Order, String>("dateOfOrder"));
 		orderStatus.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatus"));
 		costumerID.setCellValueFactory(new PropertyValueFactory<Order, String>("costumerId"));
-		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, LoginScreenController.ID));
+		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, LoginScreenController.user.getId()));
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
 	}

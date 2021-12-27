@@ -23,7 +23,6 @@ import main.PopUpMessage;
 
 public class AddDishToMenuController extends Controller implements Initializable {
 	public static boolean indicator;// in case indicator=false then createMenu, if indicator=true then addNewDish
-	public static String TypeOfDish;
 	public static boolean dishAdd = false;
 
 	@FXML
@@ -68,6 +67,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	@FXML
 	private TextArea txtExtra;
 
+	private String TypeOfDish;
 	private boolean typeDishIsValid = true;
 	private boolean choiceDetailsIsValid = true;
 	private boolean choiceFactorIsValid = true;

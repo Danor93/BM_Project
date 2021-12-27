@@ -281,7 +281,7 @@ public class Parsing {
 
 		case Use_Refund: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.updateRefundAmmount((ArrayList<Order>) receivedMessage.getMessageData())) {
+			if (UpdateDB.updateRefundAmmount((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.update_RefundTable, null);
 				return messageFromServer;
 			}
@@ -289,7 +289,7 @@ public class Parsing {
 
 		case Use_Budget: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.updateBudgetValue((ArrayList<Order>) receivedMessage.getMessageData())) {
+			if (UpdateDB.updateBudgetValue((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
 				return messageFromServer;
 			}
@@ -297,7 +297,7 @@ public class Parsing {
 
 		case Order_not_approved: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.updateOrderStatusToNotApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
+			if (UpdateDB.updateOrderStatusToNotApproved((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
 				return messageFromServer;
 			}
@@ -305,7 +305,7 @@ public class Parsing {
 
 		case Order_approved: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.updateOrderStatusToApproved((ArrayList<Order>) receivedMessage.getMessageData())) {
+			if (UpdateDB.updateOrderStatusToApproved((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
 				return messageFromServer;
 			}
@@ -313,14 +313,14 @@ public class Parsing {
 
 		case Order_sended: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.updateOrderStatusSended((ArrayList<Order>) receivedMessage.getMessageData())) {
+			if (UpdateDB.updateOrderStatusSended((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
 				return messageFromServer;
 			}
 		}
 
 		case get_Phone_Number: {
-			String phoneNumber = Query.LoadPhoneNumber((ArrayList<Order>) receivedMessage.getMessageData());
+			String phoneNumber = Query.LoadPhoneNumber((Order) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.set_Phone_number, phoneNumber);
 			return messageFromServer;
 		}

@@ -575,13 +575,13 @@ public class Query {
 		return false;
 	}
 
-	public static String LoadPhoneNumber(ArrayList<Order> arrayList) {
+	public static String LoadPhoneNumber(Order order) {
 		Statement stmt;
 		String phoneNumber=null;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT phone FROM bitemedb.users WHERE ID='" + arrayList.get(0).getCostumerId() + "'" + "");
+					"SELECT phone FROM bitemedb.users WHERE ID='" + order.getCostumerId() + "'" + "");
 			while (rs.next()) {
 				phoneNumber = rs.getString(1);
 			}

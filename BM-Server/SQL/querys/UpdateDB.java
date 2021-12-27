@@ -137,15 +137,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean updateOrderStatusToNotApproved(ArrayList<Order> arrayList) {
+	public static boolean updateOrderStatusToNotApproved(Order order) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Not approved' WHERE orderNumber=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
-				i++;
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
 
@@ -159,15 +157,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean updateOrderStatusToApproved(ArrayList<Order> arrayList) {
+	public static boolean updateOrderStatusToApproved(Order order) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Approved' WHERE orderNumber=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
-				i++;
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
 
@@ -260,23 +256,23 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean updateRefundAmmount(ArrayList<Order> arrayList) {
+	public static boolean updateRefundAmmount(Order order) {
 		int newAmmount;
-		ArrayList<String> ammount = new ArrayList<>();
+		String ammount=null;
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT ammount FROM bitemedb.refund WHERE restId='"
-					+ arrayList.get(0).getRestId() + "' AND ID='" + arrayList.get(0).getCostumerId() + "'" + "");
+					+ order.getRestId() + "' AND ID='" + order.getCostumerId() + "'" + "");
 			while (rs.next()) {
-				ammount.add(rs.getString(1));
+				ammount = rs.getString(1);
 			}
 			rs.close();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
 
-		newAmmount = Integer.parseInt(ammount.get(0)) - Integer.parseInt(arrayList.get(0).getUseRefund());
+		newAmmount = Integer.parseInt(ammount) - Integer.parseInt(order.getUseRefund());
 		if (newAmmount < 0)
 			newAmmount = 0;
 
@@ -284,8 +280,8 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.refund SET ammount='" + newAmmount
-						+ "' WHERE restId='" + arrayList.get(0).getRestId() + "' AND ID='"
-						+ arrayList.get(0).getCostumerId() + "'" + "");
+						+ "' WHERE restId='" + order.getRestId() + "' AND ID='"
+						+ order.getCostumerId() + "'" + "");
 				stmt2.executeUpdate();
 				return true;
 
@@ -299,23 +295,23 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean updateBudgetValue(ArrayList<Order> arrayList) {
+	public static boolean updateBudgetValue(Order order) {
 		Float newBudget;
-		ArrayList<String> budget = new ArrayList<>();
+		String budget = null;
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT budget FROM bitemedb.buss_client WHERE ID='"
-					+ arrayList.get(0).getCostumerId() + "' AND status='Approved'" + "");
+					+ order.getCostumerId() + "' AND status='Approved'" + "");
 			while (rs.next()) {
-				budget.add(rs.getString(1));
+				budget = rs.getString(1);
 			}
 			rs.close();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
 
-		newBudget = Float.parseFloat(budget.get(0)) - arrayList.get(0).getTotalPrice();
+		newBudget = Float.parseFloat(budget) - order.getTotalPrice();
 
 		if (newBudget.compare(newBudget, 0) < 0)
 			newBudget = Float.parseFloat("0");
@@ -324,7 +320,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.buss_client SET budget='" + newBudget
-						+ "' WHERE ID='" + arrayList.get(0).getCostumerId() + "' AND status='Approved'" + "");
+						+ "' WHERE ID='" + order.getCostumerId() + "' AND status='Approved'" + "");
 				stmt2.executeUpdate();
 				return true;
 
@@ -338,15 +334,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean updateOrderStatusSended(ArrayList<Order> arrayList) {
+	public static boolean updateOrderStatusSended(Order order) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Sended' WHERE orderNumber=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getOrderNum()));
-				i++;
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
 
