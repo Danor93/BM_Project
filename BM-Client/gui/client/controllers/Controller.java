@@ -1,6 +1,9 @@
 package client.controllers;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import Entities.Message;
 import Entities.MessageType;
@@ -22,10 +25,10 @@ import javafx.stage.WindowEvent;
 
 public abstract class  Controller  {
 
-	/** setImage this method setImage for give imageview */
-	public void setImage(ImageView img, String ImageName) {
-		Image image;
-		image = new Image(getClass().getResource(ImageName).toExternalForm());
+	/** setImage this method setImage for give imageview 
+	 * @throws FileNotFoundException */
+	public void setImage(ImageView img, String ImageName)  {
+		Image image = new Image(getClass().getResource(ImageName).toExternalForm());
 		img.setImage(image);
 	}
 

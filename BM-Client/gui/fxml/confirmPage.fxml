@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -13,10 +12,7 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.RecConfirmController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
-         </image></ImageView>
+      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="621.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -53,11 +49,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="logout" layoutX="14.0" layoutY="249.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
                <font>
                   <Font name="System Bold" size="14.0" />
