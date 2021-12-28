@@ -2,142 +2,178 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Supplier;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import main.ClientUI;
-import javafx.fxml.Initializable;
+import main.PopUpMessage;
 
 public class ConfirmSupplierRegController extends Controller implements Initializable {
-	
-	/*
-	 * Author:Danor
-	 * this Class for handle the confirm or refuse registration for the Branch Manager of suppliers.
-	 * */
 
-		public static ArrayList<Supplier> Suppliers = new ArrayList<>();
-		public static String supplierName;
-	
-	 	@FXML
-	    private ResourceBundle resources;
+	public static Supplier supplier;
+	public static Boolean confirmRegFlag = false;
 
-	    @FXML
-	    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-	    @FXML
-	    private ImageView BackImage;
+	@FXML
+	private URL location;
 
-	    @FXML
-	    private ComboBox<String> ListofSupplier;
+	@FXML
+	private TextField AddressTXT;
 
-	    @FXML
-	    private Button BackBtn;
+	@FXML
+	private Button BackBtn;
 
-	    @FXML
-	    private Button btnConfirmSupplierRegistartion;
+	@FXML
+	private ImageView BackImage;
 
-	    @FXML
-	    private Button btnRefuseSupplierRegistartion;
+	@FXML
+	private TextField CityTXT;
 
-	    /*this method for update the DB and return to the branch manager screen.*/
-	    @FXML
-	    void Back(ActionEvent event) throws IOException {
-	    	ClientUI.chat.accept(new Message(MessageType.Supplier_Update,Suppliers));
-	    	if(LoginScreenController.user.getRole().equals("CEO")) {
-				startScreen(event, "CEOScreen", "CEO");
-			}
-			if(LoginScreenController.user.getRole().equals("BranchManager")) {
-				startScreen(event, "BranchManagerScreen", "Branch Manager");
-			}
-	    }
+	@FXML
+	private TextField ConfirmEmpTxt;
 
-	    /*this method is for the Combobox Selection*/
-	    @FXML
-	    void ChooseSupplier(ActionEvent event) {
-	    	supplierName = ListofSupplier.getSelectionModel().getSelectedItem();
-	    	btnConfirmSupplierRegistartion.setDisable(false);
-			btnRefuseSupplierRegistartion.setDisable(false);
-	    }
+	@FXML
+	private Label InvaildEmployeeID;
 
-	    /*this method is for the "Confirm" Button for approved Supplier*/
-	    @FXML
-	    void ConfirmSupplierRegistartion(ActionEvent event) {
-	    	ListofSupplier.setDisable(true);
-			for (int i = 0; i < Suppliers.size(); i++) {
-				if (Suppliers.get(i).getSupplierName().equals(supplierName)) {
-					Suppliers.get(i).setSupplierStatus("Approved");
+	@FXML
+	private Label InvaildopeningTime;
+
+	@FXML
+	private TextField OpeningTimeTXT;
+
+	@FXML
+	private TextField ResIDTXT;
+
+	@FXML
+	private TextField ResNameTXT;
+
+	@FXML
+	private Button btnConfirmSupplierRegistartion;
+
+	@FXML
+	private Label invaildName;
+
+	@FXML
+	private Label InvaildCityName;
+
+	@FXML
+	private Label InvaildResID;
+
+	@FXML
+	private Label InvaildAddress;
+
+	@FXML
+	void Back(ActionEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
+	}
+
+	@FXML
+	void ConfirmSupplierRegistartion(ActionEvent event) {
+		Boolean ConfirmFlag = true;
+		if (AddressTXT.getText().isEmpty() || CityTXT.getText().isEmpty() || ConfirmEmpTxt.getText().isEmpty()
+				|| OpeningTimeTXT.getText().isEmpty() || ResIDTXT.getText().isEmpty()
+				|| ResNameTXT.getText().isEmpty()) {
+			PopUpMessage.errorMessage("you must fill all of the fileds!");
+		} else {
+			while (ConfirmFlag) {
+				char[] charsResName = ResNameTXT.getText().toCharArray();
+				for (char c : charsResName) {
+
+					if (!Character.isLetter(c) && !Character.isSpaceChar(c)) {
+						invaildName.setVisible(true);
+					}
+				}
+
+				char[] charsCityName = CityTXT.getText().toCharArray();
+
+				for (char c : charsCityName) {
+
+					if (!Character.isLetter(c) && !Character.isSpaceChar(c)) {
+						InvaildCityName.setVisible(true);
+					}
+				}
+
+				char[] charsAddress = AddressTXT.getText().toCharArray();
+
+				for (char c : charsAddress) {
+
+					if (!Character.isLetter(c) && !Character.isSpaceChar(c) && !Character.isDigit(c)) {
+						InvaildAddress.setVisible(true);
+					}
+				}
+
+				/**
+				 * String regexStr = "^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{4}$"; if
+				 * (!(ResIDTXT.getText()).matches(regexStr)) {
+				 * InvaildEmployeeID.setVisible(true); } if
+				 * (!ConfirmEmpTxt.getText().matches(regexStr)) { InvaildResID.setVisible(true);
+				 * }
+				 **/
+
+				char[] charresid = ResIDTXT.getText().toCharArray();
+
+				for (char c : charresid) {
+
+					if (!Character.isDigit(c)) {
+						InvaildResID.setVisible(true);
+					}
+				}
+
+				char[] charEmpId = ConfirmEmpTxt.getText().toCharArray();
+
+				for (char c : charEmpId) {
+
+					if (!Character.isDigit(c)) {
+						InvaildEmployeeID.setVisible(true);
+					}
+				}
+
+				if (invaildName.isVisible() && InvaildAddress.isVisible() && InvaildCityName.isVisible()
+						&& InvaildEmployeeID.isVisible() && InvaildopeningTime.isVisible()
+						&& InvaildResID.isVisible()) {
+					ConfirmFlag = false;
+				}
+				else {
+					break;
 				}
 			}
-			ListofSupplier.getItems().clear();
-			loadSupplierstoComboBox(Suppliers);
-			ListofSupplier.setPromptText("List of employers awaiting approval");
-			ListofSupplier.setDisable(false);
-	    }
+			supplier = new Supplier(Integer.parseInt(ResIDTXT.getText()), ResNameTXT.getText(),
+					OpeningTimeTXT.getText(), CityTXT.getText(), AddressTXT.getText(), "Approved",
+					LoginScreenController.user.getHomeBranch(), ConfirmEmpTxt.getText());
 
-	    /*this method is for the "Refuse" Button for Not Approved Supplier*/
-	    @FXML
-	    void RefuseSupplierRegistartion(ActionEvent event) {
-	    	ListofSupplier.setDisable(true);
-			for (int i = 0; i < Suppliers.size(); i++) {
-				if (Suppliers.get(i).getSupplierName().equals(supplierName)) {
-					Suppliers.get(i).setSupplierStatus("Not approved");
-				}
-			}
-			ListofSupplier.getItems().clear();
-			refreshcombobox(Suppliers);
-			ListofSupplier.setPromptText("List of employers awaiting approval");
-			ListofSupplier.setDisable(false);
-	    }
-		
-		/*this method is for load the not approved and waiting supplier names.*/
-		public void loadSupplierstoComboBox(ArrayList<Supplier> Suppliers) {
-			for (Supplier s : Suppliers) {
-				if (s.getSupplierStatus().equals("Not approved") || s.getSupplierStatus().equals("Waiting")) {
-					ListofSupplier.getItems().add(s.getSupplierName());
-				}
+			ClientUI.chat.accept(new Message(MessageType.check_suppliers_details, supplier));
+			if (confirmRegFlag) {
+				PopUpMessage
+						.successMessage("The supplier " + supplier.getSupplierName() + " has been added succesfuly!");
+				confirmRegFlag = false;
+			} else {
+				PopUpMessage.errorMessage("details are not match to the DB,check again please.");
 			}
 		}
-		
-		/*this method is for load only the waiting Supplier names.*/
-		public void refreshcombobox(ArrayList<Supplier> Suppliers) {
-			for (Supplier s : Suppliers) {
-				if (s.getSupplierStatus().equals("Waiting")) {
-					ListofSupplier.getItems().add(s.getSupplierName());
-				}
-			}
-		}
-	
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String Branch = LoginScreenController.user.getHomeBranch().toString();
-		ClientUI.chat.accept(new Message(MessageType.get_Supplier,Branch));
-		loadSupplierstoComboBox(Suppliers);
-		if(LoginScreenController.user.getRole().equals("CEO")) {
-			BackBtn.setText("Back to CEO Panel");
-		}
-		if(LoginScreenController.user.getRole().equals("BranchManager")) {
-			BackBtn.setText("Back to Branch Manager Panel");
-		}
-		btnConfirmSupplierRegistartion.setDisable(true);
-		btnRefuseSupplierRegistartion.setDisable(true);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

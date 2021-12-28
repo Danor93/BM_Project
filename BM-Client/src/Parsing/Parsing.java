@@ -45,8 +45,7 @@ import main.PopUpMessage;
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
-		Message receivedMessage = null;
-		receivedMessage = (Message) msg;
+		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 
@@ -169,8 +168,13 @@ public class Parsing {
 			break;
 		}
 
-		case Supplier_list: {
-			ConfirmSupplierRegController.Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
+		case Supplier_List_Update_succ:{
+			ConfirmSupplierRegController.confirmRegFlag=false;
+			break;
+		}
+		
+		case supplier_not_match:{
+			ConfirmSupplierRegController.confirmRegFlag=true;
 			break;
 		}
 

@@ -72,7 +72,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		startScreen(event, "LoginScreen", "Login");
 	}
 
@@ -119,7 +119,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
-		startScreen(event, "ConfirmSupplierRegistartion", "Confirm Supplier");
+		startScreen(event, "BranchManagerSupplierRegistration", "Supplier Registration");
 	}
 
 	/**

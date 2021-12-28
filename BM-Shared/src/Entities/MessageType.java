@@ -11,7 +11,7 @@ public enum MessageType {
 	Baccount_details_not_ok, PAccount_details_not_ok, changed_BusinessAccount_status_to_Approved_succ,
 	changed_BusinessAccount_status_to_NotApproved_succ, W4C_Business_List, update_RefundTable, update_Budget_bussClient,
 	changed_status_to_sended_succ, Company_Status_Not_Equale_To_Approved, Company_Status_Equale_To_Approved,
-	set_Phone_number,ConfirmOpenNewBusinessAccount,
+	set_Phone_number,ConfirmOpenNewBusinessAccount,supplier_not_match,
 
 	/* Client Message */
 	Update_Orders, Show_Orders, IdentifyW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
@@ -23,7 +23,7 @@ public enum MessageType {
 	get_Revenue_report, get_Orders_report, getAllW4CBusiness, get_Performance_report, Use_Refund, Use_Budget,
 	Order_sended, get_Company_Status, get_Phone_Number,Account_Status_Active,Account_Status_Freeze,send_Revenue_Report,
 	check_account_status,InsertDelivery,ClientConfirm,orderDone,check_account_status_Active,check_account_status_Freeze,
-	Update_Status_to_Active,Update_Status_to_Freeze,ReturnFirstName, ReturnFirstName_success, 
+	Update_Status_to_Active,Update_Status_to_Freeze,ReturnFirstName, ReturnFirstName_success,check_suppliers_details,
 
 	/* type of users */
 
