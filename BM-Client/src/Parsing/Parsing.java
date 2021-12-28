@@ -169,12 +169,12 @@ public class Parsing {
 		}
 
 		case Supplier_List_Update_succ:{
-			ConfirmSupplierRegController.confirmRegFlag=false;
+			ConfirmSupplierRegController.confirmRegFlag=true;
 			break;
 		}
 		
 		case supplier_not_match:{
-			ConfirmSupplierRegController.confirmRegFlag=true;
+			ConfirmSupplierRegController.confirmRegFlag=false;
 			break;
 		}
 

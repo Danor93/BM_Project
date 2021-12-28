@@ -206,7 +206,6 @@ public class Query {
 					}
 					if (role[0].equals("Certified")) {
 						Certified_Employee.setId(String.valueOf(supplier.getRestId()));
-						System.out.println(Certified_Employee.getId());
 						Certified_Employee.setFirstN(rs.getString(3));
 						Certified_Employee.setLastN(rs.getString(4));
 						Certified_Employee.setUserName(rs.getString(1));
@@ -221,7 +220,7 @@ public class Query {
 						"INSERT INTO bitemedb.users(userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch) VALUES(?,?,?,?,?,?,?,?,?,?)");
 				stmt2.setString(1, Approved_Employee.getUserName());
 				stmt2.setString(2, Approved_Employee.getPassword());
-				stmt2.setString(3, Approved_Employee.getRole());
+				stmt2.setString(3, "Supplier-" + Approved_Employee.getRole());
 				stmt2.setString(4, Approved_Employee.getFirstN());
 				stmt2.setString(5, Approved_Employee.getLastN());
 				stmt2.setString(6, Approved_Employee.getId());
@@ -235,7 +234,7 @@ public class Query {
 						"INSERT INTO bitemedb.users(userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch) VALUES(?,?,?,?,?,?,?,?,?,?)");
 				stmt3.setString(1, Certified_Employee.getUserName());
 				stmt3.setString(2, Certified_Employee.getPassword());
-				stmt3.setString(3, Certified_Employee.getRole());
+				stmt3.setString(3, "Supplier-" + Certified_Employee.getRole());
 				stmt3.setString(4, Certified_Employee.getFirstN());
 				stmt3.setString(5, Certified_Employee.getLastN());
 				stmt3.setString(6, Certified_Employee.getId());

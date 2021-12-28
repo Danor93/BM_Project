@@ -91,7 +91,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('111','Microsoft','Approved'),('222','Amazon','Not approved'),('22233','Elbit','Approved'),('333','Intel','Approved'),('444','Google','Approved'),('555','Facebook','Approved'),('666','Refael','Waiting'),('777','Nivdia','Not approved');
+INSERT INTO `company` VALUES ('111','Microsoft','Approved'),('222','Amazon','Not approved'),('22233','Elbit','Approved'),('444','Google','Approved'),('555','Facebook','Approved'),('666','Refael','Waiting'),('777','Nivdia','Not approved'),('B87','Intel','Waiting');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,6 +120,7 @@ CREATE TABLE `delivery` (
 
 LOCK TABLES `delivery` WRITE;
 /*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
+INSERT INTO `delivery` VALUES ('23','Regular','1','habrosh','0502660865','danor','25.0'),('24','Regular','1','habrosh','0502660864','adi','25.0'),('25','Regular','1','habrosh','0502660868','talia','25.0');
 /*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +153,6 @@ CREATE TABLE `dishes` (
 
 LOCK TABLES `dishes` WRITE;
 /*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
-INSERT INTO `dishes` VALUES ('cheese cake','Dessert','1','vivino',6,'with','Strawberries / blueberries','cheese,aggs,cramble','no cramble'),('greek salad','Salad','1','vivino',3.5,'size','S/M/L','tomato,cucamber,onion','no onion/ no pinuts/extra cheese'),('home salad','Salad','1','vivino',7.5,'','','tomato,cucamber,onion','');
 /*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `dishesinorder` (
   PRIMARY KEY (`dishId`,`orderNum`,`dishName`),
   KEY `orderNumber` (`orderNum`),
   CONSTRAINT `orderNumber_fk` FOREIGN KEY (`orderNum`) REFERENCES `order` (`orderNumber`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `dishesinorder` (
 
 LOCK TABLES `dishesinorder` WRITE;
 /*!40000 ALTER TABLE `dishesinorder` DISABLE KEYS */;
-INSERT INTO `dishesinorder` VALUES (3,15,'home salad','1','Salad','','','',2),(4,15,'cheese cake','1','Dessert','with','Strawberries ','',2),(5,16,'home salad','1','Salad','','','',2),(6,17,'home salad','1','Salad','','','',2),(7,17,'cheese cake','1','Dessert','with',' blueberries','',1),(8,18,'greek salad','1','Salad','size','S','',1),(9,18,'home salad','1','Salad','','','',1),(10,19,'greek salad','1','Salad','size','S','',1),(11,19,'home salad','1','Salad','','','',1),(12,20,'greek salad','1','Salad','size','S','',1),(13,20,'home salad','1','Salad','','','',1);
+INSERT INTO `dishesinorder` VALUES (3,15,'home salad','1','Salad','','','',2),(4,15,'cheese cake','1','Dessert','with','Strawberries ','',2),(5,16,'home salad','1','Salad','','','',2),(6,17,'home salad','1','Salad','','','',2),(7,17,'cheese cake','1','Dessert','with',' blueberries','',1),(8,18,'greek salad','1','Salad','size','S','',1),(9,18,'home salad','1','Salad','','','',1),(10,19,'greek salad','1','Salad','size','S','',1),(11,19,'home salad','1','Salad','','','',1),(12,20,'greek salad','1','Salad','size','S','',1),(13,20,'home salad','1','Salad','','','',1),(14,23,'greek salad','1','Salad','size','S','',1),(15,24,'greek salad','1','Salad','size','M','extra cheese ',1),(16,25,'home salad','1','Salad','',NULL,NULL,1),(17,26,'home salad','1','Salad','',NULL,NULL,1),(18,27,'home salad','1','Salad','',NULL,NULL,1),(19,28,'greek salad','1','Salad','size','M',' no pinuts ',1);
 /*!40000 ALTER TABLE `dishesinorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `import_users` (
 
 LOCK TABLES `import_users` WRITE;
 /*!40000 ALTER TABLE `import_users` DISABLE KEYS */;
-INSERT INTO `import_users` VALUES ('ds','ds','danor','sinai','3111','d@gmail.com','050266',''),('ag','ag','aviel','gabay','312987','a@gmail.com','053456',''),('so','so','sahar','oz','31456','s@gmail.com','052222','');
+INSERT INTO `import_users` VALUES ('ds','ds','danor','sinai','3111','d@gmail.com','050266',''),('viv1','viv1','avi','cohen','311546','avic@gmail.com','0526489','Certified-vivinio'),('ag','ag','aviel','gabay','312987','a@gmail.com','053456',''),('so','so','sahar','oz','31456','s@gmail.com','052222',''),('viv2','viv2','moshe','biton','356789','mosheb@gmail.com','0534689','Approved-vivinio');
 /*!40000 ALTER TABLE `import_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +240,7 @@ CREATE TABLE `order` (
   `usedBudget` int NOT NULL DEFAULT '0',
   `EarlyOrder` varchar(45) NOT NULL,
   PRIMARY KEY (`orderNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +249,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (3,'Take Away','vivino','1','7.5','12:00','2021-12-23','Done','134','0',0,''),(4,'Take Away','vivino','1','6.75','14:00','2021-12-23','Waiting for approval','123','0',0,''),(5,'Take Away','vivino','1','7.5','12:00','2021-12-23','Sended','134','0',0,''),(6,'Take Away','vivino','1','6.75','13:00','2021-12-23','Waiting for approval','123','0',0,''),(7,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(8,'Take Away','vivino','1','6.75','11:00','2021-12-23','Done','123','0',0,''),(9,'Take Away','vivino','1','6.75','11:00','2021-12-23','Waiting for approval','123','0',0,''),(10,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(11,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(12,'Take Away','vivino','1','12.15','11:00','2021-12-23','Done','123','0',0,''),(13,'Take Away','vivino','1','13.5','12:00','2021-12-23','Waiting for approval','134','0',0,''),(14,'Take Away','vivino','1','12.15','12:00','2021-12-23','Waiting for approval','3111','0',0,''),(15,'Take Away','vivino','1','13.5','11:00','2021-12-23','Done','134','0',0,''),(16,'Take Away','vivino','1','13.5','11:00','2021-12-23','Waiting for approval','123','0',0,''),(17,'Take Away','vivino','1','21.0','11:00','2021-12-23','Waiting for approval','134','0',0,''),(18,'Take Away','vivino','1','11.0','14:00','2021-12-24','Waiting for approval','123','0',0,'yes'),(19,'Take Away','vivino','1','6.8999996','14:00','2021-12-24','Waiting for approval','123','3',0,'yes'),(20,'Take Away','vivino','1','6.8999996','14:00','2021-12-24','Done','123','3',0,'yes'),(21,'Take Away','refaelo','2','10.5','12:30','2021-12-24','Waiting for approval','123','0',0,'yes'),(22,'Take Away','refaelo','2','17.5','13:45','2021-12-24','Waiting for approval','123','0',0,'yes');
+INSERT INTO `order` VALUES (3,'Take Away','vivino','1','7.5','12:00','2021-12-23','Done','134','0',0,''),(4,'Take Away','vivino','1','6.75','14:00','2021-12-23','Waiting for approval','123','0',0,''),(5,'Take Away','vivino','1','7.5','12:00','2021-12-23','Sended','134','0',0,''),(6,'Take Away','vivino','1','6.75','13:00','2021-12-23','Waiting for approval','123','0',0,''),(7,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(8,'Take Away','vivino','1','6.75','11:00','2021-12-23','Done','123','0',0,''),(9,'Take Away','vivino','1','6.75','11:00','2021-12-23','Waiting for approval','123','0',0,''),(10,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(11,'Take Away','vivino','1','7.5','11:00','2021-12-23','Waiting for approval','134','0',0,''),(12,'Take Away','vivino','1','12.15','11:00','2021-12-23','Done','123','0',0,''),(13,'Take Away','vivino','1','13.5','12:00','2021-12-23','Waiting for approval','134','0',0,''),(14,'Take Away','vivino','1','12.15','12:00','2021-12-23','Waiting for approval','3111','0',0,''),(15,'Take Away','vivino','1','13.5','11:00','2021-12-23','Done','134','0',0,''),(16,'Take Away','vivino','1','13.5','11:00','2021-12-23','Waiting for approval','123','0',0,''),(17,'Take Away','vivino','1','21.0','11:00','2021-12-23','Waiting for approval','134','0',0,''),(18,'Take Away','vivino','1','11.0','14:00','2021-12-24','Waiting for approval','123','0',0,'yes'),(19,'Take Away','vivino','1','6.8999996','14:00','2021-12-24','Waiting for approval','123','3',0,'yes'),(20,'Take Away','vivino','1','6.8999996','14:00','2021-12-24','Done','123','3',0,'yes'),(21,'Take Away','refaelo','2','10.5','12:30','2021-12-24','Waiting for approval','123','0',0,'yes'),(22,'Take Away','refaelo','2','17.5','13:45','2021-12-24','Waiting for approval','123','0',0,'yes'),(23,'Regular','vivino','1','3.5','15:00','2021-12-27','Waiting for approval','123','0',0,'yes'),(24,'Regular','vivino','1','3.5','12:00','2021-12-28','Waiting for approval','123','0',0,'yes'),(25,'Regular','vivino','1','7.5','17:00','2021-12-29','Waiting for approval','123','0',0,'yes'),(26,'Take Away','vivino','1','7.5','20:00','2021-12-28','Waiting for approval','123','0',0,'yes'),(27,'Take Away','vivino','1','7.5','11:00','2021-12-28','Waiting for approval','123','0',0,'yes'),(28,'Take Away','vivino','1','3.15','11:30','2021-12-30','Waiting for approval','134','0',0,'yes');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +321,6 @@ CREATE TABLE `supplier` (
   `address` varchar(45) DEFAULT NULL,
   `supplierStatus` varchar(45) DEFAULT NULL,
   `homeBranch` varchar(45) DEFAULT NULL,
-  `Certified_Employee` varchar(45) NOT NULL,
   `Confirm_Employee` varchar(45) NOT NULL,
   PRIMARY KEY (`restId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -333,7 +332,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1','vivino','10:00-20:00','haifa','haifa','Approved','north','',''),('2','refaelo','11:00-20:00','haifa','haifa','Approved','north','',''),('3','mcdonalds','11:00-23:00','kiryat haim','ahi eilat','Approved','north','',''),('4','japanika','12:00-00:00','kiryat haim','big center','Not approved','north','',''),('5','suso&suns','12:00-00:00','tel aviv','dizingof','Not approved','center','','');
+INSERT INTO `supplier` VALUES ('2','refaelo','11:00-20:00','haifa','haifa','Approved','north',''),('3','mcdonalds','11:00-23:00','kiryat haim','ahi eilat','Approved','north',''),('311546','vivinio','12:00-23:00','haifa','haifa','Approved','North','356789'),('4','japanika','12:00-00:00','kiryat haim','big center','Approved','north',''),('5','suso&suns','12:00-00:00','tel aviv','dizingof','Approved','center','');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,7 +365,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('adi','a1','Customer','tali','or','111','as@as.com','050344',0,'north'),('h','h','HR Intel','avi','sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','adi','sasson','123','***','***',0,'north'),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('ag','ag','Customer','aviel','gabay','312987','a@gmail.com','053456',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,'north'),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
+INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('adi','a1','Customer','tali','or','111','as@as.com','050344',0,'north'),('h','h','HR-Intel','avi','sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','adi','sasson','123','***','***',0,'north'),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('viv1','viv1','Supplier-Certified-vivinio','avi','cohen','311546','avic@gmail.com','0526489',0,'North'),('ag','ag','Customer','aviel','gabay','312987','a@gmail.com','053456',0,'North'),('viv2','viv2','Supplier-Approved-vivinio','moshe','biton','356789','mosheb@gmail.com','0534689',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',1,'north'),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -379,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27  8:13:22
+-- Dump completed on 2021-12-28 19:38:28
