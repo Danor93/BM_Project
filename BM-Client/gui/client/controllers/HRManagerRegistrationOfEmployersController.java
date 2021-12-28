@@ -64,7 +64,7 @@ public class HRManagerRegistrationOfEmployersController extends Controller {
 		}
 		RandomSuccess = false;
 
-		Employer employer = new Employer(w4cNew, companyName.getText(), "waiting");
+		Employer employer = new Employer(w4cNew, companyName.getText(), "Waiting");
 		ClientUI.chat.accept(new Message(MessageType.RegistrationOfEmployer, employer));
 		if (RegistrationFlag) {
 			mibiLabel.setText("Registration succeeded");
@@ -84,5 +84,11 @@ public class HRManagerRegistrationOfEmployersController extends Controller {
 				: "fx:id=\"btnConfirm\" was not injected: check your FXML file 'HRManagerRegistrationOfEmployers.fxml'.";
 		assert mibiLabel != null
 				: "fx:id=\"mibiLabel\" was not injected: check your FXML file 'HRManagerRegistrationOfEmployers.fxml'.";
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

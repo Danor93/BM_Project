@@ -110,4 +110,10 @@ public class AddNewMainDishToMenuConrtoller extends Controller{
         assert WellDoneCookLavelMark != null : "fx:id=\"WellDoneCookLavelMark\" was not injected: check your FXML file 'AddNewMainDishToMenu.fxml'.";
         assert OneWayMark != null : "fx:id=\"OneWayMark\" was not injected: check your FXML file 'AddNewMainDishToMenu.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

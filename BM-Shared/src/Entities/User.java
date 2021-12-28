@@ -14,8 +14,10 @@ public class User implements Serializable {
 		this.firstN = firstN;
 		this.lastN = lastN;
 		this.homeBranch = homeBranch;
-		setUserName(userName);
-		setPassword(password);
+		this.userName=userName;
+		this.password=password;
+		//setUserName(userName);
+		//setPassword(password);
 		this.isLoggedIn="0";
 	}
 	

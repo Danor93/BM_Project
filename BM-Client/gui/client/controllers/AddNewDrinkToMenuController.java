@@ -87,4 +87,10 @@ public class AddNewDrinkToMenuController extends Controller{
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'AddNewDrinkToMenu.fxml'.";
         assert txtMiniLabel != null : "fx:id=\"txtMiniLabel\" was not injected: check your FXML file 'AddNewDrinkToMenu.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

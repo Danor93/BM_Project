@@ -51,6 +51,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
    @FXML
    void ChooseUserName(ActionEvent event) {
 	   userName = AccountComboBox.getSelectionModel().getSelectedItem();
+	   ConfirmBtn.setDisable(false);
    }
    
    /*for confirm button*/
@@ -77,7 +78,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
     /*load account for the combo box*/
     public void loadAccounts(ArrayList<User> Users) {
     	for(User u:Users) {
-    		AccountComboBox.getItems().add(u.getUserName());
+    		AccountComboBox.getItems().add(u.getFirstN());
     	}
     }
 
@@ -86,5 +87,12 @@ public class BranchManagerCloseAccountController extends Controller implements I
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.chat.accept(new Message(MessageType.get_Accounts,null));
 		loadAccounts(Users);
+		ConfirmBtn.setDisable(true);
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

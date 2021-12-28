@@ -101,7 +101,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 				e.printStackTrace();
 			}
 			try {
-				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
+				dish = new Dish(txtNameDish.getText(), LoginScreenController.user.getFirstN(), null, null, null, null,
 						Float.parseFloat(txtPriceDish.getText()), DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				e.printStackTrace();
@@ -208,5 +208,11 @@ public class AddDishToMenuController extends Controller implements Initializable
 			miniLabel.setText("Add new dish");
 
 		btnTypeDish.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

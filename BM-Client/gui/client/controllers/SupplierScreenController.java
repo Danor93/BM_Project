@@ -85,4 +85,10 @@ public class SupplierScreenController extends Controller implements ControllerIn
 		startScreen(event, "ConfirmOrderApproval", "Update order status");
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

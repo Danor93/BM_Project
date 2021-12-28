@@ -33,10 +33,10 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <ComboBox fx:id="BranchChoose" layoutX="159.0" layoutY="132.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="184.0" promptText="branch" />
-      <ComboBox fx:id="Month" layoutX="165.0" layoutY="218.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="86.0" promptText="month" />
-      <ComboBox fx:id="ReportType" layoutX="159.0" layoutY="169.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="184.0" promptText="report type" />
-      <ComboBox fx:id="Year" layoutX="257.0" layoutY="218.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="86.0" promptText="year" />
+      <ComboBox fx:id="BranchChoose" layoutX="159.0" layoutY="132.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="184.0" promptText="Branch" />
+      <ComboBox fx:id="Month" layoutX="165.0" layoutY="218.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="86.0" promptText="Month" />
+      <ComboBox fx:id="ReportType" layoutX="159.0" layoutY="169.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="184.0" promptText="Report Type" />
+      <ComboBox fx:id="Year" layoutX="257.0" layoutY="218.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="86.0" promptText="Year" />
       <Label layoutX="24.0" layoutY="136.0" prefHeight="17.0" prefWidth="120.0" text="Choose Branch:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -55,20 +55,9 @@
       <Button fx:id="GetReport" layoutX="185.0" layoutY="262.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" text="Get Report" />
       <StackPane fx:id="ReportPane" layoutX="390.0" layoutY="132.0" prefHeight="632.0" prefWidth="624.0" style="-fx-background-color: Grey;">
          <children>
-            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: green;">
-               <children>
-                  <TableView fx:id="RevenueTable" layoutY="302.0" prefHeight="330.0" prefWidth="624.0">
-                    <columns>
-                      <TableColumn prefWidth="157.59991455078125" text="Restaurant " />
-                      <TableColumn minWidth="0.0" prefWidth="276.00006103515625" text="Number of Orders" />
-                        <TableColumn prefWidth="190.4000244140625" text="Income" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
             <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;">
                <children>
-                  <TableView fx:id="orders" prefHeight="384.0" prefWidth="474.0">
+                  <TableView fx:id="OrdersTable" prefHeight="384.0" prefWidth="474.0" visible="false">
                     <columns>
                       <TableColumn prefWidth="150.4000244140625" text="Restaurant" />
                       <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
@@ -76,9 +65,9 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="Performance" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+            <Pane fx:id="Performance" prefHeight="632.0" prefWidth="624.0" style="-fx-background-color: grey;">
                <children>
-                  <TableView fx:id="PerformanceTable" prefHeight="498.0" prefWidth="553.0">
+                  <TableView fx:id="PerformanceTable" prefHeight="498.0" prefWidth="553.0" visible="false">
                     <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
@@ -86,7 +75,18 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="main" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: green;">
+               <children>
+                  <TableView fx:id="RevenueTable" prefHeight="632.0" prefWidth="624.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="Restaurant" prefWidth="180.0" text="Restaurant " />
+                      <TableColumn fx:id="NumberOfOrders" minWidth="0.0" prefWidth="261.5999755859375" text="NumberOfOrders" />
+                        <TableColumn fx:id="Income" prefWidth="184.800048828125" text="Income" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="main" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #BBBB;" />
          </children>
       </StackPane>
    </children>

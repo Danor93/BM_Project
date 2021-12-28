@@ -119,4 +119,10 @@ public class CreateMenuScreenController extends Controller implements Controller
         assert SaladsPane != null : "fx:id=\"SaladsPane\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
         assert MainDishesPain != null : "fx:id=\"MainDishesPain\" was not injected: check your FXML file 'CreateMenuScreen.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

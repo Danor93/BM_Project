@@ -76,7 +76,6 @@ public class HRManagerScreenController extends Controller{
 		ClientUI.chat.accept(new Message(MessageType.RegistrationOfEmployer, employer));
 		if (RegistrationFlag) {
 			ExistLbl.setText("Registration succeeded");
-			System.out.println(employer.getCompanyName() + " " + employer.getW4cBussines());
 		} else {
 			ExistLbl.setText("Registration failed! The employe already signed");
 		}
@@ -90,4 +89,10 @@ public class HRManagerScreenController extends Controller{
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
         assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

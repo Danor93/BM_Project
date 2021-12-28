@@ -16,6 +16,12 @@ public class Client extends User implements Serializable {
 		this.creditCardNumber = creditCardNumber;
 	}
 
+	public Client(String w4c_private)
+	{
+		super();
+		this.w4c_private=w4c_private;
+	}
+
 	public String getW4c_private() {
 		return w4c_private;
 	}

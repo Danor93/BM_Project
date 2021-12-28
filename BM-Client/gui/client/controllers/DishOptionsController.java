@@ -121,14 +121,12 @@ public class DishOptionsController extends Controller implements Initializable{
 		dish.setQuentity(ChoosingDishesController.quentity);
 		dish.setRestCode(RestListFormController.chosenRst.getRestCode());
 		SingletonOrder.getInstance().myOrder.add(dish);
-		notify.setFill(Color.GREEN);
-		notify.setText("The dish was successfully added to your order");
-
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
 		Parent root=load.load();
 		MenuScreenController aFrame = load.getController();
-		aFrame.display(RestListFormController.chosenRst.getSupplierName());
+		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"The dish was successfully added to your order");
+		aFrame.display("The dish was successfully added to your order");
 		aFrame.start(primaryStage,root);
 		
 	}
@@ -228,11 +226,11 @@ public class DishOptionsController extends Controller implements Initializable{
     }
 
     
-    public void setValue()
+  /*  public void setValue()
     {
 		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 
-    }
+    }*/
 	
 	public void start(Stage stage, Parent root) {
 		Scene scene = new Scene(root);		
@@ -270,6 +268,11 @@ public class DishOptionsController extends Controller implements Initializable{
 		}
 		
 		return choices;
+		
+	}
+	@Override
+	public void display(String string) {
+		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 		
 	}
 

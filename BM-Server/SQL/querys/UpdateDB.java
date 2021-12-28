@@ -179,7 +179,7 @@ public class UpdateDB {
 
 	public static boolean RegistrationOfEmployer(Employer employer) {
 		Statement stmt;
-		ArrayList<String> compantStatus = new ArrayList<>();
+		//ArrayList<String> compantStatus = new ArrayList<>();
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT companyStatus FROM bitemedb.company WHERE companyName='"
