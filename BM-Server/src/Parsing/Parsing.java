@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
+import java.util.Map;
+
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
@@ -37,7 +39,6 @@ import querys.queries;
 import querys.showCities;
 import querys.showRestaurants;
 
-
 public class Parsing {
 	public static String result2;
 
@@ -63,9 +64,9 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.login, result);
 			return messageFromServer;
 		}
-		
+
 		case IdentifyW4c: {
-			Client costumer=queries.checkAccountKind((String) receivedMessage.getMessageData());
+			Client costumer = queries.checkAccountKind((String) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 			return messageFromServer;
 		}
@@ -88,29 +89,28 @@ public class Parsing {
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest =getDishes.getDishes((String)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes,dishesOfRest);
+			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 			return messageFromServer;
 		}
-		
-		case getRefundDetails:{
-			String refundSum=queries.getRefundSum((Order)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.getRefundDetails,refundSum);
+
+		case getRefundDetails: {
+			String refundSum = queries.getRefundSum((Order) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.getRefundDetails, refundSum);
 			return messageFromServer;
 		}
-		
-		case InsertOrder:
-		{
-			Integer insert=queries.insertOrder((Order)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertOrder,insert);
+
+		case InsertOrder: {
+			Integer insert = queries.insertOrder((Order) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertOrder, insert);
 			return messageFromServer;
 		}
-		
-		case InsertDishesOrder:
-		{
-			String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
-			//String insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertDishesOrder,insert);
+
+		case InsertDishesOrder: {
+			String insert = queries.insertDishesOrder((ArrayList<Dish>) receivedMessage.getMessageData());
+			// String
+			// insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDishesOrder, insert);
 			return messageFromServer;
 		}
 
@@ -231,21 +231,19 @@ public class Parsing {
 			Query.updateFile(file);
 			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
 		}
-		
-		case checkDownloadFileDetails: {
-			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
-			if ((Query.checkBranchAndQuarterAndYear(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2])) == true) {
-				return messageFromServer = new Message(MessageType.DownloadFileDetails_ok, null);
-			} else {
-				return messageFromServer = new Message(MessageType.DownloadFileDetails_not_ok, null);
-			}
-		}
 
 		case downloadPDF: {
 			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
 			MyFile file = Query.downloadFile(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2]);
 			messageFromServer = new Message(MessageType.download_pdf_succ, file);
 			return messageFromServer;
+		}
+
+		case showRelevantYearsAndQuarterly: {
+			String branch = (String) receivedMessage.getMessageData();
+			ArrayList<String> yearsAndQuarter = Query.getRelevantYearsAndQuarterly(branch);
+			return new Message(MessageType.relevantYearAndQuarterly, yearsAndQuarter);
+
 		}
 
 		case Disconected: {
@@ -350,7 +348,7 @@ public class Parsing {
 		case get_Revenue_report: {
 			String[] details = ((String) receivedMessage.getMessageData()).split("@");
 			RevenueReport Revenuereport = Query.getRevenueReport(details[0], details[1], details[2]);
-			return messageFromServer = new Message(MessageType.send_Revenue_Report,Revenuereport);
+			return messageFromServer = new Message(MessageType.send_Revenue_Report, Revenuereport);
 		}
 
 		default: {

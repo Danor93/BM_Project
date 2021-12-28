@@ -1,16 +1,11 @@
 package client.controllers;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.JFileChooser;
-
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
@@ -19,14 +14,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
@@ -35,18 +29,18 @@ import main.PopUpMessage;
 /**
  * 
  * @author Lior
+ * 
  *
  */
 public class CEODownloadQuarterlyReportController implements Initializable {
 
-	public static ArrayList<String> years;
+	public static ArrayList<String> yearsAndQuarter;
+	public ArrayList<String> years = new ArrayList<String>();
 	ObservableList<String> yearsObservableList;
 	public static Stage stage;
 
-	public static String selectedBranch, selectedQuarterly, selectedYear;
-	public static Boolean branchAndQuarterlyAndYearFlaf = false;
-	public static Boolean succesload = false;
-	public StringBuilder branchAndQuarterlyAndYearString = new StringBuilder();
+	public String selectedBranch, selectedQuarterly, selectedYear;
+	public StringBuilder branchAndYearAndQuarterlyString = new StringBuilder();
 	public static MyFile downloadFileData;
 
 	@FXML
@@ -84,8 +78,6 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		yearsObservableList = FXCollections.observableArrayList("2019", "2020", "2021");
-		comboBoxYear.setItems(yearsObservableList);
 
 		comboBoxYear.setDisable(true);
 		btn01.setDisable(true);
@@ -106,16 +98,51 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	@FXML
 	void selectBranch(ActionEvent event) {
 		if (btnNorth.isSelected())
-			selectedBranch = "north";
+			selectedBranch = "North";
 		else if (btnCenter.isSelected())
-			selectedBranch = "center";
+			selectedBranch = "Center";
 		else if (btnSouth.isSelected())
-			selectedBranch = "south";
+			selectedBranch = "South";
 
-		btn01.setDisable(false);
-		btn02.setDisable(false);
-		btn03.setDisable(false);
-		btn04.setDisable(false);
+		ClientUI.chat.accept(new Message(MessageType.showRelevantYearsAndQuarterly, selectedBranch));
+
+		for (String year : yearsAndQuarter) {
+			String[] divYandQ = year.split("@");
+			if (!years.contains(divYandQ[0]))
+				years.add(divYandQ[0]);
+		}
+
+		yearsObservableList = FXCollections.observableArrayList(years);
+		comboBoxYear.setItems(yearsObservableList);
+
+		comboBoxYear.setDisable(years.isEmpty());
+
+	}
+
+	@FXML
+	void selectYear(ActionEvent event) {
+		selectedYear = comboBoxYear.getSelectionModel().getSelectedItem();
+
+		for (String year : yearsAndQuarter) {
+			String[] divYandQ = year.split("@");
+			if (divYandQ[0].equals(selectedYear)) {
+				switch (divYandQ[1]) {
+				case "1":
+					btn01.setDisable(false);
+					break;
+				case "2":
+					btn02.setDisable(false);
+					break;
+				case "3":
+					btn03.setDisable(false);
+					break;
+				case "4":
+					btn04.setDisable(false);
+					break;
+				}
+
+			}
+		}
 
 	}
 
@@ -130,19 +157,11 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 		else if (btn04.isSelected())
 			selectedQuarterly = "4";
 
-		comboBoxYear.setDisable(false);
-
-	}
-
-	@FXML
-	void selectYear(ActionEvent event) {
-		selectedYear = comboBoxYear.getSelectionModel().getSelectedItem();
-
-		branchAndQuarterlyAndYearString.append(selectedBranch);
-		branchAndQuarterlyAndYearString.append("@");
-		branchAndQuarterlyAndYearString.append(selectedQuarterly);
-		branchAndQuarterlyAndYearString.append("@");
-		branchAndQuarterlyAndYearString.append(selectedYear);
+		branchAndYearAndQuarterlyString.append(selectedBranch);
+		branchAndYearAndQuarterlyString.append("@");
+		branchAndYearAndQuarterlyString.append(selectedYear);
+		branchAndYearAndQuarterlyString.append("@");
+		branchAndYearAndQuarterlyString.append(selectedQuarterly);
 
 		btnDownload.setDisable(false);
 
@@ -151,49 +170,39 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	@FXML
 	void downloadReport(ActionEvent event) {
 
-		ClientUI.chat
-				.accept(new Message(MessageType.checkDownloadFileDetails, branchAndQuarterlyAndYearString.toString()));
-		if (branchAndQuarterlyAndYearFlaf == true) {
-			branchAndQuarterlyAndYearFlaf = false;
+		ClientUI.chat.accept(new Message(MessageType.downloadPDF, branchAndYearAndQuarterlyString.toString()));
+		try {
 
-			try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+			fileChooser.setInitialFileName(downloadFileData.getFileName());
+			fileChooser.setTitle("Save");
+			File folder = fileChooser.showSaveDialog(CEODownloadQuarterlyReportController.stage);
+			if (folder != null) {
+				String folderPath = folder.getAbsolutePath();
+				File downloadFile = new File(folderPath);
+				int len = downloadFileData.mybytearray.length;
+				byte[] myByteArray = new byte[len];
+				myByteArray = downloadFileData.getMybytearray();
 
-				FileChooser fileChooser = new FileChooser();
-				// fileChooser.getExtensionFilters().addAll(new
-				// FileChooser.ExtensionFilter("PDF", "*.pdf"));
-				// fileChooser.setInitialFileName(downloadFileData.getFileName());
-				fileChooser.setTitle("Save");
-				File folder = fileChooser.showSaveDialog(CEODownloadQuarterlyReportController.stage);
-				if (folder != null) {
-					String folderPath = folder.getAbsolutePath();
-					File downloadFile = new File(folderPath);
-					int len = downloadFileData.getMybytearray().length;
-					byte[] myByteArray = new byte[len];
+				try {
+					FileOutputStream fos = new FileOutputStream(downloadFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
 
-					try {
-						FileOutputStream fos = new FileOutputStream(downloadFile);
-						BufferedOutputStream bos = new BufferedOutputStream(fos);
+					bos.write(myByteArray, 0, len);
+					bos.flush();
+					fos.flush();
+					// PopUpMessage.successMessage("File downloaded");
+					((Node) event.getSource()).getScene().getWindow().hide();
 
-						bos.write(myByteArray, 0, len);
-						bos.flush();
-						fos.flush();
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-		} else {
-			// PopUpMessage.errorMessage("there is a report for " + Year + " " + Quertar + "
-			// already!");
-		}
 
-		System.out.println("branch:" + selectedBranch);
-		System.out.println("yesr:" + selectedYear);
-		System.out.println("quarterly:" + selectedQuarterly);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 

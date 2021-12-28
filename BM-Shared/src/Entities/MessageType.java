@@ -9,8 +9,8 @@ public enum MessageType {
 	ConfirmOpenNewPrivateAccount, return_accounts_for_freeze, Account_Freeze, Account_Active, Account_Freeze_succ,
 	Show_Dishes_succ, updateDish, year_and_querter_ok, year_and_querter_not_ok, upload_pdf_succ,
 	Baccount_details_not_ok, PAccount_details_not_ok, changed_BusinessAccount_status_to_Approved_succ,
-	changed_BusinessAccount_status_to_NotApproved_succ, send_Revenue_Report, DownloadFileDetails_ok,
-	DownloadFileDetails_not_ok,download_pdf_succ,
+	changed_BusinessAccount_status_to_NotApproved_succ, send_Revenue_Report,
+	download_pdf_succ,relevantYearAndQuarterly,
 
 	/* Client Message */
 	Update_Orders, Show_Orders, IdentifyW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
@@ -19,7 +19,7 @@ public enum MessageType {
 	Account_For_Freeze, send_PDF, Show_Dishes, Dish_update_succ, Check_buss_Account, getRefundDetails, InsertOrder,
 	InsertDishesOrder, deleteDish, Dish_delete_succ, check_year_and_quertar, check_Baccount_details,
 	check_PAccount_details, update_status_approved_businessAccount, update_status_NotApproved_businessAccount,
-	get_Revenue_report, get_Orders_report, get_Performance_report, checkDownloadFileDetails, downloadPDF,
+	get_Revenue_report, get_Orders_report, get_Performance_report, downloadPDF,showRelevantYearsAndQuarterly,
 
 	/* type of users */
 

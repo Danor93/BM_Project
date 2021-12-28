@@ -15,21 +15,21 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Label layoutX="29.0" layoutY="80.0" text="Choose quarterly" textFill="#fafafa" />
-      <Label layoutX="29.0" layoutY="126.0" text="Choose year" textFill="#fafafa" />
+      <Label layoutX="29.0" layoutY="126.0" text="Choose quarterly" textFill="#fafafa" />
+      <Label layoutX="29.0" layoutY="80.0" text="Choose year" textFill="#fafafa" />
       <ToggleButton fx:id="btnNorth" layoutX="139.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectBranch" prefHeight="25.0" prefWidth="50.0" text="North">
          <toggleGroup>
             <ToggleGroup fx:id="branchGroup" />
          </toggleGroup></ToggleButton>
       <ToggleButton fx:id="btnCenter" layoutX="190.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectBranch" text="Center" toggleGroup="$branchGroup" />
-      <ToggleButton fx:id="btnSouth" layoutX="241.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectBranch" text="South" toggleGroup="$branchGroup" />
-      <ToggleButton fx:id="btn01" layoutX="138.0" layoutY="76.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="01">
+      <ToggleButton fx:id="btnSouth" layoutX="241.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectBranch" prefHeight="25.0" prefWidth="50.0" text="South" toggleGroup="$branchGroup" />
+      <ToggleButton fx:id="btn01" layoutX="139.0" layoutY="126.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="01">
          <toggleGroup>
             <ToggleGroup fx:id="quarterlyGroup" />
          </toggleGroup></ToggleButton>
-      <ToggleButton fx:id="btn02" layoutX="176.0" layoutY="76.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="02" toggleGroup="$quarterlyGroup" />
-      <ToggleButton fx:id="btn03" layoutX="214.0" layoutY="76.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="03" toggleGroup="$quarterlyGroup" />
-      <ToggleButton fx:id="btn04" layoutX="252.0" layoutY="76.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="04" toggleGroup="$quarterlyGroup" />
-      <ComboBox fx:id="comboBoxYear" layoutX="139.0" layoutY="126.0" onAction="#selectYear" prefHeight="25.0" prefWidth="150.0" promptText="Year" />
+      <ToggleButton fx:id="btn02" layoutX="177.0" layoutY="126.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="02" toggleGroup="$quarterlyGroup" />
+      <ToggleButton fx:id="btn03" layoutX="215.0" layoutY="126.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="03" toggleGroup="$quarterlyGroup" />
+      <ToggleButton fx:id="btn04" layoutX="253.0" layoutY="126.0" mnemonicParsing="false" onAction="#selectQuarterly" prefHeight="25.0" prefWidth="37.5" text="04" toggleGroup="$quarterlyGroup" />
+      <ComboBox fx:id="comboBoxYear" layoutX="141.0" layoutY="80.0" onAction="#selectYear" prefHeight="25.0" prefWidth="150.0" promptText="Year" />
    </children>
 </Pane>

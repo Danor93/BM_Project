@@ -2,6 +2,8 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
+import java.util.Map;
+
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Dish;
@@ -239,8 +241,7 @@ public class Parsing {
 		}
 
 		case businessAccountsTracking: {
-			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage
-					.getMessageData();
+			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -257,19 +258,12 @@ public class Parsing {
 
 		}
 
-		case DownloadFileDetails_ok: {
-			CEODownloadQuarterlyReportController.branchAndQuarterlyAndYearFlaf = true;
-			break;
-		}
-
-		case DownloadFileDetails_not_ok: {
-			CEODownloadQuarterlyReportController.branchAndQuarterlyAndYearFlaf = false;
-			break;
-		}
-
 		case download_pdf_succ: {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
+		}
+		case relevantYearAndQuarterly: {
+			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 		}
 
 		default: {

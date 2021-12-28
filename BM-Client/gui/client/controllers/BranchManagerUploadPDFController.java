@@ -104,7 +104,7 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						BufferedInputStream bis = new BufferedInputStream(fis);
 
 						bis.read(msg.getMybytearray(), 0, mybytearray.length);
-						msg.setQuertar(Quertar);
+						msg.setQuarter(Quertar);
 						msg.setYear(Year);
 						msg.setHomebranch((LoginScreenController.user.getHomeBranch()));
 						ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
