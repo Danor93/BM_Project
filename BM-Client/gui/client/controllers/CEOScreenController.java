@@ -1,61 +1,77 @@
 package client.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import main.ClientUI;
 
-public class CEOScreenController extends BranchManagerScreenController implements ControllerInterface, Initializable {
-	@FXML
-	private ResourceBundle resources;
+public class CEOScreenController extends Controller{
 
-	@FXML
-	private URL location;
+    @FXML
+    private ImageView BackImage;
 
-	@FXML
-	private Button btnConfirmEmployerRegistration;
+    @FXML
+    private Button btnBack;
 
-	@FXML
-	private Button btnOpenNewAccount;
+    @FXML
+    private Button btnConfirmEmployerRegistration;
 
-	@FXML
-	private Button btnConfirmSupplierRegistration;
+    @FXML
+    private Button btnConfirmSupplierRegistration;
 
-	@FXML
-	private Button btnUploadPDF;
+    @FXML
+    private Button btnOpenNewAccount;
 
-	@FXML
-	private Button btnViewBranchsReports;
+    @FXML
+    private Button btnUploadPDF;
 
-	@FXML
-	private Button btnCreateOrder;
+    @FXML
+    private Button btnViewBranchsReports;
 
-	@FXML
-	private ImageView BackImage;
+    @FXML
+    private Button quater;
+
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+    	startScreen(event, "LoginScreen","Login Screen");
+    }
+
+    @FXML
+    void ConfirmEmployerReg(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ConfirmSupplierReg(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OpenNewAccount(ActionEvent event) {
+
+    }
+
+    @FXML
+    void UploadPDF(ActionEvent event) {
+
+    }
+
+    @FXML
+    void open(ActionEvent event) throws IOException {
+		start(event, "CEOChooseQReports", "Show quaterly reports","");
+
+
+    }
 
 	@Override
-	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
-		startScreen(event, "LoginScreen", "Login");
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

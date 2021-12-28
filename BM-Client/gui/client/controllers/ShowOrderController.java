@@ -102,7 +102,7 @@ public class ShowOrderController extends Controller implements Initializable{
 			StringBuilder dishString=new StringBuilder();
 			dishString.append(dish.getDishName()+":       ");
 			
-			if(dish.getChoiceFactor()!=null)
+			if(dish.getChoiceFactor()!=null&&!dish.getChoiceFactor().equals(""))
 			{
 				dishString.append(dish.getChoiceFactor()+": ");
 				dishString.append(dish.getChoiceDetails()+"       ");
@@ -129,5 +129,12 @@ public class ShowOrderController extends Controller implements Initializable{
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

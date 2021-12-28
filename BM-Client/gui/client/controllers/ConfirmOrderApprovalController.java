@@ -263,4 +263,10 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

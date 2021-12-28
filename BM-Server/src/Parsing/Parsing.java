@@ -14,6 +14,7 @@ import java.util.IllegalFormatPrecisionException;
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
 import Entities.Dish;
 import Entities.DishType;
 import Entities.Employer;
@@ -22,6 +23,7 @@ import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
@@ -57,8 +59,8 @@ public class Parsing {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
-			result2 = DivededUandP[0];
-			messageFromServer = new Message(MessageType.login, result);
+			// result2 = DivededUandP[0];
+			messageFromServer = new Message(MessageType.loginSystem, result);
 			return messageFromServer;
 		}
 
@@ -70,11 +72,13 @@ public class Parsing {
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-
-			for (String s : city) {
-				System.out.println(s);
-			}
 			messageFromServer = new Message(MessageType.Show_Cities, city);
+			return messageFromServer;
+		}
+
+		case ClientConfirm: {
+			ArrayList<Order> orders = queries.ConfirmClient((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.ClientConfirm, orders);
 			return messageFromServer;
 		}
 
@@ -105,9 +109,19 @@ public class Parsing {
 
 		case InsertDishesOrder: {
 			String insert = queries.insertDishesOrder((ArrayList<Dish>) receivedMessage.getMessageData());
-			// String
-			// insert=queries.insertDishesOrder((ArrayList<Dish>)receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.InsertDishesOrder, insert);
+			return messageFromServer;
+		}
+
+		case InsertDelivery: {
+			String insert = queries.insertDelivery((Delivery) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDelivery, insert);
+			return messageFromServer;
+		}
+
+		case orderDone: {
+			String checkRef = queries.checkRefund((Order) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.InsertDelivery, checkRef);
 			return messageFromServer;
 		}
 
@@ -136,7 +150,8 @@ public class Parsing {
 		}
 
 		case get_Supplier: {
-			ArrayList<Supplier> Suppliers = Query.LoadSuppliers();
+			String Branch = (String) receivedMessage.getMessageData();
+			ArrayList<Supplier> Suppliers = Query.LoadSuppliers(Branch);
 			messageFromServer = new Message(MessageType.Supplier_list, Suppliers);
 			return messageFromServer;
 		}
@@ -194,20 +209,35 @@ public class Parsing {
 		}
 
 		case get_accounts_for_freeze: {
-			ArrayList<User> Users = Query.GetAccountForFreeze();
+			ArrayList<User> Users = Query.GetAccountForFreeze((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.return_accounts_for_freeze, Users);
 		}
 
-		case check_if_account_freeze: {
+		case check_account_status_Active: {
 			String AccountID = (String) receivedMessage.getMessageData();
-			if (Query.CheckAccountStatus(AccountID)) {
-				return messageFromServer = new Message(MessageType.Account_Active, null);
+			if (Query.CheckAccountStatusActive(AccountID)) {
+				return messageFromServer = new Message(MessageType.Account_Status_Active, true);
 			} else {
-				return messageFromServer = new Message(MessageType.Account_Freeze, null);
+				return messageFromServer = new Message(MessageType.Account_Status_Active, false);
 			}
 		}
 
-		case Account_For_Freeze: {
+		case check_account_status_Freeze: {
+			String AccountID = (String) receivedMessage.getMessageData();
+			if (Query.CheckAccountStatusFreeze(AccountID)) {
+				return messageFromServer = new Message(MessageType.Account_Status_Freeze, true);
+			} else {
+				return messageFromServer = new Message(MessageType.Account_Status_Freeze, false);
+			}
+		}
+
+		case Update_Status_to_Active: {
+			String AccountID = (String) receivedMessage.getMessageData();
+			Query.UpdateAccountStatusToActive(AccountID);
+			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
+		}
+
+		case Update_Status_to_Freeze: {
 			String AccountID = (String) receivedMessage.getMessageData();
 			Query.UpdateAccountStatusToFreeze(AccountID);
 			return messageFromServer = new Message(MessageType.Account_Freeze_succ, null);
@@ -232,7 +262,7 @@ public class Parsing {
 		}
 
 		case Disconected: {
-			UpdateDB.UpdateisLoggedIn(result2);
+			UpdateDB.UpdateisLoggedIn((String) receivedMessage.getMessageData());
 			LogicController.UpdateClientTable(msg, client);
 			messageFromServer = new Message(MessageType.Disconected, null);
 			return messageFromServer;
@@ -321,42 +351,34 @@ public class Parsing {
 
 		case get_Phone_Number: {
 			String phoneNumber = Query.LoadPhoneNumber((Order) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.set_Phone_number, phoneNumber);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.set_Phone_number, phoneNumber);
 		}
 
 		case getAllW4CBusiness: {
 			ArrayList<String> w4cBusiness = Query.LoadW4CBusiness();
-			messageFromServer = new Message(MessageType.W4C_Business_List, w4cBusiness);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.W4C_Business_List, w4cBusiness);
 		}
 
 		case RegistrationOfEmployer: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
 			} else {
-				messageFromServer = new Message(MessageType.RegistrationOfEmployer_failed, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.RegistrationOfEmployer_failed, null);
 			}
 		}
 
 		case get_Company_Status: {
 			if (Query.LoadCompanyStatus((StringBuilder) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.Company_Status_Equale_To_Approved, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.Company_Status_Equale_To_Approved, null);
 			} else {
-				messageFromServer = new Message(MessageType.Company_Status_Not_Equale_To_Approved, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.Company_Status_Not_Equale_To_Approved, null);
 			}
 		}
 
 		case get_business_account_details: {
 			ArrayList<BusinessAccountTracking> businessAccount = Query
-					.LoadBusinessAccountDetails((StringBuilder) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
-			return messageFromServer;
+					.LoadBusinessAccountDetails((String) receivedMessage.getMessageData());
+			return messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
 		}
 
 		case update_status_approved_businessAccount: {
@@ -376,6 +398,12 @@ public class Parsing {
 						null);
 			}
 
+		}
+
+		case get_Revenue_report: {
+			String[] details = ((String) receivedMessage.getMessageData()).split("@");
+			RevenueReport Revenuereport = Query.getRevenueReport(details[0], details[1], details[2]);
+			return messageFromServer = new Message(MessageType.send_Revenue_Report, Revenuereport);
 		}
 
 		default: {

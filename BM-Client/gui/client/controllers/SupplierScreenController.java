@@ -52,7 +52,6 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	/**
 	 * A method to return to the previous page. 
 	 * @param event
-	 * @throws IOException
 	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
@@ -77,7 +76,6 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	 * If not, open a new screen accordingly (AddDishToMenu with 'Create Menu' label). 
 	 * If so, send an error message that the menu already exists.
 	 * @param event
-	 * @throws IOException
 	 */
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
@@ -94,7 +92,6 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	/**
 	 * A method to open a new screen (UpdateMenuScreen).
 	 * @param event
-	 * @throws IOException
 	 */
 	@FXML
 	void UpdateMenu(ActionEvent event) throws IOException {
@@ -104,11 +101,16 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	/**
 	 * A method to open a new screen (ConfirmOrderApproval).
 	 * @param event
-	 * @throws IOException
 	 */
 	@FXML
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmOrderApproval", "Update order status");
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

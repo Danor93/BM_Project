@@ -216,17 +216,11 @@ public class DeliveryController {
     				OrderConfimController aFrame = load.getController();
     				aFrame.Display();
     				aFrame.start(primaryStage, root);
-    		    	
-    		    	
-    		    	
-    		    	
-    		    	
+
  
     		    }
 
 	    	}
-	    	
-	    	
 
 	    }
 	    

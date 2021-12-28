@@ -70,12 +70,18 @@ import main.ClientUI;
 	    
 	    @FXML
 	    void initialize() {
-	    	//setImage(LogoImage, "ClientMenuUi.jpeg");
+	    	//setImage(LogoImage, "/Images/ClientMenuUi.jpg");
 	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 
 	    }
+
+		@Override
+		public void display(String string) {
+			// TODO Auto-generated method stub
+			
+		}
 
 
 

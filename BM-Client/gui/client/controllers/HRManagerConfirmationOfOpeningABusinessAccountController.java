@@ -114,8 +114,14 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		ID.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("ID"));
 		companyName.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("companyName"));
 		budget.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("budget"));
-		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, LoginScreenController.CompanyName));
+		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, LoginScreenController.fullCompanyName));
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

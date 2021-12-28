@@ -67,6 +67,8 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    @FXML
 	    void ChooseSupplier(ActionEvent event) {
 	    	supplierName = ListofSupplier.getSelectionModel().getSelectedItem();
+	    	btnConfirmSupplierRegistartion.setDisable(false);
+			btnRefuseSupplierRegistartion.setDisable(false);
 	    }
 
 	    /*this method is for the "Confirm" Button for approved Supplier*/
@@ -75,7 +77,7 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    	ListofSupplier.setDisable(true);
 			for (int i = 0; i < Suppliers.size(); i++) {
 				if (Suppliers.get(i).getSupplierName().equals(supplierName)) {
-					Suppliers.get(i).setSupplierStatus("approved");
+					Suppliers.get(i).setSupplierStatus("Approved");
 				}
 			}
 			ListofSupplier.getItems().clear();
@@ -90,7 +92,7 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    	ListofSupplier.setDisable(true);
 			for (int i = 0; i < Suppliers.size(); i++) {
 				if (Suppliers.get(i).getSupplierName().equals(supplierName)) {
-					Suppliers.get(i).setSupplierStatus("not approved");
+					Suppliers.get(i).setSupplierStatus("Not approved");
 				}
 			}
 			ListofSupplier.getItems().clear();
@@ -100,9 +102,9 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	    }
 		
 		/*this method is for load the not approved and waiting supplier names.*/
-		public void loadSupplierstoComboBox(ArrayList<Supplier> Employers) {
+		public void loadSupplierstoComboBox(ArrayList<Supplier> Suppliers) {
 			for (Supplier s : Suppliers) {
-				if (s.getSupplierStatus().equals("not approved") || s.getSupplierStatus().equals("waiting")) {
+				if (s.getSupplierStatus().equals("Not approved") || s.getSupplierStatus().equals("Waiting")) {
 					ListofSupplier.getItems().add(s.getSupplierName());
 				}
 			}
@@ -111,7 +113,7 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 		/*this method is for load only the waiting Supplier names.*/
 		public void refreshcombobox(ArrayList<Supplier> Suppliers) {
 			for (Supplier s : Suppliers) {
-				if (s.getSupplierStatus().equals("waiting")) {
+				if (s.getSupplierStatus().equals("Waiting")) {
 					ListofSupplier.getItems().add(s.getSupplierName());
 				}
 			}
@@ -119,7 +121,8 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.chat.accept(new Message(MessageType.get_Supplier, null));
+		String Branch = LoginScreenController.user.getHomeBranch().toString();
+		ClientUI.chat.accept(new Message(MessageType.get_Supplier,Branch));
 		loadSupplierstoComboBox(Suppliers);
 		if(LoginScreenController.user.getRole().equals("CEO")) {
 			BackBtn.setText("Back to CEO Panel");
@@ -127,6 +130,14 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 		if(LoginScreenController.user.getRole().equals("BranchManager")) {
 			BackBtn.setText("Back to Branch Manager Panel");
 		}
+		btnConfirmSupplierRegistartion.setDisable(true);
+		btnRefuseSupplierRegistartion.setDisable(true);
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

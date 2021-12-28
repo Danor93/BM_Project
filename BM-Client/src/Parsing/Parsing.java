@@ -4,6 +4,7 @@ package Parsing;
 import java.util.ArrayList;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
@@ -11,13 +12,15 @@ import Entities.MessageType;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.AddDishToMenuController;
+import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
-import client.controllers.BranchManagerFreezeAccountController;
+import client.controllers.BranchManagerChangePermissionsController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
 import client.controllers.DeliveryController;
@@ -29,6 +32,7 @@ import client.controllers.ConfirmEmployerRegController;
 import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.ConfirmSupplierRegController;
+import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
 import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
@@ -46,17 +50,27 @@ public class Parsing {
 
 		switch (receivedMessage.getMessageType()) {
 
-		case login: {
+		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.AlreadyLoggedInFlag = true;
-					LoginScreenController.LoginFlag = true;
+					// LoginScreenController.LoginFlag = true;
+					LoginScreenController.statusUser = "The user is already logged in";
 				} else {
-					LoginScreenController.LoginFlag = true;
-					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+					if (receivedMessage.getMessageData().equals("Freeze")) {
+						LoginScreenController.statusUser = "Frozen Account";
+					} else {
+						// LoginScreenController.LoginFlag = true;
+						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+						LoginScreenController.statusUser = "Active";
+					}
+
 				}
+			} else {
+				LoginScreenController.statusUser = "User name or password are inccorect";
 			}
 			break;
 		}
@@ -76,6 +90,11 @@ public class Parsing {
 			break;
 		}
 
+		case ClientConfirm: {
+			CustomerScreenController.orderConfirm = (ArrayList<Order>) receivedMessage.getMessageData();
+			break;
+		}
+
 		case IdentifyW4c: {
 			IdentifyW4cController.client = (Client) receivedMessage.getMessageData();
 			break;
@@ -88,7 +107,6 @@ public class Parsing {
 
 		case InsertOrder: {
 			ShowOrderController.finalOrder.setOrderNum((Integer) receivedMessage.getMessageData());
-			// SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
 
@@ -97,19 +115,27 @@ public class Parsing {
 			break;
 		}
 
+		case InsertDelivery: {
+			break;
+		}
+
+		case orderDone: {
+			break;
+		}
+
 		case Disconected: {
 			break;
 		}
 
 		case ReturnFirstName_success: {
-			LoginScreenController.Name = receivedMessage.getMessageData().toString();
+			LoginScreenController.user.setFirstN(receivedMessage.getMessageData().toString());
 			break;
 		}
 
-		case WrongInput: {
-			LoginScreenController.WrongInputFlag = true;
-			break;
-		}
+		// case WrongInput: {
+		// LoginScreenController.WrongInputFlag = true;
+		// break;
+		// }
 
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
@@ -184,17 +210,27 @@ public class Parsing {
 		}
 
 		case return_accounts_for_freeze: {
-			BranchManagerFreezeAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
+			BranchManagerChangePermissionsController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
 
-		case Account_Active: {
-			BranchManagerFreezeAccountController.FreezeAccount = false;
+		case Account_Status_Active: {
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if (status) {
+				BranchManagerChangePermissionsController.ActiveAccount = true;
+			} else {
+				BranchManagerChangePermissionsController.ActiveAccount = false;
+			}
 			break;
 		}
 
-		case Account_Freeze: {
-			BranchManagerFreezeAccountController.FreezeAccount = true;
+		case Account_Status_Freeze: {
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if (status) {
+				BranchManagerChangePermissionsController.FreezeAccount = true;
+			} else {
+				BranchManagerChangePermissionsController.FreezeAccount = false;
+			}
 			break;
 		}
 
@@ -210,16 +246,18 @@ public class Parsing {
 		}
 
 		case changed_status_to_notApproved_succ: {
+			break;
 		}
 
 		case changed_status_to_Approved_succ: {
+
 		}
 
 		case changed_status_to_sended_succ: {
 		}
-		
-		case set_Phone_number:{
-			ConfirmOrderApprovalController.phoneNumber = (String)receivedMessage.getMessageData();
+
+		case set_Phone_number: {
+			ConfirmOrderApprovalController.phoneNumber = (String) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -232,16 +270,6 @@ public class Parsing {
 			HRManagerScreenController.RegistrationFlag = true;
 			break;
 
-		}
-
-		case Company_Status_Equale_To_Approved: {
-			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = true;
-			break;*/
-		}
-
-		case Company_Status_Not_Equale_To_Approved: {
-			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = false;
-			break;*/
 		}
 
 		case RegistrationOfEmployer_failed: {
@@ -265,7 +293,7 @@ public class Parsing {
 		}
 
 		case Delete_Account_Succ: {
-
+			break;
 		}
 
 		case businessAccountsTracking: {
@@ -274,12 +302,17 @@ public class Parsing {
 			break;
 		}
 
-		case changed_BusinessAccount_status_to_Approved_succ: {
+		case send_Revenue_Report: {
+			BranchManagerChooseReportToViewController.revenueReport = (RevenueReport) receivedMessage.getMessageData();
+			break;
+		}
 
+		case changed_BusinessAccount_status_to_Approved_succ: {
+			break;
 		}
 
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
-
+			break;
 		}
 
 		default: {

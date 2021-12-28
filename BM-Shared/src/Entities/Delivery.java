@@ -7,7 +7,7 @@ public class Delivery implements Serializable{
 	private static final long serialVersionUID = 8991119981743155411L;
 	
 	private String deliveryType,address,phone,city,recipient;
-	private int participantsNum;
+	private int participantsNum,orderNum;
 	private int deliPrice;
 	
 	
@@ -21,6 +21,19 @@ public class Delivery implements Serializable{
 		this.participantsNum = participantsNum;
 		this.deliPrice = deliPrice;
 	}
+
+	
+
+	public int getOrderNum() {
+		return orderNum;
+	}
+
+
+
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
+
 
 
 	public String getDeliveryType() {
