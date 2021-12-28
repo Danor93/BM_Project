@@ -226,11 +226,11 @@ public class DishOptionsController extends Controller implements Initializable{
     }
 
     
-    public void setValue()
+  /*  public void setValue()
     {
 		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 
-    }
+    }*/
 	
 	public void start(Stage stage, Parent root) {
 		Scene scene = new Scene(root);		
@@ -272,7 +272,7 @@ public class DishOptionsController extends Controller implements Initializable{
 	}
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
+		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 		
 	}
 

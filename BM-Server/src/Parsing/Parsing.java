@@ -62,8 +62,8 @@ public class Parsing {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
-			result2 = DivededUandP[0];
-			messageFromServer = new Message(MessageType.login, result);
+		//	result2 = DivededUandP[0];
+			messageFromServer = new Message(MessageType.loginSystem, result);
 			return messageFromServer;
 		}
 		
@@ -252,7 +252,7 @@ public class Parsing {
 		}
 
 		case Disconected: {
-			UpdateDB.UpdateisLoggedIn(result2);
+			UpdateDB.UpdateisLoggedIn((String)receivedMessage.getMessageData());
 			LogicController.UpdateClientTable(msg, client);
 			messageFromServer = new Message(MessageType.Disconected, null);
 			return messageFromServer;

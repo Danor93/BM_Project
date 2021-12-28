@@ -67,7 +67,7 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void back(ActionEvent event) throws IOException {
-	    	ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+	    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 			start(event, "LoginScreen", "Login","");
 
 	    }

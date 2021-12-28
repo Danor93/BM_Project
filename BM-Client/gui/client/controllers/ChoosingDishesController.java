@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.Message;
+import Entities.MessageType;
 import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -29,7 +32,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.ClientUI;
 
+/**
+ * @author Adi
+ *
+ */
 public class ChoosingDishesController extends Controller implements Initializable {
 
     @FXML
@@ -69,6 +77,17 @@ public class ChoosingDishesController extends Controller implements Initializabl
     
     @FXML
     private Text price;
+    
+
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+    
+
+    @FXML
+    private Text userName;
 
     public ArrayList<String> dishNames;
 	public ArrayList<Dish> dishListOfType;
@@ -77,6 +96,32 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	String selectedDish;
 	float priceDish;
 
+	  /** This method meant to get back to costumer page
+		 * @param event				pressing the "home" image 
+		 * @throws IOException
+		 */
+	 @FXML
+	 void backToHome(MouseEvent event) throws IOException {
+		 start(event, "CustomerScreen", "CustomerScreen","");
+	  }
+	    
+	    
+		/** This method meant to get back to login page and logout the customer
+		 * @param event				pressing the "logout" button 
+		 * @throws IOException
+		 */
+
+	 @FXML
+	 void logout(ActionEvent event) throws IOException {
+	    ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+	 }
+
+	 
+    /**This method adds a dish to the order
+     * @param event              pressing the "add to my order" button
+     * @throws IOException
+     */
     @FXML
     void addDishToOrder(ActionEvent event) throws IOException 
     {
@@ -94,12 +139,16 @@ public class ChoosingDishesController extends Controller implements Initializabl
         	chosenDish=dishListOfType.get(indexOfDish);
         	if(!chosenDish.getChoiceFactor().equals("")||!chosenDish.getExtra().equals(""))
         	{
+        		/*
         		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishOptions.fxml"));
         		Parent root=load.load();
         		DishOptionsController aFrame = load.getController();
         		aFrame.setValue();
-        		aFrame.start(primaryStage, root);
+        		aFrame.start(primaryStage, root);*/
+        		
+        		start(event, "DishOptions", "choose dish details","");
+
         	}
         	
         	else
@@ -109,29 +158,36 @@ public class ChoosingDishesController extends Controller implements Initializabl
         		dish.setQuentity(quentity);
         		SingletonOrder.getInstance().myOrder.add(dish);
         		
-        		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        		/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
         		Parent root=load.load();
         		MenuScreenController aFrame = load.getController();
         		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"The dish was successfully added to your order");
         		aFrame.display("The dish was successfully added to your order");
-
-        		aFrame.start(primaryStage,root);
+        		aFrame.start(primaryStage,root);*/
+        		
+        		start(event, "MenuScreen","Restaurant's menu","The dish was successfully added to your order");
     
         		
         	}
     	}
     }
-
+    
+    
+	/** This method meant to get back to the previous page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	start(event,"MenuScreen","Restaurant's menu","");
+    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
 		Parent root=load.load();
 		MenuScreenController aFrame = load.getController();
 		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"");
 		aFrame.display("");
-		aFrame.start(primaryStage,root);
+		aFrame.start(primaryStage,root);*/
 
     }
     

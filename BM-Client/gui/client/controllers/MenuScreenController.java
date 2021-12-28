@@ -83,11 +83,15 @@ public class MenuScreenController extends Controller{
 
     @FXML
     void logout(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }
+    
 
-
+	/** This method meant to get back to the previous page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
     @FXML
     void backToRestChoose(ActionEvent event) throws IOException {
     	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

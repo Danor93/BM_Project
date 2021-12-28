@@ -84,7 +84,7 @@ public abstract class  Controller  {
 					boolean ans = PopUpMessage.confirmDialog("Do you want to logout and exit from system?",
 							primaryStage);
 					if (ans) {
-						ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+						ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 						primaryStage.close();
 					}
 				}

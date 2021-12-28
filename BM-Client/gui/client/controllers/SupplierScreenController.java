@@ -66,7 +66,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.MenuExist, LoginScreenController.ID));
+		ClientUI.chat.accept(new Message(MessageType.MenuExist, LoginScreenController.user.getId()));
 		if (ExisingMenuFlag == true) {
 			ExistLbl.setText("Menu already exists, you can update it");
 		} else {

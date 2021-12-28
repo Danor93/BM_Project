@@ -28,14 +28,14 @@ import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
 public class LoginScreenController extends Controller {
-	public static User user = new User(null, null, null, null, null, null, null, null);
-	public static boolean LoginFlag = false;
+	public static User user =null;
+	//public static boolean LoginFlag = false;
+	public static String statusUser;
 	public static boolean AlreadyLoggedInFlag = false;
-	public static boolean WrongInputFlag = false;
-	public static String Name = null;
-	public static String ID = null;
-	public static ActionEvent mainevent;
-	public static String CompanyName = null;
+	//public static boolean WrongInputFlag = false;
+	//public static String Name = null;
+	//public static String ID = null;
+	//public static String CompanyName = null;
 
 	@FXML
 	private ResourceBundle resources;
@@ -59,7 +59,7 @@ public class LoginScreenController extends Controller {
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
-		mainevent = event;
+		//mainevent = event;
 		String[] DivededUandP;
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());
@@ -67,15 +67,72 @@ public class LoginScreenController extends Controller {
 		str.append(PasswordField.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
 		ClientUI.chat.accept(msg);
-		if (LoginFlag) {
-			if (AlreadyLoggedInFlag) {
-				PopUpMessage.errorMessage("The User is Already logged in");
-				AlreadyLoggedInFlag = false;
-				LoginFlag = false;
-			} else {
-				LoginFlag = false;
-				if (user.getRole().equals("BranchManager")) {
-					startScreen(event, "BranchManagerScreen", "Branch Manager");
+		//if (LoginFlag) {
+			//if (AlreadyLoggedInFlag) {
+				//PopUpMessage.errorMessage("The User is Already logged in");
+				//AlreadyLoggedInFlag = false;
+				//LoginFlag = false;
+			
+				//LoginFlag = false;
+				if(!statusUser.equals("Active"))
+				{
+					WrongInputInLoggin.setText(statusUser);
+					statusUser=null;
+					
+				}
+					
+					
+				if(user!=null)
+				{
+					switch(user.getRole())
+					{
+					case "BranchManager":
+					{
+						start(event, "BranchManagerScreen", "Branch Manager",user.getFirstN());
+						break;
+					}
+					
+					case "Customer":
+					{
+						start(event, "CustomerScreen", "CustomerScreen",user.getFirstN());
+						break;
+					}
+					
+					case "CEO":
+					{
+						start(event,"CEOScreen","CEO",user.getFirstN());
+						break;
+					}
+					
+					case "Supplier":
+					{
+						start(event, "SupplierScreen", "Supplier",user.getFirstN());
+						break;
+					}
+					
+					default:
+					{
+						DivededUandP = ((String) user.getRole()).split(" ");
+						if (DivededUandP[0].equals("HR")) {
+							//CompanyName = DivededUandP[1];
+							start(event, "HRManagerScreen", "HR Manager",user.getFirstN());
+						}
+						else
+						{
+							start(event, "SupplierScreen", "Supplier",user.getRole());
+
+						}
+					}
+
+				}
+				}
+
+				}
+					
+
+
+			
+		/*
 
 				} else if (user.getRole().equals("Customer")) {
 					start(event, "CustomerScreen", "CustomerScreen",user.getFirstN());
@@ -95,12 +152,9 @@ public class LoginScreenController extends Controller {
 				}
 			}
 		}
+		*/
 
-		else {
-			PopUpMessage.errorMessage("Wrong UserName/Password!");
-		}
-
-	}
+	
 
 	@FXML
 	void getUserName(InputMethodEvent event) {

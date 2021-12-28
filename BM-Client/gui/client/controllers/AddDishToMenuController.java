@@ -111,13 +111,13 @@ public class AddDishToMenuController extends Controller implements Initializable
 
 			System.out.println(TypeOfDish);
 			try {
-				dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
-						Float.parseFloat(txtPriceDish.getText()),DishType.toDishType(TypeOfDish));
+			//	dish = new Dish(txtNameDish.getText(), LoginScreenController.Name, null, null, null, null,
+				//		Float.parseFloat(txtPriceDish.getText()),DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				txtMiniLabel.setText("type must be selected!");
 				e.printStackTrace();
 			}
-			dish.setRestCode(LoginScreenController.ID);
+			dish.setRestCode(LoginScreenController.user.getId());
 			if (txtChoiceDish.getText().equals("example: Size"))
 				txtChoiceDish.setText("");
 			dish.setChoiceFactor(txtChoiceDish.getText());

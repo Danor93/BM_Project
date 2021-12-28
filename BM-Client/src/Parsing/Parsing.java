@@ -51,18 +51,33 @@ public class Parsing {
 
 		switch (receivedMessage.getMessageType()) {
 
-		case login: {
+		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+			
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.AlreadyLoggedInFlag = true;
-					LoginScreenController.LoginFlag = true;
+					//LoginScreenController.LoginFlag = true;
+					LoginScreenController.statusUser="The user is already logged in";
 				} else {
-					LoginScreenController.LoginFlag = true;
-					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+					if (receivedMessage.getMessageData().equals("Freeze"))
+					{
+						LoginScreenController.statusUser="Frozen Account";
+					}
+					else
+					{
+						//LoginScreenController.LoginFlag = true;
+						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);	
+						LoginScreenController.statusUser="Active";
+					}
+				
 				
 				}
+			}
+			else
+			{
+				LoginScreenController.statusUser="User name or password are inccorect";
 			}
 			break;
 		}
@@ -127,14 +142,14 @@ public class Parsing {
 		}
 
 		case ReturnFirstName_success: {
-			LoginScreenController.Name = receivedMessage.getMessageData().toString();
+			LoginScreenController.user.setFirstN(receivedMessage.getMessageData().toString()); 
 			break;
 		}
 
-		case WrongInput: {
-			LoginScreenController.WrongInputFlag = true;
-			break;
-		}
+	//	case WrongInput: {
+		//	LoginScreenController.WrongInputFlag = true;
+		//	break;
+	//	}
 
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();

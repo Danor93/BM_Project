@@ -162,9 +162,9 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 
 			}
 			if (NameAndTypeCorrect && CorrectPrice && CorrectInv) {
-				String SupplierName = LoginScreenController.Name;
+				String SupplierName = LoginScreenController.user.getFirstN();
 				dish = new Dish(NameOfDish, SupplierName, null, null, null, null, PriceOfDish, dishtype);
-				dish.setRestCode(LoginScreenController.ID);
+				dish.setRestCode(LoginScreenController.user.getId());
 				if (txtNewChoiceDish.getText().equals("null")) {
 					txtNewChoiceDish.setText("");
 				}
@@ -208,7 +208,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		}
 		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, dishtype);
 		if (NameAndTypeCorrectToDelete) {
-			dish.setRestCode(LoginScreenController.ID);
+			dish.setRestCode(LoginScreenController.user.getId());
 			System.out.println(dish.toString());
 			ClientUI.chat.accept(new Message(MessageType.deleteDish, dish));
 			startScreen(event, "DeleteOrUpdateDish", "Create Menu");
