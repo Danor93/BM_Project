@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
+import java.util.Map;
+
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
@@ -47,6 +49,21 @@ public class Parsing {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
+		
+		case ShowHistogram:
+		{
+			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split(",");
+			Map<String,ArrayList<Float>> histogram=(Map<String,ArrayList<Float>>)queries.getHistogramData(DivededAdd);
+			messageFromServer = new Message(MessageType. ShowHistogram, histogram);
+			return messageFromServer;
+		}
+		
+		case getYears:
+		{
+			ArrayList<String> years=(ArrayList<String>)queries.getYear();
+			messageFromServer = new Message(MessageType. getYears,  years);
+			return messageFromServer;
+		}
 		
 	
 

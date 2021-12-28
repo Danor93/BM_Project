@@ -2,6 +2,8 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
+import java.util.Map;
+
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Delivery;
@@ -40,7 +42,9 @@ import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
+import client.controllers.quaterRepController;
 import main.PopUpMessage;
+
 
 
 
@@ -56,13 +60,16 @@ public class Parsing {
 			
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
-					LoginScreenController.AlreadyLoggedInFlag = true;
+					//LoginScreenController.AlreadyLoggedInFlag = true;
 					//LoginScreenController.LoginFlag = true;
 					LoginScreenController.statusUser="The user is already logged in";
+					LoginScreenController.user=null;
+					
 				} else {
 					if (receivedMessage.getMessageData().equals("Freeze"))
 					{
 						LoginScreenController.statusUser="Frozen Account";
+						LoginScreenController.user=null;
 					}
 					else
 					{
@@ -78,8 +85,31 @@ public class Parsing {
 			else
 			{
 				LoginScreenController.statusUser="User name or password are inccorect";
+				LoginScreenController.user=null;
 			}
 			break;
+		}
+		
+		case ShowHistogram:
+		{
+			
+			if(quaterRepController.report1==null)
+			{
+				quaterRepController.report1=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			}
+			else
+			{
+				quaterRepController.report2=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			}
+				
+			
+			break;
+		}
+		
+		case getYears:
+		{
+			quaterRepController.years=(ArrayList<String>) receivedMessage.getMessageData();
+			
 		}
 
 		case Show_Cities: {
@@ -96,6 +126,7 @@ public class Parsing {
 			RestListFormController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
+		
 		
 		case ClientConfirm:
 		{

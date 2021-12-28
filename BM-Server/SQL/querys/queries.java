@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import Entities.BussinessAccount;
 import Entities.Client;
@@ -513,6 +515,80 @@ public class queries {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public static Map<String, ArrayList<Float>> getHistogramData(String[] divededAdd) 
+	{
+		PreparedStatement stmt;
+		Map<String, ArrayList<Float>> mapHist=new HashMap<>();
+		String rest=null;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT resturant,orders_amount,Income FROM bitemedb.revenue_reports WHERE Quaterly=? and branch=? and year=?");
+			stmt.setString(1, divededAdd[0]);
+			stmt.setString(2,divededAdd[1]);
+			stmt.setString(3,divededAdd[2]);
+			
+			ResultSet rs1=stmt.executeQuery();
+			while(rs1.next())
+			{
+				rest=rs1.getString(1);
+				if(mapHist.containsKey(rest))
+				{
+					Float amount=mapHist.get(rest).get(0);
+					amount+=rs1.getInt(2);
+					mapHist.get(rest).set(0, amount);
+					
+					Float income=mapHist.get(rest).get(1);
+					income+=rs1.getFloat(3);
+					mapHist.get(rest).set(1, income);
+					
+						
+				}
+				else
+				{
+					ArrayList<Float> temp=new ArrayList<>();
+					temp.add((float) rs1.getInt(2));
+					temp.add(rs1.getFloat(3));	
+					mapHist.put(rest, temp);
+				}
+					
+			}
+			
+			rs1.close();
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		 
+		 
+		 
+		return mapHist;
+	}
+
+	public static ArrayList<String> getYear() {
+		ArrayList<String>years=null;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT DISTINCT year FROM bitemedb.revenue_reports");
+			years=new ArrayList<String>();
+			while (rs.next()) {
+				years.add(rs.getString(1));
+			}
+			rs.close();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return years;
 	}
 }
 

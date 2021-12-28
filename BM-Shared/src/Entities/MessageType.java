@@ -17,7 +17,7 @@ public enum MessageType {
 	send_PDF,Show_Dishes,Dish_update_succ,Check_buss_Account,getRefundDetails,InsertOrder,InsertDishesOrder, 
 	deleteDish, Dish_delete_succ,check_year_and_quertar,check_Baccount_details,check_PAccount_details,
 	update_status_approved_businessAccount,update_status_NotApproved_businessAccount,get_Revenue_report,get_Orders_report,InsertDelivery,
-	get_Performance_report,ClientConfirm,orderDone,
+	get_Performance_report,ClientConfirm,orderDone,ShowHistogram,getYears,
 
 
 	/* type of users */
@@ -29,6 +29,6 @@ public enum MessageType {
 	/* Error */
 	Error, MenuExist, MenuExistTrue, MenuExistFalse, get_orders_to_approve, Orders_List, Order_not_approved, 
 	changed_status_to_notApproved_succ, Order_approved, changed_status_to_Approved_succ, RegistrationOfEmployer, 
-	RegistrationOfEmployer_succ, RegistrationOfEmployer_failed, get_business_account_details,businessAccountsTracking,  
+	RegistrationOfEmployer_succ, RegistrationOfEmployer_failed, get_business_account_details,businessAccountsTracking,    
 
 }
