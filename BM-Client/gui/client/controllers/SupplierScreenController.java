@@ -20,6 +20,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+/**
+ * @author Aviel
+ * This class is for supplier main screen.
+ */
 public class SupplierScreenController extends Controller implements ControllerInterface {
 	public static boolean ExisingMenuFlag = false;
 	@FXML
@@ -45,6 +49,11 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	private ImageView BackImage;
 
+	/**
+	 * A method to return to the previous page. 
+	 * @param event
+	 * @throws IOException
+	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
@@ -63,6 +72,13 @@ public class SupplierScreenController extends Controller implements ControllerIn
 		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 	}
 
+	/**
+	 * A method for checking if there is a menu for this restaurant or not. 
+	 * If not, open a new screen accordingly (AddDishToMenu with 'Create Menu' label). 
+	 * If so, send an error message that the menu already exists.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void CreateMenu(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.MenuExist, LoginScreenController.user.getId()));
@@ -75,11 +91,21 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	}
 
+	/**
+	 * A method to open a new screen (UpdateMenuScreen).
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void UpdateMenu(ActionEvent event) throws IOException {
 		startScreen(event, "UpdateMenuScreen", "Update Menu");
 	}
 
+	/**
+	 * A method to open a new screen (ConfirmOrderApproval).
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmOrderApproval", "Update order status");

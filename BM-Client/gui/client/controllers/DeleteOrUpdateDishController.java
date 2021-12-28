@@ -22,13 +22,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 
+/**
+ * @author Aviel
+ * This class is for updating/deleting an existing dish from the menu.
+ */
 public class DeleteOrUpdateDishController extends Controller implements Initializable {
 	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
-	public static String TypeOfDish;
-	public static String NameOfDish;
-	public static float PriceOfDish;
-	public DishType dishtype;
-	public static int PlaceOfDish;
 
 	@FXML
 	private ResourceBundle resources;
@@ -75,41 +74,47 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	@FXML
 	private Button btnConfirm;
 	
-	
+	private String TypeOfDish;
+	private String NameOfDish;
+	private int PlaceOfDish;
+	private DishType dishtype;
+	private float PriceOfDish;
 	private boolean NameAndTypeCorrect = false;
 	private boolean NameAndTypeCorrectToDelete = false;
 	private boolean CorrectPrice = false;
-	private boolean typeDishIsValid = true;
 	private boolean choiceDetailsIsValid = true;
 	private boolean choiceFactorIsValid = true;
 	private boolean continuedFlag = true;
 	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
 	private boolean ingredientsIsValid = true;
+	//private boolean typeDishIsValid = true;
 
 	@FXML
 	void BackToUpdateMenu(ActionEvent event) throws IOException {
 		startScreen(event, "UpdateMenuScreen", "Update menu");
 	}
 
+	/**
+	 * A method to catch the type of dish, then add to ComboBox the appropriate dishes for this type of dish.
+	 * @param event
+	 */
 	@FXML
 	void ChoocTypeOfDish(ActionEvent event) {
 		btnDish.getItems().clear();
-		for (int i = 0; i < dishes.size(); i++) {
-			System.out.println("this here!" + dishes.get(i).getDishName());
-		}
 		TypeOfDish = btnDishType.getSelectionModel().getSelectedItem();
-		System.out.println("TypeOfDish= " + TypeOfDish);
 		for (int i = 0; i < dishes.size(); i++) {
 			if (dishes.get(i) != null) {
-				System.out.println("this here again!" + dishes.get(i).getDishName());
 				if (DishType.fromTypeToStr(dishes.get(i).getDishType()).equals(TypeOfDish)) {
-					System.out.println("dishes in this type: " + dishes.get(i).getDishName());
 					btnDish.getItems().add(dishes.get(i).getDishName());
 				}
 			}
 		}
 	}
 
+	/**
+	 * A method to catch the specific dish, and then inserting the existing fields
+	 * @param event
+	 */
 	@FXML
 	void ChooseDish(ActionEvent event) {
 		NameOfDish = btnDish.getSelectionModel().getSelectedItem();
@@ -125,6 +130,10 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		}
 	}
 
+	/**
+	 * A method to confirm update of specific dish.
+	 * @param event
+	 */
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
 		Dish dish = new Dish(null, null, null, null, null, null, 0, null);
@@ -217,43 +226,16 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				}
 			} else {
 				txtMiniLabel.setText("Type must be selected!");
-				typeDishIsValid = true;
+				//typeDishIsValid = true;
 			}
 		}
-
-		/*
-		 * try { dishtype = DishType.toDishType(TypeOfDish); if (NameOfDish == null) {
-		 * txtMiniLabel.setText("Name must be selected!"); } else {
-		 * System.out.println("NameOfdish=" + NameOfDish); NameAndTypeCorrect = true; }
-		 * 
-		 * } catch (NullPointerException e) {
-		 * txtMiniLabel.setText("Type must be selected!"); e.printStackTrace(); } if
-		 * (NameAndTypeCorrect) { if (txtNewPriceDish.getText().isEmpty())
-		 * txtMiniLabel.setText("price must be invailed!"); else { try { PriceOfDish =
-		 * Float.parseFloat(txtNewPriceDish.getText()); CorrectPrice = true; } catch
-		 * (Exception e) { txtMiniLabel.setText("The price must be invalid number");
-		 * e.printStackTrace(); } } if (NameAndTypeCorrect && CorrectPrice) { String
-		 * SupplierName = LoginScreenController.Name; dish = new Dish(NameOfDish,
-		 * SupplierName, null, null, null, null, PriceOfDish, dishtype);
-		 * dish.setRestCode(LoginScreenController.ID); if
-		 * (txtNewChoiceDish.getText().equals("null")) { txtNewChoiceDish.setText(""); }
-		 * dish.setChoiceFactor(txtNewChoiceDish.getText()); if
-		 * (txtNewChoiceDetailsDish.getText().equals("null")) {
-		 * txtNewChoiceDetailsDish.setText(""); }
-		 * dish.setChoiceDetails(txtNewChoiceDetailsDish.getText()); if
-		 * (txtNewIngredients.getText().equals("null")) { txtNewIngredients.setText("");
-		 * }
-		 * 
-		 * dish.setIngredients(txtNewIngredients.getText()); if
-		 * (txtNewIngredientsToRemove.getText().equals("null")) {
-		 * txtNewIngredientsToRemove.setText(""); }
-		 * dish.setExtra(txtNewIngredientsToRemove.getText());
-		 * System.out.println(dish.toString()); ClientUI.chat.accept(new
-		 * Message(MessageType.updateDish, dish)); startScreen(event,
-		 * "DeleteOrUpdateDish", "Create Menu"); dish = null; } }
-		 */
 	}
 
+	/**
+	 * A method to deleting an existing dish from the menu.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void DeleteDish(ActionEvent event) throws IOException {
 		try {

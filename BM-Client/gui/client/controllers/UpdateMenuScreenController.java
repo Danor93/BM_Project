@@ -14,6 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import main.ClientUI;
 
+/**
+ * @author Aviel
+ * This class is for select - Update/Delete existing dish, or add new dish into menu.
+ */
 public class UpdateMenuScreenController extends Controller {
 
 	@FXML
@@ -40,17 +44,32 @@ public class UpdateMenuScreenController extends Controller {
 	@FXML
 	private Button btnDeleteOrUpdateDish;
 
+	/**
+	 * A method to open a new screen (AddDishToMenu), and change value of 'indicator' to be true.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void AddNewDishToMenu(ActionEvent event) throws IOException {
 		AddDishToMenuController.indicator = true;
 		startScreen(event, "AddDishToMenu", "Add new dish");
 	}
 
+	/**
+	 * A method to open a new screen (SupplierScreen).
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void BackToSupplier(ActionEvent event) throws IOException {
 		startScreen(event, "SupplierScreen", "Supplier page");
 	}
 
+	/**
+	 * A method to open a new screen (DeleteOrUpdateDish), once we have received from the database the existing dishes in this menu.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void DeleteOrUpdateDish(ActionEvent event) throws IOException {
 		Message msg = new Message(MessageType.Show_Dishes, LoginScreenController.user.getId());

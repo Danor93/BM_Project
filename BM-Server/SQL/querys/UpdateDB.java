@@ -212,15 +212,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean BusinessAccountStatusToApproved(ArrayList<BusinessAccountTracking> arrayList) {
+	public static boolean BusinessAccountStatusToApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Approved' WHERE ID=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
-				i++;
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
 
@@ -234,15 +232,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean BusinessAccountStatusToNotApproved(ArrayList<BusinessAccountTracking> arrayList) {
+	public static boolean BusinessAccountStatusToNotApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Not approved' WHERE ID=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
-				i++;
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
 

@@ -21,8 +21,12 @@ import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 import main.PopUpMessage;
 
+/**
+ * @author Aviel
+ * This class is for add new dish to menu.
+ */
 public class AddDishToMenuController extends Controller implements Initializable {
-	public static boolean indicator;// in case indicator=false then createMenu, if indicator=true then addNewDish
+	public static boolean indicator;// in case indicator=false then label = 'Create Menu', if indicator=true then label = 'Add new dish'
 	public static boolean dishAdd = false;
 
 	@FXML
@@ -68,23 +72,38 @@ public class AddDishToMenuController extends Controller implements Initializable
 	private TextArea txtExtra;
 
 	private String TypeOfDish;
-	private boolean typeDishIsValid = true;
-	private boolean choiceDetailsIsValid = true;
-	private boolean choiceFactorIsValid = true;
+	private boolean typeDishIsValid = true; // flag to check if the type is valid
+	private boolean choiceDetailsIsValid = true; // flag to check if the the dish include choice details
+	private boolean choiceFactorIsValid = true; // flag to check if the the dish include choice factor
 	private boolean continuedFlag = true;
 	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
-	private boolean ingredientsIsValid = true;
+	private boolean ingredientsIsValid = true; // flag to check if the the dish include ingredients
 
+	/**
+	 * A method to return to the previous page. 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void Back(ActionEvent event) throws IOException {
 		startScreen(event, "SupplierScreen", "Supplier page");
 	}
 
+	/**
+	 * A method to catch the type of dish.
+	 * @param event
+	 */
 	@FXML
 	void ChooceTypeDish(ActionEvent event) {
 		TypeOfDish = btnTypeDish.getSelectionModel().getSelectedItem();
 	}
 
+	/**
+	 * A method to confirm new dish and insert it into the menu.
+	 * Also, if there are incorrect fields in the dish, we will issue an appropriate error message about it.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
 		Dish dish = new Dish(null, null, null, null, null, null, 0, null);

@@ -362,7 +362,7 @@ public class Parsing {
 		case update_status_approved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.BusinessAccountStatusToApproved(
-					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+					(BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
 						null);
 			}
@@ -371,7 +371,7 @@ public class Parsing {
 		case update_status_NotApproved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.BusinessAccountStatusToNotApproved(
-					(ArrayList<BusinessAccountTracking>) receivedMessage.getMessageData())) {
+					(BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
 						null);
 			}
