@@ -16,7 +16,7 @@
    <children>
       <ImageView fx:id="BackImage" fitHeight="589.0" fitWidth="644.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
+            <Image url="@/images/backk.jpg" />
          </image></ImageView>
       <Text layoutX="646.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
@@ -42,7 +42,7 @@
             </Text>
             <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
+                  <Image url="@/images/home.png" />
                </image>
             </ImageView>
             <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
