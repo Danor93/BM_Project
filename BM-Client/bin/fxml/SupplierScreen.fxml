@@ -19,9 +19,9 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="206.78009033203125">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Bold" size="17.0" />
          </font>
       </Text>
       <Button fx:id="btnCreateMenu" layoutX="162.0" layoutY="155.0" mnemonicParsing="false" onAction="#CreateMenu" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Create Menu">

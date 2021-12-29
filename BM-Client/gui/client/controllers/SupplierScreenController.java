@@ -49,7 +49,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	private ImageView backImg;
 	
-	@FXML
+    @FXML
     private Text WelcomeLabel;
 
 	private String[] DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
@@ -89,7 +89,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	void CreateMenu(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Certified")) {
 			ClientUI.chat.accept(new Message(MessageType.MenuExist, LoginScreenController.user.getId()));
-			if (ExisingMenuFlag == true) {
+			if (ExisingMenuFlag) {
 				ExistLbl.setText("Menu already exists, you can update it");
 			} else {
 				AddDishToMenuController.indicator = false;

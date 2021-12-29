@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import main.ClientUI;
 
 /**
@@ -44,6 +45,9 @@ public class HRManagerScreenController extends Controller{
 
     @FXML
     private Label ExistLbl;
+    
+    @FXML
+    private Text WelcomeLabel;
     
 	private boolean RandomSuccess = false;
 	private boolean marker = false;
@@ -114,7 +118,6 @@ public class HRManagerScreenController extends Controller{
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN());
 	}
 }

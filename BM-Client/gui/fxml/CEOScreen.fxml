@@ -15,9 +15,9 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fx:id="WelcomeLabel" fill="WHITE" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Text>
       <Label layoutX="282.0" layoutY="53.0" text="CEO page" textFill="WHITE">

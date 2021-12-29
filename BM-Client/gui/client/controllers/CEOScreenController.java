@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import main.ClientUI;
 
 public class CEOScreenController extends Controller{
@@ -34,6 +35,9 @@ public class CEOScreenController extends Controller{
 
     @FXML
     private Button quater;
+
+    @FXML
+    private Text WelcomeLabel;
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -70,8 +74,7 @@ public class CEOScreenController extends Controller{
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN());
 	}
 
 }
