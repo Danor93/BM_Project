@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="653.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.quaterRepController">
+   <children>
+      <ImageView fx:id="BackImage" fitHeight="524.0" fitWidth="626.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
+         </image></ImageView>
+      <Text layoutX="576.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="116.0" layoutY="25.0" text="choose quaterly reports">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="-7.0" prefHeight="531.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="117.0" layoutY="90.0" text="quentity of reports to view: ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="choose1" layoutX="303.0" layoutY="92.0" mnemonicParsing="false" onAction="#choose1Rep" text="1" />
+      <CheckBox fx:id="choose2" layoutX="399.0" layoutY="93.0" mnemonicParsing="false" onAction="#choose2Rep" text="2" />
+      <ChoiceBox fx:id="chooseBranch1" layoutX="180.0" layoutY="138.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chooseBranch2" layoutX="456.0" layoutY="138.0" prefWidth="150.0" visible="false" />
+      <Label layoutX="124.0" layoutY="141.0" text="brach :">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="brachLbl" layoutX="392.0" layoutY="141.0" text="brach :" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="quater1" layoutX="182.0" layoutY="173.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="quater2" layoutX="458.0" layoutY="173.0" prefWidth="150.0" visible="false" />
+      <Label layoutX="120.0" layoutY="176.0" text="quaterly :">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="quaterlyLbl" layoutX="392.0" layoutY="176.0" text="quately:" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="year1" layoutX="182.0" layoutY="208.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="year2" layoutX="458.0" layoutY="208.0" prefWidth="150.0" visible="false" />
+      <Label layoutX="120.0" layoutY="211.0" text="year:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="yearlbl" layoutX="392.0" layoutY="211.0" text="year:" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="proceed" layoutX="512.0" layoutY="420.0" mnemonicParsing="false" onAction="#proceed" prefHeight="33.0" prefWidth="90.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="proceed">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
