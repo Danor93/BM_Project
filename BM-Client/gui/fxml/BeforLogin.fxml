@@ -11,7 +11,7 @@
    <children>
       <ImageView fx:id="BackImage" fitHeight="506.0" fitWidth="550.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/mainBackgrpund.jpeg" />
+            <Image url="@/images/mainBackgrpund.jpeg" />
          </image></ImageView>
       <Text layoutX="105.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;BITEME&quot; is the #1 website" wrappingWidth="246.3999137878418">
          <font>

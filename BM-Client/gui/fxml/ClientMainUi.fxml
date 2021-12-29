@@ -36,7 +36,7 @@
       </Button>
       <ImageView fx:id="LogoImage" fitHeight="124.0" fitWidth="290.0" layoutX="131.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/images/clientMenuUi.jpg" />
+            <Image url="@/images/logo.png" />
          </image></ImageView>
    </children>
 </AnchorPane>
