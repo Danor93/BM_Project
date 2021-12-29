@@ -12,10 +12,11 @@ public class Supplier implements Serializable{
 	private String address;
 	private String supplierStatus;
 	private homeBranches homeBranch;
-	
-	
+	private String Confirm_Employee;
+
+
 	public Supplier(int restId, String supplierName, String openingTime, String city, String address,
-			String supplierStatus, homeBranches homeBranch) {
+			String supplierStatus, homeBranches homeBranch, String confirm_Employee) {
 		super();
 		this.restId = restId;
 		this.supplierName = supplierName;
@@ -24,9 +25,11 @@ public class Supplier implements Serializable{
 		this.address = address;
 		this.supplierStatus = supplierStatus;
 		this.homeBranch = homeBranch;
+		Confirm_Employee = confirm_Employee;
 	}
 
 
+	
 	public int getRestId() {
 		return restId;
 	}
@@ -94,5 +97,14 @@ public class Supplier implements Serializable{
 
 	public void setHomeBranch(homeBranches homeBranch) {
 		this.homeBranch = homeBranch;
+	}
+	
+	public String getConfirm_Employee() {
+		return Confirm_Employee;
+	}
+
+
+	public void setConfirm_Employee(String confirm_Employee) {
+		Confirm_Employee = confirm_Employee;
 	}
 }

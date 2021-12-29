@@ -204,7 +204,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 									dish.setExtra(txtNewIngredientsToRemove.getText());
 
 								System.out.println(dish);
-								CreateMenuScreenController.dishes.add(dish);
+								dishes.add(dish);
 								ClientUI.chat.accept(new Message(MessageType.updateDish, dish));
 								startScreen(event, "DeleteOrUpdateDish", "Create Menu");
 							} else {

@@ -2,6 +2,7 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.Dish;
@@ -28,6 +29,7 @@ import main.PopUpMessage;
 public class AddDishToMenuController extends Controller implements Initializable {
 	public static boolean indicator;// in case indicator=false then label = 'Create Menu', if indicator=true then label = 'Add new dish'
 	public static boolean dishAdd = false;
+	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 
 	@FXML
 	private ResourceBundle resources;
@@ -164,7 +166,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 									dish.setExtra("");
 								else
 									dish.setExtra(txtExtra.getText());
-								CreateMenuScreenController.dishes.add(dish);
+								dishes.add(dish);
 								ClientUI.chat.accept(new Message(MessageType.add_new_dish, dish));
 								if (dishAdd == false) {
 									txtMiniLabel.setText("Update failed. This dish is already on the menu");

@@ -37,7 +37,7 @@ public class CEOScreenController extends Controller{
 
     @FXML
     void Back(ActionEvent event) throws IOException {
-    	ClientUI.chat.accept(new Message(MessageType.Disconected,null));
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
     	startScreen(event, "LoginScreen","Login Screen");
     }
 

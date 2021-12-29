@@ -64,8 +64,7 @@ public class LoginScreenController extends Controller {
 		str.append(txtUserName.getText());
 		str.append("@");
 		str.append(PasswordField.getText());
-		Message msg = new Message(MessageType.loginSystem, str.toString());
-		ClientUI.chat.accept(msg);
+		ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
 		// if (LoginFlag) {
 		// if (AlreadyLoggedInFlag) {
 		// PopUpMessage.errorMessage("The User is Already logged in");

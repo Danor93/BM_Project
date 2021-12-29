@@ -2,8 +2,6 @@ package Parsing;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
-//server
-
 import java.util.ArrayList;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.IllegalFormatPrecisionException;
+import java.util.Map;
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
@@ -46,6 +45,22 @@ public class Parsing {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
+
+		
+		case ShowHistogram:
+		{
+			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split(",");
+			Map<String,ArrayList<Float>> histogram=(Map<String,ArrayList<Float>>)queries.getHistogramData(DivededAdd);
+			messageFromServer = new Message(MessageType. ShowHistogram, histogram);
+			return messageFromServer;
+		}
+		
+		case getYears:
+		{
+			ArrayList<String> years=(ArrayList<String>)queries.getYear();
+			messageFromServer = new Message(MessageType. getYears,  years);
+			return messageFromServer;
+		}
 
 		case Update_Orders: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split("@");
@@ -148,21 +163,16 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.Employer_List_Update_succ, null);
 			return messageFromServer;
 		}
-
-		case get_Supplier: {
-			String Branch = (String) receivedMessage.getMessageData();
-			ArrayList<Supplier> Suppliers = Query.LoadSuppliers(Branch);
-			messageFromServer = new Message(MessageType.Supplier_list, Suppliers);
-			return messageFromServer;
-		}
-
-		case Supplier_Update: {
-			ArrayList<Supplier> Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
-			for (int i = 0; i < Suppliers.size(); i++) {
-				Query.UpdateSupplier(Suppliers.get(i).getSupplierName(), Suppliers.get(i).getSupplierStatus());
+		
+		case check_suppliers_details:{
+			Supplier supplier = (Supplier) receivedMessage.getMessageData();
+			if(Query.checkSupplier(supplier)) {
+				Query.UpdateSupplier(supplier);
+				return messageFromServer = new Message(MessageType.Supplier_List_Update_succ,null);
 			}
-			messageFromServer = new Message(MessageType.Supplier_List_Update_succ, null);
-			return messageFromServer;
+			else {
+				return messageFromServer = new Message(MessageType.supplier_not_match,null);
+			}
 		}
 
 		case get_Accounts: {
@@ -264,8 +274,7 @@ public class Parsing {
 		case Disconected: {
 			UpdateDB.UpdateisLoggedIn((String) receivedMessage.getMessageData());
 			LogicController.UpdateClientTable(msg, client);
-			messageFromServer = new Message(MessageType.Disconected, null);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Disconected, null);
 		}
 
 		case Show_Dishes: {// get all orders from DB
@@ -407,8 +416,7 @@ public class Parsing {
 		}
 
 		default: {
-			messageFromServer = new Message(MessageType.Error, null);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Error, null);
 		}
 
 		}

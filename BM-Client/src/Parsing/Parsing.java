@@ -2,6 +2,8 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
+import java.util.Map;
+
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Delivery;
@@ -41,38 +43,71 @@ import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
+import client.controllers.quaterRepController;
 import main.PopUpMessage;
+
 
 public class Parsing {
 	public static void Message(Object msg) throws Exception {
-		Message receivedMessage = null;
-		receivedMessage = (Message) msg;
+		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 
 		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
-
+			
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
-					LoginScreenController.AlreadyLoggedInFlag = true;
-					// LoginScreenController.LoginFlag = true;
-					LoginScreenController.statusUser = "The user is already logged in";
+					//LoginScreenController.AlreadyLoggedInFlag = true;
+					//LoginScreenController.LoginFlag = true;
+					LoginScreenController.statusUser="The user is already logged in";
+					LoginScreenController.user=null;
+					
 				} else {
-					if (receivedMessage.getMessageData().equals("Freeze")) {
-						LoginScreenController.statusUser = "Frozen Account";
-					} else {
-						// LoginScreenController.LoginFlag = true;
-						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-						LoginScreenController.statusUser = "Active";
+					if (receivedMessage.getMessageData().equals("Freeze"))
+					{
+						LoginScreenController.statusUser="Frozen Account";
+						LoginScreenController.user=null;
 					}
-
+					else
+					{
+						//LoginScreenController.LoginFlag = true;
+						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);	
+						LoginScreenController.statusUser="Active";
+					}
+				
+				
 				}
-			} else {
-				LoginScreenController.statusUser = "User name or password are inccorect";
+			}
+			else
+			{
+				LoginScreenController.statusUser="User name or password are inccorect";
+				LoginScreenController.user=null;
 			}
 			break;
+		}
+		
+		case ShowHistogram:
+		{
+			
+			if(quaterRepController.report1==null)
+			{
+				quaterRepController.report1=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			}
+			else
+			{
+				quaterRepController.report2=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			}
+				
+			
+			break;
+		}
+		
+		case getYears:
+		{
+			quaterRepController.years=(ArrayList<String>) receivedMessage.getMessageData();
+			
 		}
 
 		case Show_Cities: {
@@ -90,8 +125,9 @@ public class Parsing {
 			break;
 		}
 
-		case ClientConfirm: {
-			CustomerScreenController.orderConfirm = (ArrayList<Order>) receivedMessage.getMessageData();
+		case ClientConfirm:
+		{
+			CustomerScreenController.orderConfirm=(ArrayList<Order>) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -169,8 +205,13 @@ public class Parsing {
 			break;
 		}
 
-		case Supplier_list: {
-			ConfirmSupplierRegController.Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
+		case Supplier_List_Update_succ:{
+			ConfirmSupplierRegController.confirmRegFlag=true;
+			break;
+		}
+		
+		case supplier_not_match:{
+			ConfirmSupplierRegController.confirmRegFlag=false;
 			break;
 		}
 
