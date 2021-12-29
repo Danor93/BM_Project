@@ -9,33 +9,45 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+
+
 public class histogramController extends Controller implements Initializable {
 
-    @FXML
+	@FXML
     private ImageView BackImage;
 
     @FXML
     private Button back;
 
     @FXML
+    private BarChart<String, Float> chart1;
+
+    @FXML
+    private BarChart<String, Float> chart2;
+
+    @FXML
     private ImageView homePage;
-
-    @FXML
-    private NumberAxis ordersNum;
-
-    @FXML
-    private CategoryAxis rest;
 
     @FXML
     private Text userName;
 
     @FXML
-    private BarChart<?, ?> chart;
+    private CategoryAxis xRest1;
+
+    @FXML
+    private CategoryAxis xRest2;
+
+    @FXML
+    private NumberAxis yIncome1;
+
+    @FXML
+    private NumberAxis yIncome2;
 
     @FXML
     void back(ActionEvent event) {
@@ -48,7 +60,33 @@ public class histogramController extends Controller implements Initializable {
     }
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		XYChart.Series set1=new XYChart.Series<>();
+		XYChart.Series set2=new XYChart.Series<>();
+		
+		for(String rest: quaterRepController.report1.keySet())
+		{
+			String data= rest+"\n"+quaterRepController.report1.get(rest).get(0)+" Orders";
+			set1.getData().add(new XYChart.Data(data,quaterRepController.report1.get(rest).get(1)));
+			
+		}
+		if(quaterRepController.report2!=null)
+		{
+			for(String rest: quaterRepController.report2.keySet())
+			{
+				String data= rest+"\n"+quaterRepController.report2.get(rest).get(0)+" Orders";
+				set2.getData().add(new XYChart.Data(data,quaterRepController.report2.get(rest).get(1)));
+				
+			}
+			chart2.getData().addAll(set2);
+			
+			chart2.setVisible(true);
+		
+			
+			
+		}
+		chart1.getData().addAll(set1);
 		
 		
 	}

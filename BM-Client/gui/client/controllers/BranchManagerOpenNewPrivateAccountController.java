@@ -119,7 +119,7 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewAccount", "Open New Account");
+		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
 	@Override

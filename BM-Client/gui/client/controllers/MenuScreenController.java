@@ -104,6 +104,8 @@ public class MenuScreenController extends Controller implements Initializable {
 		Parent root=load.load();
 		RestListFormController aFrame = load.getController();
 		aFrame.start(primaryStage, root);*/
+    	
+		start(event, "restListForm", "Restaurants list",ChooseRestController.cityName);
     }
 
 	/**

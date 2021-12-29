@@ -10,5 +10,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
+	<classpathentry kind="lib" path="/BM-Shared/libraries/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

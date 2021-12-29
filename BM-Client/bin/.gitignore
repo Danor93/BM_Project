@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /css/
 /fxml/
 /icons/
@@ -5,3 +6,7 @@
 /Parsing/
 /client/
 /main/
+=======
+/fxml/
+/client/
+>>>>>>> master

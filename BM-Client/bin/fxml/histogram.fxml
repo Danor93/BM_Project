@@ -16,7 +16,7 @@
    <children>
       <ImageView fx:id="BackImage" fitHeight="589.0" fitWidth="644.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
+            <Image url="@/images/backk.jpg" />
          </image></ImageView>
       <Text layoutX="646.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
@@ -42,7 +42,7 @@
             </Text>
             <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
+                  <Image url="@/images/home.png" />
                </image>
             </ImageView>
             <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
@@ -52,20 +52,20 @@
             </Button>
          </children>
       </AnchorPane>
-      <BarChart fx:id="chart1" layoutX="117.0" layoutY="88.0" prefHeight="252.0" prefWidth="529.0">
+      <BarChart fx:id="chart1" layoutX="98.0" layoutY="77.0" prefHeight="248.0" prefWidth="552.0" title="Quaterly report">
         <xAxis>
-          <CategoryAxis fx:id="rest" label="restaurants" side="BOTTOM" />
+          <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest1" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="ordersNum" label="number of orders" side="LEFT" />
+          <NumberAxis fx:id="yIncome1" label="Restaurants revenue" side="LEFT" />
         </yAxis>
       </BarChart>
-      <BarChart fx:id="chart2" layoutX="117.0" layoutY="337.0" prefHeight="252.0" prefWidth="529.0">
+      <BarChart fx:id="chart2" layoutX="98.0" layoutY="335.0" prefHeight="248.0" prefWidth="562.0" title="Quaterly report" visible="false">
          <xAxis>
-            <CategoryAxis fx:id="rest1" label="restaurants" side="BOTTOM" />
+            <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest2" />
          </xAxis>
          <yAxis>
-            <NumberAxis fx:id="ordersNum1" label="number of orders" side="LEFT" />
+            <NumberAxis fx:id="yIncome2" label="Restaurants Revenue" side="LEFT" />
          </yAxis>
       </BarChart>
    </children>

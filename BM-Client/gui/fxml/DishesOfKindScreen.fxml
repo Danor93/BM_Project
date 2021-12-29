@@ -12,13 +12,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ChoosingDishesController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ChoosingDishesController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="544.0" fitWidth="635.0" layoutX="53.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
-         </image>
-      </ImageView>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
       <VBox layoutX="124.0" layoutY="64.0" prefHeight="359.0" prefWidth="227.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <children>
             <Text fx:id="foodKind" fill="#276e24" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="226.16099548339844">
@@ -34,7 +33,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <AnchorPane fx:id="ingPane" layoutX="382.0" layoutY="124.0" prefHeight="212.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <AnchorPane fx:id="ingPane" layoutX="382.0" layoutY="124.0" prefHeight="212.0" prefWidth="240.0" style="-fx-background-color: white; -fx-background-radius: 30;" visible="false">
          <children>
             <Text fx:id="dishLbl" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="237.58590698242188">
                <font>
@@ -74,9 +73,8 @@
             </Text>
             <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
-               </image>
-            </ImageView>
+                  <Image url="@/images/home.png" />
+               </image></ImageView>
             <Button fx:id="back" layoutX="11.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToMenu" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
                <font>
                   <Font name="System Bold" size="14.0" />
