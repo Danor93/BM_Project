@@ -365,7 +365,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('supp','supp','Supplier','ron','abu','1','asa','234',0,'center'),('adi','a1','Customer','tali','or','111','as@as.com','050344',0,'north'),('h','h','HR-Intel','avi','sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','adi','sasson','123','***','***',0,'north'),('b','b','Customer','talia','blum','134','111','111',0,'center'),('supp2','supp2','Supplier','adi','blum','2','222','222',0,'north'),('viv1','viv1','Supplier-Certified-vivinio','avi','cohen','311546','avic@gmail.com','0526489',0,'North'),('ag','ag','Customer','aviel','gabay','312987','a@gmail.com','053456',0,'North'),('viv2','viv2','Supplier-Approved-vivinio','moshe','biton','356789','mosheb@gmail.com','0534689',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',1,'north'),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
+INSERT INTO `users` VALUES ('adi','a1','Customer','tali','or','111','as@as.com','050344',0,'north'),('h','h','HR-Intel','avi','sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','adi','sasson','123','***','***',0,'north'),('b','b','Customer','talia','blum','134','111','111',0,'center'),('viv1','viv1','Supplier-Certified-vivinio','avi','cohen','311546','avic@gmail.com','0526489',0,'North'),('ag','ag','Customer','aviel','gabay','312987','a@gmail.com','053456',0,'North'),('viv2','viv2','Supplier-Approved-vivinio','moshe','biton','356789','mosheb@gmail.com','0534689',0,'North'),('c','c','BranchManager','sahar','oz','456','b@b.co.il','054678',0,'north'),('e','e','CEO','lior','shauli','689','c@c.co.il','054789',0,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -378,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-28 19:38:28
+-- Dump completed on 2021-12-29 10:42:14
