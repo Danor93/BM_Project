@@ -27,6 +27,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+/**
+ * this is the controller of the main branch screen.
+ */
 public class BranchManagerScreenController extends Controller implements ControllerInterface, Initializable {
 
 	public static Stage stage;
@@ -60,10 +63,16 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@FXML
 	private ImageView BackImage;
+	
+	  @FXML
+	    private Button ChangePBtn;
 
+	/**
+	 * for back to login screen.
+	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		startScreen(event, "LoginScreen", "Login");
 	}
 
@@ -82,41 +91,70 @@ public class BranchManagerScreenController extends Controller implements Control
 				: "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
 	}
 
+	
+	/**
+	 * this will open the new account screen.
+	 * @param event - for the open new account button.
+	 * 
+	 */
 	@FXML
 	void OpenNewAccount(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
-	/* open a screen for confirm an employer */
+
+	/**
+	 * open a screen for confirm an employer
+	 * @param event - for the confirm employer button.
+	 */
 	@FXML
 	void ConfirmEmployerReg(ActionEvent event) throws IOException {
 		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
 	}
 
-	/* open a screen for confirm an Supplier */
+
+	/**
+	 * open a screen for confirm an Supplier
+	 * @param event - for the confirm supplier button.
+	 */
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
-		startScreen(event, "ConfirmSupplierRegistartion", "Confirm Supplier");
+		startScreen(event, "BranchManagerSupplierRegistration", "Supplier Registration");
 	}
 
-	/* open a screen for close an account */
+	/**
+	 * open a screen for close an account
+	 * @param event - for the close account button.
+	 */
 	@FXML
 	void deleteAccount(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerCloseAccount", "Close Account");
 	}
 
-	/* open a screen for Freeze an account */
+	
+	/**
+	 * open a screen for Change Permissions of account.
+	 * @param event - for the change permissions button.
+	 */
 	@FXML
-	void FreezeAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerFreezeAccount", "Freeze Account");
+	void ChangePermissions(ActionEvent event) throws IOException {
+		startScreen(event, "BranchManagerChangePermissions", "Change Permissions");
 	}
 
-	/* for upload the quarterly PDF. */
+	
+	/**
+	 * for upload the quarterly PDF.
+	 * @param event - for the upload pdf button.
+	 */
 	@FXML
 	void UploadPDF(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerUploadPDF", "Upload PDF");
 	}
 
+	/**
+	 * for view the branch monthly report
+	 * @param event - for the branch manager report button.
+	 */
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerChooseReportToView", "View Report");
@@ -124,8 +162,7 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+		/*setImage(BackImage,"/Images/BackImageBiteMe.jpeg");*/
 	}
 
 	@Override

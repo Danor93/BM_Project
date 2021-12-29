@@ -46,4 +46,3 @@ public class ClientConnection {
 		return String.format("%s %s %s", hostName, ipAddress, status);
 	}
 }
-

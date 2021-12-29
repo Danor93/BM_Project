@@ -13,10 +13,7 @@
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ChooseRestController">
    <children>
 
-      <ImageView fx:id="BackImage" fitHeight="538.0" fitWidth="604.0" layoutX="64.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/backk.jpg" />
-         </image></ImageView>
+      <ImageView fx:id="BackImage" fitHeight="538.0" fitWidth="604.0" layoutX="64.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" />
       <Text layoutX="565.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -50,11 +47,10 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="34.0" layoutY="177.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../שיטות-חלק%203/pictures/home.png" />
-               </image>
-            </ImageView>
+                  <Image url="@../images/home.png" />
+               </image></ImageView>
             <Button fx:id="back" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#back" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log Out">
                <font>
                   <Font name="System Bold" size="14.0" />

@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="backImg" fitHeight="571.0" fitWidth="565.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../שיטות-חלק%203/pictures/Nbackground.jpg" />
+            <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Adi" wrappingWidth="106.00001271565748">
          <font>

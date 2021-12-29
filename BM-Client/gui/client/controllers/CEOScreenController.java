@@ -1,11 +1,13 @@
 package client.controllers;
 
 import java.io.IOException;
-
+import Entities.Message;
+import Entities.MessageType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import main.ClientUI;
 
 public class CEOScreenController extends Controller{
 
@@ -34,8 +36,9 @@ public class CEOScreenController extends Controller{
     private Button quater;
 
     @FXML
-    void Back(ActionEvent event) {
-
+    void Back(ActionEvent event) throws IOException {
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+    	startScreen(event, "LoginScreen","Login Screen");
     }
 
     @FXML

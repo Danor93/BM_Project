@@ -65,9 +65,8 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	@FXML
 	void ChooseQuertar(ActionEvent event) {
 		Quertar = QuertarComboBox.getSelectionModel().getSelectedItem();
+		YearComboBox.getItems().add("2022");
 		YearComboBox.getItems().add("2021");
-		YearComboBox.getItems().add("2020");
-		YearComboBox.getItems().add("2019");
 		YearComboBox.setDisable(false);
 	}
 

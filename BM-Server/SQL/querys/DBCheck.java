@@ -129,18 +129,18 @@ public class DBCheck {
 				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bitemedb.dishes WHERE restId1=?");
 				stmt.setString(1, ID);
 				ResultSet rs = stmt.executeQuery();
-				rs.next();
-				rs1 = rs.getString(1).toString();
+				while (rs.next())
+					rs1 = rs.getString(1).toString();
 				rs.close();
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("return false");
-			return false;
 		}
-		System.out.println("in sql before false rs1=" + rs1);
-		return true;
+		if(rs1==null)
+			return false;
+		else
+			return true;
 	}
 
 	public static ArrayList<String> w4cBusinessGet() {
