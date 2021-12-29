@@ -77,9 +77,8 @@ public class DeliveryOrPickupController extends Controller {
 	    			ShowOrderController.finalOrder.setUseBudget(1);	
 	    		}
 	    	}
-    		//earlyOrder=checkEarlyOrder();
     		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
-    		//ShowOrderController.finalOrder.setEarlyOrder(earlyOrder);
+    		
     		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/Delivery.fxml"));
     		Parent root=load.load();
@@ -164,7 +163,7 @@ public class DeliveryOrPickupController extends Controller {
     		try {
     			LocalTime timeOfOrder=LocalTime.parse(orderTime);
     			String[] restHours=RestListFormController.chosenRst.getOpenning().split("-");
-    			//check how to change
+
     			if(!timeOfOrder.isAfter(LocalTime.parse(restHours[1])) && !timeOfOrder.isBefore(LocalTime.parse(restHours[0])))
     			{
     				if(orderDate.isEqual(LocalDate.now()))
@@ -231,6 +230,12 @@ public class DeliveryOrPickupController extends Controller {
 			else
 				return "no";
 		}
+		
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
 		
 	}
 

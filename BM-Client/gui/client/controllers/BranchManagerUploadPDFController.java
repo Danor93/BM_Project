@@ -65,9 +65,8 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	@FXML
 	void ChooseQuertar(ActionEvent event) {
 		Quertar = QuertarComboBox.getSelectionModel().getSelectedItem();
+		YearComboBox.getItems().add("2022");
 		YearComboBox.getItems().add("2021");
-		YearComboBox.getItems().add("2020");
-		YearComboBox.getItems().add("2019");
 		YearComboBox.setDisable(false);
 	}
 
@@ -148,5 +147,11 @@ public class BranchManagerUploadPDFController extends Controller implements Init
         assert YearComboBox != null : "fx:id=\"YearComboBox\" was not injected: check your FXML file 'BranchManagerUploadPDF.fxml'.";
 
     }
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

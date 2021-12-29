@@ -3,10 +3,8 @@ package Entities;
 import java.io.Serializable;
 
 public class BusinessAccountTracking implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1865089739851638526L;
 	private String ID;
 	private String companyName;
 	private String budget;

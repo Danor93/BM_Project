@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import Entities.Dish;
 import Entities.DishType;
+import Entities.Message;
+import Entities.MessageType;
 import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +28,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.ClientUI;
 
+/**
+ * @author User
+ *
+ */
+/**
+ * @author User
+ *
+ */
 public class DishOptionsController extends Controller implements Initializable{
 
     @FXML
@@ -61,6 +72,13 @@ public class DishOptionsController extends Controller implements Initializable{
     
 
     @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+    
+
+    @FXML
     private Text notify;
 
     
@@ -69,7 +87,34 @@ public class DishOptionsController extends Controller implements Initializable{
     
     private ArrayList<String> UnChosenExtra=new ArrayList<>();    
     ObservableList <String>observableListUnExtra; 
+    
+    
 
+    /** This method meant to get back to costumer page
+	 * @param event				pressing the "home" image 
+	 * @throws IOException
+	 */
+    @FXML
+    void backToHome(MouseEvent event) throws IOException {
+    	start(event, "CustomerScreen", "CustomerScreen","");
+    }
+    
+	/** This method meant to get back to login page and logout the customer
+	 * @param event				pressing the "logout" button 
+	 * @throws IOException
+	 */
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+
+    }
+
+    
+    /**This method meant to add the selected dish to the order with a choice factor(if it has one) and with it's choice details 
+     * @param event               
+     * @throws IOException
+     */
     @FXML
     void addDishToOrder(ActionEvent event) throws IOException 
     {
@@ -96,6 +141,13 @@ public class DishOptionsController extends Controller implements Initializable{
     	}
 
     }
+    
+    /**this method creates a dish with it's chosen details and places it in the dishes array list.
+     *  it also gets us back to the menu screen with an appropriate label if the dish successfully added to the array list.
+     * @param op                the choice factor that the customer chose
+     * @param event             pressing the button "add to my order"
+     * @throws IOException
+     */
     private void addDishToMyOrder(String op,ActionEvent event) throws IOException
     {
     	
@@ -121,31 +173,25 @@ public class DishOptionsController extends Controller implements Initializable{
 		dish.setQuentity(ChoosingDishesController.quentity);
 		dish.setRestCode(RestListFormController.chosenRst.getRestCode());
 		SingletonOrder.getInstance().myOrder.add(dish);
-		notify.setFill(Color.GREEN);
-		notify.setText("The dish was successfully added to your order");
-
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
-		Parent root=load.load();
-		MenuScreenController aFrame = load.getController();
-		aFrame.display(RestListFormController.chosenRst.getSupplierName());
-		aFrame.start(primaryStage,root);
+		start(event,"MenuScreen","Restaurant's menu","The dish was successfully added to your order");
 		
 	}
     	
     
-
+	/** This method meant to get back to the dishes of a specific kind page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
     @FXML
     void backToDishes(ActionEvent event) throws IOException 
     {
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root=load.load();
-		ChoosingDishesController aFrame = load.getController();
-		aFrame.start(primaryStage, root);
-
+		start(event, "DishesOfKindScreen", "Restaurant's starters", MenuScreenController.chosenFoodType);
     }
 
+    
+    /**This method meant to remove a choice detail that the customer has already chose,allowing him to drawback from his decision 
+     * @param event      pressing the "<-" button
+     */
     @FXML
     void removeChange(ActionEvent event) 
     {
@@ -171,15 +217,12 @@ public class DishOptionsController extends Controller implements Initializable{
         		observableListUnExtra=FXCollections.observableArrayList(UnChosenExtra);	
         		optionsList.getItems().removeAll();
         		optionsList.getItems().addAll(observableListUnExtra);
-        		//optionsList.setItems(observableListUnExtra);
         	}
         	
         	else
         	{
         		notify.setFill(Color.RED);
         		notify.setText("Please choose at least one change to remove ");
-        		
-        		
         	}
         	
     	}
@@ -188,13 +231,13 @@ public class DishOptionsController extends Controller implements Initializable{
     	{
     		notify.setFill(Color.RED);
     		notify.setText("There are no changes to remove");
-    		
     	}
-
-
-
     }
 
+    
+    /**This method meant to add a choice detail that the customer chose from the given list 
+     * @param event      pressing the "->" button
+     */
     @FXML
     void selectChange(ActionEvent event) 
     {
@@ -228,20 +271,6 @@ public class DishOptionsController extends Controller implements Initializable{
     }
 
     
-    public void setValue()
-    {
-		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
-
-    }
-	
-	public void start(Stage stage, Parent root) {
-		Scene scene = new Scene(root);		
-		stage.setScene(scene);
-		stage.show();
-		
-	}
-
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 			
@@ -256,11 +285,15 @@ public class DishOptionsController extends Controller implements Initializable{
 		{
 			String[] getChoices=ChoosingDishesController.chosenDish.getExtra().split("/");
 			ObservableList <String>observableList2=FXCollections.observableArrayList(createList(getChoices));
-			//optionsList.getItems().addAll(observableList2);
 			optionsList.setItems(observableList2);
 
 		}
 	}
+	
+	/**The method takes an array of choices that the supplier entered for the customer to choose and converts it to array list
+	 * @param splitedData             array of strings with choices
+	 * @return
+	 */
 	private ArrayList<String> createList(String[] splitedData)
 	{
 		ArrayList<String> choices=new ArrayList<>();
@@ -270,6 +303,12 @@ public class DishOptionsController extends Controller implements Initializable{
 		}
 		
 		return choices;
+		
+	}
+	
+	@Override
+	public void display(String string) {
+		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 		
 	}
 

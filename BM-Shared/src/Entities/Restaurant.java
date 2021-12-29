@@ -3,7 +3,8 @@ package Entities;
 import java.io.Serializable;
 
 public class Restaurant implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 6163898968170345743L;
 	private String supplierName, openning, city, address,restCode;
 	private homeBranches homeBranch;
 

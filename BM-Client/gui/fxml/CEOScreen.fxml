@@ -15,17 +15,17 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="225.58587646484375">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Arial Bold" size="19.0" />
          </font>
       </Text>
-      <Label layoutX="267.0" layoutY="66.0" text="CEO page">
+      <Label layoutX="267.0" layoutY="66.0" text="CEO Page">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewRevenueReport" layoutX="348.0" layoutY="185.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="View Revenue Report" textAlignment="CENTER">
+      <Button fx:id="btnViewRevenueReport" layoutX="348.0" layoutY="173.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="196.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="View Revenue Report" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

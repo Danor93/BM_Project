@@ -1,16 +1,16 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Order implements Serializable {
 
 	private static final long serialVersionUID = 2360410765980564003L;
 	private int orderNum, useBudget;
-	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund,EarlyOrder;
-
+	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund, EarlyOrder;
 
 	private float totalPrice;
-	private String orderType;
+	private String orderType, dishes;
 
 	public Order(String orderType, String restName, String timeOfOrder, String dateOfOrder, String orderStatus,
 			String costumerId, String restId, float totalPrice) {
@@ -28,6 +28,15 @@ public class Order implements Serializable {
 		this.costumerId = costumerId;
 		this.restId = restId;
 		this.totalPrice = totalPrice;
+	}
+
+	public Order(int orderNum, String restName, String timeOfOrder, String dateOfOrder, String EarlyOrder) {
+		this.orderNum = orderNum;
+		this.restName = restName;
+		this.timeOfOrder = timeOfOrder;
+		this.dateOfOrder = dateOfOrder;
+		this.EarlyOrder = EarlyOrder;
+
 	}
 
 	public int getOrderNum() {
@@ -117,12 +126,20 @@ public class Order implements Serializable {
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
 	}
-	
+
 	public String getEarlyOrder() {
 		return EarlyOrder;
 	}
 
 	public void setEarlyOrder(String earlyOrder) {
 		EarlyOrder = earlyOrder;
+	}
+
+	public String getDishes() {
+		return dishes;
+	}
+
+	public void setDishes(String dishes) {
+		this.dishes = dishes;
 	}
 }

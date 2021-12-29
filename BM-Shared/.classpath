@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="/OCSF"/>
+	<classpathentry kind="lib" path="libraries/javax.mail.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

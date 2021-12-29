@@ -34,4 +34,10 @@ public class CEORevenueReport extends Controller implements ControllerInterface{
 		
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

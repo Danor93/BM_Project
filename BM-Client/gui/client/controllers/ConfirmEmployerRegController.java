@@ -82,7 +82,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		ListofEmployers.setDisable(true);
 		for (int i = 0; i < Employers.size(); i++) {
 			if (Employers.get(i).getCompanyName().equals(companyName)) {
-				Employers.get(i).setCompanyStatus("approved");
+				Employers.get(i).setCompanyStatus("Approved");
 			}
 		}
 		ListofEmployers.getItems().clear();
@@ -97,7 +97,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		ListofEmployers.setDisable(true);
 		for (int i = 0; i < Employers.size(); i++) {
 			if (Employers.get(i).getCompanyName().equals(companyName)) {
-				Employers.get(i).setCompanyStatus("not approved");
+				Employers.get(i).setCompanyStatus("Not approved");
 			}
 		}
 		ListofEmployers.getItems().clear();
@@ -110,7 +110,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	/* this method is for load the not approved and waiting company names. */
 	public void loadEmployerstoComboBox(ArrayList<Employer> Employers) {
 		for (Employer e : Employers) {
-			if (e.getCompanyStatus().equals("not approved") || e.getCompanyStatus().equals("waiting")) {
+			if (e.getCompanyStatus().equals("Not approved") || e.getCompanyStatus().equals("Waiting")) {
 				ListofEmployers.getItems().add(e.getCompanyName());
 			}
 		}
@@ -119,7 +119,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	/* this method is for load only the waiting company names. */
 	public void refreshcombobox(ArrayList<Employer> Employers) {
 		for (Employer e : Employers) {
-			if (e.getCompanyStatus().equals("waiting")) {
+			if (e.getCompanyStatus().equals("Waiting")) {
 				ListofEmployers.getItems().add(e.getCompanyName());
 			}
 		}
@@ -140,6 +140,12 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		}
 		btnConfirmEmployerRegistartion.setDisable(true);
 		btnRefuseEmployerRegistartion.setDisable(true);
+		
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
 		
 	}
 }

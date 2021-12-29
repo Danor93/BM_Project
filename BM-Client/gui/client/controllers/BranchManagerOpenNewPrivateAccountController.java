@@ -119,11 +119,17 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller
 
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "OpenNewAccount", "Open New Account");
+		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ConfirmOpenNewPrivateAccountFlag = false;
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

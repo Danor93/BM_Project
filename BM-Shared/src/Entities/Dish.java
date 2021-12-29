@@ -8,7 +8,7 @@ public class Dish implements Serializable{
 	private static final long serialVersionUID = 3722018100294979572L;
 	private String dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,restCode;
 	private float price;
-	private int inventory,quentity,orderNumber;
+	private int quentity,orderNumber;
 	public int getOrderNumber() {
 		return orderNumber;
 	}
@@ -74,7 +74,6 @@ public class Dish implements Serializable{
 		return price;
 	}
 
-
 	public DishType getDishType() {
 		return dishType;
 	}
@@ -105,6 +104,6 @@ public class Dish implements Serializable{
 	public String toString() {
 		return "Dish [dishName=" + dishName + ", supplierName=" + supplierName + ", extra=" + extra + ", ingredients="
 				+ ingredients + ", restCode=" + restCode + ", choiceFactor=" + choiceFactor + ", Choice Details="
-				+ choiceDetails + ", price=" + price + ", inventory=" + inventory + ", dishType=" + dishType + "]";
+				+ choiceDetails + ", price=" + price + ", dishType=" + dishType + "]";
 	}
 }

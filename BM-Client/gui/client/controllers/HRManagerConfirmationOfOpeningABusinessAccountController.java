@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.BusinessAccountTracking;
+import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
@@ -16,10 +17,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
+import main.PopUpMessage;
 
+/**
+ * @author Aviel
+ * * This class is intended for approving / refusing new business account.
+ */
 public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
 
@@ -28,6 +35,9 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	private URL location;
+	
+    @FXML
+    private ImageView BackImage;
 
 	@FXML
 	private Button back;
@@ -52,51 +62,57 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	ObservableList<BusinessAccountTracking> list;
 
+	/**
+	 * A method to return to the previous page. 
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void back(ActionEvent event) throws IOException {
 		startScreen(event, "HRManagerScreen", "HR Manager");
 	}
 
+	/**
+	 * A method of confirming a new business account waiting for approval.
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		BusinessAccountTracking orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, ordersToChange));
+		orderToChange = list.get(0);	
+		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-			for (int j = 0; j < ordersToChange.size(); j++) {
-				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
+				if (trackingDetails.get(i).equals(orderToChange))
 					trackingDetails.remove(i);
 			}
-		}
-		ordersToChange.clear();
+		orderToChange = null;
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}
 
+	/**
+	 * A method of refusing a new business account waiting for approval.
+	 * @param event = ActionEvent
+	 */
 	@FXML
-		void refuseBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+	void refuseBusinessAccount(ActionEvent event) {
+		BusinessAccountTracking orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, ordersToChange));
+		orderToChange = list.get(0);
+		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-			for (int j = 0; j < ordersToChange.size(); j++) {
-				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
+				if (trackingDetails.get(i).equals(orderToChange))
 					trackingDetails.remove(i);
-			}
 		}
-		ordersToChange.clear();
+
+		orderToChange = null;
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}
 
 	@FXML
 	void initialize() {
+        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert back != null
 				: "fx:id=\"back\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert Refuse != null
@@ -119,8 +135,15 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		ID.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("ID"));
 		companyName.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("companyName"));
 		budget.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("budget"));
-		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, null));
+		String DivededUandP[] = ((String) LoginScreenController.user.getRole()).split("-");
+		String fullCompanyName = String.valueOf(DivededUandP[1]);
+		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, fullCompanyName));
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
+	}
+
+	@Override
+	public void display(String string) {
+		
 	}
 }

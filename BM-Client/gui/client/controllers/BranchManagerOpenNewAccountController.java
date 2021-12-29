@@ -85,4 +85,10 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 			BackBtn.setText("Back to Branch Manager Panel");
 		}
 	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

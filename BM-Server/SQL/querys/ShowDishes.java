@@ -15,12 +15,10 @@ import Entities.OrderType;
 import Entities.User;
 
 public class ShowDishes {
-	public static ArrayList<Dish> getDishes(Object object) {
+	public static ArrayList<Dish> getDishes(String ID) {
 		ArrayList<Dish> dishes = new ArrayList<>();
-		String ID = (String) object;
 		System.out.println(ID);
 		PreparedStatement stmt;
-		String query = "";
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
@@ -31,7 +29,8 @@ public class ShowDishes {
 				while (rs.next()) {
 					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
 							rs.getString("choiceFactor"), rs.getString("choiceDetails"), rs.getString("ingredients"),
-							rs.getString("extra"), Float.parseFloat(rs.getString("price")), DishType.toDishType(rs.getString("dishType")));
+							rs.getString("extra"), Float.parseFloat(rs.getString("price")),
+							DishType.toDishType(rs.getString("dishType")));
 					dish.setRestCode(rs.getString("restId1"));
 					dishes.add(dish);
 				}

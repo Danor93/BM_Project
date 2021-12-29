@@ -3,7 +3,6 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -16,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
@@ -48,9 +48,12 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 	@FXML
 	private ImageView BackImage;
 
+	@FXML
+	private Text WelcomeLabel;
+
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		startScreen(event, "LoginScreen", "Login");
 	}
 
@@ -58,7 +61,7 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
 		startScreen(event, "BranchManagerChooseReportToView", "View Report");
 	}
-	
+
 	@FXML
 	void revenueReport(ActionEvent event) throws IOException {
 		startScreen(event, "BarChartRevenueReport", "Revenue Report");
@@ -77,6 +80,11 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+	}
+
+	@Override
+	public void display(String string) {
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getRole() + " - " + LoginScreenController.user.getFirstN() );
 	}
 
 }
