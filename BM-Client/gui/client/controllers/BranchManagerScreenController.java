@@ -162,13 +162,12 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		/*setImage(BackImage,"/Images/BackImageBiteMe.jpeg");*/
+		
 	}
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		nameLabel.setText(LoginScreenController.user.getFirstN());
 	}
 
 }

@@ -106,22 +106,10 @@ public class CustomerScreenController extends Controller implements Initializabl
 	public void display(String firstN) {
 		welcome.setText("Welcome "+firstN);
 	}
-	
-  /*  @FXML
-    void initialize() {
-    	setImage(backImg,"/Image/Nbackground.jpg");
-        assert backImg != null : "fx:id=\"backImg\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert btnCreateOrder != null : "fx:id=\"btnCreateOrder\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert btnLogout != null : "fx:id=\"btnLogout\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert btnOrderRec != null : "fx:id=\"btnOrderRec\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-        assert welcome != null : "fx:id=\"welcome\" was not injected: check your FXML file 'CustomerScreen.fxml'.";
-
-    }*/
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-    //	setImage(backImg,"/Image/Nbackground.jpg");
-		
+  
 	}
 
 }
