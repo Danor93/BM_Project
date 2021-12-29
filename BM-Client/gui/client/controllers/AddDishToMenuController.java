@@ -27,9 +27,10 @@ import main.PopUpMessage;
  * This class is for add new dish to menu.
  */
 public class AddDishToMenuController extends Controller implements Initializable {
+	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 	public static boolean indicator;// in case indicator=false then label = 'Create Menu', if indicator=true then label = 'Add new dish'
 	public static boolean dishAdd = false;
-	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
+	public static String restName;
 
 	@FXML
 	private ResourceBundle resources;
@@ -98,6 +99,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	@FXML
 	void ChooceTypeDish(ActionEvent event) {
 		TypeOfDish = btnTypeDish.getSelectionModel().getSelectedItem();
+		btnConfirm.setDisable(false);
 	}
 
 	/**
@@ -122,14 +124,15 @@ public class AddDishToMenuController extends Controller implements Initializable
 				e.printStackTrace();
 			}
 			try {
-				dish = new Dish(txtNameDish.getText(), LoginScreenController.user.getFirstN(), null, null, null, null,
+				ClientUI.chat.accept(new Message(MessageType.get_Rest_Name, LoginScreenController.user.getId()));
+				dish = new Dish(txtNameDish.getText(), restName, null, null, null, null,
 						Float.parseFloat(txtPriceDish.getText()), DishType.toDishType(TypeOfDish));
 			} catch (NullPointerException e) {
 				e.printStackTrace();
 				typeDishIsValid = false;
 			}
 			if (typeDishIsValid == true) {
-				dish.setRestCode(LoginScreenController.ID);
+				dish.setRestCode(LoginScreenController.user.getId());
 				if (txtChoiceDish.getText().isEmpty()) {
 					dish.setChoiceFactor("");
 					choiceFactorIsValid = false;
@@ -228,6 +231,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 		else
 			miniLabel.setText("Add new dish");
 
+		btnConfirm.setDisable(true);
 		btnTypeDish.getItems().addAll("Salad", "Starter", "Main dish", "Dessert", "Drink");
 	}
 

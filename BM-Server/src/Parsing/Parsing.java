@@ -125,6 +125,11 @@ public class Parsing {
 			return messageFromServer;
 		}
 
+		case get_Rest_Name:{
+			String restName = Query.getRestName((String)receivedMessage.getMessageData());
+			return messageFromServer = new Message(MessageType.rest_Name, restName);
+		}
+
 		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
 			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
@@ -264,7 +269,7 @@ public class Parsing {
 
 		case Show_Dishes: {// get all orders from DB
 			System.out.println(receivedMessage.getMessageData());
-			ArrayList<Dish> dishes = ShowDishes.getDishes(receivedMessage.getMessageData());
+			ArrayList<Dish> dishes = ShowDishes.getDishes((String)receivedMessage.getMessageData());
 			System.out.println("in server : ");
 			for (int i = 0; i < dishes.size(); i++)
 				System.out.println(dishes.get(i).getDishName());

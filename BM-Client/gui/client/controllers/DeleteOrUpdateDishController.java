@@ -76,7 +76,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	
 	private String TypeOfDish;
 	private String NameOfDish;
-	private int PlaceOfDish;
 	private DishType dishtype;
 	private float PriceOfDish;
 	private boolean NameAndTypeCorrect = false;
@@ -87,7 +86,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	private boolean continuedFlag = true;
 	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
 	private boolean ingredientsIsValid = true;
-	//private boolean typeDishIsValid = true;
+	private int placeOfDish;
 
 	@FXML
 	void BackToUpdateMenu(ActionEvent event) throws IOException {
@@ -125,14 +124,14 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				txtNewChoiceDetailsDish.setText(dishes.get(i).getChoiceDetails());
 				txtNewIngredients.setText(dishes.get(i).getIngredients());
 				txtNewIngredientsToRemove.setText(dishes.get(i).getExtra());
-				PlaceOfDish = i;
+				placeOfDish = i;
 			}
 		}
 	}
 
 	/**
 	 * A method to confirm update of specific dish.
-	 * @param event
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
@@ -148,7 +147,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 
 		} catch (NullPointerException e) {
 			txtMiniLabel.setText("Type must be selected!");
-			e.printStackTrace();
 		}
 		if (NameAndTypeCorrect) {
 			if (txtNewPriceDish.getText().isEmpty())
@@ -163,7 +161,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				}
 			}
 			if (NameAndTypeCorrect && CorrectPrice) {
-				String SupplierName = LoginScreenController.user.getFirstN();
+				String SupplierName = AddDishToMenuController.restName;
 				dish = new Dish(NameOfDish, SupplierName, null, null, null, null, PriceOfDish, dishtype);
 				dish.setRestCode(LoginScreenController.user.getId());
 				if (txtNewChoiceDish.getText().isEmpty()) {
@@ -204,7 +202,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 									dish.setExtra(txtNewIngredientsToRemove.getText());
 
 								System.out.println(dish);
-								dishes.add(dish);
+								dishes.set(placeOfDish, dish);
 								ClientUI.chat.accept(new Message(MessageType.updateDish, dish));
 								startScreen(event, "DeleteOrUpdateDish", "Create Menu");
 							} else {
@@ -226,15 +224,13 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				}
 			} else {
 				txtMiniLabel.setText("Type must be selected!");
-				//typeDishIsValid = true;
 			}
 		}
 	}
 
 	/**
 	 * A method to deleting an existing dish from the menu.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void DeleteDish(ActionEvent event) throws IOException {
@@ -253,9 +249,10 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		}
 		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, dishtype);
 		if (NameAndTypeCorrectToDelete) {
-			dish.setRestCode(LoginScreenController.ID);
+			dish.setRestCode(LoginScreenController.user.getId());
 			System.out.println(dish.toString());
 			ClientUI.chat.accept(new Message(MessageType.deleteDish, dish));
+			dishes.remove(placeOfDish);
 			startScreen(event, "DeleteOrUpdateDish", "Create Menu");
 			dish = null;
 		}

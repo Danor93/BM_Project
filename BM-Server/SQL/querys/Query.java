@@ -153,21 +153,21 @@ public class Query {
 				String[] role1 = null;
 				String[] role2 = null;
 				Statement stmt1 = DBConnect.conn.createStatement();
-				ResultSet rs1 = stmt1.executeQuery("SELECT role FROM bitemedb.import_users WHERE id = '"
-						+ supplier.getRestId() + "' ;");
+				ResultSet rs1 = stmt1.executeQuery(
+						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getRestId() + "' ;");
 				while (rs1.next()) {
 					role1 = rs1.getString(1).split("-");
 				}
 				rs1.close();
-				
+
 				Statement stmt2 = DBConnect.conn.createStatement();
-				ResultSet rs2 = stmt2.executeQuery("SELECT role FROM bitemedb.import_users WHERE id = '"
-						+ supplier.getConfirm_Employee() + "' ;");
+				ResultSet rs2 = stmt2.executeQuery(
+						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getConfirm_Employee() + "' ;");
 				while (rs2.next()) {
 					role2 = rs2.getString(1).split("-");
 				}
 				rs2.close();
-				
+
 				if (role1[0].equals("Certified") && role1[1].equals(supplier.getSupplierName())
 						&& role2[0].equals("Approved") && role2[1].equals(supplier.getSupplierName())) {
 					return true;
@@ -246,16 +246,16 @@ public class Query {
 
 				PreparedStatement stmt4 = DBConnect.conn.prepareStatement(
 						"INSERT INTO bitemedb.supplier(restId,supplierName,openingTime,city,address,supplierStatus,homeBranch,Confirm_Employee) VALUES(?,?,?,?,?,?,?,?)");
-				stmt4.setString(1,String.valueOf(supplier.getRestId()));
+				stmt4.setString(1, String.valueOf(supplier.getRestId()));
 				stmt4.setString(2, supplier.getSupplierName());
 				stmt4.setString(3, supplier.getOpeningTime());
 				stmt4.setString(4, supplier.getCity());
-				stmt4.setString(5,supplier.getAddress());
-				stmt4.setString(6,"Approved");
+				stmt4.setString(5, supplier.getAddress());
+				stmt4.setString(6, "Approved");
 				stmt4.setString(7, supplier.getHomeBranch().toString());
 				stmt4.setString(8, supplier.getConfirm_Employee());
 				stmt4.executeUpdate();
-			} 
+			}
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
@@ -624,21 +624,27 @@ public class Query {
 		}
 	}
 
-	public static ArrayList<Order> LoadOrders(String ID) {
+	public static ArrayList<Order> LoadOrders(String restName) {
 		ArrayList<Order> orders = new ArrayList<>();
+		System.out.println("in server - "+restName);
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
+			/*ResultSet rs = stmt.executeQuery(
 					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE rstID='"
-							+ ID + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
+							+ ID + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");*/
+			ResultSet rs = stmt.executeQuery(
+					"SELECT orderType,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE restName='"
+							+ restName + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
 			while (rs.next()) {
-				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), Float.parseFloat(rs.getString(8)));
-				order.setOrderNum(Integer.parseInt(rs.getString(9)));
-				order.setUseRefund(rs.getString(10));
-				order.setUseBudget(Integer.parseInt(rs.getString(11)));
-				order.setEarlyOrder(rs.getString(12));
+				/*Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), rs.getString(7), Float.parseFloat(rs.getString(8)));*/
+				Order order = new Order(rs.getString(1), restName, rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), Float.parseFloat(rs.getString(7)));
+				order.setOrderNum(Integer.parseInt(rs.getString(8)));
+				order.setUseRefund(rs.getString(9));
+				order.setUseBudget(Integer.parseInt(rs.getString(10)));
+				order.setEarlyOrder(rs.getString(11));
 				orders.add(order);
 			}
 			rs.close();
@@ -758,4 +764,21 @@ public class Query {
 		}
 		return null;
 	}
+
+	public static String getRestName(String ID) {
+		String restName = null;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT supplierName FROM bitemedb.supplier WHERE restId='" + ID + "' ;");
+			while (rs.next()) {
+				restName = rs.getString(1);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return restName;
+	}
+
 }

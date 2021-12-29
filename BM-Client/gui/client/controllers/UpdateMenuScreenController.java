@@ -46,8 +46,7 @@ public class UpdateMenuScreenController extends Controller {
 
 	/**
 	 * A method to open a new screen (AddDishToMenu), and change value of 'indicator' to be true.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void AddNewDishToMenu(ActionEvent event) throws IOException {
@@ -57,8 +56,7 @@ public class UpdateMenuScreenController extends Controller {
 
 	/**
 	 * A method to open a new screen (SupplierScreen).
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void BackToSupplier(ActionEvent event) throws IOException {
@@ -67,8 +65,7 @@ public class UpdateMenuScreenController extends Controller {
 
 	/**
 	 * A method to open a new screen (DeleteOrUpdateDish), once we have received from the database the existing dishes in this menu.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void DeleteOrUpdateDish(ActionEvent event) throws IOException {
@@ -96,6 +93,5 @@ public class UpdateMenuScreenController extends Controller {
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-		
 	}
 }

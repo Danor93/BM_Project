@@ -94,24 +94,19 @@ public class LoginScreenController extends Controller {
 				break;
 			}
 
-			case "Supplier": {
-				start(event, "SupplierScreen", "Supplier", user.getFirstN());
-				break;
-			}
+			/*
+			 * case "Supplier": { start(event, "SupplierScreen", "Supplier",
+			 * user.getFirstN()); break; }
+			 */
 
 			default: {
 				DivededUandP = ((String) user.getRole()).split("-");
 				if (DivededUandP[0].equals("HR")) {
-					StringBuilder CompanyName = new StringBuilder();
-					for (int i = 1; i < DivededUandP.length; i++)
-						CompanyName.append(DivededUandP[i] + " ");
-					CompanyName.deleteCharAt(CompanyName.length() - 1);
-					fullCompanyName = String.valueOf(CompanyName);
 					start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
+				} else if (DivededUandP[0].equals("Supplier")) {
+					start(event, "SupplierScreen", "Supplier", user.getFirstN());
 				}
-
 			}
-
 			}
 		}
 	}

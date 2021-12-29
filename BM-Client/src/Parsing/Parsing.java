@@ -149,6 +149,11 @@ public class Parsing {
 			break;
 		}
 
+		case rest_Name:{
+			AddDishToMenuController.restName = (String)receivedMessage.getMessageData();
+			break;
+		}
+
 		case Dish_add_succ: {
 			AddDishToMenuController.dishAdd = true;
 			break;

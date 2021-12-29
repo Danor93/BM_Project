@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.ErrorManager;
+import javafx.scene.image.ImageView;
 
 import javafx.scene.control.Label;
 
@@ -52,6 +53,9 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	private Button Send;
+	
+    @FXML
+    private ImageView backImg;
 
 	@FXML
 	private TableView<Order> table;
@@ -91,11 +95,11 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	boolean waitForArrivalTimeFlag = false; // flag to check if we need to wait for arrival time
 	boolean RegularOrSharedFlag = false; // flag to check if the delivery method = regular / shared
 	private String ArrivalTime; 
+	private String[] DivededUandP;
 
 	/**
 	 * A method to return to the previous page. 
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void back(ActionEvent event) throws IOException {
@@ -104,8 +108,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	/**
 	 * A method of confirming an order waiting for approval.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void confirmOrder(ActionEvent event) throws IOException {
@@ -134,8 +137,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	/**
 	 * A method of refusing an order waiting for approval.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void refuseOrder(ActionEvent event) throws IOException {
@@ -154,8 +156,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	/**
 	 * A method of Sending an order waiting for send.
-	 * @param event
-	 * @throws IOException
+	 * @param event = ActionEvent
 	 */
 	@FXML
 	void SendOrder(ActionEvent event) {
@@ -219,6 +220,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	void initialize() {
+        assert backImg != null : "fx:id=\"backImg\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert Refuse != null : "fx:id=\"Refuse\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert Confirm != null
@@ -259,7 +261,9 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		dateOfOrder.setCellValueFactory(new PropertyValueFactory<Order, String>("dateOfOrder"));
 		orderStatus.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatus"));
 		costumerID.setCellValueFactory(new PropertyValueFactory<Order, String>("costumerId"));
-		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, LoginScreenController.user.getId()));
+		DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
+		System.out.println(DivededUandP[2]);
+		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, DivededUandP[2]));
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
 	}
@@ -267,6 +271,5 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-		
 	}
 }
