@@ -59,12 +59,12 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChooseReportToView", "View Report");
+		start(event, "BranchManagerChooseReportToView", "View Report", "");
 	}
 
 	@FXML
 	void revenueReport(ActionEvent event) throws IOException {
-		startScreen(event, "BarChartRevenueReport", "Revenue Report");
+		start(event, "CEOChooseQReports", "Revenue Report","");
 	}
 
 	@FXML

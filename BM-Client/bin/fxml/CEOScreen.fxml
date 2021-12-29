@@ -2,44 +2,48 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="711.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CEOScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="501.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.CEOScreenController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="495.0" fitWidth="711.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="522.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fx:id="BackImage" fitHeight="527.0" fitWidth="526.0" layoutX="-15.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/Nbackground.jpg" />
+         </image></ImageView>
+      <Text layoutX="446.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="225.58587646484375">
+      <Label layoutX="154.0" layoutY="80.0" text="CEO Page">
          <font>
-            <Font name="Arial Bold" size="19.0" />
-         </font>
-      </Text>
-      <Label layoutX="267.0" layoutY="66.0" text="CEO Page">
-         <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="43.0" />
          </font>
       </Label>
-      <Button fx:id="btnViewRevenueReport" layoutX="348.0" layoutY="173.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="196.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="View Revenue Report" textAlignment="CENTER">
+      <Button fx:id="btnViewRevenueReport" layoutX="140.0" layoutY="230.0" mnemonicParsing="false" onAction="#revenueReport" prefHeight="50.0" prefWidth="225.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="View Revenue Report" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnViewBranchsReports" layoutX="89.0" layoutY="176.0" mnemonicParsing="false" onAction="#ViewBranchManagerReport" prefHeight="59.0" prefWidth="217.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="View Branch's Reports" textAlignment="CENTER">
+      <Button fx:id="btnViewBranchsReports" layoutX="140.0" layoutY="160.0" mnemonicParsing="false" onAction="#ViewBranchManagerReport" prefHeight="50.0" prefWidth="225.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="View Branch's Reports" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnLogout" layoutX="28.0" layoutY="439.0" mnemonicParsing="false" onAction="#Back" prefHeight="40.0" prefWidth="113.0" text="Logout">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="btnDownloadQuarterlyReport" layoutX="225.0" layoutY="276.0" mnemonicParsing="false" onAction="#downloadQuarterlyReport" prefHeight="53.0" prefWidth="246.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="Download Quarterly Report">
+      <Button fx:id="btnLogout" layoutX="140.0" layoutY="370.0" mnemonicParsing="false" onAction="#Back" prefHeight="50.0" prefWidth="225.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Logout">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
+      <Button fx:id="btnDownloadQuarterlyReport" layoutX="140.0" layoutY="300.0" mnemonicParsing="false" onAction="#downloadQuarterlyReport" prefHeight="50.0" prefWidth="225.0" style="-fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: black; -fx-border-width: 2;" text="Download Quarterly Report">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="193.6259765625">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
