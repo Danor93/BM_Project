@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="501.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="501.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
    <children>
       <ImageView fx:id="backImg" fitHeight="502.0" fitWidth="594.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,29 +19,29 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="btnCreateMenu" layoutX="162.0" layoutY="155.0" mnemonicParsing="false" onAction="#CreateMenu" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Create menu">
+      <Button fx:id="btnCreateMenu" layoutX="162.0" layoutY="155.0" mnemonicParsing="false" onAction="#CreateMenu" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Create Menu">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Label layoutX="109.0" layoutY="79.0" text="Supplier page">
+      <Label layoutX="109.0" layoutY="79.0" text="Supplier Page">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
       </Label>
-      <Button fx:id="btnUpdateMenu" layoutX="162.0" layoutY="213.0" mnemonicParsing="false" onAction="#UpdateMenu" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Update menu">
+      <Button fx:id="btnUpdateMenu" layoutX="162.0" layoutY="213.0" mnemonicParsing="false" onAction="#UpdateMenu" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Update Menu">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnUpdateOrderStatus" layoutX="162.0" layoutY="274.0" mnemonicParsing="false" onAction="#UpdateOrderStatus" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Update order status">
+      <Button fx:id="btnUpdateOrderStatus" layoutX="162.0" layoutY="274.0" mnemonicParsing="false" onAction="#UpdateOrderStatus" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Update Order Status">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnBack" layoutX="162.0" layoutY="334.0" mnemonicParsing="false" onAction="#Back" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-width: 2; -fx-border-radius: 30; -fx-border-color: black;" text="Back">
+      <Button fx:id="btnBack" layoutX="162.0" layoutY="334.0" mnemonicParsing="false" onAction="#Back" prefHeight="47.0" prefWidth="176.0" style="-fx-background-radius: 30; -fx-border-width: 2; -fx-border-radius: 30; -fx-border-color: black;" text="Logout">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

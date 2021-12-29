@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
@@ -47,6 +48,9 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	private ImageView backImg;
+	
+	@FXML
+    private Text WelcomeLabel;
 
 	private String[] DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
 
@@ -126,8 +130,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN());
 	}
 
 }

@@ -168,11 +168,6 @@ public class Parsing {
 			break;
 		}
 
-		// case WrongInput: {
-		// LoginScreenController.WrongInputFlag = true;
-		// break;
-		// }
-
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
