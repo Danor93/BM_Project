@@ -74,7 +74,6 @@ public class Parsing {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
-			// result2 = DivededUandP[0];
 			messageFromServer = new Message(MessageType.loginSystem, result);
 			return messageFromServer;
 		}

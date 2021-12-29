@@ -55,29 +55,33 @@ public class Parsing {
 		switch (receivedMessage.getMessageType()) {
 
 		case loginSystem: {
-			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
-
+String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+			
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
-					// LoginScreenController.AlreadyLoggedInFlag = true;
-					// LoginScreenController.LoginFlag = true;
-					LoginScreenController.statusUser = "The user is already logged in";
-					LoginScreenController.user = null;
-
+					LoginScreenController.statusUser="The user is already logged in";
+					LoginScreenController.user=null;
+					
 				} else {
-					if (receivedMessage.getMessageData().equals("Freeze")) {
-						LoginScreenController.statusUser = "Frozen Account";
-						LoginScreenController.user = null;
-					} else {
-						// LoginScreenController.LoginFlag = true;
-						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-						LoginScreenController.statusUser = "Active";
+					if (receivedMessage.getMessageData().equals("Freeze"))
+					{
+						LoginScreenController.statusUser="Frozen Account";
+						LoginScreenController.user=null;
 					}
+					else
+					{
+						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);	
+						LoginScreenController.statusUser="Active";
+					}
+				
+				
 				}
-			} else {
-				LoginScreenController.statusUser = "User name or password are inccorect";
-				LoginScreenController.user = null;
+			}
+			else
+			{
+				LoginScreenController.statusUser="User name or password are inccorect";
+				LoginScreenController.user=null;
 			}
 			break;
 		}
