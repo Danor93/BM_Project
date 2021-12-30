@@ -57,7 +57,7 @@
                <image>
                   <Image url="@/images/home.png" />
                </image></ImageView>
-            <Button fx:id="backBtn" layoutX="12.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
+            <Button fx:id="backBtn" layoutX="12.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToCity" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

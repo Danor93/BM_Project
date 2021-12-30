@@ -1,5 +1,6 @@
 package client.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,13 +51,13 @@ public class histogramController extends Controller implements Initializable {
     private NumberAxis yIncome2;
 
     @FXML
-    void back(ActionEvent event) {
-
+    void back(ActionEvent event) throws IOException {
+    	start(event,"CEOChooseQReports", "Choose Quarter Report",LoginScreenController.user.getFirstN());
     }
 
     @FXML
-    void backToHome(MouseEvent event) {
-
+    void backToHome(MouseEvent event) throws IOException {
+    	start(event,"CEOScreen", "CEO", LoginScreenController.user.getFirstN());
     }
 
 	@Override
@@ -93,8 +94,7 @@ public class histogramController extends Controller implements Initializable {
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 
 }

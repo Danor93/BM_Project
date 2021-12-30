@@ -5,70 +5,60 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="968.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="163.0" fitWidth="259.0" layoutX="67.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="522.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fx:id="BackImage" fitHeight="779.0" fitWidth="1244.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/background.jpeg" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="1108.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Label layoutX="234.0" layoutY="48.0" text="Branch Report" textFill="WHITE">
+      <Label layoutX="133.0" layoutY="65.0" text="Branch Report" textFill="#1b1919">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnBack" layoutX="35.0" layoutY="528.0" mnemonicParsing="false" onAction="#Back" text="Back">
+      <ComboBox fx:id="BranchChoose" layoutX="266.0" layoutY="139.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="102.0" promptText="Branch" />
+      <ComboBox fx:id="Month" layoutX="266.0" layoutY="220.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="102.0" promptText="Month" />
+      <ComboBox fx:id="ReportType" layoutX="266.0" layoutY="180.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="109.0" promptText="Report Type" />
+      <ComboBox fx:id="Year" layoutX="266.0" layoutY="255.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="102.0" promptText="Year" />
+      <Label layoutX="110.0" layoutY="143.0" prefHeight="17.0" prefWidth="120.0" text="Choose Branch:" textFill="#201f1f">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="184.0" prefHeight="17.0" prefWidth="120.0" text="Choose Report Type:" textFill="#302d2d">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="224.0" prefHeight="17.0" prefWidth="144.0" text="Choose Month and Year:" textFill="#232121">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="GetReport" layoutX="194.0" layoutY="349.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" style="-fx-background-radius: 30;" text="Get Report">
+         <font>
+            <Font name="System Bold" size="17.0" />
          </font></Button>
-      <ComboBox fx:id="BranchChoose" layoutX="159.0" layoutY="132.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="184.0" promptText="branch" />
-      <ComboBox fx:id="Month" layoutX="165.0" layoutY="218.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="86.0" promptText="month" />
-      <ComboBox fx:id="ReportType" layoutX="159.0" layoutY="169.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="184.0" promptText="report type" />
-      <ComboBox fx:id="Year" layoutX="257.0" layoutY="218.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="86.0" promptText="year" />
-      <Label layoutX="24.0" layoutY="136.0" prefHeight="17.0" prefWidth="120.0" text="Choose Branch:" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="24.0" layoutY="173.0" prefHeight="17.0" prefWidth="120.0" text="Choose Report Type:" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="23.0" layoutY="222.0" prefHeight="17.0" prefWidth="137.0" text="Choose month and year:" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Button fx:id="GetReport" layoutX="185.0" layoutY="262.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" text="Get Report" />
-      <StackPane fx:id="ReportPane" layoutX="390.0" layoutY="132.0" prefHeight="442.0" prefWidth="556.0" style="-fx-background-color: Grey;">
+      <StackPane fx:id="ReportPane" layoutX="385.0" layoutY="91.0" prefHeight="674.0" prefWidth="556.0" style="-fx-background-color: white;">
          <children>
-            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: #001137;">
+            <Pane fx:id="main" prefHeight="674.0" prefWidth="551.0" style="-fx-background-color: white;" />
+            <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
-                  <TableView fx:id="RevenueTable" prefHeight="442.0" prefWidth="556.0" visible="false">
-                    <columns>
-                      <TableColumn fx:id="RevResCol" prefWidth="157.59991455078125" text="Restaurant " />
-                      <TableColumn fx:id="RevNumOforCol" minWidth="0.0" prefWidth="226.0" text="Number of Orders" />
-                        <TableColumn fx:id="RevIncomeCol" prefWidth="242.0" text="Income" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #001137;">
-               <children>
-                  <TableView fx:id="orders" prefHeight="442.0" prefWidth="556.0" visible="false">
+                  <TableView fx:id="orders" prefHeight="674.0" prefWidth="556.0" visible="false">
                     <columns>
                       <TableColumn fx:id="OrdRestCol" prefWidth="150.4000244140625" text="Restaurant" />
                       <TableColumn fx:id="OrdDishTypeCol" minWidth="0.0" prefWidth="207.0" text=" Dish Type" />
@@ -77,8 +67,47 @@
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="main" prefHeight="406.0" prefWidth="509.0" style="-fx-background-color: #001137;" />
+            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: white;">
+               <children>
+                  <TableView fx:id="RevenueTable" prefHeight="674.0" prefWidth="556.0" visible="false">
+                    <columns>
+                      <TableColumn fx:id="RevResCol" prefWidth="157.59991455078125" text="Restaurant " />
+                      <TableColumn fx:id="RevNumOforCol" minWidth="0.0" prefWidth="226.0" text="Number of Orders" />
+                        <TableColumn fx:id="RevIncomeCol" prefWidth="242.0" text="Income" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
          </children>
       </StackPane>
+      <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="786.0" prefWidth="102.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="58.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logout" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

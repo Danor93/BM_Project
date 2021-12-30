@@ -309,7 +309,7 @@ public class queries {
 		PreparedStatement stmt, stmt1;
 
 		try {
-			stmt = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.order VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+			stmt = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.order VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			stmt.setString(1, null);
 			stmt.setString(2, msg.getOrderType());
 			stmt.setString(3, msg.getRestName());
@@ -322,7 +322,8 @@ public class queries {
 			stmt.setString(10, msg.getUseRefund());
 			stmt.setInt(11, msg.getUseBudget());
 			stmt.setString(12, msg.getEarlyOrder());
-
+			stmt.setString(13, null);
+			stmt.setInt(14, 0);
 			stmt.executeUpdate();
 
 			stmt1 = DBConnect.conn.prepareStatement("SELECT LAST_INSERT_ID()");

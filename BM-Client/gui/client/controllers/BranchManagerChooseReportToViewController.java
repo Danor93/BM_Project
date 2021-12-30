@@ -22,8 +22,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import main.ClientUI;
 
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
@@ -83,22 +85,34 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private ComboBox<String> Year;
 
 	@FXML
-	private Button btnBack;
-
-	@FXML
 	private Pane main;
 
 	@FXML
 	private TableView<OrdersReport> orders;
+	
+	@FXML
+	private ImageView homePage;
 
 	@FXML
-	void Back(ActionEvent event) throws IOException {
+	private Button logout;
+
+	@FXML
+	private Text userName;
+	
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			startScreen(event, "CEOScreen", "CEO");
+			start(event, "CEOScreen", "CEO",LoginScreenController.user.getFirstN());
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			startScreen(event, "BranchManagerScreen", "Branch Manager");
+			start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 		}
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
 	}
 
 	@FXML
@@ -141,6 +155,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
 			
 			case "Revenue": {	
+				orders.setVisible(false);
 				RevenueReport(details);
 				break;
 
@@ -153,6 +168,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			}
 
 			case "Performance": {
+				orders.setVisible(false);
 				PerformanceReport(details);
 				break;
 			}
@@ -170,7 +186,6 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		RevNumOforCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Integer>("ordersamount"));
 		RevIncomeCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Float>("Income"));
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-		
 		RevenueList = FXCollections.observableArrayList(revenueArray);
 		RevenueTable.setItems(RevenueList);
 		
@@ -201,12 +216,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		for (int i = 1; i <= 12; i++) {
 			Month.getItems().add(i);
 		}
+		Year.getItems().add("2022");
 		Year.getItems().add("2021");
-		Year.getItems().add("2020");
-		Year.getItems().add("2019");
 
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			btnBack.setText("Back to CEO Screen");
 			BranchChoose.getItems().add("North");
 			BranchChoose.getItems().add("Center");
 			BranchChoose.getItems().add("South");
@@ -216,7 +229,6 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			GetReport.setDisable(true);
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			btnBack.setText("Back to Branch Manager Screen");
 			BranchChoose.setDisable(true);
 			Month.setDisable(true);
 			Year.setDisable(true);
