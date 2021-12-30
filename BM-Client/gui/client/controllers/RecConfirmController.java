@@ -99,12 +99,6 @@ public class RecConfirmController extends Controller implements Initializable {
     	table.setItems(observableList);
     	order.setCostumerId(LoginScreenController.user.getId());
     	ClientUI.chat.accept(new Message(MessageType.orderDone, order));
-    	
-    	EmailHandler e=new EmailHandler();
-    	if(e.sendMessage("adisasson2105@gmail.com","adisasson2105@gmail.com","order sent to supp","order sent to supp"))
-    	{
-    		System.out.println("success");
-    	}
 
     }
 

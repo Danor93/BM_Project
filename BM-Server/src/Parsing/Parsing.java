@@ -75,8 +75,7 @@ public class Parsing {
 			if (!result.equals("Already") && !result.equals("WrongInput")) {
 				LogicController.UpdateClientTable(msg, client);
 			}
-			messageFromServer = new Message(MessageType.loginSystem, result);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.loginSystem, result);
 		}
 
 		case IdentifyW4c: {

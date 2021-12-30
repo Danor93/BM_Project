@@ -69,21 +69,8 @@ public class DBCheck {
 					{
 						return "Freeze";
 					}
-							
-					
-					
+
 				}
-						
-				
-				
-				
-			//	stmt = DBConnect.conn.prepareStatement("SELECT isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
-			//	stmt.setString(1, userName);
-			//	stmt.setString(2, password);
-			//	rs = stmt.executeQuery();
-			//	rs.next();
-			//	rs2 = rs.getString(1).toString(); // isLoggedIn of userName
-			//	if (.equals("0")) {
 
 				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
 				stmt.setString(1, userName);

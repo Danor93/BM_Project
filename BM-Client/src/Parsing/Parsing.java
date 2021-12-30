@@ -67,11 +67,11 @@ public class Parsing {
 						LoginScreenController.statusUser = "Frozen Account";
 						LoginScreenController.user = null;
 					} else {
-						// LoginScreenController.LoginFlag = true;
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 						LoginScreenController.statusUser = "Active";
 					}
+
 				}
 			} else {
 				LoginScreenController.statusUser = "User name or password are inccorect";
