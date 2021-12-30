@@ -20,9 +20,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
+import javafx.scene.text.Text;
 
 public class ConfirmEmployerRegController extends Controller implements Initializable {
 
@@ -40,9 +43,6 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	private URL location;
 
 	@FXML
-	private ImageView BackImage;
-
-	@FXML
 	private ComboBox<String> ListofEmployers;
 
 	@FXML
@@ -53,8 +53,28 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 
 	@FXML
 	private Button btnRefuseEmployerRegistartion;
+	
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
 
 	public static String companyName;
+	
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
 
 	/* this method is for the Combobox Selection */
 	@FXML
@@ -129,23 +149,15 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Message msg = new Message(MessageType.get_Employer, null);
-		ClientUI.chat.accept(msg);
+		ClientUI.chat.accept(new Message(MessageType.get_Employer, null));
 		loadEmployerstoComboBox(Employers);
-		if (LoginScreenController.user.getRole().equals("CEO")) {
-			BackBtn.setText("Back to CEO Panel");
-		}
-		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			BackBtn.setText("Back to Branch Manager Panel");
-		}
 		btnConfirmEmployerRegistartion.setDisable(true);
 		btnRefuseEmployerRegistartion.setDisable(true);
 		
 	}
 
-	@Override
+    @Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

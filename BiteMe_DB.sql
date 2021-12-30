@@ -215,7 +215,7 @@ CREATE TABLE `import_users` (
 
 LOCK TABLES `import_users` WRITE;
 /*!40000 ALTER TABLE `import_users` DISABLE KEYS */;
-INSERT INTO `import_users` VALUES ('ds','ds','danor','sinai','3111','d@gmail.com','050266',''),('viv1','viv1','avi','cohen','311546','avic@gmail.com','0526489','Certified-vivinio'),('ag','ag','aviel','gabay','312987','a@gmail.com','053456',''),('so','so','sahar','oz','31456','s@gmail.com','052222',''),('viv2','viv2','moshe','biton','356789','mosheb@gmail.com','0534689','Approved-vivinio');
+INSERT INTO `import_users` VALUES ('ds','ds','danor','sinai','3111','d@gmail.com','050266',''),('viv1','viv1','avi','cohen','311546','avic@gmail.com','0526489','Certified-vivinio'),('ag','ag','aviel','gabay','312987','a@gmail.com','053456',''),('so','so','sahar','oz','31456','s@gmail.com','052222',''),('e','e','lior','shauli','345678','liors@gmail.com','05478956','\"CEO\"'),('viv2','viv2','moshe','biton','356789','mosheb@gmail.com','0534689','Approved-vivinio');
 /*!40000 ALTER TABLE `import_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,4 +378,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-29 10:42:14
+-- Dump completed on 2021-12-29 18:42:06
