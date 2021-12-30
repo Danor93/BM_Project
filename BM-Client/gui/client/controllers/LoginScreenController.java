@@ -33,8 +33,7 @@ public class LoginScreenController extends Controller {
 	public static String statusUser;
 	public static boolean AlreadyLoggedInFlag = false;
 	public static String fullCompanyName = null;
-	// public static boolean WrongInputFlag = false;
-	// public static String Name = null;
+	
 	public static String ID = null;
 
 	@FXML

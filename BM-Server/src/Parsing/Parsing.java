@@ -46,19 +46,17 @@ public class Parsing {
 
 		switch (receivedMessage.getMessageType()) {
 
-		
-		case ShowHistogram:
-		{
+		case ShowHistogram: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split(",");
-			Map<String,ArrayList<Float>> histogram=(Map<String,ArrayList<Float>>)queries.getHistogramData(DivededAdd);
-			messageFromServer = new Message(MessageType. ShowHistogram, histogram);
+			Map<String, ArrayList<Float>> histogram = (Map<String, ArrayList<Float>>) queries
+					.getHistogramData(DivededAdd);
+			messageFromServer = new Message(MessageType.ShowHistogram, histogram);
 			return messageFromServer;
 		}
-		
-		case getYears:
-		{
-			ArrayList<String> years=(ArrayList<String>)queries.getYear();
-			messageFromServer = new Message(MessageType. getYears,  years);
+
+		case getYears: {
+			ArrayList<String> years = (ArrayList<String>) queries.getYear();
+			messageFromServer = new Message(MessageType.getYears, years);
 			return messageFromServer;
 		}
 
@@ -74,7 +72,9 @@ public class Parsing {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
-			// result2 = DivededUandP[0];
+			if (!result.equals("Already") && !result.equals("WrongInput")) {
+				LogicController.UpdateClientTable(msg, client);
+			}
 			messageFromServer = new Message(MessageType.loginSystem, result);
 			return messageFromServer;
 		}
@@ -139,8 +139,8 @@ public class Parsing {
 			return messageFromServer;
 		}
 
-		case get_Rest_Name:{
-			String restName = Query.getRestName((String)receivedMessage.getMessageData());
+		case get_Rest_Name: {
+			String restName = Query.getRestName((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.rest_Name, restName);
 		}
 
@@ -167,15 +167,14 @@ public class Parsing {
 			messageFromServer = new Message(MessageType.Employer_List_Update_succ, null);
 			return messageFromServer;
 		}
-		
-		case check_suppliers_details:{
+
+		case check_suppliers_details: {
 			Supplier supplier = (Supplier) receivedMessage.getMessageData();
-			if(Query.checkSupplier(supplier)) {
+			if (Query.checkSupplier(supplier)) {
 				Query.UpdateSupplier(supplier);
-				return messageFromServer = new Message(MessageType.Supplier_List_Update_succ,null);
-			}
-			else {
-				return messageFromServer = new Message(MessageType.supplier_not_match,null);
+				return messageFromServer = new Message(MessageType.Supplier_List_Update_succ, null);
+			} else {
+				return messageFromServer = new Message(MessageType.supplier_not_match, null);
 			}
 		}
 
@@ -297,7 +296,7 @@ public class Parsing {
 
 		case Show_Dishes: {// get all orders from DB
 			System.out.println(receivedMessage.getMessageData());
-			ArrayList<Dish> dishes = ShowDishes.getDishes((String)receivedMessage.getMessageData());
+			ArrayList<Dish> dishes = ShowDishes.getDishes((String) receivedMessage.getMessageData());
 			System.out.println("in server : ");
 			for (int i = 0; i < dishes.size(); i++)
 				System.out.println(dishes.get(i).getDishName());
@@ -410,8 +409,7 @@ public class Parsing {
 
 		case update_status_approved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToApproved(
-					(BusinessAccountTracking) receivedMessage.getMessageData())) {
+			if (UpdateDB.BusinessAccountStatusToApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
 						null);
 			}
@@ -419,8 +417,8 @@ public class Parsing {
 
 		case update_status_NotApproved_businessAccount: {
 			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB.BusinessAccountStatusToNotApproved(
-					(BusinessAccountTracking) receivedMessage.getMessageData())) {
+			if (UpdateDB
+					.BusinessAccountStatusToNotApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
 						null);
 			}
