@@ -140,10 +140,10 @@ public class Parsing {
 			return messageFromServer;
 		}
 
-		case get_Rest_Name: {
+		/**case get_Rest_Name: {
 			String restName = Query.getRestName((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.rest_Name, restName);
-		}
+		}**/
 
 		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
@@ -433,22 +433,18 @@ public class Parsing {
 				System.out.println("DB Updated Failed");
 				return messageFromServer = new Message(MessageType.UpdateFailed, null);
 			}
-
-		
-
 		}
-
+		
 		case get_Revenue_report: {
 			try {
 				ArrayList<RevenueReport> array = (ArrayList<RevenueReport>) UpdateDB
 						.getRevenueReport((String) receivedMessage.getMessageData());
-				messageFromServer = new Message(MessageType.RReportUpdated, array);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.RReportUpdated, array);
 			} catch (Exception e) {
-
 				e.printStackTrace();
 			}
 		}
+		
 		case get_Orders_report: {
 			System.out.println(receivedMessage.getMessageData());
 			ArrayList<OrdersReport> array = UpdateDB.getOrdersReport((String) receivedMessage.getMessageData());
@@ -478,12 +474,6 @@ public class Parsing {
 				return messageFromServer = new Message(MessageType.UpdateFailed, null);
 			}
 			
-		}
-
-		case get_Revenue_report: {
-			String[] details = ((String) receivedMessage.getMessageData()).split("@");
-			RevenueReport Revenuereport = Query.getRevenueReport(details[0], details[1], details[2]);
-			return messageFromServer = new Message(MessageType.send_Revenue_Report, Revenuereport);
 		}
 
 		default: {

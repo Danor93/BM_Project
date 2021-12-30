@@ -66,8 +66,6 @@ public class UpdateDB {
 	}
 
 	public static boolean addToRevenueReportsTable(RevenueReport rr) {
-		System.out.println("this is in db : ");
-		System.out.println(rr.toString());
 		boolean ExistingReport = false;
 		PreparedStatement stmt;
 		Statement stmt2;
@@ -126,7 +124,6 @@ public class UpdateDB {
 					stmt3.setFloat(2, income);
 					stmt3.executeUpdate();
 					return true;
-
 				} else {
 					System.out.println("Conn is null");
 					return false;
@@ -139,12 +136,12 @@ public class UpdateDB {
 	}
 
 	public static boolean addToOrdersReportsTable(ArrayList<OrdersReport> ordersreports) {
-		boolean ExistingReport = false;
 		boolean RetVal = false; 
 		PreparedStatement stmt;
 		Statement stmt2;
-		int Quantity = 0;
 		for (OrdersReport or : ordersreports) {
+			int Quantity = 0;
+			boolean ExistingReport = false;
 			try {
 				stmt2 = DBConnect.conn.createStatement();
 				ResultSet rs = stmt2.executeQuery("SELECT Quantity FROM bitemedb.orders_report WHERE month='"
@@ -153,7 +150,8 @@ public class UpdateDB {
 				while (rs.next()) {
 					ExistingReport = true;
 					Quantity = rs.getInt(1);
-
+					System.out.println("this is a Quantity: " + Quantity);
+					System.out.println(or.getDishType());
 				}
 
 			} catch (SQLException e) {
@@ -163,7 +161,6 @@ public class UpdateDB {
 			if (ExistingReport == false) {
 				try {
 					if (DBConnect.conn != null) {
-						// month, year, ResName, DishType, branch, Quantity
 						stmt = DBConnect.conn.prepareStatement(
 								"INSERT INTO bitemedb.orders_report(month, year, ResName, DishType, branch, Quantity) VALUES (?,?,?, ?, ?, ?);");
 						stmt.setString(1, or.getMonth());
@@ -188,14 +185,14 @@ public class UpdateDB {
 				try {
 					if (DBConnect.conn != null) {
 						Quantity += or.getQuantity();
+						System.out.println(Quantity);
 						stmt3 = DBConnect.conn
-								.prepareStatement("UPDATE bitemedb.orders_report SET Quantity = ? WHERE month= '"
+								.prepareStatement("UPDATE bitemedb.orders_report SET Quantity = '" + Quantity + "' WHERE month= '"
 										+ or.getMonth() + "' AND year ='" + or.getYear() + "' AND ResName = '"
-										+ or.getResName() + "' ");
-						stmt3.setInt(1, Quantity);
+										+ or.getResName() + "' AND DishType= '" + or.getDishType() + "' ;");
 						stmt3.executeUpdate();
+						Quantity=0;
 						RetVal = true;
-
 					} else {
 						System.out.println("Conn is null");
 						RetVal = false;
@@ -255,8 +252,6 @@ public class UpdateDB {
 					OrdersReport report = new OrdersReport(month, year, branch, rs.getString(3), rs.getString(4),
 							rs.getInt(6));
 					reportarray.add(report);
-					System.out.println("this is in ubdatedb");
-					System.out.println(report.toString());
 					
 				}
 				return reportarray;
@@ -386,7 +381,6 @@ public class UpdateDB {
 
 	public static boolean RegistrationOfEmployer(Employer employer) {
 		Statement stmt;
-		//ArrayList<String> compantStatus = new ArrayList<>();
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT companyStatus FROM bitemedb.company WHERE companyName='"
