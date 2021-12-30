@@ -291,12 +291,12 @@ public class Query {
 		return null;
 	}
 
-	public static ArrayList<User> getAccount() {
+	public static ArrayList<User> getAccount(String Branch) {
 		ArrayList<User> users = new ArrayList<>();
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer'");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer' AND homeBranch= '" + Branch + "' ;");
 			while (rs.next()) {
 				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
 						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
@@ -315,10 +315,21 @@ public class Query {
 	public static void DeleteAccount(User user) {
 		if (DBConnect.conn != null) {
 			try {
-				PreparedStatement stmt = DBConnect.conn
-						.prepareStatement("DELETE FROM bitemedb.users WHERE ID = '" + user.getId() + "' ;");
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("DELETE FROM bitemedb.users WHERE ID = '" + user.getId() + "' ;");
 				stmt.executeUpdate();
+				
+				PreparedStatement stmt2 = DBConnect.conn.prepareStatement("DELETE FROM bitemedb.client WHERE client_id = '" + user.getId() + "' ;");
+				stmt2.executeUpdate();
+				
+				Statement stmt3=DBConnect.conn.createStatement();
+				ResultSet rs = stmt3.executeQuery("SELECT ID FROM bitemedb.buss_client WHERE ID= '" + user.getId() + "' ;");
+				while(rs.next()) {
+					PreparedStatement stmt4 = DBConnect.conn.prepareStatement("DELETE FROM bitemedb.buss_client WHERE ID = '" + user.getId() + "' ;");
+					stmt4.executeUpdate();
+				}
+				rs.close();
 			} catch (SQLException s) {
+				System.out.println(s.getMessage());
 				s.printStackTrace();
 			}
 		}

@@ -37,7 +37,6 @@ public class EchoServer extends AbstractServer {
 	@Override
 	
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		//LogicController.UpdateClientTable(msg, client);
 		resMessage = Parsing.parsing(msg, client);
 		try {
 			client.sendToClient(resMessage);

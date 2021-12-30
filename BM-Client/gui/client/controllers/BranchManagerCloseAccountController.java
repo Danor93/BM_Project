@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import main.ClientUI;
+import main.PopUpMessage;
 import javafx.scene.text.Text;
 
 public class BranchManagerCloseAccountController extends Controller implements Initializable {
@@ -34,9 +35,6 @@ public class BranchManagerCloseAccountController extends Controller implements I
 
     @FXML
     private URL location;
-
-    @FXML
-    private Button BackBtn;
     
     @FXML
     private Button ConfirmBtn;
@@ -66,16 +64,11 @@ public class BranchManagerCloseAccountController extends Controller implements I
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event,"LoginScreen", "Login Screen","");
 	}
-    
-    @FXML
-    void backToBranchManager(ActionEvent event) throws IOException {
-    	startScreen(event, "BranchManagerScreen", "Branch Manager Main");
-    }
 
     /*for the combo box*/
    @FXML
    void ChooseUserName(ActionEvent event) {
-	   UserName = AccountComboBox.getSelectionModel().getSelectedItem();
+	   UserName = AccountComboBox.getSelectionModel().getSelectedItem().toString();
 	   ConfirmBtn.setDisable(false);
    }
    
@@ -84,21 +77,15 @@ public class BranchManagerCloseAccountController extends Controller implements I
    void ConfrimDelete(ActionEvent event) {
 	   User user = null;
 	   for(int i=0;i<Users.size();i++) {
-		   if(Users.get(i).getUserName().equals(UserName)) {
+		   if(Users.get(i).getFirstN().equals(UserName)) {
 			  user=Users.get(i);
 			  Users.remove(i);
 		   }
 	   }
 	   ClientUI.chat.accept(new Message(MessageType.Delete_Account,user));
+	   PopUpMessage.successMessage("Account " + UserName + " has been Deleted!");
 	   loadAccounts(Users);
    }
-    
-    
-    @FXML
-    void initialize() {
-        assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerCloseAccount.fxml'.";
-        assert AccountComboBox != null : "fx:id=\"AccountComboBox\" was not injected: check your FXML file 'BranchManagerCloseAccount.fxml'.";
-    }
 
     /*load account for the combo box*/
     public void loadAccounts(ArrayList<User> Users) {
@@ -107,10 +94,9 @@ public class BranchManagerCloseAccountController extends Controller implements I
     	}
     }
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.chat.accept(new Message(MessageType.get_Accounts,null));
+		ClientUI.chat.accept(new Message(MessageType.get_Accounts,LoginScreenController.user.getHomeBranch().toString()));
 		loadAccounts(Users);
 		ConfirmBtn.setDisable(true);
 	}

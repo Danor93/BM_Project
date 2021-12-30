@@ -28,9 +28,8 @@ import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
 public class LoginScreenController extends Controller {
-	public static User user =null;
+	public static User user = null;
 	public static String statusUser;
-
 
 	@FXML
 	private ResourceBundle resources;
@@ -54,69 +53,58 @@ public class LoginScreenController extends Controller {
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
-		//mainevent = event;
+		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+			PopUpMessage.errorMessage("You have to fill all the fileds!");
+		}
+		else {
 		String[] DivededUandP;
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());
 		str.append("@");
 		str.append(PasswordField.getText());
-		Message msg = new Message(MessageType.loginSystem, str.toString());
-		ClientUI.chat.accept(msg);
-		//if (LoginFlag) {
-			//if (AlreadyLoggedInFlag) {
-				//PopUpMessage.errorMessage("The User is Already logged in");
-				//AlreadyLoggedInFlag = false;
-				//LoginFlag = false;
-			
-				//LoginFlag = false;
-				if(!statusUser.equals("Active"))
-				{
-					WrongInputInLoggin.setText(statusUser);
-					statusUser=null;
-					
-				}
-					
-					
-				if(user!=null)
-				{
-					switch(user.getRole())
-					{
-					case "BranchManager":
-					{
-						start(event, "BranchManagerScreen", "Branch Manager",user.getFirstN());
-						break;
-					}
-					
-					case "Customer":
-					{
-						start(event, "CustomerScreen", "CustomerScreen",user.getFirstN());
-						break;
-					}
-					
-					case "CEO":
-					{
-						start(event,"CEOScreen","CEO",user.getFirstN());
-						break;
-					}
+		ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
+		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+			PopUpMessage.errorMessage("You have to fill all the fileds!");
+		} 
 
-					default:
-					{
-						DivededUandP = ((String) user.getRole()).split(" ");
-						if (DivededUandP[0].equals("HR")) {
-							start(event, "HRManagerScreen", "HR Manager",user.getFirstN());
-						}
-						else
-						{
-							start(event, "SupplierScreen", "Supplier",user.getRole());
-						}
-						break;
-					}
+			if (!statusUser.equals("Active")) {
+				WrongInputInLoggin.setText(statusUser);
+				statusUser = null;
 
+			}
+
+			if (user != null) {
+				switch (user.getRole()) {
+				case "BranchManager": {
+					start(event, "BranchManagerScreen", "Branch Manager", user.getFirstN());
+					break;
 				}
+
+				case "Customer": {
+					start(event, "CustomerScreen", "CustomerScreen", user.getFirstN());
+					break;
+				}
+
+				case "CEO": {
+					start(event, "CEOScreen", "CEO", user.getFirstN());
+					break;
+				}
+
+				default: {
+					DivededUandP = ((String) user.getRole()).split(" ");
+					if (DivededUandP[0].equals("HR")) {
+						start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
+					} else {
+						start(event, "SupplierScreen", "Supplier", user.getRole());
+					}
+					break;
 				}
 
 				}
+			}
+		}
 
+	}
 
 	@FXML
 	void getUserName(InputMethodEvent event) {
@@ -126,6 +114,6 @@ public class LoginScreenController extends Controller {
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

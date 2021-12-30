@@ -180,7 +180,8 @@ public class Parsing {
 		}
 
 		case get_Accounts: {
-			ArrayList<User> Users = Query.getAccount();
+			String Branch = (String)receivedMessage.getMessageData();
+			ArrayList<User> Users = Query.getAccount(Branch);
 			messageFromServer = new Message(MessageType.Account_list, Users);
 			return messageFromServer;
 		}
@@ -188,18 +189,16 @@ public class Parsing {
 		case Delete_Account: {
 			User user = (User) receivedMessage.getMessageData();
 			Query.DeleteAccount(user);
-			messageFromServer = new Message(MessageType.Delete_Account_Succ, null);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Delete_Account_Succ, null);
 		}
 
 		case check_account_employer_approved: {
 			String Employer_name = (String) receivedMessage.getMessageData();
 			if ((Query.checkEmployerStatus(Employer_name)) == true) {
-				messageFromServer = new Message(MessageType.employer_approved, null);
+				return messageFromServer = new Message(MessageType.employer_approved, null);
 			} else {
-				messageFromServer = new Message(MessageType.employer_approved, null);
+				return messageFromServer = new Message(MessageType.employer_not_approved, null);
 			}
-			return messageFromServer;
 		}
 
 		case check_Baccount_details: {
