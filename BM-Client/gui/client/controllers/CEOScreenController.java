@@ -59,12 +59,12 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
-		start(event, "BranchManagerChooseReportToView", "View Report", "");
+		start(event, "BranchManagerChooseReportToView", "View Report",LoginScreenController.user.getUserName());
 	}
 
 	@FXML
 	void revenueReport(ActionEvent event) throws IOException {
-		start(event, "CEOChooseQReports", "Revenue Report","");
+		start(event, "CEOChooseQReports", "Revenue Report",LoginScreenController.user.getUserName());
 	}
 
 	@FXML
@@ -74,7 +74,6 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 		Parent root = load.load();
 		CEODownloadQuarterlyReportController aFrame = load.getController();
 		aFrame.start(stage, root);
-
 	}
 
 	@Override
@@ -84,7 +83,7 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 
 	@Override
 	public void display(String string) {
-		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getRole() + " - " + LoginScreenController.user.getFirstN() );
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN() );
 	}
 
 }

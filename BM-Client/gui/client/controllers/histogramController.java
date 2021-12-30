@@ -65,18 +65,18 @@ public class histogramController extends Controller implements Initializable {
 		XYChart.Series set1=new XYChart.Series<>();
 		XYChart.Series set2=new XYChart.Series<>();
 		
-		for(String rest: quaterRepController.report1.keySet())
+		for(String rest: QuarterReportController.report1.keySet())
 		{
-			String data= rest+"\n"+quaterRepController.report1.get(rest).get(0)+" Orders";
-			set1.getData().add(new XYChart.Data(data,quaterRepController.report1.get(rest).get(1)));
+			String data= rest+"\n"+QuarterReportController.report1.get(rest).get(0)+" Orders";
+			set1.getData().add(new XYChart.Data(data,QuarterReportController.report1.get(rest).get(1)));
 			
 		}
-		if(quaterRepController.report2!=null)
+		if(QuarterReportController.report2!=null)
 		{
-			for(String rest: quaterRepController.report2.keySet())
+			for(String rest: QuarterReportController.report2.keySet())
 			{
-				String data= rest+"\n"+quaterRepController.report2.get(rest).get(0)+" Orders";
-				set2.getData().add(new XYChart.Data(data,quaterRepController.report2.get(rest).get(1)));
+				String data= rest+"\n"+QuarterReportController.report2.get(rest).get(0)+" Orders";
+				set2.getData().add(new XYChart.Data(data,QuarterReportController.report2.get(rest).get(1)));
 				
 			}
 			chart2.getData().addAll(set2);

@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-public class quaterRepController extends Controller implements Initializable{
+public class QuarterReportController extends Controller implements Initializable{
 	
 
     @FXML
@@ -90,9 +90,7 @@ public class quaterRepController extends Controller implements Initializable{
 	 */
     @FXML
     void back(ActionEvent event) throws IOException {
-    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
-		start(event, "LoginScreen", "Login","");
-
+		start(event, "CEOScreen", "CEO Screen",LoginScreenController.user.getFirstN());
     }
 
 	/** This method meant to get back to costumer page
@@ -270,8 +268,6 @@ public class quaterRepController extends Controller implements Initializable{
 		quater2.setItems(observableList2);
 		year1.setItems(observableList3);
 		year2.setItems(observableList3);
-		
-		
 	}
 
 }

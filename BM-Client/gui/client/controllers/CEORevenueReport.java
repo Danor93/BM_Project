@@ -29,7 +29,7 @@ public class CEORevenueReport extends Controller implements ControllerInterface{
 
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getFirstN()));
 		startScreen(event, "CEOScreen", "CEO");
 		
 	}

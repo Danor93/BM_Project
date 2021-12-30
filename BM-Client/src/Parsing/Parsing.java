@@ -45,7 +45,7 @@ import client.controllers.CEODownloadQuarterlyReportController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
-import client.controllers.quaterRepController;
+import client.controllers.QuarterReportController;
 import main.PopUpMessage;
 
 public class Parsing {
@@ -82,17 +82,17 @@ public class Parsing {
 
 		case ShowHistogram: {
 
-			if (quaterRepController.report1 == null) {
-				quaterRepController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			if (QuarterReportController.report1 == null) {
+				QuarterReportController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
 			} else {
-				quaterRepController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				QuarterReportController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
 			}
 
 			break;
 		}
 
 		case getYears: {
-			quaterRepController.years = (ArrayList<String>) receivedMessage.getMessageData();
+			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
 
 		}
 

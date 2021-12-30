@@ -17,13 +17,22 @@
             <Image url="@/images/backk.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="29.0" layoutY="34.0" text="Choose branch" />
+      <Label layoutX="29.0" layoutY="34.0" prefHeight="17.0" prefWidth="90.0" text="Choose Branch">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Button fx:id="btnDownload" layoutX="101.0" layoutY="185.0" mnemonicParsing="false" onAction="#downloadReport" text="Download">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Label layoutX="29.0" layoutY="126.0" text="Choose quarterly" />
-      <Label layoutX="29.0" layoutY="80.0" prefHeight="17.0" prefWidth="72.0" text="Choose year" />
+      <Label layoutX="29.0" layoutY="126.0" prefHeight="17.0" prefWidth="99.0" text="Choose Quarterly">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="29.0" layoutY="80.0" prefHeight="17.0" prefWidth="90.0" text="Choose Year">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <ToggleButton fx:id="btnNorth" layoutX="139.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectBranch" prefHeight="25.0" prefWidth="50.0" text="North">
          <toggleGroup>
             <ToggleGroup fx:id="branchGroup" />

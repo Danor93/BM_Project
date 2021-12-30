@@ -32,10 +32,10 @@
       <TableView fx:id="table" layoutX="127.0" layoutY="118.0" prefHeight="335.0" prefWidth="523.0">
          <columns>
             <TableColumn fx:id="orderNum" prefWidth="87.33332061767578" style="-fx-alignment: CENTER;" text="Order number" />
-            <TableColumn fx:id="time" prefWidth="97.33335876464844" style="-fx-alignment: CENTER;" text="time of order" />
-            <TableColumn fx:id="date" minWidth="0.0" prefWidth="109.3333740234375" style="-fx-alignment: CENTER;" text="date of order" />
-            <TableColumn fx:id="products" prefWidth="112.00003051757812" style="-fx-alignment: CENTER;" text="selected products" />
-            <TableColumn fx:id="restName" prefWidth="112.00003051757812" style="-fx-alignment: CENTER;" text="restaurant" />
+            <TableColumn fx:id="time" prefWidth="97.33335876464844" style="-fx-alignment: CENTER;" text="Time Of Order" />
+            <TableColumn fx:id="date" minWidth="0.0" prefWidth="109.3333740234375" style="-fx-alignment: CENTER;" text="Date Of Order" />
+            <TableColumn fx:id="products" prefWidth="112.00003051757812" style="-fx-alignment: CENTER;" text="Selected Products" />
+            <TableColumn fx:id="restName" prefWidth="112.00003051757812" style="-fx-alignment: CENTER;" text="Restaurant" />
          </columns>
       </TableView>
       <AnchorPane layoutY="-2.0" prefHeight="531.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
