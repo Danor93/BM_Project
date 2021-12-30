@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 //server
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -21,7 +22,9 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
+import Entities.OrdersReport;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
@@ -376,6 +379,60 @@ public class Parsing {
 						null);
 			}
 
+		}
+		case addto_Revenue_report: {
+			if (UpdateDB.addToRevenueReportsTable((RevenueReport) receivedMessage.getMessageData())) {
+				System.out.println("DB Updated Succsessfuly!");
+				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
+			} else {
+				System.out.println("DB Updated Failed");
+				return messageFromServer = new Message(MessageType.UpdateFailed, null);
+			}
+
+		
+
+		}
+
+		case get_Revenue_report: {
+			try {
+				ArrayList<RevenueReport> array = (ArrayList<RevenueReport>) UpdateDB
+						.getRevenueReport((String) receivedMessage.getMessageData());
+				messageFromServer = new Message(MessageType.RReportUpdated, array);
+				return messageFromServer;
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+		}
+		case get_Orders_report: {
+			System.out.println(receivedMessage.getMessageData());
+			ArrayList<OrdersReport> array = UpdateDB.getOrdersReport((String) receivedMessage.getMessageData());
+			System.out.println("This is in server parsing");
+			for(OrdersReport o: array)
+			{
+				System.out.println(o.toString());
+			}
+			messageFromServer = new Message(MessageType.OReportUpdated, array);
+			return messageFromServer;
+		}
+
+		case get_Dish_type: {
+			HashMap<String, Integer> retMap;
+			int id = (Integer) receivedMessage.getMessageData();
+			retMap = Query.getQuntitiesOfDishTypes(id);
+			messageFromServer = new Message(MessageType.DType_Quantities, retMap);
+			return messageFromServer;
+		}
+
+		case addto_Order_report: {
+			if (UpdateDB.addToOrdersReportsTable((ArrayList<OrdersReport>) receivedMessage.getMessageData())) {
+				System.out.println("DB Updated Succsessfuly!");
+				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
+			} else {
+				System.out.println("DB Updated Failed");
+				return messageFromServer = new Message(MessageType.UpdateFailed, null);
+			}
+			
 		}
 
 		default: {

@@ -2,6 +2,8 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Dish;
@@ -10,12 +12,15 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
+import Entities.OrdersReport;
 import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.AddDishToMenuController;
+import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerFreezeAccountController;
 import client.controllers.ChooseRestController;
@@ -40,6 +45,7 @@ import client.controllers.SupplierScreenController;
 import main.PopUpMessage;
 
 public class Parsing {
+	@SuppressWarnings("unchecked")
 	public static void Message(Object msg) throws Exception {
 		Message receivedMessage = null;
 		receivedMessage = (Message) msg;
@@ -56,6 +62,7 @@ public class Parsing {
 					LoginScreenController.LoginFlag = true;
 					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+
 				}
 			}
 			break;
@@ -217,9 +224,9 @@ public class Parsing {
 
 		case changed_status_to_sended_succ: {
 		}
-		
-		case set_Phone_number:{
-			ConfirmOrderApprovalController.phoneNumber = (String)receivedMessage.getMessageData();
+
+		case set_Phone_number: {
+			ConfirmOrderApprovalController.phoneNumber = (String) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -235,13 +242,17 @@ public class Parsing {
 		}
 
 		case Company_Status_Equale_To_Approved: {
-			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = true;
-			break;*/
+			/*
+			 * HRManagerConfirmationOfOpeningABusinessAccountController.
+			 * CompanyStatusApproved = true; break;
+			 */
 		}
 
 		case Company_Status_Not_Equale_To_Approved: {
-			/*HRManagerConfirmationOfOpeningABusinessAccountController.CompanyStatusApproved = false;
-			break;*/
+			/*
+			 * HRManagerConfirmationOfOpeningABusinessAccountController.
+			 * CompanyStatusApproved = false; break;
+			 */
 		}
 
 		case RegistrationOfEmployer_failed: {
@@ -271,6 +282,33 @@ public class Parsing {
 		case businessAccountsTracking: {
 			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage
 					.getMessageData();
+			break;
+		}
+		case UpdateSuccsesfuly:{
+			break;
+		}
+		
+		case UpdateFailed:
+		{
+			break;
+		}
+		
+		case RReportUpdated: {
+			BranchManagerChooseReportToViewController.revenueArray = (ArrayList<RevenueReport>) receivedMessage.getMessageData();
+			System.out.println("hi hi");
+			break;
+		}
+		
+		case OReportUpdated:
+		{
+			BranchManagerChooseReportToViewController.ordersArray =(ArrayList<OrdersReport>) receivedMessage.getMessageData();
+			break; 
+		}
+		
+		case DType_Quantities:
+		{
+			HashMap<String,Integer> map = (HashMap<String,Integer>)receivedMessage.getMessageData();
+			ConfirmOrderApprovalController.dishTypesQuentities=map;
 			break;
 		}
 

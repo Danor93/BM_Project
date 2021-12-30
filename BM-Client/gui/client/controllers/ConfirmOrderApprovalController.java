@@ -5,15 +5,19 @@ import java.net.URL;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.ErrorManager;
 
 import javafx.scene.control.Label;
-
+import Entities.DishType;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.OrdersReport;
+import Entities.RevenueReport;
+import Entities.homeBranches;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +34,8 @@ import main.PopUpMessage;
 public class ConfirmOrderApprovalController extends Controller implements Initializable {
 	public static ArrayList<Order> allOrders = new ArrayList<Order>();
 	public static String phoneNumber;
+	public static HashMap<String, Integer> dishTypesQuentities = new HashMap<>();
+	private String branch;
 
 	@FXML
 	private ResourceBundle resources;
@@ -100,22 +106,76 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		orderToChange = list.get(0);
 		if (!orderToChange.getOrderStatus().equals("Approved")) {
 			if (!orderToChange.getUseRefund().equals("0")) {
-				orderToChange.setTotalPrice(
-						orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
+				orderToChange
+						.setTotalPrice(orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
 				ClientUI.chat.accept(new Message(MessageType.Use_Refund, orderToChange));
-			}			
+			}
 			if (orderToChange.getUseBudget() == 1)
-				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));			
+				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));
 			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange));
 			for (int i = 0; i < allOrders.size(); i++) {
-					if (allOrders.get(i).equals(orderToChange))
-						allOrders.get(i).setOrderStatus("Approved");
-				}
-			orderToChange = null;;
+				if (allOrders.get(i).equals(orderToChange))
+					allOrders.get(i).setOrderStatus("Approved");
+			}
+			String[] dic = orderToChange.getDateOfOrder().split("-");
+			String Quarterly;
+			Quarterly = checkQuarterly(dic[1]);
+			branch = homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
+			// LoginScreenController.user.PrintUser();
+			RevenueReport revenuereport = new RevenueReport(orderToChange.getRestName(), branch, dic[1], dic[0],
+					Quarterly, 1, orderToChange.getTotalPrice());
+			ClientUI.chat.accept(new Message(MessageType.addto_Revenue_report, revenuereport));
+			Integer id = orderToChange.getOrderNum();
+			ArrayList<OrdersReport> ordersreports = new ArrayList<>();
+			ClientUI.chat.accept(new Message(MessageType.get_Dish_type, id));
+			for (String s : dishTypesQuentities.keySet()) {
+				String dishType = s;
+				int quentity = dishTypesQuentities.get(s);
+				OrdersReport orderreport = new OrdersReport(dic[1], dic[0], branch, orderToChange.getRestName(),
+						dishType, quentity);
+				ordersreports.add(orderreport);
+			}
+			ClientUI.chat.accept(new Message(MessageType.addto_Order_report, ordersreports));
+			orderToChange = null;
 			table.refresh();
 			list = FXCollections.observableArrayList(allOrders);
 			table.setItems(list);
+	
+		
 		}
+	}
+
+	String checkQuarterly(String month) {
+		switch (month) {
+		case "1":
+			return "1";
+		case "2":
+			return "1";
+		case "3":
+			return "1";
+		case "4":
+			return "2";
+		case "5":
+			return "2";
+		case "6":
+			return "2";
+		case "7":
+			return "3";
+		case "8":
+			return "3";
+		case "9":
+			return "3";
+		case "10":
+			return "4";
+		case "11":
+			return "4";
+		case "12":
+			return "4";
+		default: {
+			return null;
+		}
+		}
+
 	}
 
 	@FXML
@@ -125,9 +185,9 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		orderToChange = list.get(0);
 		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange));
 		for (int i = 0; i < allOrders.size(); i++) {
-				if (allOrders.get(i).equals(orderToChange))
-					allOrders.remove(i);
-			}
+			if (allOrders.get(i).equals(orderToChange))
+				allOrders.remove(i);
+		}
 		orderToChange = null;
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
@@ -143,15 +203,14 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 			PopUpMessage.errorMessage("Order must be approved before sended to client");
 		else {
 			for (int i = 0; i < allOrders.size(); i++) {
-					if (allOrders.get(i).equals(orderToChange))
-						allOrders.remove(i);
-				}
+				if (allOrders.get(i).equals(orderToChange))
+					allOrders.remove(i);
+			}
 			ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, orderToChange));
 			StringBuilder str = new StringBuilder();
 			str.append("successfully. The phone is - ");
 			str.append(phoneNumber);
-			if (orderToChange.getOrderType().equals("Regular")
-					|| orderToChange.getOrderType().equals("Shared")) {
+			if (orderToChange.getOrderType().equals("Regular") || orderToChange.getOrderType().equals("Shared")) {
 				RegularOrSharedFlag = true;
 			}
 			if (RegularOrSharedFlag) {

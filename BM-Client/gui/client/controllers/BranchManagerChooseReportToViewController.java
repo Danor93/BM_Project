@@ -2,17 +2,25 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
+import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
+import Entities.RevenueReport;
+import Entities.homeBranches;
+import Entities.OrdersReport;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,15 +28,11 @@ import main.ClientUI;
 
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
 
-	public static String Branch, reportType, year;
-	public static StringBuilder details = new StringBuilder();
-	public static int month;
-
-	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
+	public String Branch, Type, year, month;
+	public static ArrayList<RevenueReport> revenueArray = new ArrayList<>();
+	public static ArrayList<OrdersReport> ordersArray = new ArrayList<>();
+	ObservableList<RevenueReport> RevenueList;
+	ObservableList<OrdersReport> OrderList;
 
 	@FXML
 	private ImageView BackImage;
@@ -43,16 +47,16 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private ComboBox<Integer> Month;
 
 	@FXML
+	private TableColumn<OrdersReport, String> OrdDishTypeCol;
+
+	@FXML
+	private TableColumn<OrdersReport, Integer> OrdQuantityCol;
+
+	@FXML
+	private TableColumn<OrdersReport, String> OrdRestCol;
+
+	@FXML
 	private Pane Orders;
-
-	@FXML
-	private TableView<String> Performance;
-
-	@FXML
-	private TableView<?> PerformanceTable;
-
-	@FXML
-	private TableView<?> RevenueTable;
 
 	@FXML
 	private StackPane ReportPane;
@@ -61,10 +65,19 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private ComboBox<String> ReportType;
 
 	@FXML
+	private TableColumn<RevenueReport, Float> RevIncomeCol;
+
+	@FXML
+	private TableColumn<RevenueReport, Integer> RevNumOforCol;
+
+	@FXML
+	private TableColumn<RevenueReport, String> RevResCol;
+
+	@FXML
 	private Pane Revenue;
 
 	@FXML
-	private Pane main;
+	private TableView<RevenueReport> RevenueTable;
 
 	@FXML
 	private ComboBox<String> Year;
@@ -73,7 +86,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private Button btnBack;
 
 	@FXML
-	private TableView<?> orders;
+	private Pane main;
+
+	@FXML
+	private TableView<OrdersReport> orders;
 
 	@FXML
 	void Back(ActionEvent event) throws IOException {
@@ -93,61 +109,102 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	@FXML
 	void ChooseMonth(ActionEvent event) {
-		month = Month.getSelectionModel().getSelectedItem();
+		month = String.valueOf(Month.getSelectionModel().getSelectedItem());
 		Year.setDisable(false);
 	}
 
 	@FXML
 	void ChooseReportType(ActionEvent event) {
-		reportType = ReportType.getSelectionModel().getSelectedItem();
 		Month.setDisable(false);
 	}
 
 	@FXML
 	void ChooseYear(ActionEvent event) {
-		year = Year.getSelectionModel().getSelectedItem();
+		year = Year.getSelectionModel().getSelectedItem().toString();
 		GetReport.setDisable(false);
 	}
 
 	@FXML
 	void getReport(ActionEvent event) {
+	
+		year = Year.getSelectionModel().getSelectedItem().toString();
+		month =Month.getSelectionModel().getSelectedItem().toString();s
+		Branch =homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
+		StringBuilder details = new StringBuilder();
 		details.append(Branch);
 		details.append("@");
 		details.append(month);
 		details.append("@");
 		details.append(year);
-		switch (reportType) {
+		
+		if (ReportType.getSelectionModel().getSelectedItem() != null) {
+			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
+			
+			case "Revenue": {	
+				RevenueReport(details);
+				break;
 
-		case "Revenue": {
-			RevenueReport();
-		}
+			}
 
-		case "Orders": {
-			OrdersReport();
-		}
+			case "Orders": {		
+				OrdersReport(details);
+				break;
+			
+			}
 
-		case "Performance": {
-			PerformanceReport();
-		}
+			case "Performance": {
+				PerformanceReport(details);
+				break;
+			}
+			}
 
+		} else {
+			System.out.println("label ERROR!");
 		}
 	}
 
-	public void RevenueReport() {
+	public void RevenueReport(StringBuilder details) {
+		RevenueTable.setVisible(true);
+		Revenue.toFront();
+		RevResCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("resName"));
+		RevNumOforCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Integer>("ordersamount"));
+		RevIncomeCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Float>("Income"));
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-
+		
+		RevenueList = FXCollections.observableArrayList(revenueArray);
+		RevenueTable.setItems(RevenueList);
+		
 	}
 
-	public void OrdersReport() {
+	public void OrdersReport(StringBuilder details) {
+		orders.setVisible(true);
+		Orders.toFront();
+		OrdDishTypeCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("DishType"));
+		OrdQuantityCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, Integer>("Quantity"));
+		OrdRestCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("ResName"));
 		ClientUI.chat.accept(new Message(MessageType.get_Orders_report, details.toString()));
+		OrderList = FXCollections.observableArrayList(ordersArray);
+		orders.setItems(OrderList);
 	}
 
-	public void PerformanceReport() {
+	public void PerformanceReport(StringBuilder details) {
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		main.toFront();
+		ReportType.getItems().add("Revenue");
+		ReportType.getItems().add("Orders");
+		ReportType.getItems().add("Performance");
+		for (int i = 1; i <= 12; i++) {
+			Month.getItems().add(i);
+		}
+		Year.getItems().add("2021");
+		Year.getItems().add("2020");
+		Year.getItems().add("2019");
+
 		if (LoginScreenController.user.getRole().equals("CEO")) {
 			btnBack.setText("Back to CEO Screen");
 			BranchChoose.getItems().add("North");
@@ -165,15 +222,6 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			Year.setDisable(true);
 			Branch = LoginScreenController.user.getHomeBranch().toString();
 		}
-		main.toFront();
-		ReportType.getItems().add("Revenue");
-		ReportType.getItems().add("Orders");
-		ReportType.getItems().add("Performance");
-		for (int i = 1; i <= 12; i++) {
-			Month.getItems().add(i);
-		}
-		Year.getItems().add("2021");
-		Year.getItems().add("2020");
-		Year.getItems().add("2019");
+
 	}
 }

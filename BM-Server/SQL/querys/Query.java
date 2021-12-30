@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import Entities.BusinessAccountTracking;
@@ -24,6 +25,7 @@ import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -591,4 +593,31 @@ public class Query {
 		}
 		return phoneNumber;
 	}
+	
+	public static HashMap<String,Integer> getQuntitiesOfDishTypes(int id) {
+		Statement stmt;
+		HashMap<String,Integer> retMap = new HashMap<>();
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT dishType,quentity FROM bitemedb.dishesinorder WHERE orderNum='" + id + "'" + "");
+			while (rs.next()) {
+				int quentity= rs.getInt(2);
+				String dishType= rs.getString(1);
+				if(retMap.containsKey(dishType))	
+				{
+					quentity += retMap.get(dishType);
+				}
+				retMap.put(dishType, quentity);
+				
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return retMap;
+	}
+	
+	
+	
 }

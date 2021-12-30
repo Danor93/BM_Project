@@ -45,13 +45,12 @@ public class DBCheck {
 				if (result.length() == 0) {
 					result.append("WrongInput");
 				}
-				stmt = DBConnect.conn
-						.prepareStatement("SELECT isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
+				stmt = DBConnect.conn.prepareStatement("SELECT isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				rs = stmt.executeQuery();
 				rs.next();
-				rs2 = rs.getString(1).toString(); // isLoggedIn of userName
+				rs2 = rs.getString(1); // isLoggedIn of userName
 				if (rs2.equals("0")) {
 					stmt = DBConnect.conn.prepareStatement(
 							"UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");

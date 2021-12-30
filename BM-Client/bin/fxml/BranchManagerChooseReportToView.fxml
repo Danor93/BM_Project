@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1028.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="968.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="709.0" fitWidth="718.0" layoutX="-3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BackImage" fitHeight="163.0" fitWidth="259.0" layoutX="67.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true" />
       <Text fill="WHITE" layoutX="522.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -29,7 +29,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnBack" layoutX="34.0" layoutY="724.0" mnemonicParsing="false" onAction="#Back" text="Back">
+      <Button fx:id="btnBack" layoutX="35.0" layoutY="528.0" mnemonicParsing="false" onAction="#Back" text="Back">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
@@ -53,40 +53,31 @@
          </font>
       </Label>
       <Button fx:id="GetReport" layoutX="185.0" layoutY="262.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" text="Get Report" />
-      <StackPane fx:id="ReportPane" layoutX="390.0" layoutY="132.0" prefHeight="632.0" prefWidth="624.0" style="-fx-background-color: Grey;">
+      <StackPane fx:id="ReportPane" layoutX="390.0" layoutY="132.0" prefHeight="442.0" prefWidth="556.0" style="-fx-background-color: Grey;">
          <children>
-            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: green;">
+            <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: #001137;">
                <children>
-                  <TableView fx:id="RevenueTable" layoutY="302.0" prefHeight="330.0" prefWidth="624.0">
+                  <TableView fx:id="RevenueTable" prefHeight="442.0" prefWidth="556.0" visible="false">
                     <columns>
-                      <TableColumn prefWidth="157.59991455078125" text="Restaurant " />
-                      <TableColumn minWidth="0.0" prefWidth="276.00006103515625" text="Number of Orders" />
-                        <TableColumn prefWidth="190.4000244140625" text="Income" />
+                      <TableColumn fx:id="RevResCol" prefWidth="157.59991455078125" text="Restaurant " />
+                      <TableColumn fx:id="RevNumOforCol" minWidth="0.0" prefWidth="226.0" text="Number of Orders" />
+                        <TableColumn fx:id="RevIncomeCol" prefWidth="242.0" text="Income" />
                     </columns>
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;">
+            <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #001137;">
                <children>
-                  <TableView fx:id="orders" prefHeight="384.0" prefWidth="474.0">
+                  <TableView fx:id="orders" prefHeight="442.0" prefWidth="556.0" visible="false">
                     <columns>
-                      <TableColumn prefWidth="150.4000244140625" text="Restaurant" />
-                      <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
+                      <TableColumn fx:id="OrdRestCol" prefWidth="150.4000244140625" text="Restaurant" />
+                      <TableColumn fx:id="OrdDishTypeCol" minWidth="0.0" prefWidth="207.0" text=" Dish Type" />
+                        <TableColumn fx:id="OrdQuantityCol" prefWidth="197.0" text="Quantity" />
                     </columns>
                   </TableView>
                </children>
             </Pane>
-            <Pane fx:id="Performance" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
-               <children>
-                  <TableView fx:id="PerformanceTable" prefHeight="498.0" prefWidth="553.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-            <Pane fx:id="main" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="main" prefHeight="406.0" prefWidth="509.0" style="-fx-background-color: #001137;" />
          </children>
       </StackPane>
    </children>

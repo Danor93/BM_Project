@@ -1,34 +1,88 @@
 package Entities;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class RevenueReport extends Report {
+public class RevenueReport implements Serializable {
 
-	private static final long serialVersionUID = -140954762019086715L;
-	private ArrayList<Order> Data = new ArrayList<>();
-	private int sum;
+	private static final long serialVersionUID = 583542510006825068L;
+	private String month, year;
+	private String branch;
+	private int ordersamount;
+	private float income;
+	private String resName;
+	private String Quarterly;
 
-	public RevenueReport(Restaurant restaurant, String month, String year) {
-		super(restaurant, month, year);
-		sum = 0;
+	public RevenueReport(String resName, String branch, String month, String year, String Quarterly, int ordersamount,
+			float income) {
+		this.month = month;
+		this.year = year;
+		this.ordersamount = ordersamount;
+		this.income = income;
+		this.resName = resName;
+		this.Quarterly = Quarterly;
+		this.branch = branch;
+
 	}
 
-	public int CaculateSum() {
-		for (int i = 0; i < Data.size(); i++) {
-			sum += Data.get(i).getTotalPrice();
-		}
-		return sum;
+	public String getMonth() {
+		return month;
 	}
 
-	public int getOrderAmount() {
-		return Data.size();
+	public void setMonth(String month) {
+		this.month = month;
 	}
-	
-	public void setData(ArrayList<Order> Data) {
-		this.Data=Data;
+
+	public String getYear() {
+		return year;
 	}
-	
-	public ArrayList<Order> getData(){
-		return Data;
+
+	public void setYear(String year) {
+		this.year = year;
 	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public int getOrdersamount() {
+		return ordersamount;
+	}
+
+	public void setOrdersamount(int ordersamount) {
+		this.ordersamount = ordersamount;
+	}
+
+	public float getIncome() {
+		return income;
+	}
+
+	public void setIncome(float income) {
+		this.income = income;
+	}
+
+	public String getResName() {
+		return resName;
+	}
+
+	public void setResName(String resName) {
+		this.resName = resName;
+	}
+
+	public String getQuarterly() {
+		return Quarterly;
+	}
+
+	public void setQuarterly(String quarterly) {
+		Quarterly = quarterly;
+	}
+
+	public String toString() {
+		return "Restaurant name = " + resName + " branch is = " + branch + " month is= " + month + " year is: " + year
+				+ " Quarerly is : " + Quarterly + " ordersamount is " + ordersamount + " income is " + income;
+	}
+
 }
