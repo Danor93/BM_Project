@@ -70,6 +70,11 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Text fill="#1b1919" layoutX="546.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

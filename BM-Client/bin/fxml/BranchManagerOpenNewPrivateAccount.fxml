@@ -16,7 +16,7 @@
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="WHITE" layoutX="521.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#282727" layoutX="639.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
