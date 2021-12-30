@@ -20,17 +20,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Label layoutX="21.0" layoutY="38.0" text="Your final order" textFill="#e2acac">
+      <Label layoutX="21.0" layoutY="38.0" prefHeight="53.0" prefWidth="312.0" text="Your Final Order" textFill="#e2acac">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="21.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="21.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="approve" layoutX="627.0" layoutY="495.0" mnemonicParsing="false" onAction="#approve" prefHeight="29.0" prefWidth="77.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="approve" textFill="WHITE">
+      <Button fx:id="approve" layoutX="627.0" layoutY="495.0" mnemonicParsing="false" onAction="#approve" prefHeight="29.0" prefWidth="77.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Approve" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

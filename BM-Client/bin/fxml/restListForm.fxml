@@ -62,14 +62,14 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="logout" layoutX="11.0" layoutY="304.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="11.0" layoutY="304.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="nextbtn" layoutX="587.0" layoutY="472.0" mnemonicParsing="false" onAction="#proceedToOrder" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="next">
+      <Button fx:id="nextbtn" layoutX="587.0" layoutY="472.0" mnemonicParsing="false" onAction="#proceedToOrder" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Next">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

@@ -714,7 +714,6 @@ public class Query {
 				yearsAndQuarter.add(resYear+"@"+resQuarter);
 
 			}
-			System.out.println(yearsAndQuarter.toString());
 			rs.close();
 		} catch (SQLException s) {
 			s.printStackTrace();

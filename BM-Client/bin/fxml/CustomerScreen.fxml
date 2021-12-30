@@ -24,7 +24,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label fx:id="welcome" layoutX="113.0" layoutY="139.0" text="costumer page">
+      <Label fx:id="welcome" layoutX="113.0" layoutY="139.0" prefHeight="64.0" prefWidth="322.0" text="Costumer Page">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
@@ -44,5 +44,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Text layoutX="521.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

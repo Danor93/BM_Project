@@ -15,11 +15,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 import main.PopUpMessage;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 
 public class BranchManagerUploadPDFController extends Controller implements Initializable {
 
@@ -41,9 +45,6 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	private URL location;
 
 	@FXML
-	private Button BackBtn;
-
-	@FXML
 	private ComboBox<String> QuertarComboBox;
 
 	@FXML
@@ -51,15 +52,25 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 
 	@FXML
 	private ComboBox<String> YearComboBox;
+	
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
 
 	@FXML
-	void Back(ActionEvent event) throws IOException {
-		if (LoginScreenController.user.getRole().equals("CEO")) {
-			startScreen(event, "CEOScreen", "CEO");
-		}
-		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			startScreen(event, "BranchManagerScreen", "Branch Manager");
-		}
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
 	}
 
 	@FXML
@@ -137,21 +148,10 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		YearComboBox.setDisable(true);
 		UploadBtn.setDisable(true);
 	}
-	
 
-    @FXML
-    void initialize() {
-        assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerUploadPDF.fxml'.";
-        assert QuertarComboBox != null : "fx:id=\"QuertarComboBox\" was not injected: check your FXML file 'BranchManagerUploadPDF.fxml'.";
-        assert UploadBtn != null : "fx:id=\"UploadBtn\" was not injected: check your FXML file 'BranchManagerUploadPDF.fxml'.";
-        assert YearComboBox != null : "fx:id=\"YearComboBox\" was not injected: check your FXML file 'BranchManagerUploadPDF.fxml'.";
-
-    }
-
-	@Override
+    @Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 
 }

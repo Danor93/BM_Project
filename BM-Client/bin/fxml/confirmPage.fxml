@@ -54,14 +54,14 @@
                <image>
                   <Image url="@/images/home.png" />
                </image></ImageView>
-            <Button fx:id="logout" layoutX="14.0" layoutY="249.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="14.0" layoutY="249.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="confirm" layoutX="578.0" layoutY="472.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="confirm">
+      <Button fx:id="confirm" layoutX="578.0" layoutY="472.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Confirm">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

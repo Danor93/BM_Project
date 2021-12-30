@@ -81,6 +81,9 @@ public class AddDishToMenuController extends Controller implements Initializable
 	@FXML
 	private Button logout;
 
+	@FXML
+	private Button back;
+
 	private String TypeOfDish;
 	private boolean typeDishIsValid = true;
 	private boolean choiceDetailsIsValid = true;
@@ -110,6 +113,12 @@ public class AddDishToMenuController extends Controller implements Initializable
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login", "");
 	}
+	
+
+    @FXML
+    void backToDishes(ActionEvent event) throws IOException {
+    	start(event,"UpdateMenuScreen", "Update Menu",LoginScreenController.user.getFirstN());
+    }
 
 	/**
 	 * A method to catch the type of dish.

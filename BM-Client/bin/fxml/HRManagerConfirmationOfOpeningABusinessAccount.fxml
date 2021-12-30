@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
+<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -28,12 +28,12 @@
       </Text>
       <Button fx:id="Refuse" layoutX="373.0" layoutY="560.0" mnemonicParsing="false" onAction="#refuseBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <Button fx:id="Confirm" layoutX="483.0" layoutY="560.0" mnemonicParsing="false" onAction="#confirmBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <Text layoutX="133.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are business accounts waiting for approval from the branch manager.">
@@ -75,7 +75,7 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

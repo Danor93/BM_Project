@@ -12,9 +12,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 import main.PopUpMessage;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 
 public class BranchManagerChangePermissionsController extends Controller implements Initializable {
 
@@ -44,6 +47,26 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 
 	@FXML
 	private Button BackBMBtn;
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
+	@FXML
+	private Text userName;
+
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", "");
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
 
 	/* choose an account from the combo box */
 	@FXML
@@ -98,12 +121,6 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 
 	}
 
-	/* back to the branch manager screen. */
-	@FXML
-	void BackToBranchManager(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerScreen", "Branch Manager");
-	}
-
 	/* load account */
 	public void loadAccounts(ArrayList<User> Users) {
 		ActiveAccountComboBox.getItems().clear();
@@ -126,8 +143,7 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 
 }

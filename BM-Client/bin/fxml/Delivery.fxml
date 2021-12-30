@@ -64,12 +64,12 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="19.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="19.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="next" layoutX="552.0" layoutY="495.0" mnemonicParsing="false" onAction="#proceed" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="proceed to payment" textFill="WHITE">
+      <Button fx:id="next" layoutX="552.0" layoutY="495.0" mnemonicParsing="false" onAction="#proceed" prefHeight="29.0" prefWidth="150.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Proceed To Payment" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

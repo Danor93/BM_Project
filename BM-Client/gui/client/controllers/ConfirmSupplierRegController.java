@@ -14,8 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 import main.PopUpMessage;
+import javafx.scene.text.Text;
 
 public class ConfirmSupplierRegController extends Controller implements Initializable {
 
@@ -30,9 +32,6 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	@FXML
 	private TextField AddressTXT;
-
-	@FXML
-	private Button BackBtn;
 
 	@FXML
 	private ImageView BackImage;
@@ -72,10 +71,25 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	@FXML
 	private Label InvaildAddress;
+	
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
 
 	@FXML
-	void Back(ActionEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
 	}
 
 	@FXML
@@ -172,8 +186,7 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 
 }

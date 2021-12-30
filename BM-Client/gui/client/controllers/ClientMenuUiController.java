@@ -54,9 +54,10 @@ import main.ClientUI;
 	    	{*/
 	    		//ClientUI.chat= new ClientController(ip, 5555);
 	    		ClientUI.chat= new ClientController("localhost", 5555);
+	    		start(event,"BeforLogin","Description","");
 	    		//Message msg = new Message(MessageType.login, null);
 	    		//ClientUI.chat.accept(msg);
-	    		startScreen(event,"LoginScreen","Login");
+	    		//start(event,"BeforLogin","Description","");
 	    	}
 	    
 	    public void start(Stage primaryStage) throws Exception {

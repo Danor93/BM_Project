@@ -99,7 +99,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void OpenNewAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
+		start(event, "BranchManagerOpenNewAccount", "Open New Account",LoginScreenController.user.getFirstN());
 	}
 
 
@@ -109,7 +109,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ConfirmEmployerReg(ActionEvent event) throws IOException {
-		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
+		start(event, "ConfirmEmployerRegistartion", "Confirm Employer",LoginScreenController.user.getFirstN());
 	}
 
 
@@ -119,7 +119,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerSupplierRegistration", "Supplier Registration");
+		start(event, "BranchManagerSupplierRegistration", "Supplier Registration",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void deleteAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerCloseAccount", "Close Account");
+		start(event, "BranchManagerCloseAccount", "Close Account",LoginScreenController.user.getFirstN());
 	}
 
 	
@@ -138,7 +138,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ChangePermissions(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChangePermissions", "Change Permissions");
+		start(event, "BranchManagerChangePermissions", "Change Permissions",LoginScreenController.user.getFirstN());
 	}
 
 	
@@ -148,7 +148,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void UploadPDF(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerUploadPDF", "Upload PDF");
+		start(event, "BranchManagerUploadPDF", "Upload PDF",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChooseReportToView", "View Report");
+		start(event, "BranchManagerChooseReportToView", "View Report",LoginScreenController.user.getFirstN());
 	}
 
 	@Override
