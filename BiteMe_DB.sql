@@ -241,6 +241,8 @@ CREATE TABLE `order` (
   `usedRefund` varchar(45) NOT NULL DEFAULT '0',
   `usedBudget` int NOT NULL DEFAULT '0',
   `EarlyOrder` varchar(45) NOT NULL,
+  `timeApproved` varchar(45) DEFAULT NULL,
+  `punctuality` int DEFAULT NULL,
   PRIMARY KEY (`orderNumber`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -251,7 +253,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Approved','134','0',0,'no'),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Approved','134','0',0,'no'),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Approved','134','0',0,'no'),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','waiting','134','0',0,'no'),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no'),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no');
+INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Approved','134','0',0,'no',NULL,NULL),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Approved','134','0',0,'no',NULL,NULL),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Approved','134','0',0,'no',NULL,NULL),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','waiting','134','0',0,'no',NULL,NULL),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Approved','134','0',0,'no',NULL,NULL);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-30 18:44:18
+-- Dump completed on 2021-12-30 18:59:50
