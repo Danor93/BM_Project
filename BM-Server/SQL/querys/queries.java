@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -400,7 +401,7 @@ public class queries {
 		
 
 		try {
-			stmt = DBConnect.conn.prepareStatement("SELECT orderNumber,restName,timeOfOrder,dateOfOrder,EarlyOrder,rstID,totalPrice FROM bitemedb.order WHERE costumerID=? and orderStatus=?");
+			stmt = DBConnect.conn.prepareStatement("SELECT orderNumber,restName,timeOfOrder,dateOfOrder,EarlyOrder,rstID,totalPrice,timeApproved FROM bitemedb.order WHERE costumerID=? and orderStatus=?");
 			stmt.setString(1,msg);
 			stmt.setString(2,"Sended");
 			ResultSet rs = stmt.executeQuery();
@@ -408,6 +409,7 @@ public class queries {
 				Order order =new Order (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
 				order.setRestId(Integer.toString(rs.getInt(6)));
 				order.setTotalPrice(Float.parseFloat(rs.getString(7)));
+				order.setSuppApproved(rs.getString(8));
 				orders.add(order);
 			}
 			rs.close();
@@ -436,31 +438,47 @@ public class queries {
 	}
 
 	public static String checkRefund(Order msg) {
-		
+		int flag=0;
 		if(msg.getEarlyOrder().equals("yes"))
 		{
-			System.out.println(java.time.Duration.between(LocalTime.now(),LocalTime.parse(msg.getTimeOfOrder())).toMinutes());
+			//System.out.println(java.time.Duration.between(LocalTime.now(),LocalTime.parse(msg.getTimeOfOrder())).toMinutes());
 			
 			if(java.time.Duration.between(LocalTime.parse(msg.getTimeOfOrder()), LocalTime.now()).toMinutes()>20)
 			{
-				System.out.println("metoomtamim");
 				
 				putRefund(msg);
-			}	
+				putPerfReport(msg,0);
+				
+			}
+			else
+			{
+				flag=1;
+				putPerfReport(msg,1);
+				
+			}
 		}
 		else
 		{
-			if(java.time.Duration.between(LocalTime.parse(msg.getTimeOfOrder()), LocalTime.now()).toMinutes()>60)
+			if(java.time.Duration.between(LocalTime.parse(msg.getSuppApproved()), LocalTime.now()).toMinutes()>60)
 			{
+				
 				putRefund(msg);
-			}	
+				putPerfReport(msg,0);
+				
+			}
+			else
+			{
+				flag=1;
+				putPerfReport(msg,1);
+			}
 		}
 		
 		PreparedStatement stmt;
 		try {
-			stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.order SET orderStatus=? WHERE orderNumber=?");
-			stmt.setString(1,"Done");
-			stmt.setInt(2, msg.getOrderNum());
+			stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.order SET punctuality=?,orderStatus=? WHERE orderNumber=?");
+			stmt.setInt(1,flag);
+			stmt.setString(2,"Done");
+			stmt.setInt(3, msg.getOrderNum());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -471,6 +489,103 @@ public class queries {
 		return "ok";
 	}
 	
+	private static void putPerfReport(Order msg, int flag) 
+	{
+		PreparedStatement stmt,stmt1,stmt2,stmt3;
+		String branchRest=null;
+		int total=0,late=0,onTime=0;
+
+		
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT homeBranch FROM bitemedb.supplier WHERE supplierName=?");
+			stmt.setString(1, msg.getRestName());
+			ResultSet rs1=stmt.executeQuery();
+			while(rs1.next())
+			{
+				branchRest=rs1.getString(1);
+			}
+			rs1.close();
+			
+			String [] date=(LocalDate.now().toString()).split("-");
+			
+			stmt1 = DBConnect.conn.prepareStatement("SELECT total_orders,onTime,areLate FROM bitemedb.performance_reports WHERE restaurant=? and year=? and month=?");
+			stmt1.setString(1, msg.getRestName());
+			stmt1.setString(2, date[0]);
+			stmt1.setString(3, date[1]);
+			
+			ResultSet rs2=stmt1.executeQuery();
+			while(rs2.next())
+			{
+				total=rs2.getInt(1);
+				onTime=rs2.getInt(2);
+				late=rs2.getInt(3);
+				
+			}
+			rs2.close();
+			
+			
+			if(total==0)
+			{
+				stmt2 = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.performance_reports VALUES(?,?,?,?,?,?,?)");
+				stmt2.setString(1, msg.getRestName());
+				stmt2.setString(2, date[0]);
+				stmt2.setString(3, date[1]);
+				stmt2.setString(4,branchRest);
+				stmt2.setInt(5, 1);
+				if(flag==1)
+				{
+					stmt2.setInt(6,1);
+					stmt2.setInt(7,0);
+				}
+				else
+				{
+					stmt2.setInt(6,0);
+					stmt2.setInt(7,1);
+				}
+			
+				stmt2.executeUpdate();
+				
+				
+			}
+			else
+			{
+				stmt3 = DBConnect.conn.prepareStatement("UPDATE bitemedb.performance_reports SET total_orders=?,onTime=?,areLate=? WHERE restaurant=? and year=? and month=?");
+				
+				stmt3.setInt(1,total+1);
+				if(flag==1)
+				{
+					stmt3.setInt(2,onTime+1);
+					stmt3.setInt(3,late);
+					
+				}
+				else
+				{
+					stmt3.setInt(2,onTime);
+					stmt3.setInt(3,late+1);
+					
+				}
+				stmt3.setString(4,msg.getRestName());
+				stmt3.setString(5,date[0]);
+				stmt3.setString(6,date[1]);
+				
+				
+				stmt3.executeUpdate();
+				
+			}
+			
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	private static void putRefund(Order order)
 	{
 		PreparedStatement stmt,stmt2,stmt3;
