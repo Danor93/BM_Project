@@ -59,7 +59,7 @@ public class HRManagerScreenController extends Controller{
     @FXML
     void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
-		startScreen(event, "LoginScreen", "Login");
+		start(event, "LoginScreen", "Login","");
     }
 
 	/**
@@ -68,7 +68,7 @@ public class HRManagerScreenController extends Controller{
 	 */
     @FXML
     void ConfirmationOfOpeningABusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event, "HRManagerConfirmationOfOpeningABusinessAccount", "ConfirmationOfOpeningABusinessAccount");
+		start(event, "HRManagerConfirmationOfOpeningABusinessAccount", "ConfirmationOfOpeningABusinessAccount","");
     }
 
 	/**

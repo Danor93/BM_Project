@@ -59,8 +59,6 @@ public class Parsing {
 
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
-					// LoginScreenController.AlreadyLoggedInFlag = true;
-					// LoginScreenController.LoginFlag = true;
 					LoginScreenController.statusUser = "The user is already logged in";
 					LoginScreenController.user = null;
 

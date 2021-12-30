@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="506.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="506.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="506.0" fitWidth="511.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -37,7 +37,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnBack" layoutX="14.0" layoutY="462.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Back">
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="462.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Logout">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

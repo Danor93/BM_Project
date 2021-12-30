@@ -18,14 +18,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
+import javafx.scene.text.Text;
 import main.PopUpMessage;
 
 /**
- * @author Aviel
- * * This class is intended for approving / refusing new business account.
+ * @author Aviel * This class is intended for approving / refusing new business
+ *         account.
  */
 public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
@@ -35,9 +37,9 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	private URL location;
-	
-    @FXML
-    private ImageView BackImage;
+
+	@FXML
+	private ImageView BackImage;
 
 	@FXML
 	private Button back;
@@ -60,31 +62,53 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	@FXML
 	private TableColumn<BusinessAccountTracking, String> budget;
 
+	@FXML
+	private Text userName;
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
 	ObservableList<BusinessAccountTracking> list;
 
 	/**
-	 * A method to return to the previous page. 
+	 * This method meant to get back to HR manager page
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
-	void back(ActionEvent event) throws IOException {
-		startScreen(event, "HRManagerScreen", "HR Manager");
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "HRManagerScreen", "HR Manager page", "");
+	}
+
+	/**
+	 * This method meant to get back to login page and logout the HR manager
+	 * 
+	 * @param event = ActionEvent
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login", "");
 	}
 
 	/**
 	 * A method of confirming a new business account waiting for approval.
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
 		BusinessAccountTracking orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		orderToChange = list.get(0);	
+		orderToChange = list.get(0);
 		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-				if (trackingDetails.get(i).equals(orderToChange))
-					trackingDetails.remove(i);
-			}
+			if (trackingDetails.get(i).equals(orderToChange))
+				trackingDetails.remove(i);
+		}
 		orderToChange = null;
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
@@ -92,6 +116,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	/**
 	 * A method of refusing a new business account waiting for approval.
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
@@ -101,8 +126,8 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		orderToChange = list.get(0);
 		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-				if (trackingDetails.get(i).equals(orderToChange))
-					trackingDetails.remove(i);
+			if (trackingDetails.get(i).equals(orderToChange))
+				trackingDetails.remove(i);
 		}
 
 		orderToChange = null;
@@ -112,7 +137,8 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	void initialize() {
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
+		assert BackImage != null
+				: "fx:id=\"BackImage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert back != null
 				: "fx:id=\"back\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert Refuse != null
@@ -127,7 +153,12 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 				: "fx:id=\"companyName\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert budget != null
 				: "fx:id=\"budget\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
-
+		assert userName != null
+				: "fx:id=\"userName\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
+		assert homePage != null
+				: "fx:id=\"homePage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
+		assert logout != null
+				: "fx:id=\"logout\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 	}
 
 	@Override
@@ -144,6 +175,6 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@Override
 	public void display(String string) {
-		
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 }

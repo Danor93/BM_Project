@@ -4,13 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="549.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="502.0" fitWidth="553.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BackImage" fitHeight="540.0" fitWidth="559.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/backk.jpg" />
          </image></ImageView>
@@ -24,21 +25,12 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="13.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
       <Label fx:id="miniLabel" layoutX="132.0" layoutY="25.0" prefHeight="64.0" prefWidth="286.0" text="Update Menu">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
       </Label>
       <Button fx:id="btnAddNewDishToMenu" layoutX="153.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddNewDishToMenu" prefHeight="39.0" prefWidth="243.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Add a new dish to the menu">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Button>
-      <Button fx:id="btnBack" layoutX="20.0" layoutY="452.0" mnemonicParsing="false" onAction="#BackToSupplier" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Back">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
@@ -51,5 +43,34 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
+      <AnchorPane layoutY="-5.0" prefHeight="547.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

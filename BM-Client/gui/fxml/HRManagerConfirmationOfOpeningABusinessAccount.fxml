@@ -9,59 +9,83 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="713.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
+<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="717.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/backk.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="116.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation Of Opening">
+      <Text layoutX="226.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmation Of Opening">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
       </Text>
-      <Text layoutX="654.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="771.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="14.0" layoutY="600.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-color: black; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 2;" text="back">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="Refuse" layoutX="269.0" layoutY="558.0" mnemonicParsing="false" onAction="#refuseBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
+      <Button fx:id="Refuse" layoutX="373.0" layoutY="560.0" mnemonicParsing="false" onAction="#refuseBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Confirm" layoutX="373.0" layoutY="558.0" mnemonicParsing="false" onAction="#confirmBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
+      <Button fx:id="Confirm" layoutX="483.0" layoutY="560.0" mnemonicParsing="false" onAction="#confirmBusinessAccount" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Text layoutX="23.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are business accounts waiting for approval from the branch manager.">
+      <Text layoutX="133.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are business accounts waiting for approval from the branch manager.">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="23.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the accounts for the start of using the app.">
+      <Text layoutX="133.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the accounts for the start of using the app.">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <TableView fx:id="table" layoutX="12.0" layoutY="173.0" prefHeight="378.0" prefWidth="690.0">
+      <TableView fx:id="table" layoutX="124.0" layoutY="172.0" prefHeight="378.0" prefWidth="690.0">
          <columns>
             <TableColumn fx:id="ID" prefWidth="230.0" text="ID" />
             <TableColumn fx:id="companyName" prefWidth="230.0" text="CompanyName" />
             <TableColumn fx:id="budget" prefWidth="230.0" text="Budget" />
          </columns>
       </TableView>
-      <Text layoutX="177.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A Business Account">
+      <Text layoutX="287.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A Business Account">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
       </Text>
+      <AnchorPane prefHeight="650.0" prefWidth="106.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

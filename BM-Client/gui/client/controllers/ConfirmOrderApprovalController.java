@@ -2,12 +2,15 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.ErrorManager;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import javafx.scene.control.Label;
 
@@ -29,8 +32,7 @@ import main.ClientUI;
 import main.PopUpMessage;
 
 /**
- * @author Aviel
- * This class is for approval of orders awaiting approval.
+ * @author Aviel This class is for approval of orders awaiting approval.
  */
 public class ConfirmOrderApprovalController extends Controller implements Initializable {
 	public static ArrayList<Order> allOrders = new ArrayList<Order>();
@@ -43,9 +45,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	private URL location;
 
 	@FXML
-	private Button back;
-
-	@FXML
 	private Button Refuse;
 
 	@FXML
@@ -53,9 +52,9 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	private Button Send;
-	
-    @FXML
-    private ImageView backImg;
+
+	@FXML
+	private ImageView backImg;
 
 	@FXML
 	private TableView<Order> table;
@@ -90,24 +89,47 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	@FXML
 	private TextField setArrivalTimeIsPlaaned;
 
+	@FXML
+	private Text userName;
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
 	ObservableList<Order> list;
-	boolean confirmedArrivalTimeFlag = false; // flag to check if the arrival time is valid.
-	boolean waitForArrivalTimeFlag = false; // flag to check if we need to wait for arrival time
-	boolean RegularOrSharedFlag = false; // flag to check if the delivery method = regular / shared
-	private String ArrivalTime; 
+	boolean confirmedArrivalTimeFlag = false;
+	boolean waitForArrivalTimeFlag = false;
+	boolean RegularOrSharedFlag = false;
+	boolean wrongArrivalTimeFlag = false;
+	private String ArrivalTime;
 	private String[] DivededUandP;
 
 	/**
-	 * A method to return to the previous page. 
+	 * This method meant to get back to supplier page
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
-	void back(ActionEvent event) throws IOException {
-		startScreen(event, "SupplierScreen", "Supplier");
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "SupplierScreen", "Supplier page", "");
+	}
+
+	/**
+	 * This method meant to get back to login page and logout the supplier
+	 * 
+	 * @param event = ActionEvent
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login", "");
 	}
 
 	/**
 	 * A method of confirming an order waiting for approval.
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
@@ -115,20 +137,23 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
-		if (!orderToChange.getOrderStatus().equals("Approved")) { // If the order is already approved, there is no need to confirm it again.
+		if (!orderToChange.getOrderStatus().equals("Approved")) { // If the order is already approved, there is no need
+																	// to confirm it again.
 			if (!orderToChange.getUseRefund().equals("0")) { // Check if the customer is interested in paying by refund
-				orderToChange.setTotalPrice(
-						orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
+				orderToChange
+						.setTotalPrice(orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
 				ClientUI.chat.accept(new Message(MessageType.Use_Refund, orderToChange));
-			}			
-			if (orderToChange.getUseBudget() == 1) // Check if the customer is a business customer and is interested in paying by budget
-				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));			
-			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange)); // Change the status of the database to Approved
+			}
+			if (orderToChange.getUseBudget() == 1) // Check if the customer is a business customer and is interested in
+													// paying by budget
+				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));
+			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange)); // Change the status of the
+																							// database to Approved
 			for (int i = 0; i < allOrders.size(); i++) {
-					if (allOrders.get(i).equals(orderToChange))
-						allOrders.get(i).setOrderStatus("Approved");
-				}
-			orderToChange = null;;
+				if (allOrders.get(i).equals(orderToChange))
+					allOrders.get(i).setOrderStatus("Approved");
+			}
+			orderToChange = null;
 			table.refresh();
 			list = FXCollections.observableArrayList(allOrders);
 			table.setItems(list);
@@ -137,6 +162,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	/**
 	 * A method of refusing an order waiting for approval.
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
@@ -144,11 +170,12 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
-		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of the database to Not approved
+		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of the
+																							// database to Not approved
 		for (int i = 0; i < allOrders.size(); i++) {
-				if (allOrders.get(i).equals(orderToChange))
-					allOrders.remove(i);
-			}
+			if (allOrders.get(i).equals(orderToChange))
+				allOrders.remove(i);
+		}
 		orderToChange = null;
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
@@ -156,6 +183,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	/**
 	 * A method of Sending an order waiting for send.
+	 * 
 	 * @param event = ActionEvent
 	 */
 	@FXML
@@ -164,19 +192,18 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
-		if (!orderToChange.getOrderStatus().equals("Approved")) // If the order has not yet been confirmed, we will not be able to send it to the customer.
+		if (!orderToChange.getOrderStatus().equals("Approved"))
 			PopUpMessage.errorMessage("Order must be approved before sended to client");
 		else {
 			for (int i = 0; i < allOrders.size(); i++) {
-					if (allOrders.get(i).equals(orderToChange))
-						allOrders.remove(i);
-				}
+				if (allOrders.get(i).equals(orderToChange))
+					allOrders.remove(i);
+			}
 			ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, orderToChange));
 			StringBuilder str = new StringBuilder();
 			str.append("successfully. The phone is - ");
 			str.append(phoneNumber);
-			if (orderToChange.getOrderType().equals("Regular")
-					|| orderToChange.getOrderType().equals("Shared")) { // If the shipping method is - Regular/Shared, then we must add the estimated time of arrival to the customer.
+			if (orderToChange.getOrderType().equals("Regular") || orderToChange.getOrderType().equals("Shared")) {
 				RegularOrSharedFlag = true;
 			}
 			if (RegularOrSharedFlag) {
@@ -187,8 +214,11 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				} else {
 					ArrivalTime = setArrivalTimeIsPlaaned.getText();
 					try {
-						LocalTime.parse(ArrivalTime);
-						waitForArrivalTimeFlag = true;
+						LocalTime checkTime = LocalTime.parse(ArrivalTime);
+						if (checkTime.isAfter(LocalTime.now()))
+							waitForArrivalTimeFlag = true;
+						else
+							wrongArrivalTimeFlag = true;
 					} catch (DateTimeParseException | NullPointerException e) {
 						PopUpMessage.errorMessage("Time must be invalid");
 					}
@@ -196,7 +226,10 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				if (waitForArrivalTimeFlag)
 					str.append(" Arrival time is planned to - " + ArrivalTime);
 				else {
+					if (wrongArrivalTimeFlag)
+						PopUpMessage.errorMessage("Unable to enter elapsed time");
 					RegularOrSharedFlag = false;
+					wrongArrivalTimeFlag = false;
 					continueFlag = false;
 					str.setLength(0);
 					orderToChange = null;
@@ -207,7 +240,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 			if (continueFlag) {
 				RegularOrSharedFlag = false;
 				waitForArrivalTimeFlag = false;
-				ClientUI.chat.accept(new Message(MessageType.Order_sended, orderToChange)); // Change the status of the database to Sended
+				ClientUI.chat.accept(new Message(MessageType.Order_sended, orderToChange));
 				PopUpMessage.simulationMessage(str.toString());
 				orderToChange = null;
 				list = FXCollections.observableArrayList(allOrders);
@@ -220,8 +253,8 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	void initialize() {
-        assert backImg != null : "fx:id=\"backImg\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
+		assert backImg != null
+				: "fx:id=\"backImg\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert Refuse != null : "fx:id=\"Refuse\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert Confirm != null
 				: "fx:id=\"Confirm\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
@@ -247,6 +280,11 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				: "fx:id=\"setArrivalTimeIsPlaaned\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 		assert labelArrivalTime != null
 				: "fx:id=\"labelArrivalTime\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
+		assert userName != null
+				: "fx:id=\"userName\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
+		assert homePage != null
+				: "fx:id=\"homePage\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
+		assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 	}
 
 	@Override
@@ -270,6 +308,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 }

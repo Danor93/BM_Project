@@ -48,21 +48,19 @@ public class SupplierScreenController extends Controller implements ControllerIn
 
 	@FXML
 	private ImageView backImg;
-	
-    @FXML
-    private Text WelcomeLabel;
+
+	@FXML
+	private Text WelcomeLabel;
 
 	private String[] DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
 
-	/**
-	 * A method to return to the previous page.
-	 * 
-	 * @param event = ActionEvent
+	/** This method meant to get back to login page and logout the supplier
+	 * @param event	= ActionEvent
 	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
-		start(event, "LoginScreen", "Login","");
+		start(event, "LoginScreen", "Login", "");
 	}
 
 	@FXML
@@ -93,7 +91,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 				ExistLbl.setText("Menu already exists, you can update it");
 			} else {
 				AddDishToMenuController.indicator = false;
-				startScreen(event, "AddDishToMenu", "Create Menu");
+				start(event, "AddDishToMenu", "Create Menu","");
 			}
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
@@ -108,7 +106,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateMenu(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Certified")) {
-			startScreen(event, "UpdateMenuScreen", "Update Menu");
+			start(event, "UpdateMenuScreen", "Update Menu","");
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
 
@@ -122,15 +120,13 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Approved")) {
-			startScreen(event, "ConfirmOrderApproval", "Update order status");
+			start(event, "ConfirmOrderApproval", "Update order status","");
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
-
 	}
 
 	@Override
 	public void display(String string) {
 		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN());
 	}
-
 }
