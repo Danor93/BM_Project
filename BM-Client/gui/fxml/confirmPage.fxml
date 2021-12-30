@@ -13,7 +13,10 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.RecConfirmController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/backk.jpg" />
+         </image></ImageView>
       <Text layoutX="621.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />

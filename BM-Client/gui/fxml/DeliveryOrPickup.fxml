@@ -29,7 +29,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="time" layoutX="521.0" layoutY="155.0" prefHeight="25.0" prefWidth="122.0" />
+      <TextField fx:id="time" layoutX="482.0" layoutY="155.0" prefHeight="25.0" prefWidth="122.0" />
       <Text layoutX="134.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Before payment, Please specify the required time for your order ">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -41,7 +41,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="473.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time : ">
+      <Text layoutX="434.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time : ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

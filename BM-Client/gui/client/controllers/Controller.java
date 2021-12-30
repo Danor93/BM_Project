@@ -7,6 +7,7 @@ import java.io.InputStream;
 
 import Entities.Message;
 import Entities.MessageType;
+import Entities.SingletonOrder;
 import main.ClientUI;
 import main.PopUpMessage;
 import javafx.event.ActionEvent;
@@ -128,4 +129,9 @@ public abstract class  Controller  {
 
 	
 	public abstract void display(String string);
+	
+	public void logoutForCustomer()
+	{
+		SingletonOrder.getInstance().myOrder.clear();
+	}
 }

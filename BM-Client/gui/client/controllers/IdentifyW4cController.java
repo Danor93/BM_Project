@@ -5,6 +5,7 @@ package client.controllers;
 import Entities.Client;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.SingletonOrder;
 import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 	import javafx.scene.control.Button;
@@ -53,6 +54,7 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void back(ActionEvent event) throws IOException {
+			SingletonOrder.getInstance().myOrder.clear();
 	    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 			start(event, "LoginScreen", "Login","");
 

@@ -13,7 +13,10 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.RestListFormController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BackImage" fitHeight="556.0" fitWidth="583.0" layoutX="106.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
       <Text layoutX="621.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -24,11 +27,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Label layoutX="147.0" layoutY="35.0" text="Create Order">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
       <TableView fx:id="table" layoutX="142.0" layoutY="122.0" prefHeight="335.0" prefWidth="477.0">
          <columns>
             <TableColumn fx:id="colRes" prefWidth="167.33333778381348" style="-fx-alignment: CENTER;" text="Restaurant" />
@@ -74,5 +72,10 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="137.0" layoutY="34.0" text="Recommended in your area">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

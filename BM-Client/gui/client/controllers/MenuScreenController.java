@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
-public class MenuScreenController extends Controller implements Initializable {
+public class MenuScreenController extends Controller {
 
 	@FXML
 	private ResourceBundle resources;
@@ -88,6 +88,7 @@ public class MenuScreenController extends Controller implements Initializable {
 
     @FXML
     void logout(ActionEvent event) throws IOException {
+    	logoutForCustomer();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }
@@ -99,12 +100,6 @@ public class MenuScreenController extends Controller implements Initializable {
 	 */
     @FXML
     void backToRestChoose(ActionEvent event) throws IOException {
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
-		Parent root=load.load();
-		RestListFormController aFrame = load.getController();
-		aFrame.start(primaryStage, root);*/
-    	
 		start(event, "restListForm", "Restaurants list",ChooseRestController.cityName);
     }
 
@@ -117,12 +112,6 @@ public class MenuScreenController extends Controller implements Initializable {
 
 	 @FXML
 	    void orderNow(MouseEvent event) throws IOException {
-	    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/ShowOrder.fxml"));
-			Parent root=load.load();
-			ShowOrderController aFrame = load.getController();
-			aFrame.start(primaryStage, root);
-			*/
 			start(event, "ShowOrder", "Your order","");
 
 	    }
@@ -134,13 +123,6 @@ public class MenuScreenController extends Controller implements Initializable {
     @FXML
     void showDesserts(MouseEvent event) throws IOException {
     	chosenFoodType="Dessert";
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root=load.load();
-		ChoosingDishesController aFrame = load.getController();
-		aFrame.display(chosenFoodType);
-		aFrame.start(primaryStage,root);*/
-    	
     	start(event, "DishesOfKindScreen", "Restaurant's desserts",chosenFoodType);
 
     }
@@ -152,14 +134,6 @@ public class MenuScreenController extends Controller implements Initializable {
     @FXML
     void showDrinks(MouseEvent event) throws IOException {
     	chosenFoodType="Drink";
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root=load.load();
-		ChoosingDishesController aFrame = load.getController();
-			
-		aFrame.display(chosenFoodType);
-		aFrame.start(primaryStage,root);*/
-		
 		start(event, "DishesOfKindScreen", "Restaurant's drinks",chosenFoodType);
     }
 
@@ -174,14 +148,6 @@ public class MenuScreenController extends Controller implements Initializable {
     @FXML
     void showMainDishes(MouseEvent event) throws IOException {
     	chosenFoodType= "Main dish";
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml"));
-		Parent root=load.load();
-		ChoosingDishesController aFrame = load.getController();
-			
-		aFrame.display("Main dish");
-		aFrame.start(primaryStage,root);*/
-    	
     	start(event, "DishesOfKindScreen", "Restaurant's Main dishes",chosenFoodType);
     }
 
@@ -194,47 +160,20 @@ public class MenuScreenController extends Controller implements Initializable {
 	@FXML
 	void showSalads(MouseEvent event) throws IOException {
 		chosenFoodType = "Salad";
-		/*
-		 * Stage primaryStage = (Stage) ((Node)
-		 * event.getSource()).getScene().getWindow(); FXMLLoader load = new
-		 * FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml")); Parent
-		 * root=load.load(); ChoosingDishesController aFrame = load.getController();
-		 * System.out.println(chosenFoodType); aFrame.display(chosenFoodType);
-		 * aFrame.start(primaryStage,root);
-		 */
-
 		start(event, "DishesOfKindScreen", "Restaurant's salads", chosenFoodType);
 	}
 
 	@FXML
 	void showStarters(MouseEvent event) throws IOException {
 		chosenFoodType = "Starter";
-		/*
-		 * Stage primaryStage = (Stage) ((Node)
-		 * event.getSource()).getScene().getWindow(); FXMLLoader load = new
-		 * FXMLLoader(getClass().getResource("/fxml/DishesOfKindScreen.fxml")); Parent
-		 * root=load.load(); ChoosingDishesController aFrame = load.getController();
-		 * 
-		 * aFrame.display(chosenFoodType); aFrame.start(primaryStage,root);
-		 */
-
 		start(event, "DishesOfKindScreen", "Restaurant's starters", chosenFoodType);
 	}
 
-	/**
-	 * @param stage
-	 * @param root
-	 * @throws IOException
-	 */
-	public void start(Stage stage, Parent root) throws IOException {
-		Scene scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
 
 	/**
 	 * @param supplier
 	 */
+	@Override
 	public void display(String string) {
 		restName.setText(RestListFormController.chosenRst.getSupplierName());
 		userName.setText(LoginScreenController.user.getFirstN());
@@ -242,21 +181,5 @@ public class MenuScreenController extends Controller implements Initializable {
 		dishAdded.setText(string);
 	}
 
-	@FXML
-	void initialize() {
-		assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert desserts != null : "fx:id=\"desserts\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert drinks != null : "fx:id=\"drinks\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert main != null : "fx:id=\"main\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert order != null : "fx:id=\"order\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert restName != null : "fx:id=\"restName\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert salads != null : "fx:id=\"salads\" was not injected: check your FXML file 'MenuScreen.fxml'.";
-		assert starters != null : "fx:id=\"starters\" was not injected: check your FXML file 'MenuScreen.fxml'.";
 
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-	}
 }

@@ -55,7 +55,7 @@ public class Parsing {
 		switch (receivedMessage.getMessageType()) {
 
 		case loginSystem: {
-String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
 			
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
@@ -83,6 +83,7 @@ String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
 				LoginScreenController.statusUser="User name or password are inccorect";
 				LoginScreenController.user=null;
 			}
+			IdentifyW4cController.client=null;
 			break;
 		}
 

@@ -8,10 +8,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="582.0" fitWidth="592.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="126.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+      <ImageView fx:id="BackImage" fitHeight="582.0" fitWidth="592.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
+      <Text layoutX="126.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu-">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -113,9 +116,9 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="restName" layoutX="239.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
+      <Text fx:id="restName" layoutX="248.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
    </children>

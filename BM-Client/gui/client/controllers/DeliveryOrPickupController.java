@@ -9,6 +9,7 @@ import Entities.BussinessAccount;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.OrderType;
+import Entities.SingletonOrder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,6 +87,7 @@ public class DeliveryOrPickupController extends Controller {
 
     @FXML
     void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }

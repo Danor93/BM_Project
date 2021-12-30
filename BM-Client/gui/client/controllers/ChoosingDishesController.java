@@ -113,6 +113,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
 
 	 @FXML
 	 void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
 	    ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
 	 }
