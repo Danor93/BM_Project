@@ -3,15 +3,18 @@ package Parsing;
 //client
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.MyFile;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
+import Entities.OrdersReport;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -21,7 +24,7 @@ import Entities.homeBranches;
 import client.controllers.AddDishToMenuController;
 import client.controllers.BranchManagerChooseReportToViewController;
 import client.controllers.BranchManagerCloseAccountController;
-import client.controllers.BranchManagerFreezeAccountController;
+import client.controllers.BranchManagerChangePermissionsController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
 import client.controllers.DeliveryController;
@@ -33,38 +36,67 @@ import client.controllers.ConfirmEmployerRegController;
 import client.controllers.ConfirmOrderApprovalController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.ConfirmSupplierRegController;
+import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
 import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
 import client.controllers.BranchManagerScreenController;
 import client.controllers.BranchManagerUploadPDFController;
+import client.controllers.CEODownloadQuarterlyReportController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
+import client.controllers.QuarterReportController;
 import main.PopUpMessage;
 
 public class Parsing {
 	@SuppressWarnings("unchecked")
 	public static void Message(Object msg) throws Exception {
-		Message receivedMessage = null;
-		receivedMessage = (Message) msg;
+		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 
-		case login: {
+
+		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
-					LoginScreenController.AlreadyLoggedInFlag = true;
-					LoginScreenController.LoginFlag = true;
+					LoginScreenController.statusUser = "The user is already logged in";
+					LoginScreenController.user = null;
+
 				} else {
-					LoginScreenController.LoginFlag = true;
-					LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-							homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+					if (receivedMessage.getMessageData().equals("Freeze")) {
+						LoginScreenController.statusUser = "Frozen Account";
+						LoginScreenController.user = null;
+					} else {
+						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+						LoginScreenController.statusUser = "Active";
+					}
 
 				}
+			} else {
+				LoginScreenController.statusUser = "User name or password are inccorect";
+				LoginScreenController.user = null;
 			}
 			break;
+		}
+
+		case ShowHistogram: {
+
+			if (QuarterReportController.report1 == null) {
+				QuarterReportController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			} else {
+				QuarterReportController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			}
+
+			break;
+		}
+
+		case getYears: {
+			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
+
 		}
 
 		case Show_Cities: {
@@ -103,17 +135,25 @@ public class Parsing {
 			break;
 		}
 
+		case ClientConfirm: {
+			CustomerScreenController.orderConfirm = (ArrayList<Order>) receivedMessage.getMessageData();
+			break;
+		}
+
+		case InsertDelivery: {
+			break;
+		}
+
+		case orderDone: {
+			break;
+		}
+
 		case Disconected: {
 			break;
 		}
 
 		case ReturnFirstName_success: {
-			LoginScreenController.Name = receivedMessage.getMessageData().toString();
-			break;
-		}
-
-		case WrongInput: {
-			LoginScreenController.WrongInputFlag = true;
+			LoginScreenController.user.setFirstN(receivedMessage.getMessageData().toString());
 			break;
 		}
 
@@ -127,6 +167,11 @@ public class Parsing {
 		}
 		case MenuExistFalse: {
 			SupplierScreenController.ExisingMenuFlag = false;
+			break;
+		}
+
+		case rest_Name: {
+			AddDishToMenuController.restName = (String) receivedMessage.getMessageData();
 			break;
 		}
 
@@ -149,8 +194,13 @@ public class Parsing {
 			break;
 		}
 
-		case Supplier_list: {
-			ConfirmSupplierRegController.Suppliers = (ArrayList<Supplier>) receivedMessage.getMessageData();
+		case Supplier_List_Update_succ: {
+			ConfirmSupplierRegController.confirmRegFlag = true;
+			break;
+		}
+
+		case supplier_not_match: {
+			ConfirmSupplierRegController.confirmRegFlag = false;
 			break;
 		}
 
@@ -190,17 +240,27 @@ public class Parsing {
 		}
 
 		case return_accounts_for_freeze: {
-			BranchManagerFreezeAccountController.Users = (ArrayList<User>) receivedMessage.getMessageData();
+			BranchManagerChangePermissionsController.Users = (ArrayList<User>) receivedMessage.getMessageData();
 			break;
 		}
 
-		case Account_Active: {
-			BranchManagerFreezeAccountController.FreezeAccount = false;
+		case Account_Status_Active: {
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if (status) {
+				BranchManagerChangePermissionsController.ActiveAccount = true;
+			} else {
+				BranchManagerChangePermissionsController.ActiveAccount = false;
+			}
 			break;
 		}
 
-		case Account_Freeze: {
-			BranchManagerFreezeAccountController.FreezeAccount = true;
+		case Account_Status_Freeze: {
+			Boolean status = (Boolean) receivedMessage.getMessageData();
+			if (status) {
+				BranchManagerChangePermissionsController.FreezeAccount = true;
+			} else {
+				BranchManagerChangePermissionsController.FreezeAccount = false;
+			}
 			break;
 		}
 
@@ -216,9 +276,11 @@ public class Parsing {
 		}
 
 		case changed_status_to_notApproved_succ: {
+			break;
 		}
 
 		case changed_status_to_Approved_succ: {
+
 		}
 
 		case changed_status_to_sended_succ: {
@@ -275,7 +337,7 @@ public class Parsing {
 		}
 
 		case Delete_Account_Succ: {
-
+			break;
 		}
 
 		case businessAccountsTracking: {
@@ -312,11 +374,19 @@ public class Parsing {
 		}
 
 		case changed_BusinessAccount_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
+			break;
+		}
 
+		case download_pdf_succ: {
+			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
+			break;
+		}
+		case relevantYearAndQuarterly: {
+			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 		}
 
 		default: {

@@ -20,15 +20,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
+import javafx.scene.text.Text;
 
 public class ConfirmEmployerRegController extends Controller implements Initializable {
 
 	/*
-	 * Author:Danor this Class for handle the confirm or refuse registration for the
-	 * Branch Manager of Employers.
+	 * Author:Danor 
+	 * this Class for handle the confirm or refuse registration for the Branch Manager of Employers.
 	 */
 
 	public static ArrayList<Employer> Employers = new ArrayList<Employer>();
@@ -38,9 +41,6 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 
 	@FXML
 	private URL location;
-
-	@FXML
-	private ImageView BackImage;
 
 	@FXML
 	private ComboBox<String> ListofEmployers;
@@ -53,13 +53,35 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 
 	@FXML
 	private Button btnRefuseEmployerRegistartion;
+	
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
 
 	public static String companyName;
+	
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
 
 	/* this method is for the Combobox Selection */
 	@FXML
 	void ChooseCompany(ActionEvent event) {
 		companyName = ListofEmployers.getSelectionModel().getSelectedItem();
+		btnConfirmEmployerRegistartion.setDisable(false);
+		btnRefuseEmployerRegistartion.setDisable(false);
 	}
 
 	/* this method for update the DB and return to the branch manager screen. */
@@ -80,12 +102,12 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		ListofEmployers.setDisable(true);
 		for (int i = 0; i < Employers.size(); i++) {
 			if (Employers.get(i).getCompanyName().equals(companyName)) {
-				Employers.get(i).setCompanyStatus("approved");
+				Employers.get(i).setCompanyStatus("Approved");
 			}
 		}
 		ListofEmployers.getItems().clear();
 		loadEmployerstoComboBox(Employers);
-		ListofEmployers.setPromptText("List of employers awaiting approval");
+		ListofEmployers.setPromptText("List of employers awaiting for approval");
 		ListofEmployers.setDisable(false);
 	}
 
@@ -95,7 +117,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		ListofEmployers.setDisable(true);
 		for (int i = 0; i < Employers.size(); i++) {
 			if (Employers.get(i).getCompanyName().equals(companyName)) {
-				Employers.get(i).setCompanyStatus("not approved");
+				Employers.get(i).setCompanyStatus("Not approved");
 			}
 		}
 		ListofEmployers.getItems().clear();
@@ -108,7 +130,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	/* this method is for load the not approved and waiting company names. */
 	public void loadEmployerstoComboBox(ArrayList<Employer> Employers) {
 		for (Employer e : Employers) {
-			if (e.getCompanyStatus().equals("not approved") || e.getCompanyStatus().equals("waiting")) {
+			if (e.getCompanyStatus().equals("Not approved") || e.getCompanyStatus().equals("Waiting")) {
 				ListofEmployers.getItems().add(e.getCompanyName());
 			}
 		}
@@ -117,7 +139,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	/* this method is for load only the waiting company names. */
 	public void refreshcombobox(ArrayList<Employer> Employers) {
 		for (Employer e : Employers) {
-			if (e.getCompanyStatus().equals("waiting")) {
+			if (e.getCompanyStatus().equals("Waiting")) {
 				ListofEmployers.getItems().add(e.getCompanyName());
 			}
 		}
@@ -127,14 +149,15 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Message msg = new Message(MessageType.get_Employer, null);
-		ClientUI.chat.accept(msg);
+		ClientUI.chat.accept(new Message(MessageType.get_Employer, null));
 		loadEmployerstoComboBox(Employers);
-		if (LoginScreenController.user.getRole().equals("CEO")) {
-			BackBtn.setText("Back to CEO Panel");
-		}
-		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			BackBtn.setText("Back to Branch Manager Panel");
-		}
+		btnConfirmEmployerRegistartion.setDisable(true);
+		btnRefuseEmployerRegistartion.setDisable(true);
+		
+	}
+
+    @Override
+	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

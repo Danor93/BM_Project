@@ -5,69 +5,100 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="532.0" prefWidth="721.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
+<AnchorPane prefHeight="532.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
    <children>
-      <Text fill="WHITE" layoutX="20.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change order status">
+      <ImageView fx:id="backImg" fitHeight="658.0" fitWidth="827.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="248.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Order Status">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="43.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="647.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="774.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="31.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="Refuse" layoutX="292.0" layoutY="539.0" mnemonicParsing="false" onAction="#refuseOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Refuse" layoutX="627.0" layoutY="175.0" mnemonicParsing="false" onAction="#refuseOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
+      <Button fx:id="Confirm" layoutX="412.0" layoutY="539.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Confirm" layoutX="627.0" layoutY="278.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
+      <Text layoutX="159.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are orders approved by the customer waiting for approval from the supplier.">
          <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Text fill="WHITE" layoutX="20.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are orders approved by the customer waiting for approval from the supplier.">
-         <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the orders for the start of execution.">
+      <Text layoutX="159.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please confirm the orders for the start of execution.">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <TableView fx:id="table" layoutX="20.0" layoutY="112.0" prefHeight="378.0" prefWidth="598.0">
+      <TableView fx:id="table" layoutX="108.0" layoutY="111.0" prefHeight="378.0" prefWidth="710.0">
         <columns>
-          <TableColumn fx:id="orderNumber" prefWidth="78.39999771118164" text="orderNumber" />
-          <TableColumn fx:id="orderType" prefWidth="72.00003051757812" text="orderType" />
-            <TableColumn fx:id="restName" prefWidth="75.0" text="restName" />
-            <TableColumn fx:id="totalPrice" prefWidth="75.0" text="totalPrice" />
-            <TableColumn fx:id="timeOfOrder" prefWidth="75.0" text="timeOfOrder" />
-            <TableColumn fx:id="dateOfOrder" prefWidth="75.0" text="dateOfOrder" />
-            <TableColumn fx:id="orderStatus" prefWidth="75.0" text="orderStatus" />
-            <TableColumn fx:id="costumerID" prefWidth="75.0" text="costumerID" />
+          <TableColumn fx:id="orderNumber" prefWidth="89.0" text="Order number" />
+          <TableColumn fx:id="orderType" prefWidth="89.0" text="Type" />
+            <TableColumn fx:id="restName" prefWidth="89.0" text="Restaurant" />
+            <TableColumn fx:id="totalPrice" prefWidth="89.0" text="Total price" />
+            <TableColumn fx:id="timeOfOrder" prefWidth="89.0" text="Time" />
+            <TableColumn fx:id="dateOfOrder" minWidth="0.0" prefWidth="89.0" text="Date" />
+            <TableColumn fx:id="orderStatus" prefWidth="89.0" text="Status" />
+            <TableColumn fx:id="costumerID" prefWidth="88.0" text="Costumer ID" />
         </columns>
       </TableView>
-      <Button fx:id="Send" layoutX="627.0" layoutY="379.0" mnemonicParsing="false" onAction="#SendOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: brown; -fx-background-radius: 20;" text="Send" textFill="WHITE">
+      <Button fx:id="Send" layoutX="527.0" layoutY="539.0" mnemonicParsing="false" onAction="#SendOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: brown; -fx-background-radius: 20;" text="Send" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="setArrivalTimeIsPlaaned" layoutX="288.0" layoutY="495.0" prefHeight="26.0" prefWidth="329.0" promptText="Example: 22:10" />
-      <Label fx:id="labelArrivalTime" layoutX="139.0" layoutY="499.0" text="Arrival time is planned" textFill="WHITE">
+      <TextField fx:id="setArrivalTimeIsPlaaned" layoutX="371.0" layoutY="496.0" prefHeight="30.0" prefWidth="334.0" promptText="Example: 22:10" />
+      <Label fx:id="labelArrivalTime" layoutX="202.0" layoutY="501.0" text="Arrival time is planned">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="-4.0" layoutY="-9.0" prefHeight="669.0" prefWidth="106.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

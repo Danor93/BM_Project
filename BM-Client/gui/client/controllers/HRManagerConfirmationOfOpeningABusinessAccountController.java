@@ -17,11 +17,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
+import javafx.scene.text.Text;
 import main.PopUpMessage;
 
+/**
+ * @author Aviel * This class is intended for approving / refusing new business
+ *         account.
+ */
 public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
 
@@ -30,6 +37,9 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 
 	@FXML
 	private URL location;
+
+	@FXML
+	private ImageView BackImage;
 
 	@FXML
 	private Button back;
@@ -52,53 +62,83 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	@FXML
 	private TableColumn<BusinessAccountTracking, String> budget;
 
+	@FXML
+	private Text userName;
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
 	ObservableList<BusinessAccountTracking> list;
 
+	/**
+	 * This method meant to get back to HR manager page
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
-	void back(ActionEvent event) throws IOException {
-		startScreen(event, "HRManagerScreen", "HR Manager");
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "HRManagerScreen", "HR Manager page", "");
 	}
 
+	/**
+	 * This method meant to get back to login page and logout the HR manager
+	 * 
+	 * @param event = ActionEvent
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login", "");
+	}
+
+	/**
+	 * A method of confirming a new business account waiting for approval.
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		BusinessAccountTracking orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, ordersToChange));
+		orderToChange = list.get(0);
+		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-			for (int j = 0; j < ordersToChange.size(); j++) {
-				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
-					trackingDetails.remove(i);
-			}
+			if (trackingDetails.get(i).equals(orderToChange))
+				trackingDetails.remove(i);
 		}
-		ordersToChange.clear();
+		orderToChange = null;
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}
 
+	/**
+	 * A method of refusing a new business account waiting for approval.
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void refuseBusinessAccount(ActionEvent event) {
-		ArrayList<BusinessAccountTracking> ordersToChange = new ArrayList<BusinessAccountTracking>();
+		BusinessAccountTracking orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
-		for (int i = 0; i < list.size(); i++) {
-			ordersToChange.add(list.get(i));
-		}
-		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, ordersToChange));
+		orderToChange = list.get(0);
+		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, orderToChange));
 		for (int i = 0; i < trackingDetails.size(); i++) {
-			for (int j = 0; j < ordersToChange.size(); j++) {
-				if (trackingDetails.get(i).equals(ordersToChange.get(j)))
-					trackingDetails.remove(i);
-			}
+			if (trackingDetails.get(i).equals(orderToChange))
+				trackingDetails.remove(i);
 		}
-		ordersToChange.clear();
+
+		orderToChange = null;
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
 	}
 
 	@FXML
 	void initialize() {
+		assert BackImage != null
+				: "fx:id=\"BackImage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert back != null
 				: "fx:id=\"back\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert Refuse != null
@@ -113,7 +153,12 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 				: "fx:id=\"companyName\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 		assert budget != null
 				: "fx:id=\"budget\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
-
+		assert userName != null
+				: "fx:id=\"userName\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
+		assert homePage != null
+				: "fx:id=\"homePage\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
+		assert logout != null
+				: "fx:id=\"logout\" was not injected: check your FXML file 'HRManagerConfirmationOfOpeningABusinessAccount.fxml'.";
 	}
 
 	@Override
@@ -121,14 +166,15 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 		ID.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("ID"));
 		companyName.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("companyName"));
 		budget.setCellValueFactory(new PropertyValueFactory<BusinessAccountTracking, String>("budget"));
-		/*
-		 * ClientUI.chat.accept(new Message(MessageType.get_Company_Status,
-		 * LoginScreenController.CompanyName)); if (!CompanyStatusApproved) { list =
-		 * FXCollections.observableArrayList(); table.setItems(list);
-		 * PopUpMessage.errorMessage("The employe not Approved yet"); } else {
-		 */
-		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, LoginScreenController.CompanyName));
+		String DivededUandP[] = ((String) LoginScreenController.user.getRole()).split("-");
+		String fullCompanyName = String.valueOf(DivededUandP[1]);
+		ClientUI.chat.accept(new Message(MessageType.get_business_account_details, fullCompanyName));
 		list = FXCollections.observableArrayList(trackingDetails);
 		table.setItems(list);
+	}
+
+	@Override
+	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 }

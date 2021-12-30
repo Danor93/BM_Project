@@ -14,7 +14,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
+import javafx.scene.text.Text;
 
 public class BranchManagerCloseAccountController extends Controller implements Initializable {
 
@@ -24,7 +27,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
 	 */
 	
 	public static ArrayList<User> Users;
-	public static String userName;
+	public static String UserName;
 	
     @FXML
     private ResourceBundle resources;
@@ -37,10 +40,32 @@ public class BranchManagerCloseAccountController extends Controller implements I
     
     @FXML
     private Button ConfirmBtn;
+    
+
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
 
 
     @FXML
     private ComboBox<String> AccountComboBox;
+    
+
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+	}
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
     
     @FXML
     void backToBranchManager(ActionEvent event) throws IOException {
@@ -50,7 +75,8 @@ public class BranchManagerCloseAccountController extends Controller implements I
     /*for the combo box*/
    @FXML
    void ChooseUserName(ActionEvent event) {
-	   userName = AccountComboBox.getSelectionModel().getSelectedItem();
+	   UserName = AccountComboBox.getSelectionModel().getSelectedItem();
+	   ConfirmBtn.setDisable(false);
    }
    
    /*for confirm button*/
@@ -58,7 +84,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
    void ConfrimDelete(ActionEvent event) {
 	   User user = null;
 	   for(int i=0;i<Users.size();i++) {
-		   if(Users.get(i).getUserName().equals(userName)) {
+		   if(Users.get(i).getUserName().equals(UserName)) {
 			  user=Users.get(i);
 			  Users.remove(i);
 		   }
@@ -77,7 +103,7 @@ public class BranchManagerCloseAccountController extends Controller implements I
     /*load account for the combo box*/
     public void loadAccounts(ArrayList<User> Users) {
     	for(User u:Users) {
-    		AccountComboBox.getItems().add(u.getUserName());
+    		AccountComboBox.getItems().add(u.getFirstN());
     	}
     }
 
@@ -86,5 +112,11 @@ public class BranchManagerCloseAccountController extends Controller implements I
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.chat.accept(new Message(MessageType.get_Accounts,null));
 		loadAccounts(Users);
+		ConfirmBtn.setDisable(true);
+	}
+
+	@Override
+	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

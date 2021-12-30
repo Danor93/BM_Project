@@ -54,9 +54,10 @@ import main.ClientUI;
 	    	{*/
 	    		//ClientUI.chat= new ClientController(ip, 5555);
 	    		ClientUI.chat= new ClientController("localhost", 5555);
+	    		start(event,"BeforLogin","Description","");
 	    		//Message msg = new Message(MessageType.login, null);
 	    		//ClientUI.chat.accept(msg);
-	    		startScreen(event,"LoginScreen","Login");
+	    		//start(event,"BeforLogin","Description","");
 	    	}
 	    
 	    public void start(Stage primaryStage) throws Exception {
@@ -70,12 +71,18 @@ import main.ClientUI;
 	    
 	    @FXML
 	    void initialize() {
-	    	//setImage(LogoImage, "ClientMenuUi.jpeg");
+	    	//setImage(LogoImage, "/Images/ClientMenuUi.jpg");
 	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
 
 	    }
+
+		@Override
+		public void display(String string) {
+			// TODO Auto-generated method stub
+			
+		}
 
 
 

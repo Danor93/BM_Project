@@ -15,12 +15,10 @@ import Entities.OrderType;
 import Entities.User;
 
 public class ShowDishes {
-	public static ArrayList<Dish> getDishes(Object object) {
+	public static ArrayList<Dish> getDishes(String ID) {
 		ArrayList<Dish> dishes = new ArrayList<>();
-		String ID = (String) object;
 		System.out.println(ID);
 		PreparedStatement stmt;
-		String query = "";
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn

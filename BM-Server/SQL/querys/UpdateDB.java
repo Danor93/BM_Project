@@ -386,7 +386,7 @@ public class UpdateDB {
 
 	public static boolean RegistrationOfEmployer(Employer employer) {
 		Statement stmt;
-		ArrayList<String> compantStatus = new ArrayList<>();
+		//ArrayList<String> compantStatus = new ArrayList<>();
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT companyStatus FROM bitemedb.company WHERE companyName='"
@@ -419,15 +419,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean BusinessAccountStatusToApproved(ArrayList<BusinessAccountTracking> arrayList) {
+	public static boolean BusinessAccountStatusToApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Approved' WHERE ID=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
-				i++;
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
 
@@ -441,15 +439,13 @@ public class UpdateDB {
 		}
 	}
 
-	public static boolean BusinessAccountStatusToNotApproved(ArrayList<BusinessAccountTracking> arrayList) {
+	public static boolean BusinessAccountStatusToNotApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
-		int i = 0;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
 						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Not approved' WHERE ID=?");
-				stmt.setString(1, String.valueOf(arrayList.get(i).getID()));
-				i++;
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
 

@@ -23,22 +23,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button fx:id="back" layoutX="31.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="31.0" layoutY="494.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Back" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="remove" layoutX="587.0" layoutY="266.0" mnemonicParsing="false" onAction="#removeOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="remove" textFill="WHITE">
+      <Button fx:id="remove" layoutX="587.0" layoutY="266.0" mnemonicParsing="false" onAction="#removeOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Remove" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="next" layoutX="607.0" layoutY="494.0" mnemonicParsing="false" onAction="#proceed" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="proceed" textFill="WHITE">
+      <Button fx:id="next" layoutX="607.0" layoutY="494.0" mnemonicParsing="false" onAction="#proceed" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Proceed" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="totalPrice" layoutX="544.0" layoutY="211.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="total price">
+      <Button fx:id="totalPrice" layoutX="544.0" layoutY="211.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 15;" text="Total Price">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -2,12 +2,16 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.ErrorManager;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import javafx.scene.control.Label;
 import Entities.DishType;
@@ -31,6 +35,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 import main.PopUpMessage;
 
+/**
+ * @author Aviel This class is for approval of orders awaiting approval.
+ */
 public class ConfirmOrderApprovalController extends Controller implements Initializable {
 	public static ArrayList<Order> allOrders = new ArrayList<Order>();
 	public static String phoneNumber;
@@ -44,9 +51,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	private URL location;
 
 	@FXML
-	private Button back;
-
-	@FXML
 	private Button Refuse;
 
 	@FXML
@@ -54,6 +58,9 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	@FXML
 	private Button Send;
+
+	@FXML
+	private ImageView backImg;
 
 	@FXML
 	private TableView<Order> table;
@@ -88,17 +95,49 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	@FXML
 	private TextField setArrivalTimeIsPlaaned;
 
+	@FXML
+	private Text userName;
+
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
 	ObservableList<Order> list;
 	boolean confirmedArrivalTimeFlag = false;
 	boolean waitForArrivalTimeFlag = false;
 	boolean RegularOrSharedFlag = false;
+	boolean wrongArrivalTimeFlag = false;
 	private String ArrivalTime;
+	private String[] DivededUandP;
 
+	/**
+	 * This method meant to get back to supplier page
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
-	void back(ActionEvent event) throws IOException {
-		startScreen(event, "SupplierScreen", "Supplier");
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "SupplierScreen", "Supplier page", "");
 	}
 
+	/**
+	 * This method meant to get back to login page and logout the supplier
+	 * 
+	 * @param event = ActionEvent
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login", "");
+	}
+
+	/**
+	 * A method of confirming an order waiting for approval.
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void confirmOrder(ActionEvent event) throws IOException {
 		Order orderToChange;
@@ -135,16 +174,14 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 						dishType, quentity);
 				ordersreports.add(orderreport);
 			}
+			dishTypesQuentities = new HashMap<>();
 			ClientUI.chat.accept(new Message(MessageType.addto_Order_report, ordersreports));
 			orderToChange = null;
 			table.refresh();
 			list = FXCollections.observableArrayList(allOrders);
 			table.setItems(list);
-	
-		
 		}
 	}
-
 	String checkQuarterly(String month) {
 		switch (month) {
 		case "1":
@@ -178,12 +215,20 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	}
 
+
+	/**
+	 * A method of refusing an order waiting for approval.
+	 * 
+	 * @param event = ActionEvent
+	 */
+
 	@FXML
 	void refuseOrder(ActionEvent event) throws IOException {
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
-		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange));
+		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of the
+																							// database to Not approved
 		for (int i = 0; i < allOrders.size(); i++) {
 			if (allOrders.get(i).equals(orderToChange))
 				allOrders.remove(i);
@@ -193,6 +238,11 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		table.setItems(list);
 	}
 
+	/**
+	 * A method of Sending an order waiting for send.
+	 * 
+	 * @param event = ActionEvent
+	 */
 	@FXML
 	void SendOrder(ActionEvent event) {
 		boolean continueFlag = true;
@@ -221,8 +271,11 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				} else {
 					ArrivalTime = setArrivalTimeIsPlaaned.getText();
 					try {
-						LocalTime.parse(ArrivalTime);
-						waitForArrivalTimeFlag = true;
+						LocalTime checkTime = LocalTime.parse(ArrivalTime);
+						if (checkTime.isAfter(LocalTime.now()))
+							waitForArrivalTimeFlag = true;
+						else
+							wrongArrivalTimeFlag = true;
 					} catch (DateTimeParseException | NullPointerException e) {
 						PopUpMessage.errorMessage("Time must be invalid");
 					}
@@ -230,7 +283,10 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				if (waitForArrivalTimeFlag)
 					str.append(" Arrival time is planned to - " + ArrivalTime);
 				else {
+					if (wrongArrivalTimeFlag)
+						PopUpMessage.errorMessage("Unable to enter elapsed time");
 					RegularOrSharedFlag = false;
+					wrongArrivalTimeFlag = false;
 					continueFlag = false;
 					str.setLength(0);
 					orderToChange = null;
@@ -252,36 +308,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		}
 	}
 
-	@FXML
-	void initialize() {
-		assert back != null : "fx:id=\"back\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Refuse != null : "fx:id=\"Refuse\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Confirm != null
-				: "fx:id=\"Confirm\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderNumber != null
-				: "fx:id=\"orderNumber\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderType != null
-				: "fx:id=\"orderType\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert restName != null
-				: "fx:id=\"restName\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert totalPrice != null
-				: "fx:id=\"totalPrice\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert timeOfOrder != null
-				: "fx:id=\"timeOfOrder\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert dateOfOrder != null
-				: "fx:id=\"dateOfOrder\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderStatus != null
-				: "fx:id=\"orderStatus\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert costumerID != null
-				: "fx:id=\"costumerID\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Send != null : "fx:id=\"Send\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert setArrivalTimeIsPlaaned != null
-				: "fx:id=\"setArrivalTimeIsPlaaned\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert labelArrivalTime != null
-				: "fx:id=\"labelArrivalTime\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		labelArrivalTime.setVisible(true);
@@ -294,8 +320,15 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		dateOfOrder.setCellValueFactory(new PropertyValueFactory<Order, String>("dateOfOrder"));
 		orderStatus.setCellValueFactory(new PropertyValueFactory<Order, String>("orderStatus"));
 		costumerID.setCellValueFactory(new PropertyValueFactory<Order, String>("costumerId"));
-		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, LoginScreenController.user.getId()));
+		DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
+		System.out.println(DivededUandP[2]);
+		ClientUI.chat.accept(new Message(MessageType.get_orders_to_approve, DivededUandP[2]));
 		list = FXCollections.observableArrayList(allOrders);
 		table.setItems(list);
+	}
+
+	@Override
+	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 }

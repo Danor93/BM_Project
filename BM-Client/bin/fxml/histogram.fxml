@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="728.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.histogramController">
+   <children>
+      <ImageView fx:id="BackImage" fitHeight="589.0" fitWidth="644.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
+      <Text layoutX="670.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="43.999999999999886">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Label layoutX="117.0" layoutY="13.0" prefHeight="53.0" prefWidth="305.0" text="Quarterly Report">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="-7.0" prefHeight="590.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="31.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <BarChart fx:id="chart1" layoutX="98.0" layoutY="77.0" prefHeight="248.0" prefWidth="552.0" title="Quaterly report">
+        <xAxis>
+          <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest1" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yIncome1" label="Restaurants revenue" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart fx:id="chart2" layoutX="98.0" layoutY="335.0" prefHeight="248.0" prefWidth="562.0" title="Quaterly report" visible="false">
+         <xAxis>
+            <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest2" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="yIncome2" label="Restaurants Revenue" side="LEFT" />
+         </yAxis>
+      </BarChart>
+   </children>
+</Pane>

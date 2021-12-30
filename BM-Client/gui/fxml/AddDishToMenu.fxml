@@ -5,72 +5,128 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.AddDishToMenuController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.AddDishToMenuController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="623.0" fitWidth="718.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BackImage" fitHeight="544.0" fitWidth="536.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
       <Text layoutX="31.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="512.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="58.14619140625007">
+      <Text layoutX="487.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="44.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="13.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Label fx:id="miniLabel" layoutX="151.0" layoutY="14.0" prefHeight="47.0" prefWidth="299.0">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Label fx:id="miniLabel" layoutX="138.0" layoutY="29.0" prefHeight="47.0" prefWidth="299.0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="System Bold" size="43.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNameDish" layoutX="285.0" layoutY="87.0" promptText="Example: Greek" />
-      <TextField fx:id="txtPriceDish" layoutX="285.0" layoutY="148.0" promptText="Example: 29.99" />
-      <Button fx:id="btnConfirm" layoutX="483.0" layoutY="450.0" mnemonicParsing="false" onAction="#ConfirmNewDish" style="-fx-background-radius: 30;" text="Confirm dish" />
-      <TextArea fx:id="txtIngredients" layoutX="121.0" layoutY="261.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients of the dish. Example: tomato, cucumber, black olives and cheese" />
-      <Button fx:id="btnBack" layoutX="31.0" layoutY="450.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Label fx:id="txtMiniLabel" layoutX="479.0" layoutY="408.0" prefHeight="20.0" prefWidth="165.0" textFill="RED">
+      <TextField fx:id="txtNameDish" layoutX="329.0" layoutY="94.0" promptText="Example: Greek" />
+      <TextField fx:id="txtPriceDish" layoutX="329.0" layoutY="155.0" promptText="Example: 29.99" />
+      <Button fx:id="btnConfirm" layoutX="248.0" layoutY="482.0" mnemonicParsing="false" onAction="#ConfirmNewDish" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Confirm dish">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <TextArea fx:id="txtIngredients" layoutX="156.0" layoutY="260.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients of the dish. Example: tomato, cucumber, black olives and cheese" />
+      <Label fx:id="txtMiniLabel" layoutX="121.0" layoutY="440.0" prefHeight="35.0" prefWidth="402.0" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="122.0" layoutY="89.0" text="Insert name" textFill="WHITE">
+      <Label layoutX="166.0" layoutY="96.0" text="Insert name">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="150.0" text="Insert price" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="157.0" text="Insert price">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="182.0" text="Insert choice factor" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="189.0" text="Insert choice factor">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="210.0" text="Insert choice details" textFill="WHITE">
+      <Label layoutX="165.0" layoutY="217.0" text="Insert choice details">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtChoiceDish" layoutX="285.0" layoutY="178.0" promptText="Example: Size" />
-      <TextField fx:id="txtChoiceDetailsDish" layoutX="285.0" layoutY="208.0" promptText="Example: S/M/L" />
-      <Label layoutX="121.0" layoutY="119.0" text="Choose type" textFill="WHITE">
+      <TextField fx:id="txtChoiceDish" layoutX="329.0" layoutY="185.0" promptText="Example: Size" />
+      <TextField fx:id="txtChoiceDetailsDish" layoutX="329.0" layoutY="215.0" promptText="Example: S/M/L" />
+      <Label layoutX="165.0" layoutY="126.0" text="Choose type">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="btnTypeDish" layoutX="284.0" layoutY="117.0" onAction="#ChooceTypeDish" prefWidth="150.0" promptText="Example: Salad" />
-      <TextArea fx:id="txtExtra" layoutX="121.0" layoutY="352.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients that can be removed / added. Example: no tomato / extra chees" />
+      <ComboBox fx:id="btnTypeDish" layoutX="328.0" layoutY="124.0" onAction="#ChooceTypeDish" prefWidth="150.0" promptText="Example: Salad" />
+      <TextArea fx:id="txtExtra" layoutX="156.0" layoutY="351.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients that can be removed / added. Example: no tomato / extra chees" />
+      <AnchorPane prefHeight="545.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Button fx:id="back" layoutX="12.0" layoutY="254.0" mnemonicParsing="false" onAction="#backToDishes" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Text fill="RED" layoutX="156.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="156.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="156.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="144.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

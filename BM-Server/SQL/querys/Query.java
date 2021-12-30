@@ -4,7 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,21 +19,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
-
+import java.util.TreeMap;
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.DishType;
 import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.Report;
+import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
+import Entities.MessageType;
 
 public class Query {
 
@@ -110,7 +119,7 @@ public class Query {
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT w4cBusiness,companyName,companyStatus FROM bitemedb.company WHERE companyStatus='not approved' or companyStatus ='waiting'"
+					"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='Not approved' or companyStatus ='Waiting'"
 							+ "");
 			while (rs.next()) {
 				Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -144,35 +153,114 @@ public class Query {
 		}
 	}
 
-	public static ArrayList<Supplier> LoadSuppliers() {
-		ArrayList<Supplier> suppliers = new ArrayList<>();
-		Statement stmt;
-		try {
-			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM bitemedb.supplier WHERE supplierStatus='not approved' or supplierStatus ='waiting'"
-							+ "");
-			while (rs.next()) {
-				Supplier supplier = new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), homeBranches.toHomeBranchType(rs.getString(7)));
-				suppliers.add(supplier);
+	public static Boolean checkSupplier(Supplier supplier) {
+		if (DBConnect.conn != null) {
+			try {
+				String[] role1 = null;
+				String[] role2 = null;
+				Statement stmt1 = DBConnect.conn.createStatement();
+				ResultSet rs1 = stmt1.executeQuery(
+						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getRestId() + "' ;");
+				while (rs1.next()) {
+					role1 = rs1.getString(1).split("-");
+				}
+				rs1.close();
+
+				Statement stmt2 = DBConnect.conn.createStatement();
+				ResultSet rs2 = stmt2.executeQuery(
+						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getConfirm_Employee() + "' ;");
+				while (rs2.next()) {
+					role2 = rs2.getString(1).split("-");
+				}
+				rs2.close();
+
+				if (role1[0].equals("Certified") && role1[1].equals(supplier.getSupplierName())
+						&& role2[0].equals("Approved") && role2[1].equals(supplier.getSupplierName())) {
+					return true;
+				} else {
+					return false;
+				}
+
+			} catch (SQLException s) {
+				s.printStackTrace();
 			}
-			rs.close();
-		} catch (SQLException s) {
-			s.printStackTrace();
 		}
-		return suppliers;
+		return null;
 	}
 
-	public static void UpdateSupplier(String SupplierName, String SupplierStatus) {
-		PreparedStatement stmt;
+	public static void UpdateSupplier(Supplier supplier) {
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.supplier SET supplierStatus= '" + SupplierStatus
-						+ "'" + " WHERE supplierName= '" + SupplierName + "'  ;");
-				stmt.executeUpdate();
-			} else {
-				System.out.println("Conn is null");
+				User Certified_Employee = new User(null, null, null, null, null, null, null, null);
+				User Approved_Employee = new User(null, null, null, null, null, null, null, null);
+				Statement stmt1 = DBConnect.conn.createStatement();
+				ResultSet rs = stmt1.executeQuery(
+						"SELECT userName,password,firstName,lastName,Email,phone,role FROM bitemedb.import_users WHERE id = '"
+								+ supplier.getRestId() + "' OR id= '" + supplier.getConfirm_Employee()
+								+ "' ORDER BY role;");
+				while (rs.next()) {
+					String[] role = rs.getString(7).split("-");
+					if (role[0].equals("Approved")) {
+						Approved_Employee.setId(supplier.getConfirm_Employee());
+						Approved_Employee.setFirstN(rs.getString(3));
+						Approved_Employee.setLastN(rs.getString(4));
+						Approved_Employee.setUserName(rs.getString(1));
+						Approved_Employee.setPassword(rs.getString(2));
+						Approved_Employee.setEmail(rs.getString(5));
+						Approved_Employee.setPhone(rs.getString(6));
+						Approved_Employee.setRole(rs.getString(7));
+					}
+					if (role[0].equals("Certified")) {
+						Certified_Employee.setId(String.valueOf(supplier.getRestId()));
+						Certified_Employee.setFirstN(rs.getString(3));
+						Certified_Employee.setLastN(rs.getString(4));
+						Certified_Employee.setUserName(rs.getString(1));
+						Certified_Employee.setPassword(rs.getString(2));
+						Certified_Employee.setEmail(rs.getString(5));
+						Certified_Employee.setPhone(rs.getString(6));
+						Certified_Employee.setRole(rs.getString(7));
+					}
+				}
+				rs.close();
+				PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
+						"INSERT INTO bitemedb.users(userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch) VALUES(?,?,?,?,?,?,?,?,?,?)");
+				stmt2.setString(1, Approved_Employee.getUserName());
+				stmt2.setString(2, Approved_Employee.getPassword());
+				stmt2.setString(3, "Supplier-" + Approved_Employee.getRole());
+				stmt2.setString(4, Approved_Employee.getFirstN());
+				stmt2.setString(5, Approved_Employee.getLastN());
+				stmt2.setString(6, Approved_Employee.getId());
+				stmt2.setString(7, Approved_Employee.getEmail());
+				stmt2.setString(8, Approved_Employee.getPhone());
+				stmt2.setString(9, "0");
+				stmt2.setString(10, supplier.getHomeBranch().toString());
+				stmt2.executeUpdate();
+
+				PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
+						"INSERT INTO bitemedb.users(userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch) VALUES(?,?,?,?,?,?,?,?,?,?)");
+				stmt3.setString(1, Certified_Employee.getUserName());
+				stmt3.setString(2, Certified_Employee.getPassword());
+				stmt3.setString(3, "Supplier-" + Certified_Employee.getRole());
+				stmt3.setString(4, Certified_Employee.getFirstN());
+				stmt3.setString(5, Certified_Employee.getLastN());
+				stmt3.setString(6, Certified_Employee.getId());
+				stmt3.setString(7, Certified_Employee.getEmail());
+				stmt3.setString(8, Certified_Employee.getPhone());
+				stmt3.setString(9, "0");
+				stmt3.setString(10, supplier.getHomeBranch().toString());
+				stmt3.executeUpdate();
+
+				PreparedStatement stmt4 = DBConnect.conn.prepareStatement(
+						"INSERT INTO bitemedb.supplier(restId,supplierName,openingTime,city,address,supplierStatus,homeBranch,Confirm_Employee) VALUES(?,?,?,?,?,?,?,?)");
+				stmt4.setString(1, String.valueOf(supplier.getRestId()));
+				stmt4.setString(2, supplier.getSupplierName());
+				stmt4.setString(3, supplier.getOpeningTime());
+				stmt4.setString(4, supplier.getCity());
+				stmt4.setString(5, supplier.getAddress());
+				stmt4.setString(6, "Approved");
+				stmt4.setString(7, supplier.getHomeBranch().toString());
+				stmt4.setString(8, supplier.getConfirm_Employee());
+				stmt4.executeUpdate();
 			}
 		} catch (SQLException s) {
 			s.printStackTrace();
@@ -208,7 +296,7 @@ public class Query {
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.users");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer'");
 			while (rs.next()) {
 				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
 						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
@@ -288,16 +376,19 @@ public class Query {
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
-				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT userName,password,role FROM bitemedb.import_users WHERE id= '"
-						+ BAccount.getId() + "' ;");
+				Statement stmt1 = DBConnect.conn.createStatement();
+				ResultSet rs = stmt1.executeQuery(
+						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
-							"INSERT INTO bitemedb.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
+							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
+					stmt2.setString(1, BAccount.getId());
+					stmt2.setString(2, Password);
+					stmt2.setString(3, "Active");
 					stmt2.setString(1, UserName);
 					stmt2.setString(2, Password);
 					stmt2.setString(3, Role);
@@ -310,15 +401,18 @@ public class Query {
 					stmt2.setString(10, BAccount.getBranch().toString());
 					stmt2.executeUpdate();
 
-					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
-							"INSERT INTO bitemedb.client (client_id,w4c_private,status) VALUES(?,?,?)");
+					PreparedStatement stmt3 = DBConnect.conn
+							.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
 					stmt3.setString(1, BAccount.getId());
-					stmt3.setString(2, "456");
+					Random rand = new Random(); // instance of random class
+					int int_random = rand.nextInt(1000);
+					String w4cNew = "P" + String.valueOf(int_random);
+					stmt3.setString(2, w4cNew);
 					stmt3.setString(3, "Active");
 					stmt3.executeUpdate();
 
-					PreparedStatement stmt4 = DBConnect.conn.prepareStatement(
-							"INSERT INTO bitemedb.buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
+					PreparedStatement stmt4 = DBConnect.conn
+							.prepareStatement("INSERT INTO buss_client (ID,companyName,budget,status) VALUES(?,?,?,?)");
 					stmt4.setString(1, BAccount.getId());
 					stmt4.setString(2, BAccount.getCompanyName());
 					stmt4.setString(3, BAccount.getBudget());
@@ -382,13 +476,16 @@ public class Query {
 					stmt2.setString(7, PAccount.getEmail());
 					stmt2.setString(8, PAccount.getPhone());
 					stmt2.setInt(9, 0);
-					stmt2.setString(10, PAccount.getHomeBranch().toString());
+					stmt2.setString(10, PAccount.getBranch().toString());
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn.prepareStatement(
 							"INSERT INTO bitemedb.client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
 					stmt3.setString(1, PAccount.getId());
-					stmt3.setString(2, "789");
+					Random rand = new Random(); // instance of random class
+					int int_random = rand.nextInt(1000);
+					String w4cNew = "P" + String.valueOf(int_random);
+					stmt3.setString(2, w4cNew);
 					stmt3.setString(3, "Active");
 					stmt3.setString(4, PAccount.getCreditCardNumber());
 					stmt3.executeUpdate();
@@ -400,11 +497,12 @@ public class Query {
 		}
 	}
 
-	public static ArrayList<User> GetAccountForFreeze() {
+	public static ArrayList<User> GetAccountForFreeze(String Branch) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.users WHERE Role='Customer' ");
+				ResultSet rs = stmt
+						.executeQuery("SELECT * FROM users WHERE homeBranch= '" + Branch + "' AND Role='Customer'");
 				ArrayList<User> users = new ArrayList<>();
 				while (rs.next()) {
 					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
@@ -423,7 +521,7 @@ public class Query {
 		return null;
 	}
 
-	public static Boolean CheckAccountStatus(String AccountID) {
+	public static Boolean CheckAccountStatusActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
@@ -444,6 +542,40 @@ public class Query {
 			}
 		}
 		return false;
+	}
+
+	public static Boolean CheckAccountStatusFreeze(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				Statement stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT status FROM client WHERE client_id= '" + AccountID + "' ;");
+				while (rs.next()) {
+					String status = rs.getString(1);
+					if (status.equals("Freeze")) {
+						rs.close();
+						return true;
+					} else {
+						rs.close();
+						return false;
+					}
+				}
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	public static void UpdateAccountStatusToActive(String AccountID) {
+		if (DBConnect.conn != null) {
+			try {
+				PreparedStatement stmt = DBConnect.conn
+						.prepareStatement("UPDATE client SET status='Active' WHERE client_id= '" + AccountID + "'  ;");
+				stmt.executeUpdate();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+		}
 	}
 
 	public static void UpdateAccountStatusToFreeze(String AccountID) {
@@ -481,38 +613,131 @@ public class Query {
 	}
 
 	public static void updateFile(MyFile file) {
-		String sql = "INSERT INTO bitemedb.reports(quarter,year,date_added,file_name,upload_file) values(?,?,?,?,?)";
+		String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
 		try {
 			Timestamp date = new java.sql.Timestamp(new Date().getTime());
 			InputStream is = new ByteArrayInputStream(file.getMybytearray());
 			PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
-			stmt.setString(1, file.getQuertar());
+			stmt.setString(1, file.getQuarter());
 			stmt.setString(2, file.getYear());
 			stmt.setTimestamp(3, date);
 			stmt.setString(4, file.getFileName());
 			stmt.setBlob(5, is);
-			// stmt.setString(6,file.getHomebranch());//fix.
+			stmt.setString(6, file.getHomebranch().toString());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static ArrayList<Order> LoadOrders(String ID) {
+	/**
+	 * 
+	 * @param branch
+	 * @param year
+	 * @param quarter Method connects to DB and get the relevant file with match
+	 *                parameters and creates a MyFile object with the information
+	 * @return relevant MyFile from db
+	 */
+	public static MyFile downloadFile(String branch, String year, String quarter) {
+
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement(
+						"SELECT upload_file FROM reports WHERE homebranch=? AND year=? AND quarter=?;");
+				stmt.setString(1, branch);
+				stmt.setString(2, year);
+				stmt.setString(3, quarter);
+				ResultSet rs = stmt.executeQuery();
+				MyFile downloadFile = new MyFile("");
+				while (rs.next()) {
+					downloadFile.setHomebranch(homeBranches.toHomeBranchType(branch));
+					downloadFile.setQuarter(quarter);
+					downloadFile.setYear(year);
+					downloadFile.setFileName("Branch-" + branch + "_Year-" + year + "_Quarterly-" + quarter + ".pdf");
+					downloadFile.setDate(new java.sql.Timestamp(new Date().getTime()).toString());
+					downloadFile
+							.setDescription("PDF file, Branch:" + branch + ", Year:" + year + ", Quarterly:" + quarter);
+					Blob fileData = rs.getBlob(1);
+					if (fileData != null) {
+						int len = (int) fileData.length();
+						InputStream inputFileData = fileData.getBinaryStream();
+						byte[] bytes = new byte[len];
+						int bytesRead = 0;
+						while (bytesRead != -1)
+							try {
+								bytesRead = inputFileData.read(bytes);
+							} catch (IOException e) {
+
+								e.printStackTrace();
+							}
+
+						downloadFile.initArray(len);
+						downloadFile.setSize(len);
+						downloadFile.setMybytearray(bytes);
+					} else {
+						System.out.println("no pdf");
+					}
+
+				}
+
+				rs.close();
+				return downloadFile;
+			}
+
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return null;
+
+	}
+
+	/**
+	 * 
+	 * @param branch Method connect to DB and get the relevant year and quarterly
+	 *               who match parameter "branch" and creates a ArrayList object
+	 *               with the information
+	 * @return ArrayList with the match year and quarterly
+	 */
+	public static ArrayList<String> getRelevantYearsAndQuarterly(String branch) {
+		ArrayList<String> yearsAndQuarter = new ArrayList<>();
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT year,quarter FROM reports WHERE homebranch=?;");
+			stmt.setString(1, branch);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String resYear = rs.getString(1);
+				String resQuarter = rs.getString(2);
+				yearsAndQuarter.add(resYear + "@" + resQuarter);
+
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return yearsAndQuarter;
+
+	}
+
+	public static ArrayList<Order> LoadOrders(String restName) {
+
 		ArrayList<Order> orders = new ArrayList<>();
+		System.out.println("in server - " + restName);
 		Statement stmt;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE rstID='"
-							+ ID + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
+					"SELECT orderType,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE restName='"
+							+ restName + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
 			while (rs.next()) {
-				Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), Float.parseFloat(rs.getString(8)));
-				order.setOrderNum(Integer.parseInt(rs.getString(9)));
-				order.setUseRefund(rs.getString(10));
-				order.setUseBudget(Integer.parseInt(rs.getString(11)));
-				order.setEarlyOrder(rs.getString(12));
+				Order order = new Order(rs.getString(1), restName, rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getString(6), Float.parseFloat(rs.getString(7)));
+				order.setOrderNum(Integer.parseInt(rs.getString(8)));
+				order.setUseRefund(rs.getString(9));
+				order.setUseBudget(Integer.parseInt(rs.getString(10)));
+				order.setEarlyOrder(rs.getString(11));
 				orders.add(order);
 			}
 			rs.close();
@@ -522,7 +747,7 @@ public class Query {
 		return orders;
 	}
 
-	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails(StringBuilder companyName) {
+	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails(String companyName) {
 		ArrayList<BusinessAccountTracking> businessAccountTracking = new ArrayList<>();
 		Statement stmt;
 		try {
@@ -579,11 +804,11 @@ public class Query {
 
 	public static String LoadPhoneNumber(Order order) {
 		Statement stmt;
-		String phoneNumber=null;
+		String phoneNumber = null;
 		try {
 			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT phone FROM bitemedb.users WHERE ID='" + order.getCostumerId() + "'" + "");
+			ResultSet rs = stmt
+					.executeQuery("SELECT phone FROM bitemedb.users WHERE ID='" + order.getCostumerId() + "'" + "");
 			while (rs.next()) {
 				phoneNumber = rs.getString(1);
 			}
@@ -593,23 +818,22 @@ public class Query {
 		}
 		return phoneNumber;
 	}
-	
-	public static HashMap<String,Integer> getQuntitiesOfDishTypes(int id) {
+
+	public static HashMap<String, Integer> getQuntitiesOfDishTypes(int id) {
 		Statement stmt;
-		HashMap<String,Integer> retMap = new HashMap<>();
+		HashMap<String, Integer> retMap = new HashMap<>();
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT dishType,quentity FROM bitemedb.dishesinorder WHERE orderNum='" + id + "'" + "");
 			while (rs.next()) {
-				int quentity= rs.getInt(2);
-				String dishType= rs.getString(1);
-				if(retMap.containsKey(dishType))	
-				{
+				int quentity = rs.getInt(2);
+				String dishType = rs.getString(1);
+				if (retMap.containsKey(dishType)) {
 					quentity += retMap.get(dishType);
 				}
 				retMap.put(dishType, quentity);
-				
+
 			}
 			rs.close();
 		} catch (SQLException s) {
@@ -617,7 +841,4 @@ public class Query {
 		}
 		return retMap;
 	}
-	
-	
-	
 }

@@ -22,10 +22,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
 public class DeliveryOrPickupController extends Controller {
+	
+	@FXML
+	private ImageView BackImage;
 
     @FXML
     private Button back;
@@ -53,21 +57,49 @@ public class DeliveryOrPickupController extends Controller {
     
     @FXML
     private Label bussLabel;
-
     
-    
-    public static boolean earlyOrder=false;
+    @FXML
+    private ImageView homePage;
 
     @FXML
-    void back(ActionEvent event) {
-
-    }
+    private Button logout;
+    
 
     @FXML
-    void chooseDate(ActionEvent event) 
-    {
-
+    private Text userName;
+    
+    
+	/** This method meant to get back to costumer page
+	 * @param event				pressing the "home" image 
+	 * @throws IOException
+	 */
+    @FXML
+    void backToHome(MouseEvent event) throws IOException {
+    	start(event, "CustomerScreen", "CustomerScreen","");
     }
+    
+    
+	/** This method meant to get back to login page and logout the customer
+	 * @param event				pressing the "logout" button 
+	 * @throws IOException
+	 */
+
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+    }
+    
+
+	/** This method meant to get back to show order
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
+    @FXML
+    void back(ActionEvent event) throws IOException {
+		start(event, "ShowOrder", "Your order","");
+    }
+
 
     @FXML
     void chooseDelivery(MouseEvent event) throws IOException 
@@ -81,12 +113,16 @@ public class DeliveryOrPickupController extends Controller {
 	    			ShowOrderController.finalOrder.setUseBudget(1);	
 	    		}
 	    	}
-    		earlyOrder=checkEarlyOrder();
-    		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
+    		
+    		/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/Delivery.fxml"));
     		Parent root=load.load();
     		DeliveryController aFrame = load.getController();
-    		aFrame.start(primaryStage, root);
+    		aFrame.start(primaryStage, root);*/
+    		
+    		start(event, "Delivery", "Your delivery","");
+
    
     	}
 
@@ -97,8 +133,9 @@ public class DeliveryOrPickupController extends Controller {
     {
     	if(getTimeAndDate()==true)
     	{
-    		earlyOrder=checkEarlyOrder();
     		ShowOrderController.finalOrder.setOrderType("Take Away");
+    		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
+
 	    	if(IdentifyW4cController.client instanceof BussinessAccount)
 	    	{
 	    		if(yes.isSelected())
@@ -107,13 +144,14 @@ public class DeliveryOrPickupController extends Controller {
 	    		}
 	    	}
 	    	
-	    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/OrderConfirm.fxml"));
 			Parent root=load.load();
 			OrderConfimController aFrame = load.getController();
 			aFrame.Display();
-			aFrame.start(primaryStage, root); 
-	    		    	
+			aFrame.start(primaryStage, root); */
+			
+    		start(event, "OrderConfirm", "Order Confirmation","");
 
     	}
 
@@ -135,7 +173,8 @@ public class DeliveryOrPickupController extends Controller {
 
     }
     
-    public void display()
+    
+  /*  public void display()
     {
     	if(IdentifyW4cController.client instanceof BussinessAccount)
     	{
@@ -146,7 +185,7 @@ public class DeliveryOrPickupController extends Controller {
     		yes.setDisable(false);
     	}
     }
-
+*/
     
 	public void start(Stage primaryStage, Parent root) {
 		Scene scene=new Scene(root);
@@ -165,7 +204,7 @@ public class DeliveryOrPickupController extends Controller {
     		try {
     			LocalTime timeOfOrder=LocalTime.parse(orderTime);
     			String[] restHours=RestListFormController.chosenRst.getOpenning().split("-");
-    			//check how to change
+
     			if(!timeOfOrder.isAfter(LocalTime.parse(restHours[1])) && !timeOfOrder.isBefore(LocalTime.parse(restHours[0])))
     			{
     				if(orderDate.isEqual(LocalDate.now()))
@@ -214,23 +253,39 @@ public class DeliveryOrPickupController extends Controller {
     	
 	}
 	
-	private boolean checkEarlyOrder()
+	private String checkEarlyOrder()
 	{
 		LocalDate orderDate=date.getValue();
 		
 		if(orderDate.isAfter(LocalDate.now()))
-			return true;
+			return "yes";
 		
 		else
 		{
 			if(java.time.Duration.between(LocalTime.now(),LocalTime.parse(time.getText())).toHours()>=2)
 			{
-				return true;
+
+				return "yes";
 			}
 			
 			else
-				return false;
+				return "no";
 		}
+		
+	}
+
+	@Override
+	public void display(String string) {
+    	if(IdentifyW4cController.client instanceof BussinessAccount)
+    	{
+    		bussLabel.setVisible(true);
+    		no.setVisible(true);
+    		yes.setVisible(true);
+    		no.setDisable(false);
+    		yes.setDisable(false);
+    	}
+    	
+    	userName.setText(LoginScreenController.user.getFirstN());
 		
 	}
 

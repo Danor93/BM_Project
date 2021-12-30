@@ -14,13 +14,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import main.ClientUI;
 
+/**
+ * @author Aviel
+ * This class is for HR Manager main screen.
+ */
 public class HRManagerScreenController extends Controller{
 	public static ArrayList<String> w4cBusiness = new ArrayList<String>();
 	public static boolean RegistrationFlag = false;
-	private boolean RandomSuccess = false;
-	private boolean marker = false;
 
     @FXML
     private ResourceBundle resources;
@@ -42,18 +45,38 @@ public class HRManagerScreenController extends Controller{
 
     @FXML
     private Label ExistLbl;
+    
+    @FXML
+    private Text WelcomeLabel;
+    
+	private boolean RandomSuccess = false;
+	private boolean marker = false;
 
+	/**
+	 * A method to return to the previous page. 
+	 * @param event = ActionEvent
+	 */
     @FXML
     void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
-		startScreen(event, "LoginScreen", "Login");
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
     }
 
+	/**
+	 * A method to open a new screen (HRManagerConfirmationOfOpeningABusinessAccount).
+	 * @param event = ActionEvent
+	 */
     @FXML
     void ConfirmationOfOpeningABusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event, "HRManagerConfirmationOfOpeningABusinessAccount", "ConfirmationOfOpeningABusinessAccount");
+		start(event, "HRManagerConfirmationOfOpeningABusinessAccount", "ConfirmationOfOpeningABusinessAccount","");
     }
 
+	/**
+	 * A method for checking whether the employer has already registered for the database or not.
+	 * If not, the HR registers the employer.
+	 * If so, send an error message that the employer already registered.
+	 * @param event = ActionEvent
+	 */
     @FXML
     void RegistrationOfEmploye(ActionEvent event) throws IOException {
 		String w4cNew=null;
@@ -72,11 +95,13 @@ public class HRManagerScreenController extends Controller{
 		}
 		RandomSuccess = false;
 
-		Employer employer = new Employer(w4cNew, LoginScreenController.fullCompanyName, "Waiting");
+		String DivededUandP[] = ((String) LoginScreenController.user.getRole()).split("-");
+		String fullCompanyName = String.valueOf(DivededUandP[1]);
+
+		Employer employer = new Employer(w4cNew, fullCompanyName, "Waiting");
 		ClientUI.chat.accept(new Message(MessageType.RegistrationOfEmployer, employer));
 		if (RegistrationFlag) {
 			ExistLbl.setText("Registration succeeded");
-			System.out.println(employer.getCompanyName() + " " + employer.getW4cBussines());
 		} else {
 			ExistLbl.setText("Registration failed! The employe already signed");
 		}
@@ -90,4 +115,9 @@ public class HRManagerScreenController extends Controller{
         assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
         assert ExistLbl != null : "fx:id=\"ExistLbl\" was not injected: check your FXML file 'HRManagerScreen.fxml'.";
     }
+
+	@Override
+	public void display(String string) {
+		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN());
+	}
 }

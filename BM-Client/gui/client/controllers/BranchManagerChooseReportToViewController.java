@@ -128,7 +128,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	void getReport(ActionEvent event) {
 	
 		year = Year.getSelectionModel().getSelectedItem().toString();
-		month =Month.getSelectionModel().getSelectedItem().toString();s
+		month =Month.getSelectionModel().getSelectedItem().toString();
 		Branch =homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
 		StringBuilder details = new StringBuilder();
 		details.append(Branch);
@@ -223,5 +223,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			Branch = LoginScreenController.user.getHomeBranch().toString();
 		}
 
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

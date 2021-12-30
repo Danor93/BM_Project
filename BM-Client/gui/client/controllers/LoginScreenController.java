@@ -28,15 +28,9 @@ import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
 public class LoginScreenController extends Controller {
-	public static User user = new User(null, null, null, null, null, null, null, null);
-	public static boolean LoginFlag = false;
-	public static boolean AlreadyLoggedInFlag = false;
-	public static boolean WrongInputFlag = false;
-	public static String Name = null;
-	public static String ID = null;
-	public static ActionEvent mainevent;
-	public static StringBuilder CompanyName = null;
-	public static String fullCompanyName= null;
+	public static User user =null;
+	public static String statusUser;
+
 
 	@FXML
 	private ResourceBundle resources;
@@ -60,7 +54,7 @@ public class LoginScreenController extends Controller {
 
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
-		mainevent = event;
+		//mainevent = event;
 		String[] DivededUandP;
 		StringBuilder str = new StringBuilder();
 		str.append(txtUserName.getText());
@@ -68,46 +62,70 @@ public class LoginScreenController extends Controller {
 		str.append(PasswordField.getText());
 		Message msg = new Message(MessageType.loginSystem, str.toString());
 		ClientUI.chat.accept(msg);
-		if (LoginFlag) {
-			if (AlreadyLoggedInFlag) {
-				PopUpMessage.errorMessage("The User is Already logged in");
-				AlreadyLoggedInFlag = false;
-				LoginFlag = false;
-			} else {
-				LoginFlag = false;
-				if (user.getRole().equals("BranchManager")) {
-					startScreen(event, "BranchManagerScreen", "Branch Manager");
-
-				} else if (user.getRole().equals("Customer")) {
-					startScreen(event, "CustomerScreen", "Customer");
-				} else if (user.getRole().equals("CEO")) {
-					startScreen(event, "CEOScreen", "CEO");
-				} else if (user.getRole().equals("Supplier")) {
-					Name = user.getFirstN();
-					ID = user.getId();
-					startScreen(event, "SupplierScreen", "Supplier");
-				} else {
-					DivededUandP = ((String) user.getRole()).split(" ");
-					if (DivededUandP[0].equals("HR")) {
-						CompanyName = new StringBuilder();
-						for (int i = 1; i < DivededUandP.length; i++)
-							CompanyName.append(DivededUandP[i] + " ");
-						CompanyName.deleteCharAt(CompanyName.length()-1);
-						fullCompanyName = String.valueOf(CompanyName);
-						startScreen(event, "HRManagerScreen", "HR Manager");
-					}
+		//if (LoginFlag) {
+			//if (AlreadyLoggedInFlag) {
+				//PopUpMessage.errorMessage("The User is Already logged in");
+				//AlreadyLoggedInFlag = false;
+				//LoginFlag = false;
+			
+				//LoginFlag = false;
+				if(!statusUser.equals("Active"))
+				{
+					WrongInputInLoggin.setText(statusUser);
+					statusUser=null;
+					
 				}
-			}
-		}
+					
+					
+				if(user!=null)
+				{
+					switch(user.getRole())
+					{
+					case "BranchManager":
+					{
+						start(event, "BranchManagerScreen", "Branch Manager",user.getFirstN());
+						break;
+					}
+					
+					case "Customer":
+					{
+						start(event, "CustomerScreen", "CustomerScreen",user.getFirstN());
+						break;
+					}
+					
+					case "CEO":
+					{
+						start(event,"CEOScreen","CEO",user.getFirstN());
+						break;
+					}
 
-		else {
-			PopUpMessage.errorMessage("Wrong UserName/Password!");
-		}
+					default:
+					{
+						DivededUandP = ((String) user.getRole()).split(" ");
+						if (DivededUandP[0].equals("HR")) {
+							start(event, "HRManagerScreen", "HR Manager",user.getFirstN());
+						}
+						else
+						{
+							start(event, "SupplierScreen", "Supplier",user.getRole());
+						}
+						break;
+					}
 
-	}
+				}
+				}
+
+				}
+
 
 	@FXML
 	void getUserName(InputMethodEvent event) {
 
+	}
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

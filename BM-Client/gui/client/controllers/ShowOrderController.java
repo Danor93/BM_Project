@@ -66,15 +66,17 @@ public class ShowOrderController extends Controller implements Initializable{
 
     @FXML
     void proceed(ActionEvent event) throws IOException {
-    	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting for approval",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
+    	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
     	Message msg=new Message(MessageType.getRefundDetails,finalOrder);
 		ClientUI.chat.accept(msg);
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickUp.fxml"));
 		Parent root=load.load();
 		DeliveryOrPickupController aFrame = load.getController();
 		aFrame.display();
-		aFrame.start(primaryStage, root);
+		aFrame.start(primaryStage, root);*/
+		start(event, "DeliveryOrPickUp", "Your supply details","");
+
     }
 
     @FXML
@@ -102,7 +104,7 @@ public class ShowOrderController extends Controller implements Initializable{
 			StringBuilder dishString=new StringBuilder();
 			dishString.append(dish.getDishName()+":       ");
 			
-			if(dish.getChoiceFactor()!=null)
+			if(dish.getChoiceFactor()!=null&&!dish.getChoiceFactor().equals(""))
 			{
 				dishString.append(dish.getChoiceFactor()+": ");
 				dishString.append(dish.getChoiceDetails()+"       ");
@@ -129,5 +131,12 @@ public class ShowOrderController extends Controller implements Initializable{
 		Scene scene=new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 }

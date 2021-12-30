@@ -30,7 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class DeliveryController {
+public class DeliveryController extends Controller{
 	
 	   @FXML
 	    private TextField address;
@@ -88,6 +88,10 @@ public class DeliveryController {
 	    
 
 	    @FXML
+	    private CheckBox noShared;
+	    
+
+	    @FXML
 	    private Label notifyAdd;
 
 	    @FXML
@@ -99,7 +103,10 @@ public class DeliveryController {
 	    @FXML
 	    private Label notifyPhone;
 	    
-	  //  public static BussinessAccount bussinessClient; 
+
+	    @FXML
+	    private Text sharedLbl;
+	    
 	    
 	    public ObservableList <String> observableList;
 	    
@@ -216,17 +223,11 @@ public class DeliveryController {
     				OrderConfimController aFrame = load.getController();
     				aFrame.Display();
     				aFrame.start(primaryStage, root);
-    		    	
-    		    	
-    		    	
-    		    	
-    		    	
+
  
     		    }
 
 	    	}
-	    	
-	    	
 
 	    }
 	    
@@ -238,8 +239,16 @@ public class DeliveryController {
 	    	{
 	    		notify.setText("");
     			chooseVisibleAndDisable(false,true);
-	    		shared.setSelected(false);
 	    		robot.setSelected(false);
+	    		if(IdentifyW4cController.client instanceof BussinessAccount)
+	    		{
+	    			chooseVisibleAndDisable(true,false);
+		    	}
+	    	}
+	    	
+	    	else
+	    	{
+	    		chooseVisibleAndDisable(false,true);
 	    	}
 
 	    }
@@ -250,10 +259,16 @@ public class DeliveryController {
 	    	if(robot.isSelected())
 	    	{
     			chooseVisibleAndDisable(false,true);
-	    		shared.setSelected(false);
 	    		regular.setSelected(false);
-	    		notify.setText("This option is not avaliable yet, please choose new one");
-	    		robot.setSelected(false);
+	    		if(IdentifyW4cController.client instanceof BussinessAccount)
+	    		{
+	    			chooseVisibleAndDisable(true,false);
+		    	}
+	    	}
+	    	
+	    	else
+	    	{
+	    		chooseVisibleAndDisable(false,true);
 	    	}
 
 	    }
@@ -264,41 +279,71 @@ public class DeliveryController {
 	    	if(shared.isSelected())
 	    	{
 	    		notify.setText("");
-	    		regular.setSelected(false);
-	    		robot.setSelected(false);
+	    		noShared.setSelected(false);
+	    		//robot.setSelected(false);
+	    		minus.setVisible(true);
+				minus.setDisable(false);
+				plus.setVisible(true);
+				plus.setDisable(false);
+				numberPersons.setVisible(true);
+				numOfPeople.setVisible(true);
 	    		
-	    		if(IdentifyW4cController.client instanceof BussinessAccount)
-	    		{
-	    			chooseVisibleAndDisable(true,false);
-		    	}
-	    		
-		    	else
-		    	{
-		    		notify.setText("This option is for bussiness clients only");
-		    		shared.setSelected(false);	
-		    	}
 	    	}
 	    	
 	    	else
 	    	{
 	    		shared.setSelected(false);	
-    			chooseVisibleAndDisable(false,true);
+	    		noShared.setSelected(true);
+	    		minus.setVisible(false);
+				minus.setDisable(true);
+				plus.setVisible(false);
+				plus.setDisable(true);
+				numberPersons.setVisible(false);
+				numOfPeople.setVisible(false);
+    			//chooseVisibleAndDisable(false,true);
 	    	}
+
+	    }
+	    
+
+	    @FXML
+	    void choosenoShared(ActionEvent event) {
+	    	if(noShared.isSelected())
+	    	{
+	    		shared.setSelected(false);	
+	    		minus.setVisible(false);
+				minus.setDisable(true);
+				plus.setVisible(false);
+				plus.setDisable(true);
+				numberPersons.setVisible(false);
+				numOfPeople.setVisible(false);
+	    	}
+	    	
+	    	else
+	    	{
+	    		shared.setSelected(true);
+	    		minus.setVisible(true);
+				minus.setDisable(false);
+				plus.setVisible(true);
+				plus.setDisable(false);
+				numberPersons.setVisible(true);
+				numOfPeople.setVisible(true);
+	    	}
+
 
 	    }
 	    
 	    private void chooseVisibleAndDisable(boolean visible,boolean disable)
 	    {
-			minus.setVisible(visible);
-			minus.setDisable(disable);
-			plus.setVisible(visible);
-			plus.setDisable(disable);
-			numberPersons.setVisible(visible);
-			numOfPeople.setVisible(visible);
+	    	sharedLbl.setVisible(visible);
+	    	shared.setVisible(visible);
+	    	noShared.setVisible(visible);
 	    }
 
+		@Override
+		public void display(String string) {
+			// TODO Auto-generated method stub
+			
+		}
 
-
-
-	    //check distance calculations with tiran
 }

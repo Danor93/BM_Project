@@ -92,4 +92,10 @@ public class ShowFormController extends Controller implements Initializable {
 		table.setItems(observableList);
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -91,6 +91,12 @@ public class ShowUpdateController extends Controller {
 		primaryStage.show();
 	}
 
+	@Override
+	public void display(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
 

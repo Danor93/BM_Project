@@ -3,66 +3,96 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #272727;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DishOptionsController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DishOptionsController">
    <children>
-      <ImageView fitHeight="502.0" fitWidth="718.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="660.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <ImageView fitHeight="544.0" fitWidth="620.0" layoutX="104.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:@/images/backk.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="637.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Button fx:id="addToOrder" layoutX="526.0" layoutY="495.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="33.0" prefWidth="150.0" style="-fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 30;" text="Add To My Order">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Button fx:id="back" layoutX="12.0" layoutY="496.0" mnemonicParsing="false" onAction="#backToDishes" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="addToOrder" layoutX="569.0" layoutY="495.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="29.0" prefWidth="130.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="add to my order" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Text fx:id="notify" fill="WHITE" layoutX="152.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="346.9192504882813">
+      <Text fx:id="notify" layoutX="152.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="346.9192504882813">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text fx:id="choiceLabel" fill="WHITE" layoutX="26.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="105.54458236694336">
+      <Text fx:id="choiceLabel" layoutX="146.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="105.54458236694336">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ComboBox fx:id="choice" layoutX="143.0" layoutY="113.0" prefWidth="150.0" />
-      <Text fill="WHITE" layoutX="171.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="changes in your dish ?">
+      <ComboBox fx:id="choice" layoutX="263.0" layoutY="113.0" prefWidth="150.0" />
+      <Text layoutX="221.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="changes in your dish ?">
          <font>
-            <Font name="System Bold" size="27.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <ListView fx:id="optionsList" layoutX="26.0" layoutY="217.0" prefHeight="233.0" prefWidth="200.0" />
-      <ListView fx:id="chosenList" layoutX="315.0" layoutY="218.0" prefHeight="233.0" prefWidth="200.0" />
-      <Button fx:id="add" layoutX="235.0" layoutY="263.0" mnemonicParsing="false" onAction="#selectChange" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="-&gt;" textFill="WHITE">
+      <ListView fx:id="optionsList" layoutX="146.0" layoutY="217.0" prefHeight="233.0" prefWidth="200.0" />
+      <ListView fx:id="chosenList" layoutX="435.0" layoutY="218.0" prefHeight="233.0" prefWidth="200.0" />
+      <Button fx:id="add" layoutX="355.0" layoutY="263.0" mnemonicParsing="false" onAction="#selectChange" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="-&gt;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
-      <Button fx:id="remove" layoutX="235.0" layoutY="325.0" mnemonicParsing="false" onAction="#removeChange" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="&lt;-" textFill="WHITE">
+      <Button fx:id="remove" layoutX="355.0" layoutY="325.0" mnemonicParsing="false" onAction="#removeChange" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="&lt;-" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
-      <Text fill="WHITE" layoutX="26.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose one or more changes :">
+      <Text layoutX="146.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose one or more changes :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <AnchorPane prefHeight="544.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+         <children>
+            <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="userName" fill="WHITE" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/images/home.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="11.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToDishes" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="16.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

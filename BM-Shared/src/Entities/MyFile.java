@@ -1,6 +1,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 public class MyFile implements Serializable {
 
@@ -8,11 +9,17 @@ public class MyFile implements Serializable {
 	private static final long serialVersionUID = 3037364578344496376L;
 	private String Description = null;
 	private String fileName = null;
-	private String quertar;
+	private String quarter;
 	private String date;
 	private String year;
 	private homeBranches homebranch;
+	private int size = 0;
+	public byte[] mybytearray;
+
 	
+	public MyFile(String fileName) {
+		this.fileName = fileName;
+	}
 	
 	public String getYear() {
 		return year;
@@ -22,12 +29,12 @@ public class MyFile implements Serializable {
 		this.year = year;
 	}
 	
-	public String getQuertar() {
-		return quertar;
+	public String getQuarter() {
+		return quarter;
 	}
 
-	public void setQuertar(String quertar) {
-		this.quertar = quertar;
+	public void setQuarter(String quertar) {
+		this.quarter = quertar;
 	}
 
 	public String getDate() {
@@ -46,16 +53,12 @@ public class MyFile implements Serializable {
 		this.homebranch = homebranch;
 	}
 
-	private int size = 0;
-	public byte[] mybytearray;
+
 
 	public void initArray(int size) {
 		mybytearray = new byte[size];
 	}
 
-	public MyFile(String fileName) {
-		this.fileName = fileName;
-	}
 
 	public String getFileName() {
 		return fileName;
