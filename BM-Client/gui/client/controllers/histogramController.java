@@ -83,15 +83,9 @@ public class histogramController extends Controller implements Initializable {
 				
 			}
 			chart2.getData().addAll(set2);
-			
-			chart2.setVisible(true);
-		
-			
-			
+			chart2.setVisible(true);	
 		}
 		chart1.getData().addAll(set1);
-		
-		
 	}
 
 	@Override

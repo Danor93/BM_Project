@@ -96,7 +96,7 @@ public class DishOptionsController extends Controller implements Initializable{
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen","");
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
 	/** This method meant to get back to login page and logout the customer

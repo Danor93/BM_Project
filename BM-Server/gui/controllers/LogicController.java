@@ -7,18 +7,14 @@ import Entities.MessageType;
 import extra.ClientConnection;
 import ocsf.server.ConnectionToClient;
 
-
 public class LogicController {
-
 	private static ArrayList<ClientConnection> clients = null;
-
 	public static void UpdateClientTable(Object msg, ConnectionToClient client) {
 		ClientConnection newClient = new ClientConnection(client);
 		Message recivedMessage = (Message) msg;
 		int flag = 0;
 		if (recivedMessage.getMessageType().equals(MessageType.loginSystem)) {
 			if (clients == null) {// first client
-
 				clients = new ArrayList<ClientConnection>();
 				clients.add(newClient);
 				ServerUIFController.serveruifconroller.Update(clients); // update the table
@@ -31,7 +27,6 @@ public class LogicController {
 						break;
 					}
 				}
-
 				if (flag == 0) {
 					clients.add(newClient);// new client
 					ServerUIFController.serveruifconroller.Update(clients); // update the table

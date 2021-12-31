@@ -119,7 +119,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page", "");
+		start(event, "SupplierScreen", "Supplier page", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -212,7 +212,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 			return null;
 		}
 		}
-
 	}
 
 
@@ -228,7 +227,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
 		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of the
-																							// database to Not approved
+		// database to Not approved
 		for (int i = 0; i < allOrders.size(); i++) {
 			if (allOrders.get(i).equals(orderToChange))
 				allOrders.remove(i);

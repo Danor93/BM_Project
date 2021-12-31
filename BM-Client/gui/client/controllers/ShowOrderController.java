@@ -85,24 +85,18 @@ public class ShowOrderController extends Controller implements Initializable{
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }
-    
-    
-    
-   
 
     @FXML
     void back(ActionEvent event) throws IOException {
-		start(event, "MenuScreen", "Restaurant's menu","");
+		start(event, "MenuScreen", "Restaurant's menu",LoginScreenController.user.getFirstN());
     }
     
 
     @FXML
     void proceed(ActionEvent event) throws IOException {
     	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
-    	Message msg=new Message(MessageType.getRefundDetails,finalOrder);
-		ClientUI.chat.accept(msg);
-		start(event, "DeliveryOrPickUp", "Your supply details","");
-
+		ClientUI.chat.accept(new Message(MessageType.getRefundDetails,finalOrder));
+		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
     }
 
     @FXML
@@ -117,7 +111,6 @@ public class ShowOrderController extends Controller implements Initializable{
     	totalPrice.setText("Total price: "+total+" $");
     	orders=FXCollections.observableArrayList(myDishes);
 		listOrder.setItems(orders);
-
     }
 
 	@Override
@@ -128,36 +121,27 @@ public class ShowOrderController extends Controller implements Initializable{
 		{
 			total+=dish.getPrice()*dish.getQuentity();
 			StringBuilder dishString=new StringBuilder();
-			dishString.append(dish.getDishName()+":       ");
-			
+			dishString.append(dish.getDishName()+":       ");	
 			if(dish.getChoiceFactor()!=null&&!dish.getChoiceFactor().equals(""))
 			{
 				dishString.append(dish.getChoiceFactor()+": ");
 				dishString.append(dish.getChoiceDetails()+"       ");
 			}
-			
 			if(dish.getExtra()!=null)
 			{
 				dishString.append(dish.getExtra()+"      ");
 			}
-			
 			dishString.append("quentity:         "+dish.getQuentity());
-			
 			dishString.append("         "+dish.getPrice()+"$");
 			myDishes.add(dishString.toString());
 		}
-		
 		totalPrice.setText("Total price: "+total+" $");
 		orders=FXCollections.observableArrayList(myDishes);
 		listOrder.setItems(orders);
-
 	}
-
-
-
+	
 	@Override
 	public void display(String string) {
-		userName.setText(LoginScreenController.user.getFirstN());
-		
+		userName.setText(LoginScreenController.user.getFirstN());	
 	}
 }

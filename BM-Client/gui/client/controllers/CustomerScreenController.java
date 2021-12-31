@@ -81,13 +81,8 @@ public class CustomerScreenController extends Controller implements Initializabl
     	Message msg = new Message(MessageType.ClientConfirm,LoginScreenController.user.getId());
     	ClientUI.chat.accept(msg);
     	start(event,"confirmPage","Orders to confirm","");
-    	
-
     }
-    
-
-    
-
+   
     /**This method proceed the order creation process
      * @param event				pressing the "create order" button
      * @throws IOException		the start method may throw an exception		
@@ -111,7 +106,3 @@ public class CustomerScreenController extends Controller implements Initializabl
 	}
 
 }
-
-	
-
-

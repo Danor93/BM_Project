@@ -80,7 +80,7 @@ public class OrderConfimController extends Controller{
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "CustomerScreen", "CustomerScreen", "");
+		start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -120,16 +120,13 @@ public class OrderConfimController extends Controller{
     			refundDec.setText("-"+priceAfterRef+"$ credit");
     			priceAfterRef=0;
     		}
-    		
     		else
     		{
     			refundDec.setText("-"+ShowOrderController.refund+"$ credit");
     			priceAfterRef-=Float.parseFloat(ShowOrderController.refund);
-    		}
-    		
+    		}	
 			totalPrice.setText("Total price of: "+priceAfterRef+"$");
     	}
-    	
     	else
     	{
     		no.setSelected(true);
@@ -153,40 +150,26 @@ public class OrderConfimController extends Controller{
     			}
     			else
     				ShowOrderController.finalOrder.setUseRefund(ShowOrderController.refund);
-    		}
-    			
-    	}
-    	
+    		}		
+    	}	
 		else
 		{
-			ShowOrderController.finalOrder.setTotalPrice(calPrice);
-			
+			ShowOrderController.finalOrder.setTotalPrice(calPrice);	
 		}
-
-    	
-    	Message msg=new Message(MessageType.InsertOrder,ShowOrderController.finalOrder);
-		ClientUI.chat.accept(msg);
-		
+		ClientUI.chat.accept(new Message(MessageType.InsertOrder,ShowOrderController.finalOrder));
 		SingletonOrder.getInstance().myOrder.get(0).setOrderNumber(ShowOrderController.finalOrder.getOrderNum());
-		
-		Message msg2=new Message(MessageType.InsertDishesOrder,SingletonOrder.getInstance().myOrder);
-		ClientUI.chat.accept(msg2);
-		
+		ClientUI.chat.accept(new Message(MessageType.InsertDishesOrder,SingletonOrder.getInstance().myOrder));
 		if(!ShowOrderController.finalOrder.getOrderType().equals("Take Away"))
 		{
 			DeliveryController.myDelivery.setOrderNum(ShowOrderController.finalOrder.getOrderNum());
-			Message msg3=new Message(MessageType.InsertDelivery,DeliveryController.myDelivery);
-			ClientUI.chat.accept(msg3);
+			ClientUI.chat.accept(new Message(MessageType.InsertDelivery,DeliveryController.myDelivery));
 		}
-
-		
 		if(isSuccess!=null)
 		{
 			Alert alert=new Alert(Alert.AlertType.INFORMATION);
 			alert.setTitle("Order excepted");
 			alert.getDialogPane().setPrefSize(500, 200);
 			String alertText;
-			
 			alertText="The system received your order and waiting for the supplier's approval.";
 			if(ShowOrderController.finalOrder.getUseBudget()==1)
 	    	{
@@ -196,7 +179,6 @@ public class OrderConfimController extends Controller{
 	    			alertText="The system received your order and waiting for the supplier's approval.\nPlease note that the remaining charge will be taken from your credit card";
 	    		}
 	    	}
-			
 			alert.setContentText(alertText);
 			Optional<ButtonType>result=alert.showAndWait();
 			
@@ -211,11 +193,9 @@ public class OrderConfimController extends Controller{
     
     @FXML
     void back(ActionEvent event) throws IOException {
-		start(event, "DeliveryOrPickUp", "Your supply details","");
+		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
     }
     
-
-
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());
@@ -227,11 +207,8 @@ public class OrderConfimController extends Controller{
 			yes.setVisible(true);
 			no.setDisable(false);
 			yes.setDisable(false);
-
-		}
-		
+		}	
 		orderDetails.appendText("Your order is: \n\n");
-		
 		for(Dish dish:SingletonOrder.getInstance().myOrder)
 		{
 			orderDetails.appendText(dish.getDishName()+": \n");
@@ -241,15 +218,12 @@ public class OrderConfimController extends Controller{
 				orderDetails.appendText(dish.getChoiceFactor()+": "+dish.getChoiceDetails()+"\n");
 			}
 			//!dish.getExtra().equals("")
-			
 			if(dish.getExtra()!=null)
 			{
 				orderDetails.appendText(dish.getExtra()+"\n");
 			}
-			
 			orderDetails.appendText("Dish price: "+dish.getPrice()+"*"+dish.getQuentity()+"$\n\n");
 		}
-		
 		if(!ShowOrderController.finalOrder.getOrderType().equals("Take Away"))
 		{
 			orderDetails.appendText("Delivery details: \n");
@@ -265,21 +239,11 @@ public class OrderConfimController extends Controller{
 		{
 			orderDetails.appendText("Take Away- Free of charge\n");	
 		}
-
-		
 		if(ShowOrderController.finalOrder.getEarlyOrder().equals("yes"))
 		{
 			orderDetails.appendText("-10% Early order");
 			calPrice-=calPrice*0.1;
 		}
-		
 		totalPrice.setText("Total price of: "+calPrice+"$");
-		
 	}
-
-}
-
-
-
-
-	
+}	

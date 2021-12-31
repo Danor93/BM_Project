@@ -73,7 +73,7 @@ public class RecConfirmController extends Controller implements Initializable {
 	 */
     @FXML
     void logout(ActionEvent event) throws IOException {
-    	ClientUI.chat.accept(new Message(MessageType.Disconected, null));
+    	ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
 
     }
@@ -85,11 +85,9 @@ public class RecConfirmController extends Controller implements Initializable {
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen","");
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
-    
-
     @FXML
     void confirmOrder(ActionEvent event) {
     	Order order=table.getSelectionModel().getSelectedItem();
@@ -99,7 +97,6 @@ public class RecConfirmController extends Controller implements Initializable {
     	table.setItems(observableList);
     	order.setCostumerId(LoginScreenController.user.getId());
     	ClientUI.chat.accept(new Message(MessageType.orderDone, order));
-
     }
 
 
@@ -118,11 +115,8 @@ public class RecConfirmController extends Controller implements Initializable {
 		table.setItems(observableList);
 	}
 	
-
 	@Override
 	public void display(String string) {
-		userName.setText(LoginScreenController.user.getFirstN());
-		
+		userName.setText(LoginScreenController.user.getFirstN());	
 	}
-
 }

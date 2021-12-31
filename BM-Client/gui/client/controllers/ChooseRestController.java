@@ -80,7 +80,7 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void backToHome(MouseEvent event) throws IOException {
-	    	start(event, "CustomerScreen", "CustomerScreen","");
+	    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	    }
 
 	    /**This method selects the wanted city from the combo box
@@ -102,27 +102,18 @@ import main.ClientUI;
 	    	if(cityName!=null && !cityName.equals("select"))
 	    	{
 	    		start(event, "restListForm", "Restaurants list",cityName);
-	        	/*Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	        	FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/restListForm.fxml"));
-				Parent root=load.load();
-				RestListFormController aFrame = load.getController();
-				aFrame.display(cityName);
-				aFrame.start(stage,root);*/
-	    	}
-	    	
+	    	}	    	
 	    	else
 	    	{
 	    		noSelect.setText("Please choose city");
-	    	}
-	    	
+	    	}    	
 	    }
 
 		/**
 		 *
 		 */
 		public void initialize(URL location, ResourceBundle resources) {
-			Message msg=new Message(MessageType.Show_Cities,null);
-			ClientUI.chat.accept(msg);
+			ClientUI.chat.accept(new Message(MessageType.Show_Cities,null));
 			observableList=FXCollections.observableArrayList(cities);
 			combo1.setItems(observableList);	
 		}

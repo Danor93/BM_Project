@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class BeforLoginScreenController extends Controller implements ControllerInterface{
+public class BeforLoginScreenController extends Controller{
 
     @FXML
     private ImageView BackImage;
@@ -24,13 +24,5 @@ public class BeforLoginScreenController extends Controller implements Controller
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

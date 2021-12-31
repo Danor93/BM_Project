@@ -76,7 +76,7 @@ public class MenuScreenController extends Controller {
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "CustomerScreen", "CustomerScreen", "");
+		start(event, "CustomerScreen", "CustomerScreen", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -112,8 +112,7 @@ public class MenuScreenController extends Controller {
 
 	 @FXML
 	    void orderNow(MouseEvent event) throws IOException {
-			start(event, "ShowOrder", "Your order","");
-
+			start(event, "ShowOrder", "Your order",LoginScreenController.user.getFirstN());
 	    }
 
 	/**This method meant to show the desserts of the restaurant
@@ -124,7 +123,6 @@ public class MenuScreenController extends Controller {
     void showDesserts(MouseEvent event) throws IOException {
     	chosenFoodType="Dessert";
     	start(event, "DishesOfKindScreen", "Restaurant's desserts",chosenFoodType);
-
     }
 
 	/**This method meant to show the drinks of the restaurant
@@ -180,6 +178,4 @@ public class MenuScreenController extends Controller {
 		// restName.setText(supplier);
 		dishAdded.setText(string);
 	}
-
-
 }

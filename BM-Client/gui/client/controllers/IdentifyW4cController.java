@@ -66,7 +66,7 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void backToHome(MouseEvent event) throws IOException {
-	    	start(event, "CustomerScreen", "CustomerScreen","");
+	    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	    	}
 
 	    /**This method meant to confirm if the user is registered as a costumer
@@ -74,7 +74,6 @@ import main.ClientUI;
 		 */
 		@FXML
 		void confirm(ActionEvent event) {
-			
 			if(client==null)
 			{
 				Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
@@ -93,18 +92,14 @@ import main.ClientUI;
 				else
 					allertLbl.setText("Wrong W4c, please try again or press the QR button");
 			}
-
 		}
-		
-		
-
+	
 		/**This method meant to get the W4C via QR
 		 * @param event		meant to check the W4C with QR
 		 */
 		
 		@FXML
 		void getW4cFromQR(ActionEvent event) throws IOException {
-			
 			if(client==null)
 			{
 				Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
@@ -112,8 +107,6 @@ import main.ClientUI;
 			}
 			switchScene(event);
 		}
-
-
 		
 		/**   
 		 * @param event
@@ -122,18 +115,14 @@ import main.ClientUI;
 			try {
 				start(event,"ChooseRestaurant","Choose restaurant","");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
 		}
 		
 		@Override
 		public void display(String string) {
 			userName.setText(LoginScreenController.user.getFirstN());
-			
 		}
-
 	}
 	
 

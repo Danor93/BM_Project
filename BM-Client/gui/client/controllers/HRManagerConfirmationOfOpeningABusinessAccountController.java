@@ -80,7 +80,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "HRManagerScreen", "HR Manager page", "");
+		start(event, "HRManagerScreen", "HR Manager page",LoginScreenController.user.getFirstN());
 	}
 
 	/**

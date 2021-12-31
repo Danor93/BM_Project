@@ -76,7 +76,7 @@ public class DeliveryOrPickupController extends Controller {
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen","");
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
     

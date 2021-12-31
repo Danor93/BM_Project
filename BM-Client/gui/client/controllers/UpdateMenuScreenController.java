@@ -61,7 +61,7 @@ public class UpdateMenuScreenController extends Controller {
 	@FXML
 	void AddNewDishToMenu(ActionEvent event) throws IOException {
 		AddDishToMenuController.indicator = true;
-		start(event, "AddDishToMenu", "Add new dish","");
+		start(event, "AddDishToMenu", "Add new dish",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -72,9 +72,8 @@ public class UpdateMenuScreenController extends Controller {
 	 */
 	@FXML
 	void DeleteOrUpdateDish(ActionEvent event) throws IOException {
-		Message msg = new Message(MessageType.Show_Dishes, LoginScreenController.user.getId());
-		ClientUI.chat.accept(msg);
-		start(event, "DeleteOrUpdateDish", "Delete or Update dish","");
+		ClientUI.chat.accept(new Message(MessageType.Show_Dishes, LoginScreenController.user.getId()));
+		start(event, "DeleteOrUpdateDish", "Delete or Update dish",LoginScreenController.user.getFirstN());
 	}
 
 	/**

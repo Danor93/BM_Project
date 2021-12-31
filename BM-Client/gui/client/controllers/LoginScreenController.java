@@ -63,12 +63,9 @@ public class LoginScreenController extends Controller {
 	 */
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
-
 		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
 			WrongInputInLoggin.setText("Please fill both user name and password");
-		}
-
-		else {
+		} else {
 			String[] DivededUandP;
 			StringBuilder str = new StringBuilder();
 			str.append(txtUserName.getText());
@@ -78,13 +75,10 @@ public class LoginScreenController extends Controller {
 			if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
 				PopUpMessage.errorMessage("You have to fill all the fileds!");
 			}
-
 			if (!statusUser.equals("Active")) {
 				WrongInputInLoggin.setText(statusUser);
 				statusUser = null;
-
 			}
-
 			if (user != null) {
 				switch (user.getRole()) {
 				case "BranchManager": {
@@ -111,7 +105,6 @@ public class LoginScreenController extends Controller {
 					}
 					break;
 				}
-
 				}
 			}
 		}

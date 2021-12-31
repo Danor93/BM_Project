@@ -24,7 +24,6 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 public class QuarterReportController extends Controller implements Initializable{
-	
 
     @FXML
     private Label brachLbl;
@@ -34,7 +33,6 @@ public class QuarterReportController extends Controller implements Initializable
     
     @FXML
     private Label yearlbl;
-
 
     @FXML
     private ImageView BackImage;
@@ -84,9 +82,6 @@ public class QuarterReportController extends Controller implements Initializable
     public static Map<String,ArrayList<Float>> report2=null;
     public static ArrayList<String> years;
     
-    
-    
-
 	/** This method meant to get back to login page and logout the customer
 	 * @param event				pressing the "back" button 
 	 * @throws IOException
@@ -113,7 +108,6 @@ public class QuarterReportController extends Controller implements Initializable
     	{
     		notify.setText("Select how many reports you would like to view");
     	}
-    	
     	else
     	{
     		if(quater1.getSelectionModel().getSelectedItem()!=null&&chooseBranch1.getSelectionModel().getSelectedItem()!=null&&year1.getSelectionModel().getSelectedItem()!=null)
@@ -124,13 +118,11 @@ public class QuarterReportController extends Controller implements Initializable
         		b.append(chooseBranch1.getSelectionModel().getSelectedItem().toString());
         		b.append(",");
         		b.append(year1.getSelectionModel().getSelectedItem().toString());
-        		
         		if(choose2.isSelected())
             	{
         			if(quater2.getSelectionModel().getSelectedItem()!=null&&chooseBranch2.getSelectionModel().getSelectedItem()!=null&&year2.getSelectionModel().getSelectedItem()!=null)
         			{
-        				ClientUI.chat.accept(new Message(MessageType.ShowHistogram,b.toString()));
-        				
+        				ClientUI.chat.accept(new Message(MessageType.ShowHistogram,b.toString()));	
         				if(report1!=null)
         				{
         					StringBuilder b1=new StringBuilder();
@@ -138,8 +130,7 @@ public class QuarterReportController extends Controller implements Initializable
             				b1.append(",");
             				b1.append(chooseBranch2.getSelectionModel().getSelectedItem().toString());
             				b1.append(",");
-                    		b1.append(year2.getSelectionModel().getSelectedItem().toString());
-                    		
+                    		b1.append(year2.getSelectionModel().getSelectedItem().toString());	
             				ClientUI.chat.accept(new Message(MessageType.ShowHistogram,b1.toString()));
             				if(report2!=null)
             				{
@@ -149,8 +140,7 @@ public class QuarterReportController extends Controller implements Initializable
             				{
             					report1=null;
             					notify.setText("The second report does not exist");
-            				}
-        					
+            				}	
         				}
         				else
         				{
@@ -161,8 +151,6 @@ public class QuarterReportController extends Controller implements Initializable
         			{
         				notify.setText("Please fill all fields");
         			}
-        			
-
             	}
         		else
         		{
@@ -175,18 +163,13 @@ public class QuarterReportController extends Controller implements Initializable
         			{
         				notify.setText("This report does not exist");
         			}
-        			
         		}
-        		
-        		
         	}
         	else
         	{
         		notify.setText("Please fill all fields");
         	}
-    		
     	}
-
     }
     
     @FXML
@@ -201,7 +184,6 @@ public class QuarterReportController extends Controller implements Initializable
     		quaterlyLbl.setVisible(false);
     		yearlbl.setVisible(false);
     	}
-    	
     	else
     	{
     		choose2.setSelected(true);
@@ -212,7 +194,6 @@ public class QuarterReportController extends Controller implements Initializable
     		quaterlyLbl.setVisible(true);
     		yearlbl.setVisible(true);
     	}
-
     }
 
     @FXML
@@ -225,9 +206,7 @@ public class QuarterReportController extends Controller implements Initializable
     		year2.setVisible(true);
     		brachLbl.setVisible(true);
     		quaterlyLbl.setVisible(true);
-    		yearlbl.setVisible(true);
-    		
-    		 
+    		yearlbl.setVisible(true);	 
     	}
     	else
     	{
@@ -250,9 +229,7 @@ public class QuarterReportController extends Controller implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		Message msg=new Message(MessageType.getYears,null);
-		ClientUI.chat.accept(msg);
-		
+		ClientUI.chat.accept(new Message(MessageType.getYears,null));
 		ArrayList<String> branches=new ArrayList<>();
 		ArrayList<String> quater=new ArrayList<>();
 		branches.add("north");
@@ -272,5 +249,4 @@ public class QuarterReportController extends Controller implements Initializable
 		year1.setItems(observableList3);
 		year2.setItems(observableList3);
 	}
-
 }

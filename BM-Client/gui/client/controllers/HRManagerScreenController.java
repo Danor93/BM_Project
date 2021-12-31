@@ -94,10 +94,8 @@ public class HRManagerScreenController extends Controller{
 				RandomSuccess = true;
 		}
 		RandomSuccess = false;
-
 		String DivededUandP[] = ((String) LoginScreenController.user.getRole()).split("-");
 		String fullCompanyName = String.valueOf(DivededUandP[1]);
-
 		Employer employer = new Employer(w4cNew, fullCompanyName, "Waiting");
 		ClientUI.chat.accept(new Message(MessageType.RegistrationOfEmployer, employer));
 		if (RegistrationFlag) {

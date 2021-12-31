@@ -12,7 +12,6 @@ import client.controllers.LoginScreenController;
 import client.controllers.BranchManagerOpenNewAccountController;
 import client.controllers.BranchManagerOpenNewBussinessAccountController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
-import client.controllers.UpdateFormController;
 import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 import Entities.User;
 import Entities.homeBranches;
 import Parsing.Parsing;
-
 import javax.security.auth.login.LoginContext;
 
 public class ChatClient extends AbstractClient {
@@ -58,7 +56,6 @@ public class ChatClient extends AbstractClient {
 
 	public void handleMessageFromClientUI(Object message) {
 		try {
-			// openConnection();// in order to send more than one message
 			waitingForResponse = true;
 			sendToServer(message);
 			// wait for response

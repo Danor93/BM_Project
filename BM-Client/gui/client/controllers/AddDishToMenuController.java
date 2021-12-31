@@ -100,7 +100,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page", "");
+		start(event, "SupplierScreen", "Supplier page",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -146,7 +146,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 			txtMiniLabel.setText("Name must be valid!");
 		else if (txtPriceDish.getText().isEmpty())
 			txtMiniLabel.setText("Price must be valid!");
-
 		else {
 			try {
 				Float price = Float.parseFloat(txtPriceDish.getText());

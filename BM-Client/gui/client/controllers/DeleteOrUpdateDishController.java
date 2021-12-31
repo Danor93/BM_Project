@@ -105,7 +105,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page", "");
+		start(event, "SupplierScreen", "Supplier page", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -179,7 +179,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 				System.out.println("NameOfdish=" + NameOfDish);
 				NameAndTypeCorrect = true;
 			}
-
 		} catch (NullPointerException e) {
 			txtMiniLabel.setText("Type must be selected!");
 		}
@@ -275,10 +274,8 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 			if (NameOfDish == null) {
 				txtMiniLabel.setText("Name must be selected!");
 			} else {
-				System.out.println("NameOfdish=" + NameOfDish);
 				NameAndTypeCorrectToDelete = true;
 			}
-
 		} catch (NullPointerException e) {
 			txtMiniLabel.setText("Type must be selected!");
 			// e.printStackTrace();
@@ -286,7 +283,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 		Dish dish = new Dish(NameOfDish, null, null, null, null, null, 0, dishtype);
 		if (NameAndTypeCorrectToDelete) {
 			dish.setRestCode(LoginScreenController.user.getId());
-			System.out.println(dish.toString());
 			ClientUI.chat.accept(new Message(MessageType.deleteDish, dish));
 			dishes.remove(placeOfDish);
 			start(event, "DeleteOrUpdateDish", "Create Menu", "");

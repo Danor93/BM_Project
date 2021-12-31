@@ -41,7 +41,6 @@ public class EchoServer extends AbstractServer {
 		try {
 			client.sendToClient(resMessage);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 }
