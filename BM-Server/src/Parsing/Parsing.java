@@ -52,22 +52,12 @@ public class Parsing {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split(",");
 			Map<String, ArrayList<Float>> histogram = (Map<String, ArrayList<Float>>) queries
 					.getHistogramData(DivededAdd);
-			messageFromServer = new Message(MessageType.ShowHistogram, histogram);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.ShowHistogram, histogram);
 		}
 
 		case getYears: {
 			ArrayList<String> years = (ArrayList<String>) queries.getYear();
-			messageFromServer = new Message(MessageType.getYears, years);
-			return messageFromServer;
-		}
-
-		case Update_Orders: {
-			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split("@");
-			UpdateDB.UpdateOrderAddress(DivededAdd[0]);
-			UpdateDB.UpdateTypeOrder(DivededAdd[1]);
-			messageFromServer = new Message(MessageType.Update_succesfuly, null);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.getYears, years);
 		}
 
 		case loginSystem: {
@@ -82,45 +72,38 @@ public class Parsing {
 
 		case IdentifyW4c: {
 			Client costumer = queries.checkAccountKind((String) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 		}
 
 		case Show_Cities: {
 			ArrayList<String> city = showCities.getCities();
-			messageFromServer = new Message(MessageType.Show_Cities, city);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Show_Cities, city);
 		}
 
 		case ClientConfirm: {
 			ArrayList<Order> orders = queries.ConfirmClient((String) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.ClientConfirm, orders);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.ClientConfirm, orders);
 		}
 
 		case show_Restaurants: {
 			ArrayList<Restaurant> restaurants = showRestaurants
 					.getRestaurants((String) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.show_Restaurants, restaurants);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.show_Restaurants, restaurants);
 		}
 
 		case get_Dishes: {
 			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 		}
 
 		case getRefundDetails: {
 			String refundSum = queries.getRefundSum((Order) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.getRefundDetails, refundSum);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.getRefundDetails, refundSum);
 		}
 
 		case InsertOrder: {
 			Integer insert = queries.insertOrder((Order) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertOrder, insert);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.InsertOrder, insert);
 		}
 
 		case InsertDishesOrder: {
@@ -130,23 +113,15 @@ public class Parsing {
 
 		case InsertDelivery: {
 			String insert = queries.insertDelivery((Delivery) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertDelivery, insert);
-			return messageFromServer;
+			return  messageFromServer = new Message(MessageType.InsertDelivery, insert);
 		}
 
 		case orderDone: {
 			String checkRef = queries.checkRefund((Order) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.InsertDelivery, checkRef);
-			return messageFromServer;
+			return  messageFromServer = new Message(MessageType.InsertDelivery, checkRef);
 		}
 
-		/**case get_Rest_Name: {
-			String restName = Query.getRestName((String) receivedMessage.getMessageData());
-			return messageFromServer = new Message(MessageType.rest_Name, restName);
-		}**/
-
 		case add_new_dish: {
-			System.out.println(receivedMessage.getMessageData());
 			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.Dish_add_succ, null);
 			} else {
@@ -156,8 +131,7 @@ public class Parsing {
 
 		case get_Employer: {
 			ArrayList<Employer> employers = Query.LoadEmployers();
-			messageFromServer = new Message(MessageType.Employer_list, employers);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Employer_list, employers);
 		}
 
 		case Employer_Update: {
@@ -165,8 +139,7 @@ public class Parsing {
 			for (int i = 0; i < employers.size(); i++) {
 				Query.UpdateEmployers(employers.get(i).getCompanyName(), employers.get(i).getCompanyStatus());
 			}
-			messageFromServer = new Message(MessageType.Employer_List_Update_succ, null);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Employer_List_Update_succ, null);
 		}
 
 		case check_suppliers_details: {
@@ -182,8 +155,7 @@ public class Parsing {
 		case get_Accounts: {
 			String Branch = (String)receivedMessage.getMessageData();
 			ArrayList<User> Users = Query.getAccount(Branch);
-			messageFromServer = new Message(MessageType.Account_list, Users);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Account_list, Users);
 		}
 
 		case Delete_Account: {
@@ -277,101 +249,72 @@ public class Parsing {
 		case downloadPDF: {
 			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
 			MyFile file = Query.downloadFile(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2]);
-			messageFromServer = new Message(MessageType.download_pdf_succ, file);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.download_pdf_succ, file);
 		}
 
 		case showRelevantYearsAndQuarterly: {
 			String branch = (String) receivedMessage.getMessageData();
 			ArrayList<String> yearsAndQuarter = Query.getRelevantYearsAndQuarterly(branch);
 			return new Message(MessageType.relevantYearAndQuarterly, yearsAndQuarter);
-
 		}
 
-		case Disconected: {
-			UpdateDB.UpdateisLoggedIn((String) receivedMessage.getMessageData());
-			LogicController.UpdateClientTable(msg, client);
-			return messageFromServer = new Message(MessageType.Disconected, null);
-		}
-
-		case Show_Dishes: {// get all orders from DB
-			System.out.println(receivedMessage.getMessageData());
+		case Show_Dishes: {
 			ArrayList<Dish> dishes = ShowDishes.getDishes((String) receivedMessage.getMessageData());
-			System.out.println("in server : ");
-			for (int i = 0; i < dishes.size(); i++)
-				System.out.println(dishes.get(i).getDishName());
-			messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
 		}
 
 		case updateDish: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.Dish_update_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.Dish_update_succ, null);
 			}
 		}
 
 		case MenuExist: {
 			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.MenuExistTrue, null);
+				return messageFromServer = new Message(MessageType.MenuExistTrue, null);
 			} else {
-				messageFromServer = new Message(MessageType.MenuExistFalse, null);
+				return messageFromServer = new Message(MessageType.MenuExistFalse, null);
 			}
-			return messageFromServer;
 		}
 
 		case deleteDish: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.Dish_delete_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.Dish_delete_succ, null);
 			}
 		}
 
 		case get_orders_to_approve: {
 			ArrayList<Order> orders = Query.LoadOrders((String) receivedMessage.getMessageData());
-			messageFromServer = new Message(MessageType.Orders_List, orders);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.Orders_List, orders);
 		}
 
 		case Use_Refund: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateRefundAmmount((Order) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.update_RefundTable, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.update_RefundTable, null);
 			}
 		}
 
 		case Use_Budget: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateBudgetValue((Order) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
 			}
 		}
 
 		case Order_not_approved: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToNotApproved((Order) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
 			}
 		}
 
 		case Order_approved: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToApproved((Order) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
 			}
 		}
 
 		case Order_sended: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusSended((Order) receivedMessage.getMessageData())) {
-				messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
-				return messageFromServer;
+				return messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
 			}
 		}
 
@@ -445,34 +388,30 @@ public class Parsing {
 		}
 		
 		case get_Orders_report: {
-			System.out.println(receivedMessage.getMessageData());
 			ArrayList<OrdersReport> array = UpdateDB.getOrdersReport((String) receivedMessage.getMessageData());
-			System.out.println("This is in server parsing");
-			for(OrdersReport o: array)
-			{
-				System.out.println(o.toString());
-			}
-			messageFromServer = new Message(MessageType.OReportUpdated, array);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.OReportUpdated, array);
 		}
 
 		case get_Dish_type: {
 			HashMap<String, Integer> retMap;
 			int id = (Integer) receivedMessage.getMessageData();
 			retMap = Query.getQuntitiesOfDishTypes(id);
-			messageFromServer = new Message(MessageType.DType_Quantities, retMap);
-			return messageFromServer;
+			return messageFromServer = new Message(MessageType.DType_Quantities, retMap);
 		}
 
 		case addto_Order_report: {
 			if (UpdateDB.addToOrdersReportsTable((ArrayList<OrdersReport>) receivedMessage.getMessageData())) {
-				System.out.println("DB Updated Succsessfuly!");
 				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
 			} else {
-				System.out.println("DB Updated Failed");
 				return messageFromServer = new Message(MessageType.UpdateFailed, null);
 			}
 			
+		}
+		
+		case Disconected: {
+			UpdateDB.UpdateisLoggedIn((String) receivedMessage.getMessageData());
+			LogicController.UpdateClientTable(msg, client);
+			return messageFromServer = new Message(MessageType.Disconected, null);
 		}
 
 		default: {

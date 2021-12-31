@@ -50,7 +50,6 @@ public class Query {
 	 * importData this method import the database script
 	 */
 	public static void importData() {
-
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SQL", "*.sql"));
@@ -101,7 +100,6 @@ public class Query {
 					int i = line.indexOf(' ');
 					line = line.substring(i + 1, line.length() - " */".length());
 				}
-
 				if (line.trim().length() > 0) {
 					st.execute(line);
 				}
@@ -117,6 +115,7 @@ public class Query {
 	 * that not approved or waiting for approved by the Branch Manager.
 	 */
 	public static ArrayList<Employer> LoadEmployers() {
+		if (DBConnect.conn != null) {
 		ArrayList<Employer> employers = new ArrayList<>();
 		Statement stmt;
 		try {
@@ -133,6 +132,8 @@ public class Query {
 			s.printStackTrace();
 		}
 		return employers;
+		}
+		return null;
 	}
 
 	/*
@@ -167,7 +168,6 @@ public class Query {
 					role1 = rs1.getString(1).split("-");
 				}
 				rs1.close();
-
 				Statement stmt2 = DBConnect.conn.createStatement();
 				ResultSet rs2 = stmt2.executeQuery(
 						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getConfirm_Employee() + "' ;");
@@ -175,7 +175,6 @@ public class Query {
 					role2 = rs2.getString(1).split("-");
 				}
 				rs2.close();
-
 				if (role1[0].equals("Certified") && role1[1].equals(supplier.getSupplierName())
 						&& role2[0].equals("Approved") && role2[1].equals(supplier.getSupplierName())) {
 					return true;
@@ -353,7 +352,7 @@ public class Query {
 						"SELECT companyStatus FROM bitemedb.company WHERE companyName= '" + CompanyName + "' ;");
 				while (rs.next()) {
 					String status = rs.getString(1);
-					if (status.equals("approved")) {
+					if (status.equals("Approved")) {
 						return true;
 					} else {
 						return false;
@@ -404,7 +403,7 @@ public class Query {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
-
+					
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
 							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
@@ -731,14 +730,12 @@ public class Query {
 					String resYear = rs.getString(1);
 					String resQuarter = rs.getString(2);
 					yearsAndQuarter.add(resYear + "@" + resQuarter);
-
 				}
 				rs.close();
 			} catch (SQLException s) {
 				s.printStackTrace();
 			}
 			return yearsAndQuarter;
-
 		}
 		return null;
 	}
@@ -746,7 +743,6 @@ public class Query {
 	public static ArrayList<Order> LoadOrders(String restName) {
 		if (DBConnect.conn != null) {
 			ArrayList<Order> orders = new ArrayList<>();
-			System.out.println("in server - " + restName);
 			Statement stmt;
 			try {
 				stmt = DBConnect.conn.createStatement();
@@ -784,7 +780,6 @@ public class Query {
 					BusinessAccountTracking BAT = new BusinessAccountTracking(rs.getString(1), rs.getString(2),
 							rs.getString(3));
 					BAT.setStatus("Waiting");
-
 					businessAccountTracking.add(BAT);
 				}
 				rs.close();
@@ -870,7 +865,6 @@ public class Query {
 						quentity += retMap.get(dishType);
 					}
 					retMap.put(dishType, quentity);
-
 				}
 				rs.close();
 			} catch (SQLException s) {

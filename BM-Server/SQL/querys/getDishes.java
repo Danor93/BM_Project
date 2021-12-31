@@ -25,10 +25,8 @@ public class getDishes {
 					System.out.println(dish.getDishName());
 					dishes.add(dish);
 				}
-				rs.close();
-				
+				rs.close();		
 		}
-
 		 catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -63,7 +63,6 @@ public class Parsing {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.statusUser = "The user is already logged in";
 					LoginScreenController.user = null;
-
 				} else {
 					if (receivedMessage.getMessageData().equals("Freeze")) {
 						LoginScreenController.statusUser = "Frozen Account";
@@ -73,7 +72,6 @@ public class Parsing {
 								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 						LoginScreenController.statusUser = "Active";
 					}
-
 				}
 			} else {
 				LoginScreenController.statusUser = "User name or password are inccorect";
@@ -84,19 +82,17 @@ public class Parsing {
 		}
 
 		case ShowHistogram: {
-
 			if (QuarterReportController.report1 == null) {
 				QuarterReportController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
 			} else {
 				QuarterReportController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
 			}
-
 			break;
 		}
 
 		case getYears: {
 			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
-
+			break;
 		}
 
 		case Show_Cities: {
@@ -126,7 +122,6 @@ public class Parsing {
 
 		case InsertOrder: {
 			ShowOrderController.finalOrder.setOrderNum((Integer) receivedMessage.getMessageData());
-			// SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
 
@@ -182,7 +177,7 @@ public class Parsing {
 		}
 
 		case Dish_update_succ: {
-
+			break;
 		}
 
 		case Employer_list: {
@@ -266,9 +261,11 @@ public class Parsing {
 		}
 
 		case update_RefundTable: {
+			break;
 		}
 
 		case update_Budget_bussClient: {
+			break;
 		}
 
 		case changed_status_to_notApproved_succ: {
@@ -276,10 +273,11 @@ public class Parsing {
 		}
 
 		case changed_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case changed_status_to_sended_succ: {
+			break;
 		}
 
 		case set_Phone_number: {
@@ -345,8 +343,7 @@ public class Parsing {
 			break;
 		}
 		
-		case UpdateFailed:
-		{
+		case UpdateFailed:{
 			break;
 		}
 		
@@ -356,14 +353,12 @@ public class Parsing {
 			break;
 		}
 		
-		case OReportUpdated:
-		{
+		case OReportUpdated:{
 			BranchManagerChooseReportToViewController.ordersArray =(ArrayList<OrdersReport>) receivedMessage.getMessageData();
 			break; 
 		}
 		
-		case DType_Quantities:
-		{
+		case DType_Quantities:{
 			HashMap<String,Integer> map = (HashMap<String,Integer>)receivedMessage.getMessageData();
 			ConfirmOrderApprovalController.dishTypesQuentities=map;
 			break;
@@ -381,6 +376,7 @@ public class Parsing {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
 		}
+		
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 		}
