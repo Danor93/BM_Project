@@ -27,11 +27,11 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.scene.text.Text;
 
+/**
+ * @author Danor
+ * this class implements the functionality of the Branch Manager to open new Private Account.
+ */
 public class BranchManagerOpenNewPrivateAccountController extends Controller implements Initializable {
-
-	/*
-	 * Author:Danor this class is for open new account
-	 */
 	public static Client PAccount = new Client(null, null, null, null, null, null, null, null, null, null, null);
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 
@@ -80,28 +80,40 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 	@FXML
 	private Button back;
 
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login Screen", "");
 	}
 
+	/**
+	 * @param event - for back to the open new account choose screen.
+	 */
 	@FXML
 	void backToMenu(ActionEvent event) throws IOException {
-		start(event, "BranchManagerOpenNewAccount", "Open New Account", LoginScreenController.user.getUserName());
+		start(event, "BranchManagerOpenNewAccount", "Open New Account", LoginScreenController.user.getFirstN());
 	}
 
-	/* for confirm button */
+	/**
+	 * for to confirm and check the new Private Account.
+	 * @param event - for confirm button.
+	 */
 	@FXML
 	void Confirm(ActionEvent event) throws IOException {
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
 				|| txtTelephone.getText().isEmpty() || txtEmail.getText().isEmpty()
-				|| txtCreditCardNumber.getText().isEmpty()) {
+				|| txtCreditCardNumber.getText().isEmpty()) {/*if the filed are empty.*/
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		} else {
 			PAccount.setFirstN(txtFirstName.getText());
@@ -123,6 +135,9 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 		}
 	}
 
+	/**
+	 * initialize the button functionality and style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ConfirmOpenNewPrivateAccountFlag = false;
@@ -131,6 +146,9 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 		back.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());

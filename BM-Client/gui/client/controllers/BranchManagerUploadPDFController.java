@@ -25,12 +25,11 @@ import main.PopUpMessage;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
+/**
+ * @author Danor
+ * this class handles the functionality of the Branch Manager to upload a PDF of the quarterly report.
+ */
 public class BranchManagerUploadPDFController extends Controller implements Initializable {
-
-	/*
-	 * author:Danor
-	 * this class is for the branch manager upload a quarterly pdf functionality */
-	
 	public static String Quertar;
 	public static String Year;
 	public static Stage stage;
@@ -62,25 +61,39 @@ public class BranchManagerUploadPDFController extends Controller implements Init
     @FXML
     private Text userName;
 
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event,"LoginScreen", "Login Screen","");
 	}
 
+	/**
+	 * for choosing a Quarter
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseQuertar(ActionEvent event) {
-		Quertar = QuertarComboBox.getSelectionModel().getSelectedItem();
+		Quertar = QuertarComboBox.getSelectionModel().getSelectedItem().toString();
 		YearComboBox.getItems().add("2022");
 		YearComboBox.getItems().add("2021");
 		YearComboBox.setDisable(false);
 	}
 
+	/**
+	 * for choosing a Year
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void chooseYear(ActionEvent event) {
 		Year = YearComboBox.getSelectionModel().getSelectedItem();
@@ -90,6 +103,10 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		UploadBtn.setDisable(false);
 	}
 
+	/**
+	 * this method handles the upload the PDF file and send it to the DB.
+	 * @param event - for the Upload PDF button.
+	 */
 	@FXML
 	void UploadPDF(ActionEvent event) {
 		ClientUI.chat.accept(new Message(MessageType.check_year_and_quertar, yearandQ.toString()));
@@ -109,10 +126,8 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						byte[] mybytearray = new byte[(int) newFile.length()];
 						msg.initArray(mybytearray.length);
 						msg.setSize(mybytearray.length);
-
 						FileInputStream fis = new FileInputStream(newFile);
 						BufferedInputStream bis = new BufferedInputStream(fis);
-
 						bis.read(msg.getMybytearray(), 0, mybytearray.length);
 						msg.setQuarter(Quertar);
 						msg.setYear(Year);
@@ -125,7 +140,6 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						else {
 							PopUpMessage.errorMessage("Could not upload " + Year + "' " + Quertar + " PDF file!,try again");
 						}
-
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -139,6 +153,9 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		}	
 	}
 
+	/**
+	 * initialize the combo box and the button functionality and style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		QuertarComboBox.getItems().add("1");
@@ -151,6 +168,9 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		logout.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
     @Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());

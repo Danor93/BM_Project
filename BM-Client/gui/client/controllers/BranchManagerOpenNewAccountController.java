@@ -22,11 +22,12 @@ import javafx.stage.Stage;
 import main.ClientUI;
 import javafx.scene.text.Text;
 
-public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface, Initializable {
+/**
+ * @author Danor 
+ * this class implements the functionality of the Branch Manager to choose which account he wants to open (Private/Business).
+ */
+public class BranchManagerOpenNewAccountController extends Controller implements Initializable {
 
-	/*
-	 * author:Danor this class for open new account
-	 */
 	@FXML
 	private ResourceBundle resources;
 
@@ -51,29 +52,44 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 	@FXML
 	private Text userName;
 	
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getUserName());
+		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event,"LoginScreen", "Login Screen","");
 	}
 
-	/* for business account */
+	/**
+	 * open the open new Business Account Screen.
+	 * @param event - for the Business account Button.
+	 */
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
-		start(event, "BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account","");
+		start(event, "BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account",LoginScreenController.user.getFirstN());
 	}
 
-	/* for private account */
+	/**
+	 * open the open new Private Account Screen.
+	 * @param event  - for the Private account Button.
+	 */
 	@FXML
 	void PrivateAccount(ActionEvent event) throws IOException {
-		start(event, "BranchManagerOpenNewPrivateAccount", "Open New Private Account","");
+		start(event, "BranchManagerOpenNewPrivateAccount", "Open New Private Account",LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * initialize the style of the buttons.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		btnBusinessAccount.getStylesheets().add("/css/buttons.css");
@@ -81,14 +97,11 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 		logout.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
-	}
-
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		// TODO Auto-generated method stub
-		
 	}
 }

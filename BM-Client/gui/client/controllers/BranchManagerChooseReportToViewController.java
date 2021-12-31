@@ -28,6 +28,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
+/**
+ * @author Danor
+ * this class  implements the functionality of the Branch Manager to view reports of Revenues, Orders And Performance. 
+ */
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
 
 	public String Branch, Type, year, month;
@@ -99,6 +103,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	@FXML
 	private Text userName;
 	
+	
+	/**
+	 * @param event - back to the home screen of the Branch Manager/CEO.
+	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
 		if (LoginScreenController.user.getRole().equals("CEO")) {
@@ -109,38 +117,59 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		}
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event,"LoginScreen", "Login Screen","");
 	}
 
+	/**
+	 * choosing branch from the combo box (CEO Only).
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseBranch(ActionEvent event) {
 		Branch = BranchChoose.getSelectionModel().getSelectedItem();
 		ReportType.setDisable(false);
 	}
 
+	/**
+	 * choosing Month from the combo box
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseMonth(ActionEvent event) {
 		month = String.valueOf(Month.getSelectionModel().getSelectedItem());
 		Year.setDisable(false);
 	}
 
+	/**
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseReportType(ActionEvent event) {
 		Month.setDisable(false);
 	}
 
+	/**
+	 * choosing Year from the combo box.
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseYear(ActionEvent event) {
 		year = Year.getSelectionModel().getSelectedItem().toString();
 		GetReport.setDisable(false);
 	}
 
+	/**
+	 * show the user the report he wanted by branch,year,month.
+	 * @param event - for the Get Report button.
+	 */
 	@FXML
 	void getReport(ActionEvent event) {
-	
 		year = Year.getSelectionModel().getSelectedItem().toString();
 		month =Month.getSelectionModel().getSelectedItem().toString();
 		Branch =homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
@@ -150,7 +179,6 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		details.append(month);
 		details.append("@");
 		details.append(year);
-		
 		if (ReportType.getSelectionModel().getSelectedItem() != null) {
 			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
 			
@@ -158,13 +186,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 				orders.setVisible(false);
 				RevenueReport(details);
 				break;
-
 			}
 
 			case "Orders": {		
 				OrdersReport(details);
 				break;
-			
 			}
 
 			case "Performance": {
@@ -173,12 +199,15 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 				break;
 			}
 			}
-
 		} else {
 			System.out.println("label ERROR!");
 		}
 	}
 
+	/**
+	 * a method for handle the Revenue table and show it in the screen.
+	 * @param details - details of the Branch,Year,Month.
+	 */
 	public void RevenueReport(StringBuilder details) {
 		RevenueTable.setVisible(true);
 		Revenue.toFront();
@@ -188,9 +217,12 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
 		RevenueList = FXCollections.observableArrayList(revenueArray);
 		RevenueTable.setItems(RevenueList);
-		
 	}
 
+	/**
+	 * a method for handle the Orders table and show it in the screen.
+	 * @param details - details of the Branch,Year,Month.
+	 */
 	public void OrdersReport(StringBuilder details) {
 		orders.setVisible(true);
 		Orders.toFront();
@@ -206,9 +238,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
 	}
 
+	/**
+	 * initialize the screen buttons and combo box.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		main.toFront();
 		ReportType.getItems().add("Revenue");
 		ReportType.getItems().add("Orders");
@@ -240,9 +274,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		orders.getStylesheets().add("/css/tableview.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

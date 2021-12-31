@@ -19,8 +19,11 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.scene.text.Text;
 
+/**
+ * @author Danor
+ * this class implements the functionality of the Branch Manager to confirm and add a supplier to BiteMe.
+ */
 public class ConfirmSupplierRegController extends Controller implements Initializable {
-
 	public static Supplier supplier;
 	public static Boolean confirmRegFlag = false;
 
@@ -81,22 +84,32 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	@FXML
 	private Text userName;
 
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
+		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login Screen", "");
 	}
 
+	/**
+	 * this method handles the confirm button after the user put all the information from the text fields. 
+	 * @param event - for the confirm Button.
+	 */
 	@FXML
 	void ConfirmSupplierRegistartion(ActionEvent event) {
 		if (AddressTXT.getText().isEmpty() || CityTXT.getText().isEmpty() || ConfirmEmpTxt.getText().isEmpty()
 				|| OpeningTimeTXT.getText().isEmpty() || ResIDTXT.getText().isEmpty()
-				|| ResNameTXT.getText().isEmpty()) {
+				|| ResNameTXT.getText().isEmpty()) {/*if the fields are empty.*/
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		} else {
 			char[] charsResName = ResNameTXT.getText().toCharArray();
@@ -172,15 +185,20 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	}
 
+	/**
+	 * initialize the buttons style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		btnConfirmSupplierRegistartion.getStylesheets().add("/css/buttons.css");
 		logout.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
-
 }
