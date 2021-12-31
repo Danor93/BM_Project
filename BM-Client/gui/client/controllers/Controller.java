@@ -40,7 +40,6 @@ public abstract class  Controller  {
 		
 		if (!(fxmlName.equals("LoginScreen"))) {
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
 				@Override
 				public void handle(WindowEvent event) {
 					event.consume();
@@ -70,7 +69,6 @@ public abstract class  Controller  {
 		
 		if (!(fxmlName.equals("LoginScreen"))) {
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
 				@Override
 				public void handle(WindowEvent event) {
 					event.consume();
@@ -81,7 +79,6 @@ public abstract class  Controller  {
 						primaryStage.close();
 					}
 				}
-
 			});
 		}
 	}
