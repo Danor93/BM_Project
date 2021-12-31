@@ -25,12 +25,12 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="21.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="back" textFill="WHITE">
+      <Button fx:id="back" layoutX="21.0" layoutY="495.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-background-color: red; -fx-background-radius: 30;" text="Back" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="next" layoutX="496.0" layoutY="495.0" mnemonicParsing="false" onAction="#next" prefHeight="29.0" prefWidth="208.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="proceed to order confirmation" textFill="WHITE">
+      <Button fx:id="next" layoutX="478.0" layoutY="495.0" mnemonicParsing="false" onAction="#next" prefHeight="30.0" prefWidth="226.0" style="-fx-background-color: green; -fx-background-radius: 30;" text="Proceed to Order Confirmation" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>

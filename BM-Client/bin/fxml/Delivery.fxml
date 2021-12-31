@@ -32,7 +32,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="138.0" layoutY="51.0" text="Enter your delivery details">
+      <Label layoutX="138.0" layoutY="51.0" prefHeight="53.0" prefWidth="472.0" text="Enter Your Delivery Details">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -93,10 +93,10 @@
       </Label>
       <CheckBox fx:id="regular" layoutX="252.0" layoutY="356.0" mnemonicParsing="false" onAction="#chooseRegular" text="Regular" />
       <CheckBox fx:id="robot" layoutX="346.0" layoutY="355.0" mnemonicParsing="false" onAction="#chooseRobot" text="By robot" />
-      <Label fx:id="notifyAdd" layoutX="220.0" layoutY="162.0" prefHeight="17.0" prefWidth="180.0" textFill="#f80202" />
-      <Label fx:id="notifyCity" layoutX="217.0" layoutY="213.0" prefHeight="17.0" prefWidth="180.0" textFill="#f80202" />
-      <Label fx:id="notifyName" layoutX="215.0" layoutY="269.0" prefHeight="17.0" prefWidth="180.0" textFill="#f80202" />
-      <Label fx:id="notifyPhone" layoutX="213.0" layoutY="326.0" prefHeight="17.0" prefWidth="188.0" textFill="#f80202" />
+      <Label fx:id="notifyAdd" layoutX="220.0" layoutY="162.0" prefHeight="17.0" prefWidth="216.0" textFill="#f80202" />
+      <Label fx:id="notifyCity" layoutX="217.0" layoutY="213.0" prefHeight="17.0" prefWidth="216.0" textFill="#f80202" />
+      <Label fx:id="notifyName" layoutX="215.0" layoutY="269.0" prefHeight="17.0" prefWidth="216.0" textFill="#f80202" />
+      <Label fx:id="notifyPhone" layoutX="213.0" layoutY="326.0" prefHeight="17.0" prefWidth="216.0" textFill="#f80202" />
       <Text fill="RED" layoutX="122.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* ">
          <font>
             <Font name="System Bold" size="12.0" />

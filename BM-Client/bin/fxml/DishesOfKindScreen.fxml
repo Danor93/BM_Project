@@ -92,7 +92,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="addToOrder" layoutX="480.0" layoutY="496.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="33.0" prefWidth="149.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="add to my order">
+      <Button fx:id="addToOrder" layoutX="480.0" layoutY="496.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="33.0" prefWidth="149.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Add To My Order">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

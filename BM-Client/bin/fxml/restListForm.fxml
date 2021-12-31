@@ -72,7 +72,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="137.0" layoutY="34.0" text="Recommended in your area">
+      <Label layoutX="137.0" layoutY="34.0" prefHeight="53.0" prefWidth="488.0" text="Recommended in Your Area">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

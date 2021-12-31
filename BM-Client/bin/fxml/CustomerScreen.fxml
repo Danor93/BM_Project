@@ -14,11 +14,6 @@
          <image>
             <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
-      <Text layoutX="495.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
       <Label fx:id="welcome" layoutX="113.0" layoutY="139.0" prefHeight="64.0" prefWidth="322.0" text="Costumer Page">
          <font>
             <Font name="System Bold" size="43.0" />
