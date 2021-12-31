@@ -138,6 +138,8 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 		FreezeAccount = false;
 		ActiveBtn.setDisable(true);
 		FreezeBtn.setDisable(true);
+		ActiveBtn.getStylesheets().add("/css/buttons.css");
+		FreezeBtn.getStylesheets().add("/css/buttons.css");
 		loadAccounts(Users);
 	}
 

@@ -40,9 +40,6 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 	private Button btnPrivateAccount;
 
 	@FXML
-	private Button BackBtn;
-
-	@FXML
 	private ImageView BackImage;
 
 	@FXML
@@ -65,17 +62,6 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 		start(event,"LoginScreen", "Login Screen","");
 	}
 
-	@FXML
-	void initialize() {
-		// setImage(BackImage, "background.png");
-		assert btnBusinessAccount != null
-				: "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
-		assert btnPrivateAccount != null
-				: "fx:id=\"btnPrivateAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
-		assert BackBtn != null
-				: "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerOpenNewAccount.fxml'.";
-	}
-
 	/* for business account */
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
@@ -90,7 +76,9 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		btnBusinessAccount.getStylesheets().add("/css/buttons.css");
+		btnPrivateAccount.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
 	}
 
 	@Override

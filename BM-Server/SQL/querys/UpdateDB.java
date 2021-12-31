@@ -17,38 +17,6 @@ import Entities.RevenueReport;
 
 public class UpdateDB {
 
-	public static void UpdateOrderAddress(String address) {
-		PreparedStatement stmt;
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET OrderAddress = ?");
-				stmt.setString(1, address);
-				stmt.executeUpdate();
-
-			} else {
-				System.out.println("Conn is null");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void UpdateTypeOrder(String type) {
-		PreparedStatement stmt;
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET TypeOfOrder = ?");
-				stmt.setString(1, type);
-				stmt.executeUpdate();
-
-			} else {
-				System.out.println("Conn is null");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static void UpdateisLoggedIn(String userName) {
 		PreparedStatement stmt;
 		try {
@@ -56,7 +24,6 @@ public class UpdateDB {
 				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
 				stmt.setString(1, userName);
 				stmt.executeUpdate();
-
 			} else {
 				System.out.println("Conn is null");
 			}
@@ -79,13 +46,11 @@ public class UpdateDB {
 				ExistingReport = true;
 				orderAmount = rs.getInt(5);
 				income = rs.getFloat(6);
-
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		if (ExistingReport == false) {
 			try {
 				if (DBConnect.conn != null) {
@@ -150,14 +115,10 @@ public class UpdateDB {
 				while (rs.next()) {
 					ExistingReport = true;
 					Quantity = rs.getInt(1);
-					System.out.println("this is a Quantity: " + Quantity);
-					System.out.println(or.getDishType());
 				}
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 			if (ExistingReport == false) {
 				try {
 					if (DBConnect.conn != null) {
@@ -171,7 +132,6 @@ public class UpdateDB {
 						stmt.setInt(6, or.getQuantity());
 						stmt.executeUpdate();
 						RetVal = true;
-
 					} else {
 						System.out.println("Conn is null");
 						RetVal = false;
@@ -185,7 +145,6 @@ public class UpdateDB {
 				try {
 					if (DBConnect.conn != null) {
 						Quantity += or.getQuantity();
-						System.out.println(Quantity);
 						stmt3 = DBConnect.conn
 								.prepareStatement("UPDATE bitemedb.orders_report SET Quantity = '" + Quantity + "' WHERE month= '"
 										+ or.getMonth() + "' AND year ='" + or.getYear() + "' AND ResName = '"
@@ -228,7 +187,6 @@ public class UpdateDB {
 				System.out.println("Conn is null");
 				return null;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -240,7 +198,6 @@ public class UpdateDB {
 		String branch = Data[0];
 		String month = Data[1];
 		String year = Data[2];
-		System.out.println("branch= "+branch + "month= "+month + "year = "+year);
 		Statement stmt;
 		ArrayList<OrdersReport> reportarray = new ArrayList<>();
 		try {
@@ -252,14 +209,12 @@ public class UpdateDB {
 					OrdersReport report = new OrdersReport(month, year, branch, rs.getString(3), rs.getString(4),
 							rs.getInt(6));
 					reportarray.add(report);
-					
 				}
 				return reportarray;
 			} else {
 				System.out.println("Conn is null");
 				return null;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -283,7 +238,6 @@ public class UpdateDB {
 				stmt.setString(9, dish.getExtra());
 				stmt.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -304,7 +258,6 @@ public class UpdateDB {
 						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
 				stmt.setString(1, dish.getDishName());
 				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
-				System.out.println(DishType.fromTypeToStr(dish.getDishType()));
 				stmt.setString(3, dish.getRestCode());
 				stmt.executeUpdate();
 				return true;
@@ -348,7 +301,6 @@ public class UpdateDB {
 				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -402,7 +354,6 @@ public class UpdateDB {
 				stmt2.setString(3, employer.getCompanyStatus());
 				stmt2.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -422,7 +373,6 @@ public class UpdateDB {
 				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -442,7 +392,6 @@ public class UpdateDB {
 				stmt.setString(1, String.valueOf(businessAccount.getID()));
 				stmt.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -468,11 +417,9 @@ public class UpdateDB {
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-
 		newAmmount = Integer.parseInt(ammount) - Integer.parseInt(order.getUseRefund());
 		if (newAmmount < 0)
 			newAmmount = 0;
-
 		PreparedStatement stmt2;
 		try {
 			if (DBConnect.conn != null) {
@@ -480,7 +427,6 @@ public class UpdateDB {
 						+ "' WHERE restId='" + order.getRestId() + "' AND ID='" + order.getCostumerId() + "'" + "");
 				stmt2.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -506,12 +452,9 @@ public class UpdateDB {
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
-
 		newBudget = Float.parseFloat(budget) - order.getTotalPrice();
-
 		if (newBudget.compare(newBudget, 0) < 0)
 			newBudget = Float.parseFloat("0");
-
 		PreparedStatement stmt2;
 		try {
 			if (DBConnect.conn != null) {
@@ -519,7 +462,6 @@ public class UpdateDB {
 						+ "' WHERE ID='" + order.getCostumerId() + "' AND status='Approved'" + "");
 				stmt2.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -539,7 +481,6 @@ public class UpdateDB {
 				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
-
 			} else {
 				System.out.println("Conn is null");
 				return false;
@@ -549,5 +490,4 @@ public class UpdateDB {
 			return true;
 		}
 	}
-
 }

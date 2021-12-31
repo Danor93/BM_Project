@@ -29,8 +29,7 @@ import main.PopUpMessage;
 import Entities.BussinessAccount;
 import javafx.scene.text.Text;
 
-public class BranchManagerOpenNewBussinessAccountController extends Controller
-		implements Initializable {
+public class BranchManagerOpenNewBussinessAccountController extends Controller implements Initializable {
 
 	/*
 	 * Author:danor this class is for open business account
@@ -84,10 +83,9 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller
 
 	@FXML
 	private Text userName;
-	
-	  @FXML
-	    private Button back;
 
+	@FXML
+	private Button back;
 
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
@@ -97,13 +95,13 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
-		start(event,"LoginScreen", "Login Screen","");
+		start(event, "LoginScreen", "Login Screen", "");
 	}
-	
-    @FXML
-    void backToMenu(ActionEvent event) throws IOException {
-    	start(event, "BranchManagerOpenNewAccount", "Open New Account", LoginScreenController.user.getUserName());
-    }
+
+	@FXML
+	void backToMenu(ActionEvent event) throws IOException {
+		start(event, "BranchManagerOpenNewAccount", "Open New Account", LoginScreenController.user.getUserName());
+	}
 
 	/* for confirm button */
 	@FXML
@@ -147,30 +145,9 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller
 	public void initialize(URL location, ResourceBundle resources) {
 		Checkdeatils = false;
 		AprrovedFlag = false;
-	}
-
-	@FXML
-	void initialize() {
-		assert BackImage != null
-				: "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert btnBackToOpenNewAccount != null
-				: "fx:id=\"btnBackToOpenNewAccount\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert btnConfirm != null
-				: "fx:id=\"btnConfirm\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtEmail != null
-				: "fx:id=\"txtEmail\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtEmployersName != null
-				: "fx:id=\"txtEmployersName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtFirstName != null
-				: "fx:id=\"txtFirstName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtID != null
-				: "fx:id=\"txtID\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtLastName != null
-				: "fx:id=\"txtLastName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtMonthlyBillingCeiling != null
-				: "fx:id=\"txtMonthlyBillingCeiling\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-		assert txtTelephone != null
-				: "fx:id=\"txtTelephone\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
+		btnConfirm.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+		back.getStylesheets().add("/css/buttons.css");
 	}
 
 	@Override

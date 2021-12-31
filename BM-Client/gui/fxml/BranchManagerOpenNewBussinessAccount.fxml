@@ -73,7 +73,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnConfirm" layoutX="311.0" layoutY="417.0" mnemonicParsing="false" onAction="#ConfirmBussinessAccount" prefHeight="27.0" prefWidth="68.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+      <Button fx:id="btnConfirm" layoutX="311.0" layoutY="417.0" mnemonicParsing="false" onAction="#ConfirmBussinessAccount" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>

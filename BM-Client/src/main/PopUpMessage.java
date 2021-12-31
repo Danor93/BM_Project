@@ -73,7 +73,6 @@ public class PopUpMessage {
 		alert.setHeaderText(null);
 		alert.setContentText(msg);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-		
 		DialogPane dialogPane = alert.getDialogPane();
 		dialogPane.getStylesheets().add(PopUpMessage.class.getResource("/css/fontSize.css").toExternalForm());
 		dialogPane.getStyleClass().add("font18");
@@ -88,16 +87,14 @@ public class PopUpMessage {
 	 */
 	public static void simulationMessage(String msg) {
 		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.getDialogPane().setPrefSize(400, 250);
 		alert.setTitle("Simulation");
 		alert.setHeaderText(null);
 		alert.setContentText(msg);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-		
 		DialogPane dialogPane = alert.getDialogPane();
 		dialogPane.getStylesheets().add(PopUpMessage.class.getResource("/css/fontSize.css").toExternalForm());
 		dialogPane.getStyleClass().add("font18");
-
 		alert.showAndWait();
 	}
-
 }

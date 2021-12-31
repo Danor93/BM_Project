@@ -57,6 +57,9 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@FXML
 	private Button btnLogout;
+	
+    @FXML
+    private Button ClostAccountBtn;
 
 	@FXML
 	private Label nameLabel;
@@ -64,8 +67,8 @@ public class BranchManagerScreenController extends Controller implements Control
 	@FXML
 	private ImageView BackImage;
 	
-	  @FXML
-	    private Button ChangePBtn;
+	@FXML
+	private Button ChangePBtn;
 
 	/**
 	 * for back to login screen.
@@ -162,7 +165,15 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		btnLogout.getStylesheets().add("/css/buttons.css");
+		btnOpenNewAccount.getStylesheets().add("/css/buttons.css");
+		ChangePBtn.getStylesheets().add("/css/buttons.css");
+		btnConfirmEmployerRegistration.getStylesheets().add("/css/buttons.css");
+		btnOpenNewAccount.getStylesheets().add("/css/buttons.css");
+		btnViewBranchsReports.getStylesheets().add("/css/buttons.css");
+		btnUploadPDF.getStylesheets().add("/css/buttons.css");
+		btnConfirmSupplierRegistration.getStylesheets().add("/css/buttons.css");
+		ClostAccountBtn.getStylesheets().add("/css/buttons.css");
 	}
 
 	@Override

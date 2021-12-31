@@ -20,19 +20,13 @@ public class showCities {
 					cities.add(rs.getString(1));
 				}
 				rs.close();
-				
 				for(String s:cities)
 				{
 					System.out.println(s);
 				}
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return cities;
-
 	}
-
 }

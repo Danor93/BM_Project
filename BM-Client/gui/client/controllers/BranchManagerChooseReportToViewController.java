@@ -234,7 +234,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			Year.setDisable(true);
 			Branch = LoginScreenController.user.getHomeBranch().toString();
 		}
-
+		GetReport.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+		RevenueTable.getStylesheets().add("/css/tableview.css");
+		orders.getStylesheets().add("/css/tableview.css");
 	}
 
 	@Override

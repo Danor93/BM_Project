@@ -99,6 +99,8 @@ public class BranchManagerCloseAccountController extends Controller implements I
 		ClientUI.chat.accept(new Message(MessageType.get_Accounts,LoginScreenController.user.getHomeBranch().toString()));
 		loadAccounts(Users);
 		ConfirmBtn.setDisable(true);
+		ConfirmBtn.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");	
 	}
 
 	@Override
