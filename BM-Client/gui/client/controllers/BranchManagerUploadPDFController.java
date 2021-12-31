@@ -147,6 +147,8 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 		QuertarComboBox.getItems().add("4");
 		YearComboBox.setDisable(true);
 		UploadBtn.setDisable(true);
+		UploadBtn.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
 	}
 
     @Override

@@ -33,7 +33,7 @@ public abstract class  Controller  {
 		Parent root=load.load();
 		Controller aFrame = load.getController();
 		aFrame.display(toDisplay);
-		Scene scene = new Scene(root);			
+		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe" + " " + title);
 		primaryStage.setScene(scene);
 		primaryStage.show();	

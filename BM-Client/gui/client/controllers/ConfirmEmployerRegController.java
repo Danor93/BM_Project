@@ -46,9 +46,6 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	private ComboBox<String> ListofEmployers;
 
 	@FXML
-	private Button BackBtn;
-
-	@FXML
 	private Button btnConfirmEmployerRegistartion;
 
 	@FXML
@@ -153,7 +150,9 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 		loadEmployerstoComboBox(Employers);
 		btnConfirmEmployerRegistartion.setDisable(true);
 		btnRefuseEmployerRegistartion.setDisable(true);
-		
+		btnConfirmEmployerRegistartion.getStylesheets().add("/css/buttons.css");
+		btnRefuseEmployerRegistartion.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
 	}
 
     @Override

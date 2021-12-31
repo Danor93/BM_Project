@@ -123,30 +123,12 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 		}
 	}
 
-	@FXML
-	void initialize() {
-		// setImage(BackImage, "background.png");
-		assert btnBackToOpenNewAccount != null
-				: "fx:id=\"btnBackToOpenNewAccount\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtFirstName != null
-				: "fx:id=\"txtFirstName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtLastName != null
-				: "fx:id=\"txtLastName\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtID != null : "fx:id=\"txtID\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtTelephone != null
-				: "fx:id=\"txtTelephone\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtEmail != null
-				: "fx:id=\"txtEmail\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert txtCreditCardNumber != null
-				: "fx:id=\"txtCreditCardNumber\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-		assert btnConfirm != null
-				: "fx:id=\"btnConfirm\" was not injected: check your FXML file 'OpenNewPrivateAccount.fxml'.";
-
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ConfirmOpenNewPrivateAccountFlag = false;
+		btnConfirm.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+		back.getStylesheets().add("/css/buttons.css");
 	}
 
 	@Override

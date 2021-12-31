@@ -26,7 +26,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnConfirmSupplierRegistartion" layoutX="620.0" layoutY="525.0" mnemonicParsing="false" onAction="#ConfirmSupplierRegistartion" prefWidth="62.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+      <Button fx:id="btnConfirmSupplierRegistartion" layoutX="620.0" layoutY="516.0" mnemonicParsing="false" onAction="#ConfirmSupplierRegistartion" prefHeight="34.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -71,32 +71,32 @@
       <TextField fx:id="CityTXT" layoutX="340.0" layoutY="372.0" prefHeight="25.0" prefWidth="216.0" />
       <TextField fx:id="AddressTXT" layoutX="340.0" layoutY="420.0" prefHeight="25.0" prefWidth="216.0" />
       <TextField fx:id="ConfirmEmpTxt" layoutX="340.0" layoutY="467.0" prefHeight="25.0" prefWidth="216.0" />
-      <Label fx:id="invaildName" layoutX="564.0" layoutY="205.0" prefHeight="20.0" prefWidth="113.0" text="Invaild Name!" textFill="#ff0404" visible="false">
+      <Label fx:id="invaildName" layoutX="564.0" layoutY="205.0" prefHeight="20.0" prefWidth="113.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="InvaildResID" layoutX="559.0" layoutY="258.0" prefHeight="20.0" prefWidth="160.0" text="Invaild Restaurant ID" textFill="#ff0404" visible="false">
+      <Label fx:id="InvaildResID" layoutX="559.0" layoutY="258.0" prefHeight="20.0" prefWidth="160.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="InvaildEmployeeID" layoutX="559.0" layoutY="469.0" prefHeight="20.0" prefWidth="160.0" text="Invaild Employee ID!" textFill="#ff0404" visible="false">
+      <Label fx:id="InvaildEmployeeID" layoutX="559.0" layoutY="469.0" prefHeight="20.0" prefWidth="160.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="InvaildopeningTime" layoutX="562.0" layoutY="320.0" prefHeight="20.0" prefWidth="179.0" text="Invaild Opening Times!" textFill="#ff0404" visible="false">
+      <Label fx:id="InvaildopeningTime" layoutX="562.0" layoutY="320.0" prefHeight="20.0" prefWidth="179.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="InvaildCityName" layoutX="562.0" layoutY="375.0" prefHeight="20.0" prefWidth="136.0" text="Invaild City Name!" textFill="#ff0404" visible="false">
+      <Label fx:id="InvaildCityName" layoutX="562.0" layoutY="375.0" prefHeight="20.0" prefWidth="136.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="InvaildAddress" layoutX="562.0" layoutY="422.0" prefHeight="20.0" prefWidth="136.0" text="Invaild Address!" textFill="#ff0404" visible="false">
+      <Label fx:id="InvaildAddress" layoutX="562.0" layoutY="422.0" prefHeight="20.0" prefWidth="136.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
