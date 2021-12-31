@@ -15,6 +15,7 @@ import Entities.BussinessAccount;
 import Entities.Delivery;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +27,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -107,29 +109,67 @@ public class DeliveryController extends Controller{
 	    @FXML
 	    private Text sharedLbl;
 	    
+		@FXML
+		private ImageView BackImage;
+		
+	    @FXML
+	    private ImageView homePage;
+
+	    @FXML
+	    private Button logout;
+	    
+
+	    @FXML
+	    private Text userName;
+	    
+	    
 	    
 	    public ObservableList <String> observableList;
 	    
 	    public static Delivery myDelivery;
 	    
 	    private int countParticipants=2;
-
-
 	    
-	public void start(Stage primaryStage, Parent root) {
-		Scene scene=new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();	
+	    
+	/** This method meant to get back to costumer page
+	* @param event				pressing the "home" image 
+	* @throws IOException
+	*/
+	  @FXML
+	  void backToHome(MouseEvent event) throws IOException {
+	    start(event, "CustomerScreen", "CustomerScreen","");
+	  }
+	    
+	    
+	/** This method meant to get back to login page and logout the customer
+	* @param event				pressing the "logout" button 
+	* @throws IOException
+	*/
+
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
+	    ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
 	}
+
+	
+	/** This method meant to get back to choosing supply details
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
 	
 	  @FXML
 	    void back(ActionEvent event) throws IOException 
 	    {
-		  	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		  	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickup.fxml"));
 			Parent root=load.load();
 			DeliveryOrPickupController aFrame = load.getController();
-			aFrame.start(primaryStage, root);
+			aFrame.start(primaryStage, root);*/
+			
+			start(event, "DeliveryOrPickup", "Your supply details","");
+
 	    }
 
 	    @FXML
@@ -199,7 +239,16 @@ public class DeliveryController extends Controller{
     		    	
     		    	if(shared.isSelected())
     		    	{
-    		    		deliveryType="Shared";
+    		    		if(robot.isSelected())
+    		    		{
+    		    			deliveryType="Shared by robot";
+    		    			
+    		    		}
+    		    		else
+    		    		{
+    		    			deliveryType="Shared regular";
+    		    		}
+    		    		
     		    		numOfParticipants=countParticipants;
     		    		
     		    		if(numOfParticipants>2)
@@ -210,19 +259,31 @@ public class DeliveryController extends Controller{
     		    	
     		    	else
     		    	{
-    		    		deliveryType="Regular";
+    		    		if(robot.isSelected())
+    		    		{
+    		    			deliveryType="By robot";
+    		    			
+    		    		}
+    		    		else
+    		    		{
+    		    			deliveryType="Regular";
+    		    		}
+    
     		    		numOfParticipants=1;
     		    		deliPrice=25;
     		    	}
     		    	myDelivery=new Delivery(deliveryType,address.getText(),phoneNum.getText(),city.getText(),recipient.getText(),numOfParticipants,deliPrice);
     		    	ShowOrderController.finalOrder.setOrderType(deliveryType);
     		    	
-    		    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    		    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     				FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/OrderConfirm.fxml"));
     				Parent root=load.load();
     				OrderConfimController aFrame = load.getController();
     				aFrame.Display();
-    				aFrame.start(primaryStage, root);
+    				aFrame.start(primaryStage, root);*/
+    		    	
+    		    	start(event,"OrderConfirm","Order Confirmation","");
+
 
  
     		    }
@@ -342,8 +403,8 @@ public class DeliveryController extends Controller{
 
 		@Override
 		public void display(String string) {
-			// TODO Auto-generated method stub
-			
+	    	userName.setText(LoginScreenController.user.getFirstN());
+
 		}
 
 }

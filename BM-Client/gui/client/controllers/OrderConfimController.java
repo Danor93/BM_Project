@@ -21,6 +21,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
@@ -55,11 +57,45 @@ public class OrderConfimController extends Controller{
     @FXML
     private Label refundDec;
     
+    @FXML
+    private ImageView BackImage;
+
+    @FXML
+    private ImageView homePage;
+
+    @FXML
+    private Button logout;
+    
     public float calPrice;
     
     float priceAfterRef;
     
     public static String isSuccess;
+    
+	/**
+	 * This method meant to get back to costumer page
+	 * 
+	 * @param event pressing the "home" image
+	 * @throws IOException
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "CustomerScreen", "CustomerScreen", "");
+	}
+
+	/**
+	 * This method meant to get back to login page and logout the customer
+	 * 
+	 * @param event pressing the "logout" button
+	 * @throws IOException
+	 */
+
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+    }
     
     @FXML
     void chooseNo(ActionEvent event) {
@@ -167,32 +203,22 @@ public class OrderConfimController extends Controller{
 			if(result.get()==ButtonType.OK || result.get()==ButtonType.CLOSE)
 			{
 				SingletonOrder.getInstance().myOrder.clear();
-		    	startScreen(event,"CustomerScreen","Costumer Screen");
+		    	start(event,"CustomerScreen","Costumer Screen",LoginScreenController.user.getFirstN());
 			}
-
 		}
-
     }
 
     
     @FXML
     void back(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickup.fxml"));
-		Parent root=load.load();
-		DeliveryOrPickupController aFrame = load.getController();
-		aFrame.start(primaryStage, root);
-
+		start(event, "DeliveryOrPickUp", "Your supply details","");
     }
     
-	public void start(Stage primaryStage, Parent root) {
-		Scene scene=new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-	
-	public void Display()
-	{
+
+
+	@Override
+	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN());
 		calPrice=ShowOrderController.finalOrder.getTotalPrice();
 		if(ShowOrderController.refund!=null)
 		{
@@ -247,12 +273,7 @@ public class OrderConfimController extends Controller{
 			calPrice-=calPrice*0.1;
 		}
 		
-		totalPrice.setText("Total price of: "+calPrice+"$");		
-	}
-
-	@Override
-	public void display(String string) {
-		// TODO Auto-generated method stub
+		totalPrice.setText("Total price of: "+calPrice+"$");
 		
 	}
 

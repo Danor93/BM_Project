@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
+import Entities.SingletonOrder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,10 +26,6 @@ import main.ClientUI;
 
 /** This class describes the costumer side in the system-first page after logging into the BM system
  * @author Adi & Talia
- *
- */
-/**
- * @author Adi
  *
  */
 /**
@@ -68,6 +65,7 @@ public class CustomerScreenController extends Controller implements Initializabl
 
     @FXML
     void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }

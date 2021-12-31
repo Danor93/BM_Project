@@ -27,6 +27,10 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
+/**
+ * @author Adi & Talia
+ *
+ */
 public class LoginScreenController extends Controller {
 	public static User user = null;
 	public static String statusUser;
@@ -51,21 +55,29 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
+	/**
+	 * This method meant to connect the user to the biteme system
+	 * 
+	 * @param event pressing the "login" button
+	 * @throws IOException
+	 */
 	@FXML
 	void ConnectSystem(ActionEvent event) throws IOException {
+
 		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
-			PopUpMessage.errorMessage("You have to fill all the fileds!");
+			WrongInputInLoggin.setText("Please fill both user name and password");
 		}
+
 		else {
-		String[] DivededUandP;
-		StringBuilder str = new StringBuilder();
-		str.append(txtUserName.getText());
-		str.append("@");
-		str.append(PasswordField.getText());
-		ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
-		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
-			PopUpMessage.errorMessage("You have to fill all the fileds!");
-		} 
+			String[] DivededUandP;
+			StringBuilder str = new StringBuilder();
+			str.append(txtUserName.getText());
+			str.append("@");
+			str.append(PasswordField.getText());
+			ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
+			if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+				PopUpMessage.errorMessage("You have to fill all the fileds!");
+			}
 
 			if (!statusUser.equals("Active")) {
 				WrongInputInLoggin.setText(statusUser);
@@ -91,7 +103,7 @@ public class LoginScreenController extends Controller {
 				}
 
 				default: {
-					DivededUandP = ((String) user.getRole()).split(" ");
+					DivededUandP = ((String) user.getRole()).split("-");
 					if (DivededUandP[0].equals("HR")) {
 						start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
 					} else {
@@ -103,11 +115,6 @@ public class LoginScreenController extends Controller {
 				}
 			}
 		}
-
-	}
-
-	@FXML
-	void getUserName(InputMethodEvent event) {
 
 	}
 

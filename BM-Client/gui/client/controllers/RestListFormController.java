@@ -91,6 +91,7 @@ public class RestListFormController extends Controller implements Initializable 
 
     @FXML
     void logout(ActionEvent event) throws IOException {
+    	logoutForCustomer();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }

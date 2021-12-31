@@ -22,9 +22,6 @@ import main.ClientController;
 import main.ClientUI;
 
 	public class ClientMenuUiController extends Controller {
-	
-	
-		public static ShowUpdateController ShowUpdateController;
 
 	    @FXML
 	    private ResourceBundle resources;

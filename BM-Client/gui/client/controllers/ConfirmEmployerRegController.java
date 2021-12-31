@@ -89,10 +89,10 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Employer_Update, Employers));
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			startScreen(event, "CEOScreen", "CEO");
+			start(event, "CEOScreen", "CEO",LoginScreenController.user.getFirstN());
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			startScreen(event, "BranchManagerScreen", "Branch Manager");
+			start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 		}
 	}
 

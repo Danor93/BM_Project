@@ -14,12 +14,7 @@
          <image>
             <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome Adi" wrappingWidth="106.00001271565748">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Text>
-      <Text fill="#349d34" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="495.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

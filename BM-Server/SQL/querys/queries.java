@@ -332,14 +332,10 @@ public class queries {
 				orderNum = rs.getInt(1);
 			}
 			rs.close();
-
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return orderNum;
-
 	}
 
 	public static String insertDishesOrder(ArrayList<Dish> message) {
@@ -506,6 +502,7 @@ public class queries {
 				branchRest=rs1.getString(1);
 			}
 			rs1.close();
+			
 			
 			String [] date=(LocalDate.now().toString()).split("-");
 			

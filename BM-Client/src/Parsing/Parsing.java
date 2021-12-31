@@ -59,7 +59,6 @@ public class Parsing {
 
 		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
-
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.statusUser = "The user is already logged in";
@@ -80,6 +79,7 @@ public class Parsing {
 				LoginScreenController.statusUser = "User name or password are inccorect";
 				LoginScreenController.user = null;
 			}
+			IdentifyW4cController.client=null;
 			break;
 		}
 
@@ -145,10 +145,6 @@ public class Parsing {
 		}
 
 		case orderDone: {
-			break;
-		}
-
-		case Disconected: {
 			break;
 		}
 
