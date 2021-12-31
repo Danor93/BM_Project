@@ -13,43 +13,58 @@
          <image>
             <Image url="@/images/backk.jpg" />
          </image></ImageView>
-      <Text layoutX="105.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;BITEME&quot; is the #1 website" wrappingWidth="246.3999137878418">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Button fx:id="btnEnter" layoutX="186.0" layoutY="401.0" mnemonicParsing="false" onAction="#Enter" prefHeight="39.0" prefWidth="112.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Enter">
+      <Button fx:id="btnEnter" layoutX="194.0" layoutY="390.0" mnemonicParsing="false" onAction="#Enter" prefHeight="39.0" prefWidth="112.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Enter">
          <font>
             <Font name="System Bold" size="17.0" />
          </font></Button>
-      <Text layoutX="105.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="With us you will find:" wrappingWidth="211.19994735717773">
+      <Text fill="#2d4c35" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="With us you will find:" textAlignment="CENTER" underline="true" wrappingWidth="502.00000000000006">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The best restaurants" wrappingWidth="201.800048828125">
+      <Text layoutX="172.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The best restaurants" textAlignment="CENTER" wrappingWidth="180.00001907348638">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The richest variety" wrappingWidth="201.8000488281249">
+      <Text layoutX="167.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The richest variety" textAlignment="CENTER" wrappingWidth="171.3333334922791">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The fastest service" wrappingWidth="184.79990768432617">
+      <Text layoutX="163.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The fastest service" textAlignment="CENTER" wrappingWidth="180.00001907348633">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="105.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="for online food ordering services" wrappingWidth="291.19990158081055">
+      <Text layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="for online food ordering services" textAlignment="CENTER" wrappingWidth="502.00000000000006">
          <font>
-            <Font size="20.0" />
+            <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="138.0" fitWidth="238.0" layoutX="124.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="138.0" fitWidth="205.0" layoutX="146.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@/Images/logo.png" />
+            <Image url="@/images/newLogo.png" />
+         </image>
+      </ImageView>
+      <Text layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;BiteMe is the #1 website" textAlignment="CENTER" wrappingWidth="502.00000000000006">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="42.0" fitWidth="22.0" layoutX="151.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/check.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="22.0" layoutX="152.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/check.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="22.0" layoutX="152.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/check.png" />
          </image>
       </ImageView>
    </children>

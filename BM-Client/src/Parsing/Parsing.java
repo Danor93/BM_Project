@@ -83,14 +83,29 @@ public class Parsing {
 			break;
 		}
 
+		
 		case ShowHistogram: {
-
-			if (QuarterReportController.report1 == null) {
-				QuarterReportController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
-			} else {
-				QuarterReportController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			if(QuarterReportController.report1==null)
+			{
+				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
+				{
+					QuarterReportController.report1=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				}
 			}
+			else
+			{
+				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
+				{
+					QuarterReportController.report2=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				}
+				else
+				{
+					
+					QuarterReportController.report2=null;
+				}
 
+				
+			}
 			break;
 		}
 

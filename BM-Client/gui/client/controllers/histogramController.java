@@ -52,6 +52,8 @@ public class histogramController extends Controller implements Initializable {
 
     @FXML
     void back(ActionEvent event) throws IOException {
+    	QuarterReportController.report1=null;
+    	QuarterReportController.report2=null;
     	start(event,"CEOChooseQReports", "Choose Quarter Report",LoginScreenController.user.getFirstN());
     }
 

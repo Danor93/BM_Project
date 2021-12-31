@@ -23,7 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-public class QuarterReportController extends Controller implements Initializable{
+public class quaterRepController extends Controller implements Initializable{
 	
 
     @FXML
@@ -75,9 +75,6 @@ public class QuarterReportController extends Controller implements Initializable
     @FXML
     private ChoiceBox<String> year2;
     
-    @FXML
-    private Label notify;
-    
     ObservableList<String> observableList1,observableList2,observableList3;
     
     public static Map<String,ArrayList<Float>> report1=null;
@@ -93,7 +90,9 @@ public class QuarterReportController extends Controller implements Initializable
 	 */
     @FXML
     void back(ActionEvent event) throws IOException {
-		start(event, "CEOScreen", "CEO Screen",LoginScreenController.user.getFirstN());
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+
     }
 
 	/** This method meant to get back to costumer page
@@ -102,16 +101,16 @@ public class QuarterReportController extends Controller implements Initializable
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CEOScreen", "CEO Screen","");
-    }
+    	//start(event, "CustomerScreen", "CustomerScreen","");
+    	}
 
     @FXML
     void proceed(ActionEvent event) throws IOException 
     {
-       	StringBuilder b;
+    	StringBuilder b;
     	if(!choose2.isSelected()&&!choose1.isSelected())
     	{
-    		notify.setText("Select how many reports you would like to view");
+    		//label
     	}
     	
     	else
@@ -147,19 +146,18 @@ public class QuarterReportController extends Controller implements Initializable
             				}
             				else
             				{
-            					report1=null;
-            					notify.setText("The second report does not exist");
+            					//label
             				}
         					
         				}
         				else
         				{
-        					notify.setText("The first report does not exist");
+        					//label
         				}
         			}
         			else
         			{
-        				notify.setText("Please fill all fields");
+        				//label
         			}
         			
 
@@ -173,7 +171,7 @@ public class QuarterReportController extends Controller implements Initializable
         			}
         			else
         			{
-        				notify.setText("This report does not exist");
+        				//label
         			}
         			
         		}
@@ -182,7 +180,7 @@ public class QuarterReportController extends Controller implements Initializable
         	}
         	else
         	{
-        		notify.setText("Please fill all fields");
+        		//label
         	}
     		
     	}
@@ -244,7 +242,8 @@ public class QuarterReportController extends Controller implements Initializable
 
 	@Override
 	public void display(String string) {
-		userName.setText(LoginScreenController.user.getFirstN());		
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -271,6 +270,8 @@ public class QuarterReportController extends Controller implements Initializable
 		quater2.setItems(observableList2);
 		year1.setItems(observableList3);
 		year2.setItems(observableList3);
+		
+		
 	}
 
 }
