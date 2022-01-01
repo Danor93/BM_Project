@@ -1,13 +1,3 @@
-/Image/
-/css/
-/fxml/
-/icons/
-/images/
-/Parsing/
+/LoginTest.class
 /client/
-/main/
-<<<<<<< HEAD
-=======
-/Image/
-/css/
->>>>>>> master
+/LoginTest$StubLogin.class

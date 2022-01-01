@@ -29,7 +29,7 @@ import javafx.scene.control.PasswordField;
 
 /**
  * @author Adi & Talia
- *
+ * this class handles for login into the system with all the Entity related to BiteMe.
  */
 public class LoginScreenController extends Controller {
 	public static User user = null;
@@ -56,13 +56,11 @@ public class LoginScreenController extends Controller {
 	private ImageView BackImage;
 
 	/**
-	 * This method meant to connect the user to the biteme system
-	 * 
-	 * @param event pressing the "login" button
-	 * @throws IOException
+	 * This method meant to connect the user to the BiteMe system.
+	 * @param event - pressing the "login" button
 	 */
 	@FXML
-	void ConnectSystem(ActionEvent event) throws IOException {
+	public void ConnectSystem(ActionEvent event) throws IOException {
 		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
 			WrongInputInLoggin.setText("Please fill both user name and password");
 		} else {
