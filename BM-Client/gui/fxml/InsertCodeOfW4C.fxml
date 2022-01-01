@@ -10,15 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="653.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.IdentifyW4cController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="531.0" prefWidth="667.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.IdentifyW4cController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="524.0" fitWidth="626.0" layoutX="80.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="BackImage" fitHeight="531.0" fitWidth="590.0" layoutX="97.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/backk.jpg" />
+         </image></ImageView>
       <Text layoutX="576.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="111.0" layoutY="65.0" text="Insert code:">
+      <Label layoutX="111.0" layoutY="65.0" prefHeight="53.0" prefWidth="216.0" text="Insert Code:">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -33,7 +36,7 @@
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="QR" layoutX="356.0" layoutY="250.0" mnemonicParsing="false" onAction="#getW4cFromQR" prefHeight="47.0" prefWidth="148.0" style="-fx-border-color: black; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 2;" text="use QR scanner">
+      <Button fx:id="QR" layoutX="356.0" layoutY="250.0" mnemonicParsing="false" onAction="#getW4cFromQR" prefHeight="47.0" prefWidth="148.0" style="-fx-border-color: black; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-width: 2;" text="Use QR Scanner">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
@@ -54,7 +57,7 @@
                <image>
                   <Image url="@/images/home.png" />
                </image></ImageView>
-            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
+            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

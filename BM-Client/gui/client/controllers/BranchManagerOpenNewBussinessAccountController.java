@@ -1,7 +1,5 @@
 package client.controllers;
 
-
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-
+import javafx.scene.input.MouseEvent;
 import Entities.BussinessAccount;
 import Entities.Message;
 import Entities.MessageType;
@@ -29,16 +27,18 @@ import javafx.stage.Stage;
 import main.ClientUI;
 import main.PopUpMessage;
 import Entities.BussinessAccount;
+import javafx.scene.text.Text;
 
-public class BranchManagerOpenNewBussinessAccountController extends Controller implements ControllerInterface, Initializable {
+/**
+ * @author Danor
+ * this class implements the functionality of the Branch Manager to open new Business Account.
+ */
+public class BranchManagerOpenNewBussinessAccountController extends Controller implements Initializable {
 
-	/*
-	 * Author:danor
-	 * this class is for open business account
-	  */
-	public static BussinessAccount  BAccount = new BussinessAccount(null, null, null, null,null, null, null, null, null, null, null, null);
-	public static Boolean AprrovedFlag=false;
-	public static Boolean Checkdeatils=false;
+	public static BussinessAccount BAccount = new BussinessAccount(null, null, null, null, null, null, null, null, null,
+			null, null, null);
+	public static Boolean AprrovedFlag = false;
+	public static Boolean Checkdeatils = false;
 
 	@FXML
 	private ResourceBundle resources;
@@ -61,8 +61,8 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 	@FXML
 	private TextField txtEmployersName;
 
-    @FXML
-    private TextField txtFirstName;
+	@FXML
+	private TextField txtFirstName;
 
 	@FXML
 	private TextField txtID;
@@ -76,73 +76,101 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 	@FXML
 	private TextField txtTelephone;
 
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
+	@FXML
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
+	@FXML
+	private Text userName;
+
+	@FXML
+	private Button back;
+
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event,"BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
 	}
 
-	/*for confirm button*/
+	/**
+	 * @param event - logout the user.
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login Screen", "");
+	}
+
+	/**
+	 * @param event - for back to the open new account choose screen.
+	 */
+	@FXML
+	void backToMenu(ActionEvent event) throws IOException {
+		start(event, "BranchManagerOpenNewAccount", "Open New Account", LoginScreenController.user.getFirstN());
+	}
+
+
+	/**
+	 * for to confirm and check the new Business Account.
+	 * @param event - for confirm button.
+	 */
 	@FXML
 	void ConfirmBussinessAccount(ActionEvent event) {
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
 				|| txtTelephone.getText().isEmpty() || txtEmail.getText().isEmpty()
-				|| txtEmployersName.getText().isEmpty() || txtMonthlyBillingCeiling.getText().isEmpty()) {
+				|| txtEmployersName.getText().isEmpty() || txtMonthlyBillingCeiling.getText().isEmpty()) {/*if the filed are empty.*/
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
-		}
-		else {
-			ClientUI.chat.accept(new Message(MessageType.check_account_employer_approved,txtEmployersName.getText().toString()));
-			if(AprrovedFlag==true) {
+		} else {
+			ClientUI.chat.accept(
+					new Message(MessageType.check_account_employer_approved, txtEmployersName.getText().toString()));
+			if (AprrovedFlag == true) {
 				BAccount.setFirstN(txtFirstName.getText());
 				BAccount.setLastN(txtLastName.getText());
 				BAccount.setId(txtID.getText());
 				BAccount.setPhone(txtTelephone.getText());
 				BAccount.setEmail(txtEmail.getText());
-				BAccount.setCompanyName( txtEmployersName.getText());
+				BAccount.setCompanyName(txtEmployersName.getText());
 				BAccount.setBudget(txtMonthlyBillingCeiling.getText());
-				BAccount.setBranch(homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
-				AprrovedFlag=false;
-				ClientUI.chat.accept(new Message(MessageType.check_Baccount_details,BAccount));
-				if(Checkdeatils) {
-					PopUpMessage.successMessage("The bussiness account " + BAccount.getFirstN() + " " + BAccount.getLastN() +  " has been confirmed!");
-					Checkdeatils=false;
-				}
-				else {
+				BAccount.setBranch(
+						homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
+				AprrovedFlag = false;
+				ClientUI.chat.accept(new Message(MessageType.check_Baccount_details, BAccount));
+				if (Checkdeatils) {
+					PopUpMessage.successMessage("The bussiness account " + BAccount.getFirstN() + " "
+							+ BAccount.getLastN() + " has been confirmed!");
+					Checkdeatils = false;
+				} else {
 					PopUpMessage.errorMessage("one or more of the deatils is wrong!");
-					Checkdeatils=false;
+					Checkdeatils = false;
 				}
-			}
-			else {
+			} else {
 				PopUpMessage.errorMessage("your Employer -'" + BAccount.getCompanyName() + "' doesn't Approved yet!");
-				AprrovedFlag=false;
+				AprrovedFlag = false;
 			}
 		}
-
 	}
 
+	/**
+	 * initialize the button functionality and style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//setImage(BackImage, "background.png");
-		Checkdeatils=false;
-		AprrovedFlag=false;
+		Checkdeatils = false;
+		AprrovedFlag = false;
+		btnConfirm.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+		back.getStylesheets().add("/css/buttons.css");
 	}
-	
-    @FXML
-    void initialize() {
-        assert BackImage != null : "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert btnBackToOpenNewAccount != null : "fx:id=\"btnBackToOpenNewAccount\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert btnConfirm != null : "fx:id=\"btnConfirm\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtEmail != null : "fx:id=\"txtEmail\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtEmployersName != null : "fx:id=\"txtEmployersName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtFirstName != null : "fx:id=\"txtFirstName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtID != null : "fx:id=\"txtID\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtLastName != null : "fx:id=\"txtLastName\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtMonthlyBillingCeiling != null : "fx:id=\"txtMonthlyBillingCeiling\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-        assert txtTelephone != null : "fx:id=\"txtTelephone\" was not injected: check your FXML file 'BranchManagerOpenNewBussinessAccount.fxml'.";
-    }
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

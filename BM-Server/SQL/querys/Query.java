@@ -24,9 +24,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import com.mysql.cj.xdevapi.DbDoc;
+
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.DishType;
 import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
@@ -43,13 +47,21 @@ import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
 import Entities.MessageType;
 
+/**
+ * @author Danor
+ * @author Sahar
+ * @author Aviel
+ * @author Lior
+ * @author Adi
+ * @author Talia
+ * This class handles all queries the server needs to perform.
+ */
 public class Query {
 
 	/*
-	 * importData this method import the database script
+	 * importData this method import the database script.
 	 */
 	public static void importData() {
-
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Resource File");
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SQL", "*.sql"));
@@ -83,8 +95,7 @@ public class Query {
 	}
 
 	/**
-	 * readtScript this method get script and executed it into database
-	 * 
+	 * readtScript this method get script and executed it into database.
 	 * @param conn - the connection to db
 	 * @param in   - the script file
 	 */
@@ -100,7 +111,6 @@ public class Query {
 					int i = line.indexOf(' ');
 					line = line.substring(i + 1, line.length() - " */".length());
 				}
-
 				if (line.trim().length() > 0) {
 					st.execute(line);
 				}
@@ -111,11 +121,13 @@ public class Query {
 		}
 	}
 
-	/*
-	 * Author:Danor this method is for a Execute a Query which return the company
-	 * that not approved or waiting for approved by the Branch Manager.
+
+	/**
+	 * this method load employers from the DB for the Branch Manager for confirmation.
+	 * @return - the array list of employers to confirm.
 	 */
 	public static ArrayList<Employer> LoadEmployers() {
+		if (DBConnect.conn != null) {
 		ArrayList<Employer> employers = new ArrayList<>();
 		Statement stmt;
 		try {
@@ -132,21 +144,23 @@ public class Query {
 			s.printStackTrace();
 		}
 		return employers;
+		}
+		return null;
 	}
 
-	/*
-	 * Author:Danor this method Execute an Update for the companyStatus on the
-	 * company table
+	
+	/**
+	 * this method update the employer status from the Branch Manager.
+	 * @param CompanyName - the company name of the employer.
+	 * @param CompanyStatus - the updated company name of the employer.
 	 */
 	public static void UpdateEmployers(String CompanyName, String CompanyStatus) {
-		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.company SET companyStatus= '" + CompanyStatus
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.company SET companyStatus= '" + CompanyStatus
 						+ "'" + " WHERE companyName= '" + CompanyName + "'  ;");
 				stmt.executeUpdate();
 			}
-
 			else {
 				System.out.println("Conn is null");
 			}
@@ -155,6 +169,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method check if the supplier company name equals to the supplier certified and approved in the DB.
+	 * @param supplier - the supplier to check his details.
+	 * @return - true or false if the details are correct.
+	 */
 	public static Boolean checkSupplier(Supplier supplier) {
 		if (DBConnect.conn != null) {
 			try {
@@ -167,7 +186,6 @@ public class Query {
 					role1 = rs1.getString(1).split("-");
 				}
 				rs1.close();
-
 				Statement stmt2 = DBConnect.conn.createStatement();
 				ResultSet rs2 = stmt2.executeQuery(
 						"SELECT role FROM bitemedb.import_users WHERE id = '" + supplier.getConfirm_Employee() + "' ;");
@@ -175,7 +193,6 @@ public class Query {
 					role2 = rs2.getString(1).split("-");
 				}
 				rs2.close();
-
 				if (role1[0].equals("Certified") && role1[1].equals(supplier.getSupplierName())
 						&& role2[0].equals("Approved") && role2[1].equals(supplier.getSupplierName())) {
 					return true;
@@ -190,6 +207,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method adds to the users and supplier tables in the DB the details of the supplier.
+	 * @param supplier - supplier for the id of the certified and id approved supplier.
+	 */
 	public static void UpdateSupplier(Supplier supplier) {
 		try {
 			if (DBConnect.conn != null) {
@@ -269,6 +290,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method return the user by his ID from the DB.
+	 * @param ID - the id of the user.
+	 * @return - return the user from the DB
+	 */
 	public static User IDcheck(String ID) {
 		PreparedStatement stmt;
 		try {
@@ -293,39 +319,72 @@ public class Query {
 		return null;
 	}
 
-	public static ArrayList<User> getAccount() {
-		ArrayList<User> users = new ArrayList<>();
-		Statement stmt;
-		try {
-			stmt = DBConnect.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE Role='Customer'");
-			while (rs.next()) {
-				User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
-						homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
-						rs.getString(9));
-				user.setEmail(rs.getString(7));
-				user.setPhone(rs.getString(8));
-				users.add(user);
+	/**
+	 * this method returns array list of users from the DB to the Branch Manager.
+	 * @param Branch - the Branch of the Branch Manager to search users from his branch.
+	 * @return - Array list of users.
+	 */
+	public static ArrayList<User> getAccount(String Branch) {
+		if (DBConnect.conn != null) {
+			ArrayList<User> users = new ArrayList<>();
+			Statement stmt;
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt
+						.executeQuery("SELECT * FROM users WHERE Role='Customer' AND homeBranch= '" + Branch + "' ;");
+				while (rs.next()) {
+					User user = new User(rs.getString(3), rs.getString(6), rs.getString(4), rs.getString(5),
+							homeBranches.toHomeBranchType(rs.getString(10)), rs.getString(1), rs.getString(2),
+							rs.getString(9));
+					user.setEmail(rs.getString(7));
+					user.setPhone(rs.getString(8));
+					users.add(user);
+				}
+				rs.close();
+			} catch (SQLException s) {
+				s.printStackTrace();
 			}
-			rs.close();
-		} catch (SQLException s) {
-			s.printStackTrace();
+			return users;
 		}
-		return users;
+		return null;
 	}
 
+	/**
+	 * this method delete the user from the users,client tables and if its a business client,delete form the buss_client table in DB.
+	 * @param user - user from the Branch Manager to Delete.
+	 */
 	public static void DeleteAccount(User user) {
 		if (DBConnect.conn != null) {
 			try {
 				PreparedStatement stmt = DBConnect.conn
 						.prepareStatement("DELETE FROM bitemedb.users WHERE ID = '" + user.getId() + "' ;");
 				stmt.executeUpdate();
+
+				PreparedStatement stmt2 = DBConnect.conn
+						.prepareStatement("DELETE FROM bitemedb.client WHERE client_id = '" + user.getId() + "' ;");
+				stmt2.executeUpdate();
+
+				Statement stmt3 = DBConnect.conn.createStatement();
+				ResultSet rs = stmt3
+						.executeQuery("SELECT ID FROM bitemedb.buss_client WHERE ID= '" + user.getId() + "' ;");
+				while (rs.next()) {
+					PreparedStatement stmt4 = DBConnect.conn
+							.prepareStatement("DELETE FROM bitemedb.buss_client WHERE ID = '" + user.getId() + "' ;");
+					stmt4.executeUpdate();
+				}
+				rs.close();
 			} catch (SQLException s) {
+				System.out.println(s.getMessage());
 				s.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * this method returns true of false to the Branch Manager if the company is approved or not.
+	 * @param CompanyName - company name for find the company status in the DB
+	 * @return - true of false.
+	 */
 	public static Boolean checkEmployerStatus(String CompanyName) {
 		if (DBConnect.conn != null) {
 			try {
@@ -334,7 +393,7 @@ public class Query {
 						"SELECT companyStatus FROM bitemedb.company WHERE companyName= '" + CompanyName + "' ;");
 				while (rs.next()) {
 					String status = rs.getString(1);
-					if (status.equals("approved")) {
+					if (status.equals("Approved")) {
 						return true;
 					} else {
 						return false;
@@ -344,9 +403,14 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method check if the details of the business account from the Branch Manager equals to the details from the import_users.
+	 * @param Account - business account from the Branch Manager to check his details.
+	 * @return - true or false.
+	 */
 	public static Boolean checkAccountDetails(BussinessAccount Account) {
 		if (DBConnect.conn != null) {
 			try {
@@ -372,9 +436,13 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method adds the business account from the Branch manager to the users,client,buss_client tables in the DB.
+	 * @param BAccount - business account from the Branch Manager for add to the DB.
+	 */
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
@@ -385,6 +453,7 @@ public class Query {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
 					String Role = rs.getString(3);
+					
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
 							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
@@ -428,6 +497,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method check if the details of the private client from the Branch Manager is equals to the details in the import_users table.
+	 * @param client - private account details from the Branch Manager.
+	 * @return - true or false.
+	 */
 	public static Boolean checkPrivateAccount(Client client) {
 		if (DBConnect.conn != null) {
 			try {
@@ -452,9 +526,13 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method adds the private account from the Branch manager to the users,client tables in the DB.
+	 * @param PAccount - private account details for add.
+	 */
 	public static void addNewPAccount(Client PAccount) {
 		if (DBConnect.conn != null) {
 			try {
@@ -499,6 +577,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method returns users from the branch location to change permissions.
+	 * @param Branch - branch location for getting account from the DB.
+	 * @return - array list of users for change permissions to the Branch Manager.
+	 */
 	public static ArrayList<User> GetAccountForFreeze(String Branch) {
 		if (DBConnect.conn != null) {
 			try {
@@ -523,6 +606,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method return if the status of the client is active.
+	 * @param AccountID - to find the client with his ID.
+	 * @return - true or false.
+	 */
 	public static Boolean CheckAccountStatusActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -543,9 +631,14 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method return if the status of the client is freeze.
+	 * @param AccountID - to find the client with his ID.
+	 * @return - true or false.
+	 */
 	public static Boolean CheckAccountStatusFreeze(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -565,9 +658,13 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method update the account to active.
+	 * @param AccountID - to find the client with his ID.
+	 */
 	public static void UpdateAccountStatusToActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -580,6 +677,10 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method update the account to Freeze.
+	 * @param AccountID - to find the client with his ID.
+	 */
 	public static void UpdateAccountStatusToFreeze(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -592,6 +693,12 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method return true or false if there is already report for the year and quarter given.
+	 * @param quarter - for check the quarter.
+	 * @param year - for check the year.
+	 * @return - true or false.
+	 */
 	public static Boolean checkYearAndQuarter(String quarter, String year) {
 		if (DBConnect.conn != null) {
 			try {
@@ -611,36 +718,38 @@ public class Query {
 				s.printStackTrace();
 			}
 		}
-		return false;
+		return null;
 	}
 
+	/**
+	 * this method update the MyFile file form the Branch Manager to the DB.
+	 * @param file - for update the DB.
+	 */
 	public static void updateFile(MyFile file) {
-		String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
-		try {
-			Timestamp date = new java.sql.Timestamp(new Date().getTime());
-			InputStream is = new ByteArrayInputStream(file.getMybytearray());
-			PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
-			stmt.setString(1, file.getQuarter());
-			stmt.setString(2, file.getYear());
-			stmt.setTimestamp(3, date);
-			stmt.setString(4, file.getFileName());
-			stmt.setBlob(5, is);
-			stmt.setString(6, file.getHomebranch().toString());
-			stmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (DBConnect.conn != null) {
+			String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
+			try {
+				Timestamp date = new java.sql.Timestamp(new Date().getTime());
+				InputStream is = new ByteArrayInputStream(file.getMybytearray());
+				PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
+				stmt.setString(1, file.getQuarter());
+				stmt.setString(2, file.getYear());
+				stmt.setTimestamp(3, date);
+				stmt.setString(4, file.getFileName());
+				stmt.setBlob(5, is);
+				stmt.setString(6, file.getHomebranch().toString());
+				stmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	
+
 	/**
-	 * 
-	 * @param branch
-	 * @param year
-	 * @param quarter
-	 * Method connects to DB and get the relevant file with match parameters
-	 * and creates a MyFile object with the information 
-	 * @return relevant MyFile from db
+	 * @param branch - for the Branch of the report.
+	 * @param year - for the Year of the report.
+	 * @param quarter - Method connects to DB and get the relevant file with match parameters and creates a MyFile object with the information
+	 * @return - relevant MyFile from DB.
 	 */
 	public static MyFile downloadFile(String branch, String year, String quarter) {
 
@@ -675,33 +784,28 @@ public class Query {
 
 								e.printStackTrace();
 							}
-
 						downloadFile.initArray(len);
 						downloadFile.setSize(len);
 						downloadFile.setMybytearray(bytes);
 					} else {
 						System.out.println("no pdf");
 					}
-
 				}
-
 				rs.close();
 				return downloadFile;
 			}
-
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
 		return null;
-
 	}
 
 	/**
-	 * 
-	 * @param branch
-	 * Method connect to DB and get the relevant year and quarterly who match parameter "branch"
-	 * and creates a ArrayList object with the information 
-	 * @return ArrayList with the match year and quarterly
+	 * Method connect to DB and get the relevant year and quarterly
+	 *               who match parameter "branch" and creates a ArrayList object
+	 *               with the information
+	 * @param branch - for the branch of the Branch Manager.
+	 * @return - ArrayList with the match year and quarterly
 	 */
 	public static ArrayList<String> getRelevantYearsAndQuarterly(String branch) {
 		ArrayList<String> yearsAndQuarter = new ArrayList<>();
@@ -726,40 +830,6 @@ public class Query {
 
 	}
 	
-	/**
-	 * 
-	 * @param restName
-	 * @return arrayList of orders
-	 */
-	public static ArrayList<Order> LoadOrders(String restName) {
-		ArrayList<Order> orders = new ArrayList<>();
-		System.out.println("in server - "+restName);
-		Statement stmt;
-		try {
-			stmt = DBConnect.conn.createStatement();
-			/*ResultSet rs = stmt.executeQuery(
-					"SELECT orderType,restName,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE rstID='"
-							+ ID + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");*/
-			ResultSet rs = stmt.executeQuery(
-					"SELECT orderType,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE restName='"
-							+ restName + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
-			while (rs.next()) {
-				/*Order order = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getString(6), rs.getString(7), Float.parseFloat(rs.getString(8)));*/
-				Order order = new Order(rs.getString(1), restName, rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getString(6), Float.parseFloat(rs.getString(7)));
-				order.setOrderNum(Integer.parseInt(rs.getString(8)));
-				order.setUseRefund(rs.getString(9));
-				order.setUseBudget(Integer.parseInt(rs.getString(10)));
-				order.setEarlyOrder(rs.getString(11));
-				orders.add(order);
-			}
-			rs.close();
-		} catch (SQLException s) {
-			s.printStackTrace();
-		}
-		return orders;
-	}
 
 	public static ArrayList<BusinessAccountTracking> LoadBusinessAccountDetails(String companyName) {
 		ArrayList<BusinessAccountTracking> businessAccountTracking = new ArrayList<>();
@@ -842,45 +912,6 @@ public class Query {
 		return phoneNumber;
 	}
 
-	public static RevenueReport getRevenueReport(String Branch, String Month, String Year) {
-		ArrayList<Restaurant> restaurants = new ArrayList<>();
-		if (DBConnect.conn != null) {
-			try {
-				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery(
-						"SELECT restId,supplierName,openingTime,city,address,homeBranch FROM bitemedb.supplier WHERE supplierStatus ='approved' AND homeBranch= '"
-								+ Branch + "' ;");
-				while (rs.next()) {
-					Restaurant res = new Restaurant(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-							rs.getString(5), homeBranches.toHomeBranchType(rs.getString(6)));
-					restaurants.add(res);
-				}
-				rs.close();
-				RevenueReport Revenuereport = new RevenueReport(restaurants, Month, Year);
-				for (int i = 0; i < restaurants.size(); i++) {
-					String rsID = restaurants.get(i).getRestCode();
-					Statement stmt2 = DBConnect.conn.createStatement();
-					ResultSet rs2 = stmt2.executeQuery(
-							"SELECT * FROM bitemedb.order WHERE orderStatus='done' AND rstID='" + rsID + "' ;");
-					while (rs2.next()) {
-						String[] monthYear = rs2.getString(7).split("-");
-						if (Year.equals(monthYear[0]) && Month.equals(monthYear[1])) {
-							Order order = new Order(rs2.getString(2), rs2.getString(3), rs2.getString(6),
-									rs2.getString(7), null, rs2.getString(7), rs2.getString(9), rs2.getFloat(4));
-							Revenuereport.addToData(order);
-						}
-					}
-					rs2.close();
-				}
-				Revenuereport.OrgenizeData();
-				return Revenuereport;
-			} catch (SQLException s) {
-				s.printStackTrace();
-			}
-		}
-		return null;
-	}
-
 	/**
 	 * @param ID
 	 * @return restaurant name
@@ -900,6 +931,38 @@ public class Query {
 		}
 		return restName;
 	}
+	
+	/*
+	 * @param restName - for the restaurant name to check.
+	 * @return - array list of orders.
+	 */
+	public static ArrayList<Order> LoadOrders(String restName) {
+		if (DBConnect.conn != null) {
+			ArrayList<Order> orders = new ArrayList<>();
+			Statement stmt;
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT orderType,timeOfOrder,dateOfOrder,orderStatus,costumerID,rstID,totalPrice,orderNumber,usedRefund,usedBudget,EarlyOrder FROM bitemedb.order WHERE restName='"
+								+ restName + "' AND orderStatus ='Waiting' OR orderStatus='Approved'" + "");
+				while (rs.next()) {
+					Order order = new Order(rs.getString(1), restName, rs.getString(2), rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getString(6), Float.parseFloat(rs.getString(7)));
+					order.setOrderNum(Integer.parseInt(rs.getString(8)));
+					order.setUseRefund(rs.getString(9));
+					order.setUseBudget(Integer.parseInt(rs.getString(10)));
+					order.setEarlyOrder(rs.getString(11));
+					orders.add(order);
+				}
+				rs.close();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+			return orders;
+		}
+		return null;
+	}
+
 
 	/**
 	 * 
@@ -926,5 +989,36 @@ public class Query {
 			s.printStackTrace();
 		}
 		return receipts;
+}
+
+
+	/**
+	 * this method returns HashMap of the Dish Type from the DB.
+	 * @param id - for the id to check.
+	 * @return - HashMap of dish types.
+	 */
+	public static HashMap<String, Integer> getQuntitiesOfDishTypes(int id) {
+		if (DBConnect.conn != null) {
+			Statement stmt;
+			HashMap<String, Integer> retMap = new HashMap<>();
+			try {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT dishType,quentity FROM bitemedb.dishesinorder WHERE orderNum='" + id + "'" + "");
+				while (rs.next()) {
+					int quentity = rs.getInt(2);
+					String dishType = rs.getString(1);
+					if (retMap.containsKey(dishType)) {
+						quentity += retMap.get(dishType);
+					}
+					retMap.put(dishType, quentity);
+				}
+				rs.close();
+			} catch (SQLException s) {
+				s.printStackTrace();
+			}
+			return retMap;
+		}
+		return null;
 	}
 }

@@ -22,9 +22,6 @@ import main.ClientController;
 import main.ClientUI;
 
 	public class ClientMenuUiController extends Controller {
-	
-	
-		public static ShowUpdateController ShowUpdateController;
 
 	    @FXML
 	    private ResourceBundle resources;
@@ -43,7 +40,6 @@ import main.ClientUI;
 	    
 	    @FXML
 	    void ConnectToServer(ActionEvent event) throws IOException {
-	    	
 	    	String ip;
 	    	ip=ipTxt.getText();
 	    	/*if(ipTxt.getText().trim().isEmpty())
@@ -54,9 +50,10 @@ import main.ClientUI;
 	    	{*/
 	    		//ClientUI.chat= new ClientController(ip, 5555);
 	    		ClientUI.chat= new ClientController("localhost", 5555);
+	    		start(event,"BeforLogin","Description","");
 	    		//Message msg = new Message(MessageType.login, null);
 	    		//ClientUI.chat.accept(msg);
-	    		startScreen(event,"LoginScreen","Login");
+	    		//start(event,"BeforLogin","Description","");
 	    	}
 	    
 	    public void start(Stage primaryStage) throws Exception {
@@ -67,22 +64,9 @@ import main.ClientUI;
 			//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 			primaryStage.show();
 		}
-	    
-	    @FXML
-	    void initialize() {
-	    	//setImage(LogoImage, "/Images/ClientMenuUi.jpg");
-	        assert ConnectBtn != null : "fx:id=\"ConnectBtn\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
-	        assert LogoImage != null : "fx:id=\"LogoImage\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
-	        assert ipTxt != null : "fx:id=\"ipTxt\" was not injected: check your FXML file 'ClientMainUi.fxml'.";
-
-	    }
 
 		@Override
 		public void display(String string) {
-			// TODO Auto-generated method stub
 			
 		}
-
-
-
 }

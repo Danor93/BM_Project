@@ -27,6 +27,10 @@ import main.ClientUI;
 import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
+/**
+ * @author Adi & Talia
+ * this class handles for login into the system with all the Entity related to BiteMe.
+ */
 public class LoginScreenController extends Controller {
 	public static User user = null;
 	public static String statusUser;
@@ -51,78 +55,57 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
+	/**
+	 * This method meant to connect the user to the BiteMe system.
+	 * @param event - pressing the "login" button
+	 */
 	@FXML
-	void ConnectSystem(ActionEvent event) throws IOException {
-		String[] DivededUandP;
-		StringBuilder str = new StringBuilder();
-		str.append(txtUserName.getText());
-		str.append("@");
-		str.append(PasswordField.getText());
-		ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
-		// if (LoginFlag) {
-		// if (AlreadyLoggedInFlag) {
-		// PopUpMessage.errorMessage("The User is Already logged in");
-		// AlreadyLoggedInFlag = false;
-		// LoginFlag = false;
-
-		// LoginFlag = false;
-		if (!statusUser.equals("Active")) {
-			WrongInputInLoggin.setText(statusUser);
-			statusUser = null;
-		}
-
-		if (user != null) {
-			switch (user.getRole()) {
-			case "BranchManager": {
-				start(event, "BranchManagerScreen", "Branch Manager", user.getFirstN());
-				break;
+	public void ConnectSystem(ActionEvent event) throws IOException {
+		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+			WrongInputInLoggin.setText("Please fill both user name and password");
+		} else {
+			String[] DivededUandP;
+			StringBuilder str = new StringBuilder();
+			str.append(txtUserName.getText());
+			str.append("@");
+			str.append(PasswordField.getText());
+			ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
+			if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+				PopUpMessage.errorMessage("You have to fill all the fileds!");
 			}
-
-			case "Customer": {
-				start(event, "CustomerScreen", "CustomerScreen", user.getFirstN());
-				break;
+			if (!statusUser.equals("Active")) {
+				WrongInputInLoggin.setText(statusUser);
+				statusUser = null;
 			}
+			if (user != null) {
+				switch (user.getRole()) {
+				case "BranchManager": {
+					start(event, "BranchManagerScreen", "Branch Manager", user.getFirstN());
+					break;
+				}
 
-			case "CEO": {
-				start(event, "CEOScreen", "CEO", user.getFirstN());
-				break;
-			}
+				case "Customer": {
+					start(event, "CustomerScreen", "CustomerScreen", user.getFirstN());
+					break;
+				}
 
-			/*
-			 * case "Supplier": { start(event, "SupplierScreen", "Supplier",
-			 * user.getFirstN()); break; }
-			 */
+				case "CEO": {
+					start(event, "CEOScreen", "CEO", user.getFirstN());
+					break;
+				}
 
-			default: {
-				DivededUandP = ((String) user.getRole()).split("-");
-				if (DivededUandP[0].equals("HR")) {
-					start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
-				} else if (DivededUandP[0].equals("Supplier")) {
-					start(event, "SupplierScreen", "Supplier", user.getFirstN());
+				default: {
+					DivededUandP = ((String) user.getRole()).split("-");
+					if (DivededUandP[0].equals("HR")) {
+						start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
+					} else {
+						start(event, "SupplierScreen", "Supplier", user.getRole());
+					}
+					break;
+				}
 				}
 			}
-			}
 		}
-	}
-
-	/*
-	 * 
-	 * } else if (user.getRole().equals("Customer")) { start(event,
-	 * "CustomerScreen", "CustomerScreen",user.getFirstN());
-	 * 
-	 * } else if (user.getRole().equals("CEO")) { startScreen(event, "CEOScreen",
-	 * "CEO"); } else if (user.getRole().equals("Supplier")) { Name =
-	 * user.getFirstN(); ID = user.getId(); startScreen(event, "SupplierScreen",
-	 * "Supplier"); } else { DivededUandP = ((String) user.getRole()).split(" "); if
-	 * (DivededUandP[0].equals("HR")) { CompanyName = new StringBuilder(); for (int
-	 * i = 1; i < DivededUandP.length; i++) CompanyName.append(DivededUandP[i] +
-	 * " "); CompanyName.deleteCharAt(CompanyName.length()-1); fullCompanyName =
-	 * String.valueOf(CompanyName); startScreen(event, "HRManagerScreen",
-	 * "HR Manager"); } } } }
-	 */
-
-	@FXML
-	void getUserName(InputMethodEvent event) {
 
 	}
 

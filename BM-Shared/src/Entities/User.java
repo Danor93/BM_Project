@@ -101,5 +101,18 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
+	
+	/*private String userName,password,isLoggedIn,role,id,firstN,lastN,email,phone;
+	private homeBranches homeBranch;*/
+	public void PrintUser()
+	{
+		System.out.println("User Name : "+ userName);
+		System.out.println("password :"+ password);
+		System.out.println("Role : "+role);
+		System.out.println("id: "+id);
+		System.out.println("First Name: "+firstN);
+		System.out.println("Last Name: "+lastN);
+		System.out.println("String Branch :"+homeBranches.BranchToString(homeBranch));
+		System.out.println("home Branch: "+homeBranch);
+	}
 }

@@ -11,11 +11,9 @@ import Entities.OrderType;
 public class DBCheck {
 
 	public static String DBCheck(String userName, String password) {
-
 		StringBuilder result = new StringBuilder();
 		String rs2 = null;
 		String role = null,ID=null,status = null;
-		
 		PreparedStatement stmt,stmt1;
 		try {
 			if (DBConnect.conn != null) {
@@ -23,14 +21,10 @@ public class DBCheck {
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
-
 				while (rs.next()) {
-					
-					if((rs.getString(8)).equals("1"))
-					{
+					if((rs.getString(8)).equals("1")){
 						return "Already";
 					}
-					
 					role=rs.getNString(1);
 					result.append(rs.getString(1));
 					result.append("@");
@@ -50,11 +44,9 @@ public class DBCheck {
 					result.append(rs.getString(8));
 				}
 				rs.close();
-
 				if (result.length() == 0) {
 					return "WrongInput";
 				}
-				 
 				if(role.equals("Customer"))
 				{
 					stmt1 = DBConnect.conn.prepareStatement("SELECT status FROM bitemedb.client WHERE client_id=?");
@@ -69,22 +61,7 @@ public class DBCheck {
 					{
 						return "Freeze";
 					}
-							
-					
-					
 				}
-						
-				
-				
-				
-			//	stmt = DBConnect.conn.prepareStatement("SELECT isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
-			//	stmt.setString(1, userName);
-			//	stmt.setString(2, password);
-			//	rs = stmt.executeQuery();
-			//	rs.next();
-			//	rs2 = rs.getString(1).toString(); // isLoggedIn of userName
-			//	if (.equals("0")) {
-
 				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
@@ -93,22 +70,18 @@ public class DBCheck {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return result.toString();
 	}
-
 	
 	
 	
 	public static String IDcheck(String ID) {
-
 		String rs1 = null;
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn.prepareStatement("SELECT FirstName FROM bitemedb.users WHERE ID=?");
 				stmt.setString(1, ID);
-				// stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
 				rs.next();
 				rs1 = rs.getString(1).toString();
@@ -138,7 +111,6 @@ public class DBCheck {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("return false");
 		}
 		if(rs1==null)
 			return false;

@@ -102,10 +102,9 @@ public class ChoosingDishesController extends Controller implements Initializabl
 		 */
 	 @FXML
 	 void backToHome(MouseEvent event) throws IOException {
-		 start(event, "CustomerScreen", "CustomerScreen","");
+		 start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	  }
-	    
-	    
+	       
 		/** This method meant to get back to login page and logout the customer
 		 * @param event				pressing the "logout" button 
 		 * @throws IOException
@@ -113,6 +112,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
 
 	 @FXML
 	 void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
 	    ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
 	 }
@@ -126,29 +126,17 @@ public class ChoosingDishesController extends Controller implements Initializabl
     void addDishToOrder(ActionEvent event) throws IOException 
     {
     	String selectedDish =list.getSelectionModel().getSelectedItem();
-    	
     	if(selectedDish==null)
     	{
     		notify.setText("Please choose dish");
     	}
-    	
     	else
     	{
-    		
     		int indexOfDish=dishNames.indexOf(selectedDish);
         	chosenDish=dishListOfType.get(indexOfDish);
         	if(!chosenDish.getChoiceFactor().equals("")||!chosenDish.getExtra().equals(""))
         	{
-        		/*
-        		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DishOptions.fxml"));
-        		Parent root=load.load();
-        		DishOptionsController aFrame = load.getController();
-        		aFrame.setValue();
-        		aFrame.start(primaryStage, root);*/
-        		
-        		start(event, "DishOptions", "choose dish details","");
-
+        		start(event, "DishOptions", "choose dish details",LoginScreenController.user.getFirstN());
         	}
         	
         	else
@@ -157,18 +145,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
         		dish.setRestCode(RestListFormController.chosenRst.getRestCode());
         		dish.setQuentity(quentity);
         		SingletonOrder.getInstance().myOrder.add(dish);
-        		
-        		/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
-        		Parent root=load.load();
-        		MenuScreenController aFrame = load.getController();
-        		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"The dish was successfully added to your order");
-        		aFrame.display("The dish was successfully added to your order");
-        		aFrame.start(primaryStage,root);*/
-        		
         		start(event, "MenuScreen","Restaurant's menu","The dish was successfully added to your order");
-    
-        		
         	}
     	}
     }
@@ -180,15 +157,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	 */
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
-    	start(event,"MenuScreen","Restaurant's menu","");
-    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
-		Parent root=load.load();
-		MenuScreenController aFrame = load.getController();
-		//aFrame.display(RestListFormController.chosenRst.getSupplierName(),"");
-		aFrame.display("");
-		aFrame.start(primaryStage,root);*/
-
+    	start(event,"MenuScreen","Restaurant's menu",LoginScreenController.user.getFirstN());
     }
     
     @FXML
@@ -209,18 +178,14 @@ public class ChoosingDishesController extends Controller implements Initializabl
         	minus.setDisable(false);
         	plus.setDisable(false);
     	}
-    	
-
     }
     
     @FXML
     void decQuentity(ActionEvent event) {
     	if(quentity>1)
-    		quentity--;
-    	
+    		quentity--;	
     	quantity.setText(""+quentity);
     	price.setText("price : "+priceDish*quentity+"$");
-
     }
     
     
@@ -236,13 +201,11 @@ public class ChoosingDishesController extends Controller implements Initializabl
 		Scene scene = new Scene(root);		
 		stage.setScene(scene);
 		stage.show();
-		
 	}
 
 	public void display(String string) 
 	{
 		foodKind.setText(string);
-
 	}
 
 	@Override
@@ -257,14 +220,9 @@ public class ChoosingDishesController extends Controller implements Initializabl
 				System.out.println(dish.getDishName());
 				dishNames.add(dish.getDishName());
 				dishListOfType.add(dish);
-			}
-					
+			}		
 		}
-
 		ObservableList<String> observableList = FXCollections.observableArrayList(dishNames);
 		list.getItems().addAll(observableList);	
 	}
 }
-
-
-

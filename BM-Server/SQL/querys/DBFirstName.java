@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class DBFirstName {
 	
 	public static String DBFirstName(String userName, String password) {
-		
 		String rs1=null;
 		PreparedStatement stmt;
 		try {

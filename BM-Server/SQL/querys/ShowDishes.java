@@ -22,7 +22,6 @@ public class ShowDishes {
 	 */
 	public static ArrayList<Dish> getDishes(String ID) {
 		ArrayList<Dish> dishes = new ArrayList<>();
-		System.out.println(ID);
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
@@ -30,7 +29,6 @@ public class ShowDishes {
 						.prepareStatement("SELECT * FROM bitemedb.dishes WHERE restId1=? ORDER BY dishType");
 				stmt.setString(1, ID);
 				ResultSet rs = stmt.executeQuery();
-
 				while (rs.next()) {
 					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
 							rs.getString("choiceFactor"), rs.getString("choiceDetails"), rs.getString("ingredients"),
@@ -43,7 +41,6 @@ public class ShowDishes {
 			} else {
 				System.out.println("Conn is null");
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

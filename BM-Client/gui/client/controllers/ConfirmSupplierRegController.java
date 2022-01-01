@@ -14,11 +14,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
 import main.PopUpMessage;
+import javafx.scene.text.Text;
 
+/**
+ * @author Danor
+ * this class implements the functionality of the Branch Manager to confirm and add a supplier to BiteMe.
+ */
 public class ConfirmSupplierRegController extends Controller implements Initializable {
-
 	public static Supplier supplier;
 	public static Boolean confirmRegFlag = false;
 
@@ -30,9 +35,6 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 
 	@FXML
 	private TextField AddressTXT;
-
-	@FXML
-	private Button BackBtn;
 
 	@FXML
 	private ImageView BackImage;
@@ -74,106 +76,129 @@ public class ConfirmSupplierRegController extends Controller implements Initiali
 	private Label InvaildAddress;
 
 	@FXML
-	void Back(ActionEvent event) throws IOException {
-		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
-	}
+	private ImageView homePage;
 
 	@FXML
+	private Button logout;
+
+	@FXML
+	private Text userName;
+
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
+	}
+
+	/**
+	 * @param event - logout the user.
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login Screen", "");
+	}
+
+	/**
+	 * this method handles the confirm button after the user put all the information from the text fields. 
+	 * @param event - for the confirm Button.
+	 */
+	@FXML
 	void ConfirmSupplierRegistartion(ActionEvent event) {
-		Boolean ConfirmFlag = true;
 		if (AddressTXT.getText().isEmpty() || CityTXT.getText().isEmpty() || ConfirmEmpTxt.getText().isEmpty()
 				|| OpeningTimeTXT.getText().isEmpty() || ResIDTXT.getText().isEmpty()
-				|| ResNameTXT.getText().isEmpty()) {
+				|| ResNameTXT.getText().isEmpty()) {/*if the fields are empty.*/
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		} else {
-			while (ConfirmFlag) {
-				char[] charsResName = ResNameTXT.getText().toCharArray();
-				for (char c : charsResName) {
+			char[] charsResName = ResNameTXT.getText().toCharArray();
+			for (char c : charsResName) {
 
-					if (!Character.isLetter(c) && !Character.isSpaceChar(c)) {
-						invaildName.setVisible(true);
-					}
-				}
-
-				char[] charsCityName = CityTXT.getText().toCharArray();
-
-				for (char c : charsCityName) {
-
-					if (!Character.isLetter(c) && !Character.isSpaceChar(c)) {
-						InvaildCityName.setVisible(true);
-					}
-				}
-
-				char[] charsAddress = AddressTXT.getText().toCharArray();
-
-				for (char c : charsAddress) {
-
-					if (!Character.isLetter(c) && !Character.isSpaceChar(c) && !Character.isDigit(c)) {
-						InvaildAddress.setVisible(true);
-					}
-				}
-
-				/**
-				 * String regexStr = "^(1\\-)?[0-9]{3}\\-?[0-9]{3}\\-?[0-9]{4}$"; if
-				 * (!(ResIDTXT.getText()).matches(regexStr)) {
-				 * InvaildEmployeeID.setVisible(true); } if
-				 * (!ConfirmEmpTxt.getText().matches(regexStr)) { InvaildResID.setVisible(true);
-				 * }
-				 **/
-
-				char[] charresid = ResIDTXT.getText().toCharArray();
-
-				for (char c : charresid) {
-
-					if (!Character.isDigit(c)) {
-						InvaildResID.setVisible(true);
-					}
-				}
-
-				char[] charEmpId = ConfirmEmpTxt.getText().toCharArray();
-
-				for (char c : charEmpId) {
-
-					if (!Character.isDigit(c)) {
-						InvaildEmployeeID.setVisible(true);
-					}
-				}
-
-				if (invaildName.isVisible() && InvaildAddress.isVisible() && InvaildCityName.isVisible()
-						&& InvaildEmployeeID.isVisible() && InvaildopeningTime.isVisible()
-						&& InvaildResID.isVisible()) {
-					ConfirmFlag = false;
-				}
-				else {
-					break;
+				if (!(Character.isLetter(c)) && !(Character.isSpaceChar(c))) {
+					invaildName.setText("Invaild Name!");
 				}
 			}
-			supplier = new Supplier(Integer.parseInt(ResIDTXT.getText()), ResNameTXT.getText(),
-					OpeningTimeTXT.getText(), CityTXT.getText(), AddressTXT.getText(), "Approved",
-					LoginScreenController.user.getHomeBranch(), ConfirmEmpTxt.getText());
 
-			ClientUI.chat.accept(new Message(MessageType.check_suppliers_details, supplier));
-			if (confirmRegFlag) {
-				PopUpMessage
-						.successMessage("The supplier " + supplier.getSupplierName() + " has been added succesfuly!");
-				confirmRegFlag = false;
-			} else {
-				PopUpMessage.errorMessage("details are not match to the DB,check again please.");
+			char[] charsCityName = CityTXT.getText().toCharArray();
+
+			for (char c : charsCityName) {
+
+				if (!(Character.isLetter(c)) && !(Character.isSpaceChar(c))) {
+					InvaildCityName.setText("Invaild City Name!");
+				}
+			}
+
+			char[] charsAddress = AddressTXT.getText().toCharArray();
+
+			for (char c : charsAddress) {
+
+				if (!(Character.isLetter(c)) && !(Character.isSpaceChar(c)) && !(Character.isDigit(c))) {
+					InvaildAddress.setText("Invaild Address!");
+				}
+			}
+
+			char[] charresid = ResIDTXT.getText().toCharArray();
+
+			for (char c : charresid) {
+
+				if (!(Character.isDigit(c))) {
+					InvaildResID.setText("Invaild ID!");
+				}
+			}
+			
+			char[] charOpeningTime = OpeningTimeTXT.getText().toCharArray();
+			
+			for (char c : charOpeningTime) {
+
+				if (!(Character.isDigit(c)) && (c!=':') && (c!='-'))  {
+					InvaildResID.setText("Invaild ID!");
+				}
+			}
+
+			char[] charEmpId = ConfirmEmpTxt.getText().toCharArray();
+
+			for (char c : charEmpId) {
+
+				if (!(Character.isDigit(c))) {
+					InvaildEmployeeID.setText("Invaild ID!");
+				}
+			}
+
+			if ((invaildName.getText().equals("")) && (InvaildAddress.getText().equals(""))
+					&& (InvaildCityName.getText().equals("")) && (InvaildEmployeeID.getText().equals(""))
+					&& (InvaildopeningTime.getText().equals("")) && (InvaildResID.getText().equals(""))) {
+				supplier = new Supplier(Integer.parseInt(ResIDTXT.getText()), ResNameTXT.getText(),
+						OpeningTimeTXT.getText(), CityTXT.getText(), AddressTXT.getText(), "Approved",
+						LoginScreenController.user.getHomeBranch(), ConfirmEmpTxt.getText());
+
+				ClientUI.chat.accept(new Message(MessageType.check_suppliers_details, supplier));
+				if (confirmRegFlag) {
+					PopUpMessage.successMessage(
+							"The supplier " + supplier.getSupplierName() + " has been added succesfuly!");
+					confirmRegFlag = false;
+				} else {
+					PopUpMessage.errorMessage("details are not match to the DB,check again please.");
+				}
 			}
 		}
 
 	}
 
+	/**
+	 * initialize the buttons style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+		btnConfirmSupplierRegistartion.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
-
 }

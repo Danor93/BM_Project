@@ -40,7 +40,6 @@ public class RestListFormController extends Controller implements Initializable 
 	@FXML
 	private Text cityName;
 
-
     @FXML
     private TableColumn<Restaurant, String> colAdd;
 
@@ -80,7 +79,7 @@ public class RestListFormController extends Controller implements Initializable 
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen","");
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
     
@@ -91,6 +90,7 @@ public class RestListFormController extends Controller implements Initializable 
 
     @FXML
     void logout(ActionEvent event) throws IOException {
+    	logoutForCustomer();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
     }
@@ -103,8 +103,7 @@ public class RestListFormController extends Controller implements Initializable 
 
     @FXML
     void backToCity(ActionEvent event) throws IOException {
-		start(event,"ChooseRestaurant","Choose city","");
-
+		start(event,"ChooseRestaurant","Choose city",LoginScreenController.user.getFirstN());
     }
 
     
@@ -118,23 +117,13 @@ public class RestListFormController extends Controller implements Initializable 
 		if(supplier!=null)
 		{
 			String address=table.getSelectionModel().getSelectedItem().getAddress();
-			Message msg= new Message(MessageType.get_Dishes,table.getSelectionModel().getSelectedItem().getRestCode());
-			ClientUI.chat.accept(msg);
-
-			
+			ClientUI.chat.accept(new Message(MessageType.get_Dishes,table.getSelectionModel().getSelectedItem().getRestCode()));
 			for(Restaurant r:restaurants)
 			{
 				if(supplier.equals(r.getSupplierName())&& address.equals(r.getAddress()))
-					chosenRst=r;
-				
+					chosenRst=r;	
 			}
-			start(event,"MenuScreen","Restaurant's menu","");
-			
-			
-			
-
-			//aFrame.display(supplier,"");
-			//aFrame.start(primaryStage,root);
+			start(event,"MenuScreen","Restaurant's menu",LoginScreenController.user.getFirstN());
 		}
     }
 
@@ -144,8 +133,7 @@ public class RestListFormController extends Controller implements Initializable 
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Message msg=new Message(MessageType.show_Restaurants,ChooseRestController.cityName);
-		ClientUI.chat.accept(msg);
+		ClientUI.chat.accept(new Message(MessageType.show_Restaurants,ChooseRestController.cityName));
 		ObservableList<Restaurant> observableList = FXCollections.observableArrayList(restaurants);
 		colAdd.setCellValueFactory(new PropertyValueFactory<>("address"));
 		colOpen.setCellValueFactory(new PropertyValueFactory<>("openning"));
@@ -160,7 +148,5 @@ public class RestListFormController extends Controller implements Initializable 
 	public void display(String city) {
 		cityName.setText(city);
 		userName.setText(LoginScreenController.user.getFirstN());
-
 	}
-
 }

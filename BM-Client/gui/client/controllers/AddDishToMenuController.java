@@ -81,6 +81,9 @@ public class AddDishToMenuController extends Controller implements Initializable
 	@FXML
 	private Button logout;
 
+	@FXML
+	private Button back;
+
 	private String TypeOfDish;
 	private boolean typeDishIsValid = true;
 	private boolean choiceDetailsIsValid = true;
@@ -97,7 +100,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page", "");
+		start(event, "SupplierScreen", "Supplier page",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -110,6 +113,12 @@ public class AddDishToMenuController extends Controller implements Initializable
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login", "");
 	}
+	
+
+    @FXML
+    void backToDishes(ActionEvent event) throws IOException {
+    	start(event,"UpdateMenuScreen", "Update Menu",LoginScreenController.user.getFirstN());
+    }
 
 	/**
 	 * A method to catch the type of dish.
@@ -137,7 +146,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 			txtMiniLabel.setText("Name must be valid!");
 		else if (txtPriceDish.getText().isEmpty())
 			txtMiniLabel.setText("Price must be valid!");
-
 		else {
 			try {
 				Float price = Float.parseFloat(txtPriceDish.getText());

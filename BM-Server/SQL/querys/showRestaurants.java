@@ -27,11 +27,9 @@ public class showRestaurants {
 				}
 				rs.close();
 		}
-
 		 catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rest;
 	}
-
 }

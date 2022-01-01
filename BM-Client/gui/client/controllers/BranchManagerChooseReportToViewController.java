@@ -3,13 +3,14 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 
-import Entities.BusinessAccountTracking;
 import Entities.Message;
 import Entities.MessageType;
-import Entities.Order;
-import Entities.Restaurant;
+import Entities.RevenueReport;
+import Entities.homeBranches;
+import Entities.OrdersReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,68 +22,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import main.ClientUI;
-import Entities.RevenueReport;
 
+/**
+ * @author Danor
+ * this class  implements the functionality of the Branch Manager to view reports of Revenues, Orders And Performance. 
+ */
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
 
-	private static BranchManagerChooseReportToViewController instance = new BranchManagerChooseReportToViewController();
-	public static String Branch, reportType, year;
-	public static int month;
-	public static StringBuilder details = new StringBuilder();
-	public static RevenueReport revenueReport;
-	
-	public class RelavantData {
-
-		private String Restaurant;
-		private Integer NumberOfOrders;
-		private Float Income;
-
-		RelavantData(Restaurant rest) {
-			float sum = 0;
-			int numberoforders = 0;
-			this.Restaurant = rest.getSupplierName();
-			ArrayList<Order> Orders = BranchManagerChooseReportToViewController.revenueReport.getOrgizedData()
-					.get(rest.getSupplierName());
-			for (Order o : Orders) {
-
-				if (o.getRestId().equals(rest.getRestCode())) {
-					sum += o.getTotalPrice();
-					numberoforders++;
-				}
-			}
-			NumberOfOrders = numberoforders;
-			Income = sum;
-
-		}
-
-		public String getRestaurant() {
-			return this.Restaurant;
-		}
-
-		public Integer getNumberOfOrders() {
-			return this.NumberOfOrders;
-		}
-
-		public Float getIncome() {
-			return Income;
-		}
-
-		public String toString() {
-			return "The Rstaurat is: " + Restaurant + " the number of orders is: " + String.valueOf(NumberOfOrders)
-					+ " Total income is: " + Income.toString();
-		}
-	}
-
-	ObservableList<RelavantData> revenueReportList;
-	private ArrayList<RelavantData> RevenueData = new ArrayList<>();
-	@FXML
-	private ResourceBundle resources;
-
-	@FXML
-	private URL location;
+	public String Branch, Type, year, month;
+	public static ArrayList<RevenueReport> revenueArray = new ArrayList<>();
+	public static ArrayList<OrdersReport> ordersArray = new ArrayList<>();
+	ObservableList<RevenueReport> RevenueList;
+	ObservableList<OrdersReport> OrderList;
 
 	@FXML
 	private ImageView BackImage;
@@ -97,22 +53,16 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private ComboBox<Integer> Month;
 
 	@FXML
+	private TableColumn<OrdersReport, String> OrdDishTypeCol;
+
+	@FXML
+	private TableColumn<OrdersReport, Integer> OrdQuantityCol;
+
+	@FXML
+	private TableColumn<OrdersReport, String> OrdRestCol;
+
+	@FXML
 	private Pane Orders;
-
-	@FXML
-	private TableView<String> PerformanceTable;
-
-	@FXML
-	private TableView<RelavantData> RevenueTable;
-
-	@FXML
-	private TableColumn<RelavantData, Float> Income;
-
-	@FXML
-	private TableColumn<RelavantData, Integer> NumberOfOrders;
-
-	@FXML
-	private TableColumn<RelavantData, String> Restaurant;
 
 	@FXML
 	private StackPane ReportPane;
@@ -121,114 +71,189 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private ComboBox<String> ReportType;
 
 	@FXML
+	private TableColumn<RevenueReport, Float> RevIncomeCol;
+
+	@FXML
+	private TableColumn<RevenueReport, Integer> RevNumOforCol;
+
+	@FXML
+	private TableColumn<RevenueReport, String> RevResCol;
+
+	@FXML
 	private Pane Revenue;
 
 	@FXML
-	private Pane main;
+	private TableView<RevenueReport> RevenueTable;
 
 	@FXML
 	private ComboBox<String> Year;
 
 	@FXML
-	private Button btnBack;
+	private Pane main;
 
 	@FXML
-	private TableView<String> OrdersTable;
+	private TableView<OrdersReport> orders;
+	
+	@FXML
+	private ImageView homePage;
 
 	@FXML
-	void Back(ActionEvent event) throws IOException {
+	private Button logout;
+
+	@FXML
+	private Text userName;
+	
+	
+	/**
+	 * @param event - back to the home screen of the Branch Manager/CEO.
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			startScreen(event, "CEOScreen", "CEO");
+			start(event, "CEOScreen", "CEO",LoginScreenController.user.getFirstN());
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			startScreen(event, "BranchManagerScreen", "Branch Manager");
+			start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 		}
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
+
+	/**
+	 * choosing branch from the combo box (CEO Only).
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseBranch(ActionEvent event) {
 		Branch = BranchChoose.getSelectionModel().getSelectedItem();
 		ReportType.setDisable(false);
 	}
 
+	/**
+	 * choosing Month from the combo box
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseMonth(ActionEvent event) {
-		month = Month.getSelectionModel().getSelectedItem();
+		month = String.valueOf(Month.getSelectionModel().getSelectedItem());
 		Year.setDisable(false);
 	}
 
+	/**
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseReportType(ActionEvent event) {
-		reportType = ReportType.getSelectionModel().getSelectedItem();
 		Month.setDisable(false);
 	}
 
+	/**
+	 * choosing Year from the combo box.
+	 * @param event - for the combo box.
+	 */
 	@FXML
 	void ChooseYear(ActionEvent event) {
-		year = Year.getSelectionModel().getSelectedItem();
+		year = Year.getSelectionModel().getSelectedItem().toString();
 		GetReport.setDisable(false);
 	}
 
+	/**
+	 * show the user the report he wanted by branch,year,month.
+	 * @param event - for the Get Report button.
+	 */
 	@FXML
 	void getReport(ActionEvent event) {
+		year = Year.getSelectionModel().getSelectedItem().toString();
+		month =Month.getSelectionModel().getSelectedItem().toString();
+		Branch =homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
+		StringBuilder details = new StringBuilder();
 		details.append(Branch);
 		details.append("@");
 		details.append(month);
 		details.append("@");
 		details.append(year);
-		switch (reportType) {
+		if (ReportType.getSelectionModel().getSelectedItem() != null) {
+			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
+			
+			case "Revenue": {	
+				orders.setVisible(false);
+				RevenueReport(details);
+				break;
+			}
 
-		case "Revenue": {
-			Revenue.toFront();
-			RevenueTable.setVisible(true);
-			RevenueReport();
-		}
+			case "Orders": {		
+				OrdersReport(details);
+				break;
+			}
 
-		case "Orders": {
-			OrdersReport();
-		}
-
-		case "Performance": {
-			PerformanceReport();
-		}
-
+			case "Performance": {
+				orders.setVisible(false);
+				PerformanceReport(details);
+				break;
+			}
+			}
+		} else {
+			System.out.println("label ERROR!");
 		}
 	}
 
-	public void RevenueReport() {
+	/**
+	 * a method for handle the Revenue table and show it in the screen.
+	 * @param details - details of the Branch,Year,Month.
+	 */
+	public void RevenueReport(StringBuilder details) {
+		RevenueTable.setVisible(true);
+		Revenue.toFront();
+		RevResCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("resName"));
+		RevNumOforCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Integer>("ordersamount"));
+		RevIncomeCol.setCellValueFactory(new PropertyValueFactory<RevenueReport, Float>("Income"));
 		ClientUI.chat.accept(new Message(MessageType.get_Revenue_report, details.toString()));
-		RevenueData = getRelavantDataArray();
-		Restaurant.setCellValueFactory(new PropertyValueFactory<RelavantData, String>("Restaurant"));
-		NumberOfOrders.setCellValueFactory(new PropertyValueFactory<RelavantData, Integer>("NumberOfOrders"));
-		Income.setCellValueFactory(new PropertyValueFactory<RelavantData, Float>("Income"));
-		revenueReportList = FXCollections.observableArrayList(RevenueData);
-		RevenueTable.getItems().addAll(revenueReportList);
-		RevenueTable.refresh();
+		RevenueList = FXCollections.observableArrayList(revenueArray);
+		RevenueTable.setItems(RevenueList);
 	}
 
-	ArrayList<RelavantData> getRelavantDataArray() {
-		ArrayList<RelavantData> relevantDataArray = new ArrayList<>();
-		for (Restaurant rest : revenueReport.getRestaurant()) {
-			RelavantData r = new RelavantData(rest);
-			System.out.println(r.toString());
-			relevantDataArray.add(r);
-		}
-
-		return relevantDataArray;
-	}
-
-	public void OrdersReport() {
+	/**
+	 * a method for handle the Orders table and show it in the screen.
+	 * @param details - details of the Branch,Year,Month.
+	 */
+	public void OrdersReport(StringBuilder details) {
+		orders.setVisible(true);
+		Orders.toFront();
+		OrdDishTypeCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("DishType"));
+		OrdQuantityCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, Integer>("Quantity"));
+		OrdRestCol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("ResName"));
 		ClientUI.chat.accept(new Message(MessageType.get_Orders_report, details.toString()));
+		OrderList = FXCollections.observableArrayList(ordersArray);
+		orders.setItems(OrderList);
 	}
 
-	public void PerformanceReport() {
+	public void PerformanceReport(StringBuilder details) {
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
 	}
 
+	/**
+	 * initialize the screen buttons and combo box.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		main.toFront();
+		ReportType.getItems().add("Revenue");
+		ReportType.getItems().add("Orders");
+		ReportType.getItems().add("Performance");
+		for (int i = 1; i <= 12; i++) {
+			Month.getItems().add(i);
+		}
+		Year.getItems().add("2022");
+		Year.getItems().add("2021");
+
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			btnBack.setText("Back to CEO Screen");
 			BranchChoose.getItems().add("North");
 			BranchChoose.getItems().add("Center");
 			BranchChoose.getItems().add("South");
@@ -238,63 +263,22 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			GetReport.setDisable(true);
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			btnBack.setText("Back to Branch Manager Screen");
 			BranchChoose.setDisable(true);
 			Month.setDisable(true);
 			Year.setDisable(true);
-			GetReport.setDisable(true);
 			Branch = LoginScreenController.user.getHomeBranch().toString();
 		}
-		main.toFront();
-		ReportType.getItems().add("Revenue");
-		ReportType.getItems().add("Orders");
-		ReportType.getItems().add("Performance");
-		for (int i = 1; i <= 12; i++) {
-			Month.getItems().add(i);
-		}
-		Year.getItems().add("2021");
-		Year.getItems().add("2020");
-		Year.getItems().add("2019");
+		GetReport.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+		RevenueTable.getStylesheets().add("/css/tableview.css");
+		orders.getStylesheets().add("/css/tableview.css");
 	}
 
-	public static BranchManagerChooseReportToViewController getInstance() {
-		return instance;
-	}
-
-	@FXML
-	void initialize() {
-		assert BackImage != null
-				: "fx:id=\"BackImage\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert BranchChoose != null
-				: "fx:id=\"BranchChoose\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert GetReport != null
-				: "fx:id=\"GetReport\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert Month != null
-				: "fx:id=\"Month\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert Orders != null
-				: "fx:id=\"Orders\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert PerformanceTable != null
-				: "fx:id=\"PerformanceTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert ReportPane != null
-				: "fx:id=\"ReportPane\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert ReportType != null
-				: "fx:id=\"ReportType\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert Revenue != null
-				: "fx:id=\"Revenue\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert RevenueTable != null
-				: "fx:id=\"RevenueTable\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert Year != null
-				: "fx:id=\"Year\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert btnBack != null
-				: "fx:id=\"btnBack\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-		assert main != null
-				: "fx:id=\"main\" was not injected: check your FXML file 'BranchManagerChooseReportToView.fxml'.";
-
-	}
-
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

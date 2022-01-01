@@ -12,9 +12,9 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DishOptionsController">
    <children>
-      <ImageView fitHeight="544.0" fitWidth="620.0" layoutX="104.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="544.0" fitWidth="620.0" layoutX="91.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:@/images/backk.jpg" />
+            <Image url="@/images/backk.jpg" />
          </image>
       </ImageView>
       <Text layoutX="637.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
@@ -22,7 +22,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Button fx:id="addToOrder" layoutX="526.0" layoutY="495.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="33.0" prefWidth="150.0" style="-fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 30;" text="add to my order">
+      <Button fx:id="addToOrder" layoutX="526.0" layoutY="495.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="33.0" prefWidth="150.0" style="-fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 30;" text="Add To My Order">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -38,7 +38,7 @@
          </font>
       </Text>
       <ComboBox fx:id="choice" layoutX="263.0" layoutY="113.0" prefWidth="150.0" />
-      <Text layoutX="221.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="changes in your dish ?">
+      <Text layoutX="221.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Changes in Your Dish ?">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -77,12 +77,12 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="back" layoutX="11.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToDishes" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="back">
+            <Button fx:id="back" layoutX="11.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToDishes" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

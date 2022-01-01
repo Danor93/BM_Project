@@ -7,19 +7,22 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.ErrorManager;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-
 import javafx.scene.control.Label;
-
+import Entities.DishType;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.OrderType;
 import Entities.Receipt;
+import Entities.OrdersReport;
+import Entities.RevenueReport;
+import Entities.homeBranches;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,6 +42,8 @@ import main.PopUpMessage;
 public class ConfirmOrderApprovalController extends Controller implements Initializable {
 	public static ArrayList<Order> allOrders = new ArrayList<Order>();
 	public static String phoneNumber;
+	public static HashMap<String, Integer> dishTypesQuentities = new HashMap<>();
+	private String branch;
 
 	@FXML
 	private ResourceBundle resources;
@@ -115,7 +120,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page", "");
+		start(event, "SupplierScreen", "Supplier page", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -169,19 +174,52 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 			table.setItems(list);
 		}
 	}
+	String checkQuarterly(String month) {
+		switch (month) {
+		case "1":
+			return "1";
+		case "2":
+			return "1";
+		case "3":
+			return "1";
+		case "4":
+			return "2";
+		case "5":
+			return "2";
+		case "6":
+			return "2";
+		case "7":
+			return "3";
+		case "8":
+			return "3";
+		case "9":
+			return "3";
+		case "10":
+			return "4";
+		case "11":
+			return "4";
+		case "12":
+			return "4";
+		default: {
+			return null;
+		}
+		}
+	}
+
 
 	/**
 	 * A method of refusing an order waiting for approval.
 	 * 
 	 * @param event = ActionEvent
 	 */
+
 	@FXML
 	void refuseOrder(ActionEvent event) throws IOException {
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
 		ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of the
-																							// database to Not approved
+		// database to Not approved
 		for (int i = 0; i < allOrders.size(); i++) {
 			if (allOrders.get(i).equals(orderToChange))
 				allOrders.remove(i);
@@ -264,42 +302,6 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				PopUpMessage.errorMessage("The order must be sent on the requested day.");
 			}
 		}
-	}
-
-	@FXML
-	void initialize() {
-		assert backImg != null
-				: "fx:id=\"backImg\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Refuse != null : "fx:id=\"Refuse\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Confirm != null
-				: "fx:id=\"Confirm\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert table != null : "fx:id=\"table\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderNumber != null
-				: "fx:id=\"orderNumber\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderType != null
-				: "fx:id=\"orderType\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert restName != null
-				: "fx:id=\"restName\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert totalPrice != null
-				: "fx:id=\"totalPrice\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert timeOfOrder != null
-				: "fx:id=\"timeOfOrder\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert dateOfOrder != null
-				: "fx:id=\"dateOfOrder\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert orderStatus != null
-				: "fx:id=\"orderStatus\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert costumerID != null
-				: "fx:id=\"costumerID\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert Send != null : "fx:id=\"Send\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert setArrivalTimeIsPlaaned != null
-				: "fx:id=\"setArrivalTimeIsPlaaned\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert labelArrivalTime != null
-				: "fx:id=\"labelArrivalTime\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert userName != null
-				: "fx:id=\"userName\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert homePage != null
-				: "fx:id=\"homePage\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
-		assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'ConfirmOrderApproval.fxml'.";
 	}
 
 	@Override

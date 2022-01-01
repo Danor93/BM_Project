@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="532.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
+<AnchorPane prefHeight="532.0" prefWidth="721.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmOrderApprovalController">
    <children>
       <ImageView fx:id="backImg" fitHeight="658.0" fitWidth="827.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/backk.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="248.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change order status">
+      <Text layoutX="248.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Order Status">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
@@ -30,12 +30,12 @@
       </Text>
       <Button fx:id="Refuse" layoutX="292.0" layoutY="539.0" mnemonicParsing="false" onAction="#refuseOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Refuse" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <Button fx:id="Confirm" layoutX="412.0" layoutY="539.0" mnemonicParsing="false" onAction="#confirmOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Confirm" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <Text layoutX="159.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are orders approved by the customer waiting for approval from the supplier.">
@@ -62,7 +62,7 @@
       </TableView>
       <Button fx:id="Send" layoutX="527.0" layoutY="539.0" mnemonicParsing="false" onAction="#SendOrder" prefHeight="83.0" prefWidth="83.0" style="-fx-background-color: brown; -fx-background-radius: 20;" text="Send" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
       <TextField fx:id="setArrivalTimeIsPlaaned" layoutX="371.0" layoutY="496.0" prefHeight="30.0" prefWidth="334.0" promptText="Example: 22:10" />
@@ -88,7 +88,7 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

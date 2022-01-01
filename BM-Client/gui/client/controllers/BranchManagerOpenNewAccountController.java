@@ -15,16 +15,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
+import javafx.scene.text.Text;
 
-public class BranchManagerOpenNewAccountController extends Controller implements ControllerInterface,Initializable {
+/**
+ * @author Danor 
+ * this class implements the functionality of the Branch Manager to choose which account he wants to open (Private/Business).
+ */
+public class BranchManagerOpenNewAccountController extends Controller implements Initializable {
 
-	/*
-	 * author:Danor
-	 * this class for open new account
-	 */
 	@FXML
 	private ResourceBundle resources;
 
@@ -37,58 +40,68 @@ public class BranchManagerOpenNewAccountController extends Controller implements
 	@FXML
 	private Button btnPrivateAccount;
 
-	 @FXML
-	 private Button BackBtn;
-
 	@FXML
 	private ImageView BackImage;
 
 	@FXML
-	void initialize() {
-		//setImage(BackImage, "background.png");
-		assert btnBusinessAccount != null
-				: "fx:id=\"btnBusinessAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
-		assert btnPrivateAccount != null
-				: "fx:id=\"btnPrivateAccount\" was not injected: check your FXML file 'OpenNewAccount.fxml'.";
-	    assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerOpenNewAccount.fxml'.";
+	private ImageView homePage;
+
+	@FXML
+	private Button logout;
+
+	@FXML
+	private Text userName;
+	
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
 	}
 
-	/*for business account*/
+	/**
+	 * @param event - logout the user.
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event,"LoginScreen", "Login Screen","");
+	}
+
+	/**
+	 * open the open new Business Account Screen.
+	 * @param event - for the Business account Button.
+	 */
 	@FXML
 	void BusinessAccount(ActionEvent event) throws IOException {
-		startScreen(event,"BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account");
+		start(event, "BranchManagerOpenNewBussinessAccount", "Open New Bussiness Account",LoginScreenController.user.getFirstN());
 	}
 
-	/*for private account*/
+	/**
+	 * open the open new Private Account Screen.
+	 * @param event  - for the Private account Button.
+	 */
 	@FXML
 	void PrivateAccount(ActionEvent event) throws IOException {
-		startScreen(event,"BranchManagerOpenNewPrivateAccount", "Open New Private Account");
+		start(event, "BranchManagerOpenNewPrivateAccount", "Open New Private Account",LoginScreenController.user.getFirstN());
 	}
 
-	/*for back to the branch manager screen*/
-	@Override
-	public void Back(ActionEvent event) throws IOException {
-		if(LoginScreenController.user.getRole().equals("CEO")) {
-			startScreen(event, "CEOScreen", "CEO");
-		}
-		if(LoginScreenController.user.getRole().equals("BranchManager")) {
-			startScreen(event, "BranchManagerScreen", "Branch Manager");
-		}
-	}
-
+	/**
+	 * initialize the style of the buttons.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(LoginScreenController.user.getRole().equals("CEO")) {
-			BackBtn.setText("Back to CEO Panel");
-		}
-		if(LoginScreenController.user.getRole().equals("BranchManager")) {
-			BackBtn.setText("Back to Branch Manager Panel");
-		}
+		btnBusinessAccount.getStylesheets().add("/css/buttons.css");
+		btnPrivateAccount.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

@@ -14,85 +14,117 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import main.ClientUI;
+import main.PopUpMessage;
+import javafx.scene.text.Text;
 
+/**
+ * @author Danor 
+ * this class implements the functionality of the Branch Manager to close an account.
+ */
 public class BranchManagerCloseAccountController extends Controller implements Initializable {
 
-	/*
-	 * Author:Danor
-	 * This class is for close an account.
-	 */
-	
 	public static ArrayList<User> Users;
-	public static String userName;
-	
-    @FXML
-    private ResourceBundle resources;
+	public static String UserName;
 
-    @FXML
-    private URL location;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private Button BackBtn;
-    
-    @FXML
-    private Button ConfirmBtn;
+	@FXML
+	private URL location;
 
+	@FXML
+	private Button ConfirmBtn;
 
-    @FXML
-    private ComboBox<String> AccountComboBox;
-    
-    @FXML
-    void backToBranchManager(ActionEvent event) throws IOException {
-    	startScreen(event, "BranchManagerScreen", "Branch Manager Main");
-    }
+	@FXML
+	private ImageView homePage;
 
-    /*for the combo box*/
-   @FXML
-   void ChooseUserName(ActionEvent event) {
-	   userName = AccountComboBox.getSelectionModel().getSelectedItem();
-	   ConfirmBtn.setDisable(false);
-   }
-   
-   /*for confirm button*/
-   @FXML
-   void ConfrimDelete(ActionEvent event) {
-	   User user = null;
-	   for(int i=0;i<Users.size();i++) {
-		   if(Users.get(i).getUserName().equals(userName)) {
-			  user=Users.get(i);
-			  Users.remove(i);
-		   }
-	   }
-	   ClientUI.chat.accept(new Message(MessageType.Delete_Account,user));
-	   loadAccounts(Users);
-   }
-    
-    
-    @FXML
-    void initialize() {
-        assert BackBtn != null : "fx:id=\"BackBtn\" was not injected: check your FXML file 'BranchManagerCloseAccount.fxml'.";
-        assert AccountComboBox != null : "fx:id=\"AccountComboBox\" was not injected: check your FXML file 'BranchManagerCloseAccount.fxml'.";
-    }
+	@FXML
+	private Button logout;
 
-    /*load account for the combo box*/
-    public void loadAccounts(ArrayList<User> Users) {
-    	for(User u:Users) {
-    		AccountComboBox.getItems().add(u.getFirstN());
-    	}
-    }
+	@FXML
+	private Text userName;
 
+	@FXML
+	private ComboBox<String> AccountComboBox;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.chat.accept(new Message(MessageType.get_Accounts,null));
-		loadAccounts(Users);
-		ConfirmBtn.setDisable(true);
+	/**
+	 * @param event - back to the home screen of the Branch Manager
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getUserName());
 	}
 
+	/**
+	 * @param event - logout the user.
+	 */
+	@FXML
+	void logout(ActionEvent event) throws IOException {
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login Screen", "");
+	}
+
+	/**
+	 * choosing a user name from the combo box.
+	 * 
+	 * @param event - for the combo box
+	 */
+	@FXML
+	void ChooseUserName(ActionEvent event) {
+		UserName = AccountComboBox.getSelectionModel().getSelectedItem().toString();
+		ConfirmBtn.setDisable(false);
+	}
+
+	/**
+	 * confirm the delete of the user.
+	 * 
+	 * @param event - for the Confirm button.
+	 */
+	@FXML
+	void ConfrimDelete(ActionEvent event) {
+		User user = null;
+		for (int i = 0; i < Users.size(); i++) {
+			if (Users.get(i).getFirstN().equals(UserName)) {
+				user = Users.get(i);
+				Users.remove(i);
+			}
+		}
+		ClientUI.chat.accept(new Message(MessageType.Delete_Account, user));
+		PopUpMessage.successMessage("Account " + UserName + " has been Deleted!");
+		loadAccounts(Users);
+	}
+
+	/**
+	 * load account for the combo box.
+	 * @param Users - the users from the server to delete.
+	 */
+	public void loadAccounts(ArrayList<User> Users) {
+		for (User u : Users) {
+			AccountComboBox.getItems().add(u.getFirstN());
+		}
+	}
+
+	/**
+	 * initialize the screen buttons and combo box.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ClientUI.chat
+				.accept(new Message(MessageType.get_Accounts, LoginScreenController.user.getHomeBranch().toString()));
+		loadAccounts(Users);
+		ConfirmBtn.setDisable(true);
+		ConfirmBtn.getStylesheets().add("/css/buttons.css");
+		logout.getStylesheets().add("/css/buttons.css");
+	}
+
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
 }

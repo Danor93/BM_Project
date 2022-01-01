@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
+<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -39,10 +39,10 @@
       </Text>
       <TableView fx:id="table" layoutX="124.0" layoutY="152.0" prefHeight="378.0" prefWidth="690.0">
          <columns>
-            <TableColumn fx:id="orderNumber" prefWidth="172.0" text="Order number" />
+            <TableColumn fx:id="orderNumber" prefWidth="172.0" text="Order Number" />
             <TableColumn fx:id="restaurant" prefWidth="172.0" text="Restaurant" />
-            <TableColumn fx:id="totalPrice" prefWidth="172.0" text="Total price" />
-            <TableColumn fx:id="priceAfterCommission" prefWidth="172.0" text="Price after commission " />
+            <TableColumn fx:id="totalPrice" prefWidth="172.0" text="Total Price" />
+            <TableColumn fx:id="priceAfterCommission" prefWidth="172.0" text="Price After Commission " />
          </columns>
       </TableView>
       <AnchorPane prefHeight="650.0" prefWidth="106.0" style="-fx-background-color: #004d00;">
@@ -62,7 +62,7 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

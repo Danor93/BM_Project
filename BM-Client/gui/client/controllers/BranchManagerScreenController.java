@@ -28,7 +28,9 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 /**
- * this is the controller of the main branch screen.
+ * @author Danor
+ * this class is for the main screen of the Branch Manager to choose which action he want.
+
  */
 public class BranchManagerScreenController extends Controller implements ControllerInterface, Initializable {
 
@@ -57,6 +59,9 @@ public class BranchManagerScreenController extends Controller implements Control
 
 	@FXML
 	private Button btnLogout;
+	
+    @FXML
+    private Button ClostAccountBtn;
 
 	@FXML
 	private Label nameLabel;
@@ -64,33 +69,17 @@ public class BranchManagerScreenController extends Controller implements Control
 	@FXML
 	private ImageView BackImage;
 	
-	  @FXML
-	    private Button ChangePBtn;
+	@FXML
+	private Button ChangePBtn;
 
 	/**
-	 * for back to login screen.
+	 * for back to the login screen.
 	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
-		startScreen(event, "LoginScreen", "Login");
+		start(event, "LoginScreen", "Login","");
 	}
-
-	@FXML
-	void initialize() {
-		// setImage(BackImage, "background.png");
-		assert btnConfirmEmployerRegistration != null
-				: "fx:id=\"btnConfirmEmployerRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnOpenNewAccount != null
-				: "fx:id=\"btnOpenNewAccount\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnConfirmSupplierRegistration != null
-				: "fx:id=\"btnConfirmSupplierRegistration\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnUploadPDF != null
-				: "fx:id=\"btnUploadPDF\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-		assert btnViewBranchsReports != null
-				: "fx:id=\"btnViewBranchsReports\" was not injected: check your FXML file 'BranchManagerScreen.fxml'.";
-	}
-
 	
 	/**
 	 * this will open the new account screen.
@@ -99,7 +88,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void OpenNewAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerOpenNewAccount", "Open New Account");
+		start(event, "BranchManagerOpenNewAccount", "Open New Account",LoginScreenController.user.getFirstN());
 	}
 
 
@@ -109,9 +98,8 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ConfirmEmployerReg(ActionEvent event) throws IOException {
-		startScreen(event, "ConfirmEmployerRegistartion", "Confirm Employer");
+		start(event, "ConfirmEmployerRegistartion", "Confirm Employer",LoginScreenController.user.getFirstN());
 	}
-
 
 	/**
 	 * open a screen for confirm an Supplier
@@ -119,7 +107,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ConfirmSupplierReg(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerSupplierRegistration", "Supplier Registration");
+		start(event, "BranchManagerSupplierRegistration", "Supplier Registration",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -128,7 +116,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void deleteAccount(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerCloseAccount", "Close Account");
+		start(event, "BranchManagerCloseAccount", "Close Account",LoginScreenController.user.getFirstN());
 	}
 
 	
@@ -138,7 +126,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ChangePermissions(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChangePermissions", "Change Permissions");
+		start(event, "BranchManagerChangePermissions", "Change Permissions",LoginScreenController.user.getFirstN());
 	}
 
 	
@@ -148,7 +136,7 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void UploadPDF(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerUploadPDF", "Upload PDF");
+		start(event, "BranchManagerUploadPDF", "Upload PDF",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -157,17 +145,30 @@ public class BranchManagerScreenController extends Controller implements Control
 	 */
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
-		startScreen(event, "BranchManagerChooseReportToView", "View Report");
+		start(event, "BranchManagerChooseReportToView", "View Report",LoginScreenController.user.getFirstN());
 	}
 
+	/**
+	 * initialize the buttons style.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		btnLogout.getStylesheets().add("/css/buttons.css");
+		btnOpenNewAccount.getStylesheets().add("/css/buttons.css");
+		ChangePBtn.getStylesheets().add("/css/buttons.css");
+		btnConfirmEmployerRegistration.getStylesheets().add("/css/buttons.css");
+		btnOpenNewAccount.getStylesheets().add("/css/buttons.css");
+		btnViewBranchsReports.getStylesheets().add("/css/buttons.css");
+		btnUploadPDF.getStylesheets().add("/css/buttons.css");
+		btnConfirmSupplierRegistration.getStylesheets().add("/css/buttons.css");
+		ClostAccountBtn.getStylesheets().add("/css/buttons.css");
 	}
 
+	/**
+	 * display the name of the user.
+	 */
 	@Override
 	public void display(String string) {
-		nameLabel.setText(LoginScreenController.user.getFirstN());
+		nameLabel.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
-
 }

@@ -1,54 +1,88 @@
 package Entities;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+import java.io.Serializable;
 
-public class RevenueReport extends Report {
+public class RevenueReport implements Serializable {
 
-	private static final long serialVersionUID = -140954762019086715L;
-	private ArrayList<Order> Data = new ArrayList<>();
-	private int sum;
-	private Hashtable<String, ArrayList<Order>> OrdersOfRests = new Hashtable<>();
+	private static final long serialVersionUID = 583542510006825068L;
+	private String month, year;
+	private String branch;
+	private int ordersamount;
+	private float income;
+	private String resName;
+	private String Quarterly;
 
-	public RevenueReport(ArrayList<Restaurant> restaurant, String month, String year) {
-		super(restaurant, month, year);
-		sum = 0;
-
-	}
-
-	public int CaculateSum() {
-		for (int i = 0; i < Data.size(); i++) {
-			sum += Data.get(i).getTotalPrice();
-		}
-		return sum;
-	}
-
-	public int getOrderAmount() {
-		return Data.size();
-	}
-
-	public void addToData(Order order) {
-		Data.add(order);
-	}
-
-	public ArrayList<Order> getData() {
-		return Data;
-	}
-
-	public void OrgenizeData() {
-		ArrayList<Order> tempArray = new ArrayList<>();
-		for (Restaurant r : super.Restaurant) {
-			for (Order o : Data) {
-				if (o.getRestId().equals(r.getRestCode()))
-					tempArray.add(o);
-			}
-			OrdersOfRests.put(r.getSupplierName(), tempArray);
-		}
+	public RevenueReport(String resName, String branch, String month, String year, String Quarterly, int ordersamount,
+			float income) {
+		this.month = month;
+		this.year = year;
+		this.ordersamount = ordersamount;
+		this.income = income;
+		this.resName = resName;
+		this.Quarterly = Quarterly;
+		this.branch = branch;
 
 	}
 
-	public Hashtable<String, ArrayList<Order>> getOrgizedData() {
-
-		return this.OrdersOfRests;
+	public String getMonth() {
+		return month;
 	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public int getOrdersamount() {
+		return ordersamount;
+	}
+
+	public void setOrdersamount(int ordersamount) {
+		this.ordersamount = ordersamount;
+	}
+
+	public float getIncome() {
+		return income;
+	}
+
+	public void setIncome(float income) {
+		this.income = income;
+	}
+
+	public String getResName() {
+		return resName;
+	}
+
+	public void setResName(String resName) {
+		this.resName = resName;
+	}
+
+	public String getQuarterly() {
+		return Quarterly;
+	}
+
+	public void setQuarterly(String quarterly) {
+		Quarterly = quarterly;
+	}
+
+	public String toString() {
+		return "Restaurant name = " + resName + " branch is = " + branch + " month is= " + month + " year is: " + year
+				+ " Quarerly is : " + Quarterly + " ordersamount is " + ordersamount + " income is " + income;
+	}
+
 }

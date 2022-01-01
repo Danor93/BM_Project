@@ -78,14 +78,12 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		comboBoxYear.setDisable(true);
 		btn01.setDisable(true);
 		btn02.setDisable(true);
 		btn03.setDisable(true);
 		btn04.setDisable(true);
 		btnDownload.setDisable(true);
-
 	}
 
 	public void start(Stage stage, Parent root) {
@@ -184,26 +182,20 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 				int len = downloadFileData.mybytearray.length;
 				byte[] myByteArray = new byte[len];
 				myByteArray = downloadFileData.getMybytearray();
-
 				try {
 					FileOutputStream fos = new FileOutputStream(downloadFile);
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
-
 					bos.write(myByteArray, 0, len);
 					bos.flush();
 					fos.flush();
 					// PopUpMessage.successMessage("File downloaded");
 					((Node) event.getSource()).getScene().getWindow().hide();
-
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

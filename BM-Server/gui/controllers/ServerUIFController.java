@@ -91,7 +91,6 @@ public class ServerUIFController {
     }
 
 	public void start(Stage primaryStage) throws IOException {
-		
 		FXMLLoader load = new FXMLLoader();
 		primaryStage.setTitle("BiteMe Server Panel");
 		Pane root = load.load(getClass().getResource("/fxml/ServerUIF.fxml").openStream());
@@ -173,5 +172,4 @@ public class ServerUIFController {
 		HostCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("hostName"));
 		StatusCol.setCellValueFactory(new PropertyValueFactory<ClientConnection, String>("status"));
 	}
-
 }

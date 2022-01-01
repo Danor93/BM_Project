@@ -22,7 +22,8 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 /**
- * @author Aviel This class is for supplier main screen.
+ * @author Aviel 
+ * This class is for supplier main screen.
  */
 public class SupplierScreenController extends Controller implements ControllerInterface {
 	public static boolean ExisingMenuFlag = false;
@@ -98,11 +99,10 @@ public class SupplierScreenController extends Controller implements ControllerIn
 				ExistLbl.setText("Menu already exists, you can update it");
 			} else {
 				AddDishToMenuController.indicator = false;
-				start(event, "AddDishToMenu", "Create Menu", "");
+				start(event, "AddDishToMenu", "Create Menu",LoginScreenController.user.getFirstN());
 			}
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
-
 	}
 
 	/**
@@ -113,10 +113,9 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateMenu(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Certified")) {
-			start(event, "UpdateMenuScreen", "Update Menu", "");
+			start(event, "UpdateMenuScreen", "Update Menu",LoginScreenController.user.getFirstN());
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
-
 	}
 
 	/**
@@ -127,7 +126,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Approved")) {
-			start(event, "ConfirmOrderApproval", "Update order status", "");
+			start(event, "ConfirmOrderApproval", "Update order status",LoginScreenController.user.getFirstN());
 		} else
 			ExistLbl.setText("Only the certified employee can update a menu.");
 	}
@@ -140,7 +139,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void viewReceipt(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Certified")) {
-			start(event, "ViewReceipt", "View Receipt", "");
+			start(event, "ViewReceipt", "View Receipt",LoginScreenController.user.getFirstN());
 		} else
 			ExistLbl.setText("Only the certified employee can view receipt.");
 	}

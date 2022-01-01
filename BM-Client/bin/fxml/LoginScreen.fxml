@@ -21,7 +21,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="txtUserName" layoutX="250.0" layoutY="220.0" onAction="#ConnectSystem" onInputMethodTextChanged="#getUserName" prefHeight="40.0" prefWidth="160.0" promptText="UserName">
+      <TextField fx:id="txtUserName" layoutX="250.0" layoutY="220.0" prefHeight="40.0" prefWidth="160.0" promptText="UserName">
          <font>
             <Font size="16.0" />
          </font></TextField>
@@ -34,23 +34,28 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="btnLogin" layoutX="95.0" layoutY="365.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="112.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Submit">
+      <Button fx:id="btnLogin" layoutX="191.0" layoutY="374.0" mnemonicParsing="false" onAction="#ConnectSystem" prefHeight="39.0" prefWidth="112.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Login">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Label fx:id="WrongInputInLoggin" layoutX="97.0" layoutY="340.0" prefHeight="26.0" prefWidth="260.0" text=" " textAlignment="CENTER" textFill="RED">
+      <Label fx:id="WrongInputInLoggin" alignment="CENTER" layoutX="117.0" layoutY="340.0" prefHeight="26.0" prefWidth="260.0" text=" " textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Text layoutX="78.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill in the following details" wrappingWidth="212.04345703125">
+      <Text layoutX="102.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill in the following details" wrappingWidth="212.04345703125">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text layoutX="222.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="121.0">
+      <Text layoutX="34.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to BiteMe" textAlignment="CENTER" wrappingWidth="473.0000305175781">
          <font>
             <Font name="System Bold" size="43.0" />
+         </font>
+      </Text>
+      <Text fill="#191818" layoutX="480.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Text>
    </children>

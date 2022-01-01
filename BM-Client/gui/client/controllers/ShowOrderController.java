@@ -13,16 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import main.ClientUI;
 
+//adi&talia
 public class ShowOrderController extends Controller implements Initializable{
 
     @FXML
@@ -38,7 +38,20 @@ public class ShowOrderController extends Controller implements Initializable{
     private Button remove;
 
     @FXML
-    private Button totalPrice;
+    private Text  totalPrice;
+    
+
+    @FXML
+    private ImageView BackImage;
+    
+    @FXML
+    private ImageView homePage;
+    
+    @FXML
+    private Button logout;
+
+    @FXML
+    private Text userName;
     
     ObservableList<String> orders;
     
@@ -48,33 +61,42 @@ public class ShowOrderController extends Controller implements Initializable{
     public static Order finalOrder;
     public static String refund=null;
 
+	/**
+	 * This method meant to get back to costumer page
+	 * 
+	 * @param event pressing the "home" image
+	 * @throws IOException
+	 */
+	@FXML
+	void backToHome(MouseEvent event) throws IOException {
+		start(event, "CustomerScreen", "CustomerScreen", "");
+	}
 
-    
-    
-   
+	/**
+	 * This method meant to get back to login page and logout the customer
+	 * 
+	 * @param event pressing the "logout" button
+	 * @throws IOException
+	 */
+
+    @FXML
+    void logout(ActionEvent event) throws IOException {
+		SingletonOrder.getInstance().myOrder.clear();
+    	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
+		start(event, "LoginScreen", "Login","");
+    }
 
     @FXML
     void back(ActionEvent event) throws IOException {
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/MenuScreen.fxml"));
-		Parent root=load.load();
-		MenuScreenController aFrame = load.getController();
-		aFrame.start(primaryStage, root);
-
+		start(event, "MenuScreen", "Restaurant's menu",LoginScreenController.user.getFirstN());
     }
     
 
     @FXML
     void proceed(ActionEvent event) throws IOException {
-    	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting for approval",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
-    	Message msg=new Message(MessageType.getRefundDetails,finalOrder);
-		ClientUI.chat.accept(msg);
-    	Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/DeliveryOrPickUp.fxml"));
-		Parent root=load.load();
-		DeliveryOrPickupController aFrame = load.getController();
-		aFrame.display();
-		aFrame.start(primaryStage, root);
+    	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
+		ClientUI.chat.accept(new Message(MessageType.getRefundDetails,finalOrder));
+		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
     }
 
     @FXML
@@ -89,52 +111,37 @@ public class ShowOrderController extends Controller implements Initializable{
     	totalPrice.setText("Total price: "+total+" $");
     	orders=FXCollections.observableArrayList(myDishes);
 		listOrder.setItems(orders);
-
     }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
-		
+		myDishes.clear();
 		for(Dish dish: SingletonOrder.getInstance().myOrder)
 		{
 			total+=dish.getPrice()*dish.getQuentity();
 			StringBuilder dishString=new StringBuilder();
-			dishString.append(dish.getDishName()+":       ");
-			
+			dishString.append(dish.getDishName()+":       ");	
 			if(dish.getChoiceFactor()!=null&&!dish.getChoiceFactor().equals(""))
 			{
 				dishString.append(dish.getChoiceFactor()+": ");
 				dishString.append(dish.getChoiceDetails()+"       ");
 			}
-			
 			if(dish.getExtra()!=null)
 			{
 				dishString.append(dish.getExtra()+"      ");
 			}
-			
 			dishString.append("quentity:         "+dish.getQuentity());
-			
 			dishString.append("         "+dish.getPrice()+"$");
 			myDishes.add(dishString.toString());
 		}
-		
 		totalPrice.setText("Total price: "+total+" $");
 		orders=FXCollections.observableArrayList(myDishes);
 		listOrder.setItems(orders);
-
 	}
 	
-	public void start(Stage primaryStage, Parent root) {
-		Scene scene=new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-	}
-
-
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
-		
+		userName.setText(LoginScreenController.user.getFirstN());	
 	}
 }

@@ -2,8 +2,8 @@ package Parsing;
 
 //client
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Delivery;
@@ -15,6 +15,7 @@ import Entities.MyFile;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Receipt;
+import Entities.OrdersReport;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -48,28 +49,28 @@ import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import client.controllers.ViewReceiptController;
 import client.controllers.quaterRepController;
+import client.controllers.QuarterReportController;
 import main.PopUpMessage;
 
 public class Parsing {
+	@SuppressWarnings("unchecked")
 	public static void Message(Object msg) throws Exception {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
 
+
 		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
-
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.statusUser = "The user is already logged in";
 					LoginScreenController.user = null;
-
 				} else {
 					if (receivedMessage.getMessageData().equals("Freeze")) {
 						LoginScreenController.statusUser = "Frozen Account";
 						LoginScreenController.user = null;
 					} else {
-						// LoginScreenController.LoginFlag = true;
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 								homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 						LoginScreenController.statusUser = "Active";
@@ -79,23 +80,36 @@ public class Parsing {
 				LoginScreenController.statusUser = "User name or password are inccorect";
 				LoginScreenController.user = null;
 			}
+			IdentifyW4cController.client=null;
 			break;
 		}
 
+		
 		case ShowHistogram: {
-
-			if (quaterRepController.report1 == null) {
-				quaterRepController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
-			} else {
-				quaterRepController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			if(QuarterReportController.report1==null)
+			{
+				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
+				{
+					QuarterReportController.report1=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				}
 			}
-
+			else
+			{
+				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
+				{
+					QuarterReportController.report2=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				}
+				else
+				{
+					QuarterReportController.report2=null;
+				}
+			}
 			break;
 		}
 
 		case getYears: {
-			quaterRepController.years = (ArrayList<String>) receivedMessage.getMessageData();
-
+			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
 		}
 
 		case Show_Cities: {
@@ -125,7 +139,6 @@ public class Parsing {
 
 		case InsertOrder: {
 			ShowOrderController.finalOrder.setOrderNum((Integer) receivedMessage.getMessageData());
-			// SingletonOrder.getInstance().orderNum=(Integer)receivedMessage.getMessageData();
 			break;
 		}
 
@@ -144,10 +157,6 @@ public class Parsing {
 		}
 
 		case orderDone: {
-			break;
-		}
-
-		case Disconected: {
 			break;
 		}
 
@@ -205,7 +214,7 @@ public class Parsing {
 		}
 
 		case Dish_update_succ: {
-
+			break;
 		}
 
 		case Employer_list: {
@@ -292,9 +301,11 @@ public class Parsing {
 		}
 
 		case update_RefundTable: {
+			break;
 		}
 
 		case update_Budget_bussClient: {
+			break;
 		}
 
 		case changed_status_to_notApproved_succ: {
@@ -302,10 +313,11 @@ public class Parsing {
 		}
 
 		case changed_status_to_Approved_succ: {
-
+			break;
 		}
 
 		case changed_status_to_sended_succ: {
+			break;
 		}
 
 		/**
@@ -328,6 +340,20 @@ public class Parsing {
 			HRManagerScreenController.RegistrationFlag = true;
 			break;
 
+		}
+
+		case Company_Status_Equale_To_Approved: {
+			/*
+			 * HRManagerConfirmationOfOpeningABusinessAccountController.
+			 * CompanyStatusApproved = true; break;
+			 */
+		}
+
+		case Company_Status_Not_Equale_To_Approved: {
+			/*
+			 * HRManagerConfirmationOfOpeningABusinessAccountController.
+			 * CompanyStatusApproved = false; break;
+			 */
 		}
 
 		case RegistrationOfEmployer_failed: {
@@ -359,9 +385,28 @@ public class Parsing {
 					.getMessageData();
 			break;
 		}
-
-		case send_Revenue_Report: {
-			BranchManagerChooseReportToViewController.revenueReport = (RevenueReport) receivedMessage.getMessageData();
+		case UpdateSuccsesfuly:{
+			break;
+		}
+		
+		case UpdateFailed:{
+			break;
+		}
+		
+		case RReportUpdated: {
+			BranchManagerChooseReportToViewController.revenueArray = (ArrayList<RevenueReport>) receivedMessage.getMessageData();
+			System.out.println("hi hi");
+			break;
+		}
+		
+		case OReportUpdated:{
+			BranchManagerChooseReportToViewController.ordersArray =(ArrayList<OrdersReport>) receivedMessage.getMessageData();
+			break; 
+		}
+		
+		case DType_Quantities:{
+			HashMap<String,Integer> map = (HashMap<String,Integer>)receivedMessage.getMessageData();
+			ConfirmOrderApprovalController.dishTypesQuentities=map;
 			break;
 		}
 
@@ -377,6 +422,7 @@ public class Parsing {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
 		}
+		
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 			break;

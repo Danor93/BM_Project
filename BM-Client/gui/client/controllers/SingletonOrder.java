@@ -25,8 +25,6 @@ public class SingletonOrder
     {
         if (singleOrder_instance == null)
         	singleOrder_instance = new SingletonOrder();
- 
         return singleOrder_instance;
     }
-
 }

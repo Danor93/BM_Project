@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="540.0" fitWidth="559.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,7 +30,7 @@
             <Font name="System Bold" size="43.0" />
          </font>
       </Label>
-      <Button fx:id="btnAddNewDishToMenu" layoutX="153.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddNewDishToMenu" prefHeight="39.0" prefWidth="243.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Add a new dish to the menu">
+      <Button fx:id="btnAddNewDishToMenu" layoutX="153.0" layoutY="108.0" mnemonicParsing="false" onAction="#AddNewDishToMenu" prefHeight="39.0" prefWidth="243.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Add a New Dish to the Menu">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
@@ -39,7 +39,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnDeleteOrUpdateDish" layoutX="154.0" layoutY="162.0" mnemonicParsing="false" onAction="#DeleteOrUpdateDish" prefHeight="39.0" prefWidth="243.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Delete / Update existing dish">
+      <Button fx:id="btnDeleteOrUpdateDish" layoutX="154.0" layoutY="162.0" mnemonicParsing="false" onAction="#DeleteOrUpdateDish" prefHeight="39.0" prefWidth="243.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 30;" text="Delete / Update Existing Dish">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
@@ -60,7 +60,7 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Log out">
+            <Button fx:id="logout" layoutX="10.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

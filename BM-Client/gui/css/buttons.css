@@ -1,0 +1,37 @@
+
+.button{
+	-fx-background-radius: 25px 25px 25px 25px;
+	-fx-border-radius: 30;
+	-fx-background-radius:30;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}
+
+.button:hover{
+	-fx-background-radius: 25px 25px 25px 25px;
+	-fx-border-radius: 30;
+	-fx-background-radius:30;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}
+.button:pressed{
+	-fx-background-radius: 25px 25px 25px 25px;
+	-fx-border-radius: 30;
+	-fx-background-radius:30;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}
+.button:active{
+	-fx-background-radius: 25px 25px 25px 25px;
+	-fx-border-radius: 30;
+	-fx-background-radius:30;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}
+.button:focus{
+	-fx-background-radius: 25px 25px 25px 25px;
+	-fx-border-radius: 30;
+	-fx-background-radius:30;
+	-fx-border-color:black;
+	-fx-border-width:2;
+}

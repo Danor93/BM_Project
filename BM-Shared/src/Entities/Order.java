@@ -7,7 +7,8 @@ public class Order implements Serializable {
 
 	private static final long serialVersionUID = 2360410765980564003L;
 	private int orderNum, useBudget;
-	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund, EarlyOrder;
+	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund, EarlyOrder,suppApproved;
+	
 
 	private float totalPrice;
 	private String orderType, dishes;
@@ -37,6 +38,13 @@ public class Order implements Serializable {
 		this.dateOfOrder = dateOfOrder;
 		this.EarlyOrder = EarlyOrder;
 
+	}
+	public String getSuppApproved() {
+		return suppApproved;
+	}
+
+	public void setSuppApproved(String suppApproved) {
+		this.suppApproved = suppApproved;
 	}
 
 	public int getOrderNum() {

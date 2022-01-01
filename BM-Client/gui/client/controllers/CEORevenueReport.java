@@ -22,16 +22,15 @@ public class CEORevenueReport extends Controller implements ControllerInterface{
 	@FXML
 	private Button btnBack;
 	
-	@FXML
+	/*@FXML
 	void initialize() {
 		setImage(BackImage, "background.png");
-	}
+	}*/
 
 	@Override
 	public void Back(ActionEvent event) throws IOException {
-		ClientUI.chat.accept(new Message(MessageType.Disconected, null));
-		startScreen(event, "CEOScreen", "CEO");
-		
+		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getFirstN()));
+		start(event, "CEOScreen", "CEO",LoginScreenController.user.getFirstN());
 	}
 
 	@Override

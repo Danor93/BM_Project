@@ -23,13 +23,12 @@ public class ShowOrders {
 					String PhoneNumber = rs.getString("PhoneNumber");
 					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
 					String OrderAddress = rs.getString("OrderAddress");
-					//orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));fix.
+					//orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
 				}
 				rs.close();
 			} else {
 				System.out.println("Conn is null");
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
