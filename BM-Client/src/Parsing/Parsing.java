@@ -14,6 +14,7 @@ import Entities.MessageType;
 import Entities.MyFile;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
+import Entities.Receipt;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -45,6 +46,7 @@ import client.controllers.CEODownloadQuarterlyReportController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
+import client.controllers.ViewReceiptController;
 import client.controllers.quaterRepController;
 import main.PopUpMessage;
 
@@ -154,29 +156,49 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * Inserting all dishes into a static variable
+		 */
 		case Show_Dishes_succ: {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
+		
+		/**
+		 * Change the flag to true when the menu exists.
+		 */
 		case MenuExistTrue: {
 			SupplierScreenController.ExisingMenuFlag = true;
 			break;
 		}
+		
+		/**
+		 * Change the flag to false when the menu exists.
+		 */
 		case MenuExistFalse: {
 			SupplierScreenController.ExisingMenuFlag = false;
 			break;
 		}
 
+		/**
+		 * Enter the value of the restaurant name into the static variable
+		 */
 		case rest_Name: {
 			AddDishToMenuController.restName = (String) receivedMessage.getMessageData();
 			break;
 		}
 
+		/**
+		 * Change the flag to true if adding the dish to the menu was successful
+		 */
 		case Dish_add_succ: {
 			AddDishToMenuController.dishAdd = true;
 			break;
 		}
 
+		/**
+		 * Change flag to false if adding dish to menu failed
+		 */
 		case dish_add_fail: {
 			AddDishToMenuController.dishAdd = false;
 			break;
@@ -261,6 +283,9 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * Enter all orders waiting for approval into a static variable
+		 */
 		case Orders_List: {
 			ConfirmOrderApprovalController.allOrders = (ArrayList<Order>) receivedMessage.getMessageData();
 			break;
@@ -283,11 +308,17 @@ public class Parsing {
 		case changed_status_to_sended_succ: {
 		}
 
+		/**
+		 * Entering the telephone number value into a static variable
+		 */
 		case set_Phone_number: {
 			ConfirmOrderApprovalController.phoneNumber = (String) receivedMessage.getMessageData();
 			break;
 		}
 
+		/**
+		 * Inserting all w4cBusiness values ​​into a static variable
+		 */
 		case W4C_Business_List: {
 			HRManagerScreenController.w4cBusiness = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
@@ -348,8 +379,16 @@ public class Parsing {
 		}
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
+			break;
 		}
 
+		/**
+		 * Insert all the receipts into a static variable
+		 */
+		case get_receipt:{
+			ViewReceiptController.receipts = (ArrayList<Receipt>) receivedMessage.getMessageData();
+			break;
+		}
 		default: {
 			break;
 		}

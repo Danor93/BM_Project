@@ -10,7 +10,7 @@ public enum MessageType {
 	Show_Dishes_succ, updateDish, year_and_querter_ok, year_and_querter_not_ok, upload_pdf_succ,
 	Baccount_details_not_ok, PAccount_details_not_ok, changed_BusinessAccount_status_to_Approved_succ,
 	changed_BusinessAccount_status_to_NotApproved_succ, send_Revenue_Report, download_pdf_succ,
-	relevantYearAndQuarterly,
+	relevantYearAndQuarterly,get_receipt,
 
 	/* Client Message */
 	Update_Orders, Show_Orders, IdentifyW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
@@ -26,7 +26,7 @@ public enum MessageType {
 	ShowHistogram, getYears, getAllW4CBusiness, Use_Refund, Use_Budget, Order_sended, get_Company_Status,
 	get_Phone_Number, Account_Status_Active, Account_Status_Freeze, get_Rest_Name, check_account_status,
 	check_account_status_Active, check_account_status_Freeze, Update_Status_to_Active, Update_Status_to_Freeze,
-	ReturnFirstName, ReturnFirstName_success, check_suppliers_details,
+	ReturnFirstName, ReturnFirstName_success, check_suppliers_details,get_orders_Approved,
 
 	/* type of users */
 

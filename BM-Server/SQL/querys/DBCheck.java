@@ -120,8 +120,11 @@ public class DBCheck {
 		return rs1;
 	}
 
+	/**
+	 * @param ID
+	 * @return true or false
+	 */
 	public static Boolean MenuExistingCheck(String ID) {
-
 		String rs1 = null;
 		PreparedStatement stmt;
 		try {

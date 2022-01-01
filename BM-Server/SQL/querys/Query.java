@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,12 +31,14 @@ import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.Receipt;
 import Entities.Report;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
+//import client.controllers.ViewReceiptController;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
 import Entities.MessageType;
@@ -722,8 +725,13 @@ public class Query {
 		return yearsAndQuarter;
 
 	}
+	
+	/**
+	 * 
+	 * @param restName
+	 * @return arrayList of orders
+	 */
 	public static ArrayList<Order> LoadOrders(String restName) {
-
 		ArrayList<Order> orders = new ArrayList<>();
 		System.out.println("in server - "+restName);
 		Statement stmt;
@@ -775,6 +783,10 @@ public class Query {
 		return businessAccountTracking;
 	}
 
+	/**
+	 * 
+	 * @return arrayList of w4cBusiness
+	 */
 	public static ArrayList<String> LoadW4CBusiness() {
 		ArrayList<String> w4cBusiness = new ArrayList<>();
 		Statement stmt;
@@ -808,6 +820,11 @@ public class Query {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return phone number
+	 */
 	public static String LoadPhoneNumber(Order order) {
 		Statement stmt;
 		String phoneNumber = null;
@@ -864,6 +881,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * @param ID
+	 * @return restaurant name
+	 */
 	public static String getRestName(String ID) {
 		String restName = null;
 		Statement stmt;
@@ -880,4 +901,30 @@ public class Query {
 		return restName;
 	}
 
+	/**
+	 * 
+	 * @param ID
+	 * @return arrayList of receipt
+	 */
+	public static ArrayList<Receipt> LoadOrdersApproved(String ID) {
+		ArrayList<Receipt> receipts = new ArrayList<>();
+		Float priceAfterCommission;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT orderNumber,restName,totalPrice,dateOfOrder FROM bitemedb.order WHERE rstID='" + ID + "' AND orderStatus='Approved' OR orderStatus='Sended';");
+			while (rs.next()) {
+				if (LocalDate.now().isAfter(LocalDate.parse(rs.getString(4)))
+						|| LocalDate.now().isEqual(LocalDate.parse(rs.getString(4)))) {
+					priceAfterCommission = (float) (Float.parseFloat(rs.getString(3)) - (Float.parseFloat(rs.getString(3))*0.1));
+					Receipt receipt = new Receipt(rs.getInt(1), rs.getString(2), Float.parseFloat(rs.getString(3)), priceAfterCommission);
+					receipts.add(receipt);
+				}
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return receipts;
+	}
 }

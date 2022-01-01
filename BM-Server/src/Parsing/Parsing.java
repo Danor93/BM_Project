@@ -21,6 +21,7 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
+import Entities.Receipt;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -139,11 +140,19 @@ public class Parsing {
 			return messageFromServer;
 		}
 
+		/**
+		 * Case for getting the restaurant name from the database
+		 * @param = ID of the certified employee in the restaurant
+		 */
 		case get_Rest_Name:{
 			String restName = Query.getRestName((String)receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.rest_Name, restName);
 		}
 
+		/**
+		 * Case for adding a new dish to the menu
+		 * @param = A desirable dish to add to the menu
+		 */
 		case add_new_dish: {
 			System.out.println(receivedMessage.getMessageData());
 			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
@@ -295,24 +304,31 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.Disconected, null);
 		}
 
-		case Show_Dishes: {// get all orders from DB
-			System.out.println(receivedMessage.getMessageData());
+		/**
+		 * Case of obtaining all the dishes belonging to a specific restaurant
+		 * @param = ID of the certified employee in the restaurant
+		 */
+		case Show_Dishes: {
 			ArrayList<Dish> dishes = ShowDishes.getDishes((String)receivedMessage.getMessageData());
-			System.out.println("in server : ");
-			for (int i = 0; i < dishes.size(); i++)
-				System.out.println(dishes.get(i).getDishName());
 			messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
 			return messageFromServer;
 		}
 
+		/**
+		 * Case for updating a dish according to the required changes in the database
+		 * @param = A desirable dish to update in the menu 
+		 */
 		case updateDish: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_update_succ, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Case for checking if there is a menu for a restaurant or not
+		 * @param = ID of the certified employee in the restaurant
+		 */
 		case MenuExist: {
 			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.MenuExistTrue, null);
@@ -322,65 +338,94 @@ public class Parsing {
 			return messageFromServer;
 		}
 
+		/**
+		 * Case for deleting a dish from the menu and updating it in the database
+		 * @param = A desirable dish to delete in the menu 
+		 */
 		case deleteDish: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.Dish_delete_succ, null);
 				return messageFromServer;
-			}
+			}			
 		}
 
+		/**
+		 * Case for receiving orders awaiting approval
+		 * @param = The name of the restaurant we want to confirm its reservations
+		 */
 		case get_orders_to_approve: {
 			ArrayList<Order> orders = Query.LoadOrders((String) receivedMessage.getMessageData());
 			messageFromServer = new Message(MessageType.Orders_List, orders);
 			return messageFromServer;
 		}
 
+		/**
+		 * Case of using refund and downloading the refund value from the database
+		 * @param = Order received
+		 */
 		case Use_Refund: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateRefundAmmount((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.update_RefundTable, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Case of using budget and downloading the budget value from the database
+		 * @param = Order received
+		 */
 		case Use_Budget: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateBudgetValue((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Change the order status to - Not approved in the database
+		 * @param = Order received
+		 */
 		case Order_not_approved: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToNotApproved((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Change the order status to - Approved in the database
+		 * @param = Order received
+		 */
 		case Order_approved: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusToApproved((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Change the order status to - Sended in the database
+		 * @param = Order received
+		 */
 		case Order_sended: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.updateOrderStatusSended((Order) receivedMessage.getMessageData())) {
 				messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
 				return messageFromServer;
 			}
 		}
 
+		/**
+		 * Case for obtaining the telephone number of the ordering customer
+		 * @param = Order received
+		 */
 		case get_Phone_Number: {
 			String phoneNumber = Query.LoadPhoneNumber((Order) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.set_Phone_number, phoneNumber);
 		}
 
+		/**
+		 * Case for getting all the w4cBusiness that are in the database
+		 */
 		case getAllW4CBusiness: {
 			ArrayList<String> w4cBusiness = Query.LoadW4CBusiness();
 			return messageFromServer = new Message(MessageType.W4C_Business_List, w4cBusiness);
@@ -431,6 +476,16 @@ public class Parsing {
 			String[] details = ((String) receivedMessage.getMessageData()).split("@");
 			RevenueReport Revenuereport = Query.getRevenueReport(details[0], details[1], details[2]);
 			return messageFromServer = new Message(MessageType.send_Revenue_Report, Revenuereport);
+		}
+		
+		/**
+		 * Accept all confirmed reservations at this restaurant
+		 * @param = ID of the certified employee in the restaurant
+		 */
+		case get_orders_Approved:{
+			ArrayList<Receipt> receipt = Query.LoadOrdersApproved((String) receivedMessage.getMessageData());
+			messageFromServer = new Message(MessageType.get_receipt, receipt);
+			return messageFromServer;
 		}
 
 		default: {

@@ -15,6 +15,11 @@ import Entities.OrderType;
 import Entities.User;
 
 public class ShowDishes {
+	/**
+	 * 
+	 * @param ID
+	 * @return ArrayList of dishes
+	 */
 	public static ArrayList<Dish> getDishes(String ID) {
 		ArrayList<Dish> dishes = new ArrayList<>();
 		System.out.println(ID);

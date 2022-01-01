@@ -52,10 +52,15 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	private Text WelcomeLabel;
 
+	@FXML
+	private Button btnViewReceipt;
+
 	private String[] DivededUandP = ((String) LoginScreenController.user.getRole()).split("-");
 
-	/** This method meant to get back to login page and logout the supplier
-	 * @param event	= ActionEvent
+	/**
+	 * This method meant to get back to login page and logout the supplier
+	 * 
+	 * @param event = ActionEvent
 	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
@@ -74,6 +79,8 @@ public class SupplierScreenController extends Controller implements ControllerIn
 		assert btnUpdateOrderStatus != null
 				: "fx:id=\"btnUpdateOrderStatus\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 		assert btnBack != null : "fx:id=\"btnBack\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
+		assert btnViewReceipt != null
+				: "fx:id=\"btnViewReceipt\" was not injected: check your FXML file 'SupplierScreen.fxml'.";
 	}
 
 	/**
@@ -91,7 +98,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 				ExistLbl.setText("Menu already exists, you can update it");
 			} else {
 				AddDishToMenuController.indicator = false;
-				start(event, "AddDishToMenu", "Create Menu","");
+				start(event, "AddDishToMenu", "Create Menu", "");
 			}
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
@@ -106,7 +113,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateMenu(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Certified")) {
-			start(event, "UpdateMenuScreen", "Update Menu","");
+			start(event, "UpdateMenuScreen", "Update Menu", "");
 		} else
 			ExistLbl.setText("Only the certified employee can create a menu.");
 
@@ -120,9 +127,22 @@ public class SupplierScreenController extends Controller implements ControllerIn
 	@FXML
 	void UpdateOrderStatus(ActionEvent event) throws IOException {
 		if (DivededUandP[1].equals("Approved")) {
-			start(event, "ConfirmOrderApproval", "Update order status","");
+			start(event, "ConfirmOrderApproval", "Update order status", "");
 		} else
-			ExistLbl.setText("Only the certified employee can create a menu.");
+			ExistLbl.setText("Only the certified employee can update a menu.");
+	}
+
+	/**
+	 * A method to open a new screen (ViewReceipt).
+	 * 
+	 * @param event = ActionEvent
+	 */
+	@FXML
+	void viewReceipt(ActionEvent event) throws IOException {
+		if (DivededUandP[1].equals("Certified")) {
+			start(event, "ViewReceipt", "View Receipt", "");
+		} else
+			ExistLbl.setText("Only the certified employee can view receipt.");
 	}
 
 	@Override

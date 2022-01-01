@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import Entities.BusinessAccountTracking;
@@ -64,6 +65,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param dish
+	 * @return true / false
+	 */
 	public static boolean NewDish(Dish dish) {
 		PreparedStatement stmt;
 		try {
@@ -92,6 +98,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param dish
+	 * @return true / false
+	 */
 	public static boolean UpdateDish(Dish dish) {
 		PreparedStatement stmt;
 		try {
@@ -116,6 +127,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param dish
+	 * @return true / false
+	 */
 	public static boolean deleteDish(Dish dish) {
 		PreparedStatement stmt;
 		try {
@@ -137,6 +153,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return true / false
+	 */
 	public static boolean updateOrderStatusToNotApproved(Order order) {
 		PreparedStatement stmt;
 		try {
@@ -157,12 +178,17 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return true / false
+	 */
 	public static boolean updateOrderStatusToApproved(Order order) {
 		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Approved' WHERE orderNumber=?");
+						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Approved', timeApproved='"+LocalTime.now().toString()+"' WHERE orderNumber=?");
 				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;
@@ -252,6 +278,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return true/false
+	 */
 	public static boolean updateRefundAmmount(Order order) {
 		int newAmmount;
 		String ammount=null;
@@ -291,6 +322,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return true / false
+	 */
 	public static boolean updateBudgetValue(Order order) {
 		Float newBudget;
 		String budget = null;
@@ -330,6 +366,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * 
+	 * @param order
+	 * @return true / false
+	 */
 	public static boolean updateOrderStatusSended(Order order) {
 		PreparedStatement stmt;
 		try {

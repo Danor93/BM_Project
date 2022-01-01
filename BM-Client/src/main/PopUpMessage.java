@@ -88,6 +88,7 @@ public class PopUpMessage {
 	 */
 	public static void simulationMessage(String msg) {
 		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.getDialogPane().setPrefSize(400, 250);
 		alert.setTitle("Simulation");
 		alert.setHeaderText(null);
 		alert.setContentText(msg);

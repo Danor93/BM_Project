@@ -2,6 +2,7 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -18,6 +19,7 @@ import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.OrderType;
+import Entities.Receipt;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -137,22 +139,30 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		Order orderToChange;
 		list = table.getSelectionModel().getSelectedItems();
 		orderToChange = list.get(0);
-		if (!orderToChange.getOrderStatus().equals("Approved")) { // If the order is already approved, there is no need
-																	// to confirm it again.
-			if (!orderToChange.getUseRefund().equals("0")) { // Check if the customer is interested in paying by refund
+		if (!orderToChange.getOrderStatus().equals("Approved")) {
+			if (!orderToChange.getUseRefund().equals("0")) {
 				orderToChange
 						.setTotalPrice(orderToChange.getTotalPrice() - Float.parseFloat(orderToChange.getUseRefund()));
 				ClientUI.chat.accept(new Message(MessageType.Use_Refund, orderToChange));
 			}
-			if (orderToChange.getUseBudget() == 1) // Check if the customer is a business customer and is interested in
-													// paying by budget
+			if (orderToChange.getUseBudget() == 1)
 				ClientUI.chat.accept(new Message(MessageType.Use_Budget, orderToChange));
-			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange)); // Change the status of the
-																							// database to Approved
+			ClientUI.chat.accept(new Message(MessageType.Order_approved, orderToChange));
 			for (int i = 0; i < allOrders.size(); i++) {
 				if (allOrders.get(i).equals(orderToChange))
 					allOrders.get(i).setOrderStatus("Approved");
 			}
+			if (LocalDate.now().isAfter(LocalDate.parse(orderToChange.getDateOfOrder()))
+					|| LocalDate.now().isEqual(LocalDate.parse(orderToChange.getDateOfOrder()))) {
+				Float priceAfterCommision = (float) (orderToChange.getTotalPrice()
+						- (orderToChange.getTotalPrice() * 0.1));
+				Receipt receiptToAdd = new Receipt(orderToChange.getOrderNum(), orderToChange.getRestName(),
+						orderToChange.getTotalPrice(), priceAfterCommision);
+				ViewReceiptController.receipts.add(receiptToAdd);
+			}
+			String str = "The order was successfully confirmed.\n Dear customer, your order number -"
+					+ orderToChange.getOrderNum() + "  was successfully received at the restaurant.";
+			PopUpMessage.simulationMessage(str);
 			orderToChange = null;
 			table.refresh();
 			list = FXCollections.observableArrayList(allOrders);
@@ -195,58 +205,63 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 		if (!orderToChange.getOrderStatus().equals("Approved"))
 			PopUpMessage.errorMessage("Order must be approved before sended to client");
 		else {
-			for (int i = 0; i < allOrders.size(); i++) {
-				if (allOrders.get(i).equals(orderToChange))
-					allOrders.remove(i);
-			}
-			ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, orderToChange));
-			StringBuilder str = new StringBuilder();
-			str.append("successfully. The phone is - ");
-			str.append(phoneNumber);
-			if (orderToChange.getOrderType().equals("Regular") || orderToChange.getOrderType().equals("Shared")) {
-				RegularOrSharedFlag = true;
-			}
-			if (RegularOrSharedFlag) {
-				if (setArrivalTimeIsPlaaned.getText().isEmpty()) {
-					waitForArrivalTimeFlag = false;
-					PopUpMessage.errorMessage("You have to insert arrival time");
-
-				} else {
-					ArrivalTime = setArrivalTimeIsPlaaned.getText();
-					try {
-						LocalTime checkTime = LocalTime.parse(ArrivalTime);
-						if (checkTime.isAfter(LocalTime.now()))
-							waitForArrivalTimeFlag = true;
-						else
-							wrongArrivalTimeFlag = true;
-					} catch (DateTimeParseException | NullPointerException e) {
-						PopUpMessage.errorMessage("Time must be invalid");
-					}
+			if (LocalDate.now().isAfter(LocalDate.parse(orderToChange.getDateOfOrder()))
+					|| LocalDate.now().isEqual(LocalDate.parse(orderToChange.getDateOfOrder()))) {
+				for (int i = 0; i < allOrders.size(); i++) {
+					if (allOrders.get(i).equals(orderToChange))
+						allOrders.remove(i);
 				}
-				if (waitForArrivalTimeFlag)
-					str.append(" Arrival time is planned to - " + ArrivalTime);
-				else {
-					if (wrongArrivalTimeFlag)
-						PopUpMessage.errorMessage("Unable to enter elapsed time");
+				ClientUI.chat.accept(new Message(MessageType.get_Phone_Number, orderToChange));
+				StringBuilder str = new StringBuilder();
+				str.append("Dear customer, The order was sent successfully. ");
+				str.append("The phone number is - " + phoneNumber);
+				if (orderToChange.getOrderType().equals("Regular") || orderToChange.getOrderType().equals("Shared")) {
+					RegularOrSharedFlag = true;
+				}
+				if (RegularOrSharedFlag) {
+					if (setArrivalTimeIsPlaaned.getText().isEmpty()) {
+						waitForArrivalTimeFlag = false;
+						PopUpMessage.errorMessage("You have to insert arrival time");
+
+					} else {
+						ArrivalTime = setArrivalTimeIsPlaaned.getText();
+						try {
+							LocalTime checkTime = LocalTime.parse(ArrivalTime);
+							if (checkTime.isAfter(LocalTime.now()))
+								waitForArrivalTimeFlag = true;
+							else
+								wrongArrivalTimeFlag = true;
+						} catch (DateTimeParseException | NullPointerException e) {
+							PopUpMessage.errorMessage("Time must be invalid");
+						}
+					}
+					if (waitForArrivalTimeFlag)
+						str.append(". Your order has been sent to you and will arrive at - " + ArrivalTime);
+					else {
+						if (wrongArrivalTimeFlag)
+							PopUpMessage.errorMessage("Unable to enter elapsed time");
+						RegularOrSharedFlag = false;
+						wrongArrivalTimeFlag = false;
+						continueFlag = false;
+						str.setLength(0);
+						orderToChange = null;
+						setArrivalTimeIsPlaaned.clear();
+					}
+
+				}
+				if (continueFlag) {
 					RegularOrSharedFlag = false;
-					wrongArrivalTimeFlag = false;
-					continueFlag = false;
-					str.setLength(0);
+					waitForArrivalTimeFlag = false;
+					ClientUI.chat.accept(new Message(MessageType.Order_sended, orderToChange));
+					PopUpMessage.simulationMessage(str.toString());
 					orderToChange = null;
+					list = FXCollections.observableArrayList(allOrders);
+					table.setItems(list);
+					str.setLength(0);
 					setArrivalTimeIsPlaaned.clear();
 				}
-
-			}
-			if (continueFlag) {
-				RegularOrSharedFlag = false;
-				waitForArrivalTimeFlag = false;
-				ClientUI.chat.accept(new Message(MessageType.Order_sended, orderToChange));
-				PopUpMessage.simulationMessage(str.toString());
-				orderToChange = null;
-				list = FXCollections.observableArrayList(allOrders);
-				table.setItems(list);
-				str.setLength(0);
-				setArrivalTimeIsPlaaned.clear();
+			} else {
+				PopUpMessage.errorMessage("The order must be sent on the requested day.");
 			}
 		}
 	}
