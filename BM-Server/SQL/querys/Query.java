@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,37 +14,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.TreeMap;
-
-import com.mysql.cj.xdevapi.DbDoc;
-
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
-import Entities.DishType;
 import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
-import Entities.OrderType;
 import Entities.Receipt;
-import Entities.Report;
-import Entities.Restaurant;
-import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
-//import client.controllers.ViewReceiptController;
 import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
-import Entities.MessageType;
 
 /**
  * @author Danor
