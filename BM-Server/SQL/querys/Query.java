@@ -44,10 +44,19 @@ import controllers.ServerUIFController;
 import javafx.stage.FileChooser;
 import Entities.MessageType;
 
+/**
+ * @author Danor
+ * @author Sahar
+ * @author Aviel
+ * @author Lior
+ * @author Adi
+ * @author Talia
+ * This class handles all queries the server needs to perform.
+ */
 public class Query {
 
 	/*
-	 * importData this method import the database script
+	 * importData this method import the database script.
 	 */
 	public static void importData() {
 		FileChooser fileChooser = new FileChooser();
@@ -83,8 +92,7 @@ public class Query {
 	}
 
 	/**
-	 * readtScript this method get script and executed it into database
-	 * 
+	 * readtScript this method get script and executed it into database.
 	 * @param conn - the connection to db
 	 * @param in   - the script file
 	 */
@@ -110,9 +118,10 @@ public class Query {
 		}
 	}
 
-	/*
-	 * Author:Danor this method is for a Execute a Query which return the company
-	 * that not approved or waiting for approved by the Branch Manager.
+
+	/**
+	 * this method load employers from the DB for the Branch Manager for confirmation.
+	 * @return - the array list of employers to confirm.
 	 */
 	public static ArrayList<Employer> LoadEmployers() {
 		if (DBConnect.conn != null) {
@@ -136,15 +145,16 @@ public class Query {
 		return null;
 	}
 
-	/*
-	 * Author:Danor this method Execute an Update for the companyStatus on the
-	 * company table
+	
+	/**
+	 * this method update the employer status from the Branch Manager.
+	 * @param CompanyName - the company name of the employer.
+	 * @param CompanyStatus - the updated company name of the employer.
 	 */
 	public static void UpdateEmployers(String CompanyName, String CompanyStatus) {
-		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.company SET companyStatus= '" + CompanyStatus
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.company SET companyStatus= '" + CompanyStatus
 						+ "'" + " WHERE companyName= '" + CompanyName + "'  ;");
 				stmt.executeUpdate();
 			}
@@ -156,6 +166,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method check if the supplier company name equals to the supplier certified and approved in the DB.
+	 * @param supplier - the supplier to check his details.
+	 * @return - true or false if the details are correct.
+	 */
 	public static Boolean checkSupplier(Supplier supplier) {
 		if (DBConnect.conn != null) {
 			try {
@@ -189,6 +204,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method adds to the users and supplier tables in the DB the details of the supplier.
+	 * @param supplier - supplier for the id of the certified and id approved supplier.
+	 */
 	public static void UpdateSupplier(Supplier supplier) {
 		try {
 			if (DBConnect.conn != null) {
@@ -268,6 +287,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method return the user by his ID from the DB.
+	 * @param ID - the id of the user.
+	 * @return - return the user from the DB
+	 */
 	public static User IDcheck(String ID) {
 		PreparedStatement stmt;
 		try {
@@ -292,6 +316,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method returns array list of users from the DB to the Branch Manager.
+	 * @param Branch - the Branch of the Branch Manager to search users from his branch.
+	 * @return - Array list of users.
+	 */
 	public static ArrayList<User> getAccount(String Branch) {
 		if (DBConnect.conn != null) {
 			ArrayList<User> users = new ArrayList<>();
@@ -317,6 +346,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method delete the user from the users,client tables and if its a business client,delete form the buss_client table in DB.
+	 * @param user - user from the Branch Manager to Delete.
+	 */
 	public static void DeleteAccount(User user) {
 		if (DBConnect.conn != null) {
 			try {
@@ -344,6 +377,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method returns true of false to the Branch Manager if the company is approved or not.
+	 * @param CompanyName - company name for find the company status in the DB
+	 * @return - true of false.
+	 */
 	public static Boolean checkEmployerStatus(String CompanyName) {
 		if (DBConnect.conn != null) {
 			try {
@@ -365,6 +403,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method check if the details of the business account from the Branch Manager equals to the details from the import_users.
+	 * @param Account - business account from the Branch Manager to check his details.
+	 * @return - true or false.
+	 */
 	public static Boolean checkAccountDetails(BussinessAccount Account) {
 		if (DBConnect.conn != null) {
 			try {
@@ -393,6 +436,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method adds the business account from the Branch manager to the users,client,buss_client tables in the DB.
+	 * @param BAccount - business account from the Branch Manager for add to the DB.
+	 */
 	public static void addNewBAccount(BussinessAccount BAccount) {
 		if (DBConnect.conn != null) {
 			try {
@@ -447,6 +494,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method check if the details of the private client from the Branch Manager is equals to the details in the import_users table.
+	 * @param client - private account details from the Branch Manager.
+	 * @return - true or false.
+	 */
 	public static Boolean checkPrivateAccount(Client client) {
 		if (DBConnect.conn != null) {
 			try {
@@ -474,6 +526,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method adds the private account from the Branch manager to the users,client tables in the DB.
+	 * @param PAccount - private account details for add.
+	 */
 	public static void addNewPAccount(Client PAccount) {
 		if (DBConnect.conn != null) {
 			try {
@@ -518,6 +574,11 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method returns users from the branch location to change permissions.
+	 * @param Branch - branch location for getting account from the DB.
+	 * @return - array list of users for change permissions to the Branch Manager.
+	 */
 	public static ArrayList<User> GetAccountForFreeze(String Branch) {
 		if (DBConnect.conn != null) {
 			try {
@@ -542,6 +603,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method return if the status of the client is active.
+	 * @param AccountID - to find the client with his ID.
+	 * @return - true or false.
+	 */
 	public static Boolean CheckAccountStatusActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -565,6 +631,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method return if the status of the client is freeze.
+	 * @param AccountID - to find the client with his ID.
+	 * @return - true or false.
+	 */
 	public static Boolean CheckAccountStatusFreeze(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -587,6 +658,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method update the account to active.
+	 * @param AccountID - to find the client with his ID.
+	 */
 	public static void UpdateAccountStatusToActive(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -599,6 +674,10 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method update the account to Freeze.
+	 * @param AccountID - to find the client with his ID.
+	 */
 	public static void UpdateAccountStatusToFreeze(String AccountID) {
 		if (DBConnect.conn != null) {
 			try {
@@ -611,6 +690,12 @@ public class Query {
 		}
 	}
 
+	/**
+	 * this method return true or false if there is already report for the year and quarter given.
+	 * @param quarter - for check the quarter.
+	 * @param year - for check the year.
+	 * @return - true or false.
+	 */
 	public static Boolean checkYearAndQuarter(String quarter, String year) {
 		if (DBConnect.conn != null) {
 			try {
@@ -633,6 +718,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method update the MyFile file form the Branch Manager to the DB.
+	 * @param file - for update the DB.
+	 */
 	public static void updateFile(MyFile file) {
 		if (DBConnect.conn != null) {
 			String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
@@ -654,12 +743,10 @@ public class Query {
 	}
 
 	/**
-	 * 
-	 * @param branch
-	 * @param year
-	 * @param quarter Method connects to DB and get the relevant file with match
-	 *                parameters and creates a MyFile object with the information
-	 * @return relevant MyFile from db
+	 * @param branch - for the Branch of the report.
+	 * @param year - for the Year of the report.
+	 * @param quarter - Method connects to DB and get the relevant file with match parameters and creates a MyFile object with the information
+	 * @return - relevant MyFile from DB.
 	 */
 	public static MyFile downloadFile(String branch, String year, String quarter) {
 
@@ -711,11 +798,11 @@ public class Query {
 	}
 
 	/**
-	 * 
-	 * @param branch Method connect to DB and get the relevant year and quarterly
+	 * Method connect to DB and get the relevant year and quarterly
 	 *               who match parameter "branch" and creates a ArrayList object
 	 *               with the information
-	 * @return ArrayList with the match year and quarterly
+	 * @param branch - for the branch of the Branch Manager.
+	 * @return - ArrayList with the match year and quarterly
 	 */
 	public static ArrayList<String> getRelevantYearsAndQuarterly(String branch) {
 		if (DBConnect.conn != null) {
@@ -740,6 +827,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * @param restName - for the restaurant name to check.
+	 * @return - array list of orders.
+	 */
 	public static ArrayList<Order> LoadOrders(String restName) {
 		if (DBConnect.conn != null) {
 			ArrayList<Order> orders = new ArrayList<>();
@@ -810,6 +901,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * @param companyName - for the company name to check.
+	 * @return - true or false.
+	 */
 	public static Boolean LoadCompanyStatus(StringBuilder companyName) {
 		if (DBConnect.conn != null) {
 			Statement stmt;
@@ -830,6 +925,10 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * @param order - order fir check the ID.
+	 * @return - return the phone number of the user.
+	 */
 	public static String LoadPhoneNumber(Order order) {
 		if (DBConnect.conn != null) {
 			Statement stmt;
@@ -850,6 +949,11 @@ public class Query {
 		return null;
 	}
 
+	/**
+	 * this method returns HashMap of the Dish Type from the DB.
+	 * @param id - for the id to check.
+	 * @return - HashMap of dish types.
+	 */
 	public static HashMap<String, Integer> getQuntitiesOfDishTypes(int id) {
 		if (DBConnect.conn != null) {
 			Statement stmt;
