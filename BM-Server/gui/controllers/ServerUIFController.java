@@ -108,7 +108,7 @@ public class ServerUIFController {
 		//password = Passtxt.getText();
 		username = "root";
 		password = "Aa123456";
-		Connection connection = DBConnect.connect(username, password);
+		Connection connection = DBConnect.connect();
 		if (flagon == true) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");

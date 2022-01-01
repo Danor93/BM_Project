@@ -12,7 +12,7 @@ public class DBConnect {
 	public static Connection conn;
 	/*this is for the login to DB with username and password.*/
 	@SuppressWarnings("deprecation")
-	public static Connection connect(String username,String password) {
+	public static Connection connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			EchoServer.serverUIFController.addToTextArea("Driver definition succeed.");
@@ -22,8 +22,8 @@ public class DBConnect {
 		}
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", username,password);
-			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", "root","Aa123456");
+			//EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 			ServerUIFController.flagon=true;
 		} catch (SQLException ex) {/* handle any errors */
 			EchoServer.serverUIFController.addToTextArea("SQLException:" + ex.getMessage()+".");

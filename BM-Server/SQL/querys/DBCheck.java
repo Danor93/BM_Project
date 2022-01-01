@@ -1,5 +1,6 @@
 package querys;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +12,14 @@ import Entities.OrderType;
 public class DBCheck {
 
 	public static String DBCheck(String userName, String password) {
+		Connection conn = DBConnect.connect();
 		StringBuilder result = new StringBuilder();
 		String rs2 = null;
 		String role = null,ID=null,status = null;
 		PreparedStatement stmt,stmt1;
 		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
+			if (conn != null) {
+				stmt = conn.prepareStatement("SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				ResultSet rs = stmt.executeQuery();
@@ -49,7 +51,7 @@ public class DBCheck {
 				}
 				if(role.equals("Customer"))
 				{
-					stmt1 = DBConnect.conn.prepareStatement("SELECT status FROM bitemedb.client WHERE client_id=?");
+					stmt1 = conn.prepareStatement("SELECT status FROM bitemedb.client WHERE client_id=?");
 					stmt1.setString(1, ID);
 					ResultSet rs1 = stmt1.executeQuery();
 					while(rs1.next())
@@ -62,7 +64,7 @@ public class DBCheck {
 						return "Freeze";
 					}
 				}
-				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
+				stmt = conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
 				stmt.setString(1, userName);
 				stmt.setString(2, password);
 				stmt.executeUpdate();
