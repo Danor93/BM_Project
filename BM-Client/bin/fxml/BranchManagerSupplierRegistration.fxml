@@ -7,16 +7,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmSupplierRegController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="718.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmSupplierRegController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="677.0" fitWidth="718.0" layoutY="-47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="#1b1919" layoutX="660.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#1b1919" layoutX="655.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -30,47 +31,47 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Label layoutX="141.0" layoutY="144.0" prefHeight="21.0" prefWidth="208.0" text="Please Fill the All the details:" textFill="#262424">
+      <Label layoutX="141.0" layoutY="144.0" prefHeight="23.0" prefWidth="259.0" text="Please Fill the All the details:" textFill="#262424">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
       <Label layoutX="141.0" layoutY="200.0" prefHeight="30.0" prefWidth="160.0" text="Restaurant Name:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="141.0" layoutY="253.0" prefHeight="30.0" prefWidth="129.0" text="Restaurant ID:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="141.0" layoutY="315.0" prefHeight="30.0" prefWidth="136.0" text="Opening Time:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="144.0" layoutY="370.0" prefHeight="30.0" prefWidth="43.0" text="City:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="144.0" layoutY="417.0" prefHeight="30.0" prefWidth="81.0" text="Address:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Label layoutX="144.0" layoutY="465.0" prefHeight="30.0" prefWidth="202.0" text="Confirm Employee ID:" textFill="#282727">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="ResNameTXT" layoutX="340.0" layoutY="203.0" prefHeight="25.0" prefWidth="216.0" />
-      <TextField fx:id="ResIDTXT" layoutX="340.0" layoutY="256.0" prefHeight="25.0" prefWidth="216.0" />
-      <TextField fx:id="OpeningTimeTXT" layoutX="340.0" layoutY="317.0" prefHeight="25.0" prefWidth="216.0" />
-      <TextField fx:id="CityTXT" layoutX="340.0" layoutY="372.0" prefHeight="25.0" prefWidth="216.0" />
-      <TextField fx:id="AddressTXT" layoutX="340.0" layoutY="420.0" prefHeight="25.0" prefWidth="216.0" />
-      <TextField fx:id="ConfirmEmpTxt" layoutX="340.0" layoutY="467.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="ResNameTXT" layoutX="301.0" layoutY="203.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="ResIDTXT" layoutX="301.0" layoutY="256.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="OpeningTimeTXT" layoutX="301.0" layoutY="318.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="CityTXT" layoutX="301.0" layoutY="372.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="AddressTXT" layoutX="301.0" layoutY="420.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextField fx:id="ConfirmEmpTxt" layoutX="301.0" layoutY="468.0" prefHeight="25.0" prefWidth="216.0" />
       <Label fx:id="invaildName" layoutX="564.0" layoutY="205.0" prefHeight="20.0" prefWidth="113.0" textFill="#ff0404">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -113,7 +114,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="78.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/home.png" />
                </image>
@@ -130,5 +131,11 @@
             </Text>
          </children>
       </AnchorPane>
+      <Label layoutX="125.0" layoutY="4.0" prefHeight="17.0" prefWidth="516.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Supplier Registaration" textFill="#363131">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="493.0" layoutX="225.0" layoutY="33.0" startX="-100.0" />
    </children>
 </Pane>

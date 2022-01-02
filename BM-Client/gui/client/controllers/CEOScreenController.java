@@ -22,6 +22,7 @@ import main.ClientUI;
 /**
  * 
  * @author Lior
+ * this class is for the main screen of the CEO to choose which action he want.
  *
  */
 
@@ -51,22 +52,40 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 	@FXML
 	private Text WelcomeLabel;
 
+	/**
+	 * for back to login screen
+	 */
 	@Override
 	public void Back(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
 	}
 
+	/**
+	 * for view the branch monthly reports
+	 * @param event click on btnViewBranchsReports
+	 * @throws IOException
+	 */
 	@FXML
 	void ViewBranchManagerReport(ActionEvent event) throws IOException {
 		start(event, "BranchManagerChooseReportToView", "View Report",LoginScreenController.user.getUserName());
 	}
 
+	/**
+	 * for view revenue report, the next screen is choosing witch parameters
+	 * @param event click on btnViewRevenueReport
+	 * @throws IOException
+	 */
 	@FXML
 	void revenueReport(ActionEvent event) throws IOException {
 		start(event, "CEOChooseQReports", "Revenue Report",LoginScreenController.user.getUserName());
 	}
 
+	/**
+	 * for download PDF from Database
+	 * @param event click on btnDownloadQuarterlyReport
+	 * @throws IOException
+	 */
 	@FXML
 	void downloadQuarterlyReport(ActionEvent event) throws IOException {
 		Stage stage = new Stage();
@@ -81,6 +100,9 @@ public class CEOScreenController extends Controller implements ControllerInterfa
 
 	}
 
+	/**
+	 * display the name of user
+	 */
 	@Override
 	public void display(String string) {
 		WelcomeLabel.setText("Welcome, " + LoginScreenController.user.getFirstN() );

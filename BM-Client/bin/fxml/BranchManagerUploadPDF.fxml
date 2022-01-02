@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -19,14 +20,14 @@
                   <Image url="@/images/background.jpeg" />
                </image>
             </ImageView>
-            <Label layoutX="274.0" layoutY="55.0" prefHeight="65.0" prefWidth="130.0" text="Upload PDF">
+            <Label layoutX="232.0" layoutY="54.0" prefHeight="65.0" prefWidth="214.0" text="Upload PDF">
                <font>
-                  <Font name="Arial Bold" size="23.0" />
+                  <Font name="Times New Roman Bold" size="38.0" />
                </font>
             </Label>
-            <Label layoutX="135.0" layoutY="144.0" prefHeight="19.0" prefWidth="109.0" text="Choose a Quertar:">
+            <Label layoutX="135.0" layoutY="144.0" prefHeight="19.0" prefWidth="130.0" text="Choose a Quertar:">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
             <Button fx:id="UploadBtn" layoutX="274.0" layoutY="244.0" mnemonicParsing="false" onAction="#UploadPDF" prefHeight="42.0" prefWidth="130.0" text="Upload File">
@@ -36,11 +37,11 @@
             </Button>
             <Label layoutX="135.0" layoutY="189.0" prefHeight="20.0" prefWidth="109.0" text="Enter a Year:">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="QuertarComboBox" layoutX="256.0" layoutY="141.0" onAction="#ChooseQuertar" prefHeight="25.0" prefWidth="186.0" />
-            <ComboBox fx:id="YearComboBox" layoutX="256.0" layoutY="187.0" onAction="#chooseYear" prefHeight="25.0" prefWidth="186.0" />
+            <ComboBox fx:id="QuertarComboBox" layoutX="292.0" layoutY="141.0" onAction="#ChooseQuertar" prefHeight="25.0" prefWidth="186.0" />
+            <ComboBox fx:id="YearComboBox" layoutX="292.0" layoutY="186.0" onAction="#chooseYear" prefHeight="25.0" prefWidth="186.0" />
             <AnchorPane prefHeight="442.0" prefWidth="116.0" style="-fx-background-color: #004d00;">
                <children>
                   <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
@@ -53,7 +54,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="56.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/images/home.png" />
                      </image>
@@ -70,11 +71,17 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Text fill="#1b1919" layoutX="546.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+            <Text fill="#1b1919" layoutX="546.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Text>
+            <Label layoutX="123.0" layoutY="14.0" prefHeight="20.0" prefWidth="454.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Upload PDF" textFill="#201f1f">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Line endX="430.99993896484375" endY="7.62939453125E-6" layoutX="173.0" layoutY="42.0" startX="-56.99998474121094" startY="7.62939453125E-6" />
          </children>
       </Pane>
    </children>

@@ -7,70 +7,97 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="709.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewPrivateAccountController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="709.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewPrivateAccountController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="662.0" fitWidth="736.0" layoutX="-13.0" layoutY="-93.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="#282727" layoutX="639.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#282727" layoutX="638.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="129.0" layoutY="38.0" text="New Private Account" textFill="#232121">
+      <Label layoutX="206.0" layoutY="53.0" style="-fx-font-family: Times New Roman;" text="New Private Account" textFill="#232121">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Times New Roman Bold" size="38.0" />
          </font>
       </Label>
-      <Label layoutX="156.0" layoutY="130.0" text="First Name" textFill="#151414">
+      <Label layoutX="140.0" layoutY="159.0" style="-fx-font-family: Times New Roman;" text="First Name" textFill="#151414">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="159.0" layoutY="169.0" text="Last Name" textFill="#151414">
+      <Label layoutX="137.0" layoutY="199.0" style="-fx-font-family: Times New Roman;" text="Last Name" textFill="#151414">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="159.0" layoutY="209.0" text="ID" textFill="#201e1e">
+      <Label layoutX="140.0" layoutY="235.0" style="-fx-font-family: Times New Roman;" text="ID" textFill="#201e1e">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="159.0" layoutY="246.0" text="Telephone" textFill="#151414">
+      <Label layoutX="138.0" layoutY="276.0" style="-fx-font-family: Times New Roman;" text="Telephone" textFill="#151414">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="156.0" layoutY="289.0" text="Email" textFill="#151414">
+      <Label layoutX="140.0" layoutY="315.0" style="-fx-font-family: Times New Roman;" text="Email" textFill="#151414">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="156.0" layoutY="332.0" text="Credit card number" textFill="#151414">
+      <Label layoutX="135.0" layoutY="359.0" text="Credit Card Number" textFill="#151414">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtFirstName" layoutX="284.0" layoutY="132.0" />
-      <TextField fx:id="txtLastName" layoutX="284.0" layoutY="170.0" />
-      <TextField fx:id="txtID" layoutX="284.0" layoutY="206.0" />
-      <TextField fx:id="txtTelephone" layoutX="284.0" layoutY="247.0" />
-      <TextField fx:id="txtEmail" layoutX="283.0" layoutY="286.0" />
-      <TextField fx:id="txtCreditCardNumber" layoutX="283.0" layoutY="329.0" />
-      <Text fill="#2b2828" layoutX="156.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You must fill in all the following details">
+      <TextField fx:id="txtFirstName" layoutX="284.0" layoutY="159.0" />
+      <TextField fx:id="txtLastName" layoutX="284.0" layoutY="197.0" />
+      <TextField fx:id="txtID" layoutX="284.0" layoutY="233.0" />
+      <TextField fx:id="txtTelephone" layoutX="284.0" layoutY="274.0" />
+      <TextField fx:id="txtEmail" layoutX="283.0" layoutY="313.0" />
+      <TextField fx:id="txtCreditCardNumber" layoutX="283.0" layoutY="356.0" />
+      <Text fill="#2b2828" layoutX="129.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Times New Roman;" text="You must fill in all the following details:" wrappingWidth="410.4769287109375">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Text>
-      <Button fx:id="btnConfirm" layoutX="326.0" layoutY="376.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="25.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+      <Label fx:id="InvaildFirstN" layoutX="439.0" layoutY="163.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
          <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="InvaildLastN" layoutX="439.0" layoutY="201.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="InvaildID" layoutX="439.0" layoutY="237.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="InvaildTel" layoutX="439.0" layoutY="278.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="InvaildEmail" layoutX="433.0" layoutY="317.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="InvaildCreditCard" layoutX="439.0" layoutY="360.0" prefHeight="17.0" prefWidth="212.0" textFill="#dc1212">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Label>
       <AnchorPane layoutX="-1.0" prefHeight="491.0" prefWidth="116.0" style="-fx-background-color: #004d00;">
          <children>
             <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
@@ -105,5 +132,16 @@
             </Button>
          </children>
       </AnchorPane>
+      <Button fx:id="btnConfirm" layoutX="316.0" layoutY="411.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="27.0" prefWidth="84.0" style="-fx-background-radius: 30; -fx-font-family: Times New Roman;" text="Confirm">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="118.0" layoutY="14.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account ➝ Open Private Account" textFill="#2b2727">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Line endX="491.60003662109375" endY="7.62939453125E-6" layoutX="216.0" layoutY="42.0" startX="-100.0" />
    </children>
 </Pane>

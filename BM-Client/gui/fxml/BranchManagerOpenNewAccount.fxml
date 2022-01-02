@@ -6,32 +6,33 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="683.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewAccountController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="683.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewAccountController">
    <children>
+      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="561.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account" textFill="#231f1f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
       <ImageView fx:id="BackImage" fitHeight="538.0" fitWidth="569.0" layoutX="116.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="#1b1a1a" layoutX="617.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Label layoutX="217.0" layoutY="56.0" text="Open New Account" textAlignment="CENTER" textFill="#1b1919">
          <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
-      <Label layoutX="193.0" layoutY="58.0" text="Open New Account" textAlignment="CENTER" textFill="#1b1919">
-         <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Times New Roman Bold" size="38.0" />
          </font>
       </Label>
-      <Button fx:id="btnBusinessAccount" layoutX="171.0" layoutY="144.0" mnemonicParsing="false" onAction="#BusinessAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Business Account">
+      <Button fx:id="btnBusinessAccount" layoutX="181.0" layoutY="209.0" mnemonicParsing="false" onAction="#BusinessAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30; -fx-font-family: #6AFB05;" text="Business Account">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font></Button>
-      <Button fx:id="btnPrivateAccount" layoutX="366.0" layoutY="144.0" mnemonicParsing="false" onAction="#PrivateAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Private Account">
+      <Button fx:id="btnPrivateAccount" layoutX="416.0" layoutY="209.0" mnemonicParsing="false" onAction="#PrivateAccount" prefHeight="47.0" prefWidth="182.0" style="-fx-background-radius: 30;" text="Private Account">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="15.0" />
          </font></Button>
       <AnchorPane layoutY="-12.0" prefHeight="538.0" prefWidth="116.0" style="-fx-background-color: #004d00;">
          <children>
@@ -60,7 +61,18 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Text fill="#1b1a1a" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
+      <Label layoutX="150.0" layoutY="128.0" prefHeight="40.0" prefWidth="448.0" text="Select Which kind of a Account you want to open:">
+         <font>
+            <Font name="Times New Roman Bold" size="20.0" />
+         </font>
+      </Label>
+      <Line endX="468.00006103515625" layoutX="217.0" layoutY="38.0" startX="-100.0" />
    </children>
 </Pane>

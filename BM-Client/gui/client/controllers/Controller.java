@@ -45,9 +45,9 @@ public abstract class Controller {
 						ClientUI.chat
 								.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 					}
-						primaryStage.close();
-					}
+					primaryStage.close();
 				}
+			}
 		});
 	}
 
@@ -73,9 +73,9 @@ public abstract class Controller {
 						ClientUI.chat
 								.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 					}
-						primaryStage.close();
-					}
+					primaryStage.close();
 				}
+			}
 		});
 	}
 

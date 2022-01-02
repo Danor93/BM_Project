@@ -108,8 +108,8 @@ public class ServerUIFController {
 		//password = Passtxt.getText();
 		username = "root";
 		password = "Aa123456";
-		Connection connection = DBConnect.connect(username, password);
-		if (flagon == true) {
+		Connection connection = DBConnect.connect();
+		if (flagon) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");
 			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);

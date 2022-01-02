@@ -1,5 +1,6 @@
 package querys;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,10 +20,9 @@ import Entities.RevenueReport;
 public class UpdateDB {
 
 	public static void UpdateisLoggedIn(String userName) {
-		PreparedStatement stmt;
 		try {
 			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
 				stmt.setString(1, userName);
 				stmt.executeUpdate();
 			} else {

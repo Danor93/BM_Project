@@ -10,10 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="779.0" fitWidth="1244.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,28 +26,28 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="133.0" layoutY="65.0" text="Branch Report" textFill="#1b1919">
+      <Label layoutX="133.0" layoutY="65.0" prefHeight="45.0" prefWidth="268.0" text="Branch Report" textFill="#1b1919">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Times New Roman Bold" size="38.0" />
          </font>
       </Label>
-      <ComboBox fx:id="BranchChoose" layoutX="266.0" layoutY="139.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="102.0" promptText="Branch" />
-      <ComboBox fx:id="Month" layoutX="266.0" layoutY="220.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="102.0" promptText="Month" />
-      <ComboBox fx:id="ReportType" layoutX="266.0" layoutY="180.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="109.0" promptText="Report Type" />
-      <ComboBox fx:id="Year" layoutX="266.0" layoutY="255.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="102.0" promptText="Year" />
+      <ComboBox fx:id="BranchChoose" layoutX="276.0" layoutY="140.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="102.0" promptText="Branch" />
+      <ComboBox fx:id="Month" layoutX="276.0" layoutY="221.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="102.0" promptText="Month" />
+      <ComboBox fx:id="ReportType" layoutX="276.0" layoutY="182.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="109.0" promptText="Report Type" />
+      <ComboBox fx:id="Year" layoutX="276.0" layoutY="257.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="102.0" promptText="Year" />
       <Label layoutX="110.0" layoutY="143.0" prefHeight="17.0" prefWidth="120.0" text="Choose Branch:" textFill="#201f1f">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="184.0" prefHeight="17.0" prefWidth="120.0" text="Choose Report Type:" textFill="#302d2d">
+      <Label layoutX="110.0" layoutY="184.0" prefHeight="21.0" prefWidth="153.0" text="Choose Report Type:" textFill="#302d2d">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="224.0" prefHeight="17.0" prefWidth="144.0" text="Choose Month and Year:" textFill="#232121">
+      <Label layoutX="110.0" layoutY="224.0" prefHeight="18.0" prefWidth="170.0" text="Choose Month and Year:" textFill="#232121">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Button fx:id="GetReport" layoutX="194.0" layoutY="349.0" mnemonicParsing="false" onAction="#getReport" prefHeight="40.0" prefWidth="144.0" style="-fx-background-radius: 30;" text="Get Report">
@@ -123,5 +124,16 @@
             </Text>
          </children>
       </AnchorPane>
+      <Label layoutX="119.0" layoutY="16.0" prefHeight="20.0" prefWidth="808.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Report To View Screen" textFill="#232020">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Text fill="#1b1a1a" layoutX="897.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Line endX="629.3999633789062" layoutX="332.0" layoutY="43.0" startX="-230.00001525878906" />
    </children>
 </Pane>

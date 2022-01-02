@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -14,20 +15,20 @@
    <children>
       <Pane prefHeight="535.0" prefWidth="694.0">
          <children>
-            <ImageView fitHeight="513.0" fitWidth="564.0" layoutX="110.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="535.0" fitWidth="589.0" layoutX="107.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/background.jpeg" />
                </image>
             </ImageView>
-            <Label layoutX="122.0" layoutY="161.0" prefHeight="21.0" prefWidth="274.0" text="Choose Account to Change Permissions: ">
+            <Label layoutX="122.0" layoutY="161.0" prefHeight="21.0" prefWidth="295.0" text="Choose Account to Change Permissions: ">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ActiveAccountComboBox" layoutX="398.0" layoutY="159.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
-            <Label layoutX="201.0" layoutY="88.0" prefHeight="53.0" prefWidth="321.0" text="Change Permissions Account Screen">
+            <ComboBox fx:id="ActiveAccountComboBox" layoutX="425.0" layoutY="159.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
+            <Label layoutX="201.0" layoutY="88.0" prefHeight="53.0" prefWidth="323.0" text="Change Permissions Account Screen">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="Times New Roman Bold" size="20.0" />
                </font>
             </Label>
             <Button fx:id="FreezeBtn" layoutX="397.0" layoutY="230.0" mnemonicParsing="false" onAction="#FreezeAccount" prefHeight="37.0" prefWidth="79.0" style="-fx-background-radius: 30;" text="Freeze">
@@ -52,7 +53,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="60.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/images/home.png" />
                      </image>
@@ -69,6 +70,17 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Label layoutX="110.0" layoutY="11.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Change Permissions Screen" textFill="#2b2727">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Text fill="#1b1a1a" layoutX="636.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Line endX="494.20001220703125" endY="7.62939453125E-6" layoutX="201.0" layoutY="36.0" startX="-100.0" />
          </children>
       </Pane>
    </children>

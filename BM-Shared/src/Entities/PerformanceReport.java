@@ -1,6 +1,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * @author Sahar this object is to save performance rerport data to be used in
@@ -9,9 +10,6 @@ import java.io.Serializable;
 
 public class PerformanceReport implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 640146676291178737L;
 
 	private String month, year;

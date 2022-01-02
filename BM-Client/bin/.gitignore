@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Image/
 /css/
 /fxml/
@@ -8,3 +9,18 @@
 /main/
 /LoginTest$StubLogin.class
 /LoginTest.class
+=======
+/Interfaces/
+/Parsing/
+/client/
+/css/
+/fxml/
+<<<<<<< HEAD
+/icons/
+/images/
+/main/
+/LoginTest$StubLogin.class
+/LoginTest.class
+=======
+>>>>>>> master
+>>>>>>> master

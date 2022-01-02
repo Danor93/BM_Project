@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.User;
+import Interfaces.ILoginInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,12 +29,27 @@ import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
 
 /**
- * @author Adi & Talia
- * this class handles for login into the system with all the Entity related to BiteMe.
+ * @author Adi & Talia this class handles for login into the system with all the
+ *         Entity related to BiteMe.
  */
 public class LoginScreenController extends Controller {
 	public static User user = null;
 	public static String statusUser;
+	public static ILoginInterface iLogin;
+	
+	
+	// For regular uses
+		public LoginScreenController() {
+
+		}
+	
+	/**
+	 * this is a contractor for the test case.
+	 * @param user - user from the test case;
+	 */
+	public LoginScreenController(ILoginInterface iLogin) {
+		this.iLogin=iLogin;
+	}
 
 	@FXML
 	private ResourceBundle resources;
@@ -60,7 +76,7 @@ public class LoginScreenController extends Controller {
 	 * @param event - pressing the "login" button
 	 */
 	@FXML
-	public void ConnectSystem(ActionEvent event) throws IOException {
+	public void ConnectSystem(ActionEvent event) throws Exception {
 		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
 			WrongInputInLoggin.setText("Please fill both user name and password");
 		} else {
@@ -70,9 +86,6 @@ public class LoginScreenController extends Controller {
 			str.append("@");
 			str.append(PasswordField.getText());
 			ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
-			if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
-				PopUpMessage.errorMessage("You have to fill all the fileds!");
-			}
 			if (!statusUser.equals("Active")) {
 				WrongInputInLoggin.setText(statusUser);
 				statusUser = null;
@@ -105,8 +118,8 @@ public class LoginScreenController extends Controller {
 				}
 				}
 			}
+		
 		}
-
 	}
 
 	@Override
