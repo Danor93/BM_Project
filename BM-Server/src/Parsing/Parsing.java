@@ -260,12 +260,22 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
 		}
 
+		/**
+		 * Case for download a PDF
+		 *  @param  a string with selected branch, selected year and selected quarterly
+		 *  @return a message to client with the selected file data in MyFile format
+		 */
 		case downloadPDF: {
 			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
 			MyFile file = Query.downloadFile(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2]);
 			return messageFromServer = new Message(MessageType.download_pdf_succ, file);
 		}
 
+		/**
+		 * Case for getting from database the relevant year and quarterly appropriate for a selected branch
+		 * @param a string with the selected branch name
+		 * @return a message to client with the year and quarterly in ArrayList<String> format 
+		 */
 		case showRelevantYearsAndQuarterly: {
 			String branch = (String) receivedMessage.getMessageData();
 			ArrayList<String> yearsAndQuarter = Query.getRelevantYearsAndQuarterly(branch);

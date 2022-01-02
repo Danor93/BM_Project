@@ -418,11 +418,17 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * Insert the selected file data in MyFile format into a static variable
+		 */
 		case download_pdf_succ: {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
 		}
 		
+		/**
+		 * Insert the relevant year and quarterly with the selected branch into a static variable
+		 */
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
