@@ -96,8 +96,11 @@ public class DishOptionsController extends Controller implements Initializable{
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
-    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
-    }
+    	if(SingletonOrder.getInstance()!=null)
+    	{
+    		SingletonOrder.getInstance().myOrder.clear();
+    	}
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());    }
     
 	/** This method meant to get back to login page and logout the customer
 	 * @param event				pressing the "logout" button 
@@ -309,6 +312,7 @@ public class DishOptionsController extends Controller implements Initializable{
 	
 	@Override
 	public void display(String string) {
+		userName.setText(LoginScreenController.user.getFirstN());
 		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
 		
 	}

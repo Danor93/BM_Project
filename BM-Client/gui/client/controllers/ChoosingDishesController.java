@@ -88,6 +88,9 @@ public class ChoosingDishesController extends Controller implements Initializabl
 
     @FXML
     private Text userName;
+    
+   
+
 
     public ArrayList<String> dishNames;
 	public ArrayList<Dish> dishListOfType;
@@ -102,7 +105,11 @@ public class ChoosingDishesController extends Controller implements Initializabl
 		 */
 	 @FXML
 	 void backToHome(MouseEvent event) throws IOException {
-		 start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
+	    	if(SingletonOrder.getInstance()!=null)
+	    	{
+	    		SingletonOrder.getInstance().myOrder.clear();
+	    	}
+	    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	  }
 	       
 		/** This method meant to get back to login page and logout the customer
@@ -116,6 +123,21 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	    ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
 	 }
+	 
+	 
+
+		/** This method meant to get back to restaurant menu
+		 * @param event				pressing the "back" button 
+		 * @throws IOException
+		 */
+	 
+	 @FXML
+	    void back(ActionEvent event) throws IOException {
+		 
+		 start(event,"MenuScreen","Restaurant's menu","");
+
+	    }
+
 
 	 
     /**This method adds a dish to the order
@@ -136,7 +158,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
         	chosenDish=dishListOfType.get(indexOfDish);
         	if(!chosenDish.getChoiceFactor().equals("")||!chosenDish.getExtra().equals(""))
         	{
-        		start(event, "DishOptions", "choose dish details",LoginScreenController.user.getFirstN());
+        		start(event, "DishOptions", "choose dish details","");
         	}
         	
         	else
@@ -157,7 +179,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	 */
     @FXML
     void backToMenu(ActionEvent event) throws IOException {
-    	start(event,"MenuScreen","Restaurant's menu",LoginScreenController.user.getFirstN());
+    	start(event,"MenuScreen","Restaurant's menu","");
     }
     
     @FXML
@@ -206,6 +228,7 @@ public class ChoosingDishesController extends Controller implements Initializabl
 	public void display(String string) 
 	{
 		foodKind.setText(string);
+		userName.setText(LoginScreenController.user.getFirstN());
 	}
 
 	@Override

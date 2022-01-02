@@ -66,6 +66,10 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void backToHome(MouseEvent event) throws IOException {
+	    	if(SingletonOrder.getInstance()!=null)
+	    	{
+	    		SingletonOrder.getInstance().myOrder.clear();
+	    	}
 	    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	    	}
 

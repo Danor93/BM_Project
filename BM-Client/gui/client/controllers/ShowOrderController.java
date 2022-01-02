@@ -22,9 +22,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-//adi&talia
+//Adi&Talia
 public class ShowOrderController extends Controller implements Initializable{
 
+
+    @FXML
+    private Label notify;
+    
     @FXML
     private Button back;
 
@@ -69,7 +73,11 @@ public class ShowOrderController extends Controller implements Initializable{
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "CustomerScreen", "CustomerScreen", "");
+    	if(SingletonOrder.getInstance()!=null)
+    	{
+    		SingletonOrder.getInstance().myOrder.clear();
+    	}
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -88,29 +96,43 @@ public class ShowOrderController extends Controller implements Initializable{
 
     @FXML
     void back(ActionEvent event) throws IOException {
-		start(event, "MenuScreen", "Restaurant's menu",LoginScreenController.user.getFirstN());
+		start(event, "MenuScreen", "Restaurant's menu","");
     }
     
 
     @FXML
     void proceed(ActionEvent event) throws IOException {
-    	finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
-		ClientUI.chat.accept(new Message(MessageType.getRefundDetails,finalOrder));
-		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
+    	if(SingletonOrder.getInstance().myOrder.isEmpty())
+    		notify.setText("There in no dish in the order. Please return to menu to choose one");
+    	else
+    	{
+    		finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
+    		ClientUI.chat.accept(new Message(MessageType.getRefundDetails,finalOrder));
+    		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
+    	}
+    	
     }
 
     @FXML
     void removeOrder(ActionEvent event) 
     {
     	String s=listOrder.getSelectionModel().getSelectedItem();
-    	int index=myDishes.indexOf(s);
-    	myDishes.remove(s);
-    	Dish removeDish=SingletonOrder.getInstance().myOrder.get(index);
-    	SingletonOrder.getInstance().myOrder.remove(index);
-    	total-=removeDish.getPrice()*removeDish.getQuentity();
-    	totalPrice.setText("Total price: "+total+" $");
-    	orders=FXCollections.observableArrayList(myDishes);
-		listOrder.setItems(orders);
+    	if(s==null)
+    	{
+    		notify.setText("In order to remove a dish, Please select one");
+    	}
+    	else
+    	{
+    		int index=myDishes.indexOf(s);
+        	myDishes.remove(s);
+        	Dish removeDish=SingletonOrder.getInstance().myOrder.get(index);
+        	SingletonOrder.getInstance().myOrder.remove(index);
+        	total-=removeDish.getPrice()*removeDish.getQuentity();
+        	totalPrice.setText("Total price: "+total+" $");
+        	orders=FXCollections.observableArrayList(myDishes);
+    		listOrder.setItems(orders);
+    	}
+    	
     }
 
 	@Override

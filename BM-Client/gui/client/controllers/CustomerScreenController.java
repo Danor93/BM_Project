@@ -29,7 +29,7 @@ import main.ClientUI;
  *
  */
 /**
- * @author Adi
+ * @author Adi&talia
  *
  */
 public class CustomerScreenController extends Controller implements Initializable {

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
+import Entities.SingletonOrder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,7 +77,11 @@ public class MenuScreenController extends Controller {
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "CustomerScreen", "CustomerScreen", LoginScreenController.user.getFirstN());
+    	if(SingletonOrder.getInstance()!=null)
+    	{
+    		SingletonOrder.getInstance().myOrder.clear();
+    	}
+    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -175,7 +180,6 @@ public class MenuScreenController extends Controller {
 	public void display(String string) {
 		restName.setText(RestListFormController.chosenRst.getSupplierName());
 		userName.setText(LoginScreenController.user.getFirstN());
-		// restName.setText(supplier);
 		dishAdded.setText(string);
 	}
 }

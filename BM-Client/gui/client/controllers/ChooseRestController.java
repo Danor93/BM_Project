@@ -80,6 +80,10 @@ import main.ClientUI;
 		 */
 	    @FXML
 	    void backToHome(MouseEvent event) throws IOException {
+	    	if(SingletonOrder.getInstance()!=null)
+	    	{
+	    		SingletonOrder.getInstance().myOrder.clear();
+	    	}
 	    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
 	    }
 
@@ -99,7 +103,7 @@ import main.ClientUI;
 	     */
 	    @FXML
 	    void proceedToRest(ActionEvent event) throws IOException {
-	    	if(cityName!=null && !cityName.equals("select"))
+	    	if(cityName!=null && !cityName.equals(""))
 	    	{
 	    		start(event, "restListForm", "Restaurants list",cityName);
 	    	}	    	

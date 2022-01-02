@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MenuScreenController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="582.0" fitWidth="592.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BackImage" fitHeight="582.0" fitWidth="616.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/backk.jpg" />
          </image></ImageView>
@@ -19,7 +21,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Text layoutX="579.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="607.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -73,14 +75,14 @@
          <image>
             <Image url="@/images/cart.png" />
          </image></ImageView>
-      <Text fx:id="dishAdded" fill="GREEN" layoutX="446.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0">
+      <Text fx:id="dishAdded" fill="GREEN" layoutX="429.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="174.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="-11.0" prefHeight="541.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+      <AnchorPane layoutX="-11.0" prefHeight="544.0" prefWidth="112.0" style="-fx-background-color: #004d00;">
          <children>
-            <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
+            <Text fill="WHITE" layoutX="19.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -90,16 +92,16 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="36.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="36.0" layoutY="146.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/home.png" />
                </image></ImageView>
-            <Button fx:id="back" layoutX="20.0" layoutY="258.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
+            <Button fx:id="back" layoutX="20.0" layoutY="393.0" mnemonicParsing="false" onAction="#backToRestChoose" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="logout" layoutX="19.0" layoutY="302.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
+            <Button fx:id="logout" layoutX="19.0" layoutY="444.0" mnemonicParsing="false" onAction="#logout" prefHeight="33.0" prefWidth="77.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -109,6 +111,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Text fill="WHITE" layoutX="20.0" layoutY="242.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pay attention, Pressing the home button will cancel your order " wrappingWidth="83.77734375">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Text layoutX="451.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Shopping cart">
@@ -116,10 +123,16 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="restName" layoutX="248.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
+      <Text fx:id="restName" layoutX="246.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <Label layoutX="107.0" layoutY="4.0" prefHeight="24.0" prefWidth="441.0" text="Customer page -&gt; Insert W4C code-&gt;Choose city-&gt;Choose restaurant-&gt;Menu">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="104.0" layoutY="19.0" prefHeight="17.0" prefWidth="580.0" />
    </children>
 </Pane>

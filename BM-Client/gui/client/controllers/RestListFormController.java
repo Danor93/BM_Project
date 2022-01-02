@@ -9,12 +9,14 @@ import Entities.Dish;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Restaurant;
+import Entities.SingletonOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -61,6 +63,9 @@ public class RestListFormController extends Controller implements Initializable 
 
     @FXML
     private Text userName;
+    
+    @FXML
+    private Label notify;
 
     @FXML
     private TableView<Restaurant> table;
@@ -79,6 +84,10 @@ public class RestListFormController extends Controller implements Initializable 
 	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
+    	if(SingletonOrder.getInstance()!=null)
+    	{
+    		SingletonOrder.getInstance().myOrder.clear();
+    	}
     	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
@@ -113,9 +122,9 @@ public class RestListFormController extends Controller implements Initializable 
      */
     @FXML
     void proceedToOrder(ActionEvent event) throws IOException {
-		String supplier=table.getSelectionModel().getSelectedItem().getSupplierName();
-		if(supplier!=null)
+		if(table.getSelectionModel().getSelectedItem()!=null)
 		{
+			String supplier=table.getSelectionModel().getSelectedItem().getSupplierName();
 			String address=table.getSelectionModel().getSelectedItem().getAddress();
 			ClientUI.chat.accept(new Message(MessageType.get_Dishes,table.getSelectionModel().getSelectedItem().getRestCode()));
 			for(Restaurant r:restaurants)
@@ -123,7 +132,11 @@ public class RestListFormController extends Controller implements Initializable 
 				if(supplier.equals(r.getSupplierName())&& address.equals(r.getAddress()))
 					chosenRst=r;	
 			}
-			start(event,"MenuScreen","Restaurant's menu",LoginScreenController.user.getFirstN());
+			start(event,"MenuScreen","Restaurant's menu","");
+		}
+		else
+		{
+			notify.setText("In order to proceed please choose restaurant");
 		}
     }
 
