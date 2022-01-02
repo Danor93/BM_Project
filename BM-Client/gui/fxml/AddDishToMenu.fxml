@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.AddDishToMenuController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.AddDishToMenuController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="544.0" fitWidth="536.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -40,9 +40,9 @@
             <Font name="System Bold" size="15.0" />
          </font></Button>
       <TextArea fx:id="txtIngredients" layoutX="156.0" layoutY="260.0" prefHeight="78.0" prefWidth="331.0" promptText="Enter the ingredients of the dish. Example: tomato, cucumber, black olives and cheese" />
-      <Label fx:id="txtMiniLabel" layoutX="121.0" layoutY="440.0" prefHeight="35.0" prefWidth="402.0" textFill="RED">
+      <Label fx:id="txtMiniLabel" layoutX="107.0" layoutY="440.0" prefHeight="35.0" prefWidth="425.0" textFill="RED">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Label layoutX="166.0" layoutY="96.0" text="Insert name">

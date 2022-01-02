@@ -85,13 +85,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 	private Button back;
 
 	private String TypeOfDish;
-	private boolean typeDishIsValid = true;
-	private boolean choiceDetailsIsValid = true;
-	private boolean choiceFactorIsValid = true;
-	private boolean continuedFlag = true;
-	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
-	private boolean ingredientsIsValid = true;
-	private boolean priceIsValid = true;
 
 	/**
 	 * This method meant to get back to supplier page
@@ -100,7 +93,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "SupplierScreen", "Supplier page",LoginScreenController.user.getFirstN());
+		start(event, "SupplierScreen", "Supplier page", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -113,12 +106,11 @@ public class AddDishToMenuController extends Controller implements Initializable
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login", "");
 	}
-	
 
-    @FXML
-    void backToDishes(ActionEvent event) throws IOException {
-    	start(event,"UpdateMenuScreen", "Update Menu",LoginScreenController.user.getFirstN());
-    }
+	@FXML
+	void backToDishes(ActionEvent event) throws IOException {
+		start(event, "UpdateMenuScreen", "Update Menu", LoginScreenController.user.getFirstN());
+	}
 
 	/**
 	 * A method to catch the type of dish.
@@ -141,6 +133,13 @@ public class AddDishToMenuController extends Controller implements Initializable
 	 */
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
+		boolean typeDishIsValid = true;
+		boolean choiceDetailsIsValid = true;
+		boolean choiceFactorIsValid = true;
+		boolean continuedFlag = true;
+		boolean choiceDetailsWithoutChoiceFactorFlag = true;
+		boolean ingredientsIsValid = true;
+		boolean priceIsValid = true;
 		Dish dish = new Dish(null, null, null, null, null, null, 0, null);
 		if (txtNameDish.getText().isEmpty())
 			txtMiniLabel.setText("Name must be valid!");
@@ -214,8 +213,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 									ingredientsIsValid = true;
 								}
 							} else {
-								txtMiniLabel.setText(
-										"You cannot enter a value for the Choice details without entering a value for the Choice factor");
+								txtMiniLabel.setText("If you entered a choice details, you must also enter choice factor");
 								choiceDetailsWithoutChoiceFactorFlag = true;
 							}
 						} else {

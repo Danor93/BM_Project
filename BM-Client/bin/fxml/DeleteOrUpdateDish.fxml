@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DeleteOrUpdateDishController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.DeleteOrUpdateDishController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="545.0" fitWidth="618.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -34,14 +34,14 @@
          </font>
       </Label>
       <TextField fx:id="txtNewPriceDish" layoutX="361.0" layoutY="167.0" />
-      <Button fx:id="btnDeleteDish" layoutX="209.0" layoutY="494.0" mnemonicParsing="false" onAction="#DeleteDish" style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 30;" text="Delete dish">
+      <Button fx:id="btnDeleteDish" layoutX="175.0" layoutY="494.0" mnemonicParsing="false" onAction="#DeleteDish" prefHeight="35.0" prefWidth="137.0" style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 30;" text="Delete dish">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>
       <TextArea fx:id="txtNewIngredients" layoutX="176.0" layoutY="275.0" prefHeight="78.0" prefWidth="331.0" />
-      <Label fx:id="txtMiniLabel" layoutX="146.0" layoutY="457.0" prefHeight="25.0" prefWidth="388.0" textFill="RED">
+      <Label fx:id="txtMiniLabel" layoutX="108.0" layoutY="453.0" prefHeight="34.0" prefWidth="506.0" textFill="RED">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Label layoutX="174.0" layoutY="108.0" text="Choose type">
@@ -74,7 +74,7 @@
       <ComboBox fx:id="btnDish" layoutX="360.0" layoutY="136.0" onAction="#ChooseDish" prefWidth="150.0" promptText="example: Greek" />
       <TextArea fx:id="txtNewIngredientsToRemove" layoutX="176.0" layoutY="366.0" prefHeight="78.0" prefWidth="331.0" />
       <ComboBox fx:id="btnDishType" layoutX="360.0" layoutY="106.0" onAction="#ChoocTypeOfDish" prefWidth="150.0" promptText="example: Salad" />
-      <Button fx:id="btnConfirm" layoutX="358.0" layoutY="494.0" mnemonicParsing="false" onAction="#ConfirmUpdate" style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 30;" text="Confirm Updare">
+      <Button fx:id="btnConfirm" layoutX="358.0" layoutY="494.0" mnemonicParsing="false" onAction="#ConfirmUpdate" style="-fx-border-radius: 30; -fx-border-width: 2; -fx-border-color: black; -fx-background-radius: 30;" text="Confirm Update">
          <font>
             <Font name="System Bold" size="15.0" />
          </font></Button>

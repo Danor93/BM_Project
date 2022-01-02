@@ -88,14 +88,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	private String NameOfDish;
 	private DishType dishtype;
 	private float PriceOfDish;
-	private boolean NameAndTypeCorrect = false;
-	private boolean NameAndTypeCorrectToDelete = false;
-	private boolean CorrectPrice = false;
-	private boolean choiceDetailsIsValid = true;
-	private boolean choiceFactorIsValid = true;
-	private boolean continuedFlag = true;
-	private boolean choiceDetailsWithoutChoiceFactorFlag = true;
-	private boolean ingredientsIsValid = true;
 	private int placeOfDish;
 
 	/**
@@ -170,6 +162,13 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	 */
 	@FXML
 	void ConfirmUpdate(ActionEvent event) throws IOException {
+		boolean NameAndTypeCorrect = false;
+		boolean CorrectPrice = false;
+		boolean choiceDetailsIsValid = true;
+		boolean choiceFactorIsValid = true;
+		boolean continuedFlag = true;
+		boolean choiceDetailsWithoutChoiceFactorFlag = true;
+		boolean ingredientsIsValid = true;
 		Dish dish = new Dish(null, null, null, null, null, null, 0, null);
 		try {
 			dishtype = DishType.toDishType(TypeOfDish);
@@ -191,7 +190,6 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 					CorrectPrice = true;
 				} catch (Exception e) {
 					txtMiniLabel.setText("The price must be valid number");
-					// e.printStackTrace();
 				}
 			}
 			if (NameAndTypeCorrect && CorrectPrice) {
@@ -244,8 +242,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 								ingredientsIsValid = true;
 							}
 						} else {
-							txtMiniLabel.setText(
-									"You cannot enter a value for the Choice details without entering a value for the Choice factor");
+							txtMiniLabel.setText("If you entered a choice details, you must also enter choice factor");
 							choiceDetailsWithoutChoiceFactorFlag = true;
 						}
 					} else {
@@ -257,7 +254,10 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 					continuedFlag = true;
 				}
 			} else {
-				txtMiniLabel.setText("Type must be selected!");
+				if (!CorrectPrice)
+					txtMiniLabel.setText("price must be valid!");
+				else
+					txtMiniLabel.setText("Type must be selected!");
 			}
 		}
 	}
@@ -269,6 +269,7 @@ public class DeleteOrUpdateDishController extends Controller implements Initiali
 	 */
 	@FXML
 	void DeleteDish(ActionEvent event) throws IOException {
+		boolean NameAndTypeCorrectToDelete = false;
 		try {
 			dishtype = DishType.toDishType(TypeOfDish);
 			if (NameOfDish == null) {
