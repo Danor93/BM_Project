@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmEmployerRegController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="718.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ConfirmEmployerRegController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="629.0" fitWidth="726.0" layoutX="29.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,30 +23,30 @@
       </Text>
       <Label layoutX="146.0" layoutY="49.0" text="Confirm Employer Registration" textFill="#201e1e">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="Times New Roman Bold" size="38.0" />
          </font>
       </Label>
-      <Label layoutX="140.0" layoutY="188.0" prefHeight="19.0" prefWidth="147.0" text="Employer's Name:" textFill="#151515">
+      <Label layoutX="146.0" layoutY="192.0" prefHeight="19.0" prefWidth="147.0" text="Employer's Name:" textFill="#151515">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="Times New Roman Bold" size="15.0" />
          </font>
       </Label>
       <Text fill="#181717" layoutX="130.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The registration of employers was carried out by the director of MASA.">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Text>
-      <Button fx:id="btnConfirmEmployerRegistartion" layoutX="414.0" layoutY="230.0" mnemonicParsing="false" onAction="#ConfirmEmployerRegistartion" prefHeight="34.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
+      <Button fx:id="btnConfirmEmployerRegistartion" layoutX="442.0" layoutY="230.0" mnemonicParsing="false" onAction="#ConfirmEmployerRegistartion" prefHeight="34.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: #6AFB05;" text="Confirm">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
       <Text fill="#201f1f" layoutX="130.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can confirm / refuse their registration.">
          <font>
-            <Font name="System Bold" size="17.0" />
+            <Font name="Times New Roman Bold" size="17.0" />
          </font>
       </Text>
-      <ComboBox fx:id="ListofEmployers" layoutX="297.0" layoutY="188.0" onAction="#ChooseCompany" prefHeight="25.0" prefWidth="234.0" promptText="List of employers awaiting approval" />
-      <Button fx:id="btnRefuseEmployerRegistartion" layoutX="326.0" layoutY="230.0" mnemonicParsing="false" onAction="#RefuseEmployerRegistartion" prefHeight="34.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: red;" text="Refuse">
+      <ComboBox fx:id="ListofEmployers" layoutX="325.0" layoutY="189.0" onAction="#ChooseCompany" prefHeight="25.0" prefWidth="234.0" promptText="List of employers awaiting approval" />
+      <Button fx:id="btnRefuseEmployerRegistartion" layoutX="353.0" layoutY="230.0" mnemonicParsing="false" onAction="#RefuseEmployerRegistartion" prefHeight="34.0" prefWidth="78.0" style="-fx-background-radius: 30; -fx-background-color: red;" text="Refuse">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
@@ -79,5 +79,10 @@
             </Text>
          </children>
       </AnchorPane>
+      <Label layoutX="132.0" layoutY="8.0" prefHeight="17.0" prefWidth="519.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Confirm Employer Registration" textFill="#cf1616">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

@@ -19,15 +19,15 @@
                   <Image url="@/images/background.jpeg" />
                </image>
             </ImageView>
-            <Label layoutX="122.0" layoutY="161.0" prefHeight="21.0" prefWidth="274.0" text="Choose Account to Change Permissions: ">
+            <Label layoutX="122.0" layoutY="161.0" prefHeight="21.0" prefWidth="295.0" text="Choose Account to Change Permissions: ">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Times New Roman Bold" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="ActiveAccountComboBox" layoutX="398.0" layoutY="159.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
-            <Label layoutX="201.0" layoutY="88.0" prefHeight="53.0" prefWidth="321.0" text="Change Permissions Account Screen">
+            <ComboBox fx:id="ActiveAccountComboBox" layoutX="425.0" layoutY="159.0" onAction="#ChooseAccount" prefHeight="25.0" prefWidth="249.0" promptText="LIst of Active Account" />
+            <Label layoutX="201.0" layoutY="88.0" prefHeight="53.0" prefWidth="323.0" text="Change Permissions Account Screen">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="Times New Roman Bold" size="20.0" />
                </font>
             </Label>
             <Button fx:id="FreezeBtn" layoutX="397.0" layoutY="230.0" mnemonicParsing="false" onAction="#FreezeAccount" prefHeight="37.0" prefWidth="79.0" style="-fx-background-radius: 30;" text="Freeze">
@@ -69,6 +69,16 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Label layoutX="110.0" layoutY="11.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Change Permissions Screen" textFill="#d91212">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Text fill="#1b1a1a" layoutX="636.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>

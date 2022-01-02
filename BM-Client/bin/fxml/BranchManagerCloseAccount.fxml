@@ -12,27 +12,22 @@
 
 <AnchorPane prefHeight="421.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerCloseAccountController">
    <children>
-      <Pane prefHeight="524.0" prefWidth="691.0" style="-fx-background-color: black;">
+      <Pane prefHeight="524.0" prefWidth="691.0" style="-fx-background-color: white;">
          <children>
             <ImageView fitHeight="577.0" fitWidth="576.0" layoutX="114.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/background.jpeg" />
                </image>
             </ImageView>
-            <Label layoutX="200.0" layoutY="46.0" prefHeight="92.0" prefWidth="446.0" text="Close Account Screen" textFill="#100f0f">
+            <Label layoutX="179.0" layoutY="48.0" prefHeight="92.0" prefWidth="424.0" text="Close Account Screen" textFill="#100f0f">
                <font>
-                  <Font name="System Bold" size="44.0" />
+                  <Font name="Times New Roman Bold" size="44.0" />
                </font>
             </Label>
-            <Label layoutX="617.0" layoutY="14.0" prefHeight="17.0" prefWidth="59.0" text="BiteMe" textFill="#181717">
+            <ComboBox fx:id="AccountComboBox" layoutX="261.0" layoutY="160.0" onAction="#ChooseUserName" prefHeight="25.0" prefWidth="283.0" promptText="Select which Account do you wish to close:" />
+            <Button fx:id="ConfirmBtn" layoutX="305.0" layoutY="244.0" mnemonicParsing="false" onAction="#ConfrimDelete" prefHeight="25.0" prefWidth="194.0" style="-fx-background-radius: 30;" text="Confirm">
                <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="AccountComboBox" layoutX="282.0" layoutY="161.0" onAction="#ChooseUserName" prefHeight="25.0" prefWidth="283.0" promptText="Select which Account do you wish to close:" />
-            <Button fx:id="ConfirmBtn" layoutX="327.0" layoutY="249.0" mnemonicParsing="false" onAction="#ConfrimDelete" prefHeight="25.0" prefWidth="194.0" style="-fx-background-radius: 30;" text="Confirm">
-               <font>
-                  <Font size="21.0" />
+                  <Font name="System Bold" size="21.0" />
                </font>
             </Button>
             <AnchorPane layoutX="-2.0" prefHeight="526.0" prefWidth="116.0" style="-fx-background-color: #004d00;">
@@ -64,6 +59,16 @@
                   </Text>
                </children>
             </AnchorPane>
+            <Label layoutX="120.0" layoutY="21.0" prefHeight="17.0" prefWidth="466.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Close Account Screen" textFill="#cc1111">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Text fill="#1b1a1a" layoutX="633.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
    </children>
