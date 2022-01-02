@@ -27,7 +27,7 @@ public class DBConnect {
 
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", "root","Aa123456");
-			//EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
+			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 			ServerUIFController.flagon=true;
 		} catch (SQLException ex) {/* handle any errors */
 			EchoServer.serverUIFController.addToTextArea("SQLException:" + ex.getMessage()+".");

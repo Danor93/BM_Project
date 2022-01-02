@@ -67,7 +67,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES ('111','6878','Active',NULL),('123','777','Freeze',NULL),('134','888','Active',NULL),('5647789','P793','Active',NULL),('7894511','5643','Active',NULL);
+INSERT INTO `client` VALUES ('111','6878','Active',NULL),('123','777','Freeze',NULL),('134','888','Active',NULL),('3564578','P61','Active','5546546'),('5647789','P793','Active',NULL),('7894511','5643','Active',NULL);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('111','Microsoft','Approved'),('222','Amazon','Not approved'),('22233','Elbit','Approved'),('444','Google','Approved'),('555','Facebook','Approved'),('666','Refael','Waiting'),('777','Nivdia','Not approved'),('B87','Intel','Waiting');
+INSERT INTO `company` VALUES ('111','Microsoft','Approved'),('222','Amazon','Not approved'),('22233','Elbit','Approved'),('444','Google','Approved'),('555','Facebook','Approved'),('666','Refael','Approved'),('777','Nivdia','Not approved'),('B87','Intel','Waiting');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +218,7 @@ CREATE TABLE `import_users` (
 
 LOCK TABLES `import_users` WRITE;
 /*!40000 ALTER TABLE `import_users` DISABLE KEYS */;
-INSERT INTO `import_users` VALUES ('viv1','viv1','Ron','Abu','1','asa','234','Certified-vivino'),('h','h','Avi','Sofer','1211','h@h.co.il','052121','HR-Intel'),('viv2','viv2','Adi','Blum','2','222','222','Approved-vivino'),('ds','ds','danor','sinai','3111','d@gmail.com','050266',''),('ref2','ref2','Egal','Sinai','3245678','egal@refaelo.com','0546789','Certified-refaelo'),('ref1','ref1','Moshe','Moalem','45789','moshe@refaelo.com','0564879','Approved-refaelo'),('tal','tal','Tal','Levy','5647789','tal@Elbit.com','05247896',NULL),('e','e','Lior','Shauli','689','c@c.co.il','054789','CEO'),('matan','matan','Matan','Cohen','7894562','matan@gmail.com','05064712',NULL);
+INSERT INTO `import_users` VALUES ('viv1','viv1','Ron','Abu','1','asa','234','Certified-vivino'),('h','h','Avi','Sofer','1211','h@h.co.il','052121','HR-Intel'),('viv2','viv2','Adi','Blum','2','222','222','Approved-vivino'),('rs','rs','Rina','Sinai','3111554','rina@refael.com','0502660864',NULL),('ref2','ref2','Egal','Sinai','3245678','egal@refaelo.com','0546789','Certified-refaelo'),('m10','m10','Leo','Messi','3564578','messi@gmail.com','05266987',NULL),('ref1','ref1','Moshe','Moalem','45789','moshe@refaelo.com','0564879','Approved-refaelo'),('tal','tal','Tal','Levy','5647789','tal@Elbit.com','05247896',NULL),('e','e','Lior','Shauli','689','c@c.co.il','054789','CEO'),('matan','matan','Matan','Cohen','7894562','matan@gmail.com','05064712',NULL);
 /*!40000 ALTER TABLE `import_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +457,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('adi','a1','Customer','Tali','Or','111','as@as.com','050344',0,'north'),('h','h','HR-Intel','Avi','Sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','Adi','Sasson','123','***','***',0,''),('ceo3','ceo3','CEO','Zlatan','Ibrahimović','1278946','zlatan@biteme.com','05256431',0,'south'),('b','b','Customer','Talia','Blum','134','111','111',0,'center'),('viv2','viv2','Supplier-Approved-vivino','Adi','Blum','2','222','222',0,'north'),('f','f','BranchManager','Danor','Sinai','31115566','danor@gmail.com','050264789',0,'center'),('ref2','ref2','Supplier-Certified-refaelo','Egal','Sinai','3245678','egal@refaelo.com','0546789',0,'North'),('c','c','BranchManager','Sahar','Oz','456','b@b.co.il','054678',0,'north'),('viv1','viv1','Supplier-Certified-vivino','Ron','Abu','45678','asa','234',0,'center'),('s','s','BranchManager','Tiran','Hesawi','456789','tiran@gmail.com','05678978',0,'south'),('ref1','ref1','Supplier-Approved-refaelo','Moshe','Moalem','45789','moshe@refaelo.com','0564879',0,'North'),('h2','h2','HR-Microsoft','Dudu','Aharon','5612378','dudu@microsoft.com','0556789',0,'north'),('tal','tal',NULL,'Tal','Levy','5647789','tal@Elbit.com','05247896',0,'North'),('e','e','CEO','Lior','Shauli','689','c@c.co.il','054789',0,''),('ny','ny','Customer','Noy','Sinai','7894511','noy@gmail.com','0526989',0,'north'),('ceo2','ceo2','CEO','Ruslana','Rodina','856479','ruslana@bitme.com','05089371',0,'center'),('h1','h1','HR-Elbit','Gal','Levy','98754612','gal@elbit.com','05246237',0,'north');
+INSERT INTO `users` VALUES ('adi','a1','Customer','Tali','Or','111','as@as.com','050344',0,'north'),('h','h','HR-Intel','Avi','Sofer','1211','h@h.co.il','052121',0,'north'),('a','a','Customer','Adi','Sasson','123','***','***',0,''),('ceo3','ceo3','CEO','Zlatan','Ibrahimović','1278946','zlatan@biteme.com','05256431',0,'south'),('b','b','Customer','Talia','Blum','134','111','111',0,'center'),('viv2','viv2','Supplier-Approved-vivino','Adi','Blum','2','222','222',0,'north'),('f','f','BranchManager','Danor','Sinai','31115566','danor@gmail.com','050264789',0,'center'),('ref2','ref2','Supplier-Certified-refaelo','Egal','Sinai','3245678','egal@refaelo.com','0546789',0,'North'),('m10','m10','Customer','Leo','Messi','3564578','messi@gmail.com','05266987',0,'North'),('c','c','BranchManager','Sahar','Oz','456','b@b.co.il','054678',0,'north'),('viv1','viv1','Supplier-Certified-vivino','Ron','Abu','45678','asa','234',0,'center'),('s','s','BranchManager','Tiran','Hesawi','456789','tiran@gmail.com','05678978',0,'south'),('ref1','ref1','Supplier-Approved-refaelo','Moshe','Moalem','45789','moshe@refaelo.com','0564879',0,'North'),('h2','h2','HR-Microsoft','Dudu','Aharon','5612378','dudu@microsoft.com','0556789',0,'north'),('tal','tal',NULL,'Tal','Levy','5647789','tal@Elbit.com','05247896',0,'North'),('e','e','CEO','Lior','Shauli','689','c@c.co.il','054789',0,''),('ny','ny','Customer','Noy','Sinai','7894511','noy@gmail.com','0526989',0,'north'),('ceo2','ceo2','CEO','Ruslana','Rodina','856479','ruslana@bitme.com','05089371',0,'center'),('h1','h1','HR-Elbit','Gal','Levy','98754612','gal@elbit.com','05246237',0,'north');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -470,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 11:42:50
+-- Dump completed on 2022-01-02 15:00:24
