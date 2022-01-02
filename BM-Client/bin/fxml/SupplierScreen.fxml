@@ -8,18 +8,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="501.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="501.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.SupplierScreenController">
    <children>
       <ImageView fx:id="backImg" fitHeight="502.0" fitWidth="594.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
-      <Text layoutX="431.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="444.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="206.78009033203125">
+      <Text fx:id="WelcomeLabel" layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;" wrappingWidth="206.78009033203125">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

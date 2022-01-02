@@ -1,10 +1,9 @@
 /Interfaces/
+/LoginTest$StubLogin.class
+/LoginTest.class
 /Parsing/
 /client/
-/css/
 /fxml/
 /icons/
 /images/
 /main/
-/LoginTest$StubLogin.class
-/LoginTest.class

@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -16,7 +17,7 @@
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="#151414" layoutX="645.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#151414" layoutX="644.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -157,10 +158,11 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="119.0" layoutY="24.0" prefHeight="17.0" prefWidth="582.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account ➝ Open Bussiness Account" textFill="#d91919">
+      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="582.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Open New Account ➝ Open Bussiness Account" textFill="#302929">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Line endX="487.20001220703125" endY="-7.62939453125E-6" layoutX="215.0" layoutY="40.0" startX="-100.0" />
    </children>
 </Pane>

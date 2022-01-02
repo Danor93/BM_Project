@@ -80,7 +80,7 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
-		start(event, "HRManagerScreen", "HR Manager page",LoginScreenController.user.getFirstN());
+		start(event, "HRManagerScreen", "HR Manager page", LoginScreenController.user.getFirstN());
 	}
 
 	/**
@@ -101,17 +101,24 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	 */
 	@FXML
 	void confirmBusinessAccount(ActionEvent event) {
-		BusinessAccountTracking orderToChange;
+		BusinessAccountTracking orderToChange = null;
+		boolean confirmFlag = true;
 		list = table.getSelectionModel().getSelectedItems();
-		orderToChange = list.get(0);
-		ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, orderToChange));
-		for (int i = 0; i < trackingDetails.size(); i++) {
-			if (trackingDetails.get(i).equals(orderToChange))
-				trackingDetails.remove(i);
+		try {
+			orderToChange = list.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			confirmFlag = false;
 		}
-		orderToChange = null;
-		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);
+		if (confirmFlag) {
+			ClientUI.chat.accept(new Message(MessageType.update_status_approved_businessAccount, orderToChange));
+			for (int i = 0; i < trackingDetails.size(); i++) {
+				if (trackingDetails.get(i).equals(orderToChange))
+					trackingDetails.remove(i);
+			}
+			orderToChange = null;
+			list = FXCollections.observableArrayList(trackingDetails);
+			table.setItems(list);
+		}
 	}
 
 	/**
@@ -121,18 +128,25 @@ public class HRManagerConfirmationOfOpeningABusinessAccountController extends Co
 	 */
 	@FXML
 	void refuseBusinessAccount(ActionEvent event) {
-		BusinessAccountTracking orderToChange;
+		BusinessAccountTracking orderToChange = null;
+		boolean refuseFlag = true;
 		list = table.getSelectionModel().getSelectedItems();
-		orderToChange = list.get(0);
-		ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, orderToChange));
-		for (int i = 0; i < trackingDetails.size(); i++) {
-			if (trackingDetails.get(i).equals(orderToChange))
-				trackingDetails.remove(i);
+		try {
+			orderToChange = list.get(0);
+		} catch (IndexOutOfBoundsException e) {
+			refuseFlag = false;
 		}
+		if (refuseFlag) {
+			ClientUI.chat.accept(new Message(MessageType.update_status_NotApproved_businessAccount, orderToChange));
+			for (int i = 0; i < trackingDetails.size(); i++) {
+				if (trackingDetails.get(i).equals(orderToChange))
+					trackingDetails.remove(i);
+			}
 
-		orderToChange = null;
-		list = FXCollections.observableArrayList(trackingDetails);
-		table.setItems(list);
+			orderToChange = null;
+			list = FXCollections.observableArrayList(trackingDetails);
+			table.setItems(list);
+		}
 	}
 
 	@FXML

@@ -118,6 +118,6 @@ public class ViewReceiptController extends Controller implements Initializable{
 		float totalPriceAfterCommission=0;
 		for(Receipt r : receipts)
 			totalPriceAfterCommission += r.getPriceAfterCommission();
-		miniLabel.setText("The total price to be delivered to the supplier is -"+totalPriceAfterCommission);
+		miniLabel.setText("The total price to be delivered to the supplier is: "+totalPriceAfterCommission);
 	}
 }

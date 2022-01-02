@@ -29,7 +29,7 @@ import main.PopUpMessage;
 /**
  * 
  * @author Lior
- * 
+ * This class handles the functionality of the CEO to download a PDF of the branch quarterly report.
  *
  */
 public class CEODownloadQuarterlyReportController implements Initializable {
@@ -76,6 +76,9 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	@FXML
 	private Button btnDownload;
 
+	/**
+	 * Initial boot
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBoxYear.setDisable(true);
@@ -86,6 +89,11 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 		btnDownload.setDisable(true);
 	}
 
+	/**
+	 * show a new window
+	 * @param stage
+	 * @param root
+	 */
 	public void start(Stage stage, Parent root) {
 		Scene scene = new Scene(root);
 		stage.setTitle("BiteMe Download Quarterly Report");
@@ -93,6 +101,11 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 		stage.show();
 	}
 
+	/**
+	 * Select a branch
+	 * after selection the relevant choice of year and quarterly will be available
+	 * @param event click one of btnNorth or btnCenter or btnSouth
+	 */
 	@FXML
 	void selectBranch(ActionEvent event) {
 		if (btnNorth.isSelected())
@@ -117,6 +130,11 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	}
 
+	/**
+	 * chose a year from comboBox
+	 * after selection the the relevant choice of quarterly will be available
+	 * @param event chose a year
+	 */
 	@FXML
 	void selectYear(ActionEvent event) {
 		selectedYear = comboBoxYear.getSelectionModel().getSelectedItem();
@@ -144,6 +162,11 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	}
 
+	/**
+	 * Select a quarterly
+	 * this method create a StringBuilder with the details
+	 * @param event click one of btn01 or btn02 or btn03 or btn04
+	 */
 	@FXML
 	void selectQuarterly(ActionEvent event) {
 		if (btn01.isSelected())
@@ -165,6 +188,14 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	}
 
+	/**
+	 * this method sent the details to server,
+	 * the client can choose where he want the file will save
+	 * get the relevant file data in MyFile format
+	 * make a PDF file from MyFile format 
+	 * and download to the chosen path
+	 * @param event click on btnDownload
+	 */
 	@FXML
 	void downloadReport(ActionEvent event) {
 
@@ -188,7 +219,6 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 					bos.write(myByteArray, 0, len);
 					bos.flush();
 					fos.flush();
-					// PopUpMessage.successMessage("File downloaded");
 					((Node) event.getSource()).getScene().getWindow().hide();
 				} catch (Exception e) {
 					e.printStackTrace();

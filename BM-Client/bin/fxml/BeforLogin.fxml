@@ -13,11 +13,11 @@
          <image>
             <Image url="@/images/backk.jpg" />
          </image></ImageView>
-      <Button fx:id="btnEnter" layoutX="194.0" layoutY="390.0" mnemonicParsing="false" onAction="#Enter" prefHeight="39.0" prefWidth="112.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Enter">
+      <Button fx:id="btnEnter" layoutX="189.0" layoutY="390.0" mnemonicParsing="false" onAction="#Enter" prefHeight="42.0" prefWidth="136.0" style="-fx-background-radius: 30; -fx-border-color: black; -fx-border-radius: 30; -fx-border-width: 2;" text="Let's Start!">
          <font>
             <Font name="System Bold" size="17.0" />
          </font></Button>
-      <Text fill="#2d4c35" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="With us you will find:" textAlignment="CENTER" underline="true" wrappingWidth="502.00000000000006">
+      <Text fill="#2d4c35" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In BiteMe you will find:" textAlignment="CENTER" underline="true" wrappingWidth="502.00000000000006">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="for online food ordering services" textAlignment="CENTER" wrappingWidth="502.00000000000006">
+      <Text layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="for online food ordering services." textAlignment="CENTER" wrappingWidth="502.00000000000006">
          <font>
             <Font size="18.0" />
          </font>
@@ -47,7 +47,7 @@
             <Image url="@/images/newLogo.png" />
          </image>
       </ImageView>
-      <Text layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;BiteMe is the #1 website" textAlignment="CENTER" wrappingWidth="502.00000000000006">
+      <Text layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" BiteMe is the best website" textAlignment="CENTER" wrappingWidth="502.00000000000006">
          <font>
             <Font size="18.0" />
          </font>

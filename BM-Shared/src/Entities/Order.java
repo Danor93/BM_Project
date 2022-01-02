@@ -8,7 +8,7 @@ public class Order implements Serializable {
 	private static final long serialVersionUID = 2360410765980564003L;
 	private int orderNum, useBudget;
 	private String restName, timeOfOrder, dateOfOrder, orderStatus, costumerId, restId, useRefund, EarlyOrder,suppApproved;
-	
+	private String timeSended;
 
 	private float totalPrice;
 	private String orderType, dishes;
@@ -149,5 +149,13 @@ public class Order implements Serializable {
 
 	public void setDishes(String dishes) {
 		this.dishes = dishes;
+	}
+
+	public String getTimeSended() {
+		return timeSended;
+	}
+
+	public void setTimeSended(String timeSended) {
+		this.timeSended = timeSended;
 	}
 }

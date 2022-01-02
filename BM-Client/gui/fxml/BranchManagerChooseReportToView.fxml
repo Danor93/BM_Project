@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -30,10 +31,10 @@
             <Font name="Times New Roman Bold" size="38.0" />
          </font>
       </Label>
-      <ComboBox fx:id="BranchChoose" layoutX="280.0" layoutY="140.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="102.0" promptText="Branch" />
-      <ComboBox fx:id="Month" layoutX="280.0" layoutY="221.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="102.0" promptText="Month" />
+      <ComboBox fx:id="BranchChoose" layoutX="276.0" layoutY="140.0" onAction="#ChooseBranch" prefHeight="25.0" prefWidth="102.0" promptText="Branch" />
+      <ComboBox fx:id="Month" layoutX="276.0" layoutY="221.0" onAction="#ChooseMonth" prefHeight="25.0" prefWidth="102.0" promptText="Month" />
       <ComboBox fx:id="ReportType" layoutX="276.0" layoutY="182.0" onAction="#ChooseReportType" prefHeight="25.0" prefWidth="109.0" promptText="Report Type" />
-      <ComboBox fx:id="Year" layoutX="280.0" layoutY="255.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="102.0" promptText="Year" />
+      <ComboBox fx:id="Year" layoutX="276.0" layoutY="257.0" onAction="#ChooseYear" prefHeight="25.0" prefWidth="102.0" promptText="Year" />
       <Label layoutX="110.0" layoutY="143.0" prefHeight="17.0" prefWidth="120.0" text="Choose Branch:" textFill="#201f1f">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
@@ -78,6 +79,20 @@
                   </TableView>
                </children>
             </Pane>
+            <Pane fx:id="preformancePane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="performanceTable" prefHeight="674.0" prefWidth="556.0">
+                    <columns>
+                      <TableColumn fx:id="perfRestNameCol" prefWidth="75.0" text="Restaurant" />
+                      <TableColumn fx:id="perfTotalOrdersCol" prefWidth="75.0" text="Total orders" />
+                        <TableColumn fx:id="perfOnTimeCol" prefWidth="75.0" text="On time" />
+                        <TableColumn fx:id="perfAreLateCol" prefWidth="75.0" text="Are late" />
+                        <TableColumn fx:id="perfLateRateCol" prefWidth="75.0" text="Late rate" />
+                        <TableColumn fx:id="perfAvgCol" prefWidth="179.20001220703125" text="Avg cooking time" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
          </children>
       </StackPane>
       <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="786.0" prefWidth="102.0" style="-fx-background-color: #004d00;">
@@ -109,15 +124,16 @@
             </Text>
          </children>
       </AnchorPane>
-      <Label layoutX="120.0" layoutY="21.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Report To View Screen" textFill="#d41414">
+      <Label layoutX="119.0" layoutY="16.0" prefHeight="20.0" prefWidth="808.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Report To View Screen" textFill="#232020">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Text fill="#1b1a1a" layoutX="897.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#1b1a1a" layoutX="897.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
+      <Line endX="629.3999633789062" layoutX="332.0" layoutY="43.0" startX="-230.00001525878906" />
    </children>
 </Pane>

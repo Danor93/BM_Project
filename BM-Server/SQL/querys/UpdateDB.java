@@ -245,13 +245,12 @@ public class UpdateDB {
 				return false;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
 
 	/**
-	 * 
+	 * Method for updating dish information in the database
 	 * @param dish
 	 * @return true / false
 	 */
@@ -279,7 +278,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method for deleting a dish from the database
 	 * @param dish
 	 * @return true / false
 	 */
@@ -305,7 +304,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method for updating order status to - Not approved
 	 * @param order
 	 * @return true / false
 	 */
@@ -329,7 +328,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method for updating order status to - Approved
 	 * @param order
 	 * @return true / false
 	 */
@@ -353,6 +352,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * A method for registering a new employer in the database.
+	 * @param employer
+	 * @return true / false
+	 */
 	public static boolean RegistrationOfEmployer(Employer employer) {
 		Statement stmt;
 		try {
@@ -386,6 +390,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * Method for updating businessAccount status to Approved
+	 * @param businessAccount
+	 * @return true / false
+	 */
 	public static boolean BusinessAccountStatusToApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
 		try {
@@ -405,6 +414,11 @@ public class UpdateDB {
 		}
 	}
 
+	/**
+	 * Method for updating businessAccount status to Not approved
+	 * @param businessAccount
+	 * @return true / false
+	 */
 	public static boolean BusinessAccountStatusToNotApproved(BusinessAccountTracking businessAccount) {
 		PreparedStatement stmt;
 		try {
@@ -425,7 +439,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method for updating the Refund value in the database.
 	 * @param order
 	 * @return true/false
 	 */
@@ -465,7 +479,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method for updating the Budget value in the database.
 	 * @param order
 	 * @return true / false
 	 */
@@ -505,7 +519,7 @@ public class UpdateDB {
 	}
 
 	/**
-	 * 
+	 * Method to update order status to - Sended.
 	 * @param order
 	 * @return true / false
 	 */
@@ -514,7 +528,7 @@ public class UpdateDB {
 		try {
 			if (DBConnect.conn != null) {
 				stmt = DBConnect.conn
-						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Sended' WHERE orderNumber=?");
+						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Sended', timeSended='"+LocalTime.now().toString()+"' WHERE orderNumber=?");
 				stmt.setString(1, String.valueOf(order.getOrderNum()));
 				stmt.executeUpdate();
 				return true;

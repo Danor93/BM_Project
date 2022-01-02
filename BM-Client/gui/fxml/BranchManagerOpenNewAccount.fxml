@@ -6,20 +6,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="683.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewAccountController">
    <children>
+      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="561.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Open New Account" textFill="#231f1f">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
       <ImageView fx:id="BackImage" fitHeight="538.0" fitWidth="569.0" layoutX="116.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/background.jpeg" />
          </image></ImageView>
-      <Text fill="#1b1a1a" layoutX="617.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
       <Label layoutX="217.0" layoutY="56.0" text="Open New Account" textAlignment="CENTER" textFill="#1b1919">
          <font>
             <Font name="Times New Roman Bold" size="38.0" />
@@ -60,6 +61,11 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
+            <Text fill="#1b1a1a" layoutX="28.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Label layoutX="150.0" layoutY="128.0" prefHeight="40.0" prefWidth="448.0" text="Select Which kind of a Account you want to open:">
@@ -67,10 +73,6 @@
             <Font name="Times New Roman Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="474.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account" textFill="#d91919">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <Line endX="468.00006103515625" layoutX="217.0" layoutY="38.0" startX="-100.0" />
    </children>
 </Pane>

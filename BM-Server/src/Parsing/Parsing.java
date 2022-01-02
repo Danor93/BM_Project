@@ -24,6 +24,7 @@ import Entities.MyFile;
 import Entities.Order;
 import Entities.Receipt;
 import Entities.OrdersReport;
+import Entities.PerformanceReport;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -41,7 +42,6 @@ import querys.showCities;
 import querys.showRestaurants;
 
 public class Parsing {
-	public static String result2;
 
 	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message messageFromServer;
@@ -260,12 +260,22 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
 		}
 
+		/**
+		 * Case for download a PDF
+		 *  @param  a string with selected branch, selected year and selected quarterly
+		 *  @return a message to client with the selected file data in MyFile format
+		 */
 		case downloadPDF: {
 			String[] DivededBandQandY = ((String) receivedMessage.getMessageData()).split("@");
 			MyFile file = Query.downloadFile(DivededBandQandY[0], DivededBandQandY[1], DivededBandQandY[2]);
 			return messageFromServer = new Message(MessageType.download_pdf_succ, file);
 		}
 
+		/**
+		 * Case for getting from database the relevant year and quarterly appropriate for a selected branch
+		 * @param a string with the selected branch name
+		 * @return a message to client with the year and quarterly in ArrayList<String> format 
+		 */
 		case showRelevantYearsAndQuarterly: {
 			String branch = (String) receivedMessage.getMessageData();
 			ArrayList<String> yearsAndQuarter = Query.getRelevantYearsAndQuarterly(branch);
@@ -389,6 +399,10 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.W4C_Business_List, w4cBusiness);
 		}
 
+		/**
+		 * Case for adding a new employer to the database
+		 * @param = New employer to add
+		 */
 		case RegistrationOfEmployer: {
 			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
@@ -405,24 +419,31 @@ public class Parsing {
 			}
 		}
 
+		/**
+		 * Case for obtaining a business account awaiting approval
+		 * @param = company name
+		 */
 		case get_business_account_details: {
 			ArrayList<BusinessAccountTracking> businessAccount = Query
 					.LoadBusinessAccountDetails((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.businessAccountsTracking, businessAccount);
 		}
 
+		/**
+		 * Case to change businessAccount status to - Approved
+		 */
 		case update_status_approved_businessAccount: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
 			if (UpdateDB.BusinessAccountStatusToApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
 						null);
 			}
 		}
 
+		/**
+		 * Case to change businessAccount status to - Not approved
+		 */
 		case update_status_NotApproved_businessAccount: {
-			System.out.println("receivedMessage= " + receivedMessage.getMessageData());
-			if (UpdateDB
-					.BusinessAccountStatusToNotApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
+			if (UpdateDB.BusinessAccountStatusToNotApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
 						null);
 			}
@@ -482,6 +503,16 @@ public class Parsing {
 		case get_orders_Approved:{
 			ArrayList<Receipt> receipt = Query.LoadOrdersApproved((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.get_receipt, receipt);
+		}
+		
+		/**
+		 * 
+		 */
+		case get_Performance_report:{
+			ArrayList<PerformanceReport> reports = Query.LoadPerformanceReport((String) receivedMessage.getMessageData());
+			for(PerformanceReport check : reports)
+				System.out.println("restName = " + check.getResName());
+			return messageFromServer = new Message(MessageType.get_Performance_report, reports);
 		}
 
 		default: {

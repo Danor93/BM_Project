@@ -7,6 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -14,7 +15,7 @@
    <children>
       <Pane prefHeight="535.0" prefWidth="694.0">
          <children>
-            <ImageView fitHeight="513.0" fitWidth="564.0" layoutX="110.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="535.0" fitWidth="589.0" layoutX="107.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/images/background.jpeg" />
                </image>
@@ -52,7 +53,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="60.0" layoutX="27.0" layoutY="176.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/images/home.png" />
                      </image>
@@ -69,16 +70,17 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Label layoutX="110.0" layoutY="11.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Change Permissions Screen" textFill="#d91212">
+            <Label layoutX="110.0" layoutY="11.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Change Permissions Screen" textFill="#2b2727">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Text fill="#1b1a1a" layoutX="636.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+            <Text fill="#1b1a1a" layoutX="636.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Text>
+            <Line endX="494.20001220703125" endY="7.62939453125E-6" layoutX="201.0" layoutY="36.0" startX="-100.0" />
          </children>
       </Pane>
    </children>

@@ -95,6 +95,7 @@ public class DBCheck {
 	}
 
 	/**
+	 * Method to check if there a menu exit or not
 	 * @param ID
 	 * @return true or false
 	 */

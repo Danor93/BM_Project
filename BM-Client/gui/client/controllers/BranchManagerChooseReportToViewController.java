@@ -2,6 +2,7 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.RevenueReport;
+import Entities.PerformanceReport;
 import Entities.homeBranches;
 import Entities.OrdersReport;
 import javafx.collections.FXCollections;
@@ -37,8 +39,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	public String Branch, Type, year, month;
 	public static ArrayList<RevenueReport> revenueArray = new ArrayList<>();
 	public static ArrayList<OrdersReport> ordersArray = new ArrayList<>();
+	public static ArrayList<PerformanceReport> performanceArray = new ArrayList<>();
 	ObservableList<RevenueReport> RevenueList;
 	ObservableList<OrdersReport> OrderList;
+	ObservableList<PerformanceReport> PerformanceList;
 
 	@FXML
 	private ImageView BackImage;
@@ -102,6 +106,30 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	@FXML
 	private Text userName;
+	
+	@FXML
+    private Pane preformancePane;
+	
+    @FXML
+    private TableView<PerformanceReport> performanceTable;
+
+    @FXML
+    private TableColumn<PerformanceReport, String> perfRestNameCol;
+
+    @FXML
+    private TableColumn<PerformanceReport, Integer> perfTotalOrdersCol;
+
+    @FXML
+    private TableColumn<PerformanceReport, Integer> perfOnTimeCol;
+
+    @FXML
+    private TableColumn<PerformanceReport, Integer> perfAreLateCol;
+
+    @FXML
+    private TableColumn<PerformanceReport, Double> perfLateRateCol;
+
+    @FXML
+    private TableColumn<PerformanceReport, Double> perfAvgCol;
 	
 	
 	/**
@@ -183,18 +211,22 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
 			
 			case "Revenue": {	
-				orders.setVisible(false);
+				/*orders.setVisible(false);
+				performanceTable.setVisible(false);*/
 				RevenueReport(details);
 				break;
 			}
 
-			case "Orders": {		
+			case "Orders": {	
+				/*RevenueTable.setVisible(false);
+				performanceTable.setVisible(false);*/
 				OrdersReport(details);
 				break;
 			}
 
 			case "Performance": {
-				orders.setVisible(false);
+				/*orders.setVisible(false);
+				RevenueTable.setVisible(false);*/
 				PerformanceReport(details);
 				break;
 			}
@@ -235,7 +267,17 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	}
 
 	public void PerformanceReport(StringBuilder details) {
+		performanceTable.setVisible(true);
+		preformancePane.toFront();
+		perfRestNameCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,String>("ResName"));
+		perfTotalOrdersCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("total_orders"));
+		perfOnTimeCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("onTime"));
+		perfAreLateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("areLate"));
+		perfLateRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("lateRate"));
+		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("AvarageCookingTime"));
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
+		PerformanceList = FXCollections.observableArrayList(performanceArray);
+		performanceTable.setItems(PerformanceList);
 	}
 
 	/**

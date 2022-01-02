@@ -53,7 +53,7 @@
             </Text>
             <ImageView fx:id="homePage" fitHeight="83.0" fitWidth="44.0" layoutX="34.0" layoutY="177.0" onMouseClicked="#backToHome" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/home.png" />
+                  <Image url="@/images/home.png" />
                </image></ImageView>
             <Button fx:id="back" layoutX="14.0" layoutY="261.0" mnemonicParsing="false" onAction="#back" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Logout">
                <font>

@@ -16,6 +16,7 @@ import Entities.BusinessAccountTracking;
 import Entities.Order;
 import Entities.Receipt;
 import Entities.OrdersReport;
+import Entities.PerformanceReport;
 import Entities.Restaurant;
 import Entities.RevenueReport;
 import Entities.SingletonOrder;
@@ -213,7 +214,17 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case Dish_update_succ: {
+			break;
+		}
+		
+		/**
+		 * 
+		 */
+		case Dish_delete_succ:{
 			break;
 		}
 
@@ -300,22 +311,37 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case update_RefundTable: {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case update_Budget_bussClient: {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case changed_status_to_notApproved_succ: {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case changed_status_to_Approved_succ: {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case changed_status_to_sended_succ: {
 			break;
 		}
@@ -336,6 +362,9 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * Change flag to true if adding new employer to database success
+		 */
 		case RegistrationOfEmployer_succ: {
 			HRManagerScreenController.RegistrationFlag = true;
 			break;
@@ -356,6 +385,9 @@ public class Parsing {
 			 */
 		}
 
+		/**
+		 * Change flag to false if adding new employer to database failed.
+		 */
 		case RegistrationOfEmployer_failed: {
 			HRManagerScreenController.RegistrationFlag = false;
 			break;
@@ -380,6 +412,9 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * Inserting the BusinessAccountTracking values ​​into a static variable
+		 */
 		case businessAccountsTracking: {
 			HRManagerConfirmationOfOpeningABusinessAccountController.trackingDetails = (ArrayList<BusinessAccountTracking>) receivedMessage
 					.getMessageData();
@@ -410,19 +445,31 @@ public class Parsing {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case changed_BusinessAccount_status_to_Approved_succ: {
 			break;
 		}
 
+		/**
+		 * 
+		 */
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
 			break;
 		}
 
+		/**
+		 * Insert the selected file data in MyFile format into a static variable
+		 */
 		case download_pdf_succ: {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
 		}
 		
+		/**
+		 * Insert the relevant year and quarterly with the selected branch into a static variable
+		 */
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
@@ -433,6 +480,14 @@ public class Parsing {
 		 */
 		case get_receipt:{
 			ViewReceiptController.receipts = (ArrayList<Receipt>) receivedMessage.getMessageData();
+			break;
+		}
+		
+		/**
+		 * 
+		 */
+		case get_Performance_report:{
+			BranchManagerChooseReportToViewController.performanceArray = (ArrayList<PerformanceReport>) receivedMessage.getMessageData();
 			break;
 		}
 		default: {

@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -18,12 +19,12 @@
          <image>
             <Image url="@/images/backk.jpg" />
          </image></ImageView>
-      <Text layoutX="670.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="43.999999999999886">
+      <Text layoutX="670.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="43.999999999999886">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="117.0" layoutY="13.0" prefHeight="53.0" prefWidth="305.0" text="Quarterly Report">
+      <Label layoutX="121.0" layoutY="93.0" prefHeight="53.0" prefWidth="305.0" text="Quarterly Report">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -52,7 +53,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <BarChart fx:id="chart1" layoutX="98.0" layoutY="77.0" prefHeight="248.0" prefWidth="552.0" title="Quaterly report">
+      <BarChart fx:id="chart1" layoutX="103.0" layoutY="147.0" prefHeight="248.0" prefWidth="552.0" title="Quaterly report">
         <xAxis>
           <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest1" />
         </xAxis>
@@ -68,5 +69,11 @@
             <NumberAxis fx:id="yIncome2" label="Restaurants Revenue" side="LEFT" />
          </yAxis>
       </BarChart>
+      <Label layoutX="103.0" layoutY="14.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="CEO Screen ➝ Choose Quaterly Reports ➝ Quarterly Report" textFill="#2b2727">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Line endX="506.00006103515625" endY="-7.62939453125E-6" layoutX="222.0" layoutY="44.0" startX="-125.00001525878906" startY="-7.62939453125E-6" />
    </children>
 </Pane>

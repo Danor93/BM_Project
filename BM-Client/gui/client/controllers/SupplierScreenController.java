@@ -128,7 +128,7 @@ public class SupplierScreenController extends Controller implements ControllerIn
 		if (DivededUandP[1].equals("Approved")) {
 			start(event, "ConfirmOrderApproval", "Update order status",LoginScreenController.user.getFirstN());
 		} else
-			ExistLbl.setText("Only the certified employee can update a menu.");
+			ExistLbl.setText("Only the certified employee can update order status.");
 	}
 
 	/**
