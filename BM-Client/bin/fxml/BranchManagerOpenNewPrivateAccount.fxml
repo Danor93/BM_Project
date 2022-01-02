@@ -137,7 +137,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Label layoutX="118.0" layoutY="14.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account ➝ Open Private Account" textFill="#2b2727">
+      <Label layoutX="118.0" layoutY="14.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Open New Account ➝ Open Private Account" textFill="#2b2727">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -23,7 +23,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="151.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose a restaurant in">
+      <Text layoutX="151.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose a restaurant in" wrappingWidth="363.72747802734375">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -73,7 +73,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="137.0" layoutY="34.0" prefHeight="53.0" prefWidth="488.0" text="Recommended in Your Area">
+      <Label layoutX="137.0" layoutY="30.0" prefHeight="53.0" prefWidth="488.0" text="Recommended in Your Area">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

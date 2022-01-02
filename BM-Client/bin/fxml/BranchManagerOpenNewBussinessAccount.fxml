@@ -158,7 +158,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="582.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account ➝ Open Bussiness Account" textFill="#302929">
+      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="582.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Open New Account ➝ Open Bussiness Account" textFill="#302929">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

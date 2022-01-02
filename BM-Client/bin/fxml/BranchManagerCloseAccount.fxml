@@ -65,7 +65,7 @@
                   </Text>
                </children>
             </AnchorPane>
-            <Label layoutX="124.0" layoutY="14.0" prefHeight="17.0" prefWidth="556.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Close Account Screen" textFill="#cc1111">
+            <Label layoutX="124.0" layoutY="14.0" prefHeight="17.0" prefWidth="556.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Close Account Screen" textFill="#332f2f">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

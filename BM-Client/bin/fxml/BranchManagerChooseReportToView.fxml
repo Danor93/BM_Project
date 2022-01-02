@@ -124,7 +124,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Label layoutX="119.0" layoutY="16.0" prefHeight="20.0" prefWidth="808.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Report To View Screen" textFill="#232020">
+      <Label layoutX="119.0" layoutY="16.0" prefHeight="20.0" prefWidth="808.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Report To View Screen" textFill="#232020">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

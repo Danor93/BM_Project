@@ -123,7 +123,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="restName" layoutX="246.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="110.66665267944336">
+      <Text fx:id="restName" layoutX="238.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="346.66665267944336">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

@@ -12,7 +12,7 @@
 
 <Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="683.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerOpenNewAccountController">
    <children>
-      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="561.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Open New Account" textFill="#231f1f">
+      <Label layoutX="119.0" layoutY="14.0" prefHeight="17.0" prefWidth="561.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Open New Account" textFill="#231f1f">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

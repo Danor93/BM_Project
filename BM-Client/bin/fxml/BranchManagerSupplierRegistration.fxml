@@ -131,7 +131,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <Label layoutX="125.0" layoutY="4.0" prefHeight="17.0" prefWidth="516.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Supplier Registaration" textFill="#363131">
+      <Label layoutX="125.0" layoutY="4.0" prefHeight="17.0" prefWidth="516.0" styleClass="topMenuLabel" text="Branch Manager Screen ➝ Supplier Registaration" textFill="#363131">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

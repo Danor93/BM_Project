@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
+<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/backk.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="381.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt">
+      <Text layoutX="381.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receipt">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>
