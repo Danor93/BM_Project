@@ -501,6 +501,8 @@ public class Parsing {
 		 */
 		case get_Performance_report:{
 			ArrayList<PerformanceReport> reports = Query.LoadPerformanceReport((String) receivedMessage.getMessageData());
+			for(PerformanceReport check : reports)
+				System.out.println("restName = " + check.getResName());
 			return messageFromServer = new Message(MessageType.get_Performance_report, reports);
 		}
 

@@ -20,8 +20,8 @@ public class PerformanceReport implements Serializable {
 	private int total_orders;
 	private int onTime;
 	private int areLate;
-	private float lateRate;
-	private float AvarageCookingTime;
+	private double lateRate;
+	private double AvarageCookingTime;
 
 	public PerformanceReport(String month, String year, String branch, String resName, int total_orders, int onTime,
 			int areLate) {
@@ -35,19 +35,19 @@ public class PerformanceReport implements Serializable {
 		this.areLate = areLate;
 	}
 
-	public float getLateRate() {
+	public double getLateRate() {
 		return lateRate;
 	}
 
-	public void setLateRate(float lateRate) {
+	public void setLateRate(double lateRate) {
 		this.lateRate = lateRate;
 	}
 
-	public float getAvarageCookingTime() {
+	public double getAvarageCookingTime() {
 		return AvarageCookingTime;
 	}
 
-	public void setAvarageCookingTime(float avarageCookingTime) {
+	public void setAvarageCookingTime(double avarageCookingTime) {
 		AvarageCookingTime = avarageCookingTime;
 	}
 

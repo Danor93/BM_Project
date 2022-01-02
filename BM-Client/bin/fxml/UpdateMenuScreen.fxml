@@ -6,10 +6,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="549.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.UpdateMenuScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="540.0" fitWidth="559.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,7 +21,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="479.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="58.14619140625007">
+      <Text layoutX="476.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="58.14619140625007">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -72,5 +73,11 @@
             </Text>
          </children>
       </AnchorPane>
+      <Line endX="331.3999938964844" endY="5.7220458984375E-6" layoutX="216.0" layoutY="25.0" startX="-110.99998474121094" startY="5.7220458984375E-6" />
+      <Label layoutX="108.0" layoutY="5.0" prefHeight="18.0" prefWidth="364.0" text="Home screen ➝ Login ➝ Supplier page ➝ update menu">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

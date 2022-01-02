@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="779.0" fitWidth="1244.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -74,6 +74,20 @@
                       <TableColumn fx:id="RevResCol" prefWidth="157.59991455078125" text="Restaurant " />
                       <TableColumn fx:id="RevNumOforCol" minWidth="0.0" prefWidth="226.0" text="Number of Orders" />
                         <TableColumn fx:id="RevIncomeCol" prefWidth="242.0" text="Income" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="preformancePane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="performanceTable" prefHeight="674.0" prefWidth="556.0">
+                    <columns>
+                      <TableColumn fx:id="perfRestNameCol" prefWidth="75.0" text="Restaurant" />
+                      <TableColumn fx:id="perfTotalOrdersCol" prefWidth="75.0" text="Total orders" />
+                        <TableColumn fx:id="perfOnTimeCol" prefWidth="75.0" text="On time" />
+                        <TableColumn fx:id="perfAreLateCol" prefWidth="75.0" text="Are late" />
+                        <TableColumn fx:id="perfLateRateCol" prefWidth="75.0" text="Late rate" />
+                        <TableColumn fx:id="perfAvgCol" prefWidth="179.20001220703125" text="Avg cooking time" />
                     </columns>
                   </TableView>
                </children>

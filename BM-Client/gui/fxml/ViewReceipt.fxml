@@ -7,10 +7,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
+<AnchorPane prefHeight="650.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ViewReceiptController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="650.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -22,7 +23,7 @@
             <Font name="System Bold" size="43.0" />
          </font>
       </Text>
-      <Text layoutX="771.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="787.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -79,5 +80,11 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
+      <Label layoutX="109.0" layoutY="5.0" prefHeight="18.0" prefWidth="364.0" text="Home screen ➝ Login ➝ Supplier page ➝ Receipt">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Line endX="346.2000732421875" endY="0.3999977111816406" layoutX="489.0" layoutY="23.0" startX="-380.0" startY="0.3999977111816406" />
    </children>
 </AnchorPane>

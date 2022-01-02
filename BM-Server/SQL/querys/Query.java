@@ -1071,6 +1071,7 @@ public class Query {
 
 	public static ArrayList<PerformanceReport> LoadPerformanceReport(String messageData) {
 		ArrayList<PerformanceReport> reports = new ArrayList<>();
+		System.out.println("test");
 		ArrayList<String> restNames = new ArrayList<>();
 		boolean existRest = false;
 		int totalOrders = 0;
@@ -1082,7 +1083,7 @@ public class Query {
 		String year = data[2];
 		float priceAfterCommission;
 		long avgDiff = 0;
-		Statement stmt, stmt2;
+		Statement stmt, stmt2, stmt3;
 		try {
 			stmt = DBConnect.conn.createStatement();
 			ResultSet rs = stmt
@@ -1098,35 +1099,39 @@ public class Query {
 
 		if (existRest) {
 			for (String name : restNames) {
+				System.out.println(name);
 				try {
-					stmt = DBConnect.conn.createStatement();
-					ResultSet rs = stmt.executeQuery(
-							"SELECT timeApproved,timeSended FROM bitemedb.order WHERE restName='" + name + "' ;");
+					stmt2 = DBConnect.conn.createStatement();
+					ResultSet rs2 = stmt2.executeQuery(
+							"SELECT timeApproved,timeSended FROM bitemedb.order WHERE restName='" + name + "' AND orderStatus='Sended' ;");
 
-					while (rs.next()) {
-						approvedTime = rs.getString(1);
-						sendTime = rs.getString(2);
-						long avg = LocalTime.parse(approvedTime).until(LocalTime.parse(sendTime), ChronoUnit.MINUTES);
+					while (rs2.next()) {
+						approvedTime = rs2.getString(1);
+						sendTime = rs2.getString(2);
+						long avg = LocalTime.parse(approvedTime).until(LocalTime.parse(sendTime), ChronoUnit.SECONDS);
 						avgDiff += avg;
 					}
-					rs.close();
+					rs2.close();
 				} catch (SQLException s) {
 					s.printStackTrace();
 				}
 				try {
-					stmt2 = DBConnect.conn.createStatement();
-					ResultSet rs2 = stmt2.executeQuery(
-							"SELECT * FROM bitemedb.performance_reports WHERE restaurant='" + name + "' ;");
-					while (rs2.next()) {
-					PerformanceReport report = new PerformanceReport(month, year, branch, name, rs2.getInt(5),
-							rs2.getInt(6), rs2.getInt(7));
-					float avgCookingTime = avgDiff / rs2.getInt(5);
-					float lateRate = rs2.getInt(7) / rs2.getInt(5);
+					stmt3 = DBConnect.conn.createStatement();
+					ResultSet rs3 = stmt3.executeQuery(
+							"SELECT * FROM bitemedb.performance_reports WHERE restaurant='" + name + "';");
+					while (rs3.next()) {
+					PerformanceReport report = new PerformanceReport(month, year, branch, name, rs3.getInt(5),
+							rs3.getInt(6), rs3.getInt(7));
+					int total_orders, areLate;
+					total_orders = rs3.getInt(5);
+					areLate = rs3.getInt(7);
+					double avgCookingTime = (double)avgDiff / (double)total_orders;
+					double lateRate = (double)areLate / (double)total_orders;
 					report.setAvarageCookingTime(avgCookingTime);
 					report.setLateRate(lateRate);
 					reports.add(report);
 					}
-					rs2.close();
+					rs3.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

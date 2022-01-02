@@ -5,21 +5,22 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="506.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerScreenController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="506.0" style="-fx-background-color: #001137;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.HRManagerScreenController">
    <children>
       <ImageView fx:id="BackImage" fitHeight="506.0" fitWidth="511.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
-      <Text layoutX="455.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="456.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text fx:id="WelcomeLabel" layoutX="8.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
+      <Text fx:id="WelcomeLabel" layoutX="7.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome, &quot;UserName&quot;">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
@@ -44,6 +45,12 @@
       <Label fx:id="ExistLbl" layoutX="46.0" layoutY="281.0" prefHeight="47.0" prefWidth="415.0" textFill="RED">
          <font>
             <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Line endX="331.3999938964844" endY="5.7220458984375E-6" layoutX="172.0" layoutY="23.0" startX="-169.99996948242188" startY="5.7220458984375E-6" />
+      <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="256.0" text="Home screen ➝ Login ➝ HR Manager page">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
    </children>

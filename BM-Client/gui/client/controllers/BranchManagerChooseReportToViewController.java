@@ -125,10 +125,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
     private TableColumn<PerformanceReport, Integer> perfAreLateCol;
 
     @FXML
-    private TableColumn<PerformanceReport, Float> perfLateRateCol;
+    private TableColumn<PerformanceReport, Double> perfLateRateCol;
 
     @FXML
-    private TableColumn<PerformanceReport, Float> perfAvgCol;
+    private TableColumn<PerformanceReport, Double> perfAvgCol;
 	
 	
 	/**
@@ -272,8 +272,8 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		perfTotalOrdersCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("total_orders"));
 		perfOnTimeCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("onTime"));
 		perfAreLateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("areLate"));
-		perfLateRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Float>("lateRate"));
-		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Float>("AvarageCookingTime"));
+		perfLateRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("lateRate"));
+		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("AvarageCookingTime"));
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
 		PerformanceList = FXCollections.observableArrayList(performanceArray);
 		performanceTable.setItems(PerformanceList);
