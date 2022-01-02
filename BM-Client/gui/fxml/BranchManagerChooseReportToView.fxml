@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -109,15 +110,16 @@
             </Text>
          </children>
       </AnchorPane>
-      <Label layoutX="120.0" layoutY="21.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Report To View Screen" textFill="#d41414">
+      <Label layoutX="119.0" layoutY="16.0" prefHeight="20.0" prefWidth="808.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ Branch Manager Screen ➝ Report To View Screen" textFill="#232020">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Text fill="#1b1a1a" layoutX="897.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#1b1a1a" layoutX="897.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
+      <Line endX="629.3999633789062" layoutX="332.0" layoutY="43.0" startX="-230.00001525878906" />
    </children>
 </Pane>

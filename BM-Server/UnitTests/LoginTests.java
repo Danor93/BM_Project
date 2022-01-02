@@ -1,33 +1,46 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Entities.Message;
+import Entities.MessageType;
 import Entities.User;
 import Entities.homeBranches;
+import Interfaces.ILoginInterface;
+import Parsing.Parsing;
 import querys.DBCheck;
 import querys.DBConnect;
 import querys.UpdateDB;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Danor
  * this class runs test for the login of users.
  */
-class LoginTests {
+
+public class LoginTests  {
+	
+	public String loginResult;
+	
 	
 	@BeforeEach
-	void setUP(){
-		DBConnect SQLConnect;
+	void setUp () throws Exception{
 	}
 
 	/**
 	 * this is to update the users login status to 0 after the tests.
 	 */
-	@AfterEach
-	void tearDown() throws Exception {
+	@AfterAll
+	/*void tearDown() throws Exception {
 		UpdateDB.UpdateisLoggedIn("viv1");
 		UpdateDB.UpdateisLoggedIn("h");
 		UpdateDB.UpdateisLoggedIn("b");
@@ -35,10 +48,17 @@ class LoginTests {
 		UpdateDB.UpdateisLoggedIn("e");
 		UpdateDB.UpdateisLoggedIn("adi");
 		UpdateDB.UpdateisLoggedIn("f");
-	}
+	}*/
 	
 	/************************* TEST Customer Login **************************/
 
+	@Test
+	void IsCustomerLoginTest() {
+		loginResult="Already";
+		
+		
+	}
+	
 	@Test
 	/*
 	 * Test Description:This test case check correct login of a customer
@@ -48,9 +68,12 @@ class LoginTests {
 	void testCustomerCorrectLogin() {
 		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("b","b")).split("-");
+		
+		String [] DivedMsg = DBCheck.DBCheck("b","b").split("@");
+		
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+	
 		
 		assertTrue(ExpectedCustomer.equals(resCustomer));
 	}
@@ -384,4 +407,5 @@ class LoginTests {
 		
 		assertFalse(CEO.equals(resCEO));
 	}
+	
 }
