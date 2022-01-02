@@ -41,7 +41,6 @@ import querys.showCities;
 import querys.showRestaurants;
 
 public class Parsing {
-	public static String result2;
 
 	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message messageFromServer;

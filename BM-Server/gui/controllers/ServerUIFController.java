@@ -109,7 +109,7 @@ public class ServerUIFController {
 		username = "root";
 		password = "Aa123456";
 		Connection connection = DBConnect.connect();
-		if (flagon == true) {
+		if (flagon) {
 			Statuslbl.setText("ON");
 			Statuslbl.setStyle("-fx-text-fill: green");
 			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);

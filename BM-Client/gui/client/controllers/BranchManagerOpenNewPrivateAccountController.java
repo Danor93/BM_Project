@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 import Entities.Account;
 import Entities.Client;
 import Entities.Message;
@@ -18,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,8 +32,8 @@ import main.PopUpMessage;
 import javafx.scene.text.Text;
 
 /**
- * @author Danor
- * this class implements the functionality of the Branch Manager to open new Private Account.
+ * @author Danor this class implements the functionality of the Branch Manager
+ *         to open new Private Account.
  */
 public class BranchManagerOpenNewPrivateAccountController extends Controller implements Initializable {
 	public static Client PAccount = new Client(null, null, null, null, null, null, null, null, null, null, null);
@@ -61,6 +65,24 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 
 	@FXML
 	private TextField txtCreditCardNumber;
+
+	@FXML
+	private Label InvaildCreditCard;
+
+	@FXML
+	private Label InvaildEmail;
+
+	@FXML
+	private Label InvaildFirstN;
+
+	@FXML
+	private Label InvaildID;
+
+	@FXML
+	private Label InvaildLastN;
+
+	@FXML
+	private Label InvaildTel;
 
 	@FXML
 	private Button btnConfirm;
@@ -107,30 +129,89 @@ public class BranchManagerOpenNewPrivateAccountController extends Controller imp
 
 	/**
 	 * for to confirm and check the new Private Account.
+	 * 
 	 * @param event - for confirm button.
 	 */
 	@FXML
 	void Confirm(ActionEvent event) throws IOException {
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
 				|| txtTelephone.getText().isEmpty() || txtEmail.getText().isEmpty()
-				|| txtCreditCardNumber.getText().isEmpty()) {/*if the filed are empty.*/
+				|| txtCreditCardNumber.getText().isEmpty()) {/* if the filed are empty. */
 			PopUpMessage.errorMessage("you must fill all of the fileds!");
 		} else {
-			PAccount.setFirstN(txtFirstName.getText());
-			PAccount.setLastN(txtLastName.getText());
-			PAccount.setId(txtID.getText());
-			PAccount.setPhone(txtTelephone.getText());
-			PAccount.setEmail(txtEmail.getText());
-			PAccount.setCreditCardNumber(txtCreditCardNumber.getText());
-			PAccount.setBranch(homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
-			ClientUI.chat.accept(new Message(MessageType.check_PAccount_details, PAccount));
-			if (ConfirmOpenNewPrivateAccountFlag) {
-				PopUpMessage.successMessage(
-						"Account " + PAccount.getFirstN() + " " + PAccount.getLastN() + " has been added succefuly!");
-				ConfirmOpenNewPrivateAccountFlag = false;
-			} else {
-				PopUpMessage.errorMessage("one or more of the deatils is wrong!");
-				ConfirmOpenNewPrivateAccountFlag = false;
+			char[] charsFirstName = txtFirstName.getText().toCharArray();
+			for (char c : charsFirstName) {
+
+				if (!(Character.isLetter(c))) {
+					InvaildFirstN.setText("Invaild Name!");
+				}
+			}
+
+			char[] charsLastName = txtLastName.getText().toCharArray();
+			for (char c : charsLastName) {
+
+				if (!(Character.isLetter(c))) {
+					InvaildLastN.setText("Invaild Name!");
+				}
+			}
+
+			char[] charsIDName = txtID.getText().toCharArray();
+			for (char c : charsIDName) {
+
+				if (!(Character.isDigit(c))) {
+					InvaildID.setText("Invaild ID!");
+				}
+			}
+
+			char[] charsTelephone = txtTelephone.getText().toCharArray();
+			for (char c : charsTelephone) {
+
+				if (!(Character.isDigit(c))) {
+					InvaildTel.setText("Invaild Telephone");
+				}
+			}
+
+			boolean result = true;
+			try {
+				InternetAddress emailAddr = new InternetAddress(txtEmail.getText().toString());
+				emailAddr.validate();
+			} catch (AddressException ex) {
+				result = false;
+			}
+
+			if (!result) {
+				InvaildEmail.setText("Invaild Email!");
+			}
+
+			char[] charsCreditCard = txtCreditCardNumber.getText().toCharArray();
+			for (char c : charsCreditCard) {
+
+				if (!(Character.isDigit(c))) {
+					InvaildCreditCard.setText("Invaild Credit Card!");
+				}
+			}
+
+			if (InvaildFirstN.getText().equals("") && InvaildLastN.getText().equals("")
+					&& InvaildID.getText().equals("") && InvaildEmail.getText().equals("")
+					&& InvaildTel.getText().equals("") && InvaildCreditCard.getText().equals("")) {
+				PAccount.setFirstN(txtFirstName.getText());
+				PAccount.setLastN(txtLastName.getText());
+				PAccount.setId(txtID.getText());
+				PAccount.setPhone(txtTelephone.getText());
+				PAccount.setEmail(txtEmail.getText());
+				PAccount.setCreditCardNumber(txtCreditCardNumber.getText());
+				PAccount.setBranch(
+						homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
+				PAccount.setRole("Customer");
+				ClientUI.chat.accept(new Message(MessageType.check_PAccount_details, PAccount));
+				if (ConfirmOpenNewPrivateAccountFlag) {
+					PopUpMessage.successMessage("Account " + PAccount.getFirstN() + " " + PAccount.getLastN()
+							+ " has been added succefuly!");
+					ConfirmOpenNewPrivateAccountFlag = false;
+				} else {
+					PopUpMessage.errorMessage("one or more of the deatils is wrong!");
+					ConfirmOpenNewPrivateAccountFlag = false;
+				}
 			}
 		}
 	}

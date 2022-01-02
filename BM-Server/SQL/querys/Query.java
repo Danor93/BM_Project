@@ -433,11 +433,10 @@ public class Query {
 			try {
 				Statement stmt1 = DBConnect.conn.createStatement();
 				ResultSet rs = stmt1.executeQuery(
-						"SELECT userName,password,role FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
+						"SELECT userName,password FROM import_users WHERE id= '" + BAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
-					String Role = rs.getString(3);
 					
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
 							"INSERT INTO users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
@@ -447,7 +446,7 @@ public class Query {
 					stmt2.setString(3, "Active");
 					stmt2.setString(1, UserName);
 					stmt2.setString(2, Password);
-					stmt2.setString(3, Role);
+					stmt2.setString(3, BAccount.getRole());
 					stmt2.setString(4, BAccount.getFirstN());
 					stmt2.setString(5, BAccount.getLastN());
 					stmt2.setString(6, BAccount.getId());
@@ -492,7 +491,7 @@ public class Query {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
 				ResultSet rs = stmt
-						.executeQuery("SELECT id FROM bitemedb.import_users WHERE id= '" + client.getId() + "' ;");
+						.executeQuery("SELECT firstName,lastName,Email,phone FROM bitemedb.import_users WHERE id= '" + client.getId() + "' ;");
 				while (rs.next()) {
 					String FirstName = rs.getString(1);
 					String LastName = rs.getString(2);
@@ -522,19 +521,18 @@ public class Query {
 		if (DBConnect.conn != null) {
 			try {
 				Statement stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT userName,password,role FROM bitemedb.import_users WHERE id= '"
+				ResultSet rs = stmt.executeQuery("SELECT userName,password FROM bitemedb.import_users WHERE id= '"
 						+ PAccount.getId() + "' ;");
 				while (rs.next()) {
 					String UserName = rs.getString(1);
 					String Password = rs.getString(2);
-					String Role = rs.getString(3);
 
 					PreparedStatement stmt2 = DBConnect.conn.prepareStatement(
 							"INSERT INTO bitemedb.users (userName,password,Role,FirstName,LastName,ID,Email,phone,isLoggedIn,homeBranch)"
 									+ "VALUES(?,?,?,?,?,?,?,?,?,?)");
 					stmt2.setString(1, UserName);
 					stmt2.setString(2, Password);
-					stmt2.setString(3, Role);
+					stmt2.setString(3, PAccount.getRole());
 					stmt2.setString(4, PAccount.getFirstN());
 					stmt2.setString(5, PAccount.getLastN());
 					stmt2.setString(6, PAccount.getId());

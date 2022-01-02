@@ -3,19 +3,17 @@ package querys;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 import controllers.ServerUIFController;
 import main.EchoServer;
 
 /**
  * @author Danor
  * this is for the login to DB.
- *
  */
-public class DBConnect {
+public class DBConnect  {
 
 	public static Connection conn;
-	@SuppressWarnings("deprecation")
+	
 	public static Connection connect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -27,7 +25,7 @@ public class DBConnect {
 
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", "root","Aa123456");
-			//EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
+			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 			ServerUIFController.flagon=true;
 		} catch (SQLException ex) {/* handle any errors */
 			EchoServer.serverUIFController.addToTextArea("SQLException:" + ex.getMessage()+".");

@@ -3,8 +3,11 @@
 /client/
 /css/
 /fxml/
+<<<<<<< HEAD
 /icons/
 /images/
 /main/
 /LoginTest$StubLogin.class
 /LoginTest.class
+=======
+>>>>>>> master
