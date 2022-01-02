@@ -7,10 +7,14 @@ import java.sql.SQLException;
 import controllers.ServerUIFController;
 import main.EchoServer;
 
+/**
+ * @author Danor
+ * this is for the login to DB.
+ *
+ */
 public class DBConnect {
 
 	public static Connection conn;
-	/*this is for the login to DB with username and password.*/
 	@SuppressWarnings("deprecation")
 	public static Connection connect() {
 		try {

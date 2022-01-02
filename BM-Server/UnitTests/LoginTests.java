@@ -17,6 +17,11 @@ import querys.UpdateDB;
  * this class runs test for the login of users.
  */
 class LoginTests {
+	
+	@BeforeEach
+	void setUP(){
+		DBConnect SQLConnect;
+	}
 
 	/**
 	 * this is to update the users login status to 0 after the tests.
@@ -111,13 +116,13 @@ class LoginTests {
 	 * Expected result:true because we get the same user.
 	 * */
 	void testBMCorrectLogin() {
-		User ExpectedCustomer = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("c","c")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedCustomer.equals(resCustomer));
+		assertTrue(ExpectedBM.equals(resBM));
 	}
 	
 	@Test
@@ -127,13 +132,13 @@ class LoginTests {
 	 * Expected result:false because its not the same user.
 	 * */
 	void testBMInCorrectLogin() {
-		User ExpectedCustomer = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("f","f")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedBM.equals(resBM));
 	}
 	
 	@Test
@@ -143,13 +148,13 @@ class LoginTests {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testBMNullLogin() {
-		User ExpectedCustomer = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedBM.equals(resBM));
 	}
 	
 	@Test
@@ -161,14 +166,14 @@ class LoginTests {
 	void testBMAlreadyLogin() {
 		
 		String [] FirstLogin = ((String) DBCheck.DBCheck("s","s")).split("-");
-		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
+		User BM = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
 		String [] SecondLogin = ((String) DBCheck.DBCheck("s","s")).split("-");
-		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
+		User resBM = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
-		assertFalse(Customer.equals(resCustomer));
+		assertFalse(BM.equals(resBM));
 	}
 	
 	/************************* TEST Supplier Login **************************/
@@ -181,13 +186,13 @@ class LoginTests {
 	 * Expected result:true because we get the same user.
 	 * */
 	void testSupplierCorrectLogin() {
-		User ExpectedCustomer = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("viv1","viv1")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedCustomer.equals(resCustomer));
+		assertTrue(ExpectedSupplier.equals(resSupplier));
 	}
 	
 	@Test
@@ -197,13 +202,13 @@ class LoginTests {
 	 * Expected result:false because its not the same user.
 	 * */
 	void testSupplierInCorrectLogin() {
-		User ExpectedCustomer = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("viv2","viv2")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedSupplier.equals(resSupplier));
 	}
 	
 	@Test
@@ -213,13 +218,13 @@ class LoginTests {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testSupplierNullLogin() {
-		User ExpectedCustomer = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedSupplier.equals(resSupplier));
 	}
 	
 	@Test
@@ -231,14 +236,14 @@ class LoginTests {
 	void testSupplierAlreadyLogin() {
 		
 		String [] FirstLogin = ((String) DBCheck.DBCheck("ref1","ref1")).split("-");
-		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
+		User Supplier = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
 		String [] SecondLogin = ((String) DBCheck.DBCheck("ref1","ref1")).split("-");
-		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
+		User resSupplier = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
-		assertFalse(Customer.equals(resCustomer));
+		assertFalse(Supplier.equals(resSupplier));
 	}
 	
 	/************************* TEST HR Login **************************/
@@ -251,13 +256,13 @@ class LoginTests {
 	 * Expected result:true because we get the same user.
 	 * */
 	void testHRCorrectLogin() {
-		User ExpectedCustomer = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
+		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("h","h")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedCustomer.equals(resCustomer));
+		assertTrue(ExpectedHR.equals(resHR));
 	}
 	
 	@Test
@@ -267,13 +272,13 @@ class LoginTests {
 	 * Expected result:false because its not the same user.
 	 * */
 	void testHRInCorrectLogin() {
-		User ExpectedCustomer = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
+		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("h1","h1")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedHR.equals(resHR));
 	}
 	
 	@Test
@@ -283,13 +288,13 @@ class LoginTests {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testHRNullLogin() {
-		User ExpectedCustomer = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
+		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedHR.equals(resHR));
 	}
 	
 	@Test
@@ -301,14 +306,14 @@ class LoginTests {
 	void testHRAlreadyLogin() {
 		
 		String [] FirstLogin = ((String) DBCheck.DBCheck("h2","h2")).split("-");
-		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
+		User HR = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
 		String [] SecondLogin = ((String) DBCheck.DBCheck("h2","h2")).split("-");
-		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
+		User resHR = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
-		assertFalse(Customer.equals(resCustomer));
+		assertFalse(HR.equals(resHR));
 	}
 	
 	/************************* TEST CEO Login **************************/
@@ -320,13 +325,13 @@ class LoginTests {
 	 * Expected result:true because we get the same user.
 	 * */
 	void testCEOCorrectLogin() {
-		User ExpectedCustomer = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
+		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("e","e")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedCustomer.equals(resCustomer));
+		assertTrue(ExpectedCEO.equals(resCEO));
 	}
 	
 	@Test
@@ -336,13 +341,13 @@ class LoginTests {
 	 * Expected result:false because its not the same user.
 	 * */
 	void testCEOInCorrectLogin() {
-		User ExpectedCustomer = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
+		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck("ceo2","ceo2")).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedCEO.equals(resCEO));
 	}
 	
 	@Test
@@ -352,13 +357,13 @@ class LoginTests {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testCEONullLogin() {
-		User ExpectedCustomer = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
+		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
 		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		assertFalse(ExpectedCEO.equals(resCEO));
 	}
 	
 	@Test
@@ -370,13 +375,13 @@ class LoginTests {
 	void testCEOAlreadyLogin() {
 		
 		String [] FirstLogin = ((String) DBCheck.DBCheck("ceo3","ceo3")).split("-");
-		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
+		User CEO = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
 		String [] SecondLogin = ((String) DBCheck.DBCheck("ceo3","ceo3")).split("-");
-		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
+		User resCEO = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
-		assertFalse(Customer.equals(resCustomer));
+		assertFalse(CEO.equals(resCEO));
 	}
 }

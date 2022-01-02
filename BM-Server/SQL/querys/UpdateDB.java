@@ -20,10 +20,9 @@ import Entities.RevenueReport;
 public class UpdateDB {
 
 	public static void UpdateisLoggedIn(String userName) {
-		Connection conn = DBConnect.connect();
 		try {
-			if (conn != null) {
-				PreparedStatement stmt = conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
+			if (DBConnect.conn != null) {
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
 				stmt.setString(1, userName);
 				stmt.executeUpdate();
 			} else {
