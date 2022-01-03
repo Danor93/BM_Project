@@ -20,16 +20,24 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
+import Entities.Delivery;
+import Entities.Dish;
+import Entities.DishType;
 import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
+import Entities.OrderType;
+import Entities.OrdersReport;
 import Entities.PerformanceReport;
 import Entities.Receipt;
+import Entities.Restaurant;
+import Entities.RevenueReport;
 import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
@@ -109,6 +117,680 @@ public class Query {
 				st.close();
 		}
 	}
+	
+	
+	/**
+	 * this query is for login to the system,getting the user information,change to '1' in islogin and check if the account is freeze or active.
+	 * @param userName - for the logging
+	 * @param password - for the logging
+	 * @return - return the user information from the DB.
+	 */
+	public static String Login(String userName, String password) {
+		StringBuilder result = new StringBuilder();
+		String role = null,ID=null,status = null;
+		PreparedStatement stmt,stmt1;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("SELECT Role,ID,FirstName,LastName,homeBranch,userName,password,isLoggedIn FROM bitemedb.users WHERE userName=? AND password=?");
+				stmt.setString(1, userName);
+				stmt.setString(2, password);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					if((rs.getString(8)).equals("1")){
+						return "Already";
+					}
+					role=rs.getNString(1);
+					result.append(rs.getString(1));
+					result.append("@");
+					ID=rs.getString(2);
+					result.append(rs.getString(2));
+					result.append("@");
+					result.append(rs.getString(3));
+					result.append("@");
+					result.append(rs.getString(4));
+					result.append("@");
+					result.append(rs.getString(5));
+					result.append("@");
+					result.append(rs.getString(6));
+					result.append("@");
+					result.append(rs.getString(7));
+					result.append("@");
+					result.append(rs.getString(8));
+				}
+				rs.close();
+				if (result.length() == 0) {
+					return "WrongInput";
+				}
+				if(role.equals("Customer"))
+				{
+					stmt1 = DBConnect.conn.prepareStatement("SELECT status FROM bitemedb.client WHERE client_id=?");
+					stmt1.setString(1, ID);
+					ResultSet rs1 = stmt1.executeQuery();
+					while(rs1.next())
+					{
+						status=rs1.getString(1);
+					}
+					rs1.close();
+					if(status.equals("Freeze"))
+					{
+						return "Freeze";
+					}
+				}
+				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn='1' WHERE userName=? AND password=?");
+				stmt.setString(1, userName);
+				stmt.setString(2, password);
+				stmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result.toString();
+	}
+	
+	/**
+	 * Method to check if there a menu exit or not
+	 * @param ID
+	 * @return true or false
+	 */
+	public static Boolean MenuExistingCheck(String ID) {
+		String rs1 = null;
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("SELECT dishName FROM bitemedb.dishes WHERE restId1=?");
+				stmt.setString(1, ID);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next())
+					rs1 = rs.getString(1).toString();
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(rs1==null)
+			return false;
+		else
+			return true;
+	}
+	
+	public static ArrayList<String> w4cBusinessGet() {
+		ArrayList<String> rs1 = new ArrayList<String>();
+		Statement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT w4cBusiness FROM bitemedb.company");
+				while (rs.next()) {
+					rs1.add(rs.getString(1).toString());
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs1;
+	}
+	
+
+	
+	
+	/**
+	 * @return
+	 */
+	public static ArrayList<String> getCities() {
+		ArrayList<String> cities = new ArrayList<>();
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT DISTINCT city FROM bitemedb.supplier");
+			while (rs.next()) {
+				cities.add(rs.getString(1));
+			}
+			rs.close();
+			for (String s : cities) {
+				System.out.println(s);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cities;
+	}
+
+
+
+	/**
+	 * @param address
+	 */
+	public static void UpdateOrderAddress(String address) {
+		PreparedStatement stmt;
+		String query = "";
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET OrderAddress = ?");
+				stmt.setString(1, address);
+				stmt.executeUpdate();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param type
+	 */
+	public static void UpdateTypeOrder(String type) {
+		PreparedStatement stmt;
+		String query = "";
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET TypeOfOrder = ?");
+				stmt.setString(1, type);
+				stmt.executeUpdate();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Client checkAccountKind(String id)
+	{
+		Client client=null;
+		PreparedStatement stmt1,stmt2,stmt3;
+		String w4c=null;
+		try {
+			stmt1 = DBConnect.conn.prepareStatement("SELECT w4c_private FROM bitemedb.client WHERE client_id=?");
+			stmt1.setString(1,id);
+			ResultSet rs = stmt1.executeQuery();
+			while (rs.next()) {
+				w4c=rs.getString(1);
+			}
+			rs.close();
+			stmt2 = DBConnect.conn.prepareStatement("SELECT companyName,budget FROM bitemedb.buss_client WHERE ID=? and status=?");
+			stmt2.setString(1,id);
+			stmt2.setString(2,"Approved");
+			ResultSet rs2 = stmt2.executeQuery();
+			while (rs2.next()) {
+				client = new BussinessAccount(rs2.getString(1),w4c,rs2.getString(2));
+			}
+			rs2.close();
+			if(client instanceof BussinessAccount)
+			{
+				BussinessAccount bussinessAccount=(BussinessAccount)client;
+				stmt3 = DBConnect.conn.prepareStatement("SELECT w4cBusiness FROM bitemedb.company WHERE companyName=?");
+				stmt3.setString(1,bussinessAccount.getCompanyName());
+				ResultSet rs3 = stmt3.executeQuery();
+				while (rs3.next()) {
+					bussinessAccount.setEmployerCode(rs3.getString(1));
+				}
+				rs3.close();
+			}
+			else
+			{
+				client=new Client(w4c);
+			}
+		}
+		 catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return client;
+	}
+
+
+	public static String getRefundSum(Order order) {
+		PreparedStatement stmt;
+		String ammount = null;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT ammount FROM bitemedb.refund WHERE ID=? and restId=?");
+			stmt.setString(1, order.getCostumerId());
+			stmt.setString(2, order.getRestId());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				ammount = rs.getString(1);
+			}
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ammount;
+	}
+
+	public static Integer insertOrder(Order msg) {
+		Integer orderNum = null;
+		PreparedStatement stmt, stmt1;
+		try {
+			stmt = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.order VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			stmt.setString(1, null);
+			stmt.setString(2, msg.getOrderType());
+			stmt.setString(3, msg.getRestName());
+			stmt.setString(4, msg.getRestId());
+			stmt.setString(5, Float.toString(msg.getTotalPrice()));
+			stmt.setString(6, msg.getTimeOfOrder());
+			stmt.setString(7, msg.getDateOfOrder());
+			stmt.setString(8, msg.getOrderStatus());
+			stmt.setString(9, msg.getCostumerId());
+			stmt.setString(10, msg.getUseRefund());
+			stmt.setInt(11, msg.getUseBudget());
+			stmt.setString(12, msg.getEarlyOrder());
+			stmt.setString(13, null);
+			stmt.setInt(14, 0);
+			stmt.setString(15, null);
+			
+			stmt.executeUpdate();
+			stmt1 = DBConnect.conn.prepareStatement("SELECT LAST_INSERT_ID()");
+			ResultSet rs = stmt1.executeQuery();
+			while (rs.next()) {
+				orderNum = rs.getInt(1);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderNum;
+	}
+
+	public static String insertDishesOrder(ArrayList<Dish> message) {
+		PreparedStatement stmt;
+		int orderNumber = message.get(0).getOrderNumber();
+		try {
+			for (Dish dish : message) {
+				stmt = DBConnect.conn
+						.prepareStatement("INSERT INTO bitemedb.dishesinorder VALUES(?,?,?,?,?,?,?,?,?)");
+				stmt.setString(1, null);
+				stmt.setInt(2, orderNumber);
+				stmt.setString(3, dish.getDishName());
+				stmt.setString(4, dish.getRestCode());
+				stmt.setString(5, DishType.fromTypeToStr(dish.getDishType()));
+				stmt.setString(6, dish.getChoiceFactor());
+				stmt.setString(7, dish.getChoiceDetails());
+				stmt.setString(8, dish.getExtra());
+				stmt.setInt(9, dish.getQuentity());
+				stmt.executeUpdate();
+			}
+			return "success!";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	
+	public static String insertDelivery(Delivery message) {
+		PreparedStatement stmt;
+		try
+		{
+			stmt = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.delivery VALUES(?,?,?,?,?,?,?)");
+			stmt.setInt(1, message.getOrderNum());
+			stmt.setString(2, message.getDeliveryType());
+			stmt.setInt(3, message.getParticipantsNum());
+			stmt.setString(4, message.getAddress());
+			stmt.setString(5, message.getPhone());
+			stmt.setString(6,message.getRecipient());
+			stmt.setString(7, Float.toString(message.getDeliPrice()));
+			stmt.executeUpdate();
+			return "success!";
+		}
+	 catch (SQLException e) {
+		e.printStackTrace();
+		return null;
+	}
+	}
+
+	public static ArrayList<Order> ConfirmClient(String msg) {
+		PreparedStatement stmt,stm2;
+		ArrayList<Order> orders=new ArrayList<>();
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT orderNumber,restName,timeOfOrder,dateOfOrder,EarlyOrder,rstID,totalPrice,timeApproved FROM bitemedb.order WHERE costumerID=? and orderStatus=?");
+			stmt.setString(1,msg);
+			stmt.setString(2,"Sended");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Order order =new Order (rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+				order.setRestId(Integer.toString(rs.getInt(6)));
+				order.setTotalPrice(Float.parseFloat(rs.getString(7)));
+				order.setSuppApproved(rs.getString(8));
+				orders.add(order);
+			}
+			rs.close();
+			for(Order ord:orders)
+			{
+				StringBuilder b=new StringBuilder();
+				stm2 = DBConnect.conn.prepareStatement("SELECT dishName FROM bitemedb.dishesinorder WHERE orderNum=?");
+				stm2.setInt(1, ord.getOrderNum());
+				ResultSet rs1=stm2.executeQuery();
+				while(rs1.next())
+				{
+					b.append(rs1.getString(1));
+					b.append(",");
+				}
+				ord.setDishes(b.toString());
+				rs1.close();
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+
+	public static String checkRefund(Order msg) {
+		int flag=0;
+		if(msg.getEarlyOrder().equals("yes"))
+		{
+			if(java.time.Duration.between(LocalTime.parse(msg.getTimeOfOrder()), LocalTime.now()).toMinutes()>20)
+			{	
+				putRefund(msg);
+				putPerfReport(msg,0);	
+			}
+			else
+			{
+				flag=1;
+				putPerfReport(msg,1);		
+			}
+		}
+		else
+		{
+			if(java.time.Duration.between(LocalTime.parse(msg.getSuppApproved()), LocalTime.now()).toMinutes()>60)
+			{	
+				putRefund(msg);
+				putPerfReport(msg,0);		
+			}
+			else
+			{
+				flag=1;
+				putPerfReport(msg,1);
+			}
+		}
+		
+		PreparedStatement stmt;
+		try {
+			stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.order SET punctuality=?,orderStatus=? WHERE orderNumber=?");
+			stmt.setInt(1,flag);
+			stmt.setString(2,"Done");
+			stmt.setInt(3, msg.getOrderNum());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "ok";
+	}
+	
+	private static void putPerfReport(Order msg, int flag) 
+	{
+		PreparedStatement stmt,stmt1,stmt2,stmt3;
+		String branchRest=null;
+		int total=0,late=0,onTime=0;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT homeBranch FROM bitemedb.supplier WHERE supplierName=?");
+			stmt.setString(1, msg.getRestName());
+			ResultSet rs1=stmt.executeQuery();
+			while(rs1.next())
+			{
+				branchRest=rs1.getString(1);
+			}
+			rs1.close();
+			String [] date=(LocalDate.now().toString()).split("-");
+			stmt1 = DBConnect.conn.prepareStatement("SELECT total_orders,onTime,areLate FROM bitemedb.performance_reports WHERE restaurant=? and year=? and month=?");
+			stmt1.setString(1, msg.getRestName());
+			stmt1.setString(2, date[0]);
+			stmt1.setString(3, date[1]);
+			ResultSet rs2=stmt1.executeQuery();
+			while(rs2.next())
+			{
+				total=rs2.getInt(1);
+				onTime=rs2.getInt(2);
+				late=rs2.getInt(3);	
+			}
+			rs2.close();
+			
+			if(total==0)
+			{
+				stmt2 = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.performance_reports VALUES(?,?,?,?,?,?,?)");
+				stmt2.setString(1, msg.getRestName());
+				stmt2.setString(2, date[0]);
+				stmt2.setString(3, date[1]);
+				stmt2.setString(4,branchRest);
+				stmt2.setInt(5, 1);
+				if(flag==1)
+				{
+					stmt2.setInt(6,1);
+					stmt2.setInt(7,0);
+				}
+				else
+				{
+					stmt2.setInt(6,0);
+					stmt2.setInt(7,1);
+				}
+				stmt2.executeUpdate();	
+			}
+			else
+			{
+				stmt3 = DBConnect.conn.prepareStatement("UPDATE bitemedb.performance_reports SET total_orders=?,onTime=?,areLate=? WHERE restaurant=? and year=? and month=?");
+				stmt3.setInt(1,total+1);
+				if(flag==1)
+				{
+					stmt3.setInt(2,onTime+1);
+					stmt3.setInt(3,late);
+				}
+				else
+				{
+					stmt3.setInt(2,onTime);
+					stmt3.setInt(3,late+1);
+				}
+				stmt3.setString(4,msg.getRestName());
+				stmt3.setString(5,date[0]);
+				stmt3.setString(6,date[1]);
+				stmt3.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+
+	private static void putRefund(Order order)
+	{
+		PreparedStatement stmt,stmt2,stmt3;
+		String amount=null;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT ammount FROM bitemedb.refund WHERE ID=? and restId=?");
+			stmt.setString(1, order.getCostumerId());
+			stmt.setString(2,order.getRestId());
+			ResultSet rs1=stmt.executeQuery();
+			while(rs1.next())
+			{
+				amount=rs1.getString(1);
+			}
+			rs1.close();
+			if(amount!=null)
+			{
+				Float sum= (float) (order.getTotalPrice()*0.5+ Float.parseFloat(amount));
+				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.refund SET ammount=? WHERE ID=? and restId=?");
+				System.out.println("aaa");
+				stmt2.setString(1, Float.toString(sum));
+				stmt2.setString(2, order.getCostumerId());	
+				stmt2.setString(3,order.getRestId());
+				stmt2.executeUpdate();
+			}
+			else
+			{
+				Float sum= (float) (order.getTotalPrice()*0.5);
+				stmt3 = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.refund VALUES(?,?,?)");
+				System.out.println("bbb");
+				stmt3.setString(1, order.getCostumerId());
+				stmt3.setString(2,Float.toString(sum));
+				stmt3.setString(3, order.getRestId());
+				stmt3.executeUpdate();
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Map<String, ArrayList<Float>> getHistogramData(String[] divededAdd) 
+	{
+		PreparedStatement stmt;
+		Map<String, ArrayList<Float>> mapHist=new HashMap<>();
+		String rest=null;
+		try {
+			stmt = DBConnect.conn.prepareStatement("SELECT resturant,orders_amount,Income FROM bitemedb.revenue_reports WHERE Quarterly=? and branch=? and year=?");
+			stmt.setString(1, divededAdd[0]);
+			stmt.setString(2,divededAdd[1]);
+			stmt.setString(3,divededAdd[2]);
+			ResultSet rs1=stmt.executeQuery();
+			while(rs1.next())
+			{
+				rest=rs1.getString(1);
+				if(mapHist.containsKey(rest))
+				{
+					Float amount=mapHist.get(rest).get(0);
+					amount+=rs1.getInt(2);
+					mapHist.get(rest).set(0, amount);
+					Float income=mapHist.get(rest).get(1);
+					income+=rs1.getFloat(3);
+					mapHist.get(rest).set(1, income);		
+				}
+				else
+				{
+					ArrayList<Float> temp=new ArrayList<>();
+					temp.add((float) rs1.getInt(2));
+					temp.add(rs1.getFloat(3));	
+					mapHist.put(rest, temp);
+				}
+			}
+			rs1.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return mapHist;
+	}
+
+	public static ArrayList<String> getYear() {
+		ArrayList<String>years=null;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT DISTINCT year FROM bitemedb.revenue_reports");
+			years=new ArrayList<String>();
+			while (rs.next()) {
+				years.add(rs.getString(1));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return years;
+	}
+	
+	/**
+	 * 
+	 * @param ID
+	 * @return ArrayList of dishes
+	 */
+	public static ArrayList<Dish> ShowDishes(String ID) {
+		ArrayList<Dish> dishes = new ArrayList<>();
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("SELECT * FROM bitemedb.dishes WHERE restId1=? ORDER BY dishType");
+				stmt.setString(1, ID);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					Dish dish = new Dish(rs.getString("dishName"), rs.getString("supplierName"),
+							rs.getString("choiceFactor"), rs.getString("choiceDetails"), rs.getString("ingredients"),
+							rs.getString("extra"), Float.parseFloat(rs.getString("price")),
+							DishType.toDishType(rs.getString("dishType")));
+					dish.setRestCode(rs.getString("restId1"));
+					dishes.add(dish);
+				}
+				rs.close();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dishes;
+	}
+	
+	public static ArrayList<Dish> getDishes(String restCode) {
+		ArrayList<Dish> dishes=new ArrayList<>();
+		try {
+			PreparedStatement stmt = DBConnect.conn.prepareStatement("SELECT dishName,supplierName,choiceFactor,choiceDetails,ingredients,extra,price,dishType FROM bitemedb.dishes WHERE restId1=?");
+				stmt.setString(1,restCode);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					Dish dish= new Dish(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getFloat(7),DishType.toDishType(rs.getString(8)));
+					System.out.println(dish.getDishName());
+					dishes.add(dish);
+				}
+				rs.close();		
+		}
+		 catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return dishes;
+	}
+	
+	public static ArrayList<Order> getOrders() {
+		ArrayList<Order> orders = new ArrayList<>();
+		Statement stmt;
+		String query = "";
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM order.orders");
+				while (rs.next()) {
+					String restaurant = rs.getString("Restaurant");
+					int OrderNumber = Integer.parseInt(rs.getString("OrderNumber"));
+					String OrderTime = rs.getString("OrderTime");
+					String PhoneNumber = rs.getString("PhoneNumber");
+					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
+					String OrderAddress = rs.getString("OrderAddress");
+					//orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
+				}
+				rs.close();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+	
+	/**
+	 * @param city
+	 * @return
+	 */
+	public static ArrayList<Restaurant> getRestaurants(String city) {
+		ArrayList<Restaurant> rest = new ArrayList<>();
+		PreparedStatement stmt;
+		String query = "";
+		try {
+			stmt = DBConnect.conn.prepareStatement(
+					"SELECT restId,supplierName,openingTime,city,address,homeBranch FROM bitemedb.supplier WHERE city=? and supplierStatus=?");
+			stmt.setString(1, city);
+			stmt.setString(2, "Approved");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Restaurant rst = new Restaurant(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), homeBranches.toHomeBranchType(rs.getString(6)));
+				rest.add(rst);
+			}
+			rs.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rest;
+	}
+	
 
 	/**
 	 * this method load employers from the DB for the Branch Manager for
@@ -674,7 +1356,6 @@ public class Query {
 
 	/**
 	 * this method update the account to active.
-	 * 
 	 * @param AccountID - to find the client with his ID.
 	 */
 	public static void UpdateAccountStatusToActive(String AccountID) {
@@ -1117,7 +1798,7 @@ public class Query {
 				try {
 					stmt3 = DBConnect.conn.createStatement();
 					ResultSet rs3 = stmt3.executeQuery(
-							"SELECT * FROM bitemedb.performance_reports WHERE restaurant='" + name + "';");
+							"SELECT * FROM bitemedb.performance_reports WHERE restaurant='" + name + "' AND year='"+year+"' AND month='"+month+"' ;");
 					while (rs3.next()) {
 					PerformanceReport report = new PerformanceReport(month, year, branch, name, rs3.getInt(5),
 							rs3.getInt(6), rs3.getInt(7));
@@ -1138,5 +1819,528 @@ public class Query {
 			return reports;
 		}
 		return null;
+	}
+	
+	public static void UpdateisLoggedIn(String userName) {
+		try {
+			if (DBConnect.conn != null) {
+				PreparedStatement stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.users SET isLoggedIn = '0' WHERE userName=?");
+				stmt.setString(1, userName);
+				stmt.executeUpdate();
+			} else {
+				System.out.println("Conn is null");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public static boolean addToRevenueReportsTable(RevenueReport rr) {
+		boolean ExistingReport = false;
+		PreparedStatement stmt;
+		Statement stmt2;
+		int orderAmount = 0;
+		float income = 0;
+		try {
+			stmt2 = DBConnect.conn.createStatement();
+			ResultSet rs = stmt2.executeQuery("SELECT * FROM bitemedb.revenue_reports WHERE month='" + rr.getMonth()
+					+ "' AND year ='" + rr.getYear() + "' AND resturant = '" + rr.getResName() + "' ");
+			while (rs.next()) {
+				ExistingReport = true;
+				orderAmount = rs.getInt(5);
+				income = rs.getFloat(6);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (ExistingReport == false) {
+			try {
+				if (DBConnect.conn != null) {
+
+					stmt = DBConnect.conn.prepareStatement(
+							"INSERT INTO bitemedb.revenue_reports(branch, month, year, resturant, orders_amount, Income,Quarterly) VALUES (?,?,?, ?, ?, ?,?);");
+					stmt.setString(1, rr.getBranch());
+					stmt.setString(2, rr.getMonth());
+					stmt.setString(3, rr.getYear());
+					stmt.setString(4, rr.getResName());
+					stmt.setInt(5, rr.getOrdersamount());
+					stmt.setFloat(6, rr.getIncome());
+					stmt.setString(7, rr.getQuarterly());
+					stmt.executeUpdate();
+					return true;
+
+				} else {
+					System.out.println("Conn is null");
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		} else {
+			PreparedStatement stmt3;
+			try {
+				if (DBConnect.conn != null) {
+					orderAmount += rr.getOrdersamount();
+					income += rr.getIncome();
+					stmt3 = DBConnect.conn.prepareStatement(
+							"UPDATE bitemedb.revenue_reports SET orders_amount = ?,Income = ? WHERE month= '"
+									+ rr.getMonth() + "' AND year ='" + rr.getYear() + "' AND resturant = '"
+									+ rr.getResName() + "' ");
+					stmt3.setInt(1, orderAmount);
+					stmt3.setFloat(2, income);
+					stmt3.executeUpdate();
+					return true;
+				} else {
+					System.out.println("Conn is null");
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+	}
+
+	public static boolean addToOrdersReportsTable(ArrayList<OrdersReport> ordersreports) {
+		boolean RetVal = false; 
+		PreparedStatement stmt;
+		Statement stmt2;
+		for (OrdersReport or : ordersreports) {
+			int Quantity = 0;
+			boolean ExistingReport = false;
+			try {
+				stmt2 = DBConnect.conn.createStatement();
+				ResultSet rs = stmt2.executeQuery("SELECT Quantity FROM bitemedb.orders_report WHERE month='"
+						+ or.getMonth() + "' AND year ='" + or.getYear() + "' AND ResName = '" + or.getResName()
+						+ "' AND DishType = '" + or.getDishType() + "'");
+				while (rs.next()) {
+					ExistingReport = true;
+					Quantity = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (ExistingReport == false) {
+				try {
+					if (DBConnect.conn != null) {
+						stmt = DBConnect.conn.prepareStatement(
+								"INSERT INTO bitemedb.orders_report(month, year, ResName, DishType, branch, Quantity) VALUES (?,?,?, ?, ?, ?);");
+						stmt.setString(1, or.getMonth());
+						stmt.setString(2, or.getYear());
+						stmt.setString(3, or.getResName());
+						stmt.setString(4, or.getDishType());
+						stmt.setString(5, or.getBranch());
+						stmt.setInt(6, or.getQuantity());
+						stmt.executeUpdate();
+						RetVal = true;
+					} else {
+						System.out.println("Conn is null");
+						RetVal = false;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					RetVal = false;
+				}
+			} else {
+				PreparedStatement stmt3;
+				try {
+					if (DBConnect.conn != null) {
+						Quantity += or.getQuantity();
+						stmt3 = DBConnect.conn
+								.prepareStatement("UPDATE bitemedb.orders_report SET Quantity = '" + Quantity + "' WHERE month= '"
+										+ or.getMonth() + "' AND year ='" + or.getYear() + "' AND ResName = '"
+										+ or.getResName() + "' AND DishType= '" + or.getDishType() + "' ;");
+						stmt3.executeUpdate();
+						Quantity=0;
+						RetVal = true;
+					} else {
+						System.out.println("Conn is null");
+						RetVal = false;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					RetVal = false;
+				}
+			}
+		}
+		return RetVal; 
+	}
+
+	public static ArrayList<RevenueReport> getRevenueReport(String data) {
+		String Data[] = data.split("@");
+		String branch = Data[0];
+		String month = Data[1];
+		String year = Data[2];
+		Statement stmt;
+		ArrayList<RevenueReport> reportarray = new ArrayList<>();
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.revenue_reports WHERE month='" + month
+						+ "' AND year ='" + year + "' AND branch = '" + branch + "' ");
+				while (rs.next()) {
+					RevenueReport report = new RevenueReport(rs.getString(4), branch, month, year, rs.getString(7),
+							rs.getInt(5), rs.getFloat(6));
+					reportarray.add(report);
+				}
+				return reportarray;
+			} else {
+				System.out.println("Conn is null");
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static ArrayList<OrdersReport> getOrdersReport(String data) {
+		String Data[] = data.split("@");
+		String branch = Data[0];
+		String month = Data[1];
+		String year = Data[2];
+		Statement stmt;
+		ArrayList<OrdersReport> reportarray = new ArrayList<>();
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM bitemedb.orders_report WHERE month='" + month
+						+ "' AND year ='" + year + "' AND branch = '" + branch + "' ");
+				while (rs.next()) {
+					OrdersReport report = new OrdersReport(month, year, branch, rs.getString(3), rs.getString(4),
+							rs.getInt(6));
+					reportarray.add(report);
+				}
+				return reportarray;
+			} else {
+				System.out.println("Conn is null");
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	public static boolean NewDish(Dish dish) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement(
+						"INSERT INTO bitemedb.dishes(dishName, dishType, restId1, supplierName, price, choiceFactor, choiceDetails, ingredients, extra) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				stmt.setString(1, dish.getDishName());
+				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
+				stmt.setString(3, dish.getRestCode());
+				stmt.setString(4, dish.getSupplierName());
+				stmt.setString(5, String.valueOf(dish.getPrice()));
+				stmt.setString(6, dish.getChoiceFactor());
+				stmt.setString(7, dish.getChoiceDetails());
+				stmt.setString(8, dish.getIngredients());
+				stmt.setString(9, dish.getExtra());
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Method for updating dish information in the database
+	 * @param dish
+	 * @return true / false
+	 */
+	public static boolean UpdateDish(Dish dish) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn.prepareStatement("UPDATE bitemedb.dishes SET price='" + dish.getPrice()
+						+ "', choiceFactor='" + dish.getChoiceFactor() + "', choiceDetails='" + dish.getChoiceDetails()
+						+ "', ingredients='" + dish.getIngredients() + "', extra='" + dish.getExtra()
+						+ "' WHERE dishName=? AND dishType=? AND restId1=?");
+				stmt.setString(1, dish.getDishName());
+				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
+				stmt.setString(3, dish.getRestCode());
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Method for deleting a dish from the database
+	 * @param dish
+	 * @return true / false
+	 */
+	public static boolean deleteDish(Dish dish) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("DELETE FROM bitemedb.dishes WHERE dishName=? AND dishType=? AND restId1=?");
+				stmt.setString(1, dish.getDishName());
+				stmt.setString(2, DishType.fromTypeToStr(dish.getDishType()));
+				stmt.setString(3, dish.getRestCode());
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Method for updating order status to - Not approved
+	 * @param order
+	 * @return true / false
+	 */
+	public static boolean updateOrderStatusToNotApproved(Order order) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Not approved' WHERE orderNumber=?");
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * Method for updating order status to - Approved
+	 * @param order
+	 * @return true / false
+	 */
+	public static boolean updateOrderStatusToApproved(Order order) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Approved', timeApproved='"+LocalTime.now().toString()+"' WHERE orderNumber=?");
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
+				stmt.executeUpdate();
+				return true;
+
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * A method for registering a new employer in the database.
+	 * @param employer
+	 * @return true / false
+	 */
+	public static boolean RegistrationOfEmployer(Employer employer) {
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT companyStatus FROM bitemedb.company WHERE companyName='"
+					+ employer.getCompanyName() + "'" + "");
+			while (rs.next()) {
+				return false;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		PreparedStatement stmt2;
+		try {
+			if (DBConnect.conn != null) {
+				stmt2 = DBConnect.conn.prepareStatement(
+						"INSERT INTO bitemedb.company(w4cBusiness, companyName, companyStatus) VALUES (?, ?, ?)");
+				stmt2.setString(1, employer.getW4cBussines());
+				stmt2.setString(2, employer.getCompanyName());
+				stmt2.setString(3, employer.getCompanyStatus());
+				stmt2.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Method for updating businessAccount status to Approved
+	 * @param businessAccount
+	 * @return true / false
+	 */
+	public static boolean BusinessAccountStatusToApproved(BusinessAccountTracking businessAccount) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Approved' WHERE ID=?");
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * Method for updating businessAccount status to Not approved
+	 * @param businessAccount
+	 * @return true / false
+	 */
+	public static boolean BusinessAccountStatusToNotApproved(BusinessAccountTracking businessAccount) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.buss_client SET status = 'Not approved' WHERE ID=?");
+				stmt.setString(1, String.valueOf(businessAccount.getID()));
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * Method for updating the Refund value in the database.
+	 * @param order
+	 * @return true/false
+	 */
+	public static boolean updateRefundAmmount(Order order) {
+		int newAmmount;
+		String ammount = null;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT ammount FROM bitemedb.refund WHERE restId='" + order.getRestId()
+					+ "' AND ID='" + order.getCostumerId() + "'" + "");
+			while (rs.next()) {
+				ammount = rs.getString(1);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		newAmmount = Integer.parseInt(ammount) - Integer.parseInt(order.getUseRefund());
+		if (newAmmount < 0)
+			newAmmount = 0;
+		PreparedStatement stmt2;
+		try {
+			if (DBConnect.conn != null) {
+				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.refund SET ammount='" + newAmmount
+						+ "' WHERE restId='" + order.getRestId() + "' AND ID='" + order.getCostumerId() + "'" + "");
+				stmt2.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * Method for updating the Budget value in the database.
+	 * @param order
+	 * @return true / false
+	 */
+	public static boolean updateBudgetValue(Order order) {
+		Float newBudget;
+		String budget = null;
+		Statement stmt;
+		try {
+			stmt = DBConnect.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT budget FROM bitemedb.buss_client WHERE ID='"
+					+ order.getCostumerId() + "' AND status='Approved'" + "");
+			while (rs.next()) {
+				budget = rs.getString(1);
+			}
+			rs.close();
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		newBudget = Float.parseFloat(budget) - order.getTotalPrice();
+		if (newBudget.compare(newBudget, 0) < 0)
+			newBudget = Float.parseFloat("0");
+		PreparedStatement stmt2;
+		try {
+			if (DBConnect.conn != null) {
+				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.buss_client SET budget='" + newBudget
+						+ "' WHERE ID='" + order.getCostumerId() + "' AND status='Approved'" + "");
+				stmt2.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
+	}
+
+	/**
+	 * Method to update order status to - Sended.
+	 * @param order
+	 * @return true / false
+	 */
+	public static boolean updateOrderStatusSended(Order order) {
+		PreparedStatement stmt;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.order SET orderStatus = 'Sended', timeSended='"+LocalTime.now().toString()+"' WHERE orderNumber=?");
+				stmt.setString(1, String.valueOf(order.getOrderNum()));
+				stmt.executeUpdate();
+				return true;
+			} else {
+				System.out.println("Conn is null");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return true;
+		}
 	}
 }

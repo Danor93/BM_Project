@@ -43,6 +43,7 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	public StringBuilder branchAndYearAndQuarterlyString = new StringBuilder();
 	public static MyFile downloadFileData;
 
+	
 	@FXML
 	private ToggleGroup quarterlyGroup;
 

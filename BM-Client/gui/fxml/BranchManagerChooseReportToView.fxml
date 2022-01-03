@@ -14,14 +14,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="955.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
+<Pane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="955.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.BranchManagerChooseReportToViewController">
    <children>
-      <ImageView fx:id="BackImage" fitHeight="779.0" fitWidth="1244.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BackImage" fitHeight="784.0" fitWidth="1010.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/background.jpeg" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="1108.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text fill="#0b0a0a" layoutX="883.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe" wrappingWidth="58.0">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -54,12 +54,12 @@
          <font>
             <Font name="System Bold" size="17.0" />
          </font></Button>
-      <StackPane fx:id="ReportPane" layoutX="385.0" layoutY="91.0" prefHeight="674.0" prefWidth="556.0" style="-fx-background-color: white;">
+      <StackPane fx:id="ReportPane" layoutX="385.0" layoutY="91.0" prefHeight="368.0" prefWidth="556.0" style="-fx-background-color: white;">
          <children>
             <Pane fx:id="main" prefHeight="674.0" prefWidth="551.0" style="-fx-background-color: white;" />
             <Pane fx:id="Orders" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
-                  <TableView fx:id="orders" prefHeight="674.0" prefWidth="556.0" visible="false">
+                  <TableView fx:id="orders" prefHeight="368.0" prefWidth="556.0" visible="false">
                     <columns>
                       <TableColumn fx:id="OrdRestCol" prefWidth="150.4000244140625" text="Restaurant" />
                       <TableColumn fx:id="OrdDishTypeCol" minWidth="0.0" prefWidth="207.0" text=" Dish Type" />
@@ -70,7 +70,7 @@
             </Pane>
             <Pane fx:id="Revenue" prefHeight="656.0" prefWidth="624.0" style="-fx-background-color: white;">
                <children>
-                  <TableView fx:id="RevenueTable" prefHeight="674.0" prefWidth="556.0" visible="false">
+                  <TableView fx:id="RevenueTable" prefHeight="368.0" prefWidth="556.0" visible="false">
                     <columns>
                       <TableColumn fx:id="RevResCol" prefWidth="157.59991455078125" text="Restaurant " />
                       <TableColumn fx:id="RevNumOforCol" minWidth="0.0" prefWidth="226.0" text="Number of Orders" />
@@ -81,7 +81,7 @@
             </Pane>
             <Pane fx:id="preformancePane" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="performanceTable" prefHeight="674.0" prefWidth="556.0">
+                  <TableView fx:id="performanceTable" prefHeight="368.0" prefWidth="556.0">
                     <columns>
                       <TableColumn fx:id="perfRestNameCol" prefWidth="75.0" text="Restaurant" />
                       <TableColumn fx:id="perfTotalOrdersCol" prefWidth="75.0" text="Total orders" />
@@ -91,11 +91,12 @@
                         <TableColumn fx:id="perfAvgCol" prefWidth="179.20001220703125" text="Avg cooking time" />
                     </columns>
                   </TableView>
+                  <Label fx:id="AvergaeTable" prefHeight="17.0" prefWidth="556.0" />
                </children>
             </Pane>
          </children>
       </StackPane>
-      <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="786.0" prefWidth="102.0" style="-fx-background-color: #004d00;">
+      <AnchorPane layoutX="-1.0" layoutY="-3.0" prefHeight="534.0" prefWidth="102.0" style="-fx-background-color: #004d00;">
          <children>
             <Text fill="WHITE" layoutX="11.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
                <font>
@@ -129,11 +130,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Text fill="#1b1a1a" layoutX="897.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
       <Separator layoutX="101.0" layoutY="42.0" prefHeight="0.0" prefWidth="855.0" />
    </children>
 </Pane>

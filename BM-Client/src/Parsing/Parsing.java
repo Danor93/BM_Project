@@ -483,6 +483,11 @@ public class Parsing {
 			break;
 		}
 		
+		case return_years_for_report:{
+			BranchManagerChooseReportToViewController.years= (ArrayList<String>) receivedMessage.getMessageData();
+			break;
+		}
+		
 		/**
 		 * 
 		 */

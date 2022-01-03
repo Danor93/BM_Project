@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,10 +41,14 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	public static ArrayList<RevenueReport> revenueArray = new ArrayList<>();
 	public static ArrayList<OrdersReport> ordersArray = new ArrayList<>();
 	public static ArrayList<PerformanceReport> performanceArray = new ArrayList<>();
+	public static ArrayList<String> years = new ArrayList<>();
 	ObservableList<RevenueReport> RevenueList;
 	ObservableList<OrdersReport> OrderList;
 	ObservableList<PerformanceReport> PerformanceList;
 
+    @FXML
+    private Label AvergaeTable;
+	
 	@FXML
 	private ImageView BackImage;
 
@@ -210,23 +215,29 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		if (ReportType.getSelectionModel().getSelectedItem() != null) {
 			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
 			
-			case "Revenue": {	
-				/*orders.setVisible(false);
-				performanceTable.setVisible(false);*/
+			case "Revenue": {
+				orders.getItems().clear();
+				performanceTable.getItems().clear();
+				orders.setVisible(false);
+				performanceTable.setVisible(false);
 				RevenueReport(details);
 				break;
 			}
 
-			case "Orders": {	
-				/*RevenueTable.setVisible(false);
-				performanceTable.setVisible(false);*/
+			case "Orders": {
+				RevenueTable.getItems().clear();
+				performanceTable.getItems().clear();
+				RevenueTable.setVisible(false);
+				performanceTable.setVisible(false);
 				OrdersReport(details);
 				break;
 			}
 
 			case "Performance": {
-				/*orders.setVisible(false);
-				RevenueTable.setVisible(false);*/
+				orders.getItems().clear();
+				RevenueTable.getItems().clear();
+				orders.setVisible(false);
+				RevenueTable.setVisible(false);
 				PerformanceReport(details);
 				break;
 			}
@@ -281,7 +292,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	}
 
 	/**
-	 * initialize the screen buttons and combo box.
+	 * initialize the resources of the gui including combo boxs and buttons.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -292,8 +303,11 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		for (int i = 1; i <= 12; i++) {
 			Month.getItems().add(i);
 		}
-		Year.getItems().add("2022");
-		Year.getItems().add("2021");
+		
+		ClientUI.chat.accept(new Message(MessageType.get_year_for_report,null));
+		for(String y: years) {
+			Year.getItems().add(y);
+		}
 
 		if (LoginScreenController.user.getRole().equals("CEO")) {
 			BranchChoose.getItems().add("North");

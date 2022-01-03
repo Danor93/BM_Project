@@ -34,6 +34,7 @@ public abstract class Controller {
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe" + " " + title);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
@@ -61,6 +62,7 @@ public abstract class Controller {
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe" + " " + title);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {

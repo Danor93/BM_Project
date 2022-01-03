@@ -32,6 +32,7 @@ public enum MessageType {
 	orderDone, ShowHistogram, getYears, Account_Status_Active, Account_Status_Freeze, get_Rest_Name,
 	check_account_status, check_account_status_Active, check_account_status_Freeze, Update_Status_to_Active,
 	Update_Status_to_Freeze, ReturnFirstName, ReturnFirstName_success, check_suppliers_details,
+	get_year_for_report,return_years_for_report,
 
 	/* type of users */
 

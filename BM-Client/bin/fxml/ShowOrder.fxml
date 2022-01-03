@@ -67,7 +67,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Text fx:id="totalPrice" fill="RED" layoutX="393.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" wrappingWidth="159.77731323242188">
+      <Text fx:id="totalPrice" fill="RED" layoutX="346.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price:" wrappingWidth="294.1773376464844">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

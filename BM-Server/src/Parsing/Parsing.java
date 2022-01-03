@@ -32,14 +32,7 @@ import Entities.Supplier;
 import Entities.User;
 import controllers.LogicController;
 import ocsf.server.ConnectionToClient;
-import querys.DBCheck;
-import querys.ShowDishes;
 import querys.Query;
-import querys.UpdateDB;
-import querys.getDishes;
-import querys.queries;
-import querys.showCities;
-import querys.showRestaurants;
 
 public class Parsing {
 
@@ -51,20 +44,20 @@ public class Parsing {
 
 		case ShowHistogram: {
 			String[] DivededAdd = ((String) receivedMessage.getMessageData()).split(",");
-			Map<String, ArrayList<Float>> histogram = (Map<String, ArrayList<Float>>) queries
+			Map<String, ArrayList<Float>> histogram = (Map<String, ArrayList<Float>>) Query
 					.getHistogramData(DivededAdd);
 			return messageFromServer = new Message(MessageType.ShowHistogram, histogram);
 		}
 
 		case getYears: {
-			ArrayList<String> years = (ArrayList<String>) queries.getYear();
+			ArrayList<String> years = (ArrayList<String>) Query.getYear();
 			return messageFromServer = new Message(MessageType.getYears, years);
 		}
 
 		case loginSystem: {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
-			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
+			result = Query.Login(DivededUandP[0], DivededUandP[1]);
 			if (!result.equals("Already") && !result.equals("WrongInput") && !result.equals("Freeze")) {
 				LogicController.UpdateClientTable(msg, client);
 			}
@@ -72,53 +65,53 @@ public class Parsing {
 		}
 
 		case IdentifyW4c: {
-			Client costumer = queries.checkAccountKind((String) receivedMessage.getMessageData());
+			Client costumer = Query.checkAccountKind((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 		}
 
 		case Show_Cities: {
-			ArrayList<String> city = showCities.getCities();
+			ArrayList<String> city = Query.getCities();
 			return messageFromServer = new Message(MessageType.Show_Cities, city);
 		}
 
 		case ClientConfirm: {
-			ArrayList<Order> orders = queries.ConfirmClient((String) receivedMessage.getMessageData());
+			ArrayList<Order> orders = Query.ConfirmClient((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.ClientConfirm, orders);
 		}
 
 		case show_Restaurants: {
-			ArrayList<Restaurant> restaurants = showRestaurants
+			ArrayList<Restaurant> restaurants = Query
 					.getRestaurants((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.show_Restaurants, restaurants);
 		}
 
 		case get_Dishes: {
-			ArrayList<Dish> dishesOfRest = getDishes.getDishes((String) receivedMessage.getMessageData());
+			ArrayList<Dish> dishesOfRest = Query.getDishes((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.get_Dishes, dishesOfRest);
 		}
 
 		case getRefundDetails: {
-			String refundSum = queries.getRefundSum((Order) receivedMessage.getMessageData());
+			String refundSum = Query.getRefundSum((Order) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.getRefundDetails, refundSum);
 		}
 
 		case InsertOrder: {
-			Integer insert = queries.insertOrder((Order) receivedMessage.getMessageData());
+			Integer insert = Query.insertOrder((Order) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.InsertOrder, insert);
 		}
 
 		case InsertDishesOrder: {
-			String insert = queries.insertDishesOrder((ArrayList<Dish>) receivedMessage.getMessageData());
+			String insert = Query.insertDishesOrder((ArrayList<Dish>) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.InsertDishesOrder, insert);
 		}
 
 		case InsertDelivery: {
-			String insert = queries.insertDelivery((Delivery) receivedMessage.getMessageData());
+			String insert = Query.insertDelivery((Delivery) receivedMessage.getMessageData());
 			return  messageFromServer = new Message(MessageType.InsertDelivery, insert);
 		}
 
 		case orderDone: {
-			String checkRef = queries.checkRefund((Order) receivedMessage.getMessageData());
+			String checkRef = Query.checkRefund((Order) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.InsertDelivery, checkRef);
 		}
 
@@ -136,7 +129,7 @@ public class Parsing {
 		 * @param = A desirable dish to add to the menu
 		 */
 		case add_new_dish: {
-			if (UpdateDB.NewDish((Dish) receivedMessage.getMessageData())) {
+			if (Query.NewDish((Dish) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.Dish_add_succ, null);
 			} else {
 				return messageFromServer = new Message(MessageType.dish_add_fail, null);
@@ -287,7 +280,7 @@ public class Parsing {
 		 * @param = ID of the certified employee in the restaurant
 		 */
 		case Show_Dishes: {
-			ArrayList<Dish> dishes = ShowDishes.getDishes((String)receivedMessage.getMessageData());
+			ArrayList<Dish> dishes = Query.ShowDishes((String)receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.Show_Dishes_succ, dishes);
 		}
 
@@ -296,7 +289,7 @@ public class Parsing {
 		 * @param = A desirable dish to update in the menu 
 		 */
 		case updateDish: {
-			if (UpdateDB.UpdateDish((Dish) receivedMessage.getMessageData())) {
+			if (Query.UpdateDish((Dish) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.Dish_update_succ, null);
 			}
 		}
@@ -306,7 +299,7 @@ public class Parsing {
 		 * @param = ID of the certified employee in the restaurant
 		 */
 		case MenuExist: {
-			if (DBCheck.MenuExistingCheck((String) receivedMessage.getMessageData())) {
+			if (Query.MenuExistingCheck((String) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.MenuExistTrue, null);
 			} else {
 				return messageFromServer = new Message(MessageType.MenuExistFalse, null);
@@ -318,7 +311,7 @@ public class Parsing {
 		 * @param = A desirable dish to delete in the menu 
 		 */
 		case deleteDish: {
-			if (UpdateDB.deleteDish((Dish) receivedMessage.getMessageData())) {
+			if (Query.deleteDish((Dish) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.Dish_delete_succ, null);
 			}			
 		}
@@ -337,7 +330,7 @@ public class Parsing {
 		 * @param = Order received
 		 */
 		case Use_Refund: {
-			if (UpdateDB.updateRefundAmmount((Order) receivedMessage.getMessageData())) {
+			if (Query.updateRefundAmmount((Order) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.update_RefundTable, null);
 			}
 		}
@@ -347,7 +340,7 @@ public class Parsing {
 		 * @param = Order received
 		 */
 		case Use_Budget: {
-			if (UpdateDB.updateBudgetValue((Order) receivedMessage.getMessageData())) {
+			if (Query.updateBudgetValue((Order) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.update_Budget_bussClient, null);
 			}
 		}
@@ -357,7 +350,7 @@ public class Parsing {
 		 * @param = Order received
 		 */
 		case Order_not_approved: {
-			if (UpdateDB.updateOrderStatusToNotApproved((Order) receivedMessage.getMessageData())) {
+			if (Query.updateOrderStatusToNotApproved((Order) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_status_to_notApproved_succ, null);
 			}
 		}
@@ -367,7 +360,7 @@ public class Parsing {
 		 * @param = Order received
 		 */
 		case Order_approved: {
-			if (UpdateDB.updateOrderStatusToApproved((Order) receivedMessage.getMessageData())) {
+			if (Query.updateOrderStatusToApproved((Order) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_status_to_Approved_succ, null);
 			}
 		}
@@ -377,7 +370,7 @@ public class Parsing {
 		 * @param = Order received
 		 */
 		case Order_sended: {
-			if (UpdateDB.updateOrderStatusSended((Order) receivedMessage.getMessageData())) {
+			if (Query.updateOrderStatusSended((Order) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_status_to_sended_succ, null);
 			}
 		}
@@ -404,7 +397,7 @@ public class Parsing {
 		 * @param = New employer to add
 		 */
 		case RegistrationOfEmployer: {
-			if (UpdateDB.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
+			if (Query.RegistrationOfEmployer((Employer) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.RegistrationOfEmployer_succ, null);
 			} else {
 				return messageFromServer = new Message(MessageType.RegistrationOfEmployer_failed, null);
@@ -433,7 +426,7 @@ public class Parsing {
 		 * Case to change businessAccount status to - Approved
 		 */
 		case update_status_approved_businessAccount: {
-			if (UpdateDB.BusinessAccountStatusToApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
+			if (Query.BusinessAccountStatusToApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_Approved_succ,
 						null);
 			}
@@ -443,15 +436,14 @@ public class Parsing {
 		 * Case to change businessAccount status to - Not approved
 		 */
 		case update_status_NotApproved_businessAccount: {
-			if (UpdateDB.BusinessAccountStatusToNotApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
+			if (Query.BusinessAccountStatusToNotApproved((BusinessAccountTracking) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.changed_BusinessAccount_status_to_NotApproved_succ,
 						null);
 			}
 
 		}
 		case addto_Revenue_report: {
-			if (UpdateDB.addToRevenueReportsTable((RevenueReport) receivedMessage.getMessageData())) {
-				System.out.println("DB Updated Succsessfuly!");
+			if (Query.addToRevenueReportsTable((RevenueReport) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
 			} else {
 				System.out.println("DB Updated Failed");
@@ -461,7 +453,7 @@ public class Parsing {
 		
 		case get_Revenue_report: {
 			try {
-				ArrayList<RevenueReport> array = (ArrayList<RevenueReport>) UpdateDB
+				ArrayList<RevenueReport> array = (ArrayList<RevenueReport>) Query
 						.getRevenueReport((String) receivedMessage.getMessageData());
 				return messageFromServer = new Message(MessageType.RReportUpdated, array);
 			} catch (Exception e) {
@@ -470,7 +462,7 @@ public class Parsing {
 		}
 		
 		case get_Orders_report: {
-			ArrayList<OrdersReport> array = UpdateDB.getOrdersReport((String) receivedMessage.getMessageData());
+			ArrayList<OrdersReport> array = Query.getOrdersReport((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.OReportUpdated, array);
 		}
 
@@ -482,7 +474,7 @@ public class Parsing {
 		}
 
 		case addto_Order_report: {
-			if (UpdateDB.addToOrdersReportsTable((ArrayList<OrdersReport>) receivedMessage.getMessageData())) {
+			if (Query.addToOrdersReportsTable((ArrayList<OrdersReport>) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
 			} else {
 				return messageFromServer = new Message(MessageType.UpdateFailed, null);
@@ -491,7 +483,7 @@ public class Parsing {
 		}
 		
 		case Disconected: {
-			UpdateDB.UpdateisLoggedIn((String) receivedMessage.getMessageData());
+			Query.UpdateisLoggedIn((String) receivedMessage.getMessageData());
 			LogicController.UpdateClientTable(msg, client);
 			return messageFromServer = new Message(MessageType.Disconected, null);
 		}
@@ -510,11 +502,14 @@ public class Parsing {
 		 */
 		case get_Performance_report:{
 			ArrayList<PerformanceReport> reports = Query.LoadPerformanceReport((String) receivedMessage.getMessageData());
-			for(PerformanceReport check : reports)
-				System.out.println("restName = " + check.getResName());
 			return messageFromServer = new Message(MessageType.get_Performance_report, reports);
 		}
-
+		
+		case get_year_for_report:{
+			ArrayList<String> years = Query.getYear();
+			return messageFromServer = new Message(MessageType.return_years_for_report,years);
+		}
+		
 		default: {
 			return messageFromServer = new Message(MessageType.Error, null);
 		}

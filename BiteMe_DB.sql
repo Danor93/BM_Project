@@ -67,7 +67,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES ('134','P806','Active','5464648'),('3564578','P61','Active','5546546'),('5647789','P793','Active','656554'),('6547898','P706','Active','987787');
+INSERT INTO `client` VALUES ('3115467','P193','Freeze','546547'),('3564578','P61','Active','5546546'),('5647789','P793','Active','656554'),('6547898','P706','Active','987787'),('7894511','P555','Active','545647'),('7894562','P803','Active','567897545');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `delivery` (
 
 LOCK TABLES `delivery` WRITE;
 /*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
-INSERT INTO `delivery` VALUES (27,'Regular','1','haborsh','0502660865','Danor','25.0'),(42,'Shared','3','a','0504773435','as','45.0'),(43,'Shared','3','a','0506774545','a','45.0'),(44,'Regular','1','a','0504553434','a','25.0'),(47,'Regular','1','a','0503706494','a','25.0');
+INSERT INTO `delivery` VALUES (27,'Regular','1','haborsh','0502660865','Danor','25.0'),(28,'Regular','1','haifa','0502660865','danor','25.0'),(29,'Regular','1','habrosh 13','0528969700','noy','25.0'),(30,'Regular','1','haborsh','0502660865','danor','25.0'),(42,'Shared','3','a','0504773435','as','45.0'),(43,'Shared','3','a','0506774545','a','45.0'),(44,'Regular','1','a','0504553434','a','25.0'),(47,'Regular','1','a','0503706494','a','25.0');
 /*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `dishes` (
 
 LOCK TABLES `dishes` WRITE;
 /*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
-INSERT INTO `dishes` VALUES ('Mc Royal','Main dish','200564879','mcdonalds',59.99,'size','s/m','tomato,lectuce,cucmber,','chesse'),('sushi','Main dish','2056478','japanika',69.99,'','','check','');
+INSERT INTO `dishes` VALUES ('coca cola','Drink','200564879','mcdonalds',9.99,'type','Zero/Diet/Regular','coca cola',''),('crispy chicken','Main dish','200564879','mcdonalds',49.99,'Size','M/L','cucumber,lettuce,pickles','no cucumber/no lettuce/no pickles'),('crispy salad','Salad','200564879','mcdonalds',39.99,'Size','S/M/L','Crispy Chicken,Cucamber,Tomato,Onion,','no Onion/extra Crispy Chicken/'),('ice cream','Dessert','200564879','mcdonalds',4.99,'Favor','Chooclate/Vanil','ice cream',''),('Mc Royal','Main dish','200564879','mcdonalds',59.99,'size','s/m','tomato,lectuce,cucmber,','chesse'),('nuggets','Starter','200564879','mcdonalds',29.99,'Size','s/m/l','nuggets','royal sauce/barbecue sauce'),('shnizel','Main dish','200564879','mcdonalds',39.99,'','','potatos,','no tomatos/extra cheese'),('sushi','Main dish','2056478','japanika',69.99,'','','check','');
 /*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `dishesinorder` (
   PRIMARY KEY (`dishId`,`orderNum`,`dishName`),
   KEY `orderNumber` (`orderNum`),
   CONSTRAINT `orderNumber_fk` FOREIGN KEY (`orderNum`) REFERENCES `order` (`orderNumber`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `dishesinorder` (
 
 LOCK TABLES `dishesinorder` WRITE;
 /*!40000 ALTER TABLE `dishesinorder` DISABLE KEYS */;
-INSERT INTO `dishesinorder` VALUES (1,15,'cheese cake','1','Dessert',NULL,NULL,NULL,3),(2,16,'home salad','1','Salad',NULL,NULL,NULL,1),(3,17,'greek salad','1','Salad',NULL,NULL,NULL,1),(8,15,'Shnitzel','2','Main dish',NULL,NULL,NULL,1),(9,19,'greek salad','1','Salad','size','M','',2),(10,20,'greek salad','1','Salad','size','M','',2),(11,21,'greek salad','1','Dessert','size','M','',2),(12,22,'greek salad','1','Main dish','size','M','',2),(13,23,'greek salad','1','Salad','size','M','',2),(14,24,'greek salad','1','Main dish','size','M','',2),(15,25,'greek salad','1','Dessert','size','M','',2),(16,26,'greek salad','1','Main dish','size','M','',2),(18,27,'greek salad','1','Salad','size','S','',1);
+INSERT INTO `dishesinorder` VALUES (1,15,'cheese cake','1','Dessert',NULL,NULL,NULL,3),(2,16,'home salad','1','Salad',NULL,NULL,NULL,1),(3,17,'greek salad','1','Salad',NULL,NULL,NULL,1),(8,15,'Shnitzel','2','Main dish',NULL,NULL,NULL,1),(9,19,'greek salad','1','Salad','size','M','',2),(10,20,'greek salad','1','Salad','size','M','',2),(11,21,'greek salad','1','Dessert','size','M','',2),(12,22,'greek salad','1','Main dish','size','M','',2),(13,23,'greek salad','1','Salad','size','M','',2),(14,24,'greek salad','1','Main dish','size','M','',2),(15,25,'greek salad','1','Dessert','size','M','',2),(16,26,'greek salad','1','Main dish','size','M','',2),(18,27,'greek salad','1','Salad','size','S','',1),(19,28,'crispy chicken','200564879','Main dish','Size','M','no cucumber ',1),(20,28,'coca cola','200564879','Drink','type','Zero','',1),(21,29,'Mc Royal','200564879','Main dish','size','m','',1),(22,29,'coca cola','200564879','Drink','type','Zero','',1),(23,29,'ice cream','200564879','Dessert','Favor','Vanil','',1),(24,30,'crispy chicken','200564879','Main dish','Size','M','',1);
 /*!40000 ALTER TABLE `dishesinorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,7 +218,7 @@ CREATE TABLE `import_users` (
 
 LOCK TABLES `import_users` WRITE;
 /*!40000 ALTER TABLE `import_users` DISABLE KEYS */;
-INSERT INTO `import_users` VALUES ('h','h','Avi','Sofer','1211','h@h.co.il','052121','HR-Intel'),('mc1','mc1','Ahmed','Hamodi','200564879','Ahmed@mcdonalds.com','0502647822','Certified-mcdonalds'),('mc2','mc2','Mosa','Srour','20445879','Mosa@mcdonalds.com','054878664','Approved-mcdonalds'),('jp1','jp1','Lital','Smaja','2056478','lital@japanika.com','050264456','Certified-japanika'),('jp2','jp2','Itizik','Regev','2056699','itizik@japanika.com','052554678','Approved-japanika'),('rs','rs','Rina','Sinai','3111554','rina@refael.com','0502660864',NULL),('viv1','viv1','Ron','Abu','3115645','Ron@vivino.com','052645789','Certified-vivino'),('ref2','ref2','Egal','Sinai','3245678','egal@refaelo.com','0546789','Certified-refaelo'),('m10','m10','Leo','Messi','3564578','messi@gmail.com','05266987',NULL),('ref1','ref1','Moshe','Moalem','45789','moshe@refaelo.com','0564879','Approved-refaelo'),('tal','tal','Tal','Levy','5647789','tal@Elbit.com','05247896',NULL),('lior','lior','Lior','Guzuvisky','5647889','lior@microsoft.com','050478964',NULL),('daniel','daniel','Daniel','Peretz','6547898','daniel@intel.com','050145647',NULL),('viv2','viv2','Adi','Blum','655489','adi@vivino.com','052469112','Approved-vivino'),('e','e','Lior','Shauli','689','c@c.co.il','05469314','CEO'),('matan','matan','Matan','Cohen','7894562','matan@gmail.com','05064712',NULL);
+INSERT INTO `import_users` VALUES ('h','h','Avi','Sofer','1211','avi@intel.com','052645879','HR-Intel'),('mc1','mc1','Ahmed','Hamodi','200564879','Ahmed@mcdonalds.com','050264782','Certified-mcdonalds'),('mc2','mc2','Mosa','Srour','20445879','Mosa@mcdonalds.com','054878664','Approved-mcdonalds'),('jp1','jp1','Lital','Smaja','2056478','lital@japanika.com','050264456','Certified-japanika'),('jp2','jp2','Itizik','Regev','2056699','itizik@japanika.com','052554678','Approved-japanika'),('rs','rs','Rina','Sinai','3111554','rina@refael.com','050266086',NULL),('b','b','Talia','Blum','3115467','talia@gmail.com','052648974',NULL),('viv1','viv1','Ron','Abu','3115645','Ron@vivino.com','052645789','Certified-vivino'),('a','a','Adi','Sasson','3122478','adi@gmail.com','052648765',NULL),('ns','ns','Noy','Sinai','32124564','noy@gmail.com','0528969700',NULL),('ref2','ref2','Egal','Sinai','3245678','egal@refaelo.com','054678923','Certified-refaelo'),('m10','m10','Leo','Messi','3564578','messi@gmail.com','052669879',NULL),('ref1','ref1','Moshe','Moalem','45789','moshe@refaelo.com','056487923','Approved-refaelo'),('tal','tal','Tal','Levy','5647789','tal@Elbit.com','052478968',NULL),('lior','lior','Lior','Refalov','5647889','lior@microsoft.com','050478964',NULL),('daniel','daniel','Daniel','Peretz','6547898','daniel@intel.com','050145647',NULL),('viv2','viv2','Adi','Blum','655489','adi@vivino.com','052469112','Approved-vivino'),('e','e','Lior','Shauli','689','lior@biteme.com','054693141','CEO'),('matan','matan','Matan','Cohen','7894562','matan@gmail.com','050647123',NULL);
 /*!40000 ALTER TABLE `import_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `order` (
   `punctuality` int DEFAULT NULL,
   `timeSended` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Sended','134','0',0,'no','19:47:06.739913',NULL,'19:47:43.040882900'),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Sended','134','0',0,'no','19:47:11.259438100',NULL,'19:47:46.249478500'),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Sended','134','0',0,'no','19:47:13.353014100',NULL,'19:47:49.354182900'),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','Waiting','134','0',0,'no',NULL,NULL,NULL),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:15.683945500',NULL,'19:47:56.641788'),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:17.549499100',NULL,'19:47:36.327314500'),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(27,'Regular','vivino','1','3.5','17:00','2022-01-02','Waiting','134','0',0,'yes',NULL,0,NULL);
+INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Sended','134','0',0,'no','19:47:06.739913',NULL,'19:47:43.040882900'),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Sended','134','0',0,'no','19:47:11.259438100',NULL,'19:47:46.249478500'),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Sended','134','0',0,'no','19:47:13.353014100',NULL,'19:47:49.354182900'),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','Waiting','134','0',0,'no',NULL,NULL,NULL),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:15.683945500',NULL,'19:47:56.641788'),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:17.549499100',NULL,'19:47:36.327314500'),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(27,'Regular','vivino','1','3.5','17:00','2022-01-02','Waiting','134','0',0,'yes',NULL,0,NULL),(28,'Regular','mcdonalds','200564879','76.482','12:00','2022-01-10','Waiting','3564578','0',0,'yes',NULL,0,NULL),(29,'Regular','mcdonalds','200564879','99.97','10:00','2022-01-03','Waiting','32124564','0',0,'no',NULL,0,NULL),(30,'Regular','mcdonalds','200564879','67.491005','15:00','2022-01-07','Waiting','3564578','0',0,'yes',NULL,0,NULL);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +312,7 @@ CREATE TABLE `performance_reports` (
 
 LOCK TABLES `performance_reports` WRITE;
 /*!40000 ALTER TABLE `performance_reports` DISABLE KEYS */;
-INSERT INTO `performance_reports` VALUES ('vivino','2021','12','north',3,2,1);
+INSERT INTO `performance_reports` VALUES ('mcdonalds','2022','1','north',5,5,0),('vivino','2021','12','north',3,2,1);
 /*!40000 ALTER TABLE `performance_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +338,7 @@ CREATE TABLE `refund` (
 
 LOCK TABLES `refund` WRITE;
 /*!40000 ALTER TABLE `refund` DISABLE KEYS */;
-INSERT INTO `refund` VALUES ('123','200','200564879'),('134','200','3115645');
+INSERT INTO `refund` VALUES ('3122478','200','200564879');
 /*!40000 ALTER TABLE `refund` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -458,7 +458,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('adi','a1','Customer','Tali','Or','111','Tali@gmail.com','050344',0,'north'),('h','h','HR-Intel','Avi','Sofer','1211','avi@intel.coml','052121',0,'north'),('a','a','Customer','Adi','Sasson','123','adi@gmail.com','0526487',0,'north'),('ceo3','ceo3','CEO','Zlatan','Ibrahimović','1278946','zlatan@biteme.com','05256431',0,'south'),('b','b','Customer','Talia','Blum','134','talia@gmail.com','05264897',0,'center'),('mc1','mc1','Supplier-Certified-mcdonalds','Ahmed','Hamodi','200564879','Ahmed@mcdonalds.com','0502647822',0,'North'),('mc2','mc2','Supplier-Approved-mcdonalds','Mosa','Srour','20445879','Mosa@mcdonalds.com','054878664',0,'North'),('jp1','jp1','Supplier-Certified-japanika','Lital','Smaja','2056478','lital@japanika.com','050264456',0,'North'),('jp2','jp2','Supplier-Approved-japanika','Itizik','Regev','2056699','itizik@japanika.com','052554678',0,'North'),('f','f','BranchManager','Danor','Sinai','31115566','danor@gmail.com','050264789',0,'center'),('viv1','viv1','Supplier-Certified-vivino','Ron','Abu','3115645','Ron@vivino.com','052645789',0,'North'),('ref2','ref2','Supplier-Certified-refaelo','Egal','Sinai','3245678','egal@refaelo.com','0546789',0,'North'),('m10','m10','Customer','Leo','Messi','3564578','messi@gmail.com','05266987',0,'North'),('c','c','BranchManager','Sahar','Oz','456','sahar@biteme.com','054678',0,'north'),('s','s','BranchManager','Tiran','Hesawi','456789','tiran@gmail.com','05678978',0,'south'),('ref1','ref1','Supplier-Approved-refaelo','Moshe','Moalem','45789','moshe@refaelo.com','0564879',0,'North'),('h2','h2','HR-Microsoft','Dudu','Aharon','5612378','dudu@microsoft.com','0556789',0,'north'),('tal','tal','Customer','Tal','Levy','5647789','tal@Elbit.com','05247896',0,'North'),('daniel','daniel','Customer','Daniel','Peretz','6547898','daniel@intel.com','050145647',0,'North'),('viv2','viv2','Supplier-Approved-vivino','Adi','Blum','655489','adi@vivino.com','052469112',0,'North'),('e','e','CEO','Lior','Shauli','689','lior@biteme.coml','054789',0,'north'),('ny','ny','Customer','Noy','Sinai','7894511','noy@gmail.com','0526989',0,'north'),('ceo2','ceo2','CEO','Ruslana','Rodina','856479','ruslana@bitme.com','05089371',0,'center'),('h1','h1','HR-Elbit','Gal','Levy','98754612','gal@elbit.com','05246237',0,'north');
+INSERT INTO `users` VALUES ('adi','a1','Customer','Tali','Or','111','Tali@gmail.com','050344',0,'north'),('h','h','HR-Intel','Avi','Sofer','1211','avi@intel.coml','052121',0,'north'),('ceo3','ceo3','CEO','Zlatan','Ibrahimović','1278946','zlatan@biteme.com','05256431',0,'south'),('mc1','mc1','Supplier-Certified-mcdonalds','Ahmed','Hamodi','200564879','Ahmed@mcdonalds.com','0502647822',0,'North'),('mc2','mc2','Supplier-Approved-mcdonalds','Mosa','Srour','20445879','Mosa@mcdonalds.com','054878664',0,'North'),('jp1','jp1','Supplier-Certified-japanika','Lital','Smaja','2056478','lital@japanika.com','050264456',0,'North'),('jp2','jp2','Supplier-Approved-japanika','Itizik','Regev','2056699','itizik@japanika.com','052554678',0,'North'),('f','f','BranchManager','Danor','Sinai','31115566','danor@gmail.com','050264789',0,'center'),('b','b','Customer','Talia','Blum','3115467','talia@gmail.com','05264897',0,'Center'),('viv1','viv1','Supplier-Certified-vivino','Ron','Abu','3115645','Ron@vivino.com','052645789',0,'North'),('a','a','Customer','Adi','Sasson','3122478','adi@gmail.com','0526487',0,'north'),('ns','ns','Customer','Noy','Sinai','32124564','noy@gmail.com','0528969700',0,'north'),('ref2','ref2','Supplier-Certified-refaelo','Egal','Sinai','3245678','egal@refaelo.com','0546789',0,'North'),('m10','m10','Customer','Leo','Messi','3564578','messi@gmail.com','05266987',0,'North'),('c','c','BranchManager','Sahar','Oz','456','sahar@biteme.com','054678',0,'north'),('s','s','BranchManager','Tiran','Hesawi','456789','tiran@gmail.com','05678978',0,'south'),('ref1','ref1','Supplier-Approved-refaelo','Moshe','Moalem','45789','moshe@refaelo.com','0564879',0,'North'),('h2','h2','HR-Microsoft','Dudu','Aharon','5612378','dudu@microsoft.com','0556789',0,'north'),('tal','tal','Customer','Tal','Levy','5647789','tal@Elbit.com','05247896',0,'North'),('daniel','daniel','Customer','Daniel','Peretz','6547898','daniel@intel.com','050145647',0,'North'),('viv2','viv2','Supplier-Approved-vivino','Adi','Blum','655489','adi@vivino.com','052469112',0,'North'),('e','e','CEO','Lior','Shauli','689','lior@biteme.coml','054789',0,'north'),('ns','ns','Customer','Noy','Sinai','7894511','noy@gmail.com','0526989',0,'north'),('matan','matan','Customer','Matan','Cohen','7894562','matan@gmail.com','050647123',0,'North'),('ceo2','ceo2','CEO','Ruslana','Rodina','856479','ruslana@bitme.com','05089371',0,'center'),('h1','h1','HR-Elbit','Gal','Levy','98754612','gal@elbit.com','05246237',0,'north');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -471,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-02 21:49:00
+-- Dump completed on 2022-01-03 16:45:08

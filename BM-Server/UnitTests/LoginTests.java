@@ -13,9 +13,8 @@ import Entities.User;
 import Entities.homeBranches;
 import Interfaces.ILoginInterface;
 import Parsing.Parsing;
-import querys.DBCheck;
 import querys.DBConnect;
-import querys.UpdateDB;
+import querys.Query;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,23 +39,21 @@ public class LoginTests  {
 	 * this is to update the users login status to 0 after the tests.
 	 */
 	@AfterAll
-	/*void tearDown() throws Exception {
-		UpdateDB.UpdateisLoggedIn("viv1");
-		UpdateDB.UpdateisLoggedIn("h");
-		UpdateDB.UpdateisLoggedIn("b");
-		UpdateDB.UpdateisLoggedIn("c");
-		UpdateDB.UpdateisLoggedIn("e");
-		UpdateDB.UpdateisLoggedIn("adi");
-		UpdateDB.UpdateisLoggedIn("f");
-	}*/
+	void tearDown() throws Exception {
+		Query.UpdateisLoggedIn("viv1");
+		Query.UpdateisLoggedIn("h");
+		Query.UpdateisLoggedIn("b");
+		Query.UpdateisLoggedIn("c");
+		Query.UpdateisLoggedIn("e");
+		Query.UpdateisLoggedIn("adi");
+		Query.UpdateisLoggedIn("f");
+	}
 	
 	/************************* TEST Customer Login **************************/
 
 	@Test
 	void IsCustomerLoginTest() {
 		loginResult="Already";
-		
-		
 	}
 	
 	@Test
@@ -69,7 +66,7 @@ public class LoginTests  {
 		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
 		
-		String [] DivedMsg = DBCheck.DBCheck("b","b").split("@");
+		String [] DivedMsg = Query.Login("b","b").split("@");
 		
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
@@ -87,7 +84,7 @@ public class LoginTests  {
 	void testCustomerInCorrectLogin() {
 		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("adi","a1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("adi","a1")).split("-");
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -103,7 +100,7 @@ public class LoginTests  {
 	void testCustomerNullLogin() {
 		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -118,11 +115,11 @@ public class LoginTests  {
 	 * */
 	void testCustomerAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) DBCheck.DBCheck("ny","ny")).split("-");
+		String [] FirstLogin = ((String) Query.Login("ny","ny")).split("-");
 		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
-		String [] SecondLogin = ((String) DBCheck.DBCheck("ny","ny")).split("-");
+		String [] SecondLogin = ((String) Query.Login("ny","ny")).split("-");
 		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
@@ -141,7 +138,7 @@ public class LoginTests  {
 	void testBMCorrectLogin() {
 		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("c","c")).split("-");
+		String [] DivedMsg = ((String) Query.Login("c","c")).split("-");
 		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -157,7 +154,7 @@ public class LoginTests  {
 	void testBMInCorrectLogin() {
 		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("f","f")).split("-");
+		String [] DivedMsg = ((String) Query.Login("f","f")).split("-");
 		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -173,7 +170,7 @@ public class LoginTests  {
 	void testBMNullLogin() {
 		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
 		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -188,11 +185,11 @@ public class LoginTests  {
 	 * */
 	void testBMAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) DBCheck.DBCheck("s","s")).split("-");
+		String [] FirstLogin = ((String) Query.Login("s","s")).split("-");
 		User BM = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
-		String [] SecondLogin = ((String) DBCheck.DBCheck("s","s")).split("-");
+		String [] SecondLogin = ((String) Query.Login("s","s")).split("-");
 		User resBM = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
@@ -211,7 +208,7 @@ public class LoginTests  {
 	void testSupplierCorrectLogin() {
 		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("viv1","viv1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("viv1","viv1")).split("-");
 		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -227,7 +224,7 @@ public class LoginTests  {
 	void testSupplierInCorrectLogin() {
 		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("viv2","viv2")).split("-");
+		String [] DivedMsg = ((String) Query.Login("viv2","viv2")).split("-");
 		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -243,7 +240,7 @@ public class LoginTests  {
 	void testSupplierNullLogin() {
 		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
 		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -258,11 +255,11 @@ public class LoginTests  {
 	 * */
 	void testSupplierAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) DBCheck.DBCheck("ref1","ref1")).split("-");
+		String [] FirstLogin = ((String) Query.Login("ref1","ref1")).split("-");
 		User Supplier = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
-		String [] SecondLogin = ((String) DBCheck.DBCheck("ref1","ref1")).split("-");
+		String [] SecondLogin = ((String) Query.Login("ref1","ref1")).split("-");
 		User resSupplier = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
@@ -281,7 +278,7 @@ public class LoginTests  {
 	void testHRCorrectLogin() {
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("h","h")).split("-");
+		String [] DivedMsg = ((String) Query.Login("h","h")).split("-");
 		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -297,7 +294,7 @@ public class LoginTests  {
 	void testHRInCorrectLogin() {
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("h1","h1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("h1","h1")).split("-");
 		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -313,7 +310,7 @@ public class LoginTests  {
 	void testHRNullLogin() {
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
 		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -328,11 +325,11 @@ public class LoginTests  {
 	 * */
 	void testHRAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) DBCheck.DBCheck("h2","h2")).split("-");
+		String [] FirstLogin = ((String)Query.Login("h2","h2")).split("-");
 		User HR = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
-		String [] SecondLogin = ((String) DBCheck.DBCheck("h2","h2")).split("-");
+		String [] SecondLogin = ((String)Query.Login("h2","h2")).split("-");
 		User resHR = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
@@ -350,7 +347,7 @@ public class LoginTests  {
 	void testCEOCorrectLogin() {
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("e","e")).split("-");
+		String [] DivedMsg = ((String) Query.Login("e","e")).split("-");
 		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -366,7 +363,7 @@ public class LoginTests  {
 	void testCEOInCorrectLogin() {
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck("ceo2","ceo2")).split("-");
+		String [] DivedMsg = ((String) Query.Login("ceo2","ceo2")).split("-");
 		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -382,7 +379,7 @@ public class LoginTests  {
 	void testCEONullLogin() {
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String) DBCheck.DBCheck(null,null)).split("-");
+		String [] DivedMsg = ((String)Query.Login(null,null)).split("-");
 		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
@@ -397,11 +394,11 @@ public class LoginTests  {
 	 * */
 	void testCEOAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) DBCheck.DBCheck("ceo3","ceo3")).split("-");
+		String [] FirstLogin = ((String) Query.Login("ceo3","ceo3")).split("-");
 		User CEO = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
 				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
 		
-		String [] SecondLogin = ((String) DBCheck.DBCheck("ceo3","ceo3")).split("-");
+		String [] SecondLogin = ((String) Query.Login("ceo3","ceo3")).split("-");
 		User resCEO = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
 				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
 		
