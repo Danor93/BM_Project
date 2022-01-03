@@ -1802,13 +1802,13 @@ public class Query {
 					while (rs3.next()) {
 					PerformanceReport report = new PerformanceReport(month, year, branch, name, rs3.getInt(5),
 							rs3.getInt(6), rs3.getInt(7));
-					int total_orders, areLate;
+					int total_orders, onTime;
 					total_orders = rs3.getInt(5);
-					areLate = rs3.getInt(7);
+					onTime = rs3.getInt(6);
 					Double avgCookingTime = (double)avgDiff / (double)total_orders;
-					Double lateRate = (double)areLate / (double)total_orders;
+					Double onTimeRate = (double)onTime / (double)total_orders;
 					report.setAvarageCookingTime(avgCookingTime.shortValue());
-					report.setLateRate(lateRate);
+					report.setOnTimeRate(onTimeRate);
 					reports.add(report);
 					}
 					rs3.close();

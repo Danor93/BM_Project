@@ -25,6 +25,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
+/**
+ * 
+ * @author Aviel & Sahar
+ * This class is to view receipt from the database
+ *
+ */
 public class ViewReceiptController extends Controller implements Initializable{
 	public static ArrayList<Receipt> receipts = new ArrayList<Receipt>();
 	
@@ -112,6 +118,9 @@ public class ViewReceiptController extends Controller implements Initializable{
 		table.setItems(list);
 	}
 
+	/**
+	 * This method is from the super class, we override it by use.
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());

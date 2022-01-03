@@ -1,3 +1,4 @@
-/Interfaces/
 /querys/
-/Parsing/
+/UserDBControllerTest.class
+/UserDBControllerTest$DBManagerStub.class
+/LoginTests$testDBConnect.class
