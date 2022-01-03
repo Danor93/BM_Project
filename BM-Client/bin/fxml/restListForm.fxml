@@ -35,7 +35,7 @@
             <TableColumn fx:id="colOpen" prefWidth="160.66668701171875" text="Opening time" />
          </columns>
       </TableView>
-      <Text fx:id="cityName" layoutX="315.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="78.0">
+      <Text fx:id="cityName" layoutX="309.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="340.39990234375">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

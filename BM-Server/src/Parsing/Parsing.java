@@ -65,7 +65,7 @@ public class Parsing {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
 			result = DBCheck.DBCheck(DivededUandP[0], DivededUandP[1]);
-			if (!result.equals("Already") && !result.equals("WrongInput")) {
+			if (!result.equals("Already") && !result.equals("WrongInput") && !result.equals("Freeze")) {
 				LogicController.UpdateClientTable(msg, client);
 			}
 			return messageFromServer = new Message(MessageType.loginSystem, result);

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -17,7 +18,7 @@
          <image>
             <Image url="@../images/backk.jpg" />
          </image></ImageView>
-      <Text layoutX="621.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="634.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -69,5 +70,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Separator layoutX="106.0" layoutY="24.0" prefHeight="3.0" prefWidth="583.0" />
    </children>
 </Pane>

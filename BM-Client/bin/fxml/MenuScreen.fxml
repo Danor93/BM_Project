@@ -21,7 +21,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Text layoutX="607.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
+      <Text layoutX="632.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BiteMe">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -123,7 +123,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="restName" layoutX="238.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="346.66665267944336">
+      <Text fx:id="restName" layoutX="238.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="388.26662826538086">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

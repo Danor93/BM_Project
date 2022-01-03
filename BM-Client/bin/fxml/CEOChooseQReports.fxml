@@ -4,11 +4,11 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -106,6 +106,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <Line endX="464.20001220703125" endY="3.0" layoutX="194.0" layoutY="31.0" startX="-94.00001525878906" startY="3.0" />
+      <Separator layoutX="94.0" layoutY="33.0" prefHeight="0.0" prefWidth="564.0" />
    </children>
 </Pane>

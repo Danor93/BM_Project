@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -85,6 +85,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Line endX="346.2000732421875" endY="0.3999977111816406" layoutX="489.0" layoutY="23.0" startX="-380.0" startY="0.3999977111816406" />
+      <Separator layoutX="106.0" layoutY="22.0" prefHeight="0.0" prefWidth="725.0" />
    </children>
 </AnchorPane>

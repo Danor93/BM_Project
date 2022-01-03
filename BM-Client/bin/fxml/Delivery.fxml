@@ -72,22 +72,22 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="minus" disable="true" layoutX="260.0" layoutY="422.0" mnemonicParsing="false" onAction="#personDec" style="-fx-background-color: red;" text="-" textFill="WHITE" visible="false">
+      <Button fx:id="minus" disable="true" layoutX="301.0" layoutY="422.0" mnemonicParsing="false" onAction="#personDec" style="-fx-background-color: red;" text="-" textFill="WHITE" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="plus" disable="true" layoutX="344.0" layoutY="422.0" mnemonicParsing="false" onAction="#personInc" style="-fx-background-color: green;" text="+" textFill="WHITE" visible="false" />
-      <Text fx:id="numberPersons" disable="true" layoutX="125.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of participants :" visible="false" wrappingWidth="149.17447916666669">
+      <Button fx:id="plus" disable="true" layoutX="367.0" layoutY="422.0" mnemonicParsing="false" onAction="#personInc" style="-fx-background-color: green;" text="+" textFill="WHITE" visible="false" />
+      <Text fx:id="numberPersons" disable="true" layoutX="113.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of participants :" wrappingWidth="149.17447916666669">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Label fx:id="numOfPeople" alignment="CENTER" disable="true" layoutX="275.0" layoutY="426.0" prefHeight="17.0" prefWidth="69.0" text="2" textAlignment="CENTER" visible="false">
+      <Label fx:id="numOfPeople" alignment="CENTER" disable="true" layoutX="395.0" layoutY="426.0" prefHeight="17.0" prefWidth="69.0" text="2" textAlignment="CENTER" visible="false">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="notify" alignment="CENTER" layoutX="159.0" layoutY="443.0" prefHeight="17.0" prefWidth="465.0" textFill="RED">
+      <Label fx:id="notify" alignment="CENTER" layoutX="114.0" layoutY="456.0" prefHeight="17.0" prefWidth="564.0" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -159,7 +159,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="next" layoutX="488.0" layoutY="484.0" mnemonicParsing="false" onAction="#proceed" prefHeight="33.0" prefWidth="180.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Proceed to Payment">
+      <Button fx:id="next" layoutX="495.0" layoutY="485.0" mnemonicParsing="false" onAction="#proceed" prefHeight="33.0" prefWidth="180.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Proceed to Payment">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
