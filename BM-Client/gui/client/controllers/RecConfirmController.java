@@ -91,7 +91,8 @@ public class RecConfirmController extends Controller implements Initializable {
     /**This method meant to change the order's status in the DB and to remove the confirmed order from the table
      * @param event        pressing the "confirm" button
      */
-    @FXML
+    @SuppressWarnings("unused")
+	@FXML
     void confirmOrder(ActionEvent event) {
     	Order order=table.getSelectionModel().getSelectedItem();
     	int index=CustomerScreenController.orderConfirm.indexOf(order);

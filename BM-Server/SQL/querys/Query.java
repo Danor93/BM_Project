@@ -96,6 +96,7 @@ public class Query {
 	 * @param conn - the connection to db
 	 * @param in   - the script file
 	 */
+	@SuppressWarnings("resource")
 	public static void readtScript(Connection conn, InputStream in) throws SQLException {
 		Scanner s = new Scanner(in);
 		s.useDelimiter("(;(\r)?\n)|(--\n)");
@@ -1740,6 +1741,7 @@ public class Query {
 		return null;
 	}
 
+	@SuppressWarnings("unused")
 	public static ArrayList<PerformanceReport> LoadPerformanceReport(String messageData) {
 		ArrayList<PerformanceReport> reports = new ArrayList<>();
 		System.out.println("test");
@@ -2275,6 +2277,7 @@ public class Query {
 	 * @param order
 	 * @return true / false
 	 */
+	@SuppressWarnings("static-access")
 	public static boolean updateBudgetValue(Order order) {
 		Float newBudget;
 		String budget = null;

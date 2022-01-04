@@ -35,6 +35,7 @@ public class LoginScreenController extends Controller {
 	 * this is a contractor for the test case.
 	 * @param user - user from the test case;
 	 */
+	@SuppressWarnings("static-access")
 	public LoginScreenController(ILoginInterface iLogin) {
 		this.iLogin=iLogin;
 	}

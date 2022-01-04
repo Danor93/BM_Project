@@ -130,6 +130,7 @@ public class AddDishToMenuController extends Controller implements Initializable
 	 * @param event
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unused")
 	@FXML
 	void ConfirmNewDish(ActionEvent event) throws IOException {
 		boolean typeDishIsValid = true;
