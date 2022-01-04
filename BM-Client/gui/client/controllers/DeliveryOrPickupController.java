@@ -8,14 +8,9 @@ import java.time.format.DateTimeParseException;
 import Entities.BussinessAccount;
 import Entities.Message;
 import Entities.MessageType;
-import Entities.OrderType;
 import Entities.SingletonOrder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -24,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.ClientUI;
 
 public class DeliveryOrPickupController extends Controller {

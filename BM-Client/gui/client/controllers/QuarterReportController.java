@@ -3,7 +3,6 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.ResourceBundle;
 

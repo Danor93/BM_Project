@@ -67,6 +67,7 @@ public class PopUpMessage {
 	 * user write
 	 * @param msg   - string that user put and will shows in the alert box
 	 */
+	@SuppressWarnings("unused")
 	public static void successMessage(String msg) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");

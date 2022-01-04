@@ -7,32 +7,21 @@ import java.util.ResourceBundle;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import Entities.BussinessAccount;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.homeBranches;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import main.ClientUI;
 import main.PopUpMessage;
-import Entities.BussinessAccount;
-import javafx.scene.text.Text;
 
 /**
  * @author Danor this class implements the functionality of the Branch Manager

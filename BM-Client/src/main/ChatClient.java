@@ -4,31 +4,16 @@
 
 package main;
 
-import client.*;
-import client.controllers.BranchManagerScreenController;
-import client.controllers.ChooseRestController;
-import client.controllers.CustomerScreenController;
-import client.controllers.LoginScreenController;
-import client.controllers.BranchManagerOpenNewAccountController;
-import client.controllers.BranchManagerOpenNewBussinessAccountController;
-import client.controllers.BranchManagerOpenNewPrivateAccountController;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import Entities.Dish;
 import Entities.Message;
-import Entities.MessageType;
 import Entities.Order;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import Parsing.Parsing;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
-import java.io.*;
-import java.util.ArrayList;
-import Entities.User;
-import Entities.homeBranches;
-import Parsing.Parsing;
-import javax.security.auth.login.LoginContext;
+import ocsf.client.AbstractClient;
 
 public class ChatClient extends AbstractClient {
 	public static ChatClient chatClient;

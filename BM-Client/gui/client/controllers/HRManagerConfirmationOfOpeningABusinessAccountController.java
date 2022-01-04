@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.BusinessAccountTracking;
-import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
-import Entities.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +15,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import main.ClientUI;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import main.PopUpMessage;
+import main.ClientUI;
 
 /**
  * @author Aviel * This class is intended for approving / refusing new business

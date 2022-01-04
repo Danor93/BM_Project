@@ -1,32 +1,20 @@
 package client.controllers;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import Entities.Message;
 import Entities.MessageType;
 import Entities.User;
 import Interfaces.ILoginInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import main.ChatClient;
-import main.ClientController;
-import main.ClientUI;
-import main.PopUpMessage;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import main.ClientUI;
 
 /**
  * @author Adi & Talia this class handles for login into the system with all the

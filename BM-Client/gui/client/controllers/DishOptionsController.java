@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Entities.Dish;
-import Entities.DishType;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.SingletonOrder;
@@ -14,20 +13,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.ClientUI;
 
 /**
@@ -135,7 +128,6 @@ public class DishOptionsController extends Controller implements Initializable{
     		{
     			Dish temp=ChoosingDishesController.chosenDish;
     			addDishToMyOrder(op.toString(),event);
-    			
     		}
     			
     	}
@@ -154,7 +146,6 @@ public class DishOptionsController extends Controller implements Initializable{
      */
     private void addDishToMyOrder(String op,ActionEvent event) throws IOException
     {
-    	
     	Dish temp=ChoosingDishesController.chosenDish;
     	Dish dish;
     	StringBuilder b;
@@ -166,7 +157,6 @@ public class DishOptionsController extends Controller implements Initializable{
 				b.append(s+" ");	
 			}
 			dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),b.toString(),temp.getPrice(),temp.getDishType());
-
 		}
 		
 		else 

@@ -87,6 +87,7 @@ public class histogramController extends Controller implements Initializable {
 	/**This method meant to initialize the histogram chart/s with the details from the DB
 	 *
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

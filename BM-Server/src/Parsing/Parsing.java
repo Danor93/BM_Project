@@ -1,33 +1,26 @@
 package Parsing;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.IllegalFormatPrecisionException;
+import java.util.HashMap;
 import java.util.Map;
+
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
 import Entities.Delivery;
 import Entities.Dish;
-import Entities.DishType;
 import Entities.Employer;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
 import Entities.Order;
-import Entities.Receipt;
 import Entities.OrdersReport;
 import Entities.PerformanceReport;
+import Entities.Receipt;
 import Entities.Restaurant;
 import Entities.RevenueReport;
-import Entities.SingletonOrder;
 import Entities.Supplier;
 import Entities.User;
 import controllers.LogicController;
@@ -43,6 +36,7 @@ public class Parsing {
 	 * @param client - client information
 	 * @return - a message for the server
 	 */
+	@SuppressWarnings({ "unused", "unchecked" })
 	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message messageFromServer;
 		Message receivedMessage = (Message) msg;
@@ -473,7 +467,6 @@ public class Parsing {
 			if (Query.addToRevenueReportsTable((RevenueReport) receivedMessage.getMessageData())) {
 				return messageFromServer = new Message(MessageType.UpdateSuccsesfuly, null);
 			} else {
-				System.out.println("DB Updated Failed");
 				return messageFromServer = new Message(MessageType.UpdateFailed, null);
 			}
 		}

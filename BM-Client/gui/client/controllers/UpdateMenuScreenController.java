@@ -6,15 +6,14 @@ import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
-import Parsing.Parsing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import main.ClientUI;
 import javafx.scene.text.Text;
+import main.ClientUI;
 
 /**
  * @author Aviel This class is for select - Update/Delete existing dish, or add

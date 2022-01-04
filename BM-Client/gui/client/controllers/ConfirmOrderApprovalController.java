@@ -3,24 +3,18 @@ package client.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.logging.ErrorManager;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.scene.control.Label;
-import Entities.DishType;
+
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
 import Entities.OrderType;
-import Entities.Receipt;
 import Entities.OrdersReport;
+import Entities.Receipt;
 import Entities.RevenueReport;
 import Entities.homeBranches;
 import javafx.collections.FXCollections;
@@ -29,10 +23,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import main.ClientUI;
 import main.PopUpMessage;
 
@@ -135,8 +133,7 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 	}
 
 	/**
-	 * A method of confirming an order waiting for approval.
-	 * 
+	 * A method of confirming an order waiting for approval and calculate the data into the reports.
 	 * @param event = ActionEvent
 	 */
 	@FXML
@@ -174,6 +171,25 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 				String str = "The order was successfully confirmed.\n Dear customer, your order number: "
 						+ orderToChange.getOrderNum() + "  was successfully received at the restaurant.";
 				PopUpMessage.simulationMessage(str);
+				String[] dic = orderToChange.getDateOfOrder().split("-");
+			String Quarterly;
+			Quarterly = checkQuarterly(dic[1]);
+			branch = homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
+			// LoginScreenController.user.PrintUser();
+			RevenueReport revenuereport = new RevenueReport(orderToChange.getRestName(), branch, dic[1], dic[0],
+					Quarterly, 1, orderToChange.getTotalPrice());
+			ClientUI.chat.accept(new Message(MessageType.addto_Revenue_report, revenuereport));
+			Integer id = orderToChange.getOrderNum();
+			ArrayList<OrdersReport> ordersreports = new ArrayList<>();
+			ClientUI.chat.accept(new Message(MessageType.get_Dish_type, id));
+			for (String s : dishTypesQuentities.keySet()) {
+				String dishType = s;
+				int quentity = dishTypesQuentities.get(s);
+				OrdersReport orderreport = new OrdersReport(dic[1], dic[0], branch, orderToChange.getRestName(),
+						dishType, quentity);
+				ordersreports.add(orderreport);
+			}
+			ClientUI.chat.accept(new Message(MessageType.addto_Order_report, ordersreports));
 				orderToChange = null;
 				table.refresh();
 				list = FXCollections.observableArrayList(allOrders);
@@ -184,23 +200,23 @@ public class ConfirmOrderApprovalController extends Controller implements Initia
 
 	String checkQuarterly(String month) {
 		switch (month) {
-		case "1":
+		case "01":
 			return "1";
-		case "2":
+		case "02":
 			return "1";
-		case "3":
+		case "03":
 			return "1";
-		case "4":
+		case "04":
 			return "2";
-		case "5":
+		case "05":
 			return "2";
-		case "6":
+		case "06":
 			return "2";
-		case "7":
+		case "07":
 			return "3";
-		case "8":
+		case "08":
 			return "3";
-		case "9":
+		case "09":
 			return "3";
 		case "10":
 			return "4";

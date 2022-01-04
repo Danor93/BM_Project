@@ -44,14 +44,12 @@ import client.controllers.SupplierScreenController;
 import client.controllers.ViewReceiptController;
 import client.controllers.QuarterReportController;
 
-
 public class Parsing {
 	@SuppressWarnings("unchecked")
 	public static void Message(Object msg) throws Exception {
 		Message receivedMessage = (Message) msg;
 
 		switch (receivedMessage.getMessageType()) {
-
 
 		case loginSystem: {
 			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
@@ -73,54 +71,40 @@ public class Parsing {
 				LoginScreenController.statusUser = "User name or password are inccorect";
 				LoginScreenController.user = null;
 			}
-			IdentifyW4cController.client=null;
+			IdentifyW4cController.client = null;
 			break;
 		}
 
-		
 		case ShowHistogram: {
-			if(QuarterReportController.report1==null)    
-			{
-				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
-				{
-					QuarterReportController.report1=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+			if (QuarterReportController.report1 == null) {
+				if (!((Map<String, ArrayList<Float>>) receivedMessage.getMessageData()).isEmpty()) {
+					QuarterReportController.report1 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
 				}
-			}
-			else
-			{
-				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
-				{
-					QuarterReportController.report2=(Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
-				}
-				else
-				{
-					QuarterReportController.report2=null;
+			} else {
+				if (!((Map<String, ArrayList<Float>>) receivedMessage.getMessageData()).isEmpty()) {
+					QuarterReportController.report2 = (Map<String, ArrayList<Float>>) receivedMessage.getMessageData();
+				} else {
+					QuarterReportController.report2 = null;
 				}
 			}
 			break;
 		}
-		
-		case Join:
-		{
-			if(receivedMessage.getMessageData()!=null)
-			{
-				DeliveryOrPickupController.isJoin=true;
-				String []div=((String)receivedMessage.getMessageData()).split("@");
+
+		case Join: {
+			if (receivedMessage.getMessageData() != null) {
+				DeliveryOrPickupController.isJoin = true;
+				String[] div = ((String) receivedMessage.getMessageData()).split("@");
 				ShowOrderController.finalOrder.setTimeOfOrder(div[0]);
 				ShowOrderController.finalOrder.setDateOfOrder(div[1]);
 				ShowOrderController.finalOrder.setEarlyOrder(div[2]);
-				
-				
 			}
 			break;
 		}
-		
-		case priceShare:
-		{
-			OrderConfimController.part=(Integer)receivedMessage.getMessageData();
+
+		case priceShare: {
+			OrderConfimController.part = (Integer) receivedMessage.getMessageData();
 			break;
 		}
-		
 
 		case getYears: {
 			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
@@ -170,8 +154,7 @@ public class Parsing {
 		case InsertDelivery: {
 			break;
 		}
-		case InsertShared:
-		{
+		case InsertShared: {
 			break;
 		}
 
@@ -191,7 +174,7 @@ public class Parsing {
 			DeleteOrUpdateDishController.dishes = (ArrayList<Dish>) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		/**
 		 * Change the flag to true when the menu exists.
 		 */
@@ -199,7 +182,7 @@ public class Parsing {
 			SupplierScreenController.ExisingMenuFlag = true;
 			break;
 		}
-		
+
 		/**
 		 * Change the flag to false when the menu exists.
 		 */
@@ -238,11 +221,11 @@ public class Parsing {
 		case Dish_update_succ: {
 			break;
 		}
-		
+
 		/**
 		 * 
 		 */
-		case Dish_delete_succ:{
+		case Dish_delete_succ: {
 			break;
 		}
 
@@ -438,28 +421,30 @@ public class Parsing {
 					.getMessageData();
 			break;
 		}
-		case UpdateSuccsesfuly:{
+		case UpdateSuccsesfuly: {
 			break;
 		}
-		
-		case UpdateFailed:{
+
+		case UpdateFailed: {
 			break;
 		}
-		
+
 		case RReportUpdated: {
-			BranchManagerChooseReportToViewController.revenueArray = (ArrayList<RevenueReport>) receivedMessage.getMessageData();
+			BranchManagerChooseReportToViewController.revenueArray = (ArrayList<RevenueReport>) receivedMessage
+					.getMessageData();
 			System.out.println("hi hi");
 			break;
 		}
-		
-		case OReportUpdated:{
-			BranchManagerChooseReportToViewController.ordersArray =(ArrayList<OrdersReport>) receivedMessage.getMessageData();
-			break; 
+
+		case OReportUpdated: {
+			BranchManagerChooseReportToViewController.ordersArray = (ArrayList<OrdersReport>) receivedMessage
+					.getMessageData();
+			break;
 		}
-		
-		case DType_Quantities:{
-			HashMap<String,Integer> map = (HashMap<String,Integer>)receivedMessage.getMessageData();
-			ConfirmOrderApprovalController.dishTypesQuentities=map;
+
+		case DType_Quantities: {
+			HashMap<String, Integer> map = (HashMap<String, Integer>) receivedMessage.getMessageData();
+			ConfirmOrderApprovalController.dishTypesQuentities = map;
 			break;
 		}
 
@@ -484,9 +469,10 @@ public class Parsing {
 			CEODownloadQuarterlyReportController.downloadFileData = (MyFile) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		/**
-		 * Insert the relevant year and quarterly with the selected branch into a static variable
+		 * Insert the relevant year and quarterly with the selected branch into a static
+		 * variable
 		 */
 		case relevantYearAndQuarterly: {
 			CEODownloadQuarterlyReportController.yearsAndQuarter = (ArrayList<String>) receivedMessage.getMessageData();
@@ -496,21 +482,22 @@ public class Parsing {
 		/**
 		 * Insert all the receipts into a static variable
 		 */
-		case get_receipt:{
+		case get_receipt: {
 			ViewReceiptController.receipts = (ArrayList<Receipt>) receivedMessage.getMessageData();
 			break;
 		}
-		
-		case return_years_for_report:{
-			BranchManagerChooseReportToViewController.years= (ArrayList<String>) receivedMessage.getMessageData();
+
+		case return_years_for_report: {
+			BranchManagerChooseReportToViewController.years = (ArrayList<String>) receivedMessage.getMessageData();
 			break;
 		}
-		
+
 		/**
 		 * 
 		 */
-		case get_Performance_report:{
-			BranchManagerChooseReportToViewController.performanceArray = (ArrayList<PerformanceReport>) receivedMessage.getMessageData();
+		case get_Performance_report: {
+			BranchManagerChooseReportToViewController.performanceArray = (ArrayList<PerformanceReport>) receivedMessage
+					.getMessageData();
 			break;
 		}
 		default: {

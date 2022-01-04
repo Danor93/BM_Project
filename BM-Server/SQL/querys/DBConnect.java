@@ -14,6 +14,7 @@ public class DBConnect  {
 
 	public static Connection conn;
 	
+	@SuppressWarnings("deprecation")
 	public static Connection connect(String UserName,String Password) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();

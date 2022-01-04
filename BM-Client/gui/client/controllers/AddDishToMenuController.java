@@ -19,9 +19,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import main.ClientUI;
-import main.PopUpMessage;
 import javafx.scene.text.Text;
+import main.ClientUI;
 
 /**
  * @author Aviel This class is for add new dish to menu.
@@ -152,7 +151,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 			} catch (NumberFormatException e) {
 				txtMiniLabel.setText("Price must be valid number!");
 				priceIsValid = false;
-				// e.printStackTrace();
 			}
 			if (priceIsValid) {
 				try {
@@ -160,7 +158,6 @@ public class AddDishToMenuController extends Controller implements Initializable
 					dish = new Dish(txtNameDish.getText(), restName, null, null, null, null,
 							Float.parseFloat(txtPriceDish.getText()), DishType.toDishType(TypeOfDish));
 				} catch (NullPointerException e) {
-					// e.printStackTrace();
 					typeDishIsValid = false;
 				}
 				if (typeDishIsValid == true) {

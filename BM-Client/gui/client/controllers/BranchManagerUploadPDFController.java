@@ -10,9 +10,9 @@ import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
-import Entities.homeBranches;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
@@ -22,8 +22,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
 import main.PopUpMessage;
-import javafx.fxml.Initializable;
-import javafx.scene.text.Text;
 
 /**
  * @author Danor
@@ -140,6 +138,7 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						else {
 							PopUpMessage.errorMessage("Could not upload " + Year + "' " + Quertar + " PDF file!,try again");
 						}
+						bis.close();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

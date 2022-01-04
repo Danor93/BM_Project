@@ -2,14 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.ResourceBundle;
 
 import extra.ClientConnection;
-
-import java.sql.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -100,6 +98,7 @@ public class ServerUIFController {
 		primaryStage.show();
 	}
 
+	@SuppressWarnings("unused")
 	@FXML
 	void ConnectServer(ActionEvent event) {
 		ServerConnection.startServer(null, this);

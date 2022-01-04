@@ -90,6 +90,7 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 	/**
 	 * @param event - for the Active button
 	 */
+	@SuppressWarnings("unused")
 	@FXML
 	void ActiveAccount(ActionEvent event) {
 		for (int i = 0; i < Users.size(); i++) {
@@ -113,6 +114,7 @@ public class BranchManagerChangePermissionsController extends Controller impleme
 	/**
 	 * @param event - for the Freeze button
 	 */
+	@SuppressWarnings("unused")
 	@FXML
 	void FreezeAccount(ActionEvent event) {
 		for (int i = 0; i < Users.size(); i++) {

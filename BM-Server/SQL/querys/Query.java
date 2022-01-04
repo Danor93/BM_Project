@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+
 import Entities.BusinessAccountTracking;
 import Entities.BussinessAccount;
 import Entities.Client;
@@ -31,7 +32,6 @@ import Entities.DishType;
 import Entities.Employer;
 import Entities.MyFile;
 import Entities.Order;
-import Entities.OrderType;
 import Entities.OrdersReport;
 import Entities.PerformanceReport;
 import Entities.Receipt;
@@ -1860,7 +1860,6 @@ public class Query {
 					stmt.setString(7, rr.getQuarterly());
 					stmt.executeUpdate();
 					return true;
-
 				} else {
 					System.out.println("Conn is null");
 					return false;

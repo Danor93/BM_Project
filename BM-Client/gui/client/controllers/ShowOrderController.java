@@ -80,7 +80,7 @@ public class ShowOrderController extends Controller implements Initializable{
     	{
     		SingletonOrder.getInstance().myOrder.clear();
     	}
-    	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
+    	start(event, "CustomerScreen", "CustomerScreen","");
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class ShowOrderController extends Controller implements Initializable{
     	{
     		finalOrder=new Order(null,RestListFormController.chosenRst.getSupplierName(),null,null,"Waiting",LoginScreenController.user.getId(),RestListFormController.chosenRst.getRestCode(),total);
     		ClientUI.chat.accept(new Message(MessageType.getRefundDetails,finalOrder));
-    		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
+    		start(event, "DeliveryOrPickup", "Your supply details","");
     	}
     	
     }

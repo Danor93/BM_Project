@@ -15,7 +15,7 @@ public class ClientController {
   /**
    * The default port to connect on.
    */
-   public static int DEFAULT_PORT ;
+   public static int DEFAULT_PORT =5555;
   
   //Instance variables **********************************************
   

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
@@ -24,7 +25,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import main.ClientUI;
-import main.PopUpMessage;
 
 /**
  * 
@@ -243,6 +243,7 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 					bos.write(myByteArray, 0, len);
 					bos.flush();
 					fos.flush();
+					bos.close();
 					((Node) event.getSource()).getScene().getWindow().hide();
 				} catch (Exception e) {
 					e.printStackTrace();

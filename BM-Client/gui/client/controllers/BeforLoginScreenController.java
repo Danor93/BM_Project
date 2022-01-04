@@ -18,7 +18,6 @@ public class BeforLoginScreenController extends Controller{
     @FXML
     void Enter(ActionEvent event) throws IOException {
     	start(event,"LoginScreen","Login","");
-
     }
 
 	@Override

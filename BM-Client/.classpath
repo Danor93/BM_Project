@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="gui"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="UnitTests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BM-Shared"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OCSF"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
@@ -12,6 +11,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
 	<classpathentry kind="lib" path="/BM-Shared/libraries/javax.mail.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

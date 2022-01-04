@@ -2,17 +2,15 @@ package client.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 import java.util.ResourceBundle;
 
 import Entities.Message;
 import Entities.MessageType;
-import Entities.RevenueReport;
-import Entities.PerformanceReport;
-import Entities.homeBranches;
 import Entities.OrdersReport;
+import Entities.PerformanceReport;
+import Entities.RevenueReport;
+import Entities.homeBranches;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -295,8 +293,9 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		for(PerformanceReport report : performanceArray)
 			avg+=report.getOnTimeRate();
 		avg = avg / performanceArray.size();
+		String result = String.format("Arrival time rate is: %.2f", avg);
 		if(performanceArray.size()>0)
-			AvergaeTable.setText("Arrival time rate is: "+avg+"%");
+			AvergaeTable.setText(result+"%");
 		PerformanceList = FXCollections.observableArrayList(performanceArray);
 		performanceTable.setItems(PerformanceList);
 	}

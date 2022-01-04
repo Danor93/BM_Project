@@ -1,7 +1,6 @@
 package Entities;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 
 /**
  * @author Sahar this object is to save performance rerport data to be used in
@@ -34,7 +33,7 @@ public class PerformanceReport implements Serializable {
 	}
 
 	public double getOnTimeRate() {
-		return onTimeRate;
+		return onTimeRate*100;
 	}
 
 	public void setOnTimeRate(double lateRate) {

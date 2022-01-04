@@ -1,28 +1,17 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-
-import Entities.Message;
-import Entities.MessageType;
-import Entities.User;
-import Entities.homeBranches;
-import Interfaces.ILoginInterface;
-import Parsing.Parsing;
-import controllers.ServerUIFController;
-import querys.DBConnect;
-import querys.Query;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import Entities.User;
+import Entities.homeBranches;
+import querys.DBConnect;
+import querys.Query;
 
 /**
  * @author Danor

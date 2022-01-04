@@ -56,7 +56,7 @@ public class ClientMenuUiController extends Controller {
 		if (ipTxt.getText().isEmpty()) {
 			PopUpMessage.errorMessage("you must enter an ip!");
 		} else {
-			ip = ipTxt.getText();
+			ip = ipTxt.getText().toString();
 			ClientUI.chat = new ClientController(ip, 5555);
 			start(event, "BeforLogin", "Description", "");
 		}

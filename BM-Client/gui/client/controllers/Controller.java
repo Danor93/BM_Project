@@ -1,26 +1,21 @@
 package client.controllers;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+
 import Entities.Message;
 import Entities.MessageType;
 import Entities.SingletonOrder;
-import main.ClientUI;
-import main.PopUpMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import main.ClientUI;
+import main.PopUpMessage;
 
 /**
  * 
