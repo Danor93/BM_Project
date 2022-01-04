@@ -25,29 +25,29 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="132.0" layoutY="48.0" text="Enter your Supply Details">
+      <Label layoutX="132.0" layoutY="41.0" text="Enter your Supply Details">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TextField fx:id="time" layoutX="482.0" layoutY="155.0" prefHeight="25.0" prefWidth="122.0" />
-      <Text layoutX="134.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Before payment, Please specify the required time for your order ">
+      <TextField fx:id="time" layoutX="482.0" layoutY="140.0" prefHeight="25.0" prefWidth="122.0" />
+      <Text layoutX="134.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Before payment, Please specify the required time for your order-for shared delivery no need to insert date and time : " wrappingWidth="474.48681640625">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <DatePicker fx:id="date" layoutX="183.0" layoutY="155.0" />
-      <Text layoutX="135.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+      <DatePicker fx:id="date" layoutX="183.0" layoutY="140.0" />
+      <Text layoutX="135.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text layoutX="434.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time : ">
+      <Text layoutX="434.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time : ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <ImageView fx:id="takeAway" fitHeight="111.0" fitWidth="99.0" layoutX="190.0" layoutY="342.0" onMouseClicked="#chooseTakeAway" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="sharedlbl" fitHeight="111.0" fitWidth="99.0" layoutX="190.0" layoutY="281.0" onMouseClicked="#chooseTakeAway" pickOnBounds="true" preserveRatio="true">
          <effect>
             <DropShadow />
          </effect>
@@ -55,21 +55,21 @@
             <Image url="@/images/take-away.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="delivery" fitHeight="111.0" fitWidth="99.0" layoutX="451.0" layoutY="342.0" onMouseClicked="#chooseDelivery" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="delivery" fitHeight="111.0" fitWidth="99.0" layoutX="487.0" layoutY="281.0" onMouseClicked="#chooseDelivery" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/images/scooter.png" />
          </image></ImageView>
-      <Text layoutX="132.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose the way you'd like to except your food :">
+      <Text layoutX="49.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose the way you'd like to except your food">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Label layoutX="210.0" layoutY="443.0" text="Take Away">
+      <Label layoutX="210.0" layoutY="382.0" text="Take Away">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="476.0" layoutY="444.0" text="Delivery">
+      <Label layoutX="512.0" layoutY="383.0" text="Delivery">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -79,19 +79,19 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="notify" alignment="CENTER" layoutX="-1.0" layoutY="207.0" prefHeight="17.0" prefWidth="718.0" textAlignment="CENTER" textFill="#fd0000">
+      <Label fx:id="notify" alignment="CENTER" layoutX="-1.0" layoutY="180.0" prefHeight="17.0" prefWidth="718.0" textAlignment="CENTER" textFill="#fd0000">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="bussLabel" layoutX="130.0" layoutY="227.0" prefHeight="27.0" prefWidth="194.0" text=" Paying with Bussiness card?" visible="false">
+      <Label fx:id="bussLabel" layoutX="130.0" layoutY="204.0" prefHeight="27.0" prefWidth="194.0" text=" Paying with Bussiness card?" visible="false">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <CheckBox fx:id="yes" layoutX="333.0" layoutY="233.0" mnemonicParsing="false" onAction="#chooseYes" text="Yes" visible="false" />
-      <CheckBox fx:id="no" layoutX="419.0" layoutY="233.0" mnemonicParsing="false" onAction="#chooseNo" text="No" visible="false" />
-      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="531.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
+      <CheckBox fx:id="yes" layoutX="333.0" layoutY="210.0" mnemonicParsing="false" onAction="#chooseYes" text="Yes" visible="false" />
+      <CheckBox fx:id="no" layoutX="419.0" layoutY="210.0" mnemonicParsing="false" onAction="#chooseNo" text="No" visible="false" />
+      <AnchorPane layoutX="-3.0" prefHeight="531.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
          <children>
             <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">
                <font>
@@ -125,11 +125,37 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Separator layoutX="105.0" layoutY="32.0" prefHeight="18.0" prefWidth="583.0" />
+      <Separator layoutX="105.0" layoutY="22.0" prefHeight="18.0" prefWidth="583.0" />
       <Text fill="WHITE" layoutX="16.0" layoutY="259.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pay attention, Pressing the home button will cancel your order " wrappingWidth="83.77734375">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
+      <Text fx:id="orderNumlbl" disable="true" layoutX="130.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order number you'd like to share your delivery with:" visible="false" wrappingWidth="180.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField fx:id="sharedOrderNum" disable="true" layoutX="309.0" layoutY="443.0" visible="false" />
+      <ImageView fx:id="shared" fitHeight="111.0" fitWidth="99.0" layoutX="334.0" layoutY="280.0" onMouseClicked="#chooseShared" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/network.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="344.0" layoutY="382.0" text="Shared-Delivery">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="notifySupply" alignment="CENTER" layoutX="1.0" layoutY="497.0" prefHeight="17.0" prefWidth="718.0" textAlignment="CENTER" textFill="#fd0000">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="join" disable="true" layoutX="498.0" layoutY="444.0" mnemonicParsing="false" onAction="#join" prefHeight="33.0" prefWidth="78.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="join" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

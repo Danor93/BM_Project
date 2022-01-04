@@ -32,7 +32,7 @@ public enum MessageType {
 	orderDone, ShowHistogram, getYears, Account_Status_Active, Account_Status_Freeze, get_Rest_Name,
 	check_account_status, check_account_status_Active, check_account_status_Freeze, Update_Status_to_Active,
 	Update_Status_to_Freeze, ReturnFirstName, ReturnFirstName_success, check_suppliers_details,
-	get_year_for_report,return_years_for_report,
+	get_year_for_report,return_years_for_report,Join,priceShare,InsertShared,  
 
 	/* type of users */
 
@@ -45,6 +45,6 @@ public enum MessageType {
 
 	RegistrationOfEmployer_succ, RegistrationOfEmployer_failed, get_business_account_details, businessAccountsTracking,
 	RReportUpdated, OReportUpdated, get_Dish_type, DType_Quantities, addto_Order_report, UpdateSuccsesfuly,
-	UpdateFailed,
+	UpdateFailed, 
 
 }

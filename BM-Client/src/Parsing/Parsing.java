@@ -49,7 +49,6 @@ import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import client.controllers.ViewReceiptController;
-import client.controllers.quaterRepController;
 import client.controllers.QuarterReportController;
 import main.PopUpMessage;
 
@@ -107,6 +106,28 @@ public class Parsing {
 			}
 			break;
 		}
+		
+		case Join:
+		{
+			if(receivedMessage.getMessageData()!=null)
+			{
+				DeliveryOrPickupController.isJoin=true;
+				String []div=((String)receivedMessage.getMessageData()).split("@");
+				ShowOrderController.finalOrder.setTimeOfOrder(div[0]);
+				ShowOrderController.finalOrder.setDateOfOrder(div[1]);
+				ShowOrderController.finalOrder.setEarlyOrder(div[2]);
+				
+				
+			}
+			break;
+		}
+		
+		case priceShare:
+		{
+			OrderConfimController.part=(Integer)receivedMessage.getMessageData();
+			break;
+		}
+		
 
 		case getYears: {
 			QuarterReportController.years = (ArrayList<String>) receivedMessage.getMessageData();
@@ -154,6 +175,10 @@ public class Parsing {
 		}
 
 		case InsertDelivery: {
+			break;
+		}
+		case InsertShared:
+		{
 			break;
 		}
 

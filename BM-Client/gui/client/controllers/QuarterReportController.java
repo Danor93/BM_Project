@@ -134,7 +134,8 @@ public class QuarterReportController extends Controller implements Initializable
             				ClientUI.chat.accept(new Message(MessageType.ShowHistogram,b1.toString()));
             				if(report2!=null)
             				{
-            					start(event,"histogram","Quarterly report","");
+            					String string=year1.getSelectionModel().getSelectedItem().toString()+"- Quarterly: "+quater1.getSelectionModel().getSelectedItem().toString()+","+year2.getSelectionModel().getSelectedItem().toString()+"- Quarterly: " +quater2.getSelectionModel().getSelectedItem().toString();
+            					start(event,"histogram","Quarterly report",string);
             				}
             				else
             				{
@@ -157,7 +158,8 @@ public class QuarterReportController extends Controller implements Initializable
         			ClientUI.chat.accept(new Message(MessageType.ShowHistogram,b.toString()));
         			if(report1!=null)
         			{
-    					start(event,"histogram","Quarterly report","");
+        				String string=year1.getSelectionModel().getSelectedItem().toString()+"- Quarterly: "+quater1.getSelectionModel().getSelectedItem().toString()+","+" ";
+    					start(event,"histogram","Quarterly report",string);
         			}
         			else
         			{

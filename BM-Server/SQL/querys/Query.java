@@ -50,7 +50,8 @@ import javafx.stage.FileChooser;
  * @author Aviel
  * @author Lior
  * @author Adi
- * @author Talia This class handles all queries the server needs to perform.
+ * @author Talia 
+ * This class handles all queries the server needs to perform.
  */
 public class Query {
 
@@ -669,6 +670,10 @@ public class Query {
 		return mapHist;
 	}
 
+	/**This method meant to get all the years that exists in the revenue report
+	 
+	 * @return ArrayList<String>  that list includes all the years that exists in the revenue report
+	 */
 	public static ArrayList<String> getYear() {
 		ArrayList<String>years=null;
 		Statement stmt;
@@ -717,7 +722,12 @@ public class Query {
 		}
 		return dishes;
 	}
-	
+
+	/**This method meant to get all dishes of specific restaurant
+	 * @param restCode   is the code of the specific restaurant 
+	 * @return ArrayList<Dish>  that list includes all dishes of specific restaurant
+	 */
+		
 	public static ArrayList<Dish> getDishes(String restCode) {
 		ArrayList<Dish> dishes=new ArrayList<>();
 		try {
@@ -737,36 +747,12 @@ public class Query {
 		return dishes;
 	}
 	
-	public static ArrayList<Order> getOrders() {
-		ArrayList<Order> orders = new ArrayList<>();
-		Statement stmt;
-		String query = "";
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM order.orders");
-				while (rs.next()) {
-					String restaurant = rs.getString("Restaurant");
-					int OrderNumber = Integer.parseInt(rs.getString("OrderNumber"));
-					String OrderTime = rs.getString("OrderTime");
-					String PhoneNumber = rs.getString("PhoneNumber");
-					OrderType orderType = OrderType.toOrderType(rs.getString("TypeOfOrder"));
-					String OrderAddress = rs.getString("OrderAddress");
-					//orders.add(new Order(restaurant, OrderNumber, OrderTime, PhoneNumber, orderType, OrderAddress));
-				}
-				rs.close();
-			} else {
-				System.out.println("Conn is null");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return orders;
-	}
 	
-	/**
-	 * @param city
-	 * @return
+	
+	
+	/**This method meant to get all the restaurant of the specific city
+	 * @param city  city is the specific city that client wants to order from
+	 * @return ArrayList<Reestaurant>  that list includes all the restaurant from specific city
 	 */
 	public static ArrayList<Restaurant> getRestaurants(String city) {
 		ArrayList<Restaurant> rest = new ArrayList<>();
@@ -2343,4 +2329,183 @@ public class Query {
 			return true;
 		}
 	}
+
+	/**This method  meant to check if the client can join to the shared delivery. 
+	 * @param msg    msg is the message that we get from the client.It's includes the order's number of the shared delivery. 
+	 *
+	 *@return String    that string includes the time, date and if it's early order- of the order that the client wants to join  
+	 */
+	
+
+	public static String checkJoin(String msg) 
+	{
+		String type=null,time=null;
+		String []div=msg.split("@");
+		PreparedStatement stmt;
+		StringBuilder b=null;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("SELECT orderType,timeApproved,timeOfOrder,dateOfOrder,EarlyOrder FROM bitemedb.order WHERE orderNumber=? and restName=?");
+				stmt.setInt(1, Integer.parseInt(div[0]));
+				stmt.setString(2, div[1]);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) 
+				{
+					type=rs.getString(1);
+					time=rs.getString(2);
+					b=new StringBuilder();
+					b.append(rs.getString(3));
+					b.append("@");
+					b.append(rs.getString(4));
+					b.append("@");
+					b.append(rs.getString(5));
+				}
+				rs.close();
+				
+				if(type==null||type.equals("Take Away"))
+				{
+					return null;
+				}
+				
+				else
+				{
+					System.out.println("blala "+java.time.Duration.between(LocalTime.parse(time), LocalTime.now()).toMinutes());
+					if(java.time.Duration.between(LocalTime.parse(time), LocalTime.now()).toMinutes()>15)
+					{
+						return null;
+					}
+					else
+					{
+						return b.toString();
+					}
+				}
+			}	
+		}	
+		 catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	/**This method  meant to get the number of participants of the shared delivery 
+	 * @param msg  msg is the message that we get from the client.It's includes the order's number of the shared delivery. 
+	 *
+	 **@return Integer- the number number of participants of the shared delivery 
+	 */
+
+	public static Integer getParticipants(Integer msg) 
+	{
+		PreparedStatement stmt;
+		Integer part=0;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("SELECT participantsNum FROM bitemedb.delivery WHERE orderNum=?");
+				stmt.setInt(1, msg);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) 
+				{
+					part=rs.getInt(1);
+					
+				}
+				rs.close();
+			}
+				
+	
+	}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+			 
+	return part;		
 }
+
+	
+	/**This method  meant to update the shared delivery and the total price of all the participants/ 
+	 * @param msg  msg is the message that we get from the client.It's includes the type of delivery, number of participants and the order number of the delivery that the client wants to join.
+	 */
+	public static void InsertShared(String msg) 
+	{
+		Map<Integer,Float> map=new HashMap<>();
+		String []div1=msg.split("@");
+		String []div2=div1[0].split("-");
+		float totalMain=0;
+		
+
+		PreparedStatement stmt,stmt1,stmt2,stmt3,stmt4;
+		try {
+			if (DBConnect.conn != null) {
+				stmt = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.delivery SET participantsNum = ?,deliPrice=? WHERE orderNum=?");
+				stmt.setInt(3,Integer.parseInt(div2[1]));
+				stmt.setInt(1,Integer.parseInt(div1[1]));
+				
+				if(Integer.parseInt(div1[1])>2)
+				{
+					stmt.setFloat(2,Integer.parseInt(div1[1])*15);
+				}
+				else
+				{
+					stmt.setFloat(2,Integer.parseInt(div1[1])*20);
+				}
+				stmt.executeUpdate();
+				
+				if(Integer.parseInt(div1[1])==3)
+				{
+					System.out.println("2456");
+					stmt1 = DBConnect.conn
+							.prepareStatement("SELECT orderNumber,totalPrice FROM bitemedb.order WHERE orderType=?");
+					stmt1.setString(1, div1[0]);
+					ResultSet rs1 = stmt1.executeQuery();
+					while (rs1.next()) 
+					{
+						if(rs1.getInt(1)!=Integer.parseInt(div1[2]))
+						{
+							map.put(rs1.getInt(1),rs1.getFloat(2)-5);
+						}
+						
+					}
+					rs1.close();
+					for(Integer num :map.keySet())
+					{
+						System.out.println("the number bla is "+num);
+						stmt2 = DBConnect.conn
+								.prepareStatement("UPDATE bitemedb.order SET totalPrice = ? WHERE orderNumber=?");
+						stmt2.setFloat(1,map.get(num));
+						stmt2.setInt(2,num);
+						stmt2.executeUpdate();
+					}
+				}
+				
+				stmt4 = DBConnect.conn
+						.prepareStatement("SELECT totalPrice FROM bitemedb.order WHERE orderNumber=?");
+				stmt4.setInt(1, Integer.parseInt(div2[1]));
+				ResultSet rs2 = stmt4.executeQuery();
+				while (rs2.next()) 
+				{
+					totalMain=rs2.getFloat(1);
+					
+				}
+				rs2.close();
+				stmt3 = DBConnect.conn
+						.prepareStatement("UPDATE bitemedb.order SET totalPrice = ? WHERE orderNumber=?");
+				stmt3.setFloat(1,totalMain-5);
+				stmt3.setInt(2,Integer.parseInt(div2[1]));
+				stmt3.executeUpdate();	
+				
+				
+				
+				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();	
+		}
+		
+		
+	}
+	
+	
+	}

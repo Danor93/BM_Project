@@ -72,22 +72,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="minus" disable="true" layoutX="301.0" layoutY="422.0" mnemonicParsing="false" onAction="#personDec" style="-fx-background-color: red;" text="-" textFill="WHITE" visible="false">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <Button fx:id="plus" disable="true" layoutX="367.0" layoutY="422.0" mnemonicParsing="false" onAction="#personInc" style="-fx-background-color: green;" text="+" textFill="WHITE" visible="false" />
-      <Text fx:id="numberPersons" disable="true" layoutX="113.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of participants :" wrappingWidth="149.17447916666669">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Label fx:id="numOfPeople" alignment="CENTER" disable="true" layoutX="395.0" layoutY="426.0" prefHeight="17.0" prefWidth="69.0" text="2" textAlignment="CENTER" visible="false">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="notify" alignment="CENTER" layoutX="114.0" layoutY="456.0" prefHeight="17.0" prefWidth="564.0" textFill="RED">
+      <Label fx:id="notify" alignment="CENTER" layoutX="113.0" layoutY="462.0" prefHeight="17.0" prefWidth="564.0" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -123,13 +108,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Text fx:id="sharedLbl" layoutX="126.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shared delivery?" visible="false">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <CheckBox fx:id="shared" layoutX="251.0" layoutY="391.0" mnemonicParsing="false" onAction="#chooseShared" text="yes" visible="false" />
-      <CheckBox fx:id="noShared" layoutX="345.0" layoutY="392.0" mnemonicParsing="false" onAction="#choosenoShared" text="no" visible="false" />
       <AnchorPane prefHeight="532.0" prefWidth="105.0" style="-fx-background-color: #004d00;">
          <children>
             <Text fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ">

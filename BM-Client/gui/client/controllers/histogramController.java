@@ -12,6 +12,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -22,6 +23,14 @@ public class histogramController extends Controller implements Initializable {
 
 	@FXML
     private ImageView BackImage;
+	
+	@FXML
+	private Label quarter1Lbl;
+
+	@FXML
+	private Label quarter2Lbl;
+	
+	
 
     @FXML
     private Button back;
@@ -91,6 +100,20 @@ public class histogramController extends Controller implements Initializable {
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());
+		
+		String[] div=string.split(",");
+		//quarter1Lbl.setText(div[0]);
+		//quarter2Lbl.setText(div[1]);
+		chart1.setTitle(div[0]);
+		if(!div[1].equals(" "))
+		{
+			chart2.setTitle(div[1]);
+		}
+		
+		
 	}
+	
+	
+	
 
 }

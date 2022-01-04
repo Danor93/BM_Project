@@ -48,6 +48,12 @@ public class Parsing {
 					.getHistogramData(DivededAdd);
 			return messageFromServer = new Message(MessageType.ShowHistogram, histogram);
 		}
+		
+		case Join:
+		{
+			System.out.println("iam " +Query.checkJoin((String)receivedMessage.getMessageData()));
+			return messageFromServer = new Message(MessageType.Join,Query.checkJoin((String)receivedMessage.getMessageData()) );
+		}
 
 		case getYears: {
 			ArrayList<String> years = (ArrayList<String>) Query.getYear();
@@ -77,6 +83,18 @@ public class Parsing {
 		case ClientConfirm: {
 			ArrayList<Order> orders = Query.ConfirmClient((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.ClientConfirm, orders);
+		}
+		
+		case priceShare:
+		{
+			return messageFromServer = new Message(MessageType.priceShare,Query.getParticipants((Integer) receivedMessage.getMessageData()) );
+			
+		}
+		
+		case InsertShared:
+		{
+			Query.InsertShared((String) receivedMessage.getMessageData());
+			return messageFromServer = new Message(MessageType.InsertShared,null);
 		}
 
 		case show_Restaurants: {

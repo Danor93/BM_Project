@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -24,7 +25,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="121.0" layoutY="93.0" prefHeight="53.0" prefWidth="305.0" text="Quarterly Report">
+      <Label layoutX="115.0" layoutY="33.0" prefHeight="17.0" prefWidth="304.0" text="Quarterly Report">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -46,28 +47,23 @@
                   <Image url="@/images/home.png" />
                </image>
             </ImageView>
-            <Button fx:id="back" layoutX="18.0" layoutY="258.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
+            <Button fx:id="back" layoutX="18.0" layoutY="313.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="69.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-border-width: 2; -fx-border-color: black;" text="Back">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <BarChart fx:id="chart1" layoutX="103.0" layoutY="147.0" prefHeight="248.0" prefWidth="552.0" title="Quaterly report">
-        <xAxis>
-          <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest1" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="yIncome1" label="Restaurants revenue" side="LEFT" />
-        </yAxis>
-      </BarChart>
-      <BarChart fx:id="chart2" layoutX="98.0" layoutY="335.0" prefHeight="248.0" prefWidth="562.0" title="Quaterly report" visible="false">
+      <BarChart fx:id="chart2" layoutX="203.0" layoutY="365.0" prefHeight="209.0" prefWidth="493.0" visible="false">
          <xAxis>
             <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest2" />
          </xAxis>
          <yAxis>
-            <NumberAxis fx:id="yIncome2" label="Restaurants Revenue" side="LEFT" />
+            <NumberAxis fx:id="yIncome2" label="Restaurants Revenue" side="LEFT" visible="false" />
          </yAxis>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </BarChart>
       <Label layoutX="103.0" layoutY="14.0" prefHeight="17.0" prefWidth="564.0" styleClass="topMenuLabel" text="CEO Screen ➝ Choose Quaterly Reports ➝ Quarterly Report" textFill="#2b2727">
          <font>
@@ -75,5 +71,26 @@
          </font>
       </Label>
       <Separator layoutX="98.0" layoutY="33.0" prefHeight="1.0" prefWidth="630.0" />
+      <Label fx:id="quarter1Lbl" layoutX="118.0" layoutY="101.0" prefHeight="17.0" prefWidth="170.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="quarter2Lbl" layoutX="126.0" layoutY="353.0" prefHeight="17.0" prefWidth="170.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <BarChart fx:id="chart1" layoutX="203.0" layoutY="101.0" prefHeight="209.0" prefWidth="493.0">
+         <xAxis>
+            <CategoryAxis label="Restaurants" side="BOTTOM" fx:id="xRest1" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="yIncome1" label="Restaurants Revenue" side="LEFT" visible="false" />
+         </yAxis>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </BarChart>
    </children>
 </Pane>

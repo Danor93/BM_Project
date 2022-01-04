@@ -72,6 +72,8 @@ public class OrderConfimController extends Controller{
     
     public static String isSuccess;
     
+    public static int part;
+    
 	/**
 	 * This method meant to get back to costumer page
 	 * 
@@ -165,8 +167,24 @@ public class OrderConfimController extends Controller{
 		ClientUI.chat.accept(new Message(MessageType.InsertDishesOrder,SingletonOrder.getInstance().myOrder));
 		if(!ShowOrderController.finalOrder.getOrderType().equals("Take Away"))
 		{
-			DeliveryController.myDelivery.setOrderNum(ShowOrderController.finalOrder.getOrderNum());
-			ClientUI.chat.accept(new Message(MessageType.InsertDelivery,DeliveryController.myDelivery));
+			if(ShowOrderController.finalOrder.getOrderType().equals("Regular") || ShowOrderController.finalOrder.getOrderType().equals("By robot") )
+			{
+				DeliveryController.myDelivery.setOrderNum(ShowOrderController.finalOrder.getOrderNum());
+				ClientUI.chat.accept(new Message(MessageType.InsertDelivery,DeliveryController.myDelivery));
+				
+			}
+			else
+			{
+				StringBuilder b=new StringBuilder();
+				b.append(ShowOrderController.finalOrder.getOrderType());
+				b.append("@");
+				b.append(part);
+				b.append("@");
+				b.append(ShowOrderController.finalOrder.getOrderNum());
+				
+				ClientUI.chat.accept(new Message(MessageType.InsertShared,b.toString()));
+			}
+			
 		}
 		if(isSuccess!=null)
 		{
@@ -230,14 +248,41 @@ public class OrderConfimController extends Controller{
 		}
 		if(!ShowOrderController.finalOrder.getOrderType().equals("Take Away"))
 		{
-			orderDetails.appendText("Delivery details: \n");
-			orderDetails.appendText("Recipient name: "+ DeliveryController.myDelivery.getRecipient()+"\n");
-			orderDetails.appendText("Recipient Address: "+DeliveryController.myDelivery.getAddress()+","+DeliveryController.myDelivery.getCity()+"\n");
-			orderDetails.appendText("Recipient phone: "+DeliveryController.myDelivery.getPhone()+"\n");
-			orderDetails.appendText("Delivery type: "+DeliveryController.myDelivery.getDeliveryType()+"\n");
-			orderDetails.appendText("Number of participants:" +DeliveryController.myDelivery.getParticipantsNum()+"\n");
-			orderDetails.appendText("Price of delivery:" +DeliveryController.myDelivery.getDeliPrice()+"$\n");
-			calPrice+=DeliveryController.myDelivery.getDeliPrice();
+			if(ShowOrderController.finalOrder.getOrderType().equals("Regular") || ShowOrderController.finalOrder.getOrderType().equals("By robot") )
+			{
+				orderDetails.appendText("Delivery details: \n");
+				orderDetails.appendText("Recipient name: "+ DeliveryController.myDelivery.getRecipient()+"\n");
+				orderDetails.appendText("Recipient Address: "+DeliveryController.myDelivery.getAddress()+","+DeliveryController.myDelivery.getCity()+"\n");
+				orderDetails.appendText("Recipient phone: "+DeliveryController.myDelivery.getPhone()+"\n");
+				orderDetails.appendText("Delivery type: "+DeliveryController.myDelivery.getDeliveryType()+"\n");
+				orderDetails.appendText("Number of participants:" +DeliveryController.myDelivery.getParticipantsNum()+"\n");
+				orderDetails.appendText("Price of delivery:" +DeliveryController.myDelivery.getDeliPrice()+"$\n");
+				calPrice+=DeliveryController.myDelivery.getDeliPrice();
+			}
+			
+			else
+			{
+				orderDetails.appendText(ShowOrderController.finalOrder.getOrderType());
+				String[] div =ShowOrderController.finalOrder.getOrderType().split("-");
+				Message msg= new Message(MessageType.priceShare,Integer.parseInt(div[1]));
+				ClientUI.chat.accept(msg);
+				part++;
+				if(part>2)
+				{
+					orderDetails.appendText("\nPrice of Delivery: 15$\n");
+					calPrice+=15;
+				}
+				else
+				{
+					orderDetails.appendText("\nPrice of Delivery: 20$\n");
+					calPrice+=20;
+				}
+					
+			
+			
+				
+			}
+
 		}
 		else
 		{

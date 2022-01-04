@@ -29,11 +29,15 @@ import main.ClientUI;
 
 public class DeliveryOrPickupController extends Controller {
 	
-	@FXML
-	private ImageView BackImage;
+
+    @FXML
+    private ImageView BackImage;
 
     @FXML
     private Button back;
+
+    @FXML
+    private Label bussLabel;
 
     @FXML
     private DatePicker date;
@@ -42,33 +46,47 @@ public class DeliveryOrPickupController extends Controller {
     private ImageView delivery;
 
     @FXML
-    private ImageView takeAway;
+    private ImageView shared;
 
-    @FXML
-    private TextField time;
-    
-    @FXML
-    private Label notify;
-    
-    @FXML
-    private CheckBox no;
-    
-    @FXML
-    private CheckBox yes;
-    
-    @FXML
-    private Label bussLabel;
-    
     @FXML
     private ImageView homePage;
 
     @FXML
     private Button logout;
-    
+
+    @FXML
+    private CheckBox no;
+
+    @FXML
+    private Label notify;
+
+    @FXML
+    private Label notifySupply;
+
+    @FXML
+    private Text orderNumlbl;
+
+    @FXML
+    private TextField sharedOrderNum;
+
+    @FXML
+    private ImageView sharedlbl;
+
+    @FXML
+    private TextField time;
 
     @FXML
     private Text userName;
+
+    @FXML
+    private CheckBox yes;
     
+    @FXML
+    private Button join;
+    
+    public static boolean isJoin=false;
+
+
     
 	/** This method meant to get back to costumer page
 	 * @param event				pressing the "home" image 
@@ -96,7 +114,6 @@ public class DeliveryOrPickupController extends Controller {
 		start(event, "LoginScreen", "Login","");
     }
     
-
 	/** This method meant to get back to show order
 	 * @param event				pressing the "back" button 
 	 * @throws IOException
@@ -105,7 +122,79 @@ public class DeliveryOrPickupController extends Controller {
     void back(ActionEvent event) throws IOException {
 		start(event, "ShowOrder", "Your order","");
     }
+    
+    /**This method checks if the client can join to another delivery of other business client
+     * @param event          pressing the delivery image
+     * @throws IOException
+     */
+    
+    @FXML
+    void chooseShared(MouseEvent event) 
+    {
+    	if (!(IdentifyW4cController.client instanceof BussinessAccount))
+    	{
+    		notifySupply.setText("This option is for bussiness clients only! ");
+    	}
+    	else
+    	{
+    		orderNumlbl.setVisible(true);
+    		sharedOrderNum.setVisible(true);
+    		sharedOrderNum.setDisable(false); 
+    		join.setVisible(true);
+    		join.setDisable(false);
+    	}
 
+    }
+    
+
+    /**This method checks if the client can join to another delivery of other business client with specific number order
+     * it also checks if the business client chose to use his budget. if the client can join he moved to Order Confirmation. 
+     * @param event          pressing the delivery image
+     * @throws IOException
+     */
+    
+    @FXML
+    void join(ActionEvent event) throws IOException 
+    {
+    	if(sharedOrderNum.getText().equals(""))
+    	{
+    		notifySupply.setText("In order to join you need to insert order number");
+    	}
+    	
+    	else
+    	{
+    		StringBuilder b=new StringBuilder();
+    		b.append(sharedOrderNum.getText());
+    		b.append("@");
+    		b.append(RestListFormController.chosenRst.getSupplierName());
+    		
+			Message msg=new Message(MessageType.Join,b.toString());
+    		ClientUI.chat.accept(msg);
+    		if(isJoin==true)
+    		{
+    			if(yes.isSelected())
+	    		{
+	    			ShowOrderController.finalOrder.setUseBudget(1);	
+	    		}
+    			ShowOrderController.finalOrder.setOrderType("Shared-"+sharedOrderNum.getText());
+    			
+    			start(event, "OrderConfirm", "Order Confirmation","");
+    			
+    		}
+    		else
+    		{
+    			notifySupply.setText("You can't join to this order");
+    		}
+    		
+    	}
+
+    }
+
+    /**This method checks if the entered time and date are valid using the private method and the order is an early order.
+     * it also checks if the business client chose to use his budget and moves him to the delivery details screen
+     * @param event          pressing the delivery image
+     * @throws IOException
+     */
 
     @FXML
     void chooseDelivery(MouseEvent event) throws IOException 
@@ -121,11 +210,7 @@ public class DeliveryOrPickupController extends Controller {
 	    	}
     		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
     		
-    		/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/Delivery.fxml"));
-    		Parent root=load.load();
-    		DeliveryController aFrame = load.getController();
-    		aFrame.start(primaryStage, root);*/
+    		
     		
     		start(event, "Delivery", "Your delivery","");
 
@@ -133,6 +218,12 @@ public class DeliveryOrPickupController extends Controller {
     	}
 
     }
+
+    /**This method checks if the entered time and date are valid using the private method and the order is an early order.
+     * it also checks if the business client chose to use his budget and moves him to confirming order screen
+     * @param event          pressing the take away image
+     * @throws IOException
+     */
 
     @FXML
     void chooseTakeAway(MouseEvent event) throws IOException 
@@ -150,12 +241,7 @@ public class DeliveryOrPickupController extends Controller {
 	    		}
 	    	}
 	    	
-	    	/*Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/OrderConfirm.fxml"));
-			Parent root=load.load();
-			OrderConfimController aFrame = load.getController();
-			aFrame.Display();
-			aFrame.start(primaryStage, root); */
+	    	
 			
     		start(event, "OrderConfirm", "Order Confirmation","");
 
@@ -163,6 +249,9 @@ public class DeliveryOrPickupController extends Controller {
 
     }
     
+    /**This method allows a business customer to choose that he doesn't want to pay with his budget
+     * @param event    choose no in the checkbox
+     */
 
     @FXML
     void chooseNo(ActionEvent event) {
@@ -171,6 +260,9 @@ public class DeliveryOrPickupController extends Controller {
 
     }
 
+    /**This method allows a business customer to choose that he wants to pay with his budget
+     * @param event    choose yes in the checkbox
+     */
     
     @FXML
     void chooseYes(ActionEvent event) {
@@ -180,29 +272,17 @@ public class DeliveryOrPickupController extends Controller {
     }
     
     
-  /*  public void display()
-    {
-    	if(IdentifyW4cController.client instanceof BussinessAccount)
-    	{
-    		bussLabel.setVisible(true);
-    		no.setVisible(true);
-    		yes.setVisible(true);
-    		no.setDisable(false);
-    		yes.setDisable(false);
-    	}
-    }
-*/
-    
-	public void start(Stage primaryStage, Parent root) {
-		Scene scene=new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();	
-	}
+  
+   
 	
+
+	/** This method meant to check if the chosen time and date by the customer are valid
+	 * @return      true/false
+	 */
 	
 	private boolean getTimeAndDate()
 	{
-		//check time of 00:00
+		
 		LocalDate orderDate=date.getValue();
     	String orderTime=time.getText();
     	if(orderDate!=null && !orderTime.equals("") && !orderDate.isBefore(LocalDate.now()))
@@ -259,6 +339,9 @@ public class DeliveryOrPickupController extends Controller {
     	
 	}
 	
+	/**This method meant to check if the customer entered an early order
+	 * @return         yes/no according to the check
+	 */
 	private String checkEarlyOrder()
 	{
 		LocalDate orderDate=date.getValue();
@@ -280,8 +363,14 @@ public class DeliveryOrPickupController extends Controller {
 		
 	}
 
+
+	/**Abstract method for displaying labels to the screen
+	 * @param string        empty string
+	 */
+	
 	@Override
 	public void display(String string) {
+		isJoin=false;
     	if(IdentifyW4cController.client instanceof BussinessAccount)
     	{
     		bussLabel.setVisible(true);
