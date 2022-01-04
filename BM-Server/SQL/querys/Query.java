@@ -795,7 +795,7 @@ public class Query {
 			try {
 				stmt = DBConnect.conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus='Not approved' or companyStatus ='Waiting'"
+						"SELECT w4cBusiness,companyName,companyStatus FROM company WHERE companyStatus ='Waiting'"
 								+ "");
 				while (rs.next()) {
 					Employer employer = new Employer(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -1150,13 +1150,14 @@ public class Query {
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn
-							.prepareStatement("INSERT INTO client (client_id,w4c_private,status) VALUES(?,?,?)");
+							.prepareStatement("INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?)");
 					stmt3.setString(1, BAccount.getId());
 					Random rand = new Random(); // instance of random class
 					int int_random = rand.nextInt(1000);
 					String w4cNew = "P" + String.valueOf(int_random);
 					stmt3.setString(2, w4cNew);
 					stmt3.setString(3, "Active");
+					stmt3.setString(4,BAccount.getCreditCardNumber());
 					stmt3.executeUpdate();
 
 					PreparedStatement stmt4 = DBConnect.conn
@@ -1173,7 +1174,7 @@ public class Query {
 			}
 		}
 	}
-
+	
 	/**
 	 * this method check if the details of the private client from the Branch
 	 * Manager is equals to the details in the import_users table.

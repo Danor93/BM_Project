@@ -135,7 +135,7 @@ public class ConfirmEmployerRegController extends Controller implements Initiali
 	 */
 	public void loadEmployerstoComboBox(ArrayList<Employer> Employers) {
 		for (Employer e : Employers) {
-			if (e.getCompanyStatus().equals("Not approved") || e.getCompanyStatus().equals("Waiting")) {
+			if (e.getCompanyStatus().equals("Waiting")) {
 				ListofEmployers.getItems().add(e.getCompanyName());
 			}
 		}

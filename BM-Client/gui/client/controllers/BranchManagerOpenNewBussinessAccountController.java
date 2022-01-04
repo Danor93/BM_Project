@@ -243,6 +243,7 @@ public class BranchManagerOpenNewBussinessAccountController extends Controller i
 					BAccount.setBranch(
 							homeBranches.toHomeBranchType(LoginScreenController.user.getHomeBranch().toString()));
 					BAccount.setRole("Customer");
+					BAccount.setCreditCardNumber(CreditCardText.getText());
 					AprrovedFlag = false;
 					ClientUI.chat.accept(new Message(MessageType.check_Baccount_details, BAccount));
 					if (Checkdeatils) {
