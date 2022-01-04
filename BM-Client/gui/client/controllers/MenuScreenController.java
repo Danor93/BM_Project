@@ -23,6 +23,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+/**This class meant to show the customer the menu of the restaurant he chose divided by 5 types
+ * @author Adi & Talia
+ *
+ */
 public class MenuScreenController extends Controller {
 
 	@FXML
@@ -166,6 +170,12 @@ public class MenuScreenController extends Controller {
 		start(event, "DishesOfKindScreen", "Restaurant's salads", chosenFoodType);
 	}
 
+	/**
+	 * This method meant to show the starters of the restaurant
+	 * 
+	 * @param event           pressing the starter image
+	 * @throws IOException
+	 */
 	@FXML
 	void showStarters(MouseEvent event) throws IOException {
 		chosenFoodType = "Starter";
@@ -173,8 +183,8 @@ public class MenuScreenController extends Controller {
 	}
 
 
-	/**
-	 * @param supplier
+	/**Abstract method for displaying labels to the screen
+	 * @param string          "dish added successfully"
 	 */
 	@Override
 	public void display(String string) {

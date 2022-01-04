@@ -22,7 +22,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-//Adi&Talia
+/**This method meant to show the costumer the dishes he chose until now, allowing him to confirm and remove dishes he chose in the order
+ * @author Adi & Talia
+ *
+ */
 public class ShowOrderController extends Controller implements Initializable{
 
 
@@ -94,12 +97,20 @@ public class ShowOrderController extends Controller implements Initializable{
 		start(event, "LoginScreen", "Login","");
     }
 
+    
+	/** This method meant to get back to the previous page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
     @FXML
     void back(ActionEvent event) throws IOException {
 		start(event, "MenuScreen", "Restaurant's menu","");
     }
     
-
+    /**This method create the entity of the order and asks the DB if there's a refund to the customer in this restaurant. the method also moves us to the next page to proceed the order process
+     * @param event                pressing the "proceed" button 
+     * @throws IOException
+     */
     @FXML
     void proceed(ActionEvent event) throws IOException {
     	if(SingletonOrder.getInstance().myOrder.isEmpty())
@@ -113,6 +124,10 @@ public class ShowOrderController extends Controller implements Initializable{
     	
     }
 
+    
+    /**The method meant to remove a dish from the order 
+     * @param event       pressing the "remove" button
+     */
     @FXML
     void removeOrder(ActionEvent event) 
     {
@@ -135,6 +150,10 @@ public class ShowOrderController extends Controller implements Initializable{
     	
     }
 
+	/**This method meant to initialize the list with the dishes the costumer chose until now, 
+	 * including the choice factors and extras chosen by the customer
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
@@ -162,6 +181,9 @@ public class ShowOrderController extends Controller implements Initializable{
 		listOrder.setItems(orders);
 	}
 	
+	/**Abstract method for displaying labels to the screen
+	 * @param string        empty string
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());	

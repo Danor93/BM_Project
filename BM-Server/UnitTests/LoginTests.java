@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterAll;
@@ -13,6 +15,7 @@ import Entities.User;
 import Entities.homeBranches;
 import Interfaces.ILoginInterface;
 import Parsing.Parsing;
+import controllers.ServerUIFController;
 import querys.DBConnect;
 import querys.Query;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,38 +26,52 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Danor
+ * @author Sahar
+ * @author aviel
  * this class runs test for the login of users.
  */
 
-public class LoginTests  {
-	
+public class LoginTests  {	
 	public String loginResult;
+	public static Connection testConn;	
 	
+	public class testDBConnect {
+		public Connection testConn;
+		
+		/**
+		 * this is an inner class that implements the connection of the DB without the gui.
+		 * @return - a Connection parameter.
+		 */
+		public Connection testConnect() {
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			} catch (Exception ex) {
+				/* handle the error */
+				ex.printStackTrace();
+			}
+
+			try {
+				testConn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", "root","Aa123456");
+			} catch (SQLException ex) {/* handle any errors */
+			}
+			return testConn;
+		}
+	}
+
 	
+	/**
+	 * this is a set up for the tests including an connect to the DB.
+	 */
 	@BeforeEach
 	void setUp () throws Exception{
-	}
-
-	/**
-	 * this is to update the users login status to 0 after the tests.
-	 */
-	@AfterAll
-	void tearDown() throws Exception {
-		Query.UpdateisLoggedIn("viv1");
-		Query.UpdateisLoggedIn("h");
-		Query.UpdateisLoggedIn("b");
-		Query.UpdateisLoggedIn("c");
-		Query.UpdateisLoggedIn("e");
-		Query.UpdateisLoggedIn("adi");
-		Query.UpdateisLoggedIn("f");
+		testDBConnect tbd = new testDBConnect();//for set up a connection to the DB
+		testConn = tbd.testConnect();
+		DBConnect.conn = testConn;
 	}
 	
+	
+	
 	/************************* TEST Customer Login **************************/
-
-	@Test
-	void IsCustomerLoginTest() {
-		loginResult="Already";
-	}
 	
 	@Test
 	/*
@@ -62,17 +79,16 @@ public class LoginTests  {
 	 * Input: UserName = "b" | Password = "b"
 	 * Expected result:true because we get the same user.
 	 * */
-	void testCustomerCorrectLogin() {
-		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
-		
+	void testCustomerCorrectLoginByID() {
+		User ExpectedCustomer = new User("Customer","3115467","Talia","Blum",homeBranches.toHomeBranchType("Center"),"b","b","0");
 		
 		String [] DivedMsg = Query.Login("b","b").split("@");
 		
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-	
 		
-		assertTrue(ExpectedCustomer.equals(resCustomer));
+		assertTrue(ExpectedCustomer.getId().equals(resCustomer.getId()));
+		Query.UpdateisLoggedIn("b");
 	}
 	
 	@Test
@@ -81,14 +97,16 @@ public class LoginTests  {
 	 * Input: UserName = "adi" | Password = "a1"
 	 * Expected result:false because its not the same user.
 	 * */
-	void testCustomerInCorrectLogin() {
-		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
+	void testCustomerInCorrectLoginByID() {
+		User ExpectedCustomer = new User("Customer","3115467","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) Query.Login("adi","a1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("adi","a1")).split("@");
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		
+		assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));
+		Query.UpdateisLoggedIn("adi");
 	}
 	
 	@Test
@@ -98,32 +116,31 @@ public class LoginTests  {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testCustomerNullLogin() {
-		User ExpectedCustomer = new User("Customer","134","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
+		User resCustomer = new User(null, null, null, null, null, null, null, null);
+		User ExpectedCustomer = new User("Customer","3115467","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
-		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
+		try {
+		resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		
-		assertFalse(ExpectedCustomer.equals(resCustomer));
+		} catch (Exception e) {
+			assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));
+		}		
 	}
 	
 	@Test
 	/*
 	 * Test Description:This test case check if a user can log in while he is already logged in.
-	 * Input: UserName = "ny" | Password = "ny" , UserName = "ny" | Password = "ny" 
+	 * Input: UserName = "b" | Password = "b" , UserName = "b" | Password = "b" 
 	 * Expected result:False because the user already logged in.
 	 * */
 	void testCustomerAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) Query.Login("ny","ny")).split("-");
-		User Customer = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
-				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
+		Query.Login("b","b");		
+		String SecondLogin = ((String) Query.Login("b","b"));
 		
-		String [] SecondLogin = ((String) Query.Login("ny","ny")).split("-");
-		User resCustomer = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
-				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
-		
-		assertFalse(Customer.equals(resCustomer));
+		assertTrue(SecondLogin.equals("Already"));
+		Query.UpdateisLoggedIn("b");
 	}
 	
 	/************************* TEST Branch Manager Login **************************/
@@ -135,14 +152,15 @@ public class LoginTests  {
 	 * Input: UserName = "c" | Password = "c",ExpectedCustomer(c,c);
 	 * Expected result:true because we get the same user.
 	 * */
-	void testBMCorrectLogin() {
-		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+	void testBMCorrectLoginByID() {
+		User ExpectedBM = new User("BranchManager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) Query.Login("c","c")).split("-");
+		String [] DivedMsg = ((String) Query.Login("c","c")).split("@");
 		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedBM.equals(resBM));
+		Query.UpdateisLoggedIn("c");
+		assertTrue(ExpectedBM.getId().equals(resBM.getId()));
 	}
 	
 	@Test
@@ -151,14 +169,15 @@ public class LoginTests  {
 	 * Input: UserName = "f" | Password = "f"
 	 * Expected result:false because its not the same user.
 	 * */
-	void testBMInCorrectLogin() {
-		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+	void testBMInCorrectLoginByID() {
+		User ExpectedBM = new User("BranchManager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) Query.Login("f","f")).split("-");
+		String [] DivedMsg = ((String) Query.Login("f","f")).split("@");
 		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedBM.equals(resBM));
+		Query.UpdateisLoggedIn("f");
+		assertFalse(ExpectedBM.getId().equals(resBM.getId()));
 	}
 	
 	@Test
@@ -168,13 +187,16 @@ public class LoginTests  {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testBMNullLogin() {
-		User ExpectedBM = new User("Branch Manager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
+		User resBM = new User(null, null, null, null, null, null, null, null);
+		User ExpectedBM = new User("BranchManager","456","Sahar","Oz",homeBranches.toHomeBranchType("north"),"c","c","0");
 		
-		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
-		User resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
+		try {
+			resBM = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		
-		assertFalse(ExpectedBM.equals(resBM));
+		} catch (Exception e) {
+			assertFalse(ExpectedBM.getId().equals(resBM.getId()));
+		}		
 	}
 	
 	@Test
@@ -185,15 +207,11 @@ public class LoginTests  {
 	 * */
 	void testBMAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) Query.Login("s","s")).split("-");
-		User BM = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
-				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
+		Query.Login("s","s");
+		String SecondLogin = ((String) Query.Login("s","s"));
 		
-		String [] SecondLogin = ((String) Query.Login("s","s")).split("-");
-		User resBM = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
-				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
-		
-		assertFalse(BM.equals(resBM));
+		Query.UpdateisLoggedIn("s");
+		assertTrue(SecondLogin.equals("Already"));
 	}
 	
 	/************************* TEST Supplier Login **************************/
@@ -205,14 +223,15 @@ public class LoginTests  {
 	 * Input: UserName = "viv1" | Password = "viv1",ExpectedCustomer(viv1,viv1);
 	 * Expected result:true because we get the same user.
 	 * */
-	void testSupplierCorrectLogin() {
-		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+	void testSupplierCorrectLoginByID() {
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","3115645","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) Query.Login("viv1","viv1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("viv1","viv1")).split("@");
 		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedSupplier.equals(resSupplier));
+		Query.UpdateisLoggedIn("viv1");
+		assertTrue(ExpectedSupplier.getId().equals(resSupplier.getId()));
 	}
 	
 	@Test
@@ -221,14 +240,15 @@ public class LoginTests  {
 	 * Input: UserName = "viv2" | Password = "viv2"
 	 * Expected result:false because its not the same user.
 	 * */
-	void testSupplierInCorrectLogin() {
-		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+	void testSupplierInCorrectLoginByID() {
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","3115645","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) Query.Login("viv2","viv2")).split("-");
+		String [] DivedMsg = ((String) Query.Login("viv2","viv2")).split("@");
 		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedSupplier.equals(resSupplier));
+		Query.UpdateisLoggedIn("viv2");
+		assertFalse(ExpectedSupplier.getId().equals(resSupplier.getId()));
 	}
 	
 	@Test
@@ -238,13 +258,16 @@ public class LoginTests  {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testSupplierNullLogin() {
-		User ExpectedSupplier = new User("Supplier-Certified-vivino","45678","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
+		User resSupp = new User(null, null, null, null, null, null, null, null);
+		User ExpectedSupplier = new User("Supplier-Certified-vivino","3115645","Ron","Abu",homeBranches.toHomeBranchType("center"),"viv1","viv1","0");
 		
-		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
-		User resSupplier = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
+		try {
+			resSupp = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		
-		assertFalse(ExpectedSupplier.equals(resSupplier));
+		} catch (Exception e) {
+			assertFalse(ExpectedSupplier.getId().equals(resSupp.getId()));
+		}		
 	}
 	
 	@Test
@@ -255,15 +278,11 @@ public class LoginTests  {
 	 * */
 	void testSupplierAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) Query.Login("ref1","ref1")).split("-");
-		User Supplier = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
-				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
+		Query.Login("ref1","ref1");		
+		String SecondLogin = ((String) Query.Login("ref1","ref1"));
 		
-		String [] SecondLogin = ((String) Query.Login("ref1","ref1")).split("-");
-		User resSupplier = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
-				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
-		
-		assertFalse(Supplier.equals(resSupplier));
+		Query.UpdateisLoggedIn("ref1");
+		assertTrue(SecondLogin.equals("Already"));
 	}
 	
 	/************************* TEST HR Login **************************/
@@ -275,14 +294,15 @@ public class LoginTests  {
 	 * Input: UserName = "h" | Password = "h",ExpectedCustomer(h,h);
 	 * Expected result:true because we get the same user.
 	 * */
-	void testHRCorrectLogin() {
+	void testHRCorrectLoginByID() {
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) Query.Login("h","h")).split("-");
+		String [] DivedMsg = ((String) Query.Login("h","h")).split("@");
 		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedHR.equals(resHR));
+		Query.UpdateisLoggedIn("h");
+		assertTrue(ExpectedHR.getId().equals(resHR.getId()));
 	}
 	
 	@Test
@@ -291,14 +311,15 @@ public class LoginTests  {
 	 * Input: UserName = "h1" | Password = "h1"
 	 * Expected result:false because its not the same user.
 	 * */
-	void testHRInCorrectLogin() {
+	void testHRInCorrectLoginByID() {
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) Query.Login("h1","h1")).split("-");
+		String [] DivedMsg = ((String) Query.Login("h1","h1")).split("@");
 		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedHR.equals(resHR));
+		Query.UpdateisLoggedIn("h1");
+		assertFalse(ExpectedHR.getId().equals(resHR.getId()));
 	}
 	
 	@Test
@@ -308,13 +329,16 @@ public class LoginTests  {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testHRNullLogin() {
+		User resHR = new User(null, null, null, null, null, null, null, null);
 		User ExpectedHR = new User("HR-Intel","1211","Avi","Sofer",homeBranches.toHomeBranchType("north"),"h","h","0");
 		
-		String [] DivedMsg = ((String) Query.Login(null,null)).split("-");
-		User resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
+		try {
+			resHR = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		
-		assertFalse(ExpectedHR.equals(resHR));
+		} catch (Exception e) {
+			assertFalse(ExpectedHR.getId().equals(resHR.getId()));
+		}		
 	}
 	
 	@Test
@@ -324,16 +348,11 @@ public class LoginTests  {
 	 * Expected result:False because the user already logged in.
 	 * */
 	void testHRAlreadyLogin() {
-		
-		String [] FirstLogin = ((String)Query.Login("h2","h2")).split("-");
-		User HR = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
-				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
-		
-		String [] SecondLogin = ((String)Query.Login("h2","h2")).split("-");
-		User resHR = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
-				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
-		
-		assertFalse(HR.equals(resHR));
+		Query.Login("h2","h2");		
+		String SecondLogin = ((String)Query.Login("h2","h2"));
+
+		Query.UpdateisLoggedIn("h2");
+		assertTrue(SecondLogin.equals("Already"));
 	}
 	
 	/************************* TEST CEO Login **************************/
@@ -344,14 +363,15 @@ public class LoginTests  {
 	 * Input: UserName = "e" | Password = "e",ExpectedCustomer(e,e);
 	 * Expected result:true because we get the same user.
 	 * */
-	void testCEOCorrectLogin() {
+	void testCEOCorrectLoginByID() {
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String) Query.Login("e","e")).split("-");
+		String [] DivedMsg = ((String) Query.Login("e","e")).split("@");
 		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertTrue(ExpectedCEO.equals(resCEO));
+		Query.UpdateisLoggedIn("e");
+		assertTrue(ExpectedCEO.getId().equals(resCEO.getId()));
 	}
 	
 	@Test
@@ -360,14 +380,15 @@ public class LoginTests  {
 	 * Input: UserName = "h1" | Password = "h1"
 	 * Expected result:false because its not the same user.
 	 * */
-	void testCEOInCorrectLogin() {
+	void testCEOInCorrectLoginByID() {
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String) Query.Login("ceo2","ceo2")).split("-");
+		String [] DivedMsg = ((String) Query.Login("ceo2","ceo2")).split("@");
 		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		assertFalse(ExpectedCEO.equals(resCEO));
+		Query.UpdateisLoggedIn("ceo2");
+		assertFalse(ExpectedCEO.getId().equals(resCEO.getId()));
 	}
 	
 	@Test
@@ -377,13 +398,16 @@ public class LoginTests  {
 	 * Expected result:False because we don't get anything from the DB.
 	 * */
 	void testCEONullLogin() {
+		User resCEO = new User(null, null, null, null, null, null, null, null);
 		User ExpectedCEO = new User("CEO","689","Lior","Shauli",homeBranches.toHomeBranchType("north"),"e","e","0");
 		
-		String [] DivedMsg = ((String)Query.Login(null,null)).split("-");
-		User resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
+		try {
+			resCEO = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		
-		assertFalse(ExpectedCEO.equals(resCEO));
+		} catch (Exception e) {
+			assertFalse(ExpectedCEO.getId().equals(resCEO.getId()));
+		}		
 	}
 	
 	@Test
@@ -394,15 +418,90 @@ public class LoginTests  {
 	 * */
 	void testCEOAlreadyLogin() {
 		
-		String [] FirstLogin = ((String) Query.Login("ceo3","ceo3")).split("-");
-		User CEO = new User (FirstLogin[0], FirstLogin[1], FirstLogin[2], FirstLogin[3],
-				homeBranches.toHomeBranchType(FirstLogin[4]), FirstLogin[5], FirstLogin[6], FirstLogin[7]);
+		Query.Login("ceo3","ceo3");		
+		String SecondLogin = ((String) Query.Login("ceo3","ceo3"));
 		
-		String [] SecondLogin = ((String) Query.Login("ceo3","ceo3")).split("-");
-		User resCEO = new User (SecondLogin[0], SecondLogin[1], SecondLogin[2], SecondLogin[3],
-				homeBranches.toHomeBranchType(SecondLogin[4]), SecondLogin[5], SecondLogin[6], SecondLogin[7]);
-		
-		assertFalse(CEO.equals(resCEO));
+		Query.UpdateisLoggedIn("ceo2");
+		assertTrue(SecondLogin.equals("Already"));
 	}
 	
+	/************************* TEST Errors in Login **************************/
+
+	@Test
+	/*
+	 * Test Description:This test case check if the account not exits in the DB.
+	 * Input: UserName = "ortBraude" | Password = "ortBraude".
+	 * Expected result:True because the user "ortBraude" is not exits in the DB.
+	 * */
+	void testNotExistingAccount() {
+		String testLogin = ((String) Query.Login("ortBraude","ortBraude"));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
+	
+	@Test
+	/*
+	 * Test Description:This test case check if the account is freeze.
+	 * Input: UserName = "matan" | Password = "matan".
+	 * Expected result:True because the user is defined as "Freeze" account in the DB and the login method will return "Freeze".
+	 * */
+	void testFreezeAccount() {
+		String testLogin = ((String) Query.Login("matan","matan"));
+		assertTrue(testLogin.equals("Freeze"));
+	}
+	
+	
+	@Test
+	/*
+	 * Test Description:This test case check wrong password.
+	 * Input: UserName = "matan" | Password = "123".
+	 * Expected result:True because the the password of this user is wrong and login method will return "WrongInput". 
+	 * */
+	void testWrongPassword() {
+		String testLogin = ((String) Query.Login("matan","123"));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
+	
+	@Test
+	/*
+	 * Test Description:This test case check wrong UserName.
+	 * Input: UserName = "123" | Password = "matan".
+	 * Expected result:True because the the UserName of this user is wrong and login method will return "WrongInput". 
+	 * */
+	void testWrongUserName() {
+		String testLogin = ((String) Query.Login("matan2","matan"));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
+	
+	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert userName and password at all.
+	 * Input: UserName = "" | Password = "".
+	 * Expected result:True because when there is no input,login method will return "WrongInput".
+	 * */
+	void testWithoutFields() {
+		String testLogin = ((String) Query.Login("",""));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
+	
+	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert userName.
+	 * Input: UserName = "" | Password = "b".
+	 * Expected result:True because when there is no userName,login method will return "WrongInput".
+	 * */
+	void testWithoutUserNameField() {
+		String testLogin = ((String) Query.Login("","b"));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
+	
+	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert password.
+	 * Input: UserName = "b" | Password = "".
+	 * Expected result:True because when there is no password,login method will return "WrongInput".
+	 * */
+	void testWithoutPasswordField() {
+		String testLogin = ((String) Query.Login("b",""));
+		assertTrue(testLogin.equals("WrongInput"));
+	}
 }

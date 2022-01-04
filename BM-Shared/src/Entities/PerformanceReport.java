@@ -18,7 +18,7 @@ public class PerformanceReport implements Serializable {
 	private int total_orders;
 	private int onTime;
 	private int areLate;
-	private double lateRate;
+	private double onTimeRate;
 	private double AvarageCookingTime;
 
 	public PerformanceReport(String month, String year, String branch, String resName, int total_orders, int onTime,
@@ -33,12 +33,12 @@ public class PerformanceReport implements Serializable {
 		this.areLate = areLate;
 	}
 
-	public double getLateRate() {
-		return lateRate;
+	public double getOnTimeRate() {
+		return onTimeRate;
 	}
 
-	public void setLateRate(double lateRate) {
-		this.lateRate = lateRate;
+	public void setOnTimeRate(double lateRate) {
+		this.onTimeRate = lateRate;
 	}
 
 	public double getAvarageCookingTime() {

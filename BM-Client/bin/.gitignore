@@ -3,6 +3,19 @@
 /LoginTest.class
 /Parsing/
 /client/
+<<<<<<< HEAD
 /main/
 /fxml/
 /images/
+=======
+<<<<<<< HEAD
+/css/
+/fxml/
+/icons/
+/images/
+/main/
+=======
+/main/
+/fxml/
+>>>>>>> master
+>>>>>>> master

@@ -19,6 +19,10 @@ import javafx.scene.text.Text;
 
 
 
+/**This class meant to show the CEO the histogram of the report/s she chose
+ * @author Adi & Talia
+ *
+ */
 public class histogramController extends Controller implements Initializable {
 
 	@FXML
@@ -59,6 +63,10 @@ public class histogramController extends Controller implements Initializable {
     @FXML
     private NumberAxis yIncome2;
 
+	/** This method meant to get back to login page
+	 * @param event				pressing the "back" button 
+	 * @throws IOException
+	 */
     @FXML
     void back(ActionEvent event) throws IOException {
     	QuarterReportController.report1=null;
@@ -66,11 +74,19 @@ public class histogramController extends Controller implements Initializable {
     	start(event,"CEOChooseQReports", "Choose Quarter Report",LoginScreenController.user.getFirstN());
     }
 
+	/** This method meant to get back to costumer page
+	 * @param event				pressing the "home" image 
+	 * @throws IOException
+	 */
     @FXML
     void backToHome(MouseEvent event) throws IOException {
     	start(event,"CEOScreen", "CEO", LoginScreenController.user.getFirstN());
     }
 
+    
+	/**This method meant to initialize the histogram chart/s with the details from the DB
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -97,6 +113,10 @@ public class histogramController extends Controller implements Initializable {
 		chart1.getData().addAll(set1);
 	}
 
+    
+	/**Abstract method for displaying labels to the screen
+	 * @param string        empty string
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());

@@ -27,6 +27,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+/**This class meant to show the customer his final bill with all of the details he chose for his order, 
+ * allowing him to use refund and give his approval to pass the order to the supplier
+ * @author Adi&Talia
+ *
+ */
 public class OrderConfimController extends Controller{
 
     @FXML
@@ -103,6 +108,10 @@ public class OrderConfimController extends Controller{
 		start(event, "LoginScreen", "Login","");
     }
     
+    
+    /**this method sets the total price to be without the refund (The costumer chose that he doesn't want to use refund)
+     * @param event      pressing the checkbox "no"
+     */
     @FXML
     void chooseNo(ActionEvent event) {
     	if(no.isSelected())
@@ -114,6 +123,9 @@ public class OrderConfimController extends Controller{
 
     }
 
+    /**this method sets the total price label to the price after refund (The costumer chose that he wants to use refund)
+     * @param event      pressing the checkbox "yes"
+     */
     @FXML
     void chooseYes(ActionEvent event) {
     	if(yes.isSelected())
@@ -142,6 +154,12 @@ public class OrderConfimController extends Controller{
     }
 
 
+    /**this method inserts the order to the DB, first inserts the used refund and total price to the entity of the order,
+     * inserts the order entity to the DB and gets his AI order number. after that, it inserts the dishes in the order to the DB and the delivery if he has one.
+     * the method also alerts the customer that his order got accepted in the system and passed to the supplier 
+     * @param event             pressing "approve" button
+     * @throws IOException
+     */
     @FXML
     void approve(ActionEvent event) throws IOException 
     {
@@ -212,12 +230,23 @@ public class OrderConfimController extends Controller{
 		}
     }
 
-    
+	/**
+	 * This method meant to get back to choosing supply details
+	 * 
+	 * @param event       pressing the "back" button
+	 * @throws IOException
+	 */
     @FXML
     void back(ActionEvent event) throws IOException {
 		start(event, "DeliveryOrPickUp", "Your supply details",LoginScreenController.user.getFirstN());
     }
     
+    
+	/**This method meant to show the customer all of his [selected order details- the dishes he chose and their price,
+	 * his selected supplying method including the discount if he chose an early order and even his refund details(if he has one for the restaurant he chose) 
+	 * The method also calculates the total price for the order (without refund)
+	 *
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());

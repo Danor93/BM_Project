@@ -23,6 +23,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
+/**This class meant to allow the CEO to choose the quarterly report/s she'd like to view or compare
+ * @author Adi & Talia
+ *
+ */
 public class QuarterReportController extends Controller implements Initializable{
 
     @FXML
@@ -100,6 +104,13 @@ public class QuarterReportController extends Controller implements Initializable
     	start(event, "CEOScreen", "CEO Screen","");
     }
 
+    
+    /**This method meant to check if the quarterly report/s that the costumer chose exist in the DB, 
+     * if they do it passes the costumer to the histogram screen, otherwise, alerting him if one of the
+     *  reports he chose does not exits or if he didn't enter all of the details.
+     * @param event                  pressing "proceed" button
+     * @throws IOException
+     */
     @FXML
     void proceed(ActionEvent event) throws IOException 
     {
@@ -174,6 +185,9 @@ public class QuarterReportController extends Controller implements Initializable
     	}
     }
     
+    /**The method allows the CEO to choose one quarterly report to view
+     * @param event         pressing "1" checkbox
+     */
     @FXML
     void choose1Rep(ActionEvent event) {
     	if(choose1.isSelected())
@@ -198,6 +212,9 @@ public class QuarterReportController extends Controller implements Initializable
     	}
     }
 
+    /**The method allows the CEO to choose 2 quarterly reports to view and compare
+     * @param event         pressing "2" checkbox
+     */
     @FXML
     void choose2Rep(ActionEvent event) {
     	if(choose2.isSelected())
@@ -222,12 +239,19 @@ public class QuarterReportController extends Controller implements Initializable
     		yearlbl.setVisible(false);
     	}
     }
-
+    
+	/**Abstract method for displaying labels to the screen
+	 * @param string        empty string
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());		
 	}
 
+	
+	/**The method meant to initialize the combo boxes with the 3 branches, the 4 quarters and also years from the DB that there's a revenue report for them 
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{
