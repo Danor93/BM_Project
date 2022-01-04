@@ -34,7 +34,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </TextField>
-      <TextField fx:id="ipTxt" disable="true" layoutX="205.0" layoutY="266.0" prefHeight="51.0" prefWidth="161.0" text="&quot;localhost&quot;">
+      <TextField fx:id="ipTxt" layoutX="205.0" layoutY="266.0" prefHeight="51.0" prefWidth="161.0">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></TextField>

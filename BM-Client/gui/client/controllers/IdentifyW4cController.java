@@ -106,8 +106,7 @@ import main.ClientUI;
 		void getW4cFromQR(ActionEvent event) throws IOException {
 			if(client==null)
 			{
-				Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
-				ClientUI.chat.accept(msg);
+				ClientUI.chat.accept(new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId()));
 			}
 			switchScene(event);
 		}
@@ -128,9 +127,3 @@ import main.ClientUI;
 			userName.setText(LoginScreenController.user.getFirstN());
 		}
 	}
-	
-
-
-
-
-

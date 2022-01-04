@@ -39,7 +39,7 @@ public class ServerUIFController {
 
 	public static boolean flagon = false;
 	Alert a = new Alert(AlertType.ERROR);
-	
+
 	@FXML
 	private URL location;
 
@@ -81,14 +81,14 @@ public class ServerUIFController {
 
 	@FXML
 	private TextField Passtxt;
-	
-    @FXML
-    private Button ImportBtn;
-    
-    @FXML
-    void importDatabase(ActionEvent event) {
-    	Query.importData();
-    }
+
+	@FXML
+	private Button ImportBtn;
+
+	@FXML
+	void importDatabase(ActionEvent event) {
+		Query.importData();
+	}
 
 	public void start(Stage primaryStage) throws IOException {
 		FXMLLoader load = new FXMLLoader();
@@ -104,16 +104,18 @@ public class ServerUIFController {
 	void ConnectServer(ActionEvent event) {
 		ServerConnection.startServer(null, this);
 		String username, password;
-		//username = usertxt.getText();
-		//password = Passtxt.getText();
-		username = "root";
-		password = "Aa123456";
-		Connection connection = DBConnect.connect();
-		if (flagon) {
-			Statuslbl.setText("ON");
-			Statuslbl.setStyle("-fx-text-fill: green");
-			addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
-			ClientTable.refresh();
+		if (Passtxt.getText().isEmpty()) {
+			addToTextArea("you must fill the password box!");
+		} else {
+			username = "root";
+			password = Passtxt.getText().toString();
+			Connection connection = DBConnect.connect(username, password);
+			if (flagon) {
+				Statuslbl.setText("ON");
+				Statuslbl.setStyle("-fx-text-fill: green");
+				addToTextArea("Server listening for connections on port: " + DEFAULT_PORT);
+				ClientTable.refresh();
+			}
 		}
 	}
 
@@ -156,7 +158,7 @@ public class ServerUIFController {
 		ClientTable.setItems(data);
 		ClientTable.refresh();
 	}
-	
+
 	public void message(String msg, String title) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(title);

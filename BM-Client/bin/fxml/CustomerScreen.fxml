@@ -14,7 +14,7 @@
          <image>
             <Image url="@/images/Nbackground.jpg" />
          </image></ImageView>
-      <Label fx:id="welcome" layoutX="113.0" layoutY="139.0" prefHeight="64.0" prefWidth="322.0" text="Costumer Page">
+      <Label fx:id="welcome" alignment="CENTER" layoutX="-2.0" layoutY="139.0" prefHeight="64.0" prefWidth="566.0" text="Costumer Page">
          <font>
             <Font name="System Bold" size="43.0" />
          </font>

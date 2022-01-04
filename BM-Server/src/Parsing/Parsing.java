@@ -67,9 +67,6 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.getYears, years);
 		}
 
-		/*
-		 * this case handles the login of the system.
-		 */
 		case loginSystem: {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
@@ -80,19 +77,19 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.loginSystem, result);
 		}
 		
-		/*
-		 *this case handels the W4C 
-		 */
+
 		case IdentifyW4c: {
 			Client costumer = Query.checkAccountKind((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
 		}
 
+	
 		case Show_Cities: {
 			ArrayList<String> city = Query.getCities();
 			return messageFromServer = new Message(MessageType.Show_Cities, city);
 		}
 
+	
 		case ClientConfirm: {
 			ArrayList<Order> orders = Query.ConfirmClient((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.ClientConfirm, orders);
@@ -101,7 +98,6 @@ public class Parsing {
 		case priceShare:
 		{
 			return messageFromServer = new Message(MessageType.priceShare,Query.getParticipants((Integer) receivedMessage.getMessageData()) );
-			
 		}
 		
 		case InsertShared:

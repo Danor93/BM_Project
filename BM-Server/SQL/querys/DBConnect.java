@@ -14,7 +14,7 @@ public class DBConnect  {
 
 	public static Connection conn;
 	
-	public static Connection connect() {
+	public static Connection connect(String UserName,String Password) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 			EchoServer.serverUIFController.addToTextArea("Driver definition succeed.");
@@ -24,7 +24,7 @@ public class DBConnect  {
 		}
 
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", "root","Aa123456");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", UserName,Password);
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");
 			ServerUIFController.flagon=true;
 		} catch (SQLException ex) {/* handle any errors */

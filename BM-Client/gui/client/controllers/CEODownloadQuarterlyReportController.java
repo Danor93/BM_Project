@@ -28,8 +28,8 @@ import main.PopUpMessage;
 
 /**
  * 
- * @author Lior
- * This class handles the functionality of the CEO to download a PDF of the branch quarterly report.
+ * @author Lior This class handles the functionality of the CEO to download a
+ *         PDF of the branch quarterly report.
  *
  */
 public class CEODownloadQuarterlyReportController implements Initializable {
@@ -43,7 +43,6 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	public StringBuilder branchAndYearAndQuarterlyString = new StringBuilder();
 	public static MyFile downloadFileData;
 
-	
 	@FXML
 	private ToggleGroup quarterlyGroup;
 
@@ -92,6 +91,7 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	/**
 	 * show a new window
+	 * 
 	 * @param stage
 	 * @param root
 	 */
@@ -103,8 +103,9 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	}
 
 	/**
-	 * Select a branch
-	 * after selection the relevant choice of year and quarterly will be available
+	 * Select a branch after selection the relevant choice of year and quarterly
+	 * will be available
+	 * 
 	 * @param event click one of btnNorth or btnCenter or btnSouth
 	 */
 	@FXML
@@ -116,6 +117,18 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 		else if (btnSouth.isSelected())
 			selectedBranch = "South";
 
+		years = new ArrayList<String>();
+		btn01.setSelected(false);
+		btn02.setSelected(false);
+		btn03.setSelected(false);
+		btn04.setSelected(false);
+		
+		btn01.setDisable(true);
+		btn02.setDisable(true);
+		btn03.setDisable(true);
+		btn04.setDisable(true);
+		btnDownload.setDisable(true);
+
 		ClientUI.chat.accept(new Message(MessageType.showRelevantYearsAndQuarterly, selectedBranch));
 
 		for (String year : yearsAndQuarter) {
@@ -123,21 +136,32 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 			if (!years.contains(divYandQ[0]))
 				years.add(divYandQ[0]);
 		}
-
 		yearsObservableList = FXCollections.observableArrayList(years);
 		comboBoxYear.setItems(yearsObservableList);
-
 		comboBoxYear.setDisable(years.isEmpty());
 
 	}
 
 	/**
-	 * chose a year from comboBox
-	 * after selection the the relevant choice of quarterly will be available
+	 * chose a year from comboBox after selection the the relevant choice of
+	 * quarterly will be available
+	 * 
 	 * @param event chose a year
 	 */
 	@FXML
 	void selectYear(ActionEvent event) {
+		
+		btn01.setSelected(false);
+		btn02.setSelected(false);
+		btn03.setSelected(false);
+		btn04.setSelected(false);
+		
+		btn01.setDisable(true);
+		btn02.setDisable(true);
+		btn03.setDisable(true);
+		btn04.setDisable(true);
+		btnDownload.setDisable(true);
+		
 		selectedYear = comboBoxYear.getSelectionModel().getSelectedItem();
 
 		for (String year : yearsAndQuarter) {
@@ -164,8 +188,8 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	}
 
 	/**
-	 * Select a quarterly
-	 * this method create a StringBuilder with the details
+	 * Select a quarterly this method create a StringBuilder with the details
+	 * 
 	 * @param event click one of btn01 or btn02 or btn03 or btn04
 	 */
 	@FXML
@@ -190,11 +214,10 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	}
 
 	/**
-	 * this method sent the details to server,
-	 * the client can choose where he want the file will save
-	 * get the relevant file data in MyFile format
-	 * make a PDF file from MyFile format 
-	 * and download to the chosen path
+	 * this method sent the details to server, the client can choose where he want
+	 * the file will save get the relevant file data in MyFile format make a PDF
+	 * file from MyFile format and download to the chosen path
+	 * 
 	 * @param event click on btnDownload
 	 */
 	@FXML

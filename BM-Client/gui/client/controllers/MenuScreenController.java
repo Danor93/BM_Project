@@ -144,8 +144,6 @@ public class MenuScreenController extends Controller {
 		start(event, "DishesOfKindScreen", "Restaurant's drinks",chosenFoodType);
     }
 
-
-
 	/**
 	 * This method meant to show the main dishes of the restaurant
 	 * 
