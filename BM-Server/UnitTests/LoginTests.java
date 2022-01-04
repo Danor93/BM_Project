@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * @author Danor
+ * @author Sahar
+ * @author aviel
  * this class runs test for the login of users.
  */
 
@@ -36,6 +38,10 @@ public class LoginTests  {
 	public class testDBConnect {
 		public Connection testConn;
 		
+		/**
+		 * this is an inner class that implements the connection of the DB without the gui.
+		 * @return - a Connection parameter.
+		 */
 		public Connection testConnect() {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -53,12 +59,17 @@ public class LoginTests  {
 	}
 
 	
+	/**
+	 * this is a set up for the tests including an connect to the DB.
+	 */
 	@BeforeEach
 	void setUp () throws Exception{
-		testDBConnect tbd = new testDBConnect();
+		testDBConnect tbd = new testDBConnect();//for set up a connection to the DB
 		testConn = tbd.testConnect();
 		DBConnect.conn = testConn;
 	}
+	
+	
 	
 	/************************* TEST Customer Login **************************/
 	
@@ -75,8 +86,9 @@ public class LoginTests  {
 		
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
-		Query.UpdateisLoggedIn("b");
+		
 		assertTrue(ExpectedCustomer.getId().equals(resCustomer.getId()));
+		Query.UpdateisLoggedIn("b");
 	}
 	
 	@Test
@@ -92,8 +104,9 @@ public class LoginTests  {
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
-		Query.UpdateisLoggedIn("adi");
+		
 		assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));
+		Query.UpdateisLoggedIn("adi");
 	}
 	
 	@Test
@@ -126,8 +139,8 @@ public class LoginTests  {
 		Query.Login("b","b");		
 		String SecondLogin = ((String) Query.Login("b","b"));
 		
-		Query.UpdateisLoggedIn("b");
 		assertTrue(SecondLogin.equals("Already"));
+		Query.UpdateisLoggedIn("b");
 	}
 	
 	/************************* TEST Branch Manager Login **************************/
@@ -415,42 +428,78 @@ public class LoginTests  {
 	/************************* TEST Errors in Login **************************/
 
 	@Test
+	/*
+	 * Test Description:This test case check if the account not exits in the DB.
+	 * Input: UserName = "ortBraude" | Password = "ortBraude".
+	 * Expected result:True because the user "ortBraude" is not exits in the DB.
+	 * */
 	void testNotExistingAccount() {
 		String testLogin = ((String) Query.Login("ortBraude","ortBraude"));
 		assertTrue(testLogin.equals("WrongInput"));
 	}
 	
 	@Test
+	/*
+	 * Test Description:This test case check if the account is freeze.
+	 * Input: UserName = "matan" | Password = "matan".
+	 * Expected result:True because the user is defined as "Freeze" account in the DB and the login method will return "Freeze".
+	 * */
 	void testFreezeAccount() {
 		String testLogin = ((String) Query.Login("matan","matan"));
 		assertTrue(testLogin.equals("Freeze"));
 	}
 	
+	
 	@Test
+	/*
+	 * Test Description:This test case check wrong password.
+	 * Input: UserName = "matan" | Password = "123".
+	 * Expected result:True because the the password of this user is wrong and login method will return "WrongInput". 
+	 * */
 	void testWrongPassword() {
 		String testLogin = ((String) Query.Login("matan","123"));
 		assertTrue(testLogin.equals("WrongInput"));
 	}
 	
 	@Test
+	/*
+	 * Test Description:This test case check wrong UserName.
+	 * Input: UserName = "123" | Password = "matan".
+	 * Expected result:True because the the UserName of this user is wrong and login method will return "WrongInput". 
+	 * */
 	void testWrongUserName() {
 		String testLogin = ((String) Query.Login("matan2","matan"));
 		assertTrue(testLogin.equals("WrongInput"));
 	}
 	
 	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert userName and password at all.
+	 * Input: UserName = "" | Password = "".
+	 * Expected result:True because when there is no input,login method will return "WrongInput".
+	 * */
 	void testWithoutFields() {
 		String testLogin = ((String) Query.Login("",""));
 		assertTrue(testLogin.equals("WrongInput"));
 	}
 	
 	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert userName.
+	 * Input: UserName = "" | Password = "b".
+	 * Expected result:True because when there is no userName,login method will return "WrongInput".
+	 * */
 	void testWithoutUserNameField() {
 		String testLogin = ((String) Query.Login("","b"));
 		assertTrue(testLogin.equals("WrongInput"));
 	}
 	
 	@Test
+	/*
+	 * Test Description:This test case check a case when the user doesn't insert password.
+	 * Input: UserName = "b" | Password = "".
+	 * Expected result:True because when there is no password,login method will return "WrongInput".
+	 * */
 	void testWithoutPasswordField() {
 		String testLogin = ((String) Query.Login("b",""));
 		assertTrue(testLogin.equals("WrongInput"));
