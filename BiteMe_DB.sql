@@ -39,7 +39,7 @@ CREATE TABLE `buss_client` (
 
 LOCK TABLES `buss_client` WRITE;
 /*!40000 ALTER TABLE `buss_client` DISABLE KEYS */;
-INSERT INTO `buss_client` VALUES ('5647789','Elbit','600','Waiting'),('6547898','Intel','500','Waiting');
+INSERT INTO `buss_client` VALUES ('5647789','Elbit','600','Waiting'),('6547898','Intel','423.509','Approved');
 /*!40000 ALTER TABLE `buss_client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `delivery` (
 
 LOCK TABLES `delivery` WRITE;
 /*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
-INSERT INTO `delivery` VALUES (27,'Regular','1','haborsh','0502660865','Danor','25.0'),(28,'Regular','1','haifa','0502660865','danor','25.0'),(29,'Regular','1','habrosh 13','0528969700','noy','25.0'),(30,'Regular','1','haborsh','0502660865','danor','25.0'),(42,'Shared','3','a','0504773435','as','45.0'),(43,'Shared','3','a','0506774545','a','45.0'),(44,'Regular','1','a','0504553434','a','25.0'),(47,'Regular','1','a','0503706494','a','25.0');
+INSERT INTO `delivery` VALUES (27,'Regular','1','haborsh','0502660865','Danor','25.0'),(28,'Regular','1','haifa','0502660865','danor','25.0'),(29,'Regular','1','habrosh 13','0528969700','noy','25.0'),(30,'Regular','1','haborsh','0502660865','danor','25.0'),(31,'Regular','1','haborsh','0502660865','danor','25.0'),(33,'Regular','2','ben zvi','0506647856','daniel','40.0'),(35,'Regular','2','a','0502664789','daniel','40.0'),(42,'Shared','3','a','0504773435','as','45.0'),(43,'Shared','3','a','0506774545','a','45.0'),(44,'Regular','1','a','0504553434','a','25.0'),(47,'Regular','1','a','0503706494','a','25.0');
 /*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `dishesinorder` (
   PRIMARY KEY (`dishId`,`orderNum`,`dishName`),
   KEY `orderNumber` (`orderNum`),
   CONSTRAINT `orderNumber_fk` FOREIGN KEY (`orderNum`) REFERENCES `order` (`orderNumber`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `dishesinorder` (
 
 LOCK TABLES `dishesinorder` WRITE;
 /*!40000 ALTER TABLE `dishesinorder` DISABLE KEYS */;
-INSERT INTO `dishesinorder` VALUES (1,15,'cheese cake','1','Dessert',NULL,NULL,NULL,3),(2,16,'home salad','1','Salad',NULL,NULL,NULL,1),(3,17,'greek salad','1','Salad',NULL,NULL,NULL,1),(8,15,'Shnitzel','2','Main dish',NULL,NULL,NULL,1),(9,19,'greek salad','1','Salad','size','M','',2),(10,20,'greek salad','1','Salad','size','M','',2),(11,21,'greek salad','1','Dessert','size','M','',2),(12,22,'greek salad','1','Main dish','size','M','',2),(13,23,'greek salad','1','Salad','size','M','',2),(14,24,'greek salad','1','Main dish','size','M','',2),(15,25,'greek salad','1','Dessert','size','M','',2),(16,26,'greek salad','1','Main dish','size','M','',2),(18,27,'greek salad','1','Salad','size','S','',1),(19,28,'crispy chicken','200564879','Main dish','Size','M','no cucumber ',1),(20,28,'coca cola','200564879','Drink','type','Zero','',1),(21,29,'Mc Royal','200564879','Main dish','size','m','',1),(22,29,'coca cola','200564879','Drink','type','Zero','',1),(23,29,'ice cream','200564879','Dessert','Favor','Vanil','',1),(24,30,'crispy chicken','200564879','Main dish','Size','M','',1);
+INSERT INTO `dishesinorder` VALUES (1,15,'cheese cake','1','Dessert',NULL,NULL,NULL,3),(2,16,'home salad','1','Salad',NULL,NULL,NULL,1),(3,17,'greek salad','1','Salad',NULL,NULL,NULL,1),(8,15,'Shnitzel','2','Main dish',NULL,NULL,NULL,1),(9,19,'greek salad','1','Salad','size','M','',2),(10,20,'greek salad','1','Salad','size','M','',2),(11,21,'greek salad','1','Dessert','size','M','',2),(12,22,'greek salad','1','Main dish','size','M','',2),(13,23,'greek salad','1','Salad','size','M','',2),(14,24,'greek salad','1','Main dish','size','M','',2),(15,25,'greek salad','1','Dessert','size','M','',2),(16,26,'greek salad','1','Main dish','size','M','',2),(18,27,'greek salad','1','Salad','size','S','',1),(19,28,'crispy chicken','200564879','Main dish','Size','M','no cucumber ',1),(20,28,'coca cola','200564879','Drink','type','Zero','',1),(21,29,'Mc Royal','200564879','Main dish','size','m','',1),(22,29,'coca cola','200564879','Drink','type','Zero','',1),(23,29,'ice cream','200564879','Dessert','Favor','Vanil','',1),(24,30,'crispy chicken','200564879','Main dish','Size','M','',1),(25,31,'crispy chicken','200564879','Main dish','Size','M','no cucumber no pickles ',1),(26,31,'nuggets','200564879','Starter','Size','l','royal sauce ',1),(27,31,'ice cream','200564879','Dessert','Favor','Chooclate','',1),(28,32,'Mc Royal','200564879','Main dish','size','s','chesse ',1),(29,33,'Mc Royal','200564879','Main dish','size','s','chesse ',1),(30,34,'ice cream','200564879','Dessert','Favor','Chooclate','',1),(31,35,'crispy chicken','200564879','Main dish','Size','M','',1),(32,36,'ice cream','200564879','Dessert','Favor','Chooclate','',1);
 /*!40000 ALTER TABLE `dishesinorder` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +246,7 @@ CREATE TABLE `order` (
   `punctuality` int DEFAULT NULL,
   `timeSended` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`orderNumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +255,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Sended','134','0',0,'no','19:47:06.739913',NULL,'19:47:43.040882900'),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Sended','134','0',0,'no','19:47:11.259438100',NULL,'19:47:46.249478500'),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Sended','134','0',0,'no','19:47:13.353014100',NULL,'19:47:49.354182900'),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','Waiting','134','0',0,'no',NULL,NULL,NULL),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:15.683945500',NULL,'19:47:56.641788'),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:17.549499100',NULL,'19:47:36.327314500'),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(27,'Regular','vivino','1','3.5','17:00','2022-01-02','Waiting','134','0',0,'yes',NULL,0,NULL),(28,'Regular','mcdonalds','200564879','76.482','12:00','2022-01-10','Waiting','3564578','0',0,'yes',NULL,0,NULL),(29,'Regular','mcdonalds','200564879','99.97','10:00','2022-01-03','Waiting','32124564','0',0,'no',NULL,0,NULL),(30,'Regular','mcdonalds','200564879','67.491005','15:00','2022-01-07','Waiting','3564578','0',0,'yes',NULL,0,NULL);
+INSERT INTO `order` VALUES (15,'Take Away','vivino','1','18','10:35','2021-12-23','Sended','134','0',0,'no','19:47:06.739913',NULL,'19:47:43.040882900'),(16,'Take Away','vivino','1','7.5','11:00','2021-12-23','Sended','134','0',0,'no','19:47:11.259438100',NULL,'19:47:46.249478500'),(17,'Take Away','vivino','1','3.5','11:01','2021-12-24','Sended','134','0',0,'no','19:47:13.353014100',NULL,'19:47:49.354182900'),(18,'Take Away ','refaelo','2','25.3','10:30','2021-12-25','Waiting','134','0',0,'no',NULL,NULL,NULL),(19,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:15.683945500',NULL,'19:47:56.641788'),(20,'Regular','vivino','1','32.0','19:20','2021-12-27','Sended','134','0',0,'no','19:47:17.549499100',NULL,'19:47:36.327314500'),(21,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(22,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(23,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(24,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(25,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(26,'Regular','vivino','1','32.0','19:20','2021-12-27','Waiting','134','0',0,'no',NULL,NULL,NULL),(27,'Regular','vivino','1','3.5','17:00','2022-01-02','Waiting','134','0',0,'yes',NULL,0,NULL),(28,'Regular','mcdonalds','200564879','76.482','12:00','2022-01-10','Approved','3564578','0',0,'yes','12:45:05.418126300',0,NULL),(29,'Regular','mcdonalds','200564879','99.97','10:00','2022-01-03','Sended','32124564','0',0,'no','12:49:26.447381300',0,'12:49:36.357620400'),(30,'Regular','mcdonalds','200564879','67.491005','15:00','2022-01-07','Waiting','3564578','0',0,'yes',NULL,0,NULL),(31,'Regular','mcdonalds','200564879','98.973','15:00','2022-01-06','Waiting','3115467','0',0,'yes',NULL,0,NULL),(32,'Take Away','mcdonalds','200564879','53.991','15:00','2022-01-05','Waiting','6547898','0',0,'yes',NULL,0,NULL),(33,'Regular','mcdonalds','200564879','71.491005','10:30','2022-01-18','Approved','6547898','0',1,'yes','12:45:24.829800500',0,NULL),(34,'Shared-33','mcdonalds','200564879','22.491','10:30','2022-01-18','Waiting','6547898','0',0,'yes',NULL,0,NULL),(35,'Regular','mcdonalds','200564879','69.990005','12:55','2022-01-04','Done','6547898','0',0,'no','12:52:09.237095100',1,'12:54:12.607518800'),(36,'Shared-35','mcdonalds','200564879','24.99','12:55','2022-01-04','Done','6547898','0',0,'no','12:54:01.156734300',1,'12:54:20.062078');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +312,7 @@ CREATE TABLE `performance_reports` (
 
 LOCK TABLES `performance_reports` WRITE;
 /*!40000 ALTER TABLE `performance_reports` DISABLE KEYS */;
-INSERT INTO `performance_reports` VALUES ('mcdonalds','2022','1','north',5,5,0),('vivino','2021','12','north',3,2,1);
+INSERT INTO `performance_reports` VALUES ('mcdonalds','2022','01','North',2,2,0),('mcdonalds','2022','1','north',5,5,0),('vivino','2021','12','north',3,2,1);
 /*!40000 ALTER TABLE `performance_reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-04 12:29:08
+-- Dump completed on 2022-01-04 13:22:32
