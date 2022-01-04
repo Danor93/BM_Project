@@ -26,7 +26,8 @@ import main.ClientUI;
  * he chose for his order, allowing him to use refund and give his approval to
  * pass the order to the supplier
  * 
- * @author Adi&Talia
+ * @author Adi
+ * @author Talia
  *
  */
 public class OrderConfimController extends Controller {

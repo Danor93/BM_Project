@@ -24,8 +24,8 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 	/** This class describes the start of the choosing restaurant process,starting from choosing city
-	 * @author Adi & Talia
-	 *
+	 * @author Adi  
+	 * @author Talia
 	 */
 	public class ChooseRestController extends Controller implements Initializable{
 		

@@ -16,7 +16,8 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 /**This class meant to show the customer the menu of the restaurant he chose divided by 5 types
- * @author Adi & Talia
+ * @author Adi
+ * @author Talia
  *
  */
 public class MenuScreenController extends Controller {

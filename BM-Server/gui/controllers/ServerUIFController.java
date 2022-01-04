@@ -151,6 +151,9 @@ public class ServerUIFController {
 	}
 
 	/** This method will update the table */
+	/**
+	 * @param client - Array list of clients who connected to BiteMe.
+	 */
 	public void Update(ArrayList<ClientConnection> client) {
 		addToTextArea("New connection: " + client);
 		ObservableList<ClientConnection> data = FXCollections.observableArrayList(client);

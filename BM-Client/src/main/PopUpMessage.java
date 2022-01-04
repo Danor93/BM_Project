@@ -18,7 +18,12 @@ import javafx.stage.Stage;
 public class PopUpMessage {
 
 	
-	/**confirmDialog show to user Confirm msg*/
+	/**
+	 * confirmDialog show to user Confirm msg.
+	 * @param msg - message to show
+	 * @param stage - stage for the popup
+	 * @return - true/false.
+	 */
 	public static boolean confirmDialog(String msg, Stage stage) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");

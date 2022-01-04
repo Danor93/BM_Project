@@ -25,7 +25,8 @@ import main.ClientUI;
 
 /**
  * 
- * @author Aviel & Sahar
+ * @author Aviel
+ * @author Sahar
  * This class is to view receipt from the database
  *
  */

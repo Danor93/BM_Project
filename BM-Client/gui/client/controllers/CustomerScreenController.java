@@ -17,13 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import main.ClientUI;
 
-/** This class describes the costumer side in the system-first page after logging into the BM system
- * @author Adi & Talia
- *
- */
 /**
- * @author Adi&talia
- *
+ * @author Adi
+ * @author talia
+ * This class describes the costumer side in the system-first page after logging into the BM system
  */
 public class CustomerScreenController extends Controller implements Initializable {
 

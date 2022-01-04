@@ -17,8 +17,8 @@ import javafx.event.ActionEvent;
 import main.ClientUI;
 
 	/** This class meant to identify the user as a costumer in the system
-	 * @author Adi & Talia
-	 *
+	 * @author Adi  
+	 * @author Talia
 	 */
 	public class IdentifyW4cController extends Controller {
 

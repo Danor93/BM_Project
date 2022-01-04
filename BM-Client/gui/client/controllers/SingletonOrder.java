@@ -21,7 +21,7 @@ public class SingletonOrder
  
 
     /**Static method to create instance of the Singleton class
-     * @return
+     * @return - singleton Order.
      */
     public static SingletonOrder getInstance()
     {

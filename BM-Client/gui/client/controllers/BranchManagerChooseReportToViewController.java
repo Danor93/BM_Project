@@ -30,8 +30,8 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 /**
- * @author Danor
- * this class  implements the functionality of the Branch Manager to view reports of Revenues, Orders And Performance. 
+ * @author Danor this class implements the functionality of the Branch Manager
+ *         to view reports of Revenues, Orders And Performance.
  */
 public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
 
@@ -44,9 +44,9 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	ObservableList<OrdersReport> OrderList;
 	ObservableList<PerformanceReport> PerformanceList;
 
-    @FXML
-    private Label AvergaeTable;
-	
+	@FXML
+	private Label AvergaeTable;
+
 	@FXML
 	private ImageView BackImage;
 
@@ -57,7 +57,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	private Button GetReport;
 
 	@FXML
-	private ComboBox<Integer> Month;
+	private ComboBox<String> Month;
 
 	@FXML
 	private TableColumn<OrdersReport, String> OrdDishTypeCol;
@@ -100,7 +100,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	@FXML
 	private TableView<OrdersReport> orders;
-	
+
 	@FXML
 	private ImageView homePage;
 
@@ -109,42 +109,41 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	@FXML
 	private Text userName;
-	
+
 	@FXML
-    private Pane preformancePane;
-	
-    @FXML
-    private TableView<PerformanceReport> performanceTable;
+	private Pane preformancePane;
 
-    @FXML
-    private TableColumn<PerformanceReport, String> perfRestNameCol;
+	@FXML
+	private TableView<PerformanceReport> performanceTable;
 
-    @FXML
-    private TableColumn<PerformanceReport, Integer> perfTotalOrdersCol;
+	@FXML
+	private TableColumn<PerformanceReport, String> perfRestNameCol;
 
-    @FXML
-    private TableColumn<PerformanceReport, Integer> perfOnTimeCol;
+	@FXML
+	private TableColumn<PerformanceReport, Integer> perfTotalOrdersCol;
 
-    @FXML
-    private TableColumn<PerformanceReport, Integer> perfAreLateCol;
+	@FXML
+	private TableColumn<PerformanceReport, Integer> perfOnTimeCol;
 
-    @FXML
-    private TableColumn<PerformanceReport, Double> perfOnTimeRateCol;
+	@FXML
+	private TableColumn<PerformanceReport, Integer> perfAreLateCol;
 
-    @FXML
-    private TableColumn<PerformanceReport, Double> perfAvgCol;
-	
-	
+	@FXML
+	private TableColumn<PerformanceReport, Double> perfOnTimeRateCol;
+
+	@FXML
+	private TableColumn<PerformanceReport, Double> perfAvgCol;
+
 	/**
 	 * @param event - back to the home screen of the Branch Manager/CEO.
 	 */
 	@FXML
 	void backToHome(MouseEvent event) throws IOException {
 		if (LoginScreenController.user.getRole().equals("CEO")) {
-			start(event, "CEOScreen", "CEO",LoginScreenController.user.getFirstN());
+			start(event, "CEOScreen", "CEO", LoginScreenController.user.getFirstN());
 		}
 		if (LoginScreenController.user.getRole().equals("BranchManager")) {
-			start(event, "BranchManagerScreen", "Branch Manager",LoginScreenController.user.getFirstN());
+			start(event, "BranchManagerScreen", "Branch Manager", LoginScreenController.user.getFirstN());
 		}
 	}
 
@@ -154,11 +153,12 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
-		start(event,"LoginScreen", "Login Screen","");
+		start(event, "LoginScreen", "Login Screen", "");
 	}
 
 	/**
 	 * choosing branch from the combo box (CEO Only).
+	 * 
 	 * @param event - for the combo box.
 	 */
 	@FXML
@@ -169,6 +169,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * choosing Month from the combo box
+	 * 
 	 * @param event - for the combo box.
 	 */
 	@FXML
@@ -187,6 +188,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * choosing Year from the combo box.
+	 * 
 	 * @param event - for the combo box.
 	 */
 	@FXML
@@ -197,13 +199,14 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * show the user the report he wanted by branch,year,month.
+	 * 
 	 * @param event - for the Get Report button.
 	 */
 	@FXML
 	void getReport(ActionEvent event) {
 		year = Year.getSelectionModel().getSelectedItem().toString();
-		month =Month.getSelectionModel().getSelectedItem().toString();
-		Branch =homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
+		month = Month.getSelectionModel().getSelectedItem().toString();
+		Branch = homeBranches.BranchToString(LoginScreenController.user.getHomeBranch());
 		StringBuilder details = new StringBuilder();
 		details.append(Branch);
 		details.append("@");
@@ -212,7 +215,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		details.append(year);
 		if (ReportType.getSelectionModel().getSelectedItem() != null) {
 			switch (ReportType.getSelectionModel().getSelectedItem().toString()) {
-			
+
 			case "Revenue": {
 				orders.getItems().clear();
 				performanceTable.getItems().clear();
@@ -247,6 +250,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * a method for handle the Revenue table and show it in the screen.
+	 * 
 	 * @param details - details of the Branch,Year,Month.
 	 */
 	public void RevenueReport(StringBuilder details) {
@@ -262,6 +266,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * a method for handle the Orders table and show it in the screen.
+	 * 
 	 * @param details - details of the Branch,Year,Month.
 	 */
 	public void OrdersReport(StringBuilder details) {
@@ -277,25 +282,26 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 
 	/**
 	 * a method for handle the Performance table and show it in the screen.
+	 * 
 	 * @param details - details of the Branch,Year,Month.
 	 */
 	public void PerformanceReport(StringBuilder details) {
 		performanceTable.setVisible(true);
 		preformancePane.toFront();
-		perfRestNameCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,String>("ResName"));
-		perfTotalOrdersCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("total_orders"));
-		perfOnTimeCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("onTime"));
-		perfAreLateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("areLate"));
-		perfOnTimeRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("onTimeRate"));
-		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("AvarageCookingTime"));
-		double avg=0;
+		perfRestNameCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, String>("ResName"));
+		perfTotalOrdersCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, Integer>("total_orders"));
+		perfOnTimeCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, Integer>("onTime"));
+		perfAreLateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, Integer>("areLate"));
+		perfOnTimeRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, Double>("onTimeRate"));
+		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport, Double>("AvarageCookingTime"));
+		double avg = 0;
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
-		for(PerformanceReport report : performanceArray)
-			avg+=report.getOnTimeRate();
+		for (PerformanceReport report : performanceArray)
+			avg += report.getOnTimeRate();
 		avg = avg / performanceArray.size();
 		String result = String.format("Arrival time rate is: %.2f", avg);
-		if(performanceArray.size()>0)
-			AvergaeTable.setText(result+"%");
+		if (performanceArray.size() > 0)
+			AvergaeTable.setText(result + "%");
 		PerformanceList = FXCollections.observableArrayList(performanceArray);
 		performanceTable.setItems(PerformanceList);
 	}
@@ -310,11 +316,17 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		ReportType.getItems().add("Orders");
 		ReportType.getItems().add("Performance");
 		for (int i = 1; i <= 12; i++) {
-			Month.getItems().add(i);
+			if (i < 10) {
+				Month.getItems().add("0" + i);
+			}
+			else {
+				Month.getItems().add("" + i);
+			}
+
 		}
-		
-		ClientUI.chat.accept(new Message(MessageType.get_year_for_report,null));
-		for(String y: years) {
+
+		ClientUI.chat.accept(new Message(MessageType.get_year_for_report, null));
+		for (String y : years) {
 			Year.getItems().add(y);
 		}
 

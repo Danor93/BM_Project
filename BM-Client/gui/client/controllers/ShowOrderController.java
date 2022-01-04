@@ -23,8 +23,8 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 /**This method meant to show the costumer the dishes he chose until now, allowing him to confirm and remove dishes he chose in the order
- * @author Adi & Talia
- *
+ * @author Adi 
+ * @author Talia
  */
 public class ShowOrderController extends Controller implements Initializable{
 

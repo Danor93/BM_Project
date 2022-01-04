@@ -23,7 +23,8 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 /**This class meant to allow the CEO to choose the quarterly report/s she'd like to view or compare
- * @author Adi & Talia
+ * @author Adi 
+ * @author Talia
  *
  */
 public class QuarterReportController extends Controller implements Initializable{

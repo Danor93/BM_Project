@@ -14,8 +14,8 @@ public class ServerConnection {
 	public static EchoServer server;
 
 	/**start the server for listening to client
-	 * @param userport
-	 * @param serverController
+	 * @param  userport
+	 * @param  serverUIFController
 	 */
 	public static void startServer(String userport, ServerUIFController serverUIFController) {
 		int port = 0;
@@ -38,7 +38,7 @@ public class ServerConnection {
 	}
 
 	/**This method stop the server and all connections with clients
-	 * @param serverController - the gui controller
+	 * @param serverUIFController the gui controller
 	 */
 	public static void stopServer(ServerUIFController serverUIFController) {
 		if (server == null || serverUIFController.getLabelStatusServer().getText().equals("OFF")) {

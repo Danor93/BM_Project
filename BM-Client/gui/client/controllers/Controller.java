@@ -18,11 +18,10 @@ import main.ClientUI;
 import main.PopUpMessage;
 
 /**
- * 
- * @author Aviel & Sahar
+ * @author Aviel 
+ * @author Sahar
  * Native object to be inherited by the controllers.
  * This class contains methods that be used by all the controllers. 
- *
  */
 public abstract class Controller {
 
@@ -57,7 +56,6 @@ public abstract class Controller {
 	/**
 	 * This method is to open any fxml screen
 	 * @param event, fxmlName, title, toDisplay
-	 * @throws IOException
 	 */
 	public void start(MouseEvent event, String fxmlName, String title, String toDisplay) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();

@@ -17,10 +17,10 @@ import main.ClientController;
 import main.ClientUI;
 import main.PopUpMessage;
 
-/**
- * 
- * @author Aviel & Sahar This gui class is for server connecting
- *
+/** 
+ * @author Aviel 
+ * @author Sahar 
+ * This gui class is for server connecting
  */
 public class ClientMenuUiController extends Controller {
 
@@ -58,10 +58,8 @@ public class ClientMenuUiController extends Controller {
 	}
 
 	/**
-	 * This method is to open fxml screen
-	 * 
+	 * This method is to open fxml screen.
 	 * @param primaryStage
-	 * @throws Exception
 	 */
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("BiteMe Main Client Panel");

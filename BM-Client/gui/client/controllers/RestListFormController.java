@@ -27,7 +27,8 @@ import main.ClientUI;
 
 
 /**This class shows the customer list of restaurant in specific city 
- * @author Adi & Talia
+ * @author Adi 
+ *@author Talia
  * 
  *
  */

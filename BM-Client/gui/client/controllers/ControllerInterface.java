@@ -6,11 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 /**
- * 
- * @author Aviel & Sahar
+ * @author Aviel  
+ * @author Sahar
  * Interface of back button.
  * Implemented by all the fxml controllers.
- *
  */
 public interface ControllerInterface {
 

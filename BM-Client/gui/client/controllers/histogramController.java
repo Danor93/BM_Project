@@ -20,8 +20,8 @@ import javafx.scene.text.Text;
 
 
 /**This class meant to show the CEO the histogram of the report/s she chose
- * @author Adi & Talia
- *
+ * @author Adi 
+ * @author Talia
  */
 public class histogramController extends Controller implements Initializable {
 
@@ -34,8 +34,6 @@ public class histogramController extends Controller implements Initializable {
 	@FXML
 	private Label quarter2Lbl;
 	
-	
-
     @FXML
     private Button back;
 

@@ -677,7 +677,7 @@ public class Query {
 
 	/**This method meant to get all the years that exists in the revenue report
 	 
-	 * @return ArrayList<String>  that list includes all the years that exists in the revenue report
+	 * @return ArrayList that list includes all the years that exists in the revenue report
 	 */
 	public static ArrayList<String> getYear() {
 		ArrayList<String>years=null;
@@ -730,7 +730,7 @@ public class Query {
 
 	/**This method meant to get all dishes of specific restaurant
 	 * @param restCode   is the code of the specific restaurant 
-	 * @return ArrayList<Dish>  that list includes all dishes of specific restaurant
+	 * @return - that list includes all dishes of specific restaurant
 	 */
 		
 	public static ArrayList<Dish> getDishes(String restCode) {
@@ -757,7 +757,7 @@ public class Query {
 	
 	/**This method meant to get all the restaurant of the specific city
 	 * @param city  city is the specific city that client wants to order from
-	 * @return ArrayList<Reestaurant>  that list includes all the restaurant from specific city
+	 * @return ArrayList that list includes all the restaurant from specific city
 	 */
 	public static ArrayList<Restaurant> getRestaurants(String city) {
 		ArrayList<Restaurant> rest = new ArrayList<>();

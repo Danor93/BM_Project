@@ -91,7 +91,6 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 
 	/**
 	 * show a new window
-	 * 
 	 * @param stage
 	 * @param root
 	 */

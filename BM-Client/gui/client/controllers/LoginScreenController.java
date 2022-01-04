@@ -17,7 +17,9 @@ import javafx.scene.image.ImageView;
 import main.ClientUI;
 
 /**
- * @author Adi & Talia this class handles for login into the system with all the
+ * @author Adi
+ * @author Talia 
+ * this class handles for login into the system with all the
  *         Entity related to BiteMe.
  */
 public class LoginScreenController extends Controller {
@@ -30,10 +32,11 @@ public class LoginScreenController extends Controller {
 		public LoginScreenController() {
 
 		}
-	
+		
+
 	/**
+	 * @param iLogin
 	 * this is a contractor for the test case.
-	 * @param user - user from the test case;
 	 */
 	@SuppressWarnings("static-access")
 	public LoginScreenController(ILoginInterface iLogin) {
