@@ -8,19 +8,21 @@ public class SingletonOrder
 {
 	private static SingletonOrder singleOrder_instance = null;
 
-    // Declaring a variable of type String
     public ArrayList<Dish>myOrder;
  
-    // Constructor
-    // Here we will be creating private constructor
-    // restricted to this class itself
+    
+    /** private constructor to create a singleton for the dishes array
+     * 
+     */
     private SingletonOrder()
     {
        myOrder=new ArrayList<>();
     }
  
-    // Static method
-    // Static method to create instance of Singleton class
+
+    /**Static method to create instance of the Singleton class
+     * @return
+     */
     public static SingletonOrder getInstance()
     {
         if (singleOrder_instance == null)

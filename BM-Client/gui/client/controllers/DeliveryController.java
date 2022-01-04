@@ -32,6 +32,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+/**The class creates a delivery to the customer according to the delivery details he entered in the page, 
+ * also alerts him if the details he entered are invalid
+ * @author Adi&Talia
+ *
+ */
 public class DeliveryController extends Controller {
 
 	@FXML
@@ -161,6 +166,7 @@ public class DeliveryController extends Controller {
 	void back(ActionEvent event) throws IOException {
 		start(event, "DeliveryOrPickup", "Your supply details", LoginScreenController.user.getFirstN());
 	}
+	
 
 	@FXML
 	void personDec(ActionEvent event) {
@@ -323,6 +329,9 @@ public class DeliveryController extends Controller {
 		noShared.setVisible(visible);
 	}
 
+	/**Abstract method for displaying labels to the screen
+	 * @param string          empty string
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());

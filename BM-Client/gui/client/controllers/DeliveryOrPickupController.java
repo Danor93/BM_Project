@@ -27,6 +27,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.ClientUI;
 
+
+/**This class meant to allow the costumer to enter the order's time and date and also choose the wanted supply method-delivery or take-away
+ * @author Adi& Talia
+ *
+ */
 public class DeliveryOrPickupController extends Controller {
 	
 	@FXML
@@ -107,6 +112,11 @@ public class DeliveryOrPickupController extends Controller {
     }
 
 
+    /**This method checks if the entered time and date are valid using the private method and the order is an early order.
+     * it also checks if the business client chose to use his budget and moves him to the delivery details screen
+     * @param event          pressing the delivery image
+     * @throws IOException
+     */
     @FXML
     void chooseDelivery(MouseEvent event) throws IOException 
     {
@@ -134,6 +144,11 @@ public class DeliveryOrPickupController extends Controller {
 
     }
 
+    /**This method checks if the entered time and date are valid using the private method and the order is an early order.
+     * it also checks if the business client chose to use his budget and moves him to confirming order screen
+     * @param event          pressing the take away image
+     * @throws IOException
+     */
     @FXML
     void chooseTakeAway(MouseEvent event) throws IOException 
     {
@@ -163,7 +178,9 @@ public class DeliveryOrPickupController extends Controller {
 
     }
     
-
+    /**This method allows a business customer to choose that he doesn't want to pay with his budget
+     * @param event    choose no in the checkbox
+     */
     @FXML
     void chooseNo(ActionEvent event) {
     	if(no.isSelected())
@@ -171,7 +188,9 @@ public class DeliveryOrPickupController extends Controller {
 
     }
 
-    
+    /**This method allows a business customer to choose that he wants to pay with his budget
+     * @param event    choose yes in the checkbox
+     */
     @FXML
     void chooseYes(ActionEvent event) {
     	if(yes.isSelected())
@@ -179,27 +198,11 @@ public class DeliveryOrPickupController extends Controller {
 
     }
     
-    
-  /*  public void display()
-    {
-    	if(IdentifyW4cController.client instanceof BussinessAccount)
-    	{
-    		bussLabel.setVisible(true);
-    		no.setVisible(true);
-    		yes.setVisible(true);
-    		no.setDisable(false);
-    		yes.setDisable(false);
-    	}
-    }
-*/
-    
-	public void start(Stage primaryStage, Parent root) {
-		Scene scene=new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();	
-	}
-	
-	
+
+
+	/** This method meant to check if the chosen time and date by the customer are valid
+	 * @return      true/false
+	 */
 	private boolean getTimeAndDate()
 	{
 		//check time of 00:00
@@ -259,6 +262,9 @@ public class DeliveryOrPickupController extends Controller {
     	
 	}
 	
+	/**This method meant to check if the customer entered an early order
+	 * @return         yes/no according to the check
+	 */
 	private String checkEarlyOrder()
 	{
 		LocalDate orderDate=date.getValue();
@@ -280,6 +286,9 @@ public class DeliveryOrPickupController extends Controller {
 		
 	}
 
+	/**Abstract method for displaying labels to the screen
+	 * @param string        empty string
+	 */
 	@Override
 	public void display(String string) {
     	if(IdentifyW4cController.client instanceof BussinessAccount)
@@ -292,7 +301,6 @@ public class DeliveryOrPickupController extends Controller {
     	}
     	
     	userName.setText(LoginScreenController.user.getFirstN());
-		
 	}
 
 }

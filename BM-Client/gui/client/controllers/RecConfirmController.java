@@ -88,6 +88,10 @@ public class RecConfirmController extends Controller implements Initializable {
     	start(event, "CustomerScreen", "CustomerScreen",LoginScreenController.user.getFirstN());
     }
     
+    
+    /**This method meant to change the order's status in the DB and to remove the confirmed order from the table
+     * @param event        pressing the "confirm" button
+     */
     @FXML
     void confirmOrder(ActionEvent event) {
     	Order order=table.getSelectionModel().getSelectedItem();
@@ -100,13 +104,12 @@ public class RecConfirmController extends Controller implements Initializable {
     }
 
 
-	/** this function meant to initialize the table
+	/** this function meant to initialize the table with all of the orders that were sent by suppliers to the customer that he haven't approved yet 
 	 *
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		observableList = FXCollections.observableArrayList(CustomerScreenController.orderConfirm);
-		//table.getItems().clear();
 		orderNum.setCellValueFactory(new PropertyValueFactory<>("orderNum"));
 		restName.setCellValueFactory(new PropertyValueFactory<>("restName"));
 		time.setCellValueFactory(new PropertyValueFactory<>("timeOfOrder"));
@@ -115,6 +118,9 @@ public class RecConfirmController extends Controller implements Initializable {
 		table.setItems(observableList);
 	}
 	
+	/**Abstract method for displaying labels to the screen
+	 * @param string          empty string
+	 */
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());	

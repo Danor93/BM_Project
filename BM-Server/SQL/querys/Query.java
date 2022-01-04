@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -234,8 +233,8 @@ public class Query {
 
 	
 	
-	/**
-	 * @return
+	/**This method meant to get all of the cities from the DB 
+	 * @return       ArrayList "cities" or null if there's no city in the DB
 	 */
 	public static ArrayList<String> getCities() {
 		ArrayList<String> cities = new ArrayList<>();
@@ -258,44 +257,11 @@ public class Query {
 
 
 
-	/**
-	 * @param address
+	/**This method meant to check if the customer that entered the system is a business client and if he does- 
+	 * gets the budget and the company name and code from the DB
+	 * @param id         The client's ID
+	 * @return
 	 */
-	public static void UpdateOrderAddress(String address) {
-		PreparedStatement stmt;
-		String query = "";
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET OrderAddress = ?");
-				stmt.setString(1, address);
-				stmt.executeUpdate();
-			} else {
-				System.out.println("Conn is null");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @param type
-	 */
-	public static void UpdateTypeOrder(String type) {
-		PreparedStatement stmt;
-		String query = "";
-		try {
-			if (DBConnect.conn != null) {
-				stmt = DBConnect.conn.prepareStatement("UPDATE order.orders SET TypeOfOrder = ?");
-				stmt.setString(1, type);
-				stmt.executeUpdate();
-			} else {
-				System.out.println("Conn is null");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public static Client checkAccountKind(String id)
 	{
 		Client client=null;
@@ -340,6 +306,11 @@ public class Query {
 	}
 
 
+	/**This method gets the amount of the refund for the specific customer and restaurant-
+	 * if there's no refund-returns null
+	 * @param order         the order entity of the customer
+	 * @return              the amount of the refund/null
+	 */
 	public static String getRefundSum(Order order) {
 		PreparedStatement stmt;
 		String ammount = null;
@@ -359,6 +330,10 @@ public class Query {
 		return ammount;
 	}
 
+	/**The method inserts the order of the customer to the order's table in the DB 
+	 * @param msg       the order's entity
+	 * @return          the order AI number from the DB
+	 */
 	public static Integer insertOrder(Order msg) {
 		Integer orderNum = null;
 		PreparedStatement stmt, stmt1;
@@ -393,6 +368,10 @@ public class Query {
 		return orderNum;
 	}
 
+	/**This method inserts the dishes that the customer chose in his order into dishesinorder table in the DB
+	 * @param message           ArrayList of dishes
+	 * @return                  success/null
+	 */
 	public static String insertDishesOrder(ArrayList<Dish> message) {
 		PreparedStatement stmt;
 		int orderNumber = message.get(0).getOrderNumber();
@@ -419,6 +398,10 @@ public class Query {
 	}
 
 	
+	/**This method inserts the delivery details that the customer entered for the order he made
+	 * @param message         delivery entity
+	 * @return                success/null
+	 */
 	public static String insertDelivery(Delivery message) {
 		PreparedStatement stmt;
 		try
@@ -440,6 +423,10 @@ public class Query {
 	}
 	}
 
+	/**This method selects all of the orders for the specific customer that have the status sent in the DB
+	 * @param msg        the costumer's ID
+	 * @return           ArrayList of orders
+	 */
 	public static ArrayList<Order> ConfirmClient(String msg) {
 		PreparedStatement stmt,stm2;
 		ArrayList<Order> orders=new ArrayList<>();
@@ -477,6 +464,12 @@ public class Query {
 		return orders;
 	}
 
+	/**The method checks if the costumer deserves to get a refund due to delays of order supply
+	 * and also updates the refund that the customer deserves in the refund table- if he has no refund for
+	 *  the specific restaurant it will create one, otherwise-calculate the new amount of the refund
+	 * @param msg          entity of order
+	 * @return             "ok"
+	 */
 	public static String checkRefund(Order msg) {
 		int flag=0;
 		if(msg.getEarlyOrder().equals("yes"))
@@ -520,6 +513,10 @@ public class Query {
 		return "ok";
 	}
 	
+	/**this method meant to create or update a performance report
+	 * @param msg         the order's entity
+	 * @param flag        meant to warn if the order was on time or late    
+	 */
 	private static void putPerfReport(Order msg, int flag) 
 	{
 		PreparedStatement stmt,stmt1,stmt2,stmt3;
@@ -533,6 +530,7 @@ public class Query {
 			{
 				branchRest=rs1.getString(1);
 			}
+			
 			rs1.close();
 			String [] date=(LocalDate.now().toString()).split("-");
 			stmt1 = DBConnect.conn.prepareStatement("SELECT total_orders,onTime,areLate FROM bitemedb.performance_reports WHERE restaurant=? and year=? and month=?");
@@ -592,6 +590,9 @@ public class Query {
 		}	
 	}
 
+	/** private method to insert/update a refund to the DB
+	 * @param order          the order's entity
+	 */
 	private static void putRefund(Order order)
 	{
 		PreparedStatement stmt,stmt2,stmt3;
@@ -610,7 +611,6 @@ public class Query {
 			{
 				Float sum= (float) (order.getTotalPrice()*0.5+ Float.parseFloat(amount));
 				stmt2 = DBConnect.conn.prepareStatement("UPDATE bitemedb.refund SET ammount=? WHERE ID=? and restId=?");
-				System.out.println("aaa");
 				stmt2.setString(1, Float.toString(sum));
 				stmt2.setString(2, order.getCostumerId());	
 				stmt2.setString(3,order.getRestId());
@@ -631,6 +631,10 @@ public class Query {
 		}
 	}
 
+	/**The method meant to get the histogram's data from the DB according to the selected details by the CEO
+	 * @param divededAdd          array of strings with the CEO entered data-branch,year,quarterly
+	 * @return                    hashMap with the histogram details- amount of orders and income for each restaurant
+	 */
 	public static Map<String, ArrayList<Float>> getHistogramData(String[] divededAdd) 
 	{
 		PreparedStatement stmt;

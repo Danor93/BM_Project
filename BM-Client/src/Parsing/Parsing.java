@@ -4,13 +4,10 @@ package Parsing;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import Entities.BussinessAccount;
 import Entities.Client;
-import Entities.Delivery;
 import Entities.Dish;
 import Entities.Employer;
 import Entities.Message;
-import Entities.MessageType;
 import Entities.MyFile;
 import Entities.BusinessAccountTracking;
 import Entities.Order;
@@ -19,8 +16,6 @@ import Entities.OrdersReport;
 import Entities.PerformanceReport;
 import Entities.Restaurant;
 import Entities.RevenueReport;
-import Entities.SingletonOrder;
-import Entities.Supplier;
 import Entities.User;
 import Entities.homeBranches;
 import client.controllers.AddDishToMenuController;
@@ -29,8 +24,6 @@ import client.controllers.BranchManagerCloseAccountController;
 import client.controllers.BranchManagerChangePermissionsController;
 import client.controllers.ChooseRestController;
 import client.controllers.DeleteOrUpdateDishController;
-import client.controllers.DeliveryController;
-import client.controllers.DeliveryOrPickupController;
 import client.controllers.IdentifyW4cController;
 import client.controllers.HRManagerConfirmationOfOpeningABusinessAccountController;
 import client.controllers.HRManagerScreenController;
@@ -42,16 +35,14 @@ import client.controllers.CustomerScreenController;
 import client.controllers.LoginScreenController;
 import client.controllers.OrderConfimController;
 import client.controllers.BranchManagerOpenNewPrivateAccountController;
-import client.controllers.BranchManagerScreenController;
 import client.controllers.BranchManagerUploadPDFController;
 import client.controllers.CEODownloadQuarterlyReportController;
 import client.controllers.RestListFormController;
 import client.controllers.ShowOrderController;
 import client.controllers.SupplierScreenController;
 import client.controllers.ViewReceiptController;
-import client.controllers.quaterRepController;
 import client.controllers.QuarterReportController;
-import main.PopUpMessage;
+
 
 public class Parsing {
 	@SuppressWarnings("unchecked")
@@ -87,7 +78,7 @@ public class Parsing {
 
 		
 		case ShowHistogram: {
-			if(QuarterReportController.report1==null)
+			if(QuarterReportController.report1==null)    
 			{
 				if(!((Map<String, ArrayList<Float>>)receivedMessage.getMessageData()).isEmpty())
 				{
