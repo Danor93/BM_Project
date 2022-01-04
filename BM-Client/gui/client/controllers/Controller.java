@@ -22,6 +22,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * 
+ * @author Aviel & Sahar
+ * Native object to be inherited by the controllers.
+ * This class contains methods that be used by all the controllers. 
+ *
+ */
 public abstract class Controller {
 
 	public void start(ActionEvent event, String fxmlName, String title, String toDisplay) throws IOException {
@@ -52,6 +59,11 @@ public abstract class Controller {
 		});
 	}
 
+	/**
+	 * This method is to open any fxml screen
+	 * @param event, fxmlName, title, toDisplay
+	 * @throws IOException
+	 */
 	public void start(MouseEvent event, String fxmlName, String title, String toDisplay) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -81,8 +93,15 @@ public abstract class Controller {
 		});
 	}
 
+	/**
+	 * Abstract method that will be implemented in any class with any using
+	 * @param string
+	 */
 	public abstract void display(String string);
 
+	/**
+	 * This method is for logout from the system.
+	 */
 	public void logoutForCustomer() {
 		SingletonOrder.getInstance().myOrder.clear();
 	}

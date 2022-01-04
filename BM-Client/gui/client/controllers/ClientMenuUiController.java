@@ -21,6 +21,12 @@ import main.ChatClient;
 import main.ClientController;
 import main.ClientUI;
 
+/**
+ * 
+ * @author Aviel & Sahar
+ * This gui class is for server connecting
+ *
+ */
 	public class ClientMenuUiController extends Controller {
 
 	    @FXML
@@ -38,30 +44,29 @@ import main.ClientUI;
 	    @FXML
 	    private ImageView LogoImage;
 	    
+	    /**
+	     * This method connecting the server according to the localhost and port 5555
+	     * @param event
+	     * @throws IOException
+	     */
 	    @FXML
 	    void ConnectToServer(ActionEvent event) throws IOException {
 	    	String ip;
 	    	ip=ipTxt.getText();
-	    	/*if(ipTxt.getText().trim().isEmpty())
-			{
-				System.out.println("In order to update you must enter all fields");	
-			}
-	    	else
-	    	{*/
-	    		//ClientUI.chat= new ClientController(ip, 5555);
 	    		ClientUI.chat= new ClientController("localhost", 5555);
 	    		start(event,"BeforLogin","Description","");
-	    		//Message msg = new Message(MessageType.login, null);
-	    		//ClientUI.chat.accept(msg);
-	    		//start(event,"BeforLogin","Description","");
 	    	}
 	    
+	    /**
+	     * This method is to open fxml screen
+	     * @param primaryStage
+	     * @throws Exception
+	     */
 	    public void start(Stage primaryStage) throws Exception {
 			primaryStage.setTitle("BiteMe Main Client Panel");
 			Parent root=FXMLLoader.load(getClass().getResource("/fxml/ClientMainUi.fxml"));
 			Scene home=new Scene(root);
 			primaryStage.setScene(home);
-			//primaryStage.getIcons().add(new Image("/gui/ClientIcon.png"));
 			primaryStage.show();
 		}
 

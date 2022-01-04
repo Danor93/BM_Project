@@ -131,7 +131,7 @@ public class BranchManagerChooseReportToViewController extends Controller implem
     private TableColumn<PerformanceReport, Integer> perfAreLateCol;
 
     @FXML
-    private TableColumn<PerformanceReport, Double> perfLateRateCol;
+    private TableColumn<PerformanceReport, Double> perfOnTimeRateCol;
 
     @FXML
     private TableColumn<PerformanceReport, Double> perfAvgCol;
@@ -277,6 +277,10 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		orders.setItems(OrderList);
 	}
 
+	/**
+	 * a method for handle the Performance table and show it in the screen.
+	 * @param details - details of the Branch,Year,Month.
+	 */
 	public void PerformanceReport(StringBuilder details) {
 		performanceTable.setVisible(true);
 		preformancePane.toFront();
@@ -284,9 +288,15 @@ public class BranchManagerChooseReportToViewController extends Controller implem
 		perfTotalOrdersCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("total_orders"));
 		perfOnTimeCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("onTime"));
 		perfAreLateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Integer>("areLate"));
-		perfLateRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("lateRate"));
+		perfOnTimeRateCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("onTimeRate"));
 		perfAvgCol.setCellValueFactory(new PropertyValueFactory<PerformanceReport,Double>("AvarageCookingTime"));
+		double avg=0;
 		ClientUI.chat.accept(new Message(MessageType.get_Performance_report, details.toString()));
+		for(PerformanceReport report : performanceArray)
+			avg+=report.getOnTimeRate();
+		avg = avg / performanceArray.size();
+		if(performanceArray.size()>0)
+			AvergaeTable.setText("Arrival time rate is: "+avg+"%");
 		PerformanceList = FXCollections.observableArrayList(performanceArray);
 		performanceTable.setItems(PerformanceList);
 	}

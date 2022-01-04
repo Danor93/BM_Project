@@ -36,6 +36,13 @@ import querys.Query;
 
 public class Parsing {
 
+	
+	/**
+	 * this method handles the messages from the server by using a big switch of enums.
+	 * @param msg - a message from the client
+	 * @param client - client information
+	 * @return - a message for the server
+	 */
 	public static Message parsing(Object msg, ConnectionToClient client) {
 		Message messageFromServer;
 		Message receivedMessage = (Message) msg;
@@ -54,6 +61,9 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.getYears, years);
 		}
 
+		/*
+		 * this case handles the login of the system.
+		 */
 		case loginSystem: {
 			String result;
 			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
@@ -63,7 +73,10 @@ public class Parsing {
 			}
 			return messageFromServer = new Message(MessageType.loginSystem, result);
 		}
-
+		
+		/*
+		 *this case handels the W4C 
+		 */
 		case IdentifyW4c: {
 			Client costumer = Query.checkAccountKind((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.IdentifyW4c, costumer);
