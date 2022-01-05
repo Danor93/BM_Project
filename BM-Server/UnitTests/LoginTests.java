@@ -16,7 +16,7 @@ import querys.Query;
 /**
  * @author Danor
  * @author Sahar
- * @author aviel
+ * @author Aviel
  * this class runs test for the login of users.
  */
 

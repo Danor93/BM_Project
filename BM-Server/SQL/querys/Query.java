@@ -93,7 +93,7 @@ public class Query {
 	/**
 	 * readtScript this method get script and executed it into database.
 	 * 
-	 * @param conn - the connection to db
+	 * @param conn - the connection to DB.
 	 * @param in   - the script file
 	 */
 	@SuppressWarnings("resource")
@@ -236,7 +236,7 @@ public class Query {
 	
 	
 	/**This method meant to get all of the cities from the DB 
-	 * @return       ArrayList "cities" or null if there's no city in the DB
+	 * @return ArrayList "cities" or null if there's no city in the DB
 	 */
 	public static ArrayList<String> getCities() {
 		ArrayList<String> cities = new ArrayList<>();
@@ -261,7 +261,7 @@ public class Query {
 
 	/**This method meant to check if the customer that entered the system is a business client and if he does- 
 	 * gets the budget and the company name and code from the DB
-	 * @param id         The client's ID
+	 * @param id The client's ID
 	 * @return
 	 */
 	public static Client checkAccountKind(String id)
@@ -532,7 +532,6 @@ public class Query {
 			{
 				branchRest=rs1.getString(1);
 			}
-			
 			rs1.close();
 			String [] date=(LocalDate.now().toString()).split("-");
 			stmt1 = DBConnect.conn.prepareStatement("SELECT total_orders,onTime,areLate FROM bitemedb.performance_reports WHERE restaurant=? and year=? and month=?");
@@ -547,7 +546,6 @@ public class Query {
 				late=rs2.getInt(3);	
 			}
 			rs2.close();
-			
 			if(total==0)
 			{
 				stmt2 = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.performance_reports VALUES(?,?,?,?,?,?,?)");
@@ -1151,7 +1149,7 @@ public class Query {
 					stmt2.executeUpdate();
 
 					PreparedStatement stmt3 = DBConnect.conn
-							.prepareStatement("INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?)");
+							.prepareStatement("INSERT INTO client (client_id,w4c_private,status,CreditCardNumber) VALUES(?,?,?,?)");
 					stmt3.setString(1, BAccount.getId());
 					Random rand = new Random(); // instance of random class
 					int int_random = rand.nextInt(1000);
@@ -1414,24 +1412,36 @@ public class Query {
 	 * 
 	 * @param file - for update the DB.
 	 */
-	public static void updateFile(MyFile file) {
+	public static Boolean updateFile(MyFile file) {
 		if (DBConnect.conn != null) {
 			String sql = "INSERT INTO reports(quarter,year,date_added,file_name,upload_file,homebranch) values(?,?,?,?,?,?)";
 			try {
-				Timestamp date = new java.sql.Timestamp(new Date().getTime());
-				InputStream is = new ByteArrayInputStream(file.getMybytearray());
+				InputStream is;
+				try {
+					is = new ByteArrayInputStream(file.getMybytearray());
+				} catch (Exception e) {
+					e.printStackTrace();
+					return false;
+				}
 				PreparedStatement stmt = DBConnect.conn.prepareStatement(sql);
 				stmt.setString(1, file.getQuarter());
 				stmt.setString(2, file.getYear());
-				stmt.setTimestamp(3, date);
+				stmt.setString(3, file.getDate());
 				stmt.setString(4, file.getFileName());
 				stmt.setBlob(5, is);
 				stmt.setString(6, file.getHomebranch().toString());
-				stmt.executeUpdate();
+				if(stmt.executeUpdate()==1) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				return false;
 			}
 		}
+		return null;
 	}
 
 	/**

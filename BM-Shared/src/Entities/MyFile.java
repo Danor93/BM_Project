@@ -1,10 +1,10 @@
 package Entities;
 
 import java.io.Serializable;
+import java.security.Timestamp;
 
 public class MyFile implements Serializable {
 
-	
 	private static final long serialVersionUID = 3037364578344496376L;
 	private String Description = null;
 	private String fileName = null;
@@ -15,11 +15,10 @@ public class MyFile implements Serializable {
 	private int size = 0;
 	public byte[] mybytearray;
 
-	
 	public MyFile(String fileName) {
 		this.fileName = fileName;
 	}
-	
+
 	public String getYear() {
 		return year;
 	}
@@ -27,7 +26,7 @@ public class MyFile implements Serializable {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
+
 	public String getQuarter() {
 		return quarter;
 	}
@@ -52,12 +51,9 @@ public class MyFile implements Serializable {
 		this.homebranch = homebranch;
 	}
 
-
-
 	public void initArray(int size) {
 		mybytearray = new byte[size];
 	}
-
 
 	public String getFileName() {
 		return fileName;
@@ -96,4 +92,28 @@ public class MyFile implements Serializable {
 	public void setDescription(String description) {
 		Description = description;
 	}
+
+	// only for test use
+	@Override
+	public boolean equals(Object obj) {
+		MyFile f = (MyFile) obj;
+		if (f.getYear().equals(this.getYear()))
+			if (f.getQuarter().equals(this.getQuarter()))
+				if (f.getDate().equals(this.getDate())) {
+					if (f.mybytearray.length != 0) {
+						if (f.mybytearray.length == this.mybytearray.length) {
+							int i = 0;
+							for (byte b : f.mybytearray) {
+								if (b != this.mybytearray[i]) {
+									return false;
+								}
+								i++;
+							}
+							return true;
+						}
+					}
+				}
+		return false;
+	}
+
 }

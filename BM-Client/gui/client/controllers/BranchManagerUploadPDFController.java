@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import Entities.Message;
@@ -130,6 +132,8 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 						msg.setQuarter(Quertar);
 						msg.setYear(Year);
 						msg.setHomebranch((LoginScreenController.user.getHomeBranch()));
+						Timestamp date = new java.sql.Timestamp(new Date().getTime());
+						msg.setDate(date.toString());
 						ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
 						if(succesUpload==true)
 						{
