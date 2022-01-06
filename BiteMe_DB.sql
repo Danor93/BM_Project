@@ -39,7 +39,7 @@ CREATE TABLE `buss_client` (
 
 LOCK TABLES `buss_client` WRITE;
 /*!40000 ALTER TABLE `buss_client` DISABLE KEYS */;
-INSERT INTO `buss_client` VALUES ('5465478','Microsoft','80','Approved'),('6547898','Intel','0.0','Approved');
+INSERT INTO `buss_client` VALUES ('3115467','Microsoft','20','Approved'),('5465478','Microsoft','80','Approved'),('6547898','Intel','0.0','Approved');
 /*!40000 ALTER TABLE `buss_client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,4 +472,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-06 20:31:34
+-- Dump completed on 2022-01-06 20:43:15
