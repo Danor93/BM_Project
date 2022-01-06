@@ -83,19 +83,19 @@ public class LoginTests  {
 	@Test
 	/*
 	 * Test Description:This test case check Incorrect login of a customer
-	 * Input: UserName = "adi" | Password = "a1"
+	 * Input: UserName = "ns" | Password = "ns"
 	 * Expected result:false because its not the same user.
 	 * */
 	void testCustomerInCorrectLoginByID() {
 		User ExpectedCustomer = new User("Customer","3115467","Talia","Blum",homeBranches.toHomeBranchType("center"),"b","b","0");
 		
-		String [] DivedMsg = ((String) Query.Login("adi","a1")).split("@");
+		String [] DivedMsg = ((String) Query.Login("ns","ns")).split("@");
 		User resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		
 		
 		assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));
-		Query.UpdateisLoggedIn("adi");
+		Query.UpdateisLoggedIn("ns");
 	}
 	
 	@Test
@@ -110,11 +110,11 @@ public class LoginTests  {
 		
 		String [] DivedMsg = ((String) Query.Login(null,null)).split("@");
 		try {
-		resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-				homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
+			resCustomer = new User (DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
+					homeBranches.toHomeBranchType(DivedMsg[4]), DivedMsg[5], DivedMsg[6], DivedMsg[7]);
 		} catch (Exception e) {
-			assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));
-		}		
+			assertFalse(ExpectedCustomer.getId().equals(resCustomer.getId()));	
+		}
 	}
 	
 	@Test
@@ -434,7 +434,7 @@ public class LoginTests  {
 	 * Expected result:True because the user is defined as "Freeze" account in the DB and the login method will return "Freeze".
 	 * */
 	void testFreezeAccount() {
-		String testLogin = ((String) Query.Login("matan","matan"));
+		String testLogin = ((String) Query.Login("daniel","daniel"));
 		assertTrue(testLogin.equals("Freeze"));
 	}
 	

@@ -17,30 +17,32 @@ import javafx.scene.image.ImageView;
 import main.ClientUI;
 
 /**
+ * @author Danor
+ * @author Sahar
+ * @author Aviel
+ * @author Lior
  * @author Adi
  * @author Talia 
- * this class handles for login into the system with all the
- *         Entity related to BiteMe.
+ * this class handles for login into the system with all the Entity related to BiteMe.
  */
 public class LoginScreenController extends Controller {
 	public static User user = null;
+	public ILoginInterface iLogin;
 	public static String statusUser;
-	public static ILoginInterface iLogin;
-	
-	
-	// For regular uses
-		public LoginScreenController() {
 
-		}
-		
+	private String[] DivededUandP;
+
+	// For regular uses
+	public LoginScreenController() {
+		iLogin = new LoginInterface(); // for real use
+
+	}
 
 	/**
-	 * @param iLogin
-	 * this is a contractor for the test case.
+	 * @param iLogin this is a contractor for the test case.
 	 */
-	@SuppressWarnings("static-access")
 	public LoginScreenController(ILoginInterface iLogin) {
-		this.iLogin=iLogin;
+		this.iLogin = iLogin;
 	}
 
 	@FXML
@@ -63,30 +65,42 @@ public class LoginScreenController extends Controller {
 	@FXML
 	private ImageView BackImage;
 
-	/**
-	 * This method meant to connect the user to the BiteMe system.
-	 * @param event - pressing the "login" button
-	 */
-	@FXML
-	public void ConnectSystem(ActionEvent event) throws Exception {
-		if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
-			WrongInputInLoggin.setText("Please fill both user name and password");
-		} else {
-			String[] DivededUandP;
-			StringBuilder str = new StringBuilder();
-			str.append(txtUserName.getText());
-			str.append("@");
-			str.append(PasswordField.getText());
-			ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
-			if (!statusUser.equals("Active")) {
-				WrongInputInLoggin.setText(statusUser);
-				statusUser = null;
+	public class LoginInterface implements ILoginInterface {
+
+		public LoginInterface() {
+
+		}
+
+		public ILoginInterface getInterFace() {
+			return this;
+		}
+
+		@Override
+		public void setUser(String role, String id, String firstN, String lastN, String homeBranch, String userName,
+				String password, String isLoggedIn) {
+		}
+
+		@Override
+		public void ConnectSystem(ActionEvent event) throws Exception {
+			if (txtUserName.getText().isEmpty() || PasswordField.getText().isEmpty()) {
+				WrongInputInLoggin.setText("Please fill both user name and password");
+			} else {
+				StringBuilder str = new StringBuilder();
+				str.append(txtUserName.getText());
+				str.append("@");
+				str.append(PasswordField.getText());
+				ClientUI.chat.accept(new Message(MessageType.loginSystem, str.toString()));
+				if (!statusUser.equals("Active")) {
+					WrongInputInLoggin.setText(statusUser);
+					statusUser = null;
+				}
 			}
 			if (user != null) {
 				switch (user.getRole()) {
 				case "BranchManager": {
 					start(event, "BranchManagerScreen", "Branch Manager", user.getFirstN());
 					break;
+
 				}
 
 				case "Customer": {
@@ -103,15 +117,44 @@ public class LoginScreenController extends Controller {
 					DivededUandP = ((String) user.getRole()).split("-");
 					if (DivededUandP[0].equals("HR")) {
 						start(event, "HRManagerScreen", "HR Manager", user.getFirstN());
+						break;
 					} else {
 						start(event, "SupplierScreen", "Supplier", user.getRole());
+						break;
 					}
-					break;
 				}
 				}
+
 			}
-		
 		}
+
+		@Override
+		public User getUser() {
+			return user;
+		}
+
+		@Override
+		public void setStatus(String status) {
+			statusUser = status;
+		}
+
+		@Override
+		public String getStatus() {
+			return statusUser;
+		}
+
+	}
+
+	/**
+	 * This method meant to connect the user to the BiteMe system via interface the
+	 * TestFlag gets the result of the login only for test using.
+	 * 
+	 * @param event - pressing the "login" button
+	 * 
+	 */
+	@FXML
+	public void ConnectSystem(ActionEvent event) throws Exception {
+		iLogin.ConnectSystem(event); // get true in good login scenario or get false if login failed!
 	}
 
 	@Override

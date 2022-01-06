@@ -100,20 +100,15 @@ public class MyFile implements Serializable {
 		if (f.getYear().equals(this.getYear()))
 			if (f.getQuarter().equals(this.getQuarter()))
 				if (f.getDate().equals(this.getDate())) {
-					if (f.mybytearray.length != 0) {
-						if (f.mybytearray.length == this.mybytearray.length) {
-							int i = 0;
-							for (byte b : f.mybytearray) {
-								if (b != this.mybytearray[i]) {
-									return false;
-								}
-								i++;
+					if (f.mybytearray.length == this.mybytearray.length) {
+						for (int i = 0; i < this.getMybytearray().length; i++) {
+							if (!(this.getMybytearray(i) == f.getMybytearray(i))) {
+								return false;
 							}
-							return true;
 						}
+						return true;
 					}
 				}
 		return false;
 	}
-
 }

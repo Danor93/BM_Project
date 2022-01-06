@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.MyFile;
+import Interfaces.IUploadPDFileInterface;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,10 +33,18 @@ import main.PopUpMessage;
 public class BranchManagerUploadPDFController extends Controller implements Initializable {
 	public static String Quertar;
 	public static String Year;
-	public static Stage stage;
 	public static Boolean yearandqflag=false;
 	public static Boolean succesUpload=false;
+	public IUploadPDFileInterface IUpload;
 	public StringBuilder yearandQ=new StringBuilder();
+	
+	public BranchManagerUploadPDFController() {
+		IUpload=new UploadPDFileInterface();
+	}
+	
+	public BranchManagerUploadPDFController(IUploadPDFileInterface IUPI) {
+		this.IUpload=IUPI;
+	}
 
 	@FXML
 	private ResourceBundle resources;
@@ -60,6 +69,74 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 
     @FXML
     private Text userName;
+    
+    public class UploadPDFileInterface implements IUploadPDFileInterface{
+
+    	public UploadPDFileInterface() {
+    		
+    	}
+    	
+    	public IUploadPDFileInterface getInterface() {
+			return this;
+		}
+    	
+		@Override
+		public boolean UploadPDF(ActionEvent event) throws Exception {
+			ClientUI.chat.accept(new Message(MessageType.check_year_and_quertar, yearandQ.toString()));
+			if(yearandqflag) {
+				yearandqflag=false;
+				try {
+					FileChooser fileChooser = new FileChooser();
+					fileChooser.setTitle("Open Resource File");
+					fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+					Stage stage = new Stage();
+					File file = fileChooser.showOpenDialog(stage);
+					if (file != null) {
+						String path = file.getPath();
+						File f = new File(path);
+						MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
+						try {
+							File newFile = new File(path);
+							byte[] mybytearray = new byte[(int) newFile.length()];
+							msg.initArray(mybytearray.length);
+							msg.setSize(mybytearray.length);
+							FileInputStream fis = new FileInputStream(newFile);
+							BufferedInputStream bis = new BufferedInputStream(fis);
+							bis.read(msg.getMybytearray(), 0, mybytearray.length);
+							msg.setQuarter(Quertar);
+							msg.setYear(Year);
+							msg.setHomebranch((LoginScreenController.user.getHomeBranch()));
+							Timestamp date = new java.sql.Timestamp(new Date().getTime());
+							msg.setDate(date.toString());
+							bis.close();
+							ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
+							if(succesUpload)
+							{
+								PopUpMessage.successMessage("Succes to upload the " + Year + "' " + Quertar + " PDF file!");
+								return true;
+							}
+							else {
+								PopUpMessage.errorMessage("Could not upload " + Year + "' " + Quertar + " PDF file!,try again");
+								return false;
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							return false;
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					return false;
+				}
+			}
+			else {
+				PopUpMessage.errorMessage("there is a report for " + Year + " " + Quertar + " already!");
+				return false;
+			}
+			return false;
+		}
+    }
+    
 
 	/**
 	 * @param event - back to the home screen of the Branch Manager
@@ -96,7 +173,7 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	 */
 	@FXML
 	void chooseYear(ActionEvent event) {
-		Year = YearComboBox.getSelectionModel().getSelectedItem();
+		Year = YearComboBox.getSelectionModel().getSelectedItem().toString();
 		yearandQ.append(Quertar);
 		yearandQ.append("@");
 		yearandQ.append(Year);
@@ -106,54 +183,11 @@ public class BranchManagerUploadPDFController extends Controller implements Init
 	/**
 	 * this method handles the upload the PDF file and send it to the DB.
 	 * @param event - for the Upload PDF button.
+	 * @throws Exception 
 	 */
 	@FXML
-	void UploadPDF(ActionEvent event) {
-		ClientUI.chat.accept(new Message(MessageType.check_year_and_quertar, yearandQ.toString()));
-		if(yearandqflag==true) {
-			yearandqflag=false;
-			try {
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Open Resource File");
-				fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
-				File file = fileChooser.showOpenDialog(BranchManagerUploadPDFController.stage);
-				if (file != null) {
-					String path = file.getPath();
-					File f = new File(path);
-					MyFile msg = new MyFile(f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("\\") + 1));
-					try {
-						File newFile = new File(path);
-						byte[] mybytearray = new byte[(int) newFile.length()];
-						msg.initArray(mybytearray.length);
-						msg.setSize(mybytearray.length);
-						FileInputStream fis = new FileInputStream(newFile);
-						BufferedInputStream bis = new BufferedInputStream(fis);
-						bis.read(msg.getMybytearray(), 0, mybytearray.length);
-						msg.setQuarter(Quertar);
-						msg.setYear(Year);
-						msg.setHomebranch((LoginScreenController.user.getHomeBranch()));
-						Timestamp date = new java.sql.Timestamp(new Date().getTime());
-						msg.setDate(date.toString());
-						ClientUI.chat.accept(new Message(MessageType.send_PDF, msg));
-						if(succesUpload==true)
-						{
-							PopUpMessage.successMessage("Succes to upload the " + Year + "' " + Quertar + " PDF file!");
-						}
-						else {
-							PopUpMessage.errorMessage("Could not upload " + Year + "' " + Quertar + " PDF file!,try again");
-						}
-						bis.close();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		else {
-			PopUpMessage.errorMessage("there is a report for " + Year + " " + Quertar + " already!");
-		}	
+	void UploadPDF(ActionEvent event) throws Exception {
+		IUpload.UploadPDF(event);
 	}
 
 	/**

@@ -17,9 +17,7 @@ public class User implements Serializable {
 		this.homeBranch = homeBranch;
 		this.userName = userName;
 		this.password = password;
-		// setUserName(userName);
-		// setPassword(password);
-		this.isLoggedIn = "0";
+		this.isLoggedIn = isLoggedIn;
 	}
 
 	public User() {
@@ -101,18 +99,38 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	/*private String userName,password,isLoggedIn,role,id,firstN,lastN,email,phone;
-	private homeBranches homeBranch;*/
-	public void PrintUser()
-	{
-		System.out.println("User Name : "+ userName);
-		System.out.println("password :"+ password);
-		System.out.println("Role : "+role);
-		System.out.println("id: "+id);
-		System.out.println("First Name: "+firstN);
-		System.out.println("Last Name: "+lastN);
-		System.out.println("String Branch :"+homeBranches.BranchToString(homeBranch));
-		System.out.println("home Branch: "+homeBranch);
+
+	/*
+	 * private String userName,password,isLoggedIn,role,id,firstN,lastN,email,phone;
+	 * private homeBranches homeBranch;
+	 */
+	public void PrintUser() {
+		System.out.println("User Name : " + userName);
+		System.out.println("password :" + password);
+		System.out.println("Role : " + role);
+		System.out.println("id: " + id);
+		System.out.println("First Name: " + firstN);
+		System.out.println("Last Name: " + lastN);
+		System.out.println("String Branch :" + homeBranches.BranchToString(homeBranch));
+		System.out.println("home Branch: " + homeBranch);
 	}
+
+//only for test use
+	@Override
+	public boolean equals(Object obj) {
+		User u = (User) obj;
+		if (u.getUserName().equals(this.getUserName()))
+			if (u.getPassword().equals(this.getPassword()))
+				if (u.getRole().equals(this.getRole()))
+					if (u.getFirstN().equals(this.firstN))
+						if (u.getLastN().equals(this.lastN))
+							if (u.getHomeBranch().equals(this.getHomeBranch()))
+								if (u.getId().equals(this.getId()))
+									if (u.getIsLoggedIn().equals(this.getIsLoggedIn()))
+										return true;
+
+		return false;
+
+	}
+
 }

@@ -221,10 +221,8 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 	 */
 	@FXML
 	void downloadReport(ActionEvent event) {
-
 		ClientUI.chat.accept(new Message(MessageType.downloadPDF, branchAndYearAndQuarterlyString.toString()));
 		try {
-
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 			fileChooser.setInitialFileName(downloadFileData.getFileName());
