@@ -35,7 +35,6 @@ public class LoginScreenController extends AbstractController {
 	// For regular uses
 	public LoginScreenController() {
 		iLogin = new LoginInterface(); // for real use
-
 	}
 
 	/**
@@ -160,6 +159,5 @@ public class LoginScreenController extends AbstractController {
 	@Override
 	public void display(String string) {
 		// TODO Auto-generated method stub
-
 	}
 }
