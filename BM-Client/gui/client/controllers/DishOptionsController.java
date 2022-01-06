@@ -31,7 +31,7 @@ import main.ClientUI;
  * @author User
  *
  */
-public class DishOptionsController extends Controller implements Initializable{
+public class DishOptionsController extends AbstractController implements Initializable{
 
     @FXML
     private Button add;

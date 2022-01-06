@@ -1,7 +1,7 @@
 eclipse.preferences.version=1
 encoding//UnitTests/UploadPDFileTests.java=UTF-8
+encoding//gui/client/controllers/AbstractController.java=UTF-8
 encoding//gui/client/controllers/CEOScreenController.java=UTF-8
-encoding//gui/client/controllers/Controller.java=UTF-8
 encoding//gui/client/controllers/CustomerScreenController.java=UTF-8
 encoding//gui/client/controllers/MenuScreenController.java=UTF-8
 encoding//src/Parsing/Parsing.java=UTF-8

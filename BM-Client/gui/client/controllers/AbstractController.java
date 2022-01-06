@@ -23,14 +23,14 @@ import main.PopUpMessage;
  * Native object to be inherited by the controllers.
  * This class contains methods that be used by all the controllers. 
  */
-public abstract class Controller {
+public abstract class AbstractController {
 
 	public void start(ActionEvent event, String fxmlName, String title, String toDisplay) throws IOException {
 		((Node) event.getSource()).getScene().getWindow().hide();
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = load.load();
-		Controller aFrame = load.getController();
+		AbstractController aFrame = load.getController();
 		aFrame.display(toDisplay);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe" + " " + title);
@@ -62,7 +62,7 @@ public abstract class Controller {
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = load.load();
-		Controller aFrame = load.getController();
+		AbstractController aFrame = load.getController();
 		aFrame.display(toDisplay);
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("BiteMe" + " " + title);

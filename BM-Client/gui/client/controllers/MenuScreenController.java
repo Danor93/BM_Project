@@ -20,7 +20,7 @@ import main.ClientUI;
  * @author Talia
  *
  */
-public class MenuScreenController extends Controller {
+public class MenuScreenController extends AbstractController {
 
 	@FXML
 	private ResourceBundle resources;

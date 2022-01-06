@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
  * @author Danor
  * this class implements the functionality of the Branch Manager to confirm and add a supplier to BiteMe.
  */
-public class ConfirmSupplierRegController extends Controller implements Initializable {
+public class ConfirmSupplierRegController extends AbstractController implements Initializable {
 	public static Supplier supplier;
 	public static Boolean confirmRegFlag = false;
 

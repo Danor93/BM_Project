@@ -19,7 +19,7 @@ import main.ClientUI;
  * @author Aviel 
  * This class is for supplier main screen.
  */
-public class SupplierScreenController extends Controller implements ControllerInterface {
+public class SupplierScreenController extends AbstractController implements ControllerInterface {
 	public static boolean ExisingMenuFlag = false;
 	@FXML
 	private ResourceBundle resources;

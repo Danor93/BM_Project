@@ -32,7 +32,7 @@ import main.ClientUI;
  * @author Adi
  *
  */
-public class ChoosingDishesController extends Controller implements Initializable {
+public class ChoosingDishesController extends AbstractController implements Initializable {
 
     @FXML
     private Button addToOrder;

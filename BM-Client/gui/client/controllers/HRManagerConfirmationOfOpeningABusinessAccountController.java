@@ -26,7 +26,7 @@ import main.ClientUI;
  * @author Aviel * This class is intended for approving / refusing new business
  *         account.
  */
-public class HRManagerConfirmationOfOpeningABusinessAccountController extends Controller implements Initializable {
+public class HRManagerConfirmationOfOpeningABusinessAccountController extends AbstractController implements Initializable {
 	public static ArrayList<BusinessAccountTracking> trackingDetails = new ArrayList<BusinessAccountTracking>();
 
 	@FXML

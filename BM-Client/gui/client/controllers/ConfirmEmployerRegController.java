@@ -22,7 +22,7 @@ import main.ClientUI;
  * @author Danor
  * this class implements the functionality of the Branch Manager to confirm an Employer.
  */
-public class ConfirmEmployerRegController extends Controller implements Initializable {
+public class ConfirmEmployerRegController extends AbstractController implements Initializable {
 	public static ArrayList<Employer> Employers = new ArrayList<Employer>();
 
 	@FXML

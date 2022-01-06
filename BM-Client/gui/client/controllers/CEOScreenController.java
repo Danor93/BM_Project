@@ -25,7 +25,7 @@ import main.ClientUI;
  *
  */
 
-public class CEOScreenController extends Controller implements ControllerInterface, Initializable {
+public class CEOScreenController extends AbstractController implements ControllerInterface, Initializable {
 
 	@FXML
 	private ResourceBundle resources;

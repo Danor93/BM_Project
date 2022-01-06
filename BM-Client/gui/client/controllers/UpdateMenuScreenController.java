@@ -19,7 +19,7 @@ import main.ClientUI;
  * @author Aviel This class is for select - Update/Delete existing dish, or add
  *         new dish into menu.
  */
-public class UpdateMenuScreenController extends Controller {
+public class UpdateMenuScreenController extends AbstractController {
 
 	@FXML
 	private ResourceBundle resources;

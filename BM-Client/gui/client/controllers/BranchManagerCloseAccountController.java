@@ -23,7 +23,7 @@ import main.PopUpMessage;
  * @author Danor 
  * this class implements the functionality of the Branch Manager to close an account.
  */
-public class BranchManagerCloseAccountController extends Controller implements Initializable {
+public class BranchManagerCloseAccountController extends AbstractController implements Initializable {
 
 	public static ArrayList<User> Users;
 	public static String UserName;

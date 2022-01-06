@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
  * @author Adi 
  * @author Talia
  */
-public class histogramController extends Controller implements Initializable {
+public class histogramController extends AbstractController implements Initializable {
 
 	@FXML
     private ImageView BackImage;

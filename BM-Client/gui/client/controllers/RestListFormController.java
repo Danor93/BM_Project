@@ -32,7 +32,7 @@ import main.ClientUI;
  * 
  *
  */
-public class RestListFormController extends Controller implements Initializable {
+public class RestListFormController extends AbstractController implements Initializable {
 
 	@FXML
 	private ImageView BackImage;

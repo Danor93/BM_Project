@@ -21,7 +21,7 @@ import main.ClientUI;
  * @author Aviel
  * This class is for HR Manager main screen.
  */
-public class HRManagerScreenController extends Controller{
+public class HRManagerScreenController extends AbstractController{
 	public static ArrayList<String> w4cBusiness = new ArrayList<String>();
 	public static boolean RegistrationFlag = false;
 

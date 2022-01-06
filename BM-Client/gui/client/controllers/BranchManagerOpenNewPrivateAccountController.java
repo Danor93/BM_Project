@@ -27,7 +27,7 @@ import main.PopUpMessage;
  * @author Danor this class implements the functionality of the Branch Manager
  *         to open new Private Account.
  */
-public class BranchManagerOpenNewPrivateAccountController extends Controller implements Initializable {
+public class BranchManagerOpenNewPrivateAccountController extends AbstractController implements Initializable {
 	public static Client PAccount = new Client(null, null, null, null, null, null, null, null, null, null, null);
 	public static boolean ConfirmOpenNewPrivateAccountFlag = false;
 

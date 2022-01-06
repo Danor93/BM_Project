@@ -20,7 +20,7 @@ import main.ClientUI;
 	 * @author Adi  
 	 * @author Talia
 	 */
-	public class IdentifyW4cController extends Controller {
+	public class IdentifyW4cController extends AbstractController {
 
 	    @FXML
 	    private ImageView BackImage;

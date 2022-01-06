@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
  * @author Danor
  * this class implements the functionality of the Branch Manager to Change Permissions of the users.
  */
-public class BranchManagerChangePermissionsController extends Controller implements Initializable {
+public class BranchManagerChangePermissionsController extends AbstractController implements Initializable {
 
 
 	public static ArrayList<User> Users = new ArrayList<>();

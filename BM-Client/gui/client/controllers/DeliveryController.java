@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-public class DeliveryController extends Controller {
+public class DeliveryController extends AbstractController {
 
 	 
 	  @FXML

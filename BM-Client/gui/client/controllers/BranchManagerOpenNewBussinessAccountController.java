@@ -27,7 +27,7 @@ import main.PopUpMessage;
  * @author Danor this class implements the functionality of the Branch Manager
  *         to open new Business Account.
  */
-public class BranchManagerOpenNewBussinessAccountController extends Controller implements Initializable {
+public class BranchManagerOpenNewBussinessAccountController extends AbstractController implements Initializable {
 
 	public static BussinessAccount BAccount = new BussinessAccount(null, null, null, null, null, null, null, null, null,
 			null, null, null);

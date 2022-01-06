@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class BeforLoginScreenController extends Controller{
+public class BeforLoginScreenController extends AbstractController{
 
     @FXML
     private ImageView BackImage;

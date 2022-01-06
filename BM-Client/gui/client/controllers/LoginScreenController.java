@@ -25,7 +25,7 @@ import main.ClientUI;
  * @author Talia 
  * this class handles for login into the system with all the Entity related to BiteMe.
  */
-public class LoginScreenController extends Controller {
+public class LoginScreenController extends AbstractController {
 	public static User user = null;
 	public ILoginInterface iLogin;
 	public static String statusUser;

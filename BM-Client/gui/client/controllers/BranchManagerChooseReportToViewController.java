@@ -33,7 +33,7 @@ import main.ClientUI;
  * @author Danor this class implements the functionality of the Branch Manager
  *         to view reports of Revenues, Orders And Performance.
  */
-public class BranchManagerChooseReportToViewController extends Controller implements Initializable {
+public class BranchManagerChooseReportToViewController extends AbstractController implements Initializable {
 
 	public String Branch, Type, year, month;
 	public static ArrayList<RevenueReport> revenueArray = new ArrayList<>();

@@ -30,7 +30,7 @@ import main.ClientUI;
  * This class is to view receipt from the database
  *
  */
-public class ViewReceiptController extends Controller implements Initializable{
+public class ViewReceiptController extends AbstractController implements Initializable{
 	public static ArrayList<Receipt> receipts = new ArrayList<Receipt>();
 	
     @FXML

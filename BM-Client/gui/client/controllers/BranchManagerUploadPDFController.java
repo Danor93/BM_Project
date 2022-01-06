@@ -30,7 +30,7 @@ import main.PopUpMessage;
  * @author Danor
  * this class handles the functionality of the Branch Manager to upload a PDF of the quarterly report.
  */
-public class BranchManagerUploadPDFController extends Controller implements Initializable {
+public class BranchManagerUploadPDFController extends AbstractController implements Initializable {
 	public static String Quertar;
 	public static String Year;
 	public static Boolean yearandqflag=false;

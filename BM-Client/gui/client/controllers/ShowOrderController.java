@@ -26,7 +26,7 @@ import main.ClientUI;
  * @author Adi 
  * @author Talia
  */
-public class ShowOrderController extends Controller implements Initializable{
+public class ShowOrderController extends AbstractController implements Initializable{
 
 
     @FXML

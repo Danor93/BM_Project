@@ -37,7 +37,7 @@ import main.PopUpMessage;
 /**
  * @author Aviel This class is for approval of orders awaiting approval.
  */
-public class ConfirmOrderApprovalController extends Controller implements Initializable {
+public class ConfirmOrderApprovalController extends AbstractController implements Initializable {
 	public static ArrayList<Order> allOrders = new ArrayList<Order>();
 	public static String phoneNumber;
 	public static HashMap<String, Integer> dishTypesQuentities = new HashMap<>();

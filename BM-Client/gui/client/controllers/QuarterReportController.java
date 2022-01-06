@@ -27,7 +27,7 @@ import main.ClientUI;
  * @author Talia
  *
  */
-public class QuarterReportController extends Controller implements Initializable{
+public class QuarterReportController extends AbstractController implements Initializable{
 
     @FXML
     private Label brachLbl;

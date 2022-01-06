@@ -21,7 +21,7 @@ import main.ClientUI;
  * this class is for the main screen of the Branch Manager to choose which action he want.
 
  */
-public class BranchManagerScreenController extends Controller implements ControllerInterface, Initializable {
+public class BranchManagerScreenController extends AbstractController implements ControllerInterface, Initializable {
 
 	public static Stage stage;
 

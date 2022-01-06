@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import main.ClientUI;
 
 
-public class RecConfirmController extends Controller implements Initializable {
+public class RecConfirmController extends AbstractController implements Initializable {
 
     @FXML
     private ResourceBundle resources;

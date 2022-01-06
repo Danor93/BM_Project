@@ -30,7 +30,7 @@ import main.ClientUI;
  * @author Talia
  *
  */
-public class OrderConfimController extends Controller {
+public class OrderConfimController extends AbstractController {
 
 	@FXML
 	private Button approve;

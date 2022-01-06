@@ -26,7 +26,7 @@ import main.ClientUI;
  * @author Aviel This class is for updating/deleting an existing dish from the
  *         menu.
  */
-public class DeleteOrUpdateDishController extends Controller implements Initializable {
+public class DeleteOrUpdateDishController extends AbstractController implements Initializable {
 	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 
 	@FXML

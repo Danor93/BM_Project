@@ -22,7 +22,7 @@ import main.PopUpMessage;
  * @author Sahar 
  * This gui class is for server connecting
  */
-public class ClientMenuUiController extends Controller {
+public class ClientMenuUiController extends AbstractController {
 
 	@FXML
 	private ResourceBundle resources;

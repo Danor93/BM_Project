@@ -25,7 +25,7 @@ import main.ClientUI;
 /**
  * @author Aviel This class is for add new dish to menu.
  */
-public class AddDishToMenuController extends Controller implements Initializable {
+public class AddDishToMenuController extends AbstractController implements Initializable {
 	public static ArrayList<Dish> dishes = new ArrayList<Dish>();
 	public static boolean indicator;// in case indicator=false then label = 'Create Menu', if indicator=true then
 									// label = 'Add new dish'

@@ -27,7 +27,7 @@ import main.ClientUI;
 	 * @author Adi  
 	 * @author Talia
 	 */
-	public class ChooseRestController extends Controller implements Initializable{
+	public class ChooseRestController extends AbstractController implements Initializable{
 		
 		@FXML
 		private ResourceBundle resources;

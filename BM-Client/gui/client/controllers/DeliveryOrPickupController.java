@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import main.ClientUI;
 
-public class DeliveryOrPickupController extends Controller {
+public class DeliveryOrPickupController extends AbstractController {
 	
 
     @FXML

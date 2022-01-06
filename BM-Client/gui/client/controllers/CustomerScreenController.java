@@ -22,7 +22,7 @@ import main.ClientUI;
  * @author talia
  * This class describes the costumer side in the system-first page after logging into the BM system
  */
-public class CustomerScreenController extends Controller implements Initializable {
+public class CustomerScreenController extends AbstractController implements Initializable {
 
 	public static ArrayList<Order> orderConfirm;
     @FXML

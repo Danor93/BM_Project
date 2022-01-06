@@ -19,7 +19,7 @@ import main.ClientUI;
  * @author Danor 
  * this class implements the functionality of the Branch Manager to choose which account he wants to open (Private/Business).
  */
-public class BranchManagerOpenNewAccountController extends Controller implements Initializable {
+public class BranchManagerOpenNewAccountController extends AbstractController implements Initializable {
 
 	@FXML
 	private ResourceBundle resources;
