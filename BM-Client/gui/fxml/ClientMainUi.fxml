@@ -29,12 +29,12 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField disable="true" layoutX="207.0" layoutY="183.0" prefHeight="14.0" prefWidth="161.0" text="5555">
+      <TextField layoutX="207.0" layoutY="183.0" prefHeight="14.0" prefWidth="161.0" text="5555">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </TextField>
-      <TextField fx:id="ipTxt" layoutX="205.0" layoutY="266.0" prefHeight="51.0" prefWidth="161.0">
+      <TextField fx:id="ipTxt" layoutX="205.0" layoutY="266.0" prefHeight="51.0" prefWidth="161.0" text="localhost">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></TextField>

@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -78,7 +79,7 @@ public class ServerUIFController {
 	private TextField usertxt;
 
 	@FXML
-	private TextField Passtxt;
+    private PasswordField Passtxt;
 
 	@FXML
 	private Button ImportBtn;
@@ -104,7 +105,7 @@ public class ServerUIFController {
 		ServerConnection.startServer(null, this);
 		String username, password;
 		if (Passtxt.getText().isEmpty()) {
-			addToTextArea("you must fill the password box!");
+			addToTextArea("You must fill the password box!");
 		} else {
 			username = "root";
 			password = Passtxt.getText().toString();
