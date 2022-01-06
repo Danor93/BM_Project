@@ -1,4 +1,4 @@
-package client.controllers;
+package Interfaces;
 
 import java.io.IOException;
 
