@@ -247,8 +247,7 @@ public class ConfirmOrderApprovalController extends AbstractController implement
 			refuseFlag = false;
 		}
 		if (refuseFlag) {
-			ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of
-																								// the
+			ClientUI.chat.accept(new Message(MessageType.Order_not_approved, orderToChange)); // Change the status of																				// the
 			// database to Not approved
 			for (int i = 0; i < allOrders.size(); i++) {
 				if (allOrders.get(i).equals(orderToChange))
@@ -323,7 +322,6 @@ public class ConfirmOrderApprovalController extends AbstractController implement
 							orderToChange = null;
 							setArrivalTimeIsPlaaned.clear();
 						}
-
 					}
 					if (continueFlag) {
 						RegularOrSharedFlag = false;

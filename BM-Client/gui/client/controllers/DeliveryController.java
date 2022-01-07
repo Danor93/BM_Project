@@ -175,18 +175,14 @@ public class DeliveryController extends AbstractController {
 	 */
 	@FXML
 	void chooseRegular(ActionEvent event) {
-
 		if (regular.isSelected()) {
 			notify.setText("");
 			robot.setSelected(false);
-			
 		}
 		else {
 			
 			robot.setSelected(true);
-			regular.setSelected(false);
-			
-			
+			regular.setSelected(false);		
 		}
 	}
 	
@@ -198,8 +194,7 @@ public class DeliveryController extends AbstractController {
 	@FXML
 	void chooseRobot(ActionEvent event) {
 		if (robot.isSelected()) {
-			regular.setSelected(false);
-			
+			regular.setSelected(false);		
 		}
 		else {
 			robot.setSelected(false);
@@ -211,8 +206,6 @@ public class DeliveryController extends AbstractController {
 	/**Abstract method for displaying labels to the screen
 	 * @param string          empty string
 	 */
-	
-	
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());

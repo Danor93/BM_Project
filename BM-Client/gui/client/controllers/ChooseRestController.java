@@ -132,13 +132,10 @@ import main.ClientUI;
 	        assert next != null : "fx:id=\"next\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
 	        assert noSelect != null : "fx:id=\"noSelect\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
 	        assert userName != null : "fx:id=\"userName\" was not injected: check your FXML file 'ChooseRestaurant.fxml'.";
-
 	    }
-
 
 		@Override
 		public void display(String string) {
 			userName.setText(LoginScreenController.user.getFirstN());
 		}
 	}
-

@@ -16,8 +16,6 @@ import javafx.stage.Stage;
  */
 
 public class PopUpMessage {
-
-	
 	/**
 	 * confirmDialog show to user Confirm msg.
 	 * @param msg - message to show

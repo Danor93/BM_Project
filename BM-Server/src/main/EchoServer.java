@@ -51,7 +51,6 @@ public class EchoServer extends AbstractServer {
 	 */
 	public static void main(String[] args) {
 		int port = 0; // Port to listen on
-
 		try {
 			port = Integer.parseInt(args[0]); // Get port from command line
 		} catch (Throwable t) {

@@ -28,8 +28,6 @@ public class Supplier implements Serializable{
 		Confirm_Employee = confirm_Employee;
 	}
 
-
-	
 	public int getRestId() {
 		return restId;
 	}

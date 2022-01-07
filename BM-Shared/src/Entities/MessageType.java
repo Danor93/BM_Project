@@ -15,7 +15,9 @@ public enum MessageType {
 	Show_Dishes_succ, updateDish, year_and_querter_ok, year_and_querter_not_ok, upload_pdf_succ,
 	Baccount_details_not_ok, PAccount_details_not_ok, changed_BusinessAccount_status_to_Approved_succ,
 	changed_BusinessAccount_status_to_NotApproved_succ, send_Revenue_Report, download_pdf_succ,
-	relevantYearAndQuarterly, get_receipt,
+	relevantYearAndQuarterly, get_receipt,RegistrationOfEmployer_succ,
+	RegistrationOfEmployer_failed,UpdateSuccsesfuly,UpdateFailed,MenuExistTrue, MenuExistFalse,Orders_List,
+	Order_not_approved,changed_status_to_notApproved_succ, Order_approved, changed_status_to_Approved_succ,
 
 	/* Client Message */
 	Update_Orders, Show_Orders, IdentifyW4c, Show_Cities, show_Restaurants, get_Dishes, add_new_dish, get_Employer,
@@ -32,19 +34,15 @@ public enum MessageType {
 	orderDone, ShowHistogram, getYears, Account_Status_Active, Account_Status_Freeze, get_Rest_Name,
 	check_account_status, check_account_status_Active, check_account_status_Freeze, Update_Status_to_Active,
 	Update_Status_to_Freeze, ReturnFirstName, ReturnFirstName_success, check_suppliers_details,
-	get_year_for_report,return_years_for_report,Join,priceShare,InsertShared,  
-
+	get_year_for_report,return_years_for_report,Join,priceShare,InsertShared,get_business_account_details,RReportUpdated,
+	businessAccountsTracking,OReportUpdated, get_Dish_type,DType_Quantities, addto_Order_report, MenuExist,get_orders_to_approve,
+	RegistrationOfEmployer,
+	
 	/* type of users */
 
 	BranchManager, CEO, Customer, Supplier,
 
 	/* Error */
 
-	Error, MenuExist, MenuExistTrue, MenuExistFalse, get_orders_to_approve, Orders_List, Order_not_approved,
-	changed_status_to_notApproved_succ, Order_approved, changed_status_to_Approved_succ, RegistrationOfEmployer,
-
-	RegistrationOfEmployer_succ, RegistrationOfEmployer_failed, get_business_account_details, businessAccountsTracking,
-	RReportUpdated, OReportUpdated, get_Dish_type, DType_Quantities, addto_Order_report, UpdateSuccsesfuly,
-	UpdateFailed, 
-
+	Error;
 }

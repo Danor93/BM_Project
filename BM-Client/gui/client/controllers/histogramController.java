@@ -95,16 +95,14 @@ public class histogramController extends AbstractController implements Initializ
 		for(String rest: QuarterReportController.report1.keySet())
 		{
 			String data= rest+"\n"+QuarterReportController.report1.get(rest).get(0)+" Orders";
-			set1.getData().add(new XYChart.Data(data,QuarterReportController.report1.get(rest).get(1)));
-			
+			set1.getData().add(new XYChart.Data(data,QuarterReportController.report1.get(rest).get(1)));	
 		}
 		if(QuarterReportController.report2!=null)
 		{
 			for(String rest: QuarterReportController.report2.keySet())
 			{
 				String data= rest+"\n"+QuarterReportController.report2.get(rest).get(0)+" Orders";
-				set2.getData().add(new XYChart.Data(data,QuarterReportController.report2.get(rest).get(1)));
-				
+				set2.getData().add(new XYChart.Data(data,QuarterReportController.report2.get(rest).get(1)));	
 			}
 			chart2.getData().addAll(set2);
 			chart2.setVisible(true);	
@@ -119,7 +117,6 @@ public class histogramController extends AbstractController implements Initializ
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());
-		
 		String[] div=string.split(",");
 		//quarter1Lbl.setText(div[0]);
 		//quarter2Lbl.setText(div[1]);
@@ -128,11 +125,6 @@ public class histogramController extends AbstractController implements Initializ
 		{
 			chart2.setTitle(div[1]);
 		}
-		
-		
+	
 	}
-	
-	
-	
-
 }

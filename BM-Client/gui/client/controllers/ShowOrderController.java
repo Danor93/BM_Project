@@ -146,8 +146,7 @@ public class ShowOrderController extends AbstractController implements Initializ
         	totalPrice.setText("Total price: "+total+" $");
         	orders=FXCollections.observableArrayList(myDishes);
     		listOrder.setItems(orders);
-    	}
-    	
+    	}    	
     }
 
 	/**This method meant to initialize the list with the dishes the costumer chose until now, 

@@ -83,9 +83,6 @@ public class ChoosingDishesController extends AbstractController implements Init
     @FXML
     private Text userName;
     
-   
-
-
     public ArrayList<String> dishNames;
 	public ArrayList<Dish> dishListOfType;
 	public static Dish chosenDish;
@@ -127,12 +124,8 @@ public class ChoosingDishesController extends AbstractController implements Init
 	 
 	 @FXML
 	    void back(ActionEvent event) throws IOException {
-		 
 		 start(event,"MenuScreen","Restaurant's menu","");
-
 	    }
-
-
 	 
     /**This method adds a dish to the order
      * @param event              pressing the "add to my order" button

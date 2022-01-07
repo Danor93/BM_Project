@@ -82,7 +82,6 @@ public class CustomerScreenController extends AbstractController implements Init
     	start(event,"InsertCodeOfW4C","Insert W4C code","");
     }
 
-    
 	/**This method meant to display the name of the user to the page
 	 * @param firstN		user's first name		
 	 */
@@ -94,5 +93,4 @@ public class CustomerScreenController extends AbstractController implements Init
 	public void initialize(URL location, ResourceBundle resources) {
   
 	}
-
 }

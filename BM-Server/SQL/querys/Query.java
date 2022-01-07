@@ -48,7 +48,8 @@ import javafx.stage.FileChooser;
  * @author Aviel
  * @author Lior
  * @author Adi
- * @author Talia This class handles all queries the server needs to perform.
+ * @author Talia 
+ * This class handles all queries the server needs to perform.
  */
 public class Query {
 
@@ -246,9 +247,6 @@ public class Query {
 				cities.add(rs.getString(1));
 			}
 			rs.close();
-			for (String s : cities) {
-				System.out.println(s);
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -606,7 +604,6 @@ public class Query {
 			} else {
 				Float sum = (float) (order.getTotalPrice() * 0.5);
 				stmt3 = DBConnect.conn.prepareStatement("INSERT INTO bitemedb.refund VALUES(?,?,?)");
-				System.out.println("bbb");
 				stmt3.setString(1, order.getCostumerId());
 				stmt3.setString(2, Float.toString(sum));
 				stmt3.setString(3, order.getRestId());
@@ -732,7 +729,6 @@ public class Query {
 			while (rs.next()) {
 				Dish dish = new Dish(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getString(6), rs.getFloat(7), DishType.toDishType(rs.getString(8)));
-				System.out.println(dish.getDishName());
 				dishes.add(dish);
 			}
 			rs.close();
@@ -1509,15 +1505,12 @@ public class Query {
 				String resYear = rs.getString(1);
 				String resQuarter = rs.getString(2);
 				yearsAndQuarter.add(resYear + "@" + resQuarter);
-
 			}
-			System.out.println(yearsAndQuarter.toString());
 			rs.close();
 		} catch (SQLException s) {
 			s.printStackTrace();
 		}
 		return yearsAndQuarter;
-
 	}
 
 	/**
@@ -1744,7 +1737,6 @@ public class Query {
 	@SuppressWarnings("unused")
 	public static ArrayList<PerformanceReport> LoadPerformanceReport(String messageData) {
 		ArrayList<PerformanceReport> reports = new ArrayList<>();
-		System.out.println("test");
 		ArrayList<String> restNames = new ArrayList<>();
 		boolean existRest = false;
 		int totalOrders = 0;
@@ -1772,7 +1764,6 @@ public class Query {
 
 		if (existRest) {
 			for (String name : restNames) {
-				System.out.println(name);
 				try {
 					stmt2 = DBConnect.conn.createStatement();
 					ResultSet rs2 = stmt2
@@ -2387,8 +2378,6 @@ public class Query {
 				}
 
 				else {
-					System.out.println(
-							"blala " + java.time.Duration.between(LocalTime.parse(time), LocalTime.now()).toMinutes());
 					if (java.time.Duration.between(LocalTime.parse(time), LocalTime.now()).toMinutes() > 15) {
 						return null;
 					} else {
@@ -2465,7 +2454,6 @@ public class Query {
 				stmt.executeUpdate();
 
 				if (Integer.parseInt(div1[1]) == 3) {
-					System.out.println("2456");
 					stmt1 = DBConnect.conn
 							.prepareStatement("SELECT orderNumber,totalPrice FROM bitemedb.order WHERE orderType=?");
 					stmt1.setString(1, div1[0]);
@@ -2474,11 +2462,9 @@ public class Query {
 						if (rs1.getInt(1) != Integer.parseInt(div1[2])) {
 							map.put(rs1.getInt(1), rs1.getFloat(2) - 5);
 						}
-
 					}
 					rs1.close();
 					for (Integer num : map.keySet()) {
-						System.out.println("the number bla is " + num);
 						stmt2 = DBConnect.conn
 								.prepareStatement("UPDATE bitemedb.order SET totalPrice = ? WHERE orderNumber=?");
 						stmt2.setFloat(1, map.get(num));

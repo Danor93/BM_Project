@@ -215,16 +215,10 @@ public class Parsing {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case Dish_update_succ: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case Dish_delete_succ: {
 			break;
 		}
@@ -312,37 +306,22 @@ public class Parsing {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case update_RefundTable: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case update_Budget_bussClient: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case changed_status_to_notApproved_succ: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case changed_status_to_Approved_succ: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case changed_status_to_sended_succ: {
 			break;
 		}
@@ -370,20 +349,6 @@ public class Parsing {
 			HRManagerScreenController.RegistrationFlag = true;
 			break;
 
-		}
-
-		case Company_Status_Equale_To_Approved: {
-			/*
-			 * HRManagerConfirmationOfOpeningABusinessAccountController.
-			 * CompanyStatusApproved = true; break;
-			 */
-		}
-
-		case Company_Status_Not_Equale_To_Approved: {
-			/*
-			 * HRManagerConfirmationOfOpeningABusinessAccountController.
-			 * CompanyStatusApproved = false; break;
-			 */
 		}
 
 		/**
@@ -432,7 +397,6 @@ public class Parsing {
 		case RReportUpdated: {
 			BranchManagerChooseReportToViewController.revenueArray = (ArrayList<RevenueReport>) receivedMessage
 					.getMessageData();
-			System.out.println("hi hi");
 			break;
 		}
 
@@ -448,16 +412,10 @@ public class Parsing {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case changed_BusinessAccount_status_to_Approved_succ: {
 			break;
 		}
 
-		/**
-		 * 
-		 */
 		case changed_BusinessAccount_status_to_NotApproved_succ: {
 			break;
 		}

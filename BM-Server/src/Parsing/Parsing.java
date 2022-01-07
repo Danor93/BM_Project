@@ -50,9 +50,7 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.ShowHistogram, histogram);
 		}
 		
-		case Join:
-		{
-			System.out.println("iam " +Query.checkJoin((String)receivedMessage.getMessageData()));
+		case Join:{
 			return messageFromServer = new Message(MessageType.Join,Query.checkJoin((String)receivedMessage.getMessageData()) );
 		}
 
@@ -89,13 +87,11 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.ClientConfirm, orders);
 		}
 		
-		case priceShare:
-		{
+		case priceShare:{
 			return messageFromServer = new Message(MessageType.priceShare,Query.getParticipants((Integer) receivedMessage.getMessageData()) );
 		}
 		
-		case InsertShared:
-		{
+		case InsertShared:{
 			Query.InsertShared((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.InsertShared,null);
 		}
@@ -203,7 +199,7 @@ public class Parsing {
 
 		case check_Baccount_details: {
 			BussinessAccount BAccount = (BussinessAccount) receivedMessage.getMessageData();
-			if ((Query.checkAccountDetails(BAccount)) == true) {
+			if ((Query.checkAccountDetails(BAccount))) {
 				Query.addNewBAccount(BAccount);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewBusinessAccount, null);
 			} else {
@@ -213,7 +209,7 @@ public class Parsing {
 
 		case check_PAccount_details: {
 			Client Pclient = (Client) receivedMessage.getMessageData();
-			if ((Query.checkPrivateAccount(Pclient)) == true) {
+			if ((Query.checkPrivateAccount(Pclient))) {
 				Query.addNewPAccount(Pclient);
 				return messageFromServer = new Message(MessageType.ConfirmOpenNewPrivateAccount, null);
 			} else {
@@ -258,7 +254,7 @@ public class Parsing {
 
 		case check_year_and_quertar: {
 			String[] Divededyandq = ((String) receivedMessage.getMessageData()).split("@");
-			if ((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1])) == true) {
+			if ((Query.checkYearAndQuarter(Divededyandq[0], Divededyandq[1]))) {
 				return messageFromServer = new Message(MessageType.year_and_querter_ok, null);
 			} else {
 				return messageFromServer = new Message(MessageType.year_and_querter_not_ok, null);
@@ -517,9 +513,6 @@ public class Parsing {
 			return messageFromServer = new Message(MessageType.get_receipt, receipt);
 		}
 		
-		/**
-		 * 
-		 */
 		case get_Performance_report:{
 			ArrayList<PerformanceReport> reports = Query.LoadPerformanceReport((String) receivedMessage.getMessageData());
 			return messageFromServer = new Message(MessageType.get_Performance_report, reports);

@@ -95,7 +95,6 @@ public class ServerUIFController {
 		Pane root = load.load(getClass().getResource("/fxml/ServerUIF.fxml").openStream());
 		Scene home = new Scene(root);
 		primaryStage.setScene(home);
-		// primaryStage.getIcons().add(new Image("/gui/ServerIcon.png"));
 		primaryStage.show();
 	}
 

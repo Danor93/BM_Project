@@ -137,7 +137,6 @@ public class DeliveryOrPickupController extends AbstractController {
     		join.setVisible(true);
     		join.setDisable(false);
     	}
-
     }
     
 
@@ -171,17 +170,13 @@ public class DeliveryOrPickupController extends AbstractController {
 	    			ShowOrderController.finalOrder.setUseBudget(1);	
 	    		}
     			ShowOrderController.finalOrder.setOrderType("Shared-"+sharedOrderNum.getText());
-    			
-    			start(event, "OrderConfirm", "Order Confirmation","");
-    			
+    			start(event, "OrderConfirm", "Order Confirmation","");	
     		}
     		else
     		{
     			notifySupply.setText("You can't join to this order");
     		}
-    		
     	}
-
     }
 
     /**This method checks if the entered time and date are valid using the private method and the order is an early order.
@@ -203,14 +198,8 @@ public class DeliveryOrPickupController extends AbstractController {
 	    		}
 	    	}
     		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
-    		
-    		
-    		
     		start(event, "Delivery", "Your delivery","");
-
-   
     	}
-
     }
 
     /**This method checks if the entered time and date are valid using the private method and the order is an early order.
@@ -226,7 +215,6 @@ public class DeliveryOrPickupController extends AbstractController {
     	{
     		ShowOrderController.finalOrder.setOrderType("Take Away");
     		ShowOrderController.finalOrder.setEarlyOrder(checkEarlyOrder());
-
 	    	if(IdentifyW4cController.client instanceof BussinessAccount)
 	    	{
 	    		if(yes.isSelected())
@@ -234,13 +222,8 @@ public class DeliveryOrPickupController extends AbstractController {
 	    			ShowOrderController.finalOrder.setUseBudget(1);
 	    		}
 	    	}
-	    	
-	    	
-			
     		start(event, "OrderConfirm", "Order Confirmation","");
-
     	}
-
     }
     
     /**This method allows a business customer to choose that he doesn't want to pay with his budget
@@ -264,19 +247,12 @@ public class DeliveryOrPickupController extends AbstractController {
     		no.setSelected(false);
 
     }
-    
-    
-  
-   
-	
 
 	/** This method meant to check if the chosen time and date by the customer are valid
 	 * @return      true/false
 	 */
-	
 	private boolean getTimeAndDate()
 	{
-		
 		LocalDate orderDate=date.getValue();
     	String orderTime=time.getText();
     	if(orderDate!=null && !orderTime.equals("") && !orderDate.isBefore(LocalDate.now()))
@@ -294,8 +270,7 @@ public class DeliveryOrPickupController extends AbstractController {
     						ShowOrderController.finalOrder.setTimeOfOrder(orderTime);
             				ShowOrderController.finalOrder.setDateOfOrder(orderDate.toString());
             				return true;
-    					}
-    							
+    					}		
     					else
     					{
     						notify.setText("Sorry,That hour has passed");
@@ -309,28 +284,24 @@ public class DeliveryOrPickupController extends AbstractController {
         				ShowOrderController.finalOrder.setDateOfOrder(orderDate.toString());
         				return true;
     				}
-    				
     			}
     			else
     			{
     				notify.setText("Sorry, At this time the restaurant is close");
     				return false;
-    			}
-	
+    			}	
     		}
     		catch(DateTimeParseException c)
     		{
     			notify.setText("Invalid Time, please choose new one");
     			return false;
     		}
-    	}
-    	
+    	}    	
     	else
     	{
     		notify.setText("Please choose valid Date and Time");
     		return false;
-    	}
-    	
+    	}	
 	}
 	
 	/**This method meant to check if the customer entered an early order
@@ -341,8 +312,7 @@ public class DeliveryOrPickupController extends AbstractController {
 		LocalDate orderDate=date.getValue();
 		
 		if(orderDate.isAfter(LocalDate.now()))
-			return "yes";
-		
+			return "yes";		
 		else
 		{
 			if(java.time.Duration.between(LocalTime.now(),LocalTime.parse(time.getText())).toHours()>=2)
@@ -353,8 +323,7 @@ public class DeliveryOrPickupController extends AbstractController {
 			
 			else
 				return "no";
-		}
-		
+		}		
 	}
 
 
@@ -372,10 +341,7 @@ public class DeliveryOrPickupController extends AbstractController {
     		yes.setVisible(true);
     		no.setDisable(false);
     		yes.setDisable(false);
-    	}
-    	
-    	userName.setText(LoginScreenController.user.getFirstN());
-		
+    	}    	
+    	userName.setText(LoginScreenController.user.getFirstN());		
 	}
-
 }

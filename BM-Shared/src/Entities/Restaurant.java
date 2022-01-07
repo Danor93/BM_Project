@@ -42,5 +42,4 @@ public class Restaurant implements Serializable {
 	public String getRestCode() {
 		return restCode;
 	}
-
 }

@@ -27,10 +27,8 @@ import javafx.stage.Stage;
 import main.ClientUI;
 
 /**
- * 
- * @author Lior This class handles the functionality of the CEO to download a
- *         PDF of the branch quarterly report.
- *
+ * @author Lior 
+ * This class handles the functionality of the CEO to download a PDF of the branch quarterly report.
  */
 public class CEODownloadQuarterlyReportController implements Initializable {
 
@@ -129,7 +127,7 @@ public class CEODownloadQuarterlyReportController implements Initializable {
 		btnDownload.setDisable(true);
 
 		ClientUI.chat.accept(new Message(MessageType.showRelevantYearsAndQuarterly, selectedBranch));
-
+		
 		for (String year : yearsAndQuarter) {
 			String[] divYandQ = year.split("@");
 			if (!years.contains(divYandQ[0]))

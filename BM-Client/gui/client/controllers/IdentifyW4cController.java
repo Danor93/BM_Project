@@ -80,15 +80,13 @@ import main.ClientUI;
 		void confirm(ActionEvent event) {
 			if(client==null)
 			{
-				Message msg=new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId());
-				ClientUI.chat.accept(msg);
+				ClientUI.chat.accept(new Message(MessageType.IdentifyW4c,LoginScreenController.user.getId()));
 			}
 			
 			if (w4cManually.getText().equals("Enter W4C code manually") || w4cManually.getText().equals("")) 
 			{
 				allertLbl.setText("Please enter W4C code or press the QR button");
-			}
-			
+			}			
 			else
 			{
 				if(w4cManually.getText().equals(client.getW4c_private()))

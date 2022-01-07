@@ -322,7 +322,6 @@ public class BranchManagerChooseReportToViewController extends AbstractControlle
 			else {
 				Month.getItems().add("" + i);
 			}
-
 		}
 
 		ClientUI.chat.accept(new Message(MessageType.get_year_for_report, null));

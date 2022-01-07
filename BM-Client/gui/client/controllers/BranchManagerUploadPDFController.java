@@ -113,6 +113,7 @@ public class BranchManagerUploadPDFController extends AbstractController impleme
 							if(succesUpload)
 							{
 								PopUpMessage.successMessage("Succes to upload the " + Year + "' " + Quertar + " PDF file!");
+								succesUpload=false;
 								return true;
 							}
 							else {
@@ -212,5 +213,4 @@ public class BranchManagerUploadPDFController extends AbstractController impleme
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());
 	}
-
 }

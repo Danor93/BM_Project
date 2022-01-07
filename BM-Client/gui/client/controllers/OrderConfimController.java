@@ -117,7 +117,6 @@ public class OrderConfimController extends AbstractController {
 			refundDec.setText("");
 			totalPrice.setText("Total price of: " + calPrice + "$");
 		}
-
 	}
 
 	/**
@@ -130,7 +129,6 @@ public class OrderConfimController extends AbstractController {
 	void chooseYes(ActionEvent event) {
 		if (yes.isSelected()) {
 			priceAfterRef = calPrice;
-
 			no.setSelected(false);
 			if (Float.parseFloat(ShowOrderController.refund) >= calPrice) {
 				refundDec.setText("-" + priceAfterRef + "$ credit");
@@ -187,7 +185,6 @@ public class OrderConfimController extends AbstractController {
 				b.append(ShowOrderController.finalOrder.getOrderNum());
 				ClientUI.chat.accept(new Message(MessageType.InsertShared, b.toString()));
 			}
-
 		}
 		if (isSuccess != null) {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -203,7 +200,6 @@ public class OrderConfimController extends AbstractController {
 			}
 			alert.setContentText(alertText);
 			Optional<ButtonType> result = alert.showAndWait();
-
 			if (result.get() == ButtonType.OK || result.get() == ButtonType.CLOSE) {
 				SingletonOrder.getInstance().myOrder.clear();
 				start(event, "CustomerScreen", "Costumer Screen", LoginScreenController.user.getFirstN());

@@ -27,5 +27,4 @@ public class SingletonOrder
  
         return singleOrder_instance;
     }
-
 }

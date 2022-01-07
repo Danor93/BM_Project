@@ -231,8 +231,6 @@ public class DeleteOrUpdateDishController extends AbstractController implements 
 									dish.setExtra("");
 								else
 									dish.setExtra(txtNewIngredientsToRemove.getText());
-
-								System.out.println(dish);
 								dishes.set(placeOfDish, dish);
 								ClientUI.chat.accept(new Message(MessageType.updateDish, dish));
 								start(event, "DeleteOrUpdateDish", "Create Menu", "");

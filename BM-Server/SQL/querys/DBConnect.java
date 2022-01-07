@@ -23,7 +23,6 @@ public class DBConnect  {
 			/* handle the error */
 			EchoServer.serverUIFController.addToTextArea("Driver definition failed.");
 		}
-
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/bitemedb?serverTimezone=IST", UserName,Password);
 			EchoServer.serverUIFController.addToTextArea("SQL connection succeed.");

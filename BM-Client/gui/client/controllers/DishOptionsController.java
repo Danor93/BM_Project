@@ -104,7 +104,6 @@ public class DishOptionsController extends AbstractController implements Initial
 		SingletonOrder.getInstance().myOrder.clear();
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
-
     }
 
     
@@ -122,14 +121,12 @@ public class DishOptionsController extends AbstractController implements Initial
     		{
     			notify.setFill(Color.RED);
     			notify.setText("In order to proceed you must choose " +ChoosingDishesController.chosenDish.getChoiceFactor());
-    		}
-    		
+    		}   		
     		else
     		{
     			Dish temp=ChoosingDishesController.chosenDish;
     			addDishToMyOrder(op.toString(),event);
-    		}
-    			
+    		}  			
     	}
     	else
     	{
@@ -157,8 +154,7 @@ public class DishOptionsController extends AbstractController implements Initial
 				b.append(s+" ");	
 			}
 			dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),b.toString(),temp.getPrice(),temp.getDishType());
-		}
-		
+		}	
 		else 
 		{
 			 dish=new Dish(temp.getDishName(),temp.getSupplierName(),temp.getChoiceFactor(),op,temp.getIngredients(),null,temp.getPrice(),temp.getDishType());
@@ -204,23 +200,18 @@ public class DishOptionsController extends AbstractController implements Initial
         			if(UnChosenExtra.contains(choiceType))
         			{
         				UnChosenExtra.remove(choiceType);
-        			}
-        				
-        		}
-        		
+        			}      				
+        		}      		
         		observableListUnExtra=FXCollections.observableArrayList(UnChosenExtra);	
         		optionsList.getItems().removeAll();
         		optionsList.getItems().addAll(observableListUnExtra);
-        	}
-        	
+        	}       	
         	else
         	{
         		notify.setFill(Color.RED);
         		notify.setText("Please choose at least one change to remove ");
-        	}
-        	
-    	}
-    	
+        	}        	
+    	}   	
     	else
     	{
     		notify.setFill(Color.RED);
@@ -251,17 +242,13 @@ public class DishOptionsController extends AbstractController implements Initial
         	else
         	{
         		notify.setFill(Color.RED);
-        		notify.setText("Please choose at least one change ");
-        		
+        		notify.setText("Please choose at least one change ");        		
         	}
-    	}
-    	
+    	}    	
     	else {
     		notify.setFill(Color.RED);
     		notify.setText("There are no changes to choose ");
     	}
-
-
     }
 
     
@@ -280,7 +267,6 @@ public class DishOptionsController extends AbstractController implements Initial
 			String[] getChoices=ChoosingDishesController.chosenDish.getExtra().split("/");
 			ObservableList <String>observableList2=FXCollections.observableArrayList(createList(getChoices));
 			optionsList.setItems(observableList2);
-
 		}
 	}
 	
@@ -294,18 +280,13 @@ public class DishOptionsController extends AbstractController implements Initial
 		for(String ch:splitedData)
 		{
 			choices.add(ch);
-		}
-		
-		return choices;
-		
+		}		
+		return choices;		
 	}
 	
 	@Override
 	public void display(String string) {
 		userName.setText(LoginScreenController.user.getFirstN());
-		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");
-		
-	}
-
-	
+		choiceLabel.setText(ChoosingDishesController.chosenDish.getChoiceFactor()+" :");		
+	}	
 }

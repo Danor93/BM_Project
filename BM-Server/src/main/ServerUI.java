@@ -10,8 +10,7 @@ public class ServerUI extends Application {
 	public static Stage mainStage;
 
 	@Override
-	public void start(Stage primaryStage) throws IOException
-	{	
+	public void start(Stage primaryStage) throws IOException{	
 		mainStage=primaryStage;
 		ServerUIFController controller = new ServerUIFController();
 		controller.start(primaryStage);

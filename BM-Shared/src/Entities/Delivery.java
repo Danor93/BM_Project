@@ -22,19 +22,13 @@ public class Delivery implements Serializable{
 		this.deliPrice = deliPrice;
 	}
 
-	
-
 	public int getOrderNum() {
 		return orderNum;
 	}
 
-
-
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
 	}
-
-
 
 	public String getDeliveryType() {
 		return deliveryType;
@@ -104,6 +98,4 @@ public class Delivery implements Serializable{
 	public void setDeliPrice(int deliPrice) {
 		this.deliPrice = deliPrice;
 	}
-	
-
 }

@@ -74,7 +74,6 @@ public class RecConfirmController extends AbstractController implements Initiali
     void logout(ActionEvent event) throws IOException {
     	ClientUI.chat.accept(new Message(MessageType.Disconected, LoginScreenController.user.getUserName()));
 		start(event, "LoginScreen", "Login","");
-
     }
 
     
